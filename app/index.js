@@ -9,7 +9,7 @@ const NotFound = () => <h1>404.. This page is not found!</h1>
 
 render((
   <Router history={ hashHistory }>
-    <Route component={ App }>
+    <Route path="/" component={ App }>
       <Route path="/testClass" component={ TestClass } />
       <Route path="/testComponent" component={ TestComponent } />
     </Route>
