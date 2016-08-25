@@ -11,9 +11,7 @@ render((
   <Router history={ hashHistory }>
     <Route component={ App }>
       <Route path="/testClass" component={ TestClass } />
-      <Route component={ Nested1 }>
-        <Route path="/testComponent" component={ TestComponent } />
-      </Route>
+      <Route path="/testComponent" component={ TestComponent } />
     </Route>
     <Route path='*' component={ NotFound } />
   </Router>
