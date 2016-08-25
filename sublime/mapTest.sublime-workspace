@@ -1,0 +1,1339 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"pro",
+				"props"
+			],
+			[
+				"Te",
+				"TestInline"
+			],
+			[
+				"T",
+				"TestComponent"
+			],
+			[
+				"R",
+				"Route"
+			],
+			[
+				"co",
+				"const"
+			],
+			[
+				"m",
+				"modules.test"
+			],
+			[
+				"pr",
+				"props"
+			],
+			[
+				"Re",
+				"Repos"
+			],
+			[
+				"cor",
+				"correlate"
+			],
+			[
+				"a",
+				"a	Tag"
+			],
+			[
+				"rcc",
+				"rcc	React: class component"
+			],
+			[
+				"for",
+				"for	for (…) {…} (Improved Native For-Loop)"
+			],
+			[
+				"em",
+				"Email"
+			],
+			[
+				"data",
+				"dataValues"
+			],
+			[
+				"expo",
+				"exportStatus"
+			],
+			[
+				"res",
+				"response"
+			],
+			[
+				"op",
+				"optionalPart"
+			],
+			[
+				"att",
+				"attributeValue"
+			],
+			[
+				"nb",
+				"nbKO"
+			],
+			[
+				"merc",
+				"merchant"
+			],
+			[
+				"s",
+				"subscription"
+			],
+			[
+				"sub",
+				"subscription"
+			],
+			[
+				"cl",
+				"class	Attr"
+			],
+			[
+				"télé",
+				"téléphone"
+			],
+			[
+				"cont",
+				"contacter"
+			],
+			[
+				"adress",
+				"adresse"
+			],
+			[
+				"id",
+				"idImg"
+			],
+			[
+				"im",
+				"img"
+			],
+			[
+				"n",
+				"nbChars"
+			],
+			[
+				"va",
+				"val"
+			],
+			[
+				"ima",
+				"imageObject"
+			],
+			[
+				"h",
+				"h2	Tag"
+			],
+			[
+				"ord",
+				"ordered"
+			],
+			[
+				"cons",
+				"console"
+			],
+			[
+				"ng",
+				"ng-click	AngularJS"
+			],
+			[
+				"di",
+				"div	Tag"
+			],
+			[
+				"te",
+				"tests"
+			],
+			[
+				"cop",
+				"copyToClipboard"
+			],
+			[
+				"initl",
+				"initloadTestGen"
+			],
+			[
+				"t",
+				"text"
+			],
+			[
+				"num",
+				"numberOfGeneratedMerchants"
+			],
+			[
+				"par",
+				"parameters"
+			],
+			[
+				"cr",
+				"createUsers"
+			],
+			[
+				"fa",
+				"false"
+			],
+			[
+				"cre",
+				"createUsers"
+			],
+			[
+				"e",
+				"email"
+			],
+			[
+				"creat",
+				"create"
+			],
+			[
+				"com",
+				"company"
+			],
+			[
+				"pa",
+				"package"
+			],
+			[
+				"merchant",
+				"merchantRef"
+			],
+			[
+				"resultsUn",
+				"resultsUnit1"
+			],
+			[
+				"ge",
+				"generatedContent"
+			],
+			[
+				"table",
+				"tableId"
+			],
+			[
+				"ms",
+				"msNow"
+			],
+			[
+				"mome",
+				"momentNow"
+			],
+			[
+				"las",
+				"momentLastClicksToDisplayGraph"
+			],
+			[
+				"contro",
+				"Controller"
+			],
+			[
+				"Con",
+				"Contactless"
+			],
+			[
+				"msc",
+				"MSCFeeAmount"
+			],
+			[
+				"intercha",
+				"InterchangeFeeAmount"
+			],
+			[
+				"mom",
+				"momentNow"
+			],
+			[
+				"ra",
+				"rand"
+			],
+			[
+				"f",
+				"function"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"WEEK",
+				"week"
+			],
+			[
+				"ti",
+				"timestamp"
+			],
+			[
+				"st",
+				"startOf"
+			],
+			[
+				"x",
+				"xAxis"
+			],
+			[
+				"da",
+				"days"
+			],
+			[
+				"point",
+				"pointInterval"
+			],
+			[
+				"po",
+				"pointStart"
+			],
+			[
+				"XP",
+				"XPeriod"
+			],
+			[
+				"X",
+				"XPeriod"
+			],
+			[
+				"Date",
+				"dateUnit"
+			],
+			[
+				"dat",
+				"dateCrt"
+			],
+			[
+				"con",
+				"concat"
+			],
+			[
+				"la",
+				"labels"
+			],
+			[
+				"resut",
+				"results"
+			],
+			[
+				"arr",
+				"arrayPeriodData"
+			],
+			[
+				"ne",
+				"newData"
+			],
+			[
+				"arra",
+				"arrayFilteredRows"
+			],
+			[
+				"real",
+				"realValue"
+			],
+			[
+				"fo",
+				"for	for (…) {…}"
+			],
+			[
+				"fin",
+				"findPeriod"
+			],
+			[
+				"b",
+				"background"
+			],
+			[
+				"ret",
+				"return"
+			],
+			[
+				"fu",
+				"fun	Function"
+			],
+			[
+				"test",
+				"testbug"
+			],
+			[
+				"march",
+				"marchand"
+			],
+			[
+				"mar",
+				"marchand"
+			],
+			[
+				"comp",
+				"computeFromPackToUnpack"
+			],
+			[
+				"err",
+				"errorCode"
+			],
+			[
+				"ca",
+				"cause"
+			],
+			[
+				"er",
+				"errorCode"
+			],
+			[
+				"u",
+				"upload"
+			],
+			[
+				"clas",
+				"ng-class	AngularJS"
+			],
+			[
+				"repla",
+				"replace"
+			],
+			[
+				"re",
+				"resolve"
+			],
+			[
+				"ng-s",
+				"ng-show	AngularJS"
+			],
+			[
+				"REM_",
+				"_REM_01"
+			],
+			[
+				"Paiem",
+				"paiement"
+			],
+			[
+				"on",
+				"oneChild"
+			],
+			[
+				"str",
+				"stringNodeMainPart"
+			],
+			[
+				"succ",
+				"success"
+			],
+			[
+				"datet",
+				"datetimeMex"
+			],
+			[
+				"order",
+				"orderInitial"
+			],
+			[
+				"or",
+				"orderDirection"
+			],
+			[
+				"ode",
+				"orderColumn"
+			],
+			[
+				"rou",
+				"roundFactor"
+			],
+			[
+				"ste",
+				"stepInitial"
+			],
+			[
+				"rang",
+				"range"
+			],
+			[
+				"lo",
+				"log"
+			],
+			[
+				"filt",
+				"Filters"
+			],
+			[
+				"to",
+				"toString"
+			],
+			[
+				"hal",
+				"halSelectModel"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"$sc",
+				"$scope	AngularJS"
+			],
+			[
+				"$loc",
+				"$location	AngularJS(DI)"
+			],
+			[
+				"Pro",
+				"productUtils"
+			],
+			[
+				"produc",
+				"productSummary"
+			],
+			[
+				"$lo",
+				"$location	AngularJS"
+			],
+			[
+				"ng-re",
+				"ng-repeat	AngularJS"
+			],
+			[
+				"add",
+				"addedNews"
+			],
+			[
+				"get",
+				"getProductRating"
+			],
+			[
+				"us",
+				"useShortDate"
+			],
+			[
+				"flex",
+				"flex-start"
+			],
+			[
+				"gl",
+				"glyphName"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 375.0,
+		"last_filter": "p i",
+		"selected_items":
+		[
+			[
+				"p i",
+				"Package Control: Install Package"
+			],
+			[
+				"linter sett",
+				"Preferences: SublimeLinter Settings – Default"
+			],
+			[
+				"p r",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: List Packages"
+			],
+			[
+				"i p",
+				"Package Control: Install Package"
+			],
+			[
+				"Snippet: ",
+				"Snippet: React: class component"
+			],
+			[
+				"ins p",
+				"Package Control: Install Package"
+			],
+			[
+				"remove pa",
+				"Package Control: Remove Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"pa",
+				"Package Control: Install Package"
+			],
+			[
+				"pa li",
+				"Package Control: Disable Package"
+			],
+			[
+				"package ins",
+				"Package Control: Install Package"
+			],
+			[
+				"gitgutter",
+				"GitGutter: Show Comparing Against"
+			],
+			[
+				"package in",
+				"Package Control: Install Package"
+			],
+			[
+				"packag",
+				"Package Control: List Packages"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"gif",
+				"Git: Diff All Files (Ignore Whitespace)"
+			],
+			[
+				"gif d",
+				"Git: Diff All Files"
+			],
+			[
+				"git",
+				"Git: Log All"
+			],
+			[
+				"pack",
+				"Preferences: Browse Packages"
+			],
+			[
+				"",
+				"JSLint"
+			],
+			[
+				"Package Control: install",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"reind",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"indent",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"ind",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"inde",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"Package ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 514.0
+	},
+	"console":
+	{
+		"height": 293.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler({\"http\":\"http://proxy:3128\"})) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
+			"import urllib.request,os,sys; exec(\"if sys.version_info < (3,) or os.name != 'nt': raise OSError('This code is for Windows ST3 only!')\"); pr='Preferences.sublime-settings'; ip='ignored_packages'; n='Package Control'; s=sublime.load_settings(pr); ig=s.get(ip); ig.append(n); s.set(ip,ig); sublime.save_settings('Preferences.sublime-settings'); pf=n+'.sublime-package'; urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler())); by=urllib.request.urlopen('https://packagecontrol.io/'+pf.replace(' ','%20')).read(); open(os.path.join(sublime.installed_packages_path(),pf),'wb').write(by); ig.remove(n); s.set(ip,ig); sublime.save_settings(pr); print('Package Control: 3.0.0 upgrade successful!')",
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": true,
+		"show_tabs": false,
+		"side_bar_visible": true,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/workspace/mapTest"
+	],
+	"file_history":
+	[
+		"/C/Utilisateurs/a545888/Google Drive/Business/dev/react/graphql-demo/index.js",
+		"/C/Utilisateurs/a545888/Google Drive/Business/dev/react/graphql-demo/data.json",
+		"/C/workspace/react-router-tutorial/lessons/07-more-nesting/modules/App.js",
+		"/C/workspace/react-router-tutorial/lessons/07-more-nesting/modules/Repos.js",
+		"/C/workspace/react-router-tutorial/lessons/07-more-nesting/bundle.js",
+		"/C/workspace/react-router-tutorial/lessons/07-more-nesting/modules/NavLink.js",
+		"/C/MEX/tools/sublime/Data/Packages/jsfmt/.jsfmtrc",
+		"/C/MEX/tools/sublime/Data/Packages/User/jsfmt.sublime-settings",
+		"/C/workspace/react-router-tutorial/lessons/07-more-nesting/index.html",
+		"/C/workspace/react-router-tutorial/lessons/07-more-nesting/modules/TestClass.js",
+		"/C/workspace/react-router-tutorial/lessons/07-more-nesting/modules/TestComponent.js",
+		"/C/workspace/react-router-tutorial/lessons/07-more-nesting/modules/Nested1.js",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp49980/MIDDLELOGS/mex_merchant_extranet/ssl-mex-central/mex-central.log",
+		"/C/nodejs/.esformatter",
+		"/C/workspace/react-router-tutorial/lessons/07-more-nesting/modules/About.js",
+		"/C/workspace/react-router-tutorial/lessons/07-more-nesting/index.js",
+		"/C/MEX/tools/sublime/Data/Packages/User/Default (Windows).sublime-keymap",
+		"/C/workspace/react-router-tutorial/lessons/07-more-nesting/modules/Nested2.js",
+		"/C/workspace/react-router-tutorial/lessons/07-more-nesting/modules/Layout.js",
+		"/C/MEX/tools/sublime/Data/Packages/User/SublimeLinter-html-tidy/linter.py",
+		"/C/MEX/tools/sublime/Data/Installed Packages/SublimeLinter-html-tidy/linter.py",
+		"/C/MEX/tools/sublime/Data/Installed Packages/SublimeLinter-html-tidy.lve.force.en.language/linter.py",
+		"/C/MEX/tools/sublime/Data/Packages/User/Preferences.sublime-settings",
+		"/C/MEX/tools/sublime/Data/Packages/Default/Preferences.sublime-settings",
+		"/C/MEX/tools/sublime/Data/Packages/SublimeLinter/SublimeLinter.sublime-settings",
+		"/C/MEX/tools/sublime/Data/Packages/User/SublimeLinter.sublime-settings",
+		"/C/workspace/react-router-tutorial/lessons/07-more-nesting/.eslintrc",
+		"/C/nodejs/.eslintrc",
+		"/C/MEX/tools/sublime/Data/Packages/User/SoDaReloaded Dark.sublime-theme",
+		"/C/MEX/tools/sublime/Data/Packages/DocBlockr/Base File.sublime-settings",
+		"/C/MEX/tools/sublime/Data/Packages/DocBlockr/README.md",
+		"/C/MEX/tools/sublime/Data/Installed Packages/Theme - SoDaReloaded/dark/SoDaReloaded Dark.sublime-theme",
+		"/C/MEX/tools/sublime/Data/Installed Packages/Theme - SoDaReloaded.sublime-package",
+		"/C/MEX/tools/sublime/Data/Packages/User/Default.sublime-theme",
+		"/C/MEX/tools/sublime/Data/Packages/User/Babel.sublime-settings",
+		"/C/MEX/tools/sublime/Data/Packages/User/Distraction Free.sublime-settings",
+		"/C/MEX/tools/sublime/Data/Packages/User/JavaScript.sublime-settings",
+		"/C/MEX/tools/sublime/Data/Packages/Babel/Babel.sublime-settings",
+		"/C/MEX/tools/sublime/Data/Packages/User/GitGutter.sublime-settings",
+		"/C/MEX/tools/sublime/Data/Installed Packages/GitGutter-Edge.sublime-package",
+		"/C/MEX/tools/sublime/Data/Packages/GitGutter/GitGutter.sublime-settings",
+		"/C/MEX/tools/sublime/Data/Packages/User/Zeal.sublime-settings",
+		"/C/MEX/tools/sublime/Data/Packages/Zeal/Zeal.sublime-settings",
+		"/C/MEX/tools/git/README.portable",
+		"/C/MEX/tools/sublime/Data/Packages/User/Git.sublime-settings",
+		"/C/workspace/react-router-tutorial/lessons/react_router_lessons.sublime-project",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp58100/MIDDLELOGS/mex_merchant_extranet/ssl-mex-central/mex-easyflow-reporter.log",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp47233/MIDDLEDATA/mex_merchant_extranet/batch/merchant/synchro/out/Bnpp/report/report_sipsbnpp_2016_06_10_06_07_19.txt",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp47581/MIDDLEDATA/mex_merchant_extranet/batch/merchant/synchro/out/Bnpp/report/report_sipsbnpp_2016_06_16_06_09_06.txt",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp47954/MIDDLEDATA/mex_merchant_extranet/batch/merchant/synchro/out/Bnpp/report/report_sipsbnpp_2016_06_05_06_07_05.txt",
+		"/C/MEX/16R3/mex/mex-core/src/main/java/net/atos/itg/mem/synchro/SynchroJavaToXMLUtility.java",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp38658/MIDDLEDATA/mex_merchant_extranet/batch/transaction/error/ppro/payment/PPRO.SETTLEMENT.25.20160706.163420.CSV",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp38817/MIDDLEDATA/mex_merchant_extranet/batch/transaction/error/ppro/payment/PPRO.SETTLEMENT.25.20160711.102003.CSV",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp37759/MIDDLEDATA/mex_merchant_extranet/batch/transaction/error/ppro/payment/PPRO.SETTLEMENT.25.20160718.100001.CSV",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp37688/MIDDLEDATA/mex_merchant_extranet/batch/transaction/error/ppro/payment/PPRO.SETTLEMENT.25.20160720.102003.CSV",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp34477/MIDDLEDATA/mex_merchant_extranet/batch/transaction/archives/ppro/payment/PPRO.SETTLEMENT.25.20160725.100001.CSV",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp35653/MIDDLEDATA/mex_merchant_extranet/batch/transaction/archives/ppro/payment/PPRO.SETTLEMENT.25.20160616.125743.CSV",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp32828/MIDDLEDATA/mex_merchant_extranet/batch/transaction/archives/ppro/payment/PPRO.SETTLEMENT.25.20160704.101005.CSV",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp34455/MIDDLEDATA/mex_merchant_extranet/batch/transaction/archives/ppro/payment/PPRO.SETTLEMENT.25.20160704.100004.CSV",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp29523/MIDDLEDATA/mex_merchant_extranet/batch/transaction/archives/ppro/payment/PPRO.PAYMENT.25.20160727.030000.CSV",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp31762/MIDDLEDATA/mex_merchant_extranet/batch/transaction/archives/ppro/payment/PPRO.SETTLEMENT.25.20160706.163413.CSV",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp37653/MIDDLELOGS/mex_merchant_extranet/ssl-mex-central/mex-common.log",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp01676/MIDDLEDATA/mex_merchant_extranet/batch/merchant/error/initload/InitLoad_ErrorReport_1003_2016_05_26_08_00_02.xml",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp19178/MIDDLEDATA/mex_merchant_extranet/batch/merchant/error/initload/InitLoad_ErrorReport_1003_2016_06_02_08_00_01.xml",
+		"/C/Utilisateurs/a545888/AppData/Local/Microsoft/Windows/Temporary Internet Files/Content.Outlook/76MSEO24/ImportMerchant.xsd",
+		"/C/Utilisateurs/a545888/AppData/Local/Microsoft/Windows/Temporary Internet Files/Content.Outlook/76MSEO24/gescomMerchantTestDataStreamUpdate_2_3_10-RP.xml",
+		"/C/Utilisateurs/a545888/AppData/Local/Microsoft/Windows/Temporary Internet Files/Content.Outlook/76MSEO24/gescomMerchantTestDataStreamUpdate_2_3_10-ER.xml",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp52050/MIDDLEDATA/mex_merchant_extranet/batch/merchant/archives/initload/MIF_MEXMEM_20160706015326.XML",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp52701/MIDDLEDATA/mex_merchant_extranet/batch/merchant/out/initload/InitLoad_Report_1003_2016_07_06_08_00_46.txt",
+		"/C/Utilisateurs/a545888/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Utilisateurs/a545888/AppData/Roaming/Sublime Text 3/Packages/User/Plain text.sublime-settings",
+		"/C/Utilisateurs/a545888/Desktop/trunk/30 - mvn build mex.txt",
+		"/C/Utilisateurs/a545888/Downloads/RELEASES",
+		"/C/Utilisateurs/a545888/Google Drive/Business/dev/AngularJS/tests/angular2-quickstart/systemjs.config.js",
+		"/C/Utilisateurs/a545888/Google Drive/Business/dev/AngularJS/tests/angular2-quickstart/package.json",
+		"/C/Utilisateurs/a545888/Google Drive/Business/dev/AngularJS/tests/angular2-quickstart/typings.json",
+		"/C/Utilisateurs/a545888/Google Drive/Business/dev/AngularJS/tests/angular2-quickstart/tsconfig.json",
+		"/C/nodejs/gescomMerchantTestDataStream_1.xml",
+		"/C/Utilisateurs/a545888/AppData/Local/Microsoft/Windows/Temporary Internet Files/Content.Outlook/76MSEO24/crossmerchant.txt",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/7zO3FA7.tmp/Transaction_List_Page_Search_For_Child_TRXs.txt",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/7zO79D8.tmp/Transaction_List_Page_Search_For_DEBIT_TRXs.txt",
+		"/C/Utilisateurs/a545888/Downloads/MIF/access/access.160609.181513",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/7zOE71A.tmp/Transaction_Details_Page_Select_Child_TRX.txt",
+		"/C/MEX/trunk/mex/mex-batch/src/test/resources/generateGescomMerchantTestData.js",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp20020/MIDDLELOGS/mex_merchant_extranet/ssl-mex-central/mex-central.log",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp19706/MIDDLELOGS/mex_merchant_extranet/ssl-mex-central/mex-easyflow-reporter.log",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp46910/MIDDLELOGS/mex_merchant_extranet/ssl-mex-central/mex-central.log",
+		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/i18n/trn_sk.json",
+		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/i18n/trn_en.json",
+		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/i18n/trn_nl.json",
+		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/i18n/trn_de.json",
+		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/i18n/trn_fr.json",
+		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/i18n/trn_cz.json",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp58468/WEBS/mex_merchant_extranet/ssl-mex-central/conf/tomcat_workers.properties",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp56091/MIDDLE/mex_merchant_extranet/ssl-mex-central/webapps/ROOT/WEB-INF/classes/resource-bindings.properties",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp56162/MIDDLE/mex_merchant_extranet/ssl-mex-central/webapps/ROOT/WEB-INF/classes/sepaUpdateBatch.properties",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp49480/MIDDLE/mex_merchant_extranet/ssl-mex-central/tomcat1/conf/server.xml",
+		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/js/filters/genericFilters.js",
+		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/css/app.css",
+		"/C/MEX/trunk/mex/mex-gui/src/main/resources/net/atos/itg/gep/common/newlayout/components/NewLayout.tml",
+		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/i18n/trn_sk_sipsbelgium.json",
+		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/i18n/trn_cz_sipsbelgium.json",
+		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/i18n/trn_fr_sipsbelgium.json",
+		"/C/Mex/trunk/mex/mex-gui/src/main/resources/net/atos/itg/gep/portalfwk/admin/pages/Help_nl.properties",
+		"/C/MEX/trunk/mex/mex-gui/src/main/resources/net/atos/itg/gep/portalfwk/admin/pages/Help_sk.properties",
+		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/js/mexInfoUtilityModule.js",
+		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/js/transactionListController.js",
+		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/i18n/trn_en_sipsbelgium.json",
+		"/C/MEX/trunk/mex/mex-common/src/main/java/net/atos/itg/gep/common/utils/ReadFromPropertiesWriteToXls.java",
+		"/C/MEX/trunk/mex/mex-gui/src/main/resources/net/atos/itg/guitransaction/admin/pages/NgAcqIndex.tml",
+		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/html/_transaction_list.html",
+		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/partials/directiveWarning.html",
+		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/js/warningModule.js",
+		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/js/app.js",
+		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/js/trnGraphModule.js",
+		"/C/Utilisateurs/a545888/Downloads/MIF/access/access.160519.181517",
+		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/partials/directiveMexDateGraph.html",
+		"/C/MEX/trunk/mex/mex-resources-config/src/main/resources/SIPS_replicationMessage.xslt",
+		"/C/Utilisateurs/a545888/Downloads/ImportMerchant.xsd",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp13191/MIDDLEDATA/mex_merchant_extranet/batch/merchant/error/initload/InitLoad_ErrorReport_1003_2016_05_18_08_00_01.xml",
+		"/C/MEX/16R2/mex/mex-core/src/main/java/net/atos/itg/mem/sipstomemmigration/impl/SIPSToMeMMigrationImpl.java",
+		"/C/Utilisateurs/a545888/AppData/Local/Google/Drive/user_default/sync_log.log",
+		"/C/Utilisateurs/a545888/AppData/Local/Google/Drive/ip_lockfile",
+		"/C/Utilisateurs/a545888/AppData/Local/Google/Drive/lockfile",
+		"/C/Utilisateurs/a545888/AppData/Local/Google/Drive/upgrade_complete",
+		"/C/Utilisateurs/a545888/AppData/Local/Google/Drive/upgrade_log.log",
+		"/C/Utilisateurs/a545888/Downloads/gescomtest0305.xml",
+		"/C/ProgramData/Oracle/Java/java.settings.cfg"
+	],
+	"find":
+	{
+		"height": 30.0
+	},
+	"find_in_files":
+	{
+		"height": 105.0,
+		"where_history":
+		[
+			"C:\\MEX\\trunk\\mex\\mex-gui\\src\\main\\webapp\\static\\ng,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties,*.pom\n",
+			"C:\\Mex\\trunk\\mex\\,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties,*.pom\n",
+			"C:\\MEX\\trunk\\mex\\mex-gui\\src\\main\\webapp\\static\\ng,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties,*.pom\n",
+			"C:\\Mex\\trunk\\mex\\,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties,*.pom\n",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.json,*.properties\n",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties\n",
+			"C:\\Mex\\trunk\\mex\\,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties,*.pom\n",
+			"C:\\Mex\\trunk\\mex\\,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,*.js\n",
+			"C:\\Mex\\trunk\\mex\\,*.xml\n,C:\\MEX\\trunk",
+			"C:\\Mex\\trunk\\mex\\,pom.xml\n,C:\\MEX\\trunk",
+			"C:\\Mex\\trunk\\mex\\,*.pom\n,C:\\MEX\\trunk",
+			"C:\\Mex\\trunk\\mex\\,*.pom\n",
+			"C:\\Mex\\trunk\\mex\\*.pom\n",
+			"C:\\Mex\\trunk\\mex\\,*.pom\n",
+			"C:\\Mex\\trunk\\mex\\,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,*.pom\n",
+			"C:\\Mex\\trunk\\mex\\,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties,*.pom\n",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties,*.pom\n",
+			"C:\\Mex\\,-*.jasper,-*.jrxml,*.pom\n",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties\n",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,*.js\n",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,-*.jasper,-*.jrxml,*.js\n",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties\n",
+			"C:\\Utilisateurs\\a545888\\Downloads\\MIF,MIF_MEXMEM_2016031*.*",
+			"C:\\Utilisateurs\\a545888\\Downloads\\MIF,MIF_MEXMEM_201603*.*",
+			"C:\\Utilisateurs\\a545888\\Downloads\\MIF\\MIF_*.*",
+			"C:\\Utilisateurs\\a545888\\Downloads\\MIF,MIF_*.*",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.propertiesAddressProperties addressProperties = addressPropertiesQueries.findByCode(addressTypeCode);\n",
+			"C:\\Mex\\trunk\\mex,*.*",
+			"C:\\Mex\\trunk\\mex,*.properties",
+			"C:\\Mex\\trunk\\mex,*.*",
+			"C:\\Mex\\trunk\\mex,*.properties",
+			"C:\\Mex\\trunk\\mex,*.*",
+			"C:\\Mex\\trunk\\mex,*.properties",
+			"C:\\Mex\\trunk\\mex,*.*",
+			"C:\\Utilisateurs\\a545888\\Downloads\\MIF\\todo,*.XML",
+			"C:\\Utilisateurs\\a545888\\Downloads\\MIF\\TODO,*.XML",
+			"C:\\Utilisateurs\\a545888\\Downloads\\MIF,*.XML",
+			"C:\\Mex\\trunk\\mex,*.properties",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.propertiesAddressProperties addressProperties = addressPropertiesQueries.findByCode(addressTypeCode);\n",
+			"C:\\Mex\\trunk\\mex,*.properties",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.propertiesAddressProperties addressProperties = addressPropertiesQueries.findByCode(addressTypeCode);\n",
+			"C:\\Utilisateurs\\a545888\\Downloads\\MIF\\access.160225.181512",
+			"C:\\Utilisateurs\\a545888\\Downloads\\MIF\\access.160224.181515",
+			"C:\\Utilisateurs\\a545888\\Downloads\\MIF\\access.160224*.*",
+			"C:\\Utilisateurs\\a545888\\Downloads\\MIF\\access.160224*",
+			"C:\\Utilisateurs\\a545888\\Downloads\\MIF\\access.160223.181513",
+			"C:\\Utilisateurs\\a545888\\Downloads\\MIF,access.160223.181513",
+			"C:\\Utilisateurs\\a545888\\Downloads\\MIF,access.160223*.*",
+			"C:\\Utilisateurs\\a545888\\Downloads\\MIF,acc*.*",
+			"C:\\Mex\\trunk\\mex,*.*",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties",
+			"C:\\Mex\\trunk\\mex,*.properties",
+			"C:\\Mex\\trunk\\mex,*.*",
+			"C:\\Mex\\trunk\\mex,*.properties",
+			"C:\\Mex\\trunk\\mex,*.*",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties",
+			"C:\\Mex\\trunk\\mex,*.*",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java",
+			"C:\\Mex\\trunk\\mex,*.*",
+			"C:\\Mex\\trunk\\mex,*.java",
+			"C:\\Mex\\trunk\\mex,*.*",
+			"C:\\Mex\\trunk\\mex,*.properties",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html",
+			"C:\\Mex\\trunk\\mex\\,*.java",
+			"C:\\Mex\\trunk\\mex\\,*.*",
+			"C:\\Mex\\trunk\\mex\\,*.java",
+			"C:\\Mex\\trunk\\mex\\,commonConfiguration_en.properties",
+			"C:\\Mex\\trunk\\mex\\,*.properties",
+			"C:\\Mex\\trunk\\mex\\,*.*",
+			"C:\\Mex\\trunk\\mex\\,*.java",
+			"C:\\Mex\\trunk\\mex\\,*.properties",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java",
+			"C:\\Mex\\trunk\\mex\\,-*.jasper,-*.jrxml,*.*",
+			"C:\\Mex\\trunk\\mex\\,-*.jasper,-*.jrxml,*.java",
+			"C:\\Mex\\trunk\\mex\\,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html",
+			"C:\\MEX\\trunk\\mex\\mex-gui\\src\\main\\webapp\\static,*.js,*.json,*.html,*.css",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html",
+			"C:\\MEX\\trunk\\mex\\mex-gui\\src\\main\\webapp\\static,*.js,*.json,*.html,*.css",
+			"C:\\MEX\\trunk\\mex\\mex-gui\\src\\main\\webapp\\static\\ng,*.js,*.json,*.html,*.css",
+			"C:\\MEX\\trunk\\mex\\mex-gui\\src\\main\\webapp\\static\\ng,*.js,*.json,*.html",
+			"C:\\MEX\\trunk\\mex\\,*.html,*.tml,*.css",
+			"C:\\MEX\\trunk\\mex\\mex-gui\\src\\main\\webapp\\static\\ng,*.js,*.json,*.html",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,*.js,*.json,*.html",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,*.js,*.json,*.html",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html",
+			"C:\\MEX\\tests\\INSPINIA\\Angular_Full_Version,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html",
+			"C:\\Mex\\trunk\\mex\\,*.properties,*.json",
+			"C:\\Mex\\trunk\\mex\\,*.properties",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.tml",
+			"C:\\Mex\\trunk\\mex\\,*.tml",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html",
+			"C:\\Mex\\trunk\\mex\\,*.js",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html",
+			"C:\\Mex\\trunk\\mex\\,*.java",
+			"C:\\Mex\\trunk\\mex\\,*.*",
+			"C:\\Mex\\trunk\\mex\\,*.tml",
+			"C:\\Mex\\trunk\\mex\\,-*.jasper,*.js,*.css,*.html, *.tml",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html",
+			"C:\\Mex\\trunk\\mex\\,-*.jasper,*.js,*.css,*.html, *.tml",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html",
+			"C:\\Mex\\trunk\\mex\\,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html",
+			"C:\\Mex\\trunk\\mex\\,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties",
+			"C:\\MEX\\trunk\\mex\\mex-batch\\src\\main\\java\\net\\atos\\itg\\mem\\batch\\sipstomembatch,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties",
+			"C:\\Mex\\trunk\\mex\\,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html",
+			"C:\\Mex\\trunk\\mex\\,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html",
+			"C:\\Mex\\trunk\\mex\\,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties",
+			"C:\\Mex\\trunk\\mex\\,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml",
+			"C:\\training\\,-*.jasper,-*.jrxml,*.java,*.js,*.tml",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml",
+			"C:\\Mex\\trunk\\mex,-*.jasper,-*.jrxml,*.java,*.js,*.tml",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.js"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"START_OF_PROCESS",
+			"path",
+			"BT0000049902200",
+			"<ns1:merchantType>CG</ns1:merchantType>",
+			"info@hotelvillaflora.nl",
+			"TEXT_INFO_A1",
+			"moment",
+			"date",
+			"999999999",
+			"/EXPORT!",
+			"/EXPORT!!s",
+			"/rest/uxiHTransactions/mifTransactions",
+			"export",
+			"getUUID",
+			"            <status>ACTIVE</status>\\r\\n\\",
+			"writeSubscriptions",
+			"getSubscription",
+			"\"INFO\":",
+			"credit",
+			"MAPPING",
+			"sipsType",
+			"credi",
+			"translate",
+			"transla",
+			"credit",
+			"no match found",
+			"MERCHANT_SELECTION",
+			"INVALID_START_DATE\"",
+			"Transacties kunnen enkel aangevraagd worden voor een periode van 31 kalenderdagen",
+			"helpComponent.questionWLE",
+			"Heeft u een vraag over het WL Extranet?",
+			"REGION",
+			"CARD_PRODUCT",
+			"ARN_CUT",
+			"APPROVAL_CODE",
+			"PRICE_BUNDLE",
+			"SCHEME_FEE_AMOUNT",
+			"MSC_FEE_AMOUNT",
+			"INTERCHANGE_AMOUNT",
+			"MERCHANT_ID",
+			"TRANSACTIONUID",
+			"MERCHANT_REFERENCE",
+			"MASKED_PAN",
+			"PAID_AMOUNT",
+			"CREDIT_DEBIT",
+			"TRX_TYPE",
+			"export",
+			"<mex-warning",
+			"alert alert",
+			"warningMifExportAsked",
+			"mex-warning",
+			"warningTopPage",
+			"warningMifUnknownFees",
+			"mex",
+			"mex-warning",
+			"stat",
+			"mex-warning",
+			"warning",
+			"-->\n",
+			"length",
+			"empty",
+			"class=\"alert ",
+			"alert-info",
+			"class=\"alert",
+			"alert-danger",
+			"class=\"alert",
+			"appInitialization",
+			"textInfoShown",
+			"appinitialisation",
+			"trnGraphModule",
+			"uniqueid",
+			"trnGraphModule",
+			"trnGraph",
+			"directive",
+			"instant(limitString)",
+			"$translate.instant",
+			"errorMessage",
+			"translate",
+			"minOccurs=\"",
+			"T:",
+			"            <",
+			"                <av>",
+			"                <ac",
+			"aValue",
+			"aCode",
+			"variableAttribute",
+			"VACode",
+			"variableAttribute",
+			"stat",
+			"recycle",
+			"webshop",
+			"createSubscriptions",
+			"153006227800",
+			"LveTestDuplEmail5",
+			"LveTestDuplEmail4",
+			"LveTestDuplEmail3",
+			"LveTestDuplEmail2",
+			"LveTestDuplEmail1",
+			"transaction",
+			"instance",
+			"office@cosyhouse.be",
+			"zIndex",
+			"z-index",
+			"04281405060",
+			"160428140143855",
+			"16042814014",
+			"1604281401438551158",
+			"$translate.instant",
+			"exponent",
+			"Exponent",
+			"genericFilters",
+			"/static/generic/img/",
+			"genericFilters",
+			"rangemodal",
+			"openPopup",
+			"mscFeeAmount",
+			"rangeModal",
+			"amounts",
+			"currency",
+			"replace",
+			"{{",
+			"complementaryInformation",
+			"ASK_FOR_EXPORT",
+			"5000",
+			"complementaryInformation",
+			"class=\"alert ",
+			"warningTooManyResultsId",
+			"warningMifExportAsked"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"warning",
+			"<",
+			"<av>",
+			"<ac",
+			"ac",
+			"av",
+			"ac",
+			"a",
+			"VAC",
+			"VA",
+			"LveTestDuplEmail6",
+			"LveTestDuplEmail5",
+			"LveTestDuplEmail4",
+			"LveTestDuplEmail3",
+			"LveTestDuplEmail2",
+			"laurent.vetterhoeffer@worldline.com",
+			"ns1",
+			"domiciliationStatus ",
+			"5390007139075",
+			"5390007139074",
+			"fs.writeSync(writeStream, ",
+			"fs.writeSync(writeStream",
+			">BE<",
+			"<ns1:language>EN</ns1:language>",
+			">BE<",
+			"<ns1:language>EN</ns1:language>",
+			"",
+			"BE",
+			"<ns1:language>EN</ns1:language>",
+			"",
+			"warningMifUnknownFees",
+			"warningMifUnknownTransactionCosts",
+			"",
+			"16R1",
+			"16R2",
+			"",
+			"BE",
+			"",
+			"BE",
+			"",
+			"[Worldline Extranet]",
+			"",
+			"220667212360001",
+			"infolve@abctest.com",
+			"scope",
+			"level",
+			"TestTelnet2",
+			"Telnet1",
+			"TestTelnet1",
+			"result",
+			"displayGraph",
+			"TestMaryan1",
+			"periodInfo.nbXPeriods",
+			"XPeriod",
+			"getDataForGraph",
+			"<ns2:parentId>TestMif2",
+			"TestMif2",
+			"<ns2:companyRef>sipsbelgium</ns2:companyRef>",
+			"<ns2:name>TestMif1",
+			"<ns2:merchantRef>TestMif1",
+			"<ns2:merchantRef>Test1",
+			"fabrice.lefebvre@worldline.com",
+			"vetterh1@yahoo.fr",
+			"laurent.vetterhoeffer@worldline.com",
+			"xs:all",
+			"2015-10-27",
+			"2015-08-30",
+			"[SK]",
+			"[cz]",
+			"getArrayPeriodData",
+			"dataset",
+			"array",
+			"btn-default",
+			"/h2>",
+			"<h2 class=\"title\"",
+			"h2 title",
+			"title large-text",
+			"no-padding-right",
+			"text",
+			"",
+			"computePackedAndUnpackedJson",
+			"transactionDetailsResponse",
+			"transactionListResponse",
+			"\"",
+			"[fr]",
+			"[de]",
+			"app",
+			"./files/",
+			"src=\"./files/",
+			"files",
+			"\"INFO\"",
+			"userInfoWasRetreivedFromServer",
+			"// window.location.reload(true);",
+			"window.location.reload(true);",
+			"$scope.userInfo.company",
+			"$scope.userInfo.language",
+			"$scope.userInfo.alias",
+			"$scope.userInfo.isUserSessionData",
+			"$scope.userInfo.userType",
+			"$scope.userInfo.userIndex",
+			"$scope.userInfo",
+			"userInfoService",
+			"'",
+			" - hTransactions",
+			"uxiHTransactions",
+			"$scope.$storage.data",
+			"",
+			"To",
+			"dateTo",
+			"dateFrom",
+			"addFiltersToTable",
+			"indexAllColumns",
+			"indexDisplayedColumns",
+			"filterAndSearch",
+			"displayFilterAndSearches",
+			"tableColumnNames",
+			"tableColumnFilters",
+			"jTable",
+			"},\\n",
+			"decimalSeparator",
+			"hiddenByDefaultColumns",
+			"data",
+			"columnObjects",
+			"\"",
+			"\\\"",
+			"Status",
+			"searchTrnReferenceTo",
+			"searchTrnReferenceFrom"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"folders":
+	[
+		{
+			"path": "C:\\workspace\\mapTest"
+		}
+	],
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 30.0
+	},
+	"input":
+	{
+		"height": 30.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 123.0
+	},
+	"output.find_results":
+	{
+		"height": 148.0
+	},
+	"output.git":
+	{
+		"height": 100.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 100.0
+	},
+	"pinned_build_system": "",
+	"project": "",
+	"replace":
+	{
+		"height": 56.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"C:\\workspace\\react-router-tutorial\\lessons\\react_router_lessons.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 303.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+		"max_columns": 1
+	}
+}
