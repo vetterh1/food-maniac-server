@@ -32,9 +32,8 @@ export default React.createClass({
     );
     this.watchID = navigator.geolocation.watchPosition((position) => {
         let current = {latitude: position.coords.latitude, longitude: position.coords.longitude};
-        let nbRefreshes = this.state.nbRefreshes;
-        this.setState({current: current, nbRefreshes: nbRefreshes});
-        if( current != this.state.current )
+        this.setState({current: current, nbRefreshes: this.state.nbRefreshes + 1});
+        if( current.latitude != this.state.current.latitude || current.longitude != this.state.current.longitude )
           this.setState({nbDiffs: this.state.nbDiffs + 1});
     });
   },
