@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 const GeolocationDisplay = (props) => 
         <div>
             Current Latitude / Longitude: {props.latitude} / {props.longitude} <br />
-            Nb Refreshes / Nb diffs: {props.nbRefreshes} / {props.nbDiffs}
+            Nb Refreshes / Nb diffs: {props.nbRefreshes} / {props.nbDiffs} <br />
+            Real: {props.real}
         </div>;
 
 
@@ -16,7 +17,7 @@ export default React.createClass({
 
   getInitialState: function() {
     return {
-      current: {latitude: null, longitude: null },
+      current: {latitude: null, longitude: null, real: false },
       nbRefreshes: 0,
       nbDiffs: 0
     };
@@ -25,13 +26,13 @@ export default React.createClass({
   componentDidMount: function() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        this.setState({current: {latitude: position.coords.latitude, longitude: position.coords.longitude}});
+        this.setState({current: {latitude: position.coords.latitude, longitude: position.coords.longitude, real: true}});
       },
-      (error) => alert(error.message),
+      (error) =>         this.setState({current: {real: false}}),
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 50000}
     );
     this.watchID = navigator.geolocation.watchPosition((position) => {
-        let current = {latitude: position.coords.latitude, longitude: position.coords.longitude};
+        let current = {latitude: position.coords.latitude, longitude: position.coords.longitude, real: true};
         if( current.latitude != this.state.current.latitude || current.longitude != this.state.current.longitude ){
           this.setState({nbDiffs: this.state.nbDiffs + 1});
         } 
@@ -50,6 +51,7 @@ export default React.createClass({
       <GeolocationDisplay 
         latitude={displayLatitude} 
         longitude={displayLongitude} 
+        real={this.state.current.real}
         nbRefreshes={this.state.nbRefreshes} 
         nbDiffs={this.state.nbDiffs} />
     );
