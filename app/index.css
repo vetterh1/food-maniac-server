@@ -2,7 +2,11 @@
   color: green;
 }
 
-.geolocation_display{
+.geolocation_display_ok{
+	color: green;
+}
+
+.geolocation_display_ko{
 	color: red;
 }
 

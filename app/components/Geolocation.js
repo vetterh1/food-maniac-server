@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 
 const GeolocationDisplay = (props) => 
   <div>
-    <div className="geolocation_display">
-      Latitude: {props.latitude}<br />
-      Longitude: {props.longitude}<br /> 
-      Real: {props.real?"true":"false"}
+    <div className="geolocation_display {props.real ? geolocation_display_ok : geolocation_display_ko}">
+      Latitude: {props.latitude ? props.latitude : "unknown"}<br />
+      Longitude: {props.longitude ? props.longitude : "unknown"}<br /> 
+      {/* Real: {props.real?"true":"false"} */}
     </div>
     <div className="geolocation_statistics">
       Statistics:
@@ -28,18 +28,19 @@ export default React.createClass({
 
   getInitialState: function() {
     return {
-      current: {latitude: null, longitude: null, real: false },
+      position: {latitude: null, longitude: null, real: false },
       statistics: { nbRefreshes: 0, nbDiffs: 0, nbReal: 0, nbEstimated: 0 }
     };
   },
 
   noPosition: function() {
-    let current = this.state.current;
-    current.real = false;
+    let position = this.state.position;
     let statistics = this.state.statistics;
-    statistics.nbEstimated++;
+    position.real = false;
+    if( position.latitude != null && position.longitude != null )
+      statistics.nbEstimated++;
     this.setState({
-      current: current, 
+      position: position, 
       statistics: statistics
     });
   },
@@ -47,18 +48,16 @@ export default React.createClass({
   componentDidMount: function() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        console.log("Geolocation.componentDidMount.state before setState", this.state);
         let statistics = this.state.statistics;
         statistics.nbReal++;
         this.setState({
-          current: {
+          position: {
             latitude: position.coords.latitude, 
             longitude: position.coords.longitude, 
             real: true 
           }, 
           statistics: statistics
         });
-        console.log("Geolocation.componentDidMount.state after setState", this.state);
       },
       (error) => noPosition(),
       {enableHighAccuracy: true, timeout: 3000, maximumAge: 30000}
@@ -73,12 +72,12 @@ export default React.createClass({
         let statistics = this.state.statistics;
         statistics.nbRefreshes++;
         statistics.nbReal++;
-        if( current.latitude != this.state.current.latitude || 
-            current.longitude != this.state.current.longitude ){
+        if( current.latitude != this.state.position.latitude || 
+            current.longitude != this.state.position.longitude ){
           statistics.nbDiffs++;
         }
         this.setState({ 
-          current: current, 
+          position: current, 
           statistics: statistics
         });
       },
@@ -91,13 +90,13 @@ export default React.createClass({
   },
 
   render () {
-    let displayLatitude = Math.round(this.state.current.latitude * 10000) / 10000;
-    let displayLongitude = Math.round(this.state.current.longitude * 10000) / 10000;
+    let displayLatitude = Math.round(this.state.position.latitude * 10000) / 10000;
+    let displayLongitude = Math.round(this.state.position.longitude * 10000) / 10000;
     return (
       <GeolocationDisplay 
         latitude={displayLatitude} 
         longitude={displayLongitude} 
-        real={this.state.current.real}
+        real={this.state.position.real}
         nbRefreshes={this.state.statistics.nbRefreshes} 
         nbDiffs={this.state.statistics.nbDiffs} 
         nbReal={this.state.statistics.nbReal} 
