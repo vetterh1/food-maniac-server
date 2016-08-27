@@ -5,7 +5,9 @@ import App from './components/App'
 import TestComponent from './components/TestComponent'
 import TestClass from './components/TestClass'
 
-const NotFound = () => <h1>404.. This page is not found!</h1>
+
+const NotFound = () => <h1>404 error - This page is not found!</h1>
+
 
 render((
   <Router history={ hashHistory }>
@@ -16,5 +18,3 @@ render((
     <Route path='*' component={ NotFound } />
   </Router>
   ), document.getElementById('app'));
-
-
