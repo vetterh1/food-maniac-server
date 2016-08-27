@@ -23,17 +23,34 @@ const GeolocationDisplay = (props) =>
 
 
 
-export default React.createClass({
 
-  watchID: (null: ?number),
 
-  getInitialState: function() {
-    return {
-      position: {latitude: null, longitude: null, real: false },
-      statistics: { nbRefreshes: 0, nbDiffs: 0, nbReal: 0, nbEstimated: 0 },
-      errorCode: 0
-    };
-  },
+
+
+
+
+
+
+function getPosition (position) {
+  // alert("getPosition");
+  let current = {
+    latitude: position.coords.latitude, 
+    longitude: position.coords.longitude, 
+    real: true
+  };
+  let statistics = this.state.statistics;
+  statistics.nbRefreshes++;
+  statistics.nbReal++;
+  if( current.latitude != this.state.position.latitude || 
+      current.longitude != this.state.position.longitude ){
+    statistics.nbDiffs++;
+  }
+  this.setState({ 
+    position: current, 
+    statistics: statistics
+  });
+}
+
 
 /*
   showError: function (error) {
@@ -54,60 +71,44 @@ export default React.createClass({
   }
 */
 
-  noPosition: function (errorCode) {
-    // alert("noPosition");
-    let position = this.state.position;
-    let statistics = this.state.statistics;
-    position.real = false;
-    if( position.latitude != null && position.longitude != null )
-      statistics.nbEstimated++;
-    this.setState({
-      position: position, 
-      statistics: statistics,
-      errorCode: errorCode
-    });
+function errorPosition (error) {
+  // alert("errorPosition");
+  let position = this.state.position;
+  let statistics = this.state.statistics;
+  position.real = false;
+  if( position.latitude != null && position.longitude != null )
+    statistics.nbEstimated++;
+  this.setState({
+    position: position, 
+    statistics: statistics,
+    errorCode: error.errorCode
+  });
+};
+
+
+
+export default React.createClass({
+
+  watchID: (null: ?number),
+
+  getInitialState: function() {
+    return {
+      position: {latitude: null, longitude: null, real: false },
+      statistics: { nbRefreshes: 0, nbDiffs: 0, nbReal: 0, nbEstimated: 0 },
+      errorCode: 0
+    };
   },
 
   componentDidMount: function() {
     // alert("componentDidMount");
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        // alert("getCurrentPosition");
-        let statistics = this.state.statistics;
-        statistics.nbReal++;
-        this.setState({
-          position: {
-            latitude: position.coords.latitude, 
-            longitude: position.coords.longitude, 
-            real: true 
-          }, 
-          statistics: statistics
-        });
-      },
-      (error) => noPosition(error.code),
+    navigator.geolocation.getCurrentPosition( 
+      getPosition.bind(this), 
+      errorPosition.bind(this),
       {enableHighAccuracy: true, timeout: 3000, maximumAge: 3000}
     );
     this.watchID = navigator.geolocation.watchPosition(
-      (position) => {
-        // alert("watchPosition");
-        let current = {
-          latitude: position.coords.latitude, 
-          longitude: position.coords.longitude, 
-          real: true
-        };
-        let statistics = this.state.statistics;
-        statistics.nbRefreshes++;
-        statistics.nbReal++;
-        if( current.latitude != this.state.position.latitude || 
-            current.longitude != this.state.position.longitude ){
-          statistics.nbDiffs++;
-        }
-        this.setState({ 
-          position: current, 
-          statistics: statistics
-        });
-      },
-      (error) => noPosition(error.code)
+      getPosition.bind(this),
+      errorPosition.bind(this)
     );
   },
 
