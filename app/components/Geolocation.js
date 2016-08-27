@@ -59,7 +59,7 @@ export default React.createClass({
           statistics: statistics
         });
       },
-      {enableHighAccuracy: true, timeout: 20000, maximumAge: 50000}
+      {enableHighAccuracy: true, timeout: 3000, maximumAge: 30000}
     );
     this.watchID = navigator.geolocation.watchPosition((position) => {
         let current = {
