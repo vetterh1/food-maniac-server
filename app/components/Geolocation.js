@@ -14,6 +14,7 @@ const GeolocationDisplay = (props) =>
         <li>Nb different positions: {props.nbDiffs}</li>
         <li>Nb real positions: {props.nbReal}</li>
         <li>Nb estimated positions: {props.nbEstimated}</li>
+        <li>Last error code: {props.errorCode}</li>
       </ul>
     </div>
   </div>;
@@ -29,11 +30,31 @@ export default React.createClass({
   getInitialState: function() {
     return {
       position: {latitude: null, longitude: null, real: false },
-      statistics: { nbRefreshes: 0, nbDiffs: 0, nbReal: 0, nbEstimated: 0 }
+      statistics: { nbRefreshes: 0, nbDiffs: 0, nbReal: 0, nbEstimated: 0 },
+      errorCode: 0
     };
   },
 
-  noPosition: function() {
+/*
+  showError: function (error) {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            x.innerHTML = "User denied the request for Geolocation."
+            break;
+        case error.POSITION_UNAVAILABLE:
+            x.innerHTML = "Location information is unavailable."
+            break;
+        case error.TIMEOUT:
+            x.innerHTML = "The request to get user location timed out."
+            break;
+        case error.UNKNOWN_ERROR:
+            x.innerHTML = "An unknown error occurred."
+            break;
+    }
+  }
+*/
+
+  noPosition: function (errorCode) {
     let position = this.state.position;
     let statistics = this.state.statistics;
     position.real = false;
@@ -41,7 +62,8 @@ export default React.createClass({
       statistics.nbEstimated++;
     this.setState({
       position: position, 
-      statistics: statistics
+      statistics: statistics,
+      errorCode: errorCode
     });
   },
 
@@ -59,8 +81,8 @@ export default React.createClass({
           statistics: statistics
         });
       },
-      (error) => noPosition(),
-      {enableHighAccuracy: true, timeout: 3000, maximumAge: 30000}
+      (error) => noPosition(error.code),
+      {enableHighAccuracy: true, timeout: 3000, maximumAge: 3000}
     );
     this.watchID = navigator.geolocation.watchPosition(
       (position) => {
@@ -100,7 +122,8 @@ export default React.createClass({
         nbRefreshes={this.state.statistics.nbRefreshes} 
         nbDiffs={this.state.statistics.nbDiffs} 
         nbReal={this.state.statistics.nbReal} 
-        nbEstimated={this.state.statistics.nbEstimated} />
+        nbEstimated={this.state.statistics.nbEstimated}
+        errorCode={this.state.errorCode} />
     );
   }
 });
