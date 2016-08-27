@@ -33,6 +33,17 @@ export default React.createClass({
     };
   },
 
+  noPosition: function() {
+    let current = this.state.current;
+    current.real = false;
+    let statistics = this.state.statistics;
+    statistics.nbEstimated++;
+    this.setState({
+      current: current, 
+      statistics: statistics
+    });
+  },
+
   componentDidMount: function() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -49,19 +60,11 @@ export default React.createClass({
         });
         console.log("Geolocation.componentDidMount.state after setState", this.state);
       },
-      (error) => {
-        let current = this.state.current;
-        current.real = false;
-        let statistics = this.state.statistics;
-        statistics.nbEstimated++;
-        this.setState({
-          current: current, 
-          statistics: statistics
-        });
-      },
+      (error) => noPosition(),
       {enableHighAccuracy: true, timeout: 3000, maximumAge: 30000}
     );
-    this.watchID = navigator.geolocation.watchPosition((position) => {
+    this.watchID = navigator.geolocation.watchPosition(
+      (position) => {
         let current = {
           latitude: position.coords.latitude, 
           longitude: position.coords.longitude, 
@@ -78,7 +81,9 @@ export default React.createClass({
           current: current, 
           statistics: statistics
         });
-    });
+      },
+      (error) => noPosition()
+    );
   },
 
   componentWillUnmount: function() {
