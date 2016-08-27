@@ -55,7 +55,7 @@ export default React.createClass({
 */
 
   noPosition: function (errorCode) {
-    alert("noPosition");
+    // alert("noPosition");
     let position = this.state.position;
     let statistics = this.state.statistics;
     position.real = false;
@@ -69,10 +69,10 @@ export default React.createClass({
   },
 
   componentDidMount: function() {
-    alert("componentDidMount");
+    // alert("componentDidMount");
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        alert("getCurrentPosition");
+        // alert("getCurrentPosition");
         let statistics = this.state.statistics;
         statistics.nbReal++;
         this.setState({
@@ -89,7 +89,7 @@ export default React.createClass({
     );
     this.watchID = navigator.geolocation.watchPosition(
       (position) => {
-        alert("watchPosition");
+        // alert("watchPosition");
         let current = {
           latitude: position.coords.latitude, 
           longitude: position.coords.longitude, 

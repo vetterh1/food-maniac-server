@@ -2,7 +2,7 @@ import React from 'react';
 import Geolocation from './Geolocation';
 import Version from "./Version";
 
-const _version = "0.05";
+const _version = "0.06";
 
 const App = (props) => <div>
                          <h1>Map Test</h1>
