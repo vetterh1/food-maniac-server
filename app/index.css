@@ -1,3 +1,12 @@
 .active {
   color: green;
 }
+
+.geolocation_display{
+	color: red;
+}
+
+.geolocation_statistics{
+	color: grey;
+	margin-top: 40;
+}

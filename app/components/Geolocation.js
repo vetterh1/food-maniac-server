@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
 
 const GeolocationDisplay = (props) => 
-        <div>
-            Current Latitude / Longitude: {props.latitude} / {props.longitude} <br />
-            Nb Refreshes / Nb diffs: {props.nbRefreshes} / {props.nbDiffs} <br />
-            Real: {props.real}
-        </div>;
+  <div>
+    <div className="geolocation_display">
+      Latitude: {props.latitude}<br />
+      Longitude: {props.longitude}<br /> 
+      Real: {props.real?"true":"false"}
+    </div>
+    <div className="geolocation_statistics">
+      Statistics:
+      <ul>
+        <li>Nb refreshes: {props.nbRefreshes}</li>
+        <li>Nb different positions: {props.nbDiffs}</li>
+        <li>Nb real positions: {props.nbReal}</li>
+        <li>Nb estimated positions: {props.nbEstimated}</li>
+      </ul>
+    </div>
+  </div>;
 
 
 
@@ -18,25 +29,55 @@ export default React.createClass({
   getInitialState: function() {
     return {
       current: {latitude: null, longitude: null, real: false },
-      nbRefreshes: 0,
-      nbDiffs: 0
+      statistics: { nbRefreshes: 0, nbDiffs: 0, nbReal: 0, nbEstimated: 0 }
     };
   },
 
   componentDidMount: function() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        this.setState({current: {latitude: position.coords.latitude, longitude: position.coords.longitude, real: true}});
+        console.log("Geolocation.componentDidMount.state before setState", this.state);
+        let statistics = this.state.statistics;
+        statistics.nbReal++;
+        this.setState({
+          current: {
+            latitude: position.coords.latitude, 
+            longitude: position.coords.longitude, 
+            real: true 
+          }, 
+          statistics: statistics
+        });
+        console.log("Geolocation.componentDidMount.state after setState", this.state);
       },
-      (error) =>         this.setState({current: {real: false}}),
+      (error) => {
+        let current = this.state.current;
+        current.real = false;
+        let statistics = this.state.statistics;
+        statistics.nbEstimated++;
+        this.setState({
+          current: current, 
+          statistics: statistics
+        });
+      },
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 50000}
     );
     this.watchID = navigator.geolocation.watchPosition((position) => {
-        let current = {latitude: position.coords.latitude, longitude: position.coords.longitude, real: true};
-        if( current.latitude != this.state.current.latitude || current.longitude != this.state.current.longitude ){
-          this.setState({nbDiffs: this.state.nbDiffs + 1});
-        } 
-        this.setState({current: current, nbRefreshes: this.state.nbRefreshes + 1});
+        let current = {
+          latitude: position.coords.latitude, 
+          longitude: position.coords.longitude, 
+          real: true
+        };
+        let statistics = this.state.statistics;
+        statistics.nbRefreshes++;
+        statistics.nbReal++;
+        if( current.latitude != this.state.current.latitude || 
+            current.longitude != this.state.current.longitude ){
+          statistics.nbDiffs++;
+        }
+        this.setState({ 
+          current: current, 
+          statistics: statistics
+        });
     });
   },
 
@@ -52,8 +93,10 @@ export default React.createClass({
         latitude={displayLatitude} 
         longitude={displayLongitude} 
         real={this.state.current.real}
-        nbRefreshes={this.state.nbRefreshes} 
-        nbDiffs={this.state.nbDiffs} />
+        nbRefreshes={this.state.statistics.nbRefreshes} 
+        nbDiffs={this.state.statistics.nbDiffs} 
+        nbReal={this.state.statistics.nbReal} 
+        nbEstimated={this.state.statistics.nbEstimated} />
     );
   }
 });
