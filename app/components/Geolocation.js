@@ -103,7 +103,7 @@ export default React.createClass({
           statistics: statistics
         });
       },
-      (error) => noPosition()
+      (error) => noPosition(error.code)
     );
   },
 
