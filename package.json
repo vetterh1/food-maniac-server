@@ -9,7 +9,7 @@
     "start:prod": "npm run build && node server.js",
     "build": "npm run build:cp_css && webpack",
     "build:cp_css": "if-env OS=Windows_NT && copy .\\app\\index.css dist || cp ./app/index.css dist",
-    "pm2:restart": "if-env NODE_SERVER_RENDER=false && npm run pm2:restartClientRendering || npm run pm2:restartServerRendering",
+    "pm2:restart": "if-env NODE_SERVER_RENDER && npm run pm2:restartServerRendering || npm run pm2:restartClientRendering",
     "pm2:restartClientRendering": "pm2 stop maptest2 && pm2 restart maptest",
     "pm2:restartServerRendering": "pm2 stop maptest && pm2 restart maptest2",
     "build2:server": "webpack --config webpack.server.config.for.server.rendering.js",
