@@ -8,8 +8,13 @@
     "build:prodWin": "copy .\\app\\index.css dist && set NODE_ENV=production&&webpack", 
     "build:prod": "cp ./app/index.css dist && NODE_ENV=production&&webpack", 
     "start": "copy .\\app\\index.css dist && webpack-dev-server --inline --content-base dist --history-api-fallback",
-    "start:prod": "node server.js",
-    "start:pm2": "restart maptest"
+    "start:prodWin": "npm run build:prodWin && node server.js",
+    "start:prod": "npm run build:prod && node server.js",
+    "start:pm2": "npm run build:prod && restart maptest",
+
+    "build2:server": "webpack --config webpack.server.config.js",
+    "start:prod2Win": "npm run build2:server && npm run build:prodWin && node server.bundle.js",
+    "start:prod2": "npm run build2:server && npm run build:prod && node server.bundle.js"
   },
   "author": "",
   "license": "ISC",
