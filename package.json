@@ -9,7 +9,7 @@
     "start:prod": "npm run build && node server.js",
     "build": "npm run build:cp_css && webpack",
     "build:cp_css": "if-env OS=Windows_NT && copy .\\app\\index.css dist || cp ./app/index.css dist",
-    "pm2:restart": "pm2 restart maptest",
+    "pm2:restart": "pm2 restart maptest"
   },
   "author": "",
   "license": "ISC",

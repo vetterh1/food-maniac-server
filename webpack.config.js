@@ -11,13 +11,13 @@
  *            SET "NODE_ENV=production"
  *            SET "NODE_ENV=dev"
  *
- *    2 - Build only:
+ *    2 - Build only: add "npm run build"
  *
- *            npm run build
+ *            ...env... npm run build
  *
- *    3 - Build & Run
+ *    3 - Build & Run: add "npm start"
  *    
- *            npm start
+ *            ...env... npm start
  *
  *    4 - Server rendering
  *
@@ -27,6 +27,10 @@
  *    Note on combining: 
  *    - Unix: NODE_ENV=production npm start
  *    - Windows: SET "NODE_ENV=dev" && npm start
+ *
+ *    Examples:
+ *
+ *          NODE_ENV=production npm run build
  *    
  */
 
