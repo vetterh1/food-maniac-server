@@ -2,13 +2,16 @@ var webpack = require('webpack')
 
 /* 
  *  Plugin to inject bundle dist path in index.html 
- */
+ *
+ *  NOT USED WITH SERVER RENDERING AS NO INDEX.HTML FILE
+ *  
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
   template: __dirname + '/app/index.html',
   filename: 'index.html',
   inject: 'body'
 });
+/
 /*
  *   Loaders:
  *   - babel: ES6 --> ES5
@@ -26,7 +29,7 @@ module.exports = {
     './app/index.js'
   ],
   output: {
-    filename: "/index_bundle.js",
+    filename: "/bundle.js",
     path: __dirname + '/dist'
   },
   /*
@@ -36,9 +39,9 @@ module.exports = {
   plugins: process.env.NODE_ENV === 'production' ? [
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin(),
-    HTMLWebpackPluginConfig
-  ] : [HTMLWebpackPluginConfig],  
+    new webpack.optimize.UglifyJsPlugin()
+    /*,HTMLWebpackPluginConfig*/
+  ] : [/*HTMLWebpackPluginConfig*/],  
   module: {
     loaders: [{ 
       test: /\.js$/, 

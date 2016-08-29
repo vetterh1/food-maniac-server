@@ -1,7 +1,7 @@
 <!doctype html public="storage">
 <html>
 <meta charset=utf-8/>
-<title>My First React Router App</title>
+<title>Map Test</title>
 <link rel=stylesheet href=/index.css>
 <body>
 <div id=app></div>
