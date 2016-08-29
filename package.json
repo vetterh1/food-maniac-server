@@ -13,8 +13,9 @@
     "start:pm2": "npm run build:prod && restart maptest",
 
     "build2:server": "webpack --config webpack.server.config.js",
-    "start:prod2Win": "npm run build2:server && npm run build:prodWin && node server.bundle.js",
-    "start:prod2": "npm run build2:server && npm run build:prod && node server.bundle.js"
+    "start2:prodWin": "npm run build2:server && npm run build:prodWin && node server.bundle.js",
+    "start2:prod": "npm run build2:server && npm run build:prod && node server.bundle.js",
+    "start2:pm2": "npm run build2:server && npm run build:prod && restart maptest"
   },
   "author": "",
   "license": "ISC",
