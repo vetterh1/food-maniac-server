@@ -19,18 +19,18 @@
  *    
  *            ...env... npm start
  *
- *    4 - Server rendering
+ *    4 - Process Manager
  *
- *          NODE_SERVER_RENDER=true / set "NODE_SERVER_RENDER=true"
- *          NODE_SERVER_RENDER=false / set "NODE_SERVER_RENDER=false"
+ *          npm run pm2:restart
  * 
  *    Note on combining: 
- *    - Unix: NODE_ENV=production npm start
+ *    - Unix: NODE_ENV=production; npm start
  *    - Windows: SET "NODE_ENV=dev" && npm start
  *
  *    Examples:
  *
  *          NODE_ENV=production npm run build
+ *          npm run pm2:restart
  *    
  */
 
