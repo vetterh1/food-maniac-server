@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --inline --content-base ."
+    "build": "webpack",
+    "build_production": "webpack -p",
+    "start": "webpack-dev-server --inline --content-base public",
+    "development": "set NODE_ENV=development webpack && webpack-dev-server --content-base public/ --hot --inline --devtool inline-source-map --history-api-fallback"
   },
   "author": "",
   "license": "ISC",
@@ -18,6 +21,7 @@
     "babel-loader": "^6.2.2",
     "babel-preset-es2015": "^6.5.0",
     "babel-preset-react": "^6.5.0",
+    "html-webpack-plugin": "^2.22.0",
     "http-server": "^0.8.5",
     "webpack": "^1.12.13",
     "webpack-dev-server": "^1.14.1"
