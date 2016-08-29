@@ -10,12 +10,12 @@
     "start": "copy .\\app\\index.css dist && webpack-dev-server --inline --content-base dist --history-api-fallback",
     "start:prodWin": "npm run build:prodWin && node server.js",
     "start:prod": "npm run build:prod && node server.js",
-    "start:pm2": "npm run build:prod && restart maptest",
+    "start:pm2": "npm run build:prod && pm2 restart maptest",
 
     "build2:server": "webpack --config webpack.server.config.js",
     "start2:prodWin": "npm run build2:server && npm run build:prodWin && node server.bundle.js",
     "start2:prod": "npm run build2:server && npm run build:prod && node server.bundle.js",
-    "start2:pm2": "npm run build2:server && npm run build:prod && restart maptest"
+    "start2:pm2": "npm run build2:server && npm run build:prod && pm2 restart maptest2"
   },
   "author": "",
   "license": "ISC",
