@@ -5,6 +5,9 @@ var compression = require('compression')
 
 var app = express()
 
+// must be first!
+app.use(compression())
+
 // serve our static stuff like index.css
 app.use(express.static(path.join(__dirname, 'dist')))
 

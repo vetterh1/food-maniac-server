@@ -4,11 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
-    "build:prod": "webpack -p",
+    "build:dev": "webpack",
+    "build:prod": "set NODE_ENV=production&&webpack", 
     "start": "webpack-dev-server --inline --content-base public --history-api-fallback",
-    "start:prod": "webpack -p && node server.js",
-    "development": "set NODE_ENV=development webpack && webpack-dev-server --content-base public/ --hot --inline --devtool inline-source-map --history-api-fallback"
+    "start:prod": "node server.js"
   },
   "author": "",
   "license": "ISC",

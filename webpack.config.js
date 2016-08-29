@@ -1,10 +1,20 @@
+var webpack = require('webpack')
+
+/* 
+ *  Plugin to inject bundle dist path in index.html 
+ */
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
   template: __dirname + '/app/index.html',
   filename: 'index.html',
   inject: 'body'
 });
-
+/*
+ *   Loaders:
+ *   - babel: ES6 --> ES5
+ *   - babel: JSX --> JS
+ *   
+ */
 if(process.env.NODE_ENV === 'development'){
   var loaders = ['react-hot','babel-loader?presets[]=es2015&presets[]=react'];
 } else {
@@ -12,7 +22,6 @@ if(process.env.NODE_ENV === 'development'){
 }
 
 module.exports = {
-  /*devtool: 'eval',*/
   entry: [
     './app/index.js'
   ],
@@ -20,13 +29,19 @@ module.exports = {
     filename: "/index_bundle.js",
     path: __dirname + '/dist'
   },
-  plugins: [
+  /*
+   * In prod mode: call minifiers plugins
+   * (in addition to the inject bundle plugin )
+   */
+  plugins: process.env.NODE_ENV === 'production' ? [
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.UglifyJsPlugin(),
     HTMLWebpackPluginConfig
-  ],  
+  ] : [HTMLWebpackPluginConfig],  
   module: {
     loaders: [{ 
       test: /\.js$/, 
-      /*include: __dirname + '/app',*/
       exclude: /node_modules/, 
       loaders: loaders
     }]
