@@ -1,3 +1,4 @@
+var webpack = require('webpack')
 var fs = require('fs')
 var path = require('path')
 
@@ -8,7 +9,12 @@ module.exports = {
   output: {
     filename: 'server.bundle.js'
   },
-
+  plugins: [
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.UglifyJsPlugin()
+  ],
+  
   target: 'node',
 
   // keep node_module paths out of the bundle
