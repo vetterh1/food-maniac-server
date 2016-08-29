@@ -1,0 +1,16 @@
+.active {
+  color: green;
+}
+
+.geolocation_display_ok{
+	color: green;
+}
+
+.geolocation_display_ko{
+	color: red;
+}
+
+.geolocation_statistics{
+	color: grey;
+	margin-top: 40;
+}
