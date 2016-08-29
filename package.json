@@ -5,13 +5,16 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "build_production": "webpack -p",
-    "start": "webpack-dev-server --inline --content-base public",
+    "build:prod": "webpack -p",
+    "start": "webpack-dev-server --inline --content-base public --history-api-fallback",
+    "start:prod": "webpack -p && node server.js",
     "development": "set NODE_ENV=development webpack && webpack-dev-server --content-base public/ --hot --inline --devtool inline-source-map --history-api-fallback"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "compression": "^1.6.2",
+    "express": "^4.14.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-router": "^2.0.0"
