@@ -74,7 +74,7 @@ if(process.env.NODE_SERVER_RENDER != 'true'){
  *   - babel: JSX --> JS
  *   
  */
-var loaders = ['babel-loader?presets[]=es2015&presets[]=react'];
+var loaders = ['babel-loader'];
 if(process.env.NODE_ENV != 'production'){
   // loaders.push('react-hot');
 }
@@ -96,9 +96,12 @@ module.exports = {
     plugins,
   module: {
     loaders: [{ 
-      test: /\.js$/, 
+      test: /\.js.?$/, 
       exclude: /node_modules/, 
-      loaders: loaders
+      loader: 'babel-loader',
+      query: {
+        presets: ['es2015', 'react']
+      }
     }]
   },
   devServer: {
