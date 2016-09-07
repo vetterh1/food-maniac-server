@@ -101,7 +101,8 @@ module.exports = {
       loaders: loaders
     }]
   },
-  devServer: {
+  devServer: {*
+    historyApiFallback: true,
     inline:true,
     port: 8080
   }

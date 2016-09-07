@@ -519,6 +519,38 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "/C/workspace/mapTest/README.md",
+			"settings":
+			{
+				"buffer_size": 372,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Mex/trunk/mex/mex-gui/src/main/resources/net/atos/itg/guitransaction/admin/pages/TransactionDetails.properties",
+			"settings":
+			{
+				"buffer_size": 18204,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/MEX/16R4/mex/mex-core/src/main/java/net/atos/itg/mem/synchro/impl/SynchroManagerImpl.java",
+			"settings":
+			{
+				"buffer_size": 22468,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/workspace/mapTest/package.json",
+			"settings":
+			{
+				"buffer_size": 1142,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -527,10 +559,50 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 285.0,
-		"last_filter": "commit ",
+		"height": 160.0,
+		"last_filter": "git push",
 		"selected_items":
 		[
+			[
+				"git push",
+				"Git: Push"
+			],
+			[
+				"git commit",
+				"Git: Quick Commit (current file)"
+			],
+			[
+				"git add",
+				"Git: Add Current File"
+			],
+			[
+				"git status",
+				"Git: Status"
+			],
+			[
+				"git qui",
+				"Git: Quick Commit (current file)"
+			],
+			[
+				"git comm",
+				"Git: Quick Commit (current file)"
+			],
+			[
+				"git",
+				"Git: Gui"
+			],
+			[
+				"git pus",
+				"Git: Push"
+			],
+			[
+				"git co",
+				"Git: Commit"
+			],
+			[
+				"git a",
+				"Git: Add All"
+			],
 			[
 				"commit ",
 				"Git: Quick Commit (current file)"
@@ -548,10 +620,6 @@
 				"Git: Status"
 			],
 			[
-				"git qui",
-				"Git: Quick Commit (repo)"
-			],
-			[
 				"gi",
 				"Git: Commit"
 			],
@@ -562,14 +630,6 @@
 			[
 				"git stat",
 				"Git: Status"
-			],
-			[
-				"git push",
-				"Git: Push"
-			],
-			[
-				"git commit",
-				"Git: Quick Commit (current file)"
 			],
 			[
 				"git show",
@@ -652,10 +712,6 @@
 				"Git: Diff All Files"
 			],
 			[
-				"git",
-				"Git: Log All"
-			],
-			[
 				"pack",
 				"Preferences: Browse Packages"
 			],
@@ -696,7 +752,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 450.0
+		"width": 514.0
 	},
 	"console":
 	{
@@ -723,11 +779,22 @@
 		"/C/workspace/mapTest",
 		"/C/workspace/mapTest/app",
 		"/C/workspace/mapTest/app/components",
-		"/C/workspace/mapTest/dist",
 		"/C/workspace/mapTest/.git"
 	],
 	"file_history":
 	[
+		"/C/MEX/16R3/mex/mex-core/src/main/java/net/atos/itg/mem/synchro/SynchroJavaToXMLUtility.java",
+		"/C/MEX/trunk/mex/mex-core/src/main/java/net/atos/itg/mem/synchro/SynchroJavaToXMLUtility.java",
+		"/C/Utilisateurs/a545888/Documents/tmp/0109/mex-central.log.2016-08-23.160823",
+		"/C/MEX/16R4/mex/mex-core/src/main/java/net/atos/itg/mem/synchro/SynchroJavaToXMLUtility.java",
+		"/C/Utilisateurs/a545888/Downloads/TransactionDetails.properties",
+		"/C/MEX/16R4/mex/mex-core/src/main/java/net/atos/itg/mem/synchro/impl/SynchroManagerImpl.java",
+		"/C/MEX/16R4/mex/mex-core/src/main/java/net/atos/itg/mem/synchro/SynchroManagerPackage.java",
+		"/C/MEX/16R4/mex/mex-core/src/main/java/net/atos/itg/mem/synchro/SynchroManager.java",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp07413/MIDDLELOGS/mex_merchant_extranet/ssl-mex-central/mex-easyflow-reporter.log",
+		"/C/workspace/mapTest/.git/config",
+		"/C/MEX/tools/sublime/Data/Packages/Git/Git.sublime-settings",
+		"/C/MEX/tools/sublime/Data/Packages/User/Git.sublime-settings",
 		"/C/workspace/mapTest/app/components/Geolocation.js",
 		"/C/workspace/mapTest/package.json",
 		"/C/workspace/mapTest/dist",
@@ -737,8 +804,6 @@
 		"/C/workspace/mapTest/app/.gitignore",
 		"/C/workspace/mapTest/app/components/App.js",
 		"/C/workspace/mapTest/app/index.js",
-		"/C/MEX/tools/sublime/Data/Packages/Git/Git.sublime-settings",
-		"/C/MEX/tools/sublime/Data/Packages/User/Git.sublime-settings",
 		"/C/MEX/tools/sublime/Data/Packages/Default/Preferences.sublime-settings",
 		"/C/Utilisateurs/a545888/Google Drive/Business/dev/react/graphql-demo/index.js",
 		"/C/Utilisateurs/a545888/Google Drive/Business/dev/react/graphql-demo/data.json",
@@ -788,7 +853,6 @@
 		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp47233/MIDDLEDATA/mex_merchant_extranet/batch/merchant/synchro/out/Bnpp/report/report_sipsbnpp_2016_06_10_06_07_19.txt",
 		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp47581/MIDDLEDATA/mex_merchant_extranet/batch/merchant/synchro/out/Bnpp/report/report_sipsbnpp_2016_06_16_06_09_06.txt",
 		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp47954/MIDDLEDATA/mex_merchant_extranet/batch/merchant/synchro/out/Bnpp/report/report_sipsbnpp_2016_06_05_06_07_05.txt",
-		"/C/MEX/16R3/mex/mex-core/src/main/java/net/atos/itg/mem/synchro/SynchroJavaToXMLUtility.java",
 		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp38658/MIDDLEDATA/mex_merchant_extranet/batch/transaction/error/ppro/payment/PPRO.SETTLEMENT.25.20160706.163420.CSV",
 		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp38817/MIDDLEDATA/mex_merchant_extranet/batch/transaction/error/ppro/payment/PPRO.SETTLEMENT.25.20160711.102003.CSV",
 		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp37759/MIDDLEDATA/mex_merchant_extranet/batch/transaction/error/ppro/payment/PPRO.SETTLEMENT.25.20160718.100001.CSV",
@@ -846,16 +910,7 @@
 		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/js/mexInfoUtilityModule.js",
 		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/js/transactionListController.js",
 		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/i18n/trn_en_sipsbelgium.json",
-		"/C/MEX/trunk/mex/mex-common/src/main/java/net/atos/itg/gep/common/utils/ReadFromPropertiesWriteToXls.java",
-		"/C/MEX/trunk/mex/mex-gui/src/main/resources/net/atos/itg/guitransaction/admin/pages/NgAcqIndex.tml",
-		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/html/_transaction_list.html",
-		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/partials/directiveWarning.html",
-		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/js/warningModule.js",
-		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/js/app.js",
-		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/js/trnGraphModule.js",
-		"/C/Utilisateurs/a545888/Downloads/MIF/access/access.160519.181517",
-		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/partials/directiveMexDateGraph.html",
-		"/C/MEX/trunk/mex/mex-resources-config/src/main/resources/SIPS_replicationMessage.xslt"
+		"/C/MEX/trunk/mex/mex-common/src/main/java/net/atos/itg/gep/common/utils/ReadFromPropertiesWriteToXls.java"
 	],
 	"find":
 	{
@@ -866,6 +921,7 @@
 		"height": 105.0,
 		"where_history":
 		[
+			"C:\\Mex\\trunk\\mex\\,*.properties",
 			"C:\\MEX\\trunk\\mex\\mex-gui\\src\\main\\webapp\\static\\ng,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties,*.pom\n",
 			"C:\\Mex\\trunk\\mex\\,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties,*.pom\n",
 			"C:\\MEX\\trunk\\mex\\mex-gui\\src\\main\\webapp\\static\\ng,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties,*.pom\n",
@@ -992,8 +1048,7 @@
 			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml",
 			"C:\\Mex\\trunk\\mex,-*.jasper,-*.jrxml,*.java,*.js,*.tml",
 			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml",
-			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js",
-			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.js"
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js"
 		]
 	},
 	"find_state":
@@ -1001,6 +1056,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"availableOperations.IDEAL_rabobank",
+			"createmessageReport",
+			"processSynchroBatchReport",
+			"processSynchroBatchReport ",
+			"processSynchroBatchReport",
+			"bnp",
+			"539429",
 			"hide",
 			"START_OF_PROCESS",
 			"path",
@@ -1121,14 +1183,7 @@
 			"rangeModal",
 			"amounts",
 			"currency",
-			"replace",
-			"{{",
-			"complementaryInformation",
-			"ASK_FOR_EXPORT",
-			"5000",
-			"complementaryInformation",
-			"class=\"alert ",
-			"warningTooManyResultsId"
+			"replace"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1283,8 +1338,452 @@
 	"groups":
 	[
 		{
+			"selected": 3,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "/C/workspace/mapTest/README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 372,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								372,
+								372
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"syntax": "Packages/Markdown/Markdown.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/C/Mex/trunk/mex/mex-gui/src/main/resources/net/atos/itg/guitransaction/admin/pages/TransactionDetails.properties",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 18204,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								17646,
+								17646
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"syntax": "Packages/Java/JavaProperties.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 8572.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/C/MEX/16R4/mex/mex-core/src/main/java/net/atos/itg/mem/synchro/impl/SynchroManagerImpl.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 22468,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								17781,
+								17729
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										17781,
+										17782
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/double_quote.png",
+										"brackethighlighter.default"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										17728,
+										17729
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"syntax": "Packages/Java/Java.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 10046.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/C/workspace/mapTest/package.json",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 1142,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										1140,
+										1141
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"brackethighlighter.default"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										0,
+										1
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"syntax": "Packages/Theme - SoDaReloaded/settings/langs/npm JSON.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],

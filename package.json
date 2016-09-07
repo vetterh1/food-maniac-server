@@ -19,7 +19,9 @@
     "if-env": "^1.0.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
-    "react-router": "^2.0.0"
+    "react-redux": "^4.4.5",
+    "react-router": "^2.0.0",
+    "redux": "^3.5.2"
   },
   "devDependencies": {
     "babel-core": "^6.5.1",
@@ -28,6 +30,7 @@
     "babel-preset-react": "^6.5.0",
     "html-webpack-plugin": "^2.22.0",
     "http-server": "^0.8.5",
+    "redux-devtools": "^3.3.1",
     "webpack": "^1.12.13",
     "webpack-dev-server": "^1.14.1"
   }

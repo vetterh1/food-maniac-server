@@ -1,9 +1,8 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Router, browserHistory } from 'react-router'
-import routes from './components/Routes'
+import Root from './components/Root'
 
 
 render(
-	<Router routes={routes} history={browserHistory}/>, 
+	<Root />, 
 	document.getElementById('app'));
