@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { setCurrentLocation } from '../actions'
 
 const GeolocationDisplay = (props) => 
   <div>

@@ -104,7 +104,7 @@ module.exports = {
       }
     }]
   },
-  devServer: {*
+  devServer: {
     historyApiFallback: true,
     inline:true,
     port: 8080
