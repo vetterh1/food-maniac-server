@@ -3,7 +3,7 @@ import Geolocation from './Geolocation';
 import MapContainer from '../containers/MapContainer.jsx';
 import Version from "./Version";
 
-const _version = "0.12-flux-branch";
+const _version = "0.13-flux-branch";
 
 const App = (props) => <div>
                          <h1>Map Test</h1>
