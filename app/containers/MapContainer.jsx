@@ -1,37 +1,54 @@
-import React, {PropTypes, Component} from 'react';
-// import shouldPureComponentUpdate from 'react-pure-render/function';
-
+import React, {Component} from 'react';
+import { connect } from 'react-redux'
 import GoogleMap from 'google-map-react';
-// import MyGreatPlace from './my_great_place.jsx';
+import {setCurrentLocation} from '../actions/LocationActions'
 
-
-class MapContainer extends Component {
-
-  //shouldComponentUpdate = shouldPureComponentUpdate;
-
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-	return (
-		<GoogleMap
-			bootstrapURLKeys={{
-				key: "AIzaSyAPbswfvaojeQVe9eE-0CtZ4iEtWia9KO0"
-			}}
-	        defaultCenter={this.props.center}
-        	defaultZoom={this.props.zoom}>
-		</GoogleMap>
-	);
+const getVisibleTodos = (todos, filter) => {
+  switch (filter) {
+    case 'SHOW_ALL':
+      return todos
+    case 'SHOW_COMPLETED':
+      return todos.filter(t => t.completed)
+    case 'SHOW_ACTIVE':
+      return todos.filter(t => !t.completed)
   }
 }
 
-MapContainer.defaultProps={
-    center: {lat: 59.938043, lng: 30.337157},
-    zoom: 9,
-    greatPlaceCoords: {lat: 59.724465, lng: 30.080121}
-  };
-export default MapContainer;
+const mapStateToProps = (state) => {
+  let lat = state.coordinates.latitude;
+  let lng = state.coordinates.longitude;
+  let center = {lat: lat, lng: lng };
+  
+  console.log("LVE mapStateToProps state", state);
+  console.log("LVE mapStateToProps defaultCenter", center);
 
-//        <MyGreatPlace lat={59.955413} lng={30.337844} text={'A'} /* Kreyser Avrora */ />
-//        <MyGreatPlace {...this.props.greatPlaceCoords} text={'B'} /* road circle */ />
+  return {
+    bootstrapURLKeys: {key: "AIzaSyAPbswfvaojeQVe9eE-0CtZ4iEtWia9KO0"},
+    defaultCenter: {lat: 50.5467501, lng: 3.0290698999999996},
+    center: center,
+    defaultZoom: 20
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+  }
+}
+
+const MapContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GoogleMap)
+
+export default MapContainer
+
+
+
+
+/*
+      <GoogleMap
+        bootstrapURLKeys={{key: "AIzaSyAPbswfvaojeQVe9eE-0CtZ4iEtWia9KO0"}}
+        defaultCenter={this.props.center}
+        defaultZoom={this.props.zoom}>
+      </GoogleMap>
+*/

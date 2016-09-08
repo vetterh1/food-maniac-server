@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import Root from './components/Root'
 
 import { createStore } from 'redux'
-import mainStore from './reducers/index'
+import mainStore from './reducers/mainStore'
 let store = createStore(mainStore);
 
 render(

@@ -4,12 +4,12 @@ const coordinates = (state = {}, action) => {
 			let changed = 	action.latitude === action.latitude && 
 							state.longitude === action.longitude 
 							? false : true;
-			return {
+			return changed ? {
 				latitude: action.latitude,
 				longitude: action.longitude,
 				real: action.real,
 				changed: changed
-			}
+			} : state;
 
 		default:
 			return state

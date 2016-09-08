@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { setCurrentLocation } from '../actions'
+import * as LocationActions from '../actions/LocationActions'
+
+console.log(LocationActions)
+
 
 const GeolocationDisplay = (props) => 
   <div>
@@ -51,6 +55,10 @@ function getPosition (position) {
     position: current, 
     statistics: statistics
   });
+
+  let { dispatch } = this.props;  // Injected by react-redux
+  let action = LocationActions.setCurrentLocation( current.latitude, current.longitude, current.real );
+  dispatch(action);
 }
 
 
@@ -85,23 +93,26 @@ function errorPosition (error) {
     statistics: statistics,
     errorCode: error.errorCode
   });
+
+  let { dispatch } = this.props;  // Injected by react-redux
+  let action = LocationActions.setCurrentLocation( position.latitude, position.longitude, false );
+  dispatch(action);
 };
 
 
 
-export default React.createClass({
+class Geolocation extends Component {
 
-  watchID: (null: ?number),
+  // watchID: (null: ?number),
+  
 
-  getInitialState: function() {
-    return {
-      position: {latitude: null, longitude: null, real: false },
-      statistics: { nbRefreshes: 0, nbDiffs: 0, nbReal: 0, nbEstimated: 0 },
-      errorCode: 0
-    };
-  },
+  state = {
+    position: {latitude: 50.5467501, longitude: 3.0290698999999996, real: false },
+    statistics: { nbRefreshes: 0, nbDiffs: 0, nbReal: 0, nbEstimated: 0 },
+    errorCode: 0
+  }
 
-  componentDidMount: function() {
+  componentDidMount () {
     // alert("componentDidMount");
     navigator.geolocation.getCurrentPosition( 
       getPosition.bind(this), 
@@ -112,11 +123,11 @@ export default React.createClass({
       getPosition.bind(this),
       errorPosition.bind(this)
     );
-  },
+  }
 
-  componentWillUnmount: function() {
+  componentWillUnmount () {
     navigator.geolocation.clearWatch(this.watchID);
-  },
+  }
 
   render () {
     let displayLatitude = Math.round(this.state.position.latitude * 10000) / 10000;
@@ -133,4 +144,8 @@ export default React.createClass({
         errorCode={this.state.errorCode} />
     );
   }
-});
+}
+
+Geolocation = connect()(Geolocation)
+
+export default Geolocation
