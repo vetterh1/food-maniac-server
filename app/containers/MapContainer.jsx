@@ -5,15 +5,8 @@ import {setCurrentLocation} from '../actions/LocationActions'
 
 
 const mapStateToProps = (state) => {
-  let lat = state.coordinates.latitude;
-  let lng = state.coordinates.longitude;
-  let center = {lat: lat, lng: lng };
-
   return {
-    bootstrapURLKeys: {key: "AIzaSyAPbswfvaojeQVe9eE-0CtZ4iEtWia9KO0"},
-    defaultCenter: {lat: 50.5467501, lng: 3.0290698999999996},
-    center: center,
-    defaultZoom: 20
+    center: [state.coordinates.latitude, state.coordinates.longitude]
   }
 }
 
@@ -24,7 +17,17 @@ const mapDispatchToProps = (dispatch) => {
 
 @connect(mapStateToProps, mapDispatchToProps)
 
-export default class MapContainerOld extends Component {
+export default class MapContainer extends Component {
+
+  static defaultProps = {
+    bootstrapURLKeys: {key: "AIzaSyAPbswfvaojeQVe9eE-0CtZ4iEtWia9KO0"},
+    center: [50.5467501, 3.0290698999999996],
+    zoom: 20,
+    greatPlaces: [
+      {id: 'A', lat: 59.955413, lng: 30.337844},
+      {id: 'B', lat: 59.724, lng: 30.080}
+    ]
+  };
 
   constructor(props) {
     super(props);
