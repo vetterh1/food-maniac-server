@@ -1,9 +1,9 @@
 import React from 'react';
 import Geolocation from './Geolocation';
-import MapContainer from '../containers/MapContainer.jsx';
+import MapContainer from '../containers/basic.jsx';
 import Version from "./Version";
 
-const _version = "0.13-flux-branch";
+const _version = "0.14-new-map-branch";
 
 const App = (props) => <div>
                          <h1>Map Test</h1>
