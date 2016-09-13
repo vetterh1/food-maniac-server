@@ -27,25 +27,6 @@ const Listing = ({places}) => {
 }
 
 
-const mapStateToProps = (state) => {
-  console.log("{   PlacesContainer.mapStateToProps (pcms)" );
-  console.log("       (pcms) state:", state);
-  let result = {
-    center: [state.coordinates.latitude, state.coordinates.longitude]
-  }
-  console.log("       (pcms) result:", result);
-  console.log("}   PlacesContainer.mapStateToProps" );
-  return result;
-}
-
-const mapDispatchToProps = (dispatch) => {
-  console.log("{   PlacesContainer.mapDispatchToProps (pcmd)" );
-  console.log("       (pcmd) dispatch:", dispatch);
-  console.log("}   PlacesContainer.mapDispatchToProps (pcmd)" );
-  return {
-  }
-}
-
 // @connect(mapStateToProps, mapDispatchToProps)
 
 const PlacesContainer = React.createClass({
@@ -124,8 +105,29 @@ const PlacesContainer = React.createClass({
 
 });
 
-connect(mapStateToProps, mapDispatchToProps)(PlacesContainer);
+const mapStateToProps = (state) => {
+  console.log("{   PlacesContainer.mapStateToProps (pcms)" );
+  console.log("       (pcms) state:", state);
+  let result = {
+    //center: [state.coordinates.latitude, state.coordinates.longitude]
+    position: { lat: state.coordinates.latitude, lng: state.coordinates.longitude }    
+  }
+  console.log("       (pcms) result:", result);
+  console.log("}   PlacesContainer.mapStateToProps" );
+  return result;
+}
 
+const mapDispatchToProps = (dispatch) => {
+  console.log("{   PlacesContainer.mapDispatchToProps (pcmd)" );
+  console.log("       (pcmd) dispatch:", dispatch);
+  console.log("}   PlacesContainer.mapDispatchToProps (pcmd)" );
+  return {
+  }
+}
 
-export default GoogleApiWrapper({apiKey: __GAPI_KEY__})(PlacesContainer)
+let PlacesContainerWrapped = connect(mapStateToProps, mapDispatchToProps)(PlacesContainer);
+export default GoogleApiWrapper({apiKey: __GAPI_KEY__})(PlacesContainerWrapped);
 
+// Works too! :
+// let PlacesContainerWrapped = GoogleApiWrapper({apiKey: __GAPI_KEY__})(PlacesContainer);
+// export default connect(mapStateToProps, mapDispatchToProps)(PlacesContainerWrapped);
