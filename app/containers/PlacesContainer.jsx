@@ -76,8 +76,8 @@ const PlacesContainer = React.createClass({
     console.log("       (pcr) props:", this.props)
 
     const style = {
-      width: '80vw',
-      height: '50vh'
+      width: '80%',
+      height: '50%'
     }
 
 //    if (!this.state || !this.state.center) {
@@ -92,7 +92,8 @@ const PlacesContainer = React.createClass({
         <Map google={this.props.google}
             className={'map'}
             onReady={this.onMapReady}
-            visible={true}
+            visible={false}
+            center={this.props.position}
         >
 
           <Listing places={this.state.places} />
