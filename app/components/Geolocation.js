@@ -3,9 +3,6 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as LocationActions from '../actions/LocationActions'
 
-console.log(LocationActions)
-
-
 const GeolocationDisplay = (props) => 
   <div>
     <div className="geolocation_display {props.real ? geolocation_display_ok : geolocation_display_ko}">

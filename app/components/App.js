@@ -1,6 +1,6 @@
 import React from 'react';
 import Geolocation from './Geolocation';
-import PlacesContainer from '../containers/placesOldFormat.jsx';
+import PlacesContainer from '../containers/PlacesContainer.jsx';
 import Version from "./Version";
 
 const _version = "0.14-new-map-branch";

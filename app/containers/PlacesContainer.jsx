@@ -7,9 +7,10 @@ const __GAPI_KEY__ = "AIzaSyAPbswfvaojeQVe9eE-0CtZ4iEtWia9KO0";
 
 const Listing = ({places}) => {
 
-  console.log("Listing places", places );
+  console.log("   {   Listing.render (lr)" );
+  console.log("          (lr) places: ", places );
 
-  return (
+  let result = (
     <ul>
       {places && places.map(p => {
         return (
@@ -19,40 +20,43 @@ const Listing = ({places}) => {
         )
       })}
     </ul>
-  )
+  );
+
+  console.log("   }   Listing.render" );
+  return result;
 }
 
 
 const mapStateToProps = (state) => {
-  console.log("PlacesContainer.mapStateToProps state:", state)
-  console.log("PlacesContainer.mapStateToProps latitude:" + state.coordinates.latitude + "longitude: " + state.coordinates.longitude)
-  return {
+  console.log("{   PlacesContainer.mapStateToProps (pcms)" );
+  console.log("       (pcms) state:", state);
+  let result = {
     center: [state.coordinates.latitude, state.coordinates.longitude]
   }
+  console.log("       (pcms) result:", result);
+  console.log("}   PlacesContainer.mapStateToProps" );
+  return result;
 }
 
 const mapDispatchToProps = (dispatch) => {
-  console.log("PlacesContainer.mapDispatchToProps dispatch:", dispatch)
+  console.log("{   PlacesContainer.mapDispatchToProps (pcmd)" );
+  console.log("       (pcmd) dispatch:", dispatch);
+  console.log("}   PlacesContainer.mapDispatchToProps (pcmd)" );
   return {
   }
 }
 
-@connect(mapStateToProps, mapDispatchToProps)
+// @connect(mapStateToProps, mapDispatchToProps)
 
-class PlacesContainer extends Component {
+const PlacesContainer = React.createClass({
 
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
+  getInitialState: function() {
+    return {
       places: []
-    };
-  }
+    }
+  },
 
-  test(){
-    console.log("!!!!!!!!!!!test");
-  }
-
-  searchNearby(map, center) {
+  searchNearby: function(map, center) {
     const {google} = this.props;
     const service = new google.maps.places.PlacesService(map);
     // Specify location, radius and place types for your Places API search.
@@ -73,26 +77,27 @@ class PlacesContainer extends Component {
         })
       }
     })
-  }
+  },
 
-  onMapReady (mapProps, map) {
-    this.test(); // KO here !!!!!!!!!!!!!!
+  onMapReady: function (mapProps, map) {
     this.searchNearby(map, map.center);
-  }
+  },
 
-  render () {
+  render: function () {
 
-    this.test(); // OK here
-    
-    console.log("PlacesContainer.render state:", this.state);
-    console.log("PlacesContainer.render props:", this.props)
+    console.log("{   PlacesContainer.render (pcr)" );
+
+    console.log("       (pcr) state:", this.state);
+    console.log("       (pcr) props:", this.props)
 
 //    if (!this.state || !this.state.center) {
     if (!this.props.loaded) {
+      console.log("       returns loading msg" );
+      console.log("}   PlacesContainer.render" );
       return <div>Loading...</div>
     }
 
-    return (
+    let result = (
       <Map google={this.props.google}
           className={'map'}
           onReady={this.onMapReady}
@@ -101,10 +106,14 @@ class PlacesContainer extends Component {
         <Listing places={this.state.places} />
       </Map>
     )
+    console.log("}   PlacesContainer.render" );
+    return result;
   }
 
-}
+});
 
-export default GoogleApiWrapper({
-  apiKey: __GAPI_KEY__
-})(PlacesContainer)
+connect(mapStateToProps, mapDispatchToProps)(PlacesContainer);
+
+
+export default GoogleApiWrapper({apiKey: __GAPI_KEY__})(PlacesContainer)
+
