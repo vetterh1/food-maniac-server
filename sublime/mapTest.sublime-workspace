@@ -4,80 +4,56 @@
 		"selected_items":
 		[
 			[
-				"co",
-				"coordinates"
+				"rea",
+				"react-router"
 			],
 			[
 				"pro",
-				"props	React: this.props"
+				"prod"
 			],
 			[
-				"st",
-				"state"
-			],
-			[
-				"fun",
-				"function〔keyword〕"
-			],
-			[
-				"stat",
-				"state"
-			],
-			[
-				"s",
-				"state	React: this.state"
-			],
-			[
-				"d",
-				"div"
-			],
-			[
-				"resu",
-				"result"
+				"cp",
+				"cp_css"
 			],
 			[
 				"c",
-				"coordinates"
+				"client"
 			],
 			[
-				"pla",
-				"places"
+				"di",
+				"div"
 			],
 			[
-				"Pl",
-				"PlacesContainer"
+				"loa",
+				"loaders"
 			],
 			[
-				"ma",
-				"marker"
+				"fu",
+				"fun	Function"
 			],
 			[
-				"onMa",
-				"onMarkerClick"
+				"marg",
+				"margin-top"
 			],
 			[
-				"onM",
-				"onMapMoved"
+				"st",
+				"statistics"
 			],
 			[
-				"rcc",
-				"rcc	React: class component"
+				"nb",
+				"nbReal"
 			],
 			[
-				"de",
-				"defaultCenter"
-			],
-			[
-				"lon",
-				"longitude"
-			],
-			[
-				"lo",
-				"longitude"
-			],
-			[
-				"rea",
+				"r",
 				"real"
+			],
+			[
+				"s",
+				"statistics"
+			],
+			[
+				"posit",
+				"positions"
 			],
 			[
 				"Te",
@@ -90,6 +66,10 @@
 			[
 				"R",
 				"Route"
+			],
+			[
+				"co",
+				"const"
 			],
 			[
 				"m",
@@ -110,6 +90,10 @@
 			[
 				"a",
 				"a	Tag"
+			],
+			[
+				"rcc",
+				"rcc	React: class component"
 			],
 			[
 				"for",
@@ -138,10 +122,6 @@
 			[
 				"att",
 				"attributeValue"
-			],
-			[
-				"nb",
-				"nbKO"
 			],
 			[
 				"merc",
@@ -202,10 +182,6 @@
 			[
 				"ng",
 				"ng-click	AngularJS"
-			],
-			[
-				"di",
-				"div	Tag"
 			],
 			[
 				"te",
@@ -316,6 +292,10 @@
 				"function"
 			],
 			[
+				"fun",
+				"function"
+			],
+			[
 				"WEEK",
 				"week"
 			],
@@ -398,10 +378,6 @@
 			[
 				"ret",
 				"return"
-			],
-			[
-				"fu",
-				"fun	Function"
 			],
 			[
 				"test",
@@ -500,6 +476,10 @@
 				"range"
 			],
 			[
+				"lo",
+				"log"
+			],
+			[
 				"filt",
 				"Filters"
 			],
@@ -514,40 +494,44 @@
 			[
 				"wid",
 				"width"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"$sc",
+				"$scope	AngularJS"
+			],
+			[
+				"$loc",
+				"$location	AngularJS(DI)"
+			],
+			[
+				"Pro",
+				"productUtils"
+			],
+			[
+				"produc",
+				"productSummary"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"contents": "\"tradeName\": \"Nom du Trade\",\n\"JRTreportnetworkAmex\": \"Network CB\",\n\"walletPage_FLAG_socitgnrale\": \"Walletpage\",\n\"ACCEPTANCE_settlement\": \"Settlement\",\n\"salesVendor_MERCHANT\": \"Sales vendor\",\n\"name_webshop\": \"nom Webshop\",\n\"walletURL\": \"Wallet URL\",\n\n    \"VATnumber\": \"VAT nombre\" --> \"Numéro TVA\"\n    \"Recurring_socitgnrale\": \"Recurring transactions\"  --> \"Transactions récurrentes\"\n    \"Action_Date\": \"Mesure Date\" --> \"Date action\"\n    \"Action\": \"Mesure\" --> \"Action\"\n    \"History_Type\": \"Histoire Type\" --> \"Type historique\"\n    \"new_standard_contact\":\"Nouvelle norme contacter\" --> \"Nouveau contact standard\"\n	\"bulkChanges\":\"Changements vrac\" --> \"Changements en bloc\"\n	\"PENDING\": \"en attendant\" --> \"En attente\"\n	\"LIGHT\": \"LUMIÈRE\" --> \"FAIBLE\"\n	\"STRONG\": \"STRONG\" --> \"FORT\"\n\n    ",
-			"settings":
-			{
-				"buffer_size": 786,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/MEX/trunk/mex/mex-gui/src/main/webapp/modules/Translation/i18n/locale-en.json",
-			"settings":
-			{
-				"buffer_size": 86537,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "/C/workspace/mapTest/app/containers/PlacesContainer.jsx",
 			"settings":
 			{
-				"buffer_size": 3632,
+				"buffer_size": 4025,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/workspace/mapTest/app/tests/DisplayPositionFromStore.jsx",
+			"file": "/C/workspace/mapTest/app/containers/MapBasicContainer.js",
 			"settings":
 			{
-				"buffer_size": 844,
+				"buffer_size": 1591,
 				"line_ending": "Windows"
 			}
 		}
@@ -559,81 +543,57 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 375.0,
-		"last_filter": "git g",
+		"height": 285.0,
+		"last_filter": "git comm",
 		"selected_items":
 		[
 			[
-				"git g",
-				"Git: Gui"
+				"git comm",
+				"Git: Quick Commit (current file)"
 			],
 			[
-				"git push",
-				"Git: Push"
+				"git stat",
+				"Git: Status"
 			],
 			[
 				"git commit",
-				"Git: Quick Commit (current file)"
+				"Git: Quick Commit (repo)"
 			],
 			[
 				"git add",
 				"Git: Add Current File"
 			],
 			[
-				"git status",
+				"git pus",
+				"Git: Push"
+			],
+			[
+				"git com",
+				"Git: Quick Commit (current file)"
+			],
+			[
+				"git sta",
 				"Git: Status"
+			],
+			[
+				"git st",
+				"Git: Status"
+			],
+			[
+				"gitg",
+				"GitGutter: Show Comparing Against"
 			],
 			[
 				"git qui",
 				"Git: Quick Commit (current file)"
 			],
 			[
-				"git comm",
-				"Git: Quick Commit (current file)"
-			],
-			[
-				"git",
-				"Git: Gui"
-			],
-			[
-				"git pus",
-				"Git: Push"
-			],
-			[
-				"git co",
-				"Git: Commit"
-			],
-			[
-				"git a",
-				"Git: Add All"
-			],
-			[
-				"commit ",
-				"Git: Quick Commit (current file)"
-			],
-			[
-				"git commit ",
-				"Git: Quick Commit (repo)"
-			],
-			[
-				"git ",
-				"Git: Status"
-			],
-			[
-				"git s",
-				"Git: Status"
-			],
-			[
 				"gi",
 				"Git: Commit"
 			],
 			[
-				"git com",
-				"Git: Commit"
-			],
-			[
-				"git stat",
-				"Git: Status"
+				"git push",
+				"Git: Push"
 			],
 			[
 				"git show",
@@ -716,6 +676,10 @@
 				"Git: Diff All Files"
 			],
 			[
+				"git",
+				"Git: Log All"
+			],
+			[
 				"pack",
 				"Preferences: Browse Packages"
 			],
@@ -787,69 +751,44 @@
 		"/C/workspace/mapTest/app/containers",
 		"/C/workspace/mapTest/app/reducers",
 		"/C/workspace/mapTest/app/tests",
-		"/C/workspace/mapTest/node_modules/google-maps-react/dist",
-		"/C/workspace/mapTest/node_modules/google-maps-react/dist/components",
-		"/C/workspace/mapTest/node_modules/google-maps-react/node_modules/history",
-		"/C/workspace/mapTest/old",
-		"/C/workspace/mapTest/.git"
+		"/C/workspace/mapTest/dist",
+		"/C/workspace/mapTest/node_modules",
+		"/C/workspace/mapTest/node_modules/google-maps-react",
+		"/C/workspace/mapTest/node_modules/google-maps-react/dist"
 	],
 	"file_history":
 	[
-		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/modules/Translation/i18n/locale-en.json",
 		"/C/workspace/mapTest/app/components/App.js",
-		"/C/workspace/mapTest/app/reducers/coordinates.js",
-		"/C/workspace/mapTest/app/components/Geolocation.js",
 		"/C/workspace/mapTest/app/tests/DisplayPositionFromStore.jsx",
-		"/C/workspace/mapTest/app/containers/places.jsx",
-		"/C/workspace/mapTest/app/actions/LocationActions.js",
-		"/C/Utilisateurs/a545888/Desktop/20160616 - MST - ImportMerchant.xsd",
-		"/C/Utilisateurs/a545888/Desktop/test.xml",
-		"/C/workspace/mapTest/app/containers/basic.jsx",
-		"/C/workspace/mapTest/app/containers/MapContainer.old2.jsx",
-		"/C/workspace/mapTest/app/containers/MapContainerOld.jsx",
+		"/C/workspace/mapTest/app/components/Geolocation.js",
 		"/C/workspace/mapTest/webpack.config.js",
+		"/C/workspace/mapTest/README.md",
+		"/C/Users/Laurent/dev/sublime/Data/Packages/Terminal/Terminal.sublime-settings",
+		"/C/Users/Laurent/dev/sublime/Data/Packages/Terminal/Default (Windows).sublime-keymap",
+		"/C/Users/Laurent/dev/sublime/Data/Packages/User/Terminal.sublime-settings",
+		"/C/Users/Laurent/dev/sublime/Data/Packages/User/Terminal (Windows).sublime-settings",
+		"/C/workspace/mapTest/server.js",
 		"/C/workspace/mapTest/package.json",
-		"/C/workspace/mapTest/app/components/Root.js",
-		"/C/workspace/mapTest/.babelrc",
-		"/C/workspace/mapTest/app/components/TestComponent.js",
+		"/C/workspace/mapTest/dist/index.html",
+		"/C/workspace/mapTest/old/webpack.server.config.for.server.rendering.js",
+		"/C/workspace/mapTest/webpack.client.config.for.server.rendering.js",
+		"/C/workspace/mapTest/serverRendering.js",
+		"/C/workspace/mapTest/app/components/Routes.js",
 		"/C/workspace/mapTest/app/index.js",
-		"/C/workspace/mapTest/app/reducers/mainStore.js",
-		"/C/Utilisateurs/a545888/Documents/tmp/mex-central.log.2015-03-09.150309/mex-central.log.2015-03-09.150309",
-		"/C/workspace/mapTest/app/reducers/index.js",
-		"/C/workspace/mapTest/app/containers/my_great_place.jsx",
-		"/C/workspace/mapTest/app/containers/my_great_place_styles.jsx",
-		"/C/workspace/mapTest/app/containers/MapContainer.jsx",
-		"/C/MEX/tools/sublime/Data/Packages/User/GitGutter.sublime-settings",
+		"/C/workspace/mapTest/app/index.html.not used with server rendering",
+		"/C/workspace/mapTest/webpack.server.config.js",
+		"/C/workspace/mapTest/app/index.html",
+		"/C/workspace/mapTest/.gitignore",
+		"/C/workspace/mapTest/dist/index_bundle.js",
+		"/C/Users/Laurent/dev/sublime/Data/Packages/User/GitGutter.sublime-settings",
+		"/C/workspace/mapTest/app/webpack.config.js",
+		"/C/workspace/mapTest/app/package.json",
+		"/C/workspace/mapTest/npm-debug.log",
+		"/C/workspace/mapTest/app/index.css",
+		"/C/workspace/mapTest/app/components/Version.js",
+		"/C/Users/Laurent/dev/sublime/Data/Packages/GitGutter/GitGutter.sublime-settings",
 		"/C/MEX/tools/sublime/Data/Packages/Git/Git.sublime-settings",
 		"/C/MEX/tools/sublime/Data/Packages/User/Git.sublime-settings",
-		"/C/Utilisateurs/a545888/Google Drive/Business/dev/meteor/simple-todos/client/main.html",
-		"/C/Utilisateurs/a545888/Google Drive/Business/dev/meteor/ovh-test/meteor-ovh-test/client/main.html",
-		"/C/Utilisateurs/a545888/Google Drive/Business/dev/meteor/ovh-test/meteor-ovh-test/imports/api/tasks.js",
-		"/C/Utilisateurs/a545888/Google Drive/Business/dev/meteor/ovh-test/meteor-ovh-test/imports/components/todosList/todosList.html",
-		"/C/Utilisateurs/a545888/Google Drive/Business/dev/meteor/ovh-test/meteor-ovh-test/imports/components/todosList/todosList.js",
-		"/C/Utilisateurs/a545888/Google Drive/Business/dev/meteor/ovh-test/meteor-ovh-test/client/main.js",
-		"/C/Utilisateurs/a545888/Google Drive/Business/dev/meteor/simple-todos-old/client/main.js",
-		"/C/Utilisateurs/a545888/Google Drive/Business/dev/meteor/simple-todos/client/main.js",
-		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/modules/Translation/i18n/locale-fr.json",
-		"/C/Utilisateurs/a545888/Documents/Mes fichiers reçus/locale-fr.json",
-		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp35205/MIDDLEDATA/mex_merchant_extranet/batch/transaction/archives/ppro/payment/PPRO.PAYMENT.25.20160906.010500.CSV",
-		"/C/workspace/mapTest/README.md",
-		"/C/Mex/trunk/mex/mex-gui/src/main/resources/net/atos/itg/guitransaction/admin/pages/TransactionDetails.properties",
-		"/C/MEX/16R4/mex/mex-core/src/main/java/net/atos/itg/mem/synchro/impl/SynchroManagerImpl.java",
-		"/C/MEX/16R3/mex/mex-core/src/main/java/net/atos/itg/mem/synchro/SynchroJavaToXMLUtility.java",
-		"/C/MEX/trunk/mex/mex-core/src/main/java/net/atos/itg/mem/synchro/SynchroJavaToXMLUtility.java",
-		"/C/Utilisateurs/a545888/Documents/tmp/0109/mex-central.log.2016-08-23.160823",
-		"/C/MEX/16R4/mex/mex-core/src/main/java/net/atos/itg/mem/synchro/SynchroJavaToXMLUtility.java",
-		"/C/Utilisateurs/a545888/Downloads/TransactionDetails.properties",
-		"/C/MEX/16R4/mex/mex-core/src/main/java/net/atos/itg/mem/synchro/SynchroManagerPackage.java",
-		"/C/MEX/16R4/mex/mex-core/src/main/java/net/atos/itg/mem/synchro/SynchroManager.java",
-		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp07413/MIDDLELOGS/mex_merchant_extranet/ssl-mex-central/mex-easyflow-reporter.log",
-		"/C/workspace/mapTest/.git/config",
-		"/C/workspace/mapTest/dist",
-		"/C/workspace/mapTest/.gitignore",
-		"/C/workspace/mapTest/dist/.gitignore",
-		"/C/workspace/mapTest/app/webpack.config.js",
-		"/C/workspace/mapTest/app/.gitignore",
 		"/C/MEX/tools/sublime/Data/Packages/Default/Preferences.sublime-settings",
 		"/C/Utilisateurs/a545888/Google Drive/Business/dev/react/graphql-demo/index.js",
 		"/C/Utilisateurs/a545888/Google Drive/Business/dev/react/graphql-demo/data.json",
@@ -888,6 +827,7 @@
 		"/C/MEX/tools/sublime/Data/Packages/User/Distraction Free.sublime-settings",
 		"/C/MEX/tools/sublime/Data/Packages/User/JavaScript.sublime-settings",
 		"/C/MEX/tools/sublime/Data/Packages/Babel/Babel.sublime-settings",
+		"/C/MEX/tools/sublime/Data/Packages/User/GitGutter.sublime-settings",
 		"/C/MEX/tools/sublime/Data/Installed Packages/GitGutter-Edge.sublime-package",
 		"/C/MEX/tools/sublime/Data/Packages/GitGutter/GitGutter.sublime-settings",
 		"/C/MEX/tools/sublime/Data/Packages/User/Zeal.sublime-settings",
@@ -898,6 +838,7 @@
 		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp47233/MIDDLEDATA/mex_merchant_extranet/batch/merchant/synchro/out/Bnpp/report/report_sipsbnpp_2016_06_10_06_07_19.txt",
 		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp47581/MIDDLEDATA/mex_merchant_extranet/batch/merchant/synchro/out/Bnpp/report/report_sipsbnpp_2016_06_16_06_09_06.txt",
 		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp47954/MIDDLEDATA/mex_merchant_extranet/batch/merchant/synchro/out/Bnpp/report/report_sipsbnpp_2016_06_05_06_07_05.txt",
+		"/C/MEX/16R3/mex/mex-core/src/main/java/net/atos/itg/mem/synchro/SynchroJavaToXMLUtility.java",
 		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp38658/MIDDLEDATA/mex_merchant_extranet/batch/transaction/error/ppro/payment/PPRO.SETTLEMENT.25.20160706.163420.CSV",
 		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp38817/MIDDLEDATA/mex_merchant_extranet/batch/transaction/error/ppro/payment/PPRO.SETTLEMENT.25.20160711.102003.CSV",
 		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp37759/MIDDLEDATA/mex_merchant_extranet/batch/transaction/error/ppro/payment/PPRO.SETTLEMENT.25.20160718.100001.CSV",
@@ -922,18 +863,39 @@
 		"/C/Utilisateurs/a545888/Downloads/RELEASES",
 		"/C/Utilisateurs/a545888/Google Drive/Business/dev/AngularJS/tests/angular2-quickstart/systemjs.config.js",
 		"/C/Utilisateurs/a545888/Google Drive/Business/dev/AngularJS/tests/angular2-quickstart/package.json",
-		"/C/Utilisateurs/a545888/Google Drive/Business/dev/AngularJS/tests/angular2-quickstart/typings.json"
+		"/C/Utilisateurs/a545888/Google Drive/Business/dev/AngularJS/tests/angular2-quickstart/typings.json",
+		"/C/Utilisateurs/a545888/Google Drive/Business/dev/AngularJS/tests/angular2-quickstart/tsconfig.json",
+		"/C/nodejs/gescomMerchantTestDataStream_1.xml",
+		"/C/Utilisateurs/a545888/AppData/Local/Microsoft/Windows/Temporary Internet Files/Content.Outlook/76MSEO24/crossmerchant.txt",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/7zO3FA7.tmp/Transaction_List_Page_Search_For_Child_TRXs.txt",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/7zO79D8.tmp/Transaction_List_Page_Search_For_DEBIT_TRXs.txt",
+		"/C/Utilisateurs/a545888/Downloads/MIF/access/access.160609.181513",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/7zOE71A.tmp/Transaction_Details_Page_Select_Child_TRX.txt",
+		"/C/MEX/trunk/mex/mex-batch/src/test/resources/generateGescomMerchantTestData.js",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp20020/MIDDLELOGS/mex_merchant_extranet/ssl-mex-central/mex-central.log",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp19706/MIDDLELOGS/mex_merchant_extranet/ssl-mex-central/mex-easyflow-reporter.log",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp46910/MIDDLELOGS/mex_merchant_extranet/ssl-mex-central/mex-central.log",
+		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/i18n/trn_sk.json",
+		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/i18n/trn_en.json",
+		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/i18n/trn_nl.json",
+		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/i18n/trn_de.json",
+		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/i18n/trn_fr.json",
+		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/i18n/trn_cz.json",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp58468/WEBS/mex_merchant_extranet/ssl-mex-central/conf/tomcat_workers.properties",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp56091/MIDDLE/mex_merchant_extranet/ssl-mex-central/webapps/ROOT/WEB-INF/classes/resource-bindings.properties",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp56162/MIDDLE/mex_merchant_extranet/ssl-mex-central/webapps/ROOT/WEB-INF/classes/sepaUpdateBatch.properties",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp49480/MIDDLE/mex_merchant_extranet/ssl-mex-central/tomcat1/conf/server.xml",
+		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/static/ng/js/filters/genericFilters.js"
 	],
 	"find":
 	{
-		"height": 44.0
+		"height": 38.0
 	},
 	"find_in_files":
 	{
 		"height": 105.0,
 		"where_history":
 		[
-			"C:\\Mex\\trunk\\mex\\,*.properties",
 			"C:\\MEX\\trunk\\mex\\mex-gui\\src\\main\\webapp\\static\\ng,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties,*.pom\n",
 			"C:\\Mex\\trunk\\mex\\,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties,*.pom\n",
 			"C:\\MEX\\trunk\\mex\\mex-gui\\src\\main\\webapp\\static\\ng,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties,*.pom\n",
@@ -1060,7 +1022,8 @@
 			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml",
 			"C:\\Mex\\trunk\\mex,-*.jasper,-*.jrxml,*.java,*.js,*.tml",
 			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml",
-			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js"
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.js"
 		]
 	},
 	"find_state":
@@ -1068,24 +1031,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"setCurrentLocation",
-			"center",
 			"currentLocation",
-			"console.log",
-			"console",
-			"loaded",
-			"\"block_",
-			"legal",
-			"billing",
-			"cash",
-			"Paypage",
-			"availableOperations.IDEAL_rabobank",
-			"createmessageReport",
-			"processSynchroBatchReport",
-			"processSynchroBatchReport ",
-			"processSynchroBatchReport",
-			"bnp",
-			"539429",
+			"pm2:restartClientRendering",
+			"Geolocation",
+			"alert",
+			"current",
 			"hide",
 			"START_OF_PROCESS",
 			"path",
@@ -1195,7 +1145,20 @@
 			"16042814014",
 			"1604281401438551158",
 			"$translate.instant",
-			"exponent"
+			"exponent",
+			"Exponent",
+			"genericFilters",
+			"/static/generic/img/",
+			"genericFilters",
+			"rangemodal",
+			"openPopup",
+			"mscFeeAmount",
+			"rangeModal",
+			"amounts",
+			"currency",
+			"replace",
+			"{{",
+			"complementaryInformation"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1203,6 +1166,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"// alert",
+			"position",
 			"warning",
 			"<",
 			"<av>",
@@ -1328,9 +1293,7 @@
 			"columnObjects",
 			"\"",
 			"\\\"",
-			"Status",
-			"searchTrnReferenceTo",
-			"searchTrnReferenceFrom"
+			"Status"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -1350,28 +1313,29 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
+					"file": "/C/workspace/mapTest/app/containers/PlacesContainer.jsx",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 786,
+						"buffer_size": 4025,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								779,
-								779
+								2299,
+								2299
 							]
 						],
 						"settings":
 						{
-							"auto_complete": true,
+							"auto_complete": false,
 							"bracket_highlighter.busy": false,
 							"bracket_highlighter.locations":
 							{
@@ -1379,15 +1343,15 @@
 								{
 									"1":
 									[
-										779,
-										780
+										2956,
+										2957
 									]
 								},
 								"icon":
 								{
 									"1":
 									[
-										"Packages/BracketHighlighter/icons/double_quote.png",
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
 										"brackethighlighter.default"
 									]
 								},
@@ -1395,8 +1359,8 @@
 								{
 									"1":
 									[
-										774,
-										775
+										1784,
+										1785
 									]
 								},
 								"unmatched":
@@ -1405,79 +1369,80 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
-								"bh_default_content"
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
 							],
-							"default_dir": "C:\\workspace\\mapTest",
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1785.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "/C/MEX/trunk/mex/mex-gui/src/main/webapp/modules/Translation/i18n/locale-en.json",
+					"file": "/C/workspace/mapTest/app/containers/MapBasicContainer.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 86537,
+						"buffer_size": 1591,
 						"regions":
 						{
 						},
@@ -1504,303 +1469,72 @@
 								},
 								"unmatched":
 								{
-									"1":
-									[
-										0,
-										1
-									]
 								}
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content"
-							],
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/C/workspace/mapTest/app/containers/PlacesContainer.jsx",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3632,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3632,
-								3632
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"bracket_highlighter.busy": false,
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-								},
-								"icon":
-								{
-								},
-								"open":
-								{
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
 								"bh_curly",
 								"bh_curly_center",
 								"bh_curly_open",
 								"bh_curly_close",
 								"bh_curly_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content"
-							],
-							"open_with_edit": true,
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2530.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "/C/workspace/mapTest/app/tests/DisplayPositionFromStore.jsx",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 844,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								155,
-								155
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"bracket_highlighter.busy": false,
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-									"1":
-									[
-										423,
-										424
-									]
-								},
-								"icon":
-								{
-									"1":
-									[
-										"Packages/BracketHighlighter/icons/round_bracket.png",
-										"brackethighlighter.default"
-									]
-								},
-								"open":
-								{
-									"1":
-									[
-										153,
-										154
-									]
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
-								"bh_default_content"
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
 							],
 							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1189.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -1811,7 +1545,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 30.0
+		"height": 38.0
 	},
 	"input":
 	{
@@ -1850,7 +1584,7 @@
 	},
 	"output.git":
 	{
-		"height": 207.0
+		"height": 152.0
 	},
 	"output.unsaved_changes":
 	{
@@ -1860,7 +1594,7 @@
 	"project": "",
 	"replace":
 	{
-		"height": 56.0
+		"height": 72.0
 	},
 	"save_all_on_build": true,
 	"select_file":

@@ -33,7 +33,8 @@ const PlacesContainer = React.createClass({
 
   getInitialState: function() {
     return {
-      places: []
+      places: [],
+      nbRenders: 0
     }
   },
 
@@ -46,7 +47,7 @@ const PlacesContainer = React.createClass({
     // Specify location, radius and place types for your Places API search.
     const request = {
        location: center,
-       radius: '5000',
+       radius: '1000',
        type: ['food']
      }
 
@@ -72,6 +73,7 @@ const PlacesContainer = React.createClass({
 
     console.log("{   PlacesContainer.render (pcr)" );
 
+
     console.log("       (pcr) state:", this.state);
     console.log("       (pcr) props:", this.props)
 
@@ -79,6 +81,15 @@ const PlacesContainer = React.createClass({
       width: '80%',
       height: '50%'
     }
+
+    // Search again for new places 
+    // !!!! should NOT be here... 
+    // but it should be called when detecting new pos
+    // but not all the time !
+    this.searchNearby(map, map.center);
+    let nbRenders = this.state.nbRenders + 1;
+    this.setState({ nbRenders: nbRenders});
+
 
 //    if (!this.state || !this.state.center) {
     if (!this.props.loaded) {
@@ -97,6 +108,7 @@ const PlacesContainer = React.createClass({
         >
 
           <Listing places={this.state.places} />
+          <div>Nb renders: {nbRenders}</div>
         </Map>
       </div>
     )

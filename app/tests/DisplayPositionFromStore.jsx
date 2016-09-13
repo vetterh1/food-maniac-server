@@ -13,13 +13,13 @@ const DisplayPositionFromStore = React.createClass({
 });
 
 const mapStateToProps = (state) => {
-  console.log("{   DisplayPositionFromStore.mapStateToProps (dpms)" );
-  console.log("       (dpms) state:", state);
+  // console.log("{   DisplayPositionFromStore.mapStateToProps (dpms)" );
+  // console.log("       (dpms) state:", state);
   let result = {
     coordinates: state.coordinates
   }
-  console.log("       (dpms) result:", result);
-  console.log("}   DisplayPositionFromStore.mapStateToProps" );
+  // console.log("       (dpms) result:", result);
+  // console.log("}   DisplayPositionFromStore.mapStateToProps" );
   return result;
 }
 
