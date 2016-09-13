@@ -10,12 +10,26 @@ const coordinates = (state = {}, action) => {
 			console.log("       (rsl) previous state:", state);
 			console.log("       (rsl) action:", action);
 
-			let newState = changed ? {
+			if( !changed ) {
+				console.log("       (rsl) === no change in state");
+				console.log("}   Reducer.coordinates.SET_CURRENT_LOCATION" );
+				return state;
+			}
+
+			const newState = { 	...state, 
+								latitude: action.latitude,
+								longitude: action.longitude,
+								real: action.real,
+								changed: changed 
+			};
+
+			/* Same as:
+			var newState = Object.assign({}, state, { 
 				latitude: action.latitude,
 				longitude: action.longitude,
 				real: action.real,
 				changed: changed
-			} : state;
+			}); */
 
 			console.log("       (rsl) newState:", newState);
 			console.log("}   Reducer.coordinates.SET_CURRENT_LOCATION" );

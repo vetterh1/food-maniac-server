@@ -57,6 +57,9 @@ const PlacesContainer = React.createClass({
   },
 
   searchNearby: function(map, center) {
+    console.log("{   PlacesContainer.searchNearby (pcs)" );
+    console.log("       (pcs) center:", center);
+    console.log("       (pcs) map:", map);
     const {google} = this.props;
     const service = new google.maps.places.PlacesService(map);
     // Specify location, radius and place types for your Places API search.
@@ -77,6 +80,7 @@ const PlacesContainer = React.createClass({
         })
       }
     })
+    console.log("}   PlacesContainer.searchNearby (pcs)" );
   },
 
   onMapReady: function (mapProps, map) {
@@ -90,6 +94,11 @@ const PlacesContainer = React.createClass({
     console.log("       (pcr) state:", this.state);
     console.log("       (pcr) props:", this.props)
 
+    const style = {
+      width: '80vw',
+      height: '50vh'
+    }
+
 //    if (!this.state || !this.state.center) {
     if (!this.props.loaded) {
       console.log("       returns loading msg" );
@@ -98,13 +107,16 @@ const PlacesContainer = React.createClass({
     }
 
     let result = (
-      <Map google={this.props.google}
-          className={'map'}
-          onReady={this.onMapReady}
-          visible={false}>
+      <div style={style}>      
+        <Map google={this.props.google}
+            className={'map'}
+            onReady={this.onMapReady}
+            visible={true}
+        >
 
-        <Listing places={this.state.places} />
-      </Map>
+          <Listing places={this.state.places} />
+        </Map>
+      </div>
     )
     console.log("}   PlacesContainer.render" );
     return result;
