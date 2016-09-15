@@ -3,10 +3,23 @@ import { connect } from 'react-redux';
 
 
 const DisplayPositionFromStore = React.createClass({
+
+  getInitialState: function() {
+    return {
+      nbChanges: 0
+    }
+  },
+
+  componentWillReceiveProps: function(nextProps) {
+    this.setState({
+      nbChanges: this.state.nbChanges + 1
+    });
+  },
+
 	render: function () {
 		return (
 			<div>
-				DisplayPositionFromStore test ==> latitude: {this.props.coordinates.latitude} - longitude: {this.props.coordinates.longitude} (real: {this.props.coordinates.real===true?"yes":"no"}, changed: {this.props.coordinates.changed===true?"yes":"no"})
+        DisplayPositionFromStore test ==> latitude: {this.props.coordinates.latitude} - longitude: {this.props.coordinates.longitude} (real: {this.props.coordinates.real===true?"yes":"no"}, changed: {this.props.coordinates.changed===true?"yes":"no"} - state nb changes: {this.state.nbChanges})
 			</div>
 		);
 	}	
@@ -15,6 +28,7 @@ const DisplayPositionFromStore = React.createClass({
 const mapStateToProps = (state) => {
   // console.log("{   DisplayPositionFromStore.mapStateToProps (dpms)" );
   // console.log("       (dpms) state:", state);
+  
   let result = {
     coordinates: state.coordinates
   }

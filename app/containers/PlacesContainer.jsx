@@ -86,10 +86,11 @@ const PlacesContainer = React.createClass({
     // !!!! should NOT be here... 
     // but it should be called when detecting new pos
     // but not all the time !
+/*
     this.searchNearby(map, map.center);
     let nbRenders = this.state.nbRenders + 1;
     this.setState({ nbRenders: nbRenders});
-
+*/
 
 //    if (!this.state || !this.state.center) {
     if (!this.props.loaded) {
@@ -106,9 +107,7 @@ const PlacesContainer = React.createClass({
             visible={false}
             center={this.props.position}
         >
-
           <Listing places={this.state.places} />
-          <div>Nb renders: {nbRenders}</div>
         </Map>
       </div>
     )
