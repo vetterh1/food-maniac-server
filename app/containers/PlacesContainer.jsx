@@ -81,14 +81,8 @@ const PlacesContainer = React.createClass({
   componentWillReceiveProps: function(nextProps) {
     console.log("{   PlacesContainer.componentWillReceiveProps (cwrp)" );
     console.log("       (cwrp) nextProps: ", nextProps );
-    const {google, map} = nextProps;
-    if (map ) {
-
-      // Search again for new places 
-      this.searchNearby(map, map.center);
-      let nbRenders = this.state.nbRenders + 1;
-      this.setState({ nbRenders: nbRenders});
-    }
+    let nbRenders = this.state.nbRenders + 1;
+    this.setState({ nbRenders: nbRenders});
     console.log("}   PlacesContainer.componentWillReceiveProps (cwrp)" );
   },
 
