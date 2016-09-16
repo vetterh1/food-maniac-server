@@ -1,0 +1,5 @@
+git fetch --all
+git pull
+npm install
+NODE_ENV=production  npm run build
+npm run pm2:restart
