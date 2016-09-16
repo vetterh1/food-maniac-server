@@ -66,18 +66,30 @@ const PlacesContainer = React.createClass({
   },
 
   onMapReady: function (mapProps, map) {
+    console.log("!!! onMapReady.mapProps: ", mapProps );
+    console.log("!!! onMapReady.map: ", map );
     this.searchNearby(map, map.center);
   },
 
 
+  onMapRecentered: function(mapProps, map) {
+    console.log("!!! onMapRecentered.mapProps: ", mapProps );
+    console.log("!!! onMapRecentered.map: ", map );
+    this.searchNearby(map, map.center);
+  },
+
   componentWillReceiveProps: function(nextProps) {
-    const {google, map} = this.props;
+    console.log("{   PlacesContainer.componentWillReceiveProps (cwrp)" );
+    console.log("       (cwrp) nextProps: ", nextProps );
+    const {google, map} = nextProps;
     if (map ) {
+
       // Search again for new places 
       this.searchNearby(map, map.center);
       let nbRenders = this.state.nbRenders + 1;
       this.setState({ nbRenders: nbRenders});
     }
+    console.log("}   PlacesContainer.componentWillReceiveProps (cwrp)" );
   },
 
   render: function () {
@@ -108,6 +120,7 @@ const PlacesContainer = React.createClass({
             onReady={this.onMapReady}
             visible={false}
             center={this.props.position}
+            onRecenter={this.onMapRecentered}
         >
           <Listing places={this.state.places} />
         </Map>
