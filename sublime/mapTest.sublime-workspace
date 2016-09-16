@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"ma",
+				"mapProps"
+			],
+			[
+				"pr",
+				"props	React: this.props"
+			],
+			[
+				"st",
+				"state	React: this.state"
+			],
+			[
 				"stat",
 				"state	React: this.state"
 			],
@@ -14,10 +26,6 @@
 			[
 				"pro",
 				"props	React: this.props"
-			],
-			[
-				"st",
-				"state"
 			],
 			[
 				"fun",
@@ -46,10 +54,6 @@
 			[
 				"Pl",
 				"PlacesContainer"
-			],
-			[
-				"ma",
-				"marker"
 			],
 			[
 				"onMa",
@@ -94,10 +98,6 @@
 			[
 				"m",
 				"modules.test"
-			],
-			[
-				"pr",
-				"props"
 			],
 			[
 				"Re",
@@ -536,26 +536,34 @@
 			}
 		},
 		{
-			"file": "/C/workspace/mapTest/app/containers/PlacesContainer.jsx",
+			"file": "/C/workspace/mapTest/app/components/Root.js",
 			"settings":
 			{
-				"buffer_size": 3984,
+				"buffer_size": 915,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/workspace/mapTest/app/components/Geolocation.js",
+			"file": "/C/workspace/mapTest/app/components/App.js",
 			"settings":
 			{
-				"buffer_size": 4120,
+				"buffer_size": 597,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/workspace/mapTest/app/tests/DisplayPositionFromStore.jsx",
+			"file": "/C/workspace/mapTest/app/components/NavLink.js",
 			"settings":
 			{
-				"buffer_size": 1110,
+				"buffer_size": 177,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/workspace/mapTest/app/components/Login.js",
+			"settings":
+			{
+				"buffer_size": 745,
 				"line_ending": "Windows"
 			}
 		}
@@ -790,21 +798,25 @@
 	[
 		"/C/workspace/mapTest",
 		"/C/workspace/mapTest/app",
-		"/C/workspace/mapTest/app/actions",
 		"/C/workspace/mapTest/app/components",
 		"/C/workspace/mapTest/app/containers",
-		"/C/workspace/mapTest/app/reducers",
-		"/C/workspace/mapTest/app/tests",
-		"/C/workspace/mapTest/old",
-		"/C/workspace/mapTest/.git"
+		"/C/workspace/mapTest/app/utils",
+		"/C/workspace/mapTest/node_modules/google-maps-react/dist/components",
+		"/C/workspace/mapTest/node_modules/google-maps-react/resources/readme"
 	],
 	"file_history":
 	[
-		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/modules/Translation/i18n/locale-en.json",
+		"/C/workspace/mapTest/app/index.html",
 		"/C/workspace/mapTest/app/components/App.js",
-		"/C/workspace/mapTest/app/reducers/coordinates.js",
-		"/C/workspace/mapTest/app/components/Geolocation.js",
+		"/C/workspace/mapTest/app/containers/PlacesContainer.jsx",
+		"/C/workspace/mapTest/app/components/ChooseLocation.js",
+		"/C/workspace/react-facebook-login/demo/index.js",
+		"/C/workspace/mapTest/app/utils/FacebookLogin.js",
+		"/C/workspace/react-facebook-login/package.json",
 		"/C/workspace/mapTest/app/tests/DisplayPositionFromStore.jsx",
+		"/C/workspace/mapTest/app/components/Geolocation.js",
+		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/modules/Translation/i18n/locale-en.json",
+		"/C/workspace/mapTest/app/reducers/coordinates.js",
 		"/C/workspace/mapTest/app/containers/places.jsx",
 		"/C/workspace/mapTest/app/actions/LocationActions.js",
 		"/C/Utilisateurs/a545888/Desktop/20160616 - MST - ImportMerchant.xsd",
@@ -921,13 +933,7 @@
 		"/C/Utilisateurs/a545888/AppData/Local/Microsoft/Windows/Temporary Internet Files/Content.Outlook/76MSEO24/gescomMerchantTestDataStreamUpdate_2_3_10-ER.xml",
 		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp52050/MIDDLEDATA/mex_merchant_extranet/batch/merchant/archives/initload/MIF_MEXMEM_20160706015326.XML",
 		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp52701/MIDDLEDATA/mex_merchant_extranet/batch/merchant/out/initload/InitLoad_Report_1003_2016_07_06_08_00_46.txt",
-		"/C/Utilisateurs/a545888/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
-		"/C/Utilisateurs/a545888/AppData/Roaming/Sublime Text 3/Packages/User/Plain text.sublime-settings",
-		"/C/Utilisateurs/a545888/Desktop/trunk/30 - mvn build mex.txt",
-		"/C/Utilisateurs/a545888/Downloads/RELEASES",
-		"/C/Utilisateurs/a545888/Google Drive/Business/dev/AngularJS/tests/angular2-quickstart/systemjs.config.js",
-		"/C/Utilisateurs/a545888/Google Drive/Business/dev/AngularJS/tests/angular2-quickstart/package.json",
-		"/C/Utilisateurs/a545888/Google Drive/Business/dev/AngularJS/tests/angular2-quickstart/typings.json"
+		"/C/Utilisateurs/a545888/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings"
 	],
 	"find":
 	{
@@ -1073,6 +1079,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"assign",
+			"onReady",
+			"onMapReady",
+			"map",
 			"nbRenders",
 			"setCurrentLocation",
 			"center",
@@ -1196,11 +1206,7 @@
 			"office@cosyhouse.be",
 			"zIndex",
 			"z-index",
-			"04281405060",
-			"160428140143855",
-			"16042814014",
-			"1604281401438551158",
-			"$translate.instant"
+			"04281405060"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1350,12 +1356,15 @@
 		},
 		{
 			"path": "C:\\workspace\\mapTest\\.git"
+		},
+		{
+			"path": "C:\\workspace\\mapTest\\node_modules\\google-maps-react"
 		}
 	],
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -1473,7 +1482,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
@@ -1523,36 +1532,11 @@
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
@@ -1563,11 +1547,36 @@
 								"bh_round_open",
 								"bh_round_close",
 								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
@@ -1582,24 +1591,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "/C/workspace/mapTest/app/containers/PlacesContainer.jsx",
+					"file": "/C/workspace/mapTest/app/components/Root.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3984,
+						"buffer_size": 915,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2763,
-								2763
+								556,
+								556
 							]
 						],
 						"settings":
@@ -1612,8 +1621,8 @@
 								{
 									"1":
 									[
-										2844,
-										2845
+										830,
+										831
 									]
 								},
 								"icon":
@@ -1628,8 +1637,8 @@
 								{
 									"1":
 									[
-										2542,
-										2543
+										423,
+										424
 									]
 								},
 								"unmatched":
@@ -1638,6 +1647,36 @@
 							},
 							"bracket_highlighter.regions":
 							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
@@ -1648,31 +1687,6 @@
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
@@ -1683,148 +1697,36 @@
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content"
-							],
-							"open_with_edit": true,
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1738.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "/C/workspace/mapTest/app/components/Geolocation.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4120,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"bracket_highlighter.busy": false,
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-								},
-								"icon":
-								{
-								},
-								"open":
-								{
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
-								"bh_default_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content"
+								"bh_default_content"
 							],
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1958.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "/C/workspace/mapTest/app/tests/DisplayPositionFromStore.jsx",
+					"buffer": 3,
+					"file": "/C/workspace/mapTest/app/components/App.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1110,
+						"buffer_size": 597,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								368,
-								368
+								389,
+								389
 							]
 						],
 						"settings":
@@ -1837,8 +1739,126 @@
 								{
 									"1":
 									[
-										674,
-										675
+										389,
+										390
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/single_quote.png",
+										"brackethighlighter.default"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										384,
+										385
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/C/workspace/mapTest/app/components/NavLink.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 177,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								177,
+								177
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										176,
+										177
 									]
 								},
 								"icon":
@@ -1853,8 +1873,8 @@
 								{
 									"1":
 									[
-										357,
-										358
+										95,
+										96
 									]
 								},
 								"unmatched":
@@ -1863,6 +1883,36 @@
 							},
 							"bracket_highlighter.regions":
 							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
@@ -1873,31 +1923,6 @@
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
@@ -1908,26 +1933,139 @@
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content"
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
 							],
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"open_with_edit": true,
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/C/workspace/mapTest/app/components/Login.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 745,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								469,
+								469
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										712,
+										713
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/round_bracket.png",
+										"brackethighlighter.default"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										440,
+										441
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"open_with_edit": true,
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
