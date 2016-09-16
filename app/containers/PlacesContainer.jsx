@@ -69,6 +69,17 @@ const PlacesContainer = React.createClass({
     this.searchNearby(map, map.center);
   },
 
+
+  componentWillReceiveProps: function(nextProps) {
+    const {google, map} = this.props;
+    if (map ) {
+      // Search again for new places 
+      this.searchNearby(map, map.center);
+      let nbRenders = this.state.nbRenders + 1;
+      this.setState({ nbRenders: nbRenders});
+    }
+  },
+
   render: function () {
 
     console.log("{   PlacesContainer.render (pcr)" );
@@ -82,15 +93,6 @@ const PlacesContainer = React.createClass({
       height: '50%'
     }
 
-    // Search again for new places 
-    // !!!! should NOT be here... 
-    // but it should be called when detecting new pos
-    // but not all the time !
-/*
-    this.searchNearby(map, map.center);
-    let nbRenders = this.state.nbRenders + 1;
-    this.setState({ nbRenders: nbRenders});
-*/
 
 //    if (!this.state || !this.state.center) {
     if (!this.props.loaded) {
@@ -109,6 +111,7 @@ const PlacesContainer = React.createClass({
         >
           <Listing places={this.state.places} />
         </Map>
+        nbRenders: {this.state.nbRenders}
       </div>
     )
     console.log("}   PlacesContainer.render" );
