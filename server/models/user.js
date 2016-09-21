@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+var mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -6,16 +6,17 @@ const userSchema = new Schema({
   first: { type: 'String', required: true },
   last: { type: 'String', required: true },
   since: { type: 'Date', default: Date.now, required: true },
+  lastModif: { type: 'Date', default: Date.now, required: true },
   role: ['String'],
   nbPosts: { type: 'Number', default: 0, required: true },
-  mark: { type: 'String', required: true },
+  mark: { type: 'Number', required: true },
 });
 
 // on every save, add the date
 userSchema.pre('save', function(next) {
   var currentDate = new Date();
-  this.since = currentDate;
+  this.lastModif = currentDate;
   next();
 });
 
-export default mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema);

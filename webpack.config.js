@@ -53,19 +53,13 @@ else {
 }
 
 /* Plugin to inject bundle dist path in index.html */  
-if(process.env.NODE_SERVER_RENDER != 'true'){
-  console.log("[lve] NOT in Server rendering mode");
-  var HtmlWebpackPlugin = require('html-webpack-plugin');
-  var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
-    template: __dirname + '/app/index.html',
-    filename: 'index.html',
-    inject: 'body'
-  });
-  plugins.push( HTMLWebpackPluginConfig );
-} else {
-    console.log("[lve] NOT in Server rendering mode");
-}
-
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
+  template: __dirname + '/app/index.html',
+  filename: 'index.html',
+  inject: 'body'
+});
+plugins.push( HTMLWebpackPluginConfig );
 
 
 /*

@@ -34,6 +34,7 @@ db.users.insertMany([
 		first: 'Laurent',
 		last: 'Vetterhoeffer',
 		since: new Date(2016,09,18,10,00),
+		lastModif: new Date(2016,09,18,10,00),
 		role: ['admin','writer'],
 		nbPosts: 0,
 		mark: 100
@@ -44,6 +45,7 @@ db.users.insertMany([
 		first: 'Chedia',
 		last: 'Abdelkafi',
 		since: new Date(2016,09,18,12,00),
+		lastModif: new Date(2016,09,18,10,00),
 		role: ['writer'],
 		nbPosts: 0,
 		mark: 100
@@ -54,6 +56,7 @@ db.users.insertMany([
 		first: 'Frédéric',
 		last: 'Deconinck',
 		since: new Date(2016,09,19,14,00),
+		lastModif: new Date(2016,09,18,10,00),
 		role: ['writer'],
 		nbPosts: 0,
 		mark: 100
@@ -79,6 +82,7 @@ db.places.insertMany([
 		name: 'Test Place 1',
 		location: { type: "Point", coordinates: [ 40, 5 ] },
 		since: new Date(2016,09,19,14,00),
+		lastModif: new Date(2016,09,18,10,00),
 		items: []
 	},
 	{
@@ -86,6 +90,7 @@ db.places.insertMany([
 		name: 'Test Place 2',
 		location: { type: "Point", coordinates: [ 3, 5 ] },
 		since: new Date(2016,09,19,14,00),
+		lastModif: new Date(2016,09,18,10,00),
 		items: []
 	}
 ])
@@ -138,24 +143,28 @@ db.items.insertMany([
 		"_id" : ObjectId("57e00577691c0db6adca3b75"),
 		name: 'Test Items 1',
 		since: new Date(2016,09,19,14,00),
+		lastModif: new Date(2016,09,18,10,00),
 		picture: ""
 	},
 	{
 		"_id" : ObjectId("57e00577691c0db6adca3b76"),
 		name: 'Test Items 2',
 		since: new Date(2016,09,19,14,00),
+		lastModif: new Date(2016,09,18,10,00),
 		picture: ""
 	},
 	{
 		"_id" : ObjectId("57e00577691c0db6adca3b77"),
 		name: 'Test Items 3',
 		since: new Date(2016,09,19,14,00),
+		lastModif: new Date(2016,09,18,10,00),
 		picture: ""
 	},
 	{
 		"_id" : ObjectId("57e00577691c0db6adca3b78"),
 		name: 'Test Items 4',
 		since: new Date(2016,09,19,14,00),
+		lastModif: new Date(2016,09,18,10,00),
 		picture: ""
 	}
 ])
@@ -182,6 +191,8 @@ db.marks.insertMany([
 		item: ObjectId("57e00577691c0db6adca3b75"),
 		place: ObjectId("57e00576691c0db6adca3b73"),
 		user: ObjectId("57dff47f691c0db6adca3b6b"),
+		since: new Date(2016,09,21,14,00),
+		lastModif: new Date(2016,09,21,16,00),
 		mark: 8
 	},
 	{
@@ -189,6 +200,8 @@ db.marks.insertMany([
 		item: ObjectId("57e00577691c0db6adca3b75"),
 		place: ObjectId("57e00576691c0db6adca3b74"),
 		user: ObjectId("57dff47f691c0db6adca3b6b"),
+		since: new Date(2016,09,21,14,00),
+		lastModif: new Date(2016,09,21,16,00),
 		mark: 6
 	},
 	{
@@ -196,6 +209,8 @@ db.marks.insertMany([
 		item: ObjectId("57e00577691c0db6adca3b76"),
 		place: ObjectId("57e00576691c0db6adca3b74"),
 		user: ObjectId("57dff47f691c0db6adca3b6b"),
+		since: new Date(2016,09,21,14,00),
+		lastModif: new Date(2016,09,21,16,00),
 		mark: 4
 	},
 	{
@@ -203,6 +218,8 @@ db.marks.insertMany([
 		item: ObjectId("57e00577691c0db6adca3b75"),
 		place: ObjectId("57e00576691c0db6adca3b73"),
 		user: ObjectId("57dff47f691c0db6adca3b6c"),
+		since: new Date(2016,09,21,14,00),
+		lastModif: new Date(2016,09,21,16,00),
 		mark: 5
 	},
 	{
@@ -210,6 +227,8 @@ db.marks.insertMany([
 		item: ObjectId("57e00577691c0db6adca3b75"),
 		place: ObjectId("57e00576691c0db6adca3b73"),
 		user: ObjectId("57dff47f691c0db6adca3b6d"),
+		since: new Date(2016,09,21,14,00),
+		lastModif: new Date(2016,09,21,16,00),
 		mark: 0
 	}
 ])

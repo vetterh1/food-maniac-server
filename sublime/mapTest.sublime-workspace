@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"new",
+				"newItem"
+			],
+			[
+				"l",
+				"log"
+			],
+			[
+				"fin",
+				"findPromise〔variable〕"
+			],
+			[
+				"du",
+				"dummyData"
+			],
+			[
+				"ne",
+				"newUser"
+			],
+			[
+				"last",
+				"lastModif"
+			],
+			[
+				"user",
+				"userData"
+			],
+			[
 				"ma",
 				"mapProps"
 			],
@@ -372,10 +400,6 @@
 				"arrayPeriodData"
 			],
 			[
-				"ne",
-				"newData"
-			],
-			[
 				"arra",
 				"arrayFilteredRows"
 			],
@@ -386,10 +410,6 @@
 			[
 				"fo",
 				"for	for (…) {…}"
-			],
-			[
-				"fin",
-				"findPeriod"
 			],
 			[
 				"b",
@@ -494,26 +514,6 @@
 			[
 				"ste",
 				"stepInitial"
-			],
-			[
-				"rang",
-				"range"
-			],
-			[
-				"filt",
-				"Filters"
-			],
-			[
-				"to",
-				"toString"
-			],
-			[
-				"hal",
-				"halSelectModel"
-			],
-			[
-				"wid",
-				"width"
 			]
 		]
 	},
@@ -536,42 +536,42 @@
 			}
 		},
 		{
-			"file": "/C/workspace/mapTest/app/components/Root.js",
+			"file": "/C/workspace/mapTest/db/mongo/testData.txt",
 			"settings":
 			{
-				"buffer_size": 915,
+				"buffer_size": 4844,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/workspace/mapTest/app/components/App.js",
+			"file": "/C/workspace/mapTest/server/server.js",
 			"settings":
 			{
-				"buffer_size": 986,
+				"buffer_size": 2137,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/workspace/mapTest/app/index.css",
+			"file": "/C/workspace/mapTest/server/models/mark.js",
 			"settings":
 			{
-				"buffer_size": 220,
+				"buffer_size": 687,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/workspace/mapTest/app/components/NavLink.js",
+			"file": "/C/workspace/mapTest/server/models/place.js",
 			"settings":
 			{
-				"buffer_size": 177,
+				"buffer_size": 615,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/workspace/mapTest/app/components/Login.js",
+			"file": "/C/workspace/mapTest/server/dummyData.js",
 			"settings":
 			{
-				"buffer_size": 745,
+				"buffer_size": 1279,
 				"line_ending": "Windows"
 			}
 		}
@@ -807,15 +807,27 @@
 		"/C/workspace/mapTest",
 		"/C/workspace/mapTest/app",
 		"/C/workspace/mapTest/app/components",
-		"/C/workspace/mapTest/app/containers",
-		"/C/workspace/mapTest/app/utils",
-		"/C/workspace/mapTest/node_modules/react-fontawesome"
+		"/C/workspace/mapTest/db",
+		"/C/workspace/mapTest/db/mongo",
+		"/C/workspace/mapTest/server",
+		"/C/workspace/mapTest/server/models",
+		"/C/workspace/mapTest/sublime"
 	],
 	"file_history":
 	[
+		"/C/workspace/mapTest/server/models/place.js",
+		"/C/workspace/mapTest/server/models/item.js",
+		"/C/workspace/mapTest/server/models/user.js",
+		"/C/workspace/mapTest/server/dummyData.js",
+		"/C/workspace/mapTest/app/components/Root.js",
+		"/C/workspace/mapTest/package.json",
+		"/C/workspace/mapTest/app/components/Login.js",
+		"/C/workspace/mapTest/app/components/NavLink.js",
+		"/C/workspace/mapTest/app/index.css",
+		"/C/workspace/mapTest/webpack.config.js",
+		"/C/workspace/mapTest/app/components/App.js",
 		"/C/workspace/mapTest/srv_update",
 		"/C/workspace/mapTest/app/index.html",
-		"/C/workspace/mapTest/app/components/App.js",
 		"/C/workspace/mapTest/app/containers/PlacesContainer.jsx",
 		"/C/workspace/mapTest/app/components/ChooseLocation.js",
 		"/C/workspace/react-facebook-login/demo/index.js",
@@ -832,9 +844,6 @@
 		"/C/workspace/mapTest/app/containers/basic.jsx",
 		"/C/workspace/mapTest/app/containers/MapContainer.old2.jsx",
 		"/C/workspace/mapTest/app/containers/MapContainerOld.jsx",
-		"/C/workspace/mapTest/webpack.config.js",
-		"/C/workspace/mapTest/package.json",
-		"/C/workspace/mapTest/app/components/Root.js",
 		"/C/workspace/mapTest/.babelrc",
 		"/C/workspace/mapTest/app/components/TestComponent.js",
 		"/C/workspace/mapTest/app/index.js",
@@ -933,14 +942,7 @@
 		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp34455/MIDDLEDATA/mex_merchant_extranet/batch/transaction/archives/ppro/payment/PPRO.SETTLEMENT.25.20160704.100004.CSV",
 		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp29523/MIDDLEDATA/mex_merchant_extranet/batch/transaction/archives/ppro/payment/PPRO.PAYMENT.25.20160727.030000.CSV",
 		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp31762/MIDDLEDATA/mex_merchant_extranet/batch/transaction/archives/ppro/payment/PPRO.SETTLEMENT.25.20160706.163413.CSV",
-		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp37653/MIDDLELOGS/mex_merchant_extranet/ssl-mex-central/mex-common.log",
-		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp01676/MIDDLEDATA/mex_merchant_extranet/batch/merchant/error/initload/InitLoad_ErrorReport_1003_2016_05_26_08_00_02.xml",
-		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp19178/MIDDLEDATA/mex_merchant_extranet/batch/merchant/error/initload/InitLoad_ErrorReport_1003_2016_06_02_08_00_01.xml",
-		"/C/Utilisateurs/a545888/AppData/Local/Microsoft/Windows/Temporary Internet Files/Content.Outlook/76MSEO24/ImportMerchant.xsd",
-		"/C/Utilisateurs/a545888/AppData/Local/Microsoft/Windows/Temporary Internet Files/Content.Outlook/76MSEO24/gescomMerchantTestDataStreamUpdate_2_3_10-RP.xml",
-		"/C/Utilisateurs/a545888/AppData/Local/Microsoft/Windows/Temporary Internet Files/Content.Outlook/76MSEO24/gescomMerchantTestDataStreamUpdate_2_3_10-ER.xml",
-		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp52050/MIDDLEDATA/mex_merchant_extranet/batch/merchant/archives/initload/MIF_MEXMEM_20160706015326.XML",
-		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp52701/MIDDLEDATA/mex_merchant_extranet/batch/merchant/out/initload/InitLoad_Report_1003_2016_07_06_08_00_46.txt"
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp37653/MIDDLELOGS/mex_merchant_extranet/ssl-mex-central/mex-common.log"
 	],
 	"find":
 	{
@@ -1086,6 +1088,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"users",
+			"Item",
+			"place",
+			"since:",
+			"user",
+			"what",
+			"NODE_SERVER_RENDER",
 			"assign",
 			"onReady",
 			"onMapReady",
@@ -1206,14 +1215,7 @@
 			"LveTestDuplEmail5",
 			"LveTestDuplEmail4",
 			"LveTestDuplEmail3",
-			"LveTestDuplEmail2",
-			"LveTestDuplEmail1",
-			"transaction",
-			"instance",
-			"office@cosyhouse.be",
-			"zIndex",
-			"z-index",
-			"04281405060"
+			"LveTestDuplEmail2"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1221,6 +1223,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"results",
 			"warning",
 			"<",
 			"<av>",
@@ -1347,8 +1350,7 @@
 			"\"",
 			"\\\"",
 			"Status",
-			"searchTrnReferenceTo",
-			"searchTrnReferenceFrom"
+			"searchTrnReferenceTo"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -1371,7 +1373,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 6,
 			"sheets":
 			[
 				{
@@ -1483,7 +1485,9 @@
 								"bh_default_content"
 							],
 							"default_dir": "C:\\workspace\\mapTest",
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1549,46 +1553,46 @@
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content"
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
 							],
 							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
 							"tab_size": 4,
@@ -1603,50 +1607,34 @@
 				},
 				{
 					"buffer": 2,
-					"file": "/C/workspace/mapTest/app/components/Root.js",
+					"file": "/C/workspace/mapTest/db/mongo/testData.txt",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 915,
+						"buffer_size": 4844,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								556,
-								556
+								4594,
+								4821
 							]
 						],
 						"settings":
 						{
-							"auto_complete": false,
 							"bracket_highlighter.busy": false,
 							"bracket_highlighter.locations":
 							{
 								"close":
 								{
-									"1":
-									[
-										830,
-										831
-									]
 								},
 								"icon":
 								{
-									"1":
-									[
-										"Packages/BracketHighlighter/icons/round_bracket.png",
-										"brackethighlighter.default"
-									]
 								},
 								"open":
 								{
-									"1":
-									[
-										423,
-										424
-									]
 								},
 								"unmatched":
 								{
@@ -1669,51 +1657,53 @@
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content"
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
 							],
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
+							"open_with_edit": true,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 4276.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
@@ -1721,19 +1711,19 @@
 				},
 				{
 					"buffer": 3,
-					"file": "/C/workspace/mapTest/app/components/App.js",
+					"file": "/C/workspace/mapTest/server/server.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 986,
+						"buffer_size": 2137,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								789,
-								789
+								1173,
+								1173
 							]
 						],
 						"settings":
@@ -1744,27 +1734,12 @@
 							{
 								"close":
 								{
-									"1":
-									[
-										788,
-										789
-									]
 								},
 								"icon":
 								{
-									"1":
-									[
-										"Packages/BracketHighlighter/icons/curly_bracket.png",
-										"brackethighlighter.default"
-									]
 								},
 								"open":
 								{
-									"1":
-									[
-										775,
-										776
-									]
 								},
 								"unmatched":
 								{
@@ -1772,281 +1747,179 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content"
-							],
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "/C/workspace/mapTest/app/index.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 220,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								172,
-								220
-							]
-						],
-						"settings":
-						{
-							"bracket_highlighter.busy": false,
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-								},
-								"icon":
-								{
-								},
-								"open":
-								{
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content"
-							],
-							"syntax": "Packages/CSS/CSS.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "/C/workspace/mapTest/app/components/NavLink.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 177,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								177,
-								177
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"bracket_highlighter.busy": false,
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-									"1":
-									[
-										176,
-										177
-									]
-								},
-								"icon":
-								{
-									"1":
-									[
-										"Packages/BracketHighlighter/icons/round_bracket.png",
-										"brackethighlighter.default"
-									]
-								},
-								"open":
-								{
-									"1":
-									[
-										95,
-										96
-									]
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 272.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/C/workspace/mapTest/server/models/mark.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 687,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								303,
+								303
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										303,
+										304
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/single_quote.png",
+										"brackethighlighter.default"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										298,
+										299
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
-								"bh_default_content"
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
 							],
 							"open_with_edit": true,
 							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
@@ -2059,20 +1932,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "/C/workspace/mapTest/app/components/Login.js",
+					"buffer": 5,
+					"file": "/C/workspace/mapTest/server/models/place.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 745,
+						"buffer_size": 615,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								469,
-								469
+								401,
+								372
 							]
 						],
 						"settings":
@@ -2085,15 +1958,15 @@
 								{
 									"1":
 									[
-										712,
-										713
+										401,
+										402
 									]
 								},
 								"icon":
 								{
 									"1":
 									[
-										"Packages/BracketHighlighter/icons/round_bracket.png",
+										"Packages/BracketHighlighter/icons/square_bracket.png",
 										"brackethighlighter.default"
 									]
 								},
@@ -2101,8 +1974,8 @@
 								{
 									"1":
 									[
-										440,
-										441
+										371,
+										372
 									]
 								},
 								"unmatched":
@@ -2126,55 +1999,157 @@
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content"
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
 							],
-							"open_with_edit": true,
 							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/C/workspace/mapTest/server/dummyData.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1279,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								125,
+								125
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -2231,7 +2206,7 @@
 	"project": "",
 	"replace":
 	{
-		"height": 56.0
+		"height": 80.0
 	},
 	"save_all_on_build": true,
 	"select_file":
