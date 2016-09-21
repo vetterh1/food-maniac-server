@@ -18,7 +18,7 @@ function dummyData() {
 	// Create a new test item after removing any existing one
 	const newItem = new Item({name:'testItem', picture:''});
 	Item.find().remove({name: 'testItem'}).exec()
-		.then( Item.create([newUser]) )
+		.then( Item.create([newItem]) )
 		.then( function() { Item.find(function (err, results) {
 		if (err) return console.error(err);
 		console.log('Item list:', results)
@@ -26,9 +26,9 @@ function dummyData() {
 	);
 
 	// Create a new test place after removing any existing one
-	const newPlace = new Place({name:'testPlace', items: [newItem]});
+	const newPlace = new Place({name:'testPlace', items: [newItem._id]});
 	Place.find().remove({name: 'testPlace'}).exec()
-		.then( Place.create([newUser]) )
+		.then( Place.create([newPlace]) )
 		.then( function() { Place.find(function (err, results) {
 		if (err) return console.error(err);
 		console.log('Place list:', results)

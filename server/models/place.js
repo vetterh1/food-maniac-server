@@ -7,13 +7,12 @@ const placeSchema = new Schema({
   location: { type: {type:String}, coordinates: [Number] },
   since: { type: 'Date', default: Date.now, required: true },
   lastModif: { type: 'Date', default: Date.now, required: true },
-  items: [{ type: Number, ref: 'Item' }],
+  items: [{ type: Schema.Types.ObjectId, ref: 'Item' }],
 });
 
 // on every save, add the date
 placeSchema.pre('save', function(next) {
-  var currentDate = new Date();
-  this.lastModif = currentDate;
+  this.lastModif = new Date();
   next();
 });
 
