@@ -1,0 +1,7 @@
+Exception: STATUS_ACCESS_VIOLATION at eip=03D07454
+eax=00000001 ebx=03D07454 ecx=FFFA6000 edx=611E45B4 esi=0342CE64 edi=0342CDC4
+ebp=00000000 esp=0342CD6C program=C:\MEX\tools\git\usr\bin\bash.exe, pid 6764, thread unknown (0x25DC)
+cs=0023 ds=002B es=002B fs=0053 gs=002B ss=002B
+Stack trace:
+Frame     Function  Args
+End of stack trace

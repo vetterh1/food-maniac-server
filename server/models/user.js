@@ -9,7 +9,7 @@ const userSchema = new Schema({
   lastModif: { type: 'Date', default: Date.now, required: true },
   role: ['String'],
   nbPosts: { type: 'Number', default: 0, required: true },
-  mark: { type: 'Number', required: true },
+  mark: { type: 'Number', default: 0, required: true },
 });
 
 // on every save, add the date
