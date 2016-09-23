@@ -11,6 +11,7 @@ const markSchema = new Schema({
   since: { type: 'Date', default: Date.now, required: true },
   lastModif: { type: 'Date', default: Date.now, required: true },
   mark: { type: 'Number', required: true },
+  cuid: { type: 'String', required: true },
 });
 
 // on every save, add the date

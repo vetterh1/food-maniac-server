@@ -5,7 +5,8 @@ const itemSchema = new Schema({
   name: { type: 'String', required: true },
   picture: { type: 'String' },
   since: { type: 'Date', default: Date.now, required: true },
-  lastModif: { type: 'Date', default: Date.now, required: true }
+  lastModif: { type: 'Date', default: Date.now, required: true },
+  cuid: { type: 'String', required: true },
 });
 
 // on every save, add the date

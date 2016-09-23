@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "ava",
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:dev": "npm run build && webpack-dev-server --inline --content-base dist --history-api-fallback",
     "start:prod": "npm run build && node server/server.js",
@@ -30,6 +31,7 @@
     "sanitize-html": "^1.13.0"
   },
   "devDependencies": {
+    "ava": "^0.16.0",
     "babel-core": "^6.5.1",
     "babel-loader": "^6.2.2",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
@@ -38,8 +40,25 @@
     "babel-preset-stage-0": "^6.5.0",
     "html-webpack-plugin": "^2.22.0",
     "http-server": "^0.8.5",
+    "mockgoose": "^6.0.8",
     "redux-devtools": "^3.3.1",
+    "supertest": "^2.0.0",
     "webpack": "^1.12.13",
     "webpack-dev-server": "^1.15.1"
+  },
+  "ava": {
+    "files": [
+      "client/**/*.spec.js",
+      "server/**/*.spec.js"
+    ],
+    "source": [
+      "client/**/*.js",
+      "server/**/*.js"
+    ],
+    "failFast": true,
+    "babel": "inherit",
+    "require": [
+      "./server/util/setup-test-env.js"
+    ]
   }
 }

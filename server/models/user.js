@@ -10,6 +10,7 @@ const userSchema = new Schema({
   role: ['String'],
   nbPosts: { type: 'Number', default: 0, required: true },
   mark: { type: 'Number', default: 0, required: true },
+  cuid: { type: 'String', required: true },
 });
 
 // on every save, add the date
