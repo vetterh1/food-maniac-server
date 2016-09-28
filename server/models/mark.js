@@ -1,7 +1,11 @@
-var mongoose = require('mongoose')
-var Item = require('./item')
-var Place = require('./Place')
-var User = require('./User')
+import mongoose from 'mongoose';
+import Item from './item';
+import Place from './Place';
+import User from './User';
+// var mongoose = require('mongoose')
+// var Item = require('./item')
+// var Place = require('./Place')
+// var User = require('./User')
 const Schema = mongoose.Schema;
 
 const markSchema = new Schema({
@@ -20,4 +24,5 @@ markSchema.pre('save', function(next) {
   next();
 });
 
-module.exports = mongoose.model('Mark', markSchema);
+export default mongoose.model('Mark', markSchema);
+// module.exports = mongoose.model('Mark', markSchema);

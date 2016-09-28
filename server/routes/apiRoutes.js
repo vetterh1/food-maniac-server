@@ -1,17 +1,17 @@
-var express = require('express')
-var userController = require('../controllers/userController')
-const router = new express.Router();
+import { Router } from 'express';
+import * as UserController from '../controllers/userController';
+const router = new Router();
 
 // Get all Users
-router.route('/users').get(userController.getUsers);
-
-// Add a new User
-router.route('/users').post(userController.addUser);
+router.route('/users').get(UserController.getUsers);
 
 // Get one user by cuid
-router.route('/users/:cuid').get(userController.getUser);
+router.route('/users/:cuid').get(UserController.getUser);
+
+// Add a new User
+router.route('/users').post(UserController.addUser);
 
 // Delete a user by cuid
-router.route('/users/:cuid').delete(userController.deleteUser);
+router.route('/users/:cuid').delete(UserController.deleteUser);
 
-module.exports = router;
+export default router;

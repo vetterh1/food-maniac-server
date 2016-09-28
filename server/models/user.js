@@ -1,4 +1,4 @@
-var mongoose = require('mongoose')
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -10,13 +10,13 @@ const userSchema = new Schema({
   role: ['String'],
   nbPosts: { type: 'Number', default: 0, required: true },
   mark: { type: 'Number', default: 0, required: true },
-  cuid: { type: 'String', required: true },
+  cuid: { type: 'String', required: true }
 });
-
+/*
 // on every save, add the date
 userSchema.pre('save', function(next) {
   this.lastModif = new Date();
   next();
 });
-
-module.exports = mongoose.model('User', userSchema);
+*/
+export default mongoose.model('User', userSchema);

@@ -1,5 +1,7 @@
-var mongoose = require('mongoose')
-var Item = require('./item')
+import mongoose from 'mongoose';
+import Item from './item';
+//var mongoose = require('mongoose')
+//var Item = require('./item')
 const Schema = mongoose.Schema;
 
 const placeSchema = new Schema({
@@ -17,4 +19,5 @@ placeSchema.pre('save', function(next) {
   next();
 });
 
-module.exports = mongoose.model('Place', placeSchema);
+export default mongoose.model('Place', placeSchema);
+//module.exports = mongoose.model('Place', placeSchema);

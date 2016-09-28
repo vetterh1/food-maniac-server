@@ -6,21 +6,19 @@
 //  (to rebuild client if necessary: npm run build )
 
 
+import Express from 'express';
+import compression from 'compression';
+import mongoose from 'mongoose';
+// import bodyParser from 'body-parser';
+import path from 'path';
 
-var express = require('express')
-var bodyParser = require('body-parser')
-var path = require('path')
-var compression = require('compression')
-
-var apiRoutes = require('./routes/apiRoutes')
-
+import apiRoutes from './routes/apiRoutes';
 
 
 //
 // ---------------------  INIT DB  ---------------------  
 //
-var mongoose = require('mongoose')
-var dummyData = require('./dummyData')
+// import dummyData from './dummyData'
 
 // Set native promises as mongoose promise
 mongoose.Promise = global.Promise;
@@ -46,13 +44,14 @@ mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost:27017/food_maniac
 //
 
 
-var app = express()
+// Initialize the Express App
+const app = new Express();
 
 app.use(compression())
 
 // serve our static stuff like index.css
 // explanations here: http://expressjs.com/en/starter/static-files.html
-app.use(express.static(path.resolve(__dirname, '../dist')));
+app.use(Express.static(path.resolve(__dirname, '../dist')));
 
 // Serve our mongo apis:
 app.use('/api', apiRoutes);
@@ -68,4 +67,4 @@ app.listen(PORT, function() {
   console.log('Node Express server running at localhost:' + PORT)
 })
 
-module.exports = app
+export default app;

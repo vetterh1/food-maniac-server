@@ -1,6 +1,6 @@
-var User = require('../models/user')
-var cuid = require('cuid') // https://github.com/ericelliott/cuid
-var sanitizeHtml = require('sanitize-html')
+import User from '../models/user';
+import cuid from 'cuid';
+
 
 /**
  * Get all users
@@ -8,7 +8,7 @@ var sanitizeHtml = require('sanitize-html')
  * @param res
  * @returns void
  */
-function getUsers(req, res) {
+export function getUsers(req, res) {
   User.find().sort('-since').exec((err, users) => {
     if (err) {
       res.status(500).send(err);
@@ -16,7 +16,7 @@ function getUsers(req, res) {
     res.json({ users });
   });
 }
-module.exports.getUsers = getUsers;
+// module.exports.getUsers = getUsers;
 
 
 /**
@@ -26,7 +26,7 @@ module.exports.getUsers = getUsers;
  * @returns void
  */
 
-function addUser(req, res) {
+export function addUser(req, res) {
   console.log("{ userController.addUser");
   if (!req.body.user.login || !req.body.user.first || !req.body.user.last) {
     res.status(403).end();
@@ -46,7 +46,7 @@ function addUser(req, res) {
   });
   console.log("{ !userController.addUser failed!");
 }
-module.exports.addUser = addUser;
+// module.exports.addUser = addUser;
 
 
 /**
@@ -55,7 +55,7 @@ module.exports.addUser = addUser;
  * @param res
  * @returns void
  */
-function getUser(req, res) {
+export function getUser(req, res) {
   console.log("{ userController.getUser: ", req.params.cuid );
 
   User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
@@ -65,7 +65,7 @@ function getUser(req, res) {
     res.json({ user });
   });
 }
-module.exports.getUser = getUser;
+// module.exports.getUser = getUser;
 
 
 /**
@@ -74,7 +74,7 @@ module.exports.getUser = getUser;
  * @param res
  * @returns void
  */
-function deleteUser(req, res) {
+export function deleteUser(req, res) {
   User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
     if (err) {
       res.status(500).send(err);
@@ -85,4 +85,3 @@ function deleteUser(req, res) {
     });
   });
 }
-module.exports.deleteUser = deleteUser;
