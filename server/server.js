@@ -18,7 +18,7 @@ import apiRoutes from './routes/apiRoutes';
 //
 // ---------------------  INIT DB  ---------------------  
 //
-// import dummyData from './dummyData'
+import dummyData from './dummyData';
 
 // Set native promises as mongoose promise
 mongoose.Promise = global.Promise;
@@ -30,8 +30,8 @@ mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost:27017/food_maniac
     throw error;
   }
 
-  // feed some dummy data in DB.
-  // dummyData();
+  // feed some dummy data in DB if empty
+  dummyData();
 });
 
 
@@ -49,16 +49,16 @@ const app = new Express();
 
 app.use(compression())
 
+// Serve our mongo apis:
+app.use('/api', apiRoutes);
+
 // serve our static stuff like index.css
 // explanations here: http://expressjs.com/en/starter/static-files.html
 app.use(Express.static(path.resolve(__dirname, '../dist')));
 
-// Serve our mongo apis:
-app.use('/api', apiRoutes);
-
-
 // send all requests to index.html so browserHistory works
-app.get('*', function (req, res) {
+//app.get('*', function (req, res) {
+app.use( function (req, res) {
   res.sendFile(path.join(__dirname, '../dist', 'index.html'))
 })
 

@@ -16,7 +16,6 @@ export function getUsers(req, res) {
     res.json({ users });
   });
 }
-// module.exports.getUsers = getUsers;
 
 
 /**
@@ -46,7 +45,6 @@ export function addUser(req, res) {
   });
   console.log("{ !userController.addUser failed!");
 }
-// module.exports.addUser = addUser;
 
 
 /**
@@ -56,8 +54,6 @@ export function addUser(req, res) {
  * @returns void
  */
 export function getUser(req, res) {
-  console.log("{ userController.getUser: ", req.params.cuid );
-
   User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
     if (err) {
       res.status(500).send(err);
@@ -65,7 +61,6 @@ export function getUser(req, res) {
     res.json({ user });
   });
 }
-// module.exports.getUser = getUser;
 
 
 /**

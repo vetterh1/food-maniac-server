@@ -1,11 +1,8 @@
 import mongoose from 'mongoose';
 import Item from './item';
-import Place from './Place';
-import User from './User';
-// var mongoose = require('mongoose')
-// var Item = require('./item')
-// var Place = require('./Place')
-// var User = require('./User')
+import Place from './place';
+import User from './user';
+
 const Schema = mongoose.Schema;
 
 const markSchema = new Schema({
@@ -15,7 +12,7 @@ const markSchema = new Schema({
   since: { type: 'Date', default: Date.now, required: true },
   lastModif: { type: 'Date', default: Date.now, required: true },
   mark: { type: 'Number', required: true },
-  cuid: { type: 'String', required: true },
+  cuid: { type: 'String', required: true }
 });
 
 // on every save, add the date
@@ -25,4 +22,3 @@ markSchema.pre('save', function(next) {
 });
 
 export default mongoose.model('Mark', markSchema);
-// module.exports = mongoose.model('Mark', markSchema);

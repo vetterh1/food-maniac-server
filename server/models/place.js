@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import Item from './item';
-//var mongoose = require('mongoose')
-//var Item = require('./item')
+
 const Schema = mongoose.Schema;
 
 const placeSchema = new Schema({
@@ -10,7 +9,7 @@ const placeSchema = new Schema({
   since: { type: 'Date', default: Date.now, required: true },
   lastModif: { type: 'Date', default: Date.now, required: true },
   items: [{ type: Schema.Types.ObjectId, ref: 'Item' }],
-  cuid: { type: 'String', required: true },
+  cuid: { type: 'String', required: true }
 });
 
 // on every save, add the date
@@ -20,4 +19,4 @@ placeSchema.pre('save', function(next) {
 });
 
 export default mongoose.model('Place', placeSchema);
-//module.exports = mongoose.model('Place', placeSchema);
+

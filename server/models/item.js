@@ -1,4 +1,5 @@
-var mongoose = require('mongoose')
+import mongoose from 'mongoose';
+
 const Schema = mongoose.Schema;
 
 const itemSchema = new Schema({
@@ -6,7 +7,7 @@ const itemSchema = new Schema({
   picture: { type: 'String' },
   since: { type: 'Date', default: Date.now, required: true },
   lastModif: { type: 'Date', default: Date.now, required: true },
-  cuid: { type: 'String', required: true },
+  cuid: { type: 'String', required: true }
 });
 
 // on every save, add the date
@@ -15,4 +16,4 @@ itemSchema.pre('save', function(next) {
   next();
 });
 
-module.exports = mongoose.model('Item', itemSchema);
+export default mongoose.model('Item', itemSchema);

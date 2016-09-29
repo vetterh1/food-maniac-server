@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -12,11 +13,11 @@ const userSchema = new Schema({
   mark: { type: 'Number', default: 0, required: true },
   cuid: { type: 'String', required: true }
 });
-/*
+
 // on every save, add the date
 userSchema.pre('save', function(next) {
   this.lastModif = new Date();
   next();
 });
-*/
+
 export default mongoose.model('User', userSchema);
