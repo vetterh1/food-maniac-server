@@ -14,75 +14,81 @@ export var testItems = [
 	new Item({name:'testItem1', cuid: 'cuidTestItem1'}),
 	new Item({name:'testItem2', cuid: 'cuidTestItem2'}),
 	new Item({name:'testItem3', cuid: 'cuidTestItem3'}),
-	new Item({name:'testItem4', cuid: 'cuidTestItem4'})
+	new Item({name:'testItem4', cuid: 'cuidTestItem4'}),
+	new Item({name:'testItem5', cuid: 'cuidTestItem5'}),
+	new Item({name:'testItem6', cuid: 'cuidTestItem6'})
 ];
 
 export var testPlaces = [
 	new Place({name:'testPlace1', cuid: 'cuidTestPlace1'}),
 	new Place({name:'testPlace2', cuid: 'cuidTestPlace2'}),
 	new Place({name:'testPlace3', cuid: 'cuidTestPlace3'}),
-	new Place({name:'testPlace4', cuid: 'cuidTestPlace4'})
+	new Place({name:'testPlace4', cuid: 'cuidTestPlace4'}),
+	new Place({name:'testPlace5', cuid: 'cuidTestPlace5'}),
+	new Place({name:'testPlace6', cuid: 'cuidTestPlace6'}),
+	new Place({name:'testPlace7', cuid: 'cuidTestPlace7'}),
+	new Place({name:'testPlace8', cuid: 'cuidTestPlace8'}),
+	new Place({name:'testPlace9', cuid: 'cuidTestPlace9'})
 ];
 
 export default function dummyData() {
 
 	console.log('{   dummyData()');
 
-  	User.count().exec((err, count) => {
-	    if (count > 0) {
-			console.log('       no need to add dummy data: nb users=' + count);
-			console.log('}   dummyData()');
-	      return;
-	    }
+	User.count().exec((err, count) => {
+
+		// if (count > 0) {
+		// 	console.log('       no need to add dummy data: nb users=' + count);
+		// 	console.log('}   dummyData()');
+		// 	return;
+		// }
+
+		console.log('       Add dummy data');
+
+		// Create test users after removing any existing one
+		User.find({login: /^testUser/}).remove().exec()
+			.then( User.create(testUsers, function (err) {
+							if(err)
+								console.log('    User.create err=', err);
+						}
+					)
+			)
+
+		// Create new test items after removing any existing one
+			.then( Item.find({name: /^testItem/}).remove().exec() )
+			.then( Item.create(testItems, function (err) {
+							if(err)
+								console.log('    Item.create err=', err);
+						}
+					)
+			)
+
+		// Create new test places after removing any existing one
+			.then( Place.find({name: /^testPlace/}).remove().exec() )
+	//		.then( Place.create(new Place({name:'testPlace', items: [newItem._id]})) )
+			.then( Place.create(testPlaces, function (err) {
+							if(err)
+								console.log('    Place.create err=', err);
+						}
+					)
+			)
+
+		// Display collection counts
+			.then( function() { 
+				User.find().count(function (err, results) {
+					if (err) return console.error(err);
+					console.log('# Users:', results)
+				});
+				Item.find().count(function (err, results) {
+					if (err) return console.error(err);
+					console.log('# Items:', results)
+				});
+				Place.find().count(function (err, results) {
+					if (err) return console.error(err);
+					console.log('# Places:', results)
+				})
+			});
+
+		console.log('}   dummyData()');
 	});
-
-	
-
-	console.log('       Add dummy data');
-
-	// Create test users after removing any existing one
-	User.find().remove({login: '/^testUser/'}).exec()
-		.then( User.create(testUsers, function (err) {
-						if(err)
-							console.log('    User.create err=', err);
-					}
-				)
-		)
-
-	// Create new test items after removing any existing one
-		.then( Item.find().remove({name: '/^testItem/'}).exec() )
-		.then( Item.create(testItems, function (err) {
-						if(err)
-							console.log('    Item.create err=', err);
-					}
-				)
-		)
-
-	// Create new test places after removing any existing one
-		.then( Place.find().remove({name: '/^testPlace/'}).exec() )
-//		.then( Place.create(new Place({name:'testPlace', items: [newItem._id]})) )
-		.then( Place.create(testPlaces, function (err) {
-						if(err)
-							console.log('    Place.create err=', err);
-					}
-				)
-		)
-
-	// Display collection counts
-		.then( function() { 
-			User.find().count(function (err, results) {
-				if (err) return console.error(err);
-				console.log('# Users:', results)
-			});
-			Item.find().count(function (err, results) {
-				if (err) return console.error(err);
-				console.log('# Items:', results)
-			});
-			Place.find().count(function (err, results) {
-				if (err) return console.error(err);
-				console.log('# Places:', results)
-			})
-		});
-
-	console.log('}   dummyData()');
 }

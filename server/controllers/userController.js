@@ -1,5 +1,6 @@
 import User from '../models/user';
 import cuid from 'cuid';
+import sanitizeHtml from 'sanitize-html';
 
 
 /**
@@ -34,8 +35,10 @@ export function addUser(req, res) {
   const newUser = new User(req.body.user);
 
   // Let's sanitize inputs
-  newUser.title = sanitizeHtml(newUser.title);
-  newuser.cuid = cuid();
+  newUser.login = sanitizeHtml(newUser.login);
+  newUser.first = sanitizeHtml(newUser.first);
+  newUser.last = sanitizeHtml(newUser.last);
+  newUser.cuid = cuid();
   newUser.save((err, saved) => {
     if (err) {
       res.status(500).send(err);

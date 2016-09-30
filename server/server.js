@@ -57,9 +57,8 @@ app.use('/api', apiRoutes);
 app.use(Express.static(path.resolve(__dirname, '../dist')));
 
 // send all requests to index.html so browserHistory works
-//app.get('*', function (req, res) {
-app.use( function (req, res) {
-  res.sendFile(path.join(__dirname, '../dist', 'index.html'))
+app.get('*', function (req, res) {
+	res.sendFile(path.join(__dirname, '../dist', 'index.html'))
 })
 
 var PORT = process.env.PORT || 8080

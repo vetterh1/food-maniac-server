@@ -4,15 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test PORT=8080 MONGO_URL=mongodb://localhost:27017/food_maniac_test node_modules/.bin/nyc node_modules/.bin/ava --serial",
-    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "test": "./node_modules/.bin/mocha --reporter spec",
+    "test:ava": "node_modules/.bin/ava --serial",
+    "test:nycava": "cross-env NODE_ENV=test PORT=8080 MONGO_URL=mongodb://localhost:27017/food_maniac_test node_modules/.bin/nyc node_modules/.bin/ava --serial",
+    "start:old": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start": "cross-env BABEL_DISABLE_CACHE=1 NODE_ENV=development nodemon index.js",
     "start:dev": "npm run build && webpack-dev-server --inline --content-base dist --history-api-fallback",
     "start:prod": "npm run build && node server/server.js",
     "build": "npm run build:cp_css && webpack",
     "build:cp_css": "if-env OS=Windows_NT && copy .\\app\\index.css dist || cp ./app/index.css dist",
     "pm2:restart": "pm2 restart maptest"
   },
- "dependencies": {
+  "dependencies": {
     "babel-core": "^6.9.1",
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",
@@ -43,6 +46,7 @@
     "babel-preset-react-optimize": "^1.0.1",
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.9.0",
+    "chai": "^3.5.0",
     "eslint": "^2.11.1",
     "eslint-config-airbnb": "^9.0.1",
     "eslint-plugin-ava": "^2.4.0",
@@ -51,9 +55,12 @@
     "eslint-plugin-react": "^5.1.1",
     "html-webpack-plugin": "^2.22.0",
     "http-server": "^0.8.5",
+    "mocha": "^3.1.0",
     "mockgoose": "^6.0.8",
+    "nodemon": "^1.10.2",
     "nyc": "^8.3.0",
     "redux-devtools": "^3.3.1",
+    "request": "^2.75.0",
     "supertest": "^2.0.0",
     "webpack": "^1.12.13",
     "webpack-dev-server": "^1.15.1"
