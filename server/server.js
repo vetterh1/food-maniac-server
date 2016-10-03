@@ -18,7 +18,7 @@ import apiRoutes from './routes/apiRoutes';
 //
 // ---------------------  INIT DB  ---------------------  
 //
-import dummyData from './dummyData';
+import insertTestData from './testData';
 
 // Set native promises as mongoose promise
 mongoose.Promise = global.Promise;
@@ -31,7 +31,7 @@ mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost:27017/food_maniac
   }
 
   // feed some dummy data in DB if empty
-  dummyData();
+  insertTestData();
 });
 
 

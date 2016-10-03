@@ -10,12 +10,16 @@ import sanitizeHtml from 'sanitize-html';
  * @returns void
  */
 export function getUsers(req, res) {
+  console.log("{ userController.getUsers");
   User.find().sort('-since').exec((err, users) => {
     if (err) {
+      console.log("     userController.getUsers returns err: ", err);
       res.status(500).send(err);
     }
-    res.json({ users });
+    res.json({users});
+    console.log("     userController.getUsers length= ", users.length);
   });
+  console.log("} userController.getUsers");
 }
 
 

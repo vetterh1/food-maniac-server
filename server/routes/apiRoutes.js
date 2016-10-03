@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import * as UserController from '../controllers/userController';
 import * as ItemController from '../controllers/itemController';
+import * as PlaceController from '../controllers/placeController';
 const router = new Router();
 
 
@@ -32,6 +33,22 @@ router.route('/items').post(ItemController.addItem);
 
 // Delete a item by cuid
 router.route('/items/:cuid').delete(ItemController.deleteItem);
+
+
+// ----------------  PLACES ---------------- 
+
+// Get all Items
+router.route('/places').get(PlaceController.getPlaces);
+
+// Get one place by cuid
+router.route('/places/:cuid').get(PlaceController.getPlaces);
+
+// Add a new Item
+router.route('/places').post(PlaceController.addPlace);
+
+// Delete a place by cuid
+router.route('/places/:cuid').delete(PlaceController.deletePlace);
+
 
 
 

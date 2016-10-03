@@ -1,3 +1,5 @@
+/*eslint no-unused-vars: ["error", { "varsIgnorePattern": "mongoose" }]*/
+
 import mongoose from 'mongoose';
 import Item from './models/item';
 import Place from './models/place';
@@ -31,19 +33,19 @@ export var testPlaces = [
 	new Place({name:'testPlace9', cuid: 'cuidTestPlace9'})
 ];
 
-export default function dummyData() {
+export default function insertTestData() {
 
-	console.log('{   dummyData()');
+	console.log('{   insertTestData()');
 
 	User.count().exec((err, count) => {
 
 		// if (count > 0) {
-		// 	console.log('       no need to add dummy data: nb users=' + count);
-		// 	console.log('}   dummyData()');
+		// 	console.log('       no need to add test data: nb users=' + count);
+		// 	console.log('}   insertTestData()');
 		// 	return;
 		// }
 
-		console.log('       Add dummy data');
+		console.log('       Add test data');
 
 		// Create test users after removing any existing one
 		User.find({login: /^testUser/}).remove().exec()
@@ -89,6 +91,6 @@ export default function dummyData() {
 				})
 			});
 
-		console.log('}   dummyData()');
+		console.log('}   insertTestData()');
 	});
 }
