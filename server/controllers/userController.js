@@ -10,16 +10,17 @@ import sanitizeHtml from 'sanitize-html';
  * @returns void
  */
 export function getUsers(req, res) {
-  console.log("{ userController.getUsers");
   User.find().sort('-since').exec((err, users) => {
     if (err) {
-      console.log("     userController.getUsers returns err: ", err);
+      console.log("! userController.getUsers returns err: ", err);
       res.status(500).send(err);
     }
-    res.json({users});
-    console.log("     userController.getUsers length= ", users.length);
+    else
+    {
+      res.json({users});
+      console.log(`userController.getUsers length=${users.length}`);
+    }
   });
-  console.log("} userController.getUsers");
 }
 
 
@@ -31,8 +32,8 @@ export function getUsers(req, res) {
  */
 
 export function addUser(req, res) {
-  console.log("{ userController.addUser");
   if (!req.body.user.login || !req.body.user.first || !req.body.user.last) {
+    console.log(`! userController.addUser ${req.body.user} failed! - missing mandatory fields`);
     res.status(403).end();
   }
 
@@ -45,12 +46,15 @@ export function addUser(req, res) {
   newUser.cuid = cuid();
   newUser.save((err, saved) => {
     if (err) {
+      console.log(`! userController.addUser ${newUser.login} failed! - err = `, err);
       res.status(500).send(err);
     }
-    res.json({ user: saved });
-    console.log("} userController.addUser");
+    else
+    {
+      res.json({ user: saved });
+      console.log(`userController.addUser ${newUser.login}`);
+    }
   });
-  console.log("{ !userController.addUser failed!");
 }
 
 
@@ -63,9 +67,14 @@ export function addUser(req, res) {
 export function getUser(req, res) {
   User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
     if (err) {
+      console.log(`! userController.getUser ${req.params.cuid} failed! - err = `, err);
       res.status(500).send(err);
     }
-    res.json({ user });
+    else
+    {
+      res.json({ user });
+      console.log(`userController.getUser ${req.params.cuid}`);
+    }
   });
 }
 
@@ -79,11 +88,15 @@ export function getUser(req, res) {
 export function deleteUser(req, res) {
   User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
     if (err) {
+      console.log(`! userController.deleteUser ${req.params.cuid} failed! - err = `, err);
       res.status(500).send(err);
     }
-
-    user.remove(() => {
-      res.status(200).end();
-    });
+    else
+    {
+      user.remove(() => {
+        res.status(200).end();
+        console.log(`userController.deleteUser ${req.params.cuid}`);
+      });
+    }
   });
 }

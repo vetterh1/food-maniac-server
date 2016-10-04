@@ -12,6 +12,10 @@ import mongoose from 'mongoose';
 // import bodyParser from 'body-parser';
 import path from 'path';
 
+import config from 'config';
+if( !process.env.NODE_ENV )
+	console.error("! NODE_ENV undefined !"); // eslint-disable-line no-console
+
 import apiRoutes from './routes/apiRoutes';
 
 
@@ -24,7 +28,16 @@ import insertTestData from './testData';
 mongoose.Promise = global.Promise;
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost:27017/food_maniac', (error) => {
+if (config.has('DBHost'))
+  var DBHost = config.get('DBHost');
+else
+	console.error("! No config defined for DBHost (or no NODE_ENV defined!) !"); // eslint-disable-line no-console
+console.log(`Mongodb: ${DBHost}`); // eslint-disable-line no-console
+let options = { 
+                server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } }, 
+                replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } 
+              }; 
+mongoose.connect(DBHost, options, (error) => {
   if (error) {
     console.error('Please make sure Mongodb is installed and running!'); // eslint-disable-line no-console
     throw error;
@@ -33,7 +46,8 @@ mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost:27017/food_maniac
   // feed some dummy data in DB if empty
   insertTestData();
 });
-
+let db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
 
 
 

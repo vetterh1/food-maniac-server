@@ -12,9 +12,14 @@ import sanitizeHtml from 'sanitize-html';
 export function getPlaces(req, res) {
   Place.find().sort('-since').exec((err, places) => {
     if (err) {
+      console.log("! placeController.getPlaces returns err: ", err);
       res.status(500).send(err);
     }
-    res.json({ places });
+    else
+    {
+      res.json({ places });
+      console.log(`placeController.getPlaces length=${places.length}`);
+    }
   });
 }
 
@@ -27,8 +32,8 @@ export function getPlaces(req, res) {
  */
 
 export function addPlace(req, res) {
-  console.log("{ placeController.addPlace");
   if (!req.body.place.name) {
+    console.log(`! placeController.addPlace ${req.body.place} failed! - missing mandatory fields`);
     res.status(403).end();
   }
 
@@ -39,12 +44,15 @@ export function addPlace(req, res) {
   newPlace.cuid = cuid();
   newPlace.save((err, saved) => {
     if (err) {
+      console.log(`! placeController.addPlace ${newPlace.name} failed! - err = `, err);
       res.status(500).send(err);
     }
-    res.json({ place: saved });
-    console.log("} placeController.addPlace");
+    else
+    {
+      res.json({ place: saved });
+      console.log(`placeController.addPlace ${newPlace.name}`);
+    }
   });
-  console.log("{ !placeController.addPlace failed!");
 }
 
 
@@ -57,9 +65,14 @@ export function addPlace(req, res) {
 export function getPlace(req, res) {
   Place.findOne({ cuid: req.params.cuid }).exec((err, place) => {
     if (err) {
+      console.log(`! placeController.getPlace ${req.params.cuid} failed! - err = `, err);
       res.status(500).send(err);
     }
-    res.json({ place });
+    else
+    {
+      res.json({ place });
+      console.log(`placeController.getPlace ${req.params.cuid}`);
+    }
   });
 }
 
@@ -73,11 +86,15 @@ export function getPlace(req, res) {
 export function deletePlace(req, res) {
   Place.findOne({ cuid: req.params.cuid }).exec((err, place) => {
     if (err) {
+      console.log(`! placeController.deletePlace ${req.params.cuid} failed! - err = `, err);
       res.status(500).send(err);
     }
-
-    place.remove(() => {
-      res.status(200).end();
-    });
+    else
+    {
+      place.remove(() => {
+        res.status(200).end();
+        console.log(`placeController.deletePlace ${req.params.cuid}`);
+      });
+    }
   });
 }
