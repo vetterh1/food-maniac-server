@@ -11,10 +11,13 @@ const router = new Router();
 router.route('/users').get(UserController.getUsers);
 
 // Get one user by cuid
-router.route('/users/:cuid').get(UserController.getUsers);
+router.route('/users/:cuid').get(UserController.getUser);
 
 // Add a new Item
 router.route('/users').post(UserController.addUser);
+
+// Update a user by cuid
+router.route('/users/:cuid').post(UserController.updateUser);
 
 // Delete a user by cuid
 router.route('/users/:cuid').delete(UserController.deleteUser);

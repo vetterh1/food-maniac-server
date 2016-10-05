@@ -1,3 +1,12 @@
 {
-	"DBHost" : "mongodb://localhost:27017/food_maniac_test"
+	"server":
+	{
+		"port": 8090
+	},
+
+	"database":
+	{
+		"URL" : "mongodb://localhost:27017/food_maniac_test"		
+	}
+	
 }

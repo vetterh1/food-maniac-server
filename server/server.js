@@ -9,7 +9,7 @@
 import Express from 'express';
 import compression from 'compression';
 import mongoose from 'mongoose';
-// import bodyParser from 'body-parser';
+import bodyParser from 'body-parser';
 import path from 'path';
 
 import config from 'config';
@@ -28,23 +28,24 @@ import insertTestData from './testData';
 mongoose.Promise = global.Promise;
 
 // MongoDB Connection
-if (config.has('DBHost'))
-  var DBHost = config.get('DBHost');
+if (config.has('database.URL'))
+  var databaseURL = config.get('database.URL');
 else
-	console.error("! No config defined for DBHost (or no NODE_ENV defined!) !"); // eslint-disable-line no-console
-console.log(`Mongodb: ${DBHost}`); // eslint-disable-line no-console
+	console.error("! No config defined for database.URL (or no NODE_ENV defined!) !"); // eslint-disable-line no-console
+console.log(`Mongodb: ${databaseURL}`); // eslint-disable-line no-console
 let options = { 
                 server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } }, 
                 replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } 
               }; 
-mongoose.connect(DBHost, options, (error) => {
+mongoose.connect(databaseURL, options, (error) => {
   if (error) {
     console.error('Please make sure Mongodb is installed and running!'); // eslint-disable-line no-console
     throw error;
   }
 
-  // feed some dummy data in DB if empty
-  insertTestData();
+  	// feed some dummy data in DB if empty
+	if( process.env.NODE_ENV != "test")
+  		insertTestData();
 });
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -62,6 +63,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
 const app = new Express();
 
 app.use(compression())
+app.use(bodyParser.json());		// Mandatory to get body in post requests!
 
 // Serve our mongo apis:
 app.use('/api', apiRoutes);
@@ -75,7 +77,11 @@ app.get('*', function (req, res) {
 	res.sendFile(path.join(__dirname, '../dist', 'index.html'))
 })
 
-var PORT = process.env.PORT || 8080
+if (config.has('server.port'))
+  var PORT = config.get('server.port');
+else
+	console.error("! No config defined for server.port (or no NODE_ENV defined!) !"); // eslint-disable-line no-console
+
 app.listen(PORT, function() {
   console.log('Node Express server running at localhost:' + PORT)
 })
