@@ -7,6 +7,12 @@
 	"database":
 	{
 		"URL" : "mongodb://localhost:27017/food_maniac"		
-	}
+	},
 	
+	"log":
+	{
+		"levelConsole": "warn",
+		"levelFile": "warn",
+		"pathFile" : "./server/log/winston.log"
+	}
 }

@@ -5,9 +5,13 @@
 //  - run the app: node --debug server.js
 //  (to rebuild client if necessary: npm run build )
 
+var logger = require('./util/logger.js');  
 
 import Express from 'express';
 import compression from 'compression';
+import FileStreamRotator from 'file-stream-rotator';
+import fs from 'fs';
+import morgan from 'morgan';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import path from 'path';
@@ -19,9 +23,11 @@ if( !process.env.NODE_ENV )
 import apiRoutes from './routes/apiRoutes';
 
 
+
 //
 // ---------------------  INIT DB  ---------------------  
 //
+
 import insertTestData from './testData';
 
 // Set native promises as mongoose promise
@@ -54,6 +60,28 @@ db.on('error', console.error.bind(console, 'connection error:'));
 
 
 
+
+//
+// ---------------------  INIT LOGGER  ---------------------  
+//
+
+
+var logDirectory = __dirname + '/log'
+
+// ensure log directory exists 
+fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory)
+ 
+// create a rotating write stream 
+var accessLogStream = FileStreamRotator.getStream({
+  date_format: 'YYYYMMDD',
+  filename: logDirectory + '/access-%DATE%.log',
+  frequency: 'daily',
+  verbose: false
+})
+ 
+
+
+
 //
 // ---------------------  INIT SERVER  ---------------------  
 //
@@ -62,7 +90,8 @@ db.on('error', console.error.bind(console, 'connection error:'));
 // Initialize the Express App
 const app = new Express();
 
-app.use(compression())
+app.use(compression());
+app.use(morgan('combined', {stream: accessLogStream}))		// for logging
 app.use(bodyParser.json());		// Mandatory to get body in post requests!
 
 // Serve our mongo apis:

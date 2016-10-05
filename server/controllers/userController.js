@@ -1,3 +1,4 @@
+var logger = require('winston'); 
 import User from '../models/user';
 import cuid from 'cuid';
 import sanitizeHtml from 'sanitize-html';
@@ -9,13 +10,13 @@ import sanitizeHtml from 'sanitize-html';
 export function getUsers(req, res) {
   User.find().sort('-since').exec((err, users) => {
     if (err) {
-      console.log("! userController.getUsers returns err: ", err);
+      logger.error("! userController.getUsers returns err: ", err);
       res.status(500).send(err);
     }
     else
     {
       res.json({users});
-      console.log(`userController.getUsers length=${users.length}`);
+      logger.info(`userController.getUsers length=${users.length}`);
     }
   });
 }
@@ -28,18 +29,18 @@ export function getUsers(req, res) {
 export function addUser(req, res) {
   
   if (!req.body || !req.body.user || !req.body.user.login || !req.body.user.first || !req.body.user.last) {
-    console.log("! userController.addUser failed! - missing mandatory fields");
+    logger.error("! userController.addUser failed! - missing mandatory fields");
     if (!req.body )
-      console.log("... no req.body!");
+      logger.error("... no req.body!");
     if (req.body && !req.body.user )
-      console.log("... no req.body.user!");
+      logger.error("... no req.body.user!");
     if (req.body && req.body.user && !req.body.user.login )
-      console.log("... no req.body.user.login!");
+      logger.error("... no req.body.user.login!");
     if (req.body && req.body.user && !req.body.user.first )
-      console.log("... no req.body.user.first!");
+      logger.error("... no req.body.user.first!");
     if (req.body && req.body.user && !req.body.user.last )
-      console.log("... no req.body.user.last!");
-    res.status(403).end();
+      logger.error("... no req.body.user.last!");
+    res.status(400).end();
   }
 
   const newUser = new User(req.body.user);
@@ -52,13 +53,13 @@ export function addUser(req, res) {
   newUser.save((err, saved) => {
 
     if (err) {
-      console.log(`! userController.addUser ${newUser.login} failed! - err = `, err);
+      logger.error(`! userController.addUser ${newUser.login} failed! - err = `, err);
       res.status(500).send(err);
     }
     else
     {
       res.json({ user: saved });
-      console.log(`userController.addUser ${newUser.login}`);
+      logger.info(`userController.addUser ${newUser.login}`);
     }
   });
 }
@@ -70,13 +71,13 @@ export function addUser(req, res) {
 export function getUser(req, res) {
   User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
     if (err || !user) {
-      console.log(`! userController.getUser ${req.params.cuid} failed to find! - err = `, err);
+      logger.error(`! userController.getUser ${req.params.cuid} failed to find! - err = `, err);
       res.status(500).send(err);
     }
     else
     {
       res.json({ user: user });
-      console.log(`userController.getUser ${req.params.cuid}`);
+      logger.info(`userController.getUser ${req.params.cuid}`);
     }
   });
 }
@@ -86,20 +87,29 @@ export function getUser(req, res) {
  * Update an existing user
  */
 export function updateUser(req, res) {
-  User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
-    if(err) {
-      console.log(`! userController.updateUser ${req.params.cuid} failed to find! - err = `, err);
-      res.send(err);
+  if (!req.body || !req.body.user) {
+    let error = { status: "error", message: "! userController.updateUser failed! - no body or user" };
+    if (!req.body )
+      error.message += "... no req.body!";
+    if (req.body && !req.body.user )
+      error.message += "... no req.body.user!";
+    res.status(400).json(error);
+  }
+
+if (req.body && req.body.user && req.body.user.cuid) {
+    res.status(400).json({ status: "error", message: "! userController.updateUser failed! - cuid cannot be changed" });
+  }
+
+  User.findOneAndUpdate({ cuid: req.params.cuid }, req.body.user, {new: true}, (err, user) => {
+    if(err || !user){
+      logger.error(`! userController.updateUser ${req.params.cuid} failed to update! - err = `, err);
+      res.status(500).send(err);
     }
-    Object.assign(user, req.body).save((err, user) => {
-      if(err){
-          console.log(`! userController.updateUser ${req.params.cuid} failed to save! - err = `, err);
-          res.send(err);
-      }
+    else {
       res.json({ user: user });
-      console.log(`userController.updateUser ${req.params.cuid}`);
-    }); 
-  });
+      logger.info(`userController.updateUser ${req.params.cuid}`);
+    }
+  }); 
 }
 
 
@@ -110,19 +120,19 @@ export function updateUser(req, res) {
 export function deleteUser(req, res) {
   User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
     if (err) {
-      console.log(`! userController.deleteUser ${req.params.cuid} failed to find! - err = `, err);
+      logger.error(`! userController.deleteUser ${req.params.cuid} failed to find! - err = `, err);
       res.status(500).send(err);
     }
     else
     {
       user.remove((err) => {
         if (err) {
-          console.log(`! userController.deleteUser ${req.params.cuid} failed to remove! - err = `, err);
+          logger.error(`! userController.deleteUser ${req.params.cuid} failed to remove! - err = `, err);
           res.status(500).send(err);
         }
         else {
           res.status(200).end();
-          console.log(`userController.deleteUser ${req.params.cuid}`);
+          logger.info(`userController.deleteUser ${req.params.cuid}`);
         }
       });
     }

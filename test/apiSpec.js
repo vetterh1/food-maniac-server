@@ -67,12 +67,13 @@ describe('Users', () => {
 	* Test the /POST route
 	*/
 	describe('User Creation', () => {
+
 		it('it should fail creating an incomplete user', (done) => {
 			chai.request(app)
 				.post('/api/users')
 				.send({"user": { login: "testPostLogin", first: "testPostFirst" } })
 				.end((err, res) => {
-					res.should.have.status(403);
+					res.should.have.status(400);
 					done();
 				});
 		});
@@ -87,9 +88,9 @@ describe('Users', () => {
 					res.body.should.be.a('object');
 					res.body.should.have.property('user');
 					res.body.user.should.be.a('object');
-					res.body.user.should.have.property('login');
-					res.body.user.should.have.property('first');
-					res.body.user.should.have.property('last');
+					res.body.user.should.have.property('login').eql(userComplete.login);
+					res.body.user.should.have.property('first').eql(userComplete.first);
+					res.body.user.should.have.property('last').eql(userComplete.last);
 					done();
 				});
 		});
@@ -107,11 +108,21 @@ describe('Users', () => {
 			});
 		});
 
+		it('it should fail creating with wrong user info', (done) => {
+			chai.request(app)
+				.post('/api/users')
+				.send({"WRONG_user": { login: "testPostLogin", first: "testPostFirst", last: "testPostLast" } })
+				.end((err, res) => {
+					res.should.have.status(400);
+					done();
+				});
+		});
+
 	});  /* End test the /POST route */
 
 
 	/*
-	* Test the /POST/:id route
+	* Test the /POST/:cuid route
 	*/
 	describe('User Update', () => {
 
@@ -123,15 +134,29 @@ describe('Users', () => {
 					.post('/api/users/cuidUpdate1')
 					.send({"user": userUpdt})
 					.end((err, res) => {
-						console.log("upd: res body",  res.body)
 						res.should.have.status(200);
+						res.body.should.be.a('object');
+						res.body.should.have.property('user');
+						res.body.user.should.be.a('object');
+						res.body.user.should.have.property('login').eql(userUpdt.login);
+						res.body.user.should.have.property('first').eql(userUpdt.first);
+						res.body.user.should.have.property('last').eql(userUpdt.last);
 						done();
 					});
 			});
 		});
 
 		it('it should fail updating the cuid', (done) => {
-			done();
+			let userOrig = new User ({ cuid: "cuidUpdateCuid", login: "testLoginUpdateCuid", first: "testFirstUpdateCuid", last: "testLastUpdateCuid" });
+			userOrig.save(() => {
+				chai.request(app)
+					.post('/api/users/cuidUpdateCuid')
+					.send({"user": { cuid: "cuidUpdateCuid2" }})
+					.end((err, res) => {
+						res.should.have.status(400);
+						done();
+					});
+			});
 		});
 
 		it('it should fail updating an unknown user', (done) => {
@@ -143,12 +168,25 @@ describe('Users', () => {
 					done();
 				});
 		});
+		
+		it('it should fail updating with wrong user info', (done) => {
+			let userOrig = new User ({ cuid: "cuidUpdateIncomplete", login: "testLoginUpdateIncomplete", first: "testFirstUpdateIncomplete", last: "testLastUpdateIncomplete" });
+			userOrig.save(() => {
+				chai.request(app)
+					.post('/api/users/cuidUpdateIncomplete')
+					.send({"WRONG_user": {login: "newLogin"}})
+					.end((err, res) => {
+						res.should.have.status(400);
+						done();
+					});
+			});
+		});
 
-	});  /* End test the /POST route */
+	});  /* End test the /POST/:cuid route */
 
 
 	/*
-	* Test the /GET/:id route
+	* Test the /GET/:cuid route
 	*/
 	describe('User Retrieval', () => {
 
