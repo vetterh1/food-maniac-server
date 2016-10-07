@@ -5,16 +5,18 @@ process.env.NODE_ENV = 'test';
 
 import 'babel-polyfill'
 let mongoose = require("mongoose");
-import User from '../server/models/user';
 let chai = require('chai');
 let chaiHttp = require('chai-http');
 import app from '../server/server';
 let should = chai.should();
-
 chai.use(chaiHttp);
 
+import User from '../server/models/user';
+import Place from '../server/models/place';
+import Item from '../server/models/item';
 
-describe('Users', () => {
+
+describe('API Users', () => {
 
 	//Before each test we empty the database
 	beforeEach( (done) => { 
@@ -201,11 +203,10 @@ describe('Users', () => {
 		});
 
 		it('it should find an existing user', (done) => {
-			let user = new User ({ cuid: "cuidTestPostFind", login: "testPostLoginFind", first: "testPostFirstFind", last: "testPostLastFind" });
+			let user = new User ({ cuid: "cuidTestRetreive", login: "testRetreiveLogin", first: "testRetreiveFirst", last: "testRetreiveLast" });
 			user.save((err, user) => {
 				chai.request(app)
-					.get('/api/users/cuidTestPostFind')
-					.send({})
+					.get('/api/users/cuidTestRetreive')
 					.end((err, res) => {
 						res.should.have.status(200);
 						res.body.should.be.a('object');
@@ -220,106 +221,32 @@ describe('Users', () => {
 		});
 	});
 
+	/*
+	* Test the /DELETE/:cuid route
+	*/
+	describe('User Deletion', () => {
 
+		it('it should fail deleteing an unknown user', (done) => {
+			chai.request(app)
+				.delete('/api/users/cuidTestDeleteUnknown')
+				.end((err, res) => {
+					res.should.have.status(500);
+					done();
+				});
+		});
+
+		it('it should delete an existing user', (done) => {
+			let user = new User ({ cuid: "cuidTestDelete", login: "testDeleteLogin", first: "testDeleteFirst", last: "testDeleteLast" });
+			user.save(() => {
+				chai.request(app)
+					.delete('/api/users/cuidTestDelete')
+					.end((err, res) => {
+						res.should.have.status(200);
+						done();
+					});
+			});
+		});
+	});
 
 });   /* Users */
 
-
-/*
-var request = require("request");
-
-describe("REST API tests", () => {
-
-	describe("User", () => {
-
-		var nbUsers = 0;
-
-		describe("Get users list", () => {
-
-			var url = "http://localhost:8080/api/users";
-
-			it("returns status 200", (done) => {
-				request({url: url, json: true}, (error, response, body) => {
-					expect(response.statusCode).to.be.equal(200);
-					nbUsers = body.users.length;
-					done();
-				});
-			});
-			it("get at least 3 users", () => {
-				expect(nbUsers).to.be.at.least(3);
-			});
-		});
-
-		describe("Add user", () => {
-
-			var url = "http://localhost:8080/api/user";
-
-			it("returns status 200", (done) => {
-				request({url: url, json: true}, (error, response) => {
-					expect(response.statusCode).to.be.equal(200);
-					done();
-				});
-			});
-			it("get at least 3 users", (done) => {
-					request({url: url, json: true}, (error, response, body) => {
-					nbUsers = body.users.length;
-					expect(body.users.length).to.be.at.least(3);
-					done();
-				});
-			});
-			it("add a new user", (done) => {
-					request({url: url, json: true}, (error, response, body) => {
-					expect(body.users.length).to.be.at.least(3);
-					done();
-				});
-			});
-		});
-
-	});
-
-	describe("Item", function() {
-		describe("Get items list", () => {
-
-			var url = "http://localhost:8080/api/items";
-
-			it("returns status 200", (done) => {
-				request({url: url, json: true}, (error, response) => {
-					expect(response.statusCode).to.be.equal(200);
-					done();
-				});
-			});
-			it("get at least 6 items", (done) => {
-					request({url: url, json: true}, (error, response, body) => {
-					expect(body.items.length).to.be.at.least(6);
-					done();
-				});
-			});
-		});
-	});
-
-	describe("Place", function() {
-		describe("Get places list", () => {
-
-			var url = "http://localhost:8080/api/places";
-
-			it("returns status 200", (done) => {
-				request({url: url, json: true}, (error, response) => {
-					expect(response.statusCode).to.be.equal(200);
-					done();
-				});
-			});
-			it("get at least 9 places", (done) => {
-					request({url: url, json: true}, (error, response, body) => {
-					expect(body.places.length).to.be.at.least(9);
-					done();
-				});
-			});
-		});
-	});
-
-	describe("Mark", function() {
-
-	});
-
-});
-*/

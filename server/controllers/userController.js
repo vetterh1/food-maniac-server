@@ -42,26 +42,27 @@ export function addUser(req, res) {
       logger.error("... no req.body.user.last!");
     res.status(400).end();
   }
+  else {
+    const newUser = new User(req.body.user);
 
-  const newUser = new User(req.body.user);
+    // Let's sanitize inputs
+    newUser.login = sanitizeHtml(newUser.login);
+    newUser.first = sanitizeHtml(newUser.first);
+    newUser.last = sanitizeHtml(newUser.last);
+    newUser.cuid = cuid();
+    newUser.save((err, saved) => {
 
-  // Let's sanitize inputs
-  newUser.login = sanitizeHtml(newUser.login);
-  newUser.first = sanitizeHtml(newUser.first);
-  newUser.last = sanitizeHtml(newUser.last);
-  newUser.cuid = cuid();
-  newUser.save((err, saved) => {
-
-    if (err) {
-      logger.error(`! userController.addUser ${newUser.login} failed! - err = `, err);
-      res.status(500).send(err);
-    }
-    else
-    {
-      res.json({ user: saved });
-      logger.info(`userController.addUser ${newUser.login}`);
-    }
-  });
+      if (err) {
+        logger.error(`! userController.addUser ${newUser.login} failed! - err = `, err);
+        res.status(500).send(err);
+      }
+      else
+      {
+        res.json({ user: saved });
+        logger.info(`userController.addUser ${newUser.login}`);
+      }
+    });
+  }
 }
 
 
@@ -95,21 +96,21 @@ export function updateUser(req, res) {
       error.message += "... no req.body.user!";
     res.status(400).json(error);
   }
-
-if (req.body && req.body.user && req.body.user.cuid) {
+  else if (req.body && req.body.user && req.body.user.cuid) {
     res.status(400).json({ status: "error", message: "! userController.updateUser failed! - cuid cannot be changed" });
   }
-
-  User.findOneAndUpdate({ cuid: req.params.cuid }, req.body.user, {new: true}, (err, user) => {
-    if(err || !user){
-      logger.error(`! userController.updateUser ${req.params.cuid} failed to update! - err = `, err);
-      res.status(500).send(err);
-    }
-    else {
-      res.json({ user: user });
-      logger.info(`userController.updateUser ${req.params.cuid}`);
-    }
-  }); 
+  else {
+    User.findOneAndUpdate({ cuid: req.params.cuid }, req.body.user, {new: true}, (err, user) => {
+      if(err || !user){
+        logger.error(`! userController.updateUser ${req.params.cuid} failed to update! - err = `, err);
+        res.status(500).send(err);
+      }
+      else {
+        res.json({ user: user });
+        logger.info(`userController.updateUser ${req.params.cuid}`);
+      }
+    }); 
+  }
 }
 
 
@@ -119,7 +120,7 @@ if (req.body && req.body.user && req.body.user.cuid) {
  */
 export function deleteUser(req, res) {
   User.findOne({ cuid: req.params.cuid }).exec((err, user) => {
-    if (err) {
+    if (err || !user) {
       logger.error(`! userController.deleteUser ${req.params.cuid} failed to find! - err = `, err);
       res.status(500).send(err);
     }

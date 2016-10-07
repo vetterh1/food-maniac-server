@@ -1,20 +1,421 @@
-{"level":"info","message":"userController.getUsers length=0","timestamp":"2016-10-05T16:02:39.640Z"}
-{"level":"info","message":"userController.getUsers length=5","timestamp":"2016-10-05T16:02:39.701Z"}
-{"level":"info","message":"userController.addUser testPostLogin","timestamp":"2016-10-05T16:02:39.762Z"}
-{"level":"info","message":"userController.updateUser cuidUpdate1","timestamp":"2016-10-05T16:02:39.817Z"}
-{"level":"info","message":"userController.getUser cuidTestPostFind","timestamp":"2016-10-05T16:02:39.913Z"}
-{"level":"info","message":"userController.getUsers length=0","timestamp":"2016-10-05T16:11:35.701Z"}
-{"level":"info","message":"userController.getUsers length=5","timestamp":"2016-10-05T16:11:35.767Z"}
-{"level":"info","message":"userController.addUser testPostLogin","timestamp":"2016-10-05T16:11:35.838Z"}
-{"level":"info","message":"userController.updateUser cuidUpdate1","timestamp":"2016-10-05T16:11:35.898Z"}
-{"level":"info","message":"userController.getUser cuidTestPostFind","timestamp":"2016-10-05T16:11:35.995Z"}
-{"level":"info","message":"userController.getUsers length=0","timestamp":"2016-10-05T16:12:25.719Z"}
-{"level":"info","message":"userController.getUsers length=5","timestamp":"2016-10-05T16:12:25.768Z"}
-{"level":"info","message":"userController.addUser testPostLogin","timestamp":"2016-10-05T16:12:25.826Z"}
-{"level":"info","message":"userController.updateUser cuidUpdate1","timestamp":"2016-10-05T16:12:25.877Z"}
-{"level":"info","message":"userController.getUser cuidTestPostFind","timestamp":"2016-10-05T16:12:25.962Z"}
-{"level":"info","message":"userController.getUsers length=0","timestamp":"2016-10-05T16:14:08.369Z"}
-{"level":"info","message":"userController.getUsers length=5","timestamp":"2016-10-05T16:14:08.430Z"}
-{"level":"info","message":"userController.addUser testPostLogin","timestamp":"2016-10-05T16:14:08.511Z"}
-{"level":"info","message":"userController.updateUser cuidUpdate1","timestamp":"2016-10-05T16:14:08.590Z"}
-{"level":"info","message":"userController.getUser cuidTestPostFind","timestamp":"2016-10-05T16:14:08.704Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-10-07T09:24:38.182Z"}
+{"level":"warn","message":"                    FOOD-MANIAC  START","timestamp":"2016-10-07T09:24:38.184Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-10-07T09:24:38.184Z"}
+{"level":"debug","message":"Logger test: debug level","timestamp":"2016-10-07T09:24:38.184Z"}
+{"level":"info","message":"Logger test: info level","timestamp":"2016-10-07T09:24:38.185Z"}
+{"level":"warn","message":"Logger test: warn level","timestamp":"2016-10-07T09:24:38.185Z"}
+{"level":"error","message":"Logger test: error level","timestamp":"2016-10-07T09:24:38.185Z"}
+{"level":"info","message":"markController.getMarks length=0","timestamp":"2016-10-07T09:24:38.508Z"}
+{"level":"info","message":"markController.getMarks length=4","timestamp":"2016-10-07T09:24:38.552Z"}
+{"level":"error","message":"! markController.addMark failed! - missing mandatory fields","timestamp":"2016-10-07T09:24:38.593Z"}
+{"level":"error","message":"... no req.body.mark.mark!","timestamp":"2016-10-07T09:24:38.593Z"}
+{"level":"info","message":"markController.addMark 18","timestamp":"2016-10-07T09:24:38.616Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.marks index: _id_ dup key: { : ObjectId('57f769d605e76b29e4558973') }","op":{"__v":0,"cuid":"citzkfm9500019wegt40lu96c","mark":25,"_id":"57f769d605e76b29e4558973","lastModif":"2016-10-07T09:24:38.636Z","since":"2016-10-07T09:24:38.619Z"}}
+{"level":"error","message":"! markController.addMark failed! - missing mandatory fields","timestamp":"2016-10-07T09:24:38.650Z"}
+{"level":"error","message":"... no req.body.mark!","timestamp":"2016-10-07T09:24:38.650Z"}
+{"level":"info","message":"markController.updateMark cuidUpdate1","timestamp":"2016-10-07T09:24:38.687Z"}
+{"level":"error","message":"! markController.updateMark cuidUpdateUnknownMark failed to update! - err = ","timestamp":"2016-10-07T09:24:38.703Z"}
+{"level":"error","message":"! markController.getMark cuidTestUnknownMark failed to find! - err = ","timestamp":"2016-10-07T09:24:38.726Z"}
+{"level":"info","message":"markController.getMark cuidTestPostFind","timestamp":"2016-10-07T09:24:38.739Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-10-07T09:25:43.963Z"}
+{"level":"warn","message":"                    FOOD-MANIAC  START","timestamp":"2016-10-07T09:25:43.964Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-10-07T09:25:43.964Z"}
+{"level":"debug","message":"Logger test: debug level","timestamp":"2016-10-07T09:25:43.964Z"}
+{"level":"info","message":"Logger test: info level","timestamp":"2016-10-07T09:25:43.965Z"}
+{"level":"warn","message":"Logger test: warn level","timestamp":"2016-10-07T09:25:43.965Z"}
+{"level":"error","message":"Logger test: error level","timestamp":"2016-10-07T09:25:43.965Z"}
+{"level":"info","message":"itemController.getItems length=0","timestamp":"2016-10-07T09:25:44.287Z"}
+{"level":"info","message":"itemController.getItems length=12","timestamp":"2016-10-07T09:25:44.346Z"}
+{"level":"error","message":"! itemController.addItem failed! - missing mandatory fields","timestamp":"2016-10-07T09:25:44.385Z"}
+{"level":"error","message":"... no req.body.item.name!","timestamp":"2016-10-07T09:25:44.385Z"}
+{"level":"info","message":"itemController.addItem testPostName","timestamp":"2016-10-07T09:25:44.414Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.items index: _id_ dup key: { : ObjectId('57f76a18eff59e0c70661a96') }","op":{"__v":0,"cuid":"citzkh10s0002ggegvsdpd72r","name":"testPostname2times","_id":"57f76a18eff59e0c70661a96","lastModif":"2016-10-07T09:25:44.429Z","since":"2016-10-07T09:25:44.419Z"}}
+{"level":"error","message":"! itemController.addItem failed! - missing mandatory fields","timestamp":"2016-10-07T09:25:44.447Z"}
+{"level":"error","message":"... no req.body.item!","timestamp":"2016-10-07T09:25:44.447Z"}
+{"level":"info","message":"itemController.updateItem cuidUpdate1","timestamp":"2016-10-07T09:25:44.478Z"}
+{"level":"error","message":"! itemController.updateItem cuidUpdateUnknownItem failed to update! - err = ","timestamp":"2016-10-07T09:25:44.501Z"}
+{"level":"error","message":"! itemController.getItem cuidTestUnknownItem failed to find! - err = ","timestamp":"2016-10-07T09:25:44.531Z"}
+{"level":"info","message":"itemController.getItem cuidTestPostFind","timestamp":"2016-10-07T09:25:44.546Z"}
+{"level":"info","message":"markController.getMarks length=0","timestamp":"2016-10-07T09:25:44.556Z"}
+{"level":"info","message":"markController.getMarks length=4","timestamp":"2016-10-07T09:25:44.576Z"}
+{"level":"error","message":"! markController.addMark failed! - missing mandatory fields","timestamp":"2016-10-07T09:25:44.583Z"}
+{"level":"error","message":"... no req.body.mark.mark!","timestamp":"2016-10-07T09:25:44.583Z"}
+{"level":"info","message":"markController.addMark 18","timestamp":"2016-10-07T09:25:44.613Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.marks index: _id_ dup key: { : ObjectId('57f76a18eff59e0c70661aa1') }","op":{"__v":0,"cuid":"citzkh16e0005ggegv7h4u3yo","mark":25,"_id":"57f76a18eff59e0c70661aa1","lastModif":"2016-10-07T09:25:44.632Z","since":"2016-10-07T09:25:44.619Z"}}
+{"level":"error","message":"! markController.addMark failed! - missing mandatory fields","timestamp":"2016-10-07T09:25:44.643Z"}
+{"level":"error","message":"... no req.body.mark!","timestamp":"2016-10-07T09:25:44.643Z"}
+{"level":"info","message":"markController.updateMark cuidUpdate1","timestamp":"2016-10-07T09:25:44.656Z"}
+{"level":"error","message":"! markController.updateMark cuidUpdateUnknownMark failed to update! - err = ","timestamp":"2016-10-07T09:25:44.679Z"}
+{"level":"error","message":"! markController.getMark cuidTestUnknownMark failed to find! - err = ","timestamp":"2016-10-07T09:25:44.698Z"}
+{"level":"info","message":"markController.getMark cuidTestPostFind","timestamp":"2016-10-07T09:25:44.718Z"}
+{"level":"info","message":"placeController.getPlaces length=0","timestamp":"2016-10-07T09:25:44.736Z"}
+{"level":"info","message":"placeController.getPlaces length=9","timestamp":"2016-10-07T09:25:44.768Z"}
+{"level":"error","message":"! placeController.addPlace failed! - missing mandatory fields","timestamp":"2016-10-07T09:25:44.779Z"}
+{"level":"error","message":"... no req.body.place.name!","timestamp":"2016-10-07T09:25:44.779Z"}
+{"level":"info","message":"placeController.addPlace testPostName","timestamp":"2016-10-07T09:25:44.792Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.places index: _id_ dup key: { : ObjectId('57f76a18eff59e0c70661ab0') }","op":{"__v":0,"cuid":"citzkh1ba0007ggeg18jp0trg","name":"testPostname2times","_id":"57f76a18eff59e0c70661ab0","items":[],"lastModif":"2016-10-07T09:25:44.812Z","since":"2016-10-07T09:25:44.796Z","location":{"coordinates":[]}}}
+{"level":"error","message":"! placeController.addPlace failed! - missing mandatory fields","timestamp":"2016-10-07T09:25:44.827Z"}
+{"level":"error","message":"... no req.body.place!","timestamp":"2016-10-07T09:25:44.828Z"}
+{"level":"info","message":"placeController.updatePlace cuidUpdate1","timestamp":"2016-10-07T09:25:44.838Z"}
+{"level":"error","message":"! placeController.updatePlace cuidUpdateUnknownPlace failed to update! - err = ","timestamp":"2016-10-07T09:25:44.862Z"}
+{"level":"error","message":"! placeController.getPlace cuidTestUnknownPlace failed to find! - err = ","timestamp":"2016-10-07T09:25:44.888Z"}
+{"level":"info","message":"placeController.getPlace cuidTestPostFind","timestamp":"2016-10-07T09:25:44.904Z"}
+{"level":"info","message":"userController.getUsers length=0","timestamp":"2016-10-07T09:25:44.923Z"}
+{"level":"info","message":"userController.getUsers length=5","timestamp":"2016-10-07T09:25:44.946Z"}
+{"level":"error","message":"! userController.addUser failed! - missing mandatory fields","timestamp":"2016-10-07T09:25:44.954Z"}
+{"level":"error","message":"... no req.body.user.last!","timestamp":"2016-10-07T09:25:44.954Z"}
+{"level":"info","message":"userController.addUser testPostLogin","timestamp":"2016-10-07T09:25:44.970Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.users index: _id_ dup key: { : ObjectId('57f76a18eff59e0c70661abc') }","op":{"__v":0,"cuid":"citzkh1g9000aggegl5yu4nz7","login":"testPostLogin2times","first":"testPostFirst2times","last":"testPostLast2times","_id":"57f76a18eff59e0c70661abc","mark":0,"nbPosts":0,"role":[],"lastModif":"2016-10-07T09:25:44.998Z","since":"2016-10-07T09:25:44.975Z"}}
+{"level":"error","message":"! userController.addUser failed! - missing mandatory fields","timestamp":"2016-10-07T09:25:45.005Z"}
+{"level":"error","message":"... no req.body.user!","timestamp":"2016-10-07T09:25:45.005Z"}
+{"level":"info","message":"userController.updateUser cuidUpdate1","timestamp":"2016-10-07T09:25:45.024Z"}
+{"level":"error","message":"! userController.updateUser cuidUpdateUnknownUser failed to update! - err = ","timestamp":"2016-10-07T09:25:45.050Z"}
+{"level":"error","message":"! userController.getUser cuidTestUnknownUser failed to find! - err = ","timestamp":"2016-10-07T09:25:45.072Z"}
+{"level":"info","message":"userController.getUser cuidTestPostFind","timestamp":"2016-10-07T09:25:45.084Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-10-07T09:29:35.773Z"}
+{"level":"warn","message":"                    FOOD-MANIAC  START","timestamp":"2016-10-07T09:29:35.774Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-10-07T09:29:35.774Z"}
+{"level":"debug","message":"Logger test: debug level","timestamp":"2016-10-07T09:29:35.775Z"}
+{"level":"info","message":"Logger test: info level","timestamp":"2016-10-07T09:29:35.775Z"}
+{"level":"warn","message":"Logger test: warn level","timestamp":"2016-10-07T09:29:35.775Z"}
+{"level":"error","message":"Logger test: error level","timestamp":"2016-10-07T09:29:35.775Z"}
+{"level":"info","message":"itemController.getItems length=0","timestamp":"2016-10-07T09:29:36.127Z"}
+{"level":"info","message":"itemController.getItems length=12","timestamp":"2016-10-07T09:29:36.182Z"}
+{"level":"error","message":"! itemController.addItem failed! - missing mandatory fields","timestamp":"2016-10-07T09:29:36.218Z"}
+{"level":"error","message":"... no req.body.item.name!","timestamp":"2016-10-07T09:29:36.218Z"}
+{"level":"info","message":"itemController.addItem testPostName","timestamp":"2016-10-07T09:29:36.240Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.items index: _id_ dup key: { : ObjectId('57f76b000c30fd083c7fc43b') }","op":{"__v":0,"cuid":"citzklzwh0001mkeghsxh7s5b","name":"testPostname2times","_id":"57f76b000c30fd083c7fc43b","lastModif":"2016-10-07T09:29:36.259Z","since":"2016-10-07T09:29:36.244Z"}}
+{"level":"error","message":"! itemController.addItem failed! - missing mandatory fields","timestamp":"2016-10-07T09:29:36.286Z"}
+{"level":"error","message":"... no req.body.item!","timestamp":"2016-10-07T09:29:36.286Z"}
+{"level":"info","message":"itemController.updateItem cuidUpdate1","timestamp":"2016-10-07T09:29:36.313Z"}
+{"level":"error","message":"! itemController.updateItem cuidUpdateUnknownItem failed to update! - err = ","timestamp":"2016-10-07T09:29:36.342Z"}
+{"level":"error","message":"! itemController.getItem cuidTestUnknownItem failed to find! - err = ","timestamp":"2016-10-07T09:29:36.366Z"}
+{"level":"info","message":"itemController.getItem cuidTestPostFind","timestamp":"2016-10-07T09:29:36.378Z"}
+{"level":"info","message":"markController.getMarks length=0","timestamp":"2016-10-07T09:29:36.390Z"}
+{"level":"info","message":"markController.getMarks length=4","timestamp":"2016-10-07T09:29:36.408Z"}
+{"level":"error","message":"! markController.addMark failed! - missing mandatory fields","timestamp":"2016-10-07T09:29:36.419Z"}
+{"level":"error","message":"... no req.body.mark.mark!","timestamp":"2016-10-07T09:29:36.419Z"}
+{"level":"info","message":"markController.addMark 18","timestamp":"2016-10-07T09:29:36.439Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.marks index: _id_ dup key: { : ObjectId('57f76b000c30fd083c7fc445') }","op":{"__v":0,"cuid":"citzkm0220003mkegwepnbjx7","mark":25,"_id":"57f76b000c30fd083c7fc445","lastModif":"2016-10-07T09:29:36.463Z","since":"2016-10-07T09:29:36.446Z"}}
+{"level":"error","message":"! markController.addMark failed! - missing mandatory fields","timestamp":"2016-10-07T09:29:36.475Z"}
+{"level":"error","message":"... no req.body.mark!","timestamp":"2016-10-07T09:29:36.475Z"}
+{"level":"info","message":"markController.updateMark cuidUpdate1","timestamp":"2016-10-07T09:29:36.486Z"}
+{"level":"error","message":"! markController.updateMark cuidUpdateUnknownMark failed to update! - err = ","timestamp":"2016-10-07T09:29:36.507Z"}
+{"level":"error","message":"! markController.getMark cuidTestUnknownMark failed to find! - err = ","timestamp":"2016-10-07T09:29:36.532Z"}
+{"level":"info","message":"markController.getMark cuidTestPostFind","timestamp":"2016-10-07T09:29:36.546Z"}
+{"level":"info","message":"placeController.getPlaces length=0","timestamp":"2016-10-07T09:29:36.558Z"}
+{"level":"info","message":"placeController.getPlaces length=9","timestamp":"2016-10-07T09:29:36.591Z"}
+{"level":"error","message":"! placeController.addPlace failed! - missing mandatory fields","timestamp":"2016-10-07T09:29:36.602Z"}
+{"level":"error","message":"... no req.body.place.name!","timestamp":"2016-10-07T09:29:36.602Z"}
+{"level":"info","message":"placeController.addPlace testPostName","timestamp":"2016-10-07T09:29:36.623Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.places index: _id_ dup key: { : ObjectId('57f76b000c30fd083c7fc454') }","op":{"__v":0,"cuid":"citzkm0720005mkegzwmt5zgn","name":"testPostname2times","_id":"57f76b000c30fd083c7fc454","items":[],"lastModif":"2016-10-07T09:29:36.640Z","since":"2016-10-07T09:29:36.627Z","location":{"coordinates":[]}}}
+{"level":"error","message":"! placeController.addPlace failed! - missing mandatory fields","timestamp":"2016-10-07T09:29:36.648Z"}
+{"level":"error","message":"... no req.body.place!","timestamp":"2016-10-07T09:29:36.648Z"}
+{"level":"info","message":"placeController.updatePlace cuidUpdate1","timestamp":"2016-10-07T09:29:36.661Z"}
+{"level":"error","message":"! placeController.updatePlace cuidUpdateUnknownPlace failed to update! - err = ","timestamp":"2016-10-07T09:29:36.678Z"}
+{"level":"error","message":"! placeController.getPlace cuidTestUnknownPlace failed to find! - err = ","timestamp":"2016-10-07T09:29:36.700Z"}
+{"level":"info","message":"placeController.getPlace cuidTestPostFind","timestamp":"2016-10-07T09:29:36.712Z"}
+{"level":"info","message":"userController.getUsers length=0","timestamp":"2016-10-07T09:29:36.723Z"}
+{"level":"info","message":"userController.getUsers length=5","timestamp":"2016-10-07T09:29:36.743Z"}
+{"level":"error","message":"! userController.addUser failed! - missing mandatory fields","timestamp":"2016-10-07T09:29:36.753Z"}
+{"level":"error","message":"... no req.body.user.last!","timestamp":"2016-10-07T09:29:36.754Z"}
+{"level":"info","message":"userController.addUser testPostLogin","timestamp":"2016-10-07T09:29:36.770Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.users index: _id_ dup key: { : ObjectId('57f76b000c30fd083c7fc45f') }","op":{"__v":0,"cuid":"citzkm0b10007mkegfy9oonrl","login":"testPostLogin2times","first":"testPostFirst2times","last":"testPostLast2times","_id":"57f76b000c30fd083c7fc45f","mark":0,"nbPosts":0,"role":[],"lastModif":"2016-10-07T09:29:36.796Z","since":"2016-10-07T09:29:36.772Z"}}
+{"level":"error","message":"! userController.addUser failed! - missing mandatory fields","timestamp":"2016-10-07T09:29:36.808Z"}
+{"level":"error","message":"... no req.body.user!","timestamp":"2016-10-07T09:29:36.808Z"}
+{"level":"info","message":"userController.updateUser cuidUpdate1","timestamp":"2016-10-07T09:29:36.822Z"}
+{"level":"error","message":"! userController.updateUser cuidUpdateUnknownUser failed to update! - err = ","timestamp":"2016-10-07T09:29:36.844Z"}
+{"level":"error","message":"! userController.getUser cuidTestUnknownUser failed to find! - err = ","timestamp":"2016-10-07T09:29:36.869Z"}
+{"level":"info","message":"userController.getUser cuidTestPostFind","timestamp":"2016-10-07T09:29:36.880Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-10-07T09:33:33.431Z"}
+{"level":"warn","message":"                    FOOD-MANIAC  START","timestamp":"2016-10-07T09:33:33.433Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-10-07T09:33:33.433Z"}
+{"level":"debug","message":"Logger test: debug level","timestamp":"2016-10-07T09:33:33.433Z"}
+{"level":"info","message":"Logger test: info level","timestamp":"2016-10-07T09:33:33.434Z"}
+{"level":"warn","message":"Logger test: warn level","timestamp":"2016-10-07T09:33:33.434Z"}
+{"level":"error","message":"Logger test: error level","timestamp":"2016-10-07T09:33:33.434Z"}
+{"level":"info","message":"itemController.getItems length=0","timestamp":"2016-10-07T09:33:33.769Z"}
+{"level":"info","message":"itemController.getItems length=12","timestamp":"2016-10-07T09:33:33.825Z"}
+{"level":"error","message":"! itemController.addItem failed! - missing mandatory fields","timestamp":"2016-10-07T09:33:33.867Z"}
+{"level":"error","message":"... no req.body.item.name!","timestamp":"2016-10-07T09:33:33.867Z"}
+{"level":"info","message":"itemController.addItem testPostName","timestamp":"2016-10-07T09:33:33.890Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.items index: _id_ dup key: { : ObjectId('57f76bed37cfbb2ba8911e56') }","op":{"__v":0,"cuid":"citzkr39r0001mgegxeajtdxl","name":"testPostname2times","_id":"57f76bed37cfbb2ba8911e56","lastModif":"2016-10-07T09:33:33.904Z","since":"2016-10-07T09:33:33.893Z"}}
+{"level":"error","message":"! itemController.addItem failed! - missing mandatory fields","timestamp":"2016-10-07T09:33:33.938Z"}
+{"level":"error","message":"... no req.body.item!","timestamp":"2016-10-07T09:33:33.939Z"}
+{"level":"info","message":"itemController.updateItem cuidUpdate1","timestamp":"2016-10-07T09:33:33.970Z"}
+{"level":"error","message":"! itemController.updateItem cuidUpdateUnknownItem failed to update! - err = ","timestamp":"2016-10-07T09:33:34.000Z"}
+{"level":"error","message":"! itemController.getItem cuidTestUnknownItem failed to find! - err = ","timestamp":"2016-10-07T09:33:34.025Z"}
+{"level":"info","message":"itemController.getItem cuidTestPostFind","timestamp":"2016-10-07T09:33:34.040Z"}
+{"level":"info","message":"placeController.deleteItem cuidTestDelete","timestamp":"2016-10-07T09:33:34.069Z"}
+{"level":"info","message":"markController.getMarks length=0","timestamp":"2016-10-07T09:33:34.077Z"}
+{"level":"info","message":"markController.getMarks length=4","timestamp":"2016-10-07T09:33:34.102Z"}
+{"level":"error","message":"! markController.addMark failed! - missing mandatory fields","timestamp":"2016-10-07T09:33:34.109Z"}
+{"level":"error","message":"... no req.body.mark.mark!","timestamp":"2016-10-07T09:33:34.110Z"}
+{"level":"info","message":"markController.addMark 18","timestamp":"2016-10-07T09:33:34.138Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.marks index: _id_ dup key: { : ObjectId('57f76bee37cfbb2ba8911e61') }","op":{"__v":0,"cuid":"citzkr3gm0003mgeg97vw50p6","mark":25,"_id":"57f76bee37cfbb2ba8911e61","lastModif":"2016-10-07T09:33:34.153Z","since":"2016-10-07T09:33:34.141Z"}}
+{"level":"error","message":"! markController.addMark failed! - missing mandatory fields","timestamp":"2016-10-07T09:33:34.161Z"}
+{"level":"error","message":"... no req.body.mark!","timestamp":"2016-10-07T09:33:34.162Z"}
+{"level":"info","message":"markController.updateMark cuidUpdate1","timestamp":"2016-10-07T09:33:34.178Z"}
+{"level":"error","message":"! markController.updateMark cuidUpdateUnknownMark failed to update! - err = ","timestamp":"2016-10-07T09:33:34.198Z"}
+{"level":"error","message":"! markController.getMark cuidTestUnknownMark failed to find! - err = ","timestamp":"2016-10-07T09:33:34.219Z"}
+{"level":"info","message":"markController.getMark cuidTestPostFind","timestamp":"2016-10-07T09:33:34.242Z"}
+{"level":"info","message":"placeController.getPlaces length=0","timestamp":"2016-10-07T09:33:34.257Z"}
+{"level":"info","message":"placeController.getPlaces length=9","timestamp":"2016-10-07T09:33:34.288Z"}
+{"level":"error","message":"! placeController.addPlace failed! - missing mandatory fields","timestamp":"2016-10-07T09:33:34.299Z"}
+{"level":"error","message":"... no req.body.place.name!","timestamp":"2016-10-07T09:33:34.299Z"}
+{"level":"info","message":"placeController.addPlace testPostName","timestamp":"2016-10-07T09:33:34.311Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.places index: _id_ dup key: { : ObjectId('57f76bee37cfbb2ba8911e70') }","op":{"__v":0,"cuid":"citzkr3lg0005mgeg28dikqwg","name":"testPostname2times","_id":"57f76bee37cfbb2ba8911e70","items":[],"lastModif":"2016-10-07T09:33:34.327Z","since":"2016-10-07T09:33:34.316Z","location":{"coordinates":[]}}}
+{"level":"error","message":"! placeController.addPlace failed! - missing mandatory fields","timestamp":"2016-10-07T09:33:34.339Z"}
+{"level":"error","message":"... no req.body.place!","timestamp":"2016-10-07T09:33:34.339Z"}
+{"level":"info","message":"placeController.updatePlace cuidUpdate1","timestamp":"2016-10-07T09:33:34.354Z"}
+{"level":"error","message":"! placeController.updatePlace cuidUpdateUnknownPlace failed to update! - err = ","timestamp":"2016-10-07T09:33:34.370Z"}
+{"level":"error","message":"! placeController.getPlace cuidTestUnknownPlace failed to find! - err = ","timestamp":"2016-10-07T09:33:34.383Z"}
+{"level":"info","message":"placeController.getPlace cuidTestPostFind","timestamp":"2016-10-07T09:33:34.400Z"}
+{"level":"info","message":"userController.getUsers length=0","timestamp":"2016-10-07T09:33:34.412Z"}
+{"level":"info","message":"userController.getUsers length=5","timestamp":"2016-10-07T09:33:34.436Z"}
+{"level":"error","message":"! userController.addUser failed! - missing mandatory fields","timestamp":"2016-10-07T09:33:34.444Z"}
+{"level":"error","message":"... no req.body.user.last!","timestamp":"2016-10-07T09:33:34.444Z"}
+{"level":"info","message":"userController.addUser testPostLogin","timestamp":"2016-10-07T09:33:34.457Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.users index: _id_ dup key: { : ObjectId('57f76bee37cfbb2ba8911e7b') }","op":{"__v":0,"cuid":"citzkr3pu0007mgegwtr96289","login":"testPostLogin2times","first":"testPostFirst2times","last":"testPostLast2times","_id":"57f76bee37cfbb2ba8911e7b","mark":0,"nbPosts":0,"role":[],"lastModif":"2016-10-07T09:33:34.484Z","since":"2016-10-07T09:33:34.461Z"}}
+{"level":"error","message":"! userController.addUser failed! - missing mandatory fields","timestamp":"2016-10-07T09:33:34.493Z"}
+{"level":"error","message":"... no req.body.user!","timestamp":"2016-10-07T09:33:34.493Z"}
+{"level":"info","message":"userController.updateUser cuidUpdate1","timestamp":"2016-10-07T09:33:34.506Z"}
+{"level":"error","message":"! userController.updateUser cuidUpdateUnknownUser failed to update! - err = ","timestamp":"2016-10-07T09:33:34.524Z"}
+{"level":"error","message":"! userController.getUser cuidTestUnknownUser failed to find! - err = ","timestamp":"2016-10-07T09:33:34.547Z"}
+{"level":"info","message":"userController.getUser cuidTestPostFind","timestamp":"2016-10-07T09:33:34.561Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-10-07T09:34:54.941Z"}
+{"level":"warn","message":"                    FOOD-MANIAC  START","timestamp":"2016-10-07T09:34:54.944Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-10-07T09:34:54.945Z"}
+{"level":"debug","message":"Logger test: debug level","timestamp":"2016-10-07T09:34:54.945Z"}
+{"level":"info","message":"Logger test: info level","timestamp":"2016-10-07T09:34:54.945Z"}
+{"level":"warn","message":"Logger test: warn level","timestamp":"2016-10-07T09:34:54.945Z"}
+{"level":"error","message":"Logger test: error level","timestamp":"2016-10-07T09:34:54.945Z"}
+{"level":"info","message":"itemController.getItems length=0","timestamp":"2016-10-07T09:34:55.309Z"}
+{"level":"info","message":"itemController.getItems length=12","timestamp":"2016-10-07T09:34:55.371Z"}
+{"level":"error","message":"! itemController.addItem failed! - missing mandatory fields","timestamp":"2016-10-07T09:34:55.408Z"}
+{"level":"error","message":"... no req.body.item.name!","timestamp":"2016-10-07T09:34:55.409Z"}
+{"level":"info","message":"itemController.addItem testPostName","timestamp":"2016-10-07T09:34:55.439Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.items index: _id_ dup key: { : ObjectId('57f76c3f1fa13428702c2910') }","op":{"__v":0,"cuid":"citzksu6y0001zkegzoin9orm","name":"testPostname2times","_id":"57f76c3f1fa13428702c2910","lastModif":"2016-10-07T09:34:55.452Z","since":"2016-10-07T09:34:55.441Z"}}
+{"level":"error","message":"! itemController.addItem failed! - missing mandatory fields","timestamp":"2016-10-07T09:34:55.481Z"}
+{"level":"error","message":"... no req.body.item!","timestamp":"2016-10-07T09:34:55.481Z"}
+{"level":"info","message":"itemController.updateItem cuidUpdate1","timestamp":"2016-10-07T09:34:55.511Z"}
+{"level":"error","message":"! itemController.updateItem cuidUpdateUnknownItem failed to update! - err = ","timestamp":"2016-10-07T09:34:55.536Z"}
+{"level":"error","message":"! itemController.getItem cuidTestUnknownItem failed to find! - err = ","timestamp":"2016-10-07T09:34:55.569Z"}
+{"level":"info","message":"itemController.getItem cuidTestPostFind","timestamp":"2016-10-07T09:34:55.583Z"}
+{"level":"error","message":"! placeController.deleteItem cuidTestDeleteUnknownItem failed to find! - err = ","timestamp":"2016-10-07T09:34:55.589Z"}
+{"level":"info","message":"placeController.deleteItem cuidTestDelete","timestamp":"2016-10-07T09:34:55.608Z"}
+{"level":"info","message":"markController.getMarks length=0","timestamp":"2016-10-07T09:34:55.622Z"}
+{"level":"info","message":"markController.getMarks length=4","timestamp":"2016-10-07T09:34:55.644Z"}
+{"level":"error","message":"! markController.addMark failed! - missing mandatory fields","timestamp":"2016-10-07T09:34:55.656Z"}
+{"level":"error","message":"... no req.body.mark.mark!","timestamp":"2016-10-07T09:34:55.656Z"}
+{"level":"info","message":"markController.addMark 18","timestamp":"2016-10-07T09:34:55.682Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.marks index: _id_ dup key: { : ObjectId('57f76c3f1fa13428702c291b') }","op":{"__v":0,"cuid":"citzksudr0003zkegrq1qitxy","mark":25,"_id":"57f76c3f1fa13428702c291b","lastModif":"2016-10-07T09:34:55.698Z","since":"2016-10-07T09:34:55.684Z"}}
+{"level":"error","message":"! markController.addMark failed! - missing mandatory fields","timestamp":"2016-10-07T09:34:55.705Z"}
+{"level":"error","message":"... no req.body.mark!","timestamp":"2016-10-07T09:34:55.706Z"}
+{"level":"info","message":"markController.updateMark cuidUpdate1","timestamp":"2016-10-07T09:34:55.718Z"}
+{"level":"error","message":"! markController.updateMark cuidUpdateUnknownMark failed to update! - err = ","timestamp":"2016-10-07T09:34:55.738Z"}
+{"level":"error","message":"! markController.getMark cuidTestUnknownMark failed to find! - err = ","timestamp":"2016-10-07T09:34:55.757Z"}
+{"level":"info","message":"markController.getMark cuidTestPostFind","timestamp":"2016-10-07T09:34:55.777Z"}
+{"level":"info","message":"placeController.getPlaces length=0","timestamp":"2016-10-07T09:34:55.794Z"}
+{"level":"info","message":"placeController.getPlaces length=9","timestamp":"2016-10-07T09:34:55.828Z"}
+{"level":"error","message":"! placeController.addPlace failed! - missing mandatory fields","timestamp":"2016-10-07T09:34:55.838Z"}
+{"level":"error","message":"... no req.body.place.name!","timestamp":"2016-10-07T09:34:55.838Z"}
+{"level":"info","message":"placeController.addPlace testPostName","timestamp":"2016-10-07T09:34:55.848Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.places index: _id_ dup key: { : ObjectId('57f76c3f1fa13428702c292a') }","op":{"__v":0,"cuid":"citzksuif0005zkeg7b86el5i","name":"testPostname2times","_id":"57f76c3f1fa13428702c292a","items":[],"lastModif":"2016-10-07T09:34:55.865Z","since":"2016-10-07T09:34:55.851Z","location":{"coordinates":[]}}}
+{"level":"error","message":"! placeController.addPlace failed! - missing mandatory fields","timestamp":"2016-10-07T09:34:55.875Z"}
+{"level":"error","message":"... no req.body.place!","timestamp":"2016-10-07T09:34:55.875Z"}
+{"level":"info","message":"placeController.updatePlace cuidUpdate1","timestamp":"2016-10-07T09:34:55.889Z"}
+{"level":"error","message":"! placeController.updatePlace cuidUpdateUnknownPlace failed to update! - err = ","timestamp":"2016-10-07T09:34:55.909Z"}
+{"level":"error","message":"! placeController.getPlace cuidTestUnknownPlace failed to find! - err = ","timestamp":"2016-10-07T09:34:55.933Z"}
+{"level":"info","message":"placeController.getPlace cuidTestPostFind","timestamp":"2016-10-07T09:34:55.945Z"}
+{"level":"info","message":"userController.getUsers length=0","timestamp":"2016-10-07T09:34:55.953Z"}
+{"level":"info","message":"userController.getUsers length=5","timestamp":"2016-10-07T09:34:55.972Z"}
+{"level":"error","message":"! userController.addUser failed! - missing mandatory fields","timestamp":"2016-10-07T09:34:55.981Z"}
+{"level":"error","message":"... no req.body.user.last!","timestamp":"2016-10-07T09:34:55.982Z"}
+{"level":"info","message":"userController.addUser testPostLogin","timestamp":"2016-10-07T09:34:55.998Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.users index: _id_ dup key: { : ObjectId('57f76c401fa13428702c2935') }","op":{"__v":0,"cuid":"citzksumm0007zkeg3b6lsfeg","login":"testPostLogin2times","first":"testPostFirst2times","last":"testPostLast2times","_id":"57f76c401fa13428702c2935","mark":0,"nbPosts":0,"role":[],"lastModif":"2016-10-07T09:34:56.017Z","since":"2016-10-07T09:34:56.003Z"}}
+{"level":"error","message":"! userController.addUser failed! - missing mandatory fields","timestamp":"2016-10-07T09:34:56.031Z"}
+{"level":"error","message":"... no req.body.user!","timestamp":"2016-10-07T09:34:56.032Z"}
+{"level":"info","message":"userController.updateUser cuidUpdate1","timestamp":"2016-10-07T09:34:56.045Z"}
+{"level":"error","message":"! userController.updateUser cuidUpdateUnknownUser failed to update! - err = ","timestamp":"2016-10-07T09:34:56.081Z"}
+{"level":"error","message":"! userController.getUser cuidTestUnknownUser failed to find! - err = ","timestamp":"2016-10-07T09:34:56.097Z"}
+{"level":"info","message":"userController.getUser cuidTestPostFind","timestamp":"2016-10-07T09:34:56.108Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-10-07T09:35:43.628Z"}
+{"level":"warn","message":"                    FOOD-MANIAC  START","timestamp":"2016-10-07T09:35:43.629Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-10-07T09:35:43.630Z"}
+{"level":"debug","message":"Logger test: debug level","timestamp":"2016-10-07T09:35:43.630Z"}
+{"level":"info","message":"Logger test: info level","timestamp":"2016-10-07T09:35:43.630Z"}
+{"level":"warn","message":"Logger test: warn level","timestamp":"2016-10-07T09:35:43.630Z"}
+{"level":"error","message":"Logger test: error level","timestamp":"2016-10-07T09:35:43.630Z"}
+{"level":"info","message":"itemController.getItems length=0","timestamp":"2016-10-07T09:35:43.985Z"}
+{"level":"info","message":"itemController.getItems length=12","timestamp":"2016-10-07T09:35:44.046Z"}
+{"level":"error","message":"! itemController.addItem failed! - missing mandatory fields","timestamp":"2016-10-07T09:35:44.079Z"}
+{"level":"error","message":"... no req.body.item.name!","timestamp":"2016-10-07T09:35:44.079Z"}
+{"level":"info","message":"itemController.addItem testPostName","timestamp":"2016-10-07T09:35:44.105Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.items index: _id_ dup key: { : ObjectId('57f76c7043a20504a05a20f3') }","op":{"__v":0,"cuid":"citzktvqv0001wwegsjq8ng84","name":"testPostname2times","_id":"57f76c7043a20504a05a20f3","lastModif":"2016-10-07T09:35:44.122Z","since":"2016-10-07T09:35:44.111Z"}}
+{"level":"error","message":"! itemController.addItem failed! - missing mandatory fields","timestamp":"2016-10-07T09:35:44.136Z"}
+{"level":"error","message":"... no req.body.item!","timestamp":"2016-10-07T09:35:44.136Z"}
+{"level":"info","message":"itemController.updateItem cuidUpdate1","timestamp":"2016-10-07T09:35:44.185Z"}
+{"level":"error","message":"! itemController.updateItem cuidUpdateUnknownItem failed to update! - err = ","timestamp":"2016-10-07T09:35:44.201Z"}
+{"level":"error","message":"! itemController.getItem cuidTestUnknownItem failed to find! - err = ","timestamp":"2016-10-07T09:35:44.225Z"}
+{"level":"info","message":"itemController.getItem cuidTestPostFind","timestamp":"2016-10-07T09:35:44.237Z"}
+{"level":"error","message":"! placeController.deleteItem cuidTestDeleteUnknownItem failed to find! - err = ","timestamp":"2016-10-07T09:35:44.249Z"}
+{"level":"info","message":"placeController.deleteItem cuidTestDelete","timestamp":"2016-10-07T09:35:44.266Z"}
+{"level":"info","message":"markController.getMarks length=0","timestamp":"2016-10-07T09:35:44.278Z"}
+{"level":"info","message":"markController.getMarks length=4","timestamp":"2016-10-07T09:35:44.298Z"}
+{"level":"error","message":"! markController.addMark failed! - missing mandatory fields","timestamp":"2016-10-07T09:35:44.315Z"}
+{"level":"error","message":"... no req.body.mark.mark!","timestamp":"2016-10-07T09:35:44.315Z"}
+{"level":"info","message":"markController.addMark 18","timestamp":"2016-10-07T09:35:44.343Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.marks index: _id_ dup key: { : ObjectId('57f76c7043a20504a05a20fe') }","op":{"__v":0,"cuid":"citzktvxf0003wwegdm0nmodl","mark":25,"_id":"57f76c7043a20504a05a20fe","lastModif":"2016-10-07T09:35:44.360Z","since":"2016-10-07T09:35:44.348Z"}}
+{"level":"error","message":"! markController.addMark failed! - missing mandatory fields","timestamp":"2016-10-07T09:35:44.371Z"}
+{"level":"error","message":"... no req.body.mark!","timestamp":"2016-10-07T09:35:44.371Z"}
+{"level":"info","message":"markController.updateMark cuidUpdate1","timestamp":"2016-10-07T09:35:44.385Z"}
+{"level":"error","message":"! markController.updateMark cuidUpdateUnknownMark failed to update! - err = ","timestamp":"2016-10-07T09:35:44.403Z"}
+{"level":"error","message":"! markController.getMark cuidTestUnknownMark failed to find! - err = ","timestamp":"2016-10-07T09:35:44.428Z"}
+{"level":"info","message":"markController.getMark cuidTestPostFind","timestamp":"2016-10-07T09:35:44.449Z"}
+{"level":"info","message":"placeController.getPlaces length=0","timestamp":"2016-10-07T09:35:44.463Z"}
+{"level":"info","message":"placeController.getPlaces length=9","timestamp":"2016-10-07T09:35:44.496Z"}
+{"level":"error","message":"! placeController.addPlace failed! - missing mandatory fields","timestamp":"2016-10-07T09:35:44.505Z"}
+{"level":"error","message":"... no req.body.place.name!","timestamp":"2016-10-07T09:35:44.505Z"}
+{"level":"info","message":"placeController.addPlace testPostName","timestamp":"2016-10-07T09:35:44.518Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.places index: _id_ dup key: { : ObjectId('57f76c7043a20504a05a210d') }","op":{"__v":0,"cuid":"citzktw2e0005wweg4bqk3kbt","name":"testPostname2times","_id":"57f76c7043a20504a05a210d","items":[],"lastModif":"2016-10-07T09:35:44.536Z","since":"2016-10-07T09:35:44.520Z","location":{"coordinates":[]}}}
+{"level":"error","message":"! placeController.addPlace failed! - missing mandatory fields","timestamp":"2016-10-07T09:35:44.548Z"}
+{"level":"error","message":"... no req.body.place!","timestamp":"2016-10-07T09:35:44.548Z"}
+{"level":"info","message":"placeController.updatePlace cuidUpdate1","timestamp":"2016-10-07T09:35:44.560Z"}
+{"level":"error","message":"! placeController.updatePlace cuidUpdateUnknownPlace failed to update! - err = ","timestamp":"2016-10-07T09:35:44.582Z"}
+{"level":"error","message":"! placeController.getPlace cuidTestUnknownPlace failed to find! - err = ","timestamp":"2016-10-07T09:35:44.599Z"}
+{"level":"info","message":"placeController.getPlace cuidTestPostFind","timestamp":"2016-10-07T09:35:44.614Z"}
+{"level":"info","message":"userController.getUsers length=0","timestamp":"2016-10-07T09:35:44.627Z"}
+{"level":"info","message":"userController.getUsers length=5","timestamp":"2016-10-07T09:35:44.650Z"}
+{"level":"error","message":"! userController.addUser failed! - missing mandatory fields","timestamp":"2016-10-07T09:35:44.659Z"}
+{"level":"error","message":"... no req.body.user.last!","timestamp":"2016-10-07T09:35:44.659Z"}
+{"level":"info","message":"userController.addUser testPostLogin","timestamp":"2016-10-07T09:35:44.675Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.users index: _id_ dup key: { : ObjectId('57f76c7043a20504a05a2118') }","op":{"__v":0,"cuid":"citzktw710007wwegw84fqjol","login":"testPostLogin2times","first":"testPostFirst2times","last":"testPostLast2times","_id":"57f76c7043a20504a05a2118","mark":0,"nbPosts":0,"role":[],"lastModif":"2016-10-07T09:35:44.703Z","since":"2016-10-07T09:35:44.680Z"}}
+{"level":"error","message":"! userController.addUser failed! - missing mandatory fields","timestamp":"2016-10-07T09:35:44.715Z"}
+{"level":"error","message":"... no req.body.user!","timestamp":"2016-10-07T09:35:44.715Z"}
+{"level":"info","message":"userController.updateUser cuidUpdate1","timestamp":"2016-10-07T09:35:44.730Z"}
+{"level":"error","message":"! userController.updateUser cuidUpdateUnknownUser failed to update! - err = ","timestamp":"2016-10-07T09:35:44.751Z"}
+{"level":"error","message":"! userController.getUser cuidTestUnknownUser failed to find! - err = ","timestamp":"2016-10-07T09:35:44.770Z"}
+{"level":"info","message":"userController.getUser cuidTestPostFind","timestamp":"2016-10-07T09:35:44.784Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-10-07T09:39:47.568Z"}
+{"level":"warn","message":"                    FOOD-MANIAC  START","timestamp":"2016-10-07T09:39:47.570Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-10-07T09:39:47.570Z"}
+{"level":"debug","message":"Logger test: debug level","timestamp":"2016-10-07T09:39:47.570Z"}
+{"level":"info","message":"Logger test: info level","timestamp":"2016-10-07T09:39:47.570Z"}
+{"level":"warn","message":"Logger test: warn level","timestamp":"2016-10-07T09:39:47.570Z"}
+{"level":"error","message":"Logger test: error level","timestamp":"2016-10-07T09:39:47.570Z"}
+{"level":"info","message":"itemController.getItems length=0","timestamp":"2016-10-07T09:39:48.006Z"}
+{"level":"info","message":"itemController.getItems length=12","timestamp":"2016-10-07T09:39:48.060Z"}
+{"level":"error","message":"! itemController.addItem failed! - missing mandatory fields","timestamp":"2016-10-07T09:39:48.093Z"}
+{"level":"error","message":"... no req.body.item.name!","timestamp":"2016-10-07T09:39:48.093Z"}
+{"level":"info","message":"itemController.addItem testPostName","timestamp":"2016-10-07T09:39:48.119Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.items index: _id_ dup key: { : ObjectId('57f76d64081ed412e49c7626') }","op":{"__v":0,"cuid":"citzkz40x0001qcegcsw4fc0n","name":"testPostname2times","_id":"57f76d64081ed412e49c7626","lastModif":"2016-10-07T09:39:48.132Z","since":"2016-10-07T09:39:48.123Z"}}
+{"level":"error","message":"! itemController.addItem failed! - missing mandatory fields","timestamp":"2016-10-07T09:39:48.144Z"}
+{"level":"error","message":"... no req.body.item!","timestamp":"2016-10-07T09:39:48.144Z"}
+{"level":"info","message":"itemController.updateItem cuidUpdate1","timestamp":"2016-10-07T09:39:48.179Z"}
+{"level":"error","message":"! itemController.updateItem cuidUpdateUnknownItem failed to update! - err = ","timestamp":"2016-10-07T09:39:48.196Z"}
+{"level":"error","message":"! itemController.getItem cuidTestUnknownItem failed to find! - err = ","timestamp":"2016-10-07T09:39:48.224Z"}
+{"level":"info","message":"itemController.getItem cuidTestPostFind","timestamp":"2016-10-07T09:39:48.234Z"}
+{"level":"error","message":"! placeController.deleteItem cuidTestDeleteUnknown failed to find! - err = ","timestamp":"2016-10-07T09:39:48.244Z"}
+{"level":"info","message":"placeController.deleteItem cuidTestDelete","timestamp":"2016-10-07T09:39:48.265Z"}
+{"level":"info","message":"markController.getMarks length=0","timestamp":"2016-10-07T09:39:48.276Z"}
+{"level":"info","message":"markController.getMarks length=4","timestamp":"2016-10-07T09:39:48.297Z"}
+{"level":"error","message":"! markController.addMark failed! - missing mandatory fields","timestamp":"2016-10-07T09:39:48.310Z"}
+{"level":"error","message":"... no req.body.mark.mark!","timestamp":"2016-10-07T09:39:48.310Z"}
+{"level":"info","message":"markController.addMark 18","timestamp":"2016-10-07T09:39:48.331Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.marks index: _id_ dup key: { : ObjectId('57f76d64081ed412e49c7631') }","op":{"__v":0,"cuid":"citzkz4700003qcegi68tpom6","mark":25,"_id":"57f76d64081ed412e49c7631","lastModif":"2016-10-07T09:39:48.349Z","since":"2016-10-07T09:39:48.334Z"}}
+{"level":"error","message":"! markController.addMark failed! - missing mandatory fields","timestamp":"2016-10-07T09:39:48.359Z"}
+{"level":"error","message":"... no req.body.mark!","timestamp":"2016-10-07T09:39:48.359Z"}
+{"level":"info","message":"markController.updateMark cuidUpdate1","timestamp":"2016-10-07T09:39:48.373Z"}
+{"level":"error","message":"! markController.updateMark cuidUpdateUnknownMark failed to update! - err = ","timestamp":"2016-10-07T09:39:48.392Z"}
+{"level":"error","message":"! markController.getMark cuidTestUnknownMark failed to find! - err = ","timestamp":"2016-10-07T09:39:48.414Z"}
+{"level":"info","message":"markController.getMark cuidTestPostFind","timestamp":"2016-10-07T09:39:48.434Z"}
+{"level":"error","message":"! placeController.deleteMark cuidTestDeleteUnknown failed to find! - err = ","timestamp":"2016-10-07T09:39:48.447Z"}
+{"level":"info","message":"placeController.deleteMark cuidTestDelete","timestamp":"2016-10-07T09:39:48.463Z"}
+{"level":"info","message":"placeController.getPlaces length=0","timestamp":"2016-10-07T09:39:48.474Z"}
+{"level":"info","message":"placeController.getPlaces length=9","timestamp":"2016-10-07T09:39:48.511Z"}
+{"level":"error","message":"! placeController.addPlace failed! - missing mandatory fields","timestamp":"2016-10-07T09:39:48.517Z"}
+{"level":"error","message":"... no req.body.place.name!","timestamp":"2016-10-07T09:39:48.517Z"}
+{"level":"info","message":"placeController.addPlace testPostName","timestamp":"2016-10-07T09:39:48.528Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.places index: _id_ dup key: { : ObjectId('57f76d64081ed412e49c7641') }","op":{"__v":0,"cuid":"citzkz4c90005qcegag0fecye","name":"testPostname2times","_id":"57f76d64081ed412e49c7641","items":[],"lastModif":"2016-10-07T09:39:48.541Z","since":"2016-10-07T09:39:48.530Z","location":{"coordinates":[]}}}
+{"level":"error","message":"! placeController.addPlace failed! - missing mandatory fields","timestamp":"2016-10-07T09:39:48.550Z"}
+{"level":"error","message":"... no req.body.place!","timestamp":"2016-10-07T09:39:48.550Z"}
+{"level":"info","message":"placeController.updatePlace cuidUpdate1","timestamp":"2016-10-07T09:39:48.560Z"}
+{"level":"error","message":"! placeController.updatePlace cuidUpdateUnknownPlace failed to update! - err = ","timestamp":"2016-10-07T09:39:48.577Z"}
+{"level":"error","message":"! placeController.getPlace cuidTestUnknownPlace failed to find! - err = ","timestamp":"2016-10-07T09:39:48.597Z"}
+{"level":"info","message":"placeController.getPlace cuidTestPostFind","timestamp":"2016-10-07T09:39:48.612Z"}
+{"level":"info","message":"userController.getUsers length=0","timestamp":"2016-10-07T09:39:48.624Z"}
+{"level":"info","message":"userController.getUsers length=5","timestamp":"2016-10-07T09:39:48.647Z"}
+{"level":"error","message":"! userController.addUser failed! - missing mandatory fields","timestamp":"2016-10-07T09:39:48.658Z"}
+{"level":"error","message":"... no req.body.user.last!","timestamp":"2016-10-07T09:39:48.658Z"}
+{"level":"info","message":"userController.addUser testPostLogin","timestamp":"2016-10-07T09:39:48.671Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.users index: _id_ dup key: { : ObjectId('57f76d64081ed412e49c764c') }","op":{"__v":0,"cuid":"citzkz4ge0007qceg52ncbksd","login":"testPostLogin2times","first":"testPostFirst2times","last":"testPostLast2times","_id":"57f76d64081ed412e49c764c","mark":0,"nbPosts":0,"role":[],"lastModif":"2016-10-07T09:39:48.693Z","since":"2016-10-07T09:39:48.676Z"}}
+{"level":"error","message":"! userController.addUser failed! - missing mandatory fields","timestamp":"2016-10-07T09:39:48.703Z"}
+{"level":"error","message":"... no req.body.user!","timestamp":"2016-10-07T09:39:48.703Z"}
+{"level":"info","message":"userController.updateUser cuidUpdate1","timestamp":"2016-10-07T09:39:48.717Z"}
+{"level":"error","message":"! userController.updateUser cuidUpdateUnknownUser failed to update! - err = ","timestamp":"2016-10-07T09:39:48.736Z"}
+{"level":"error","message":"! userController.getUser cuidTestUnknownUser failed to find! - err = ","timestamp":"2016-10-07T09:39:48.757Z"}
+{"level":"info","message":"userController.getUser cuidTestPostFind","timestamp":"2016-10-07T09:39:48.767Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-10-07T09:47:22.445Z"}
+{"level":"warn","message":"                    FOOD-MANIAC  START","timestamp":"2016-10-07T09:47:22.447Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-10-07T09:47:22.447Z"}
+{"level":"debug","message":"Logger test: debug level","timestamp":"2016-10-07T09:47:22.447Z"}
+{"level":"info","message":"Logger test: info level","timestamp":"2016-10-07T09:47:22.447Z"}
+{"level":"warn","message":"Logger test: warn level","timestamp":"2016-10-07T09:47:22.447Z"}
+{"level":"error","message":"Logger test: error level","timestamp":"2016-10-07T09:47:22.447Z"}
+{"level":"info","message":"itemController.getItems length=0","timestamp":"2016-10-07T09:47:23.184Z"}
+{"level":"info","message":"itemController.getItems length=12","timestamp":"2016-10-07T09:47:23.244Z"}
+{"level":"error","message":"! itemController.addItem failed! - missing mandatory fields","timestamp":"2016-10-07T09:47:23.281Z"}
+{"level":"error","message":"... no req.body.item.name!","timestamp":"2016-10-07T09:47:23.281Z"}
+{"level":"info","message":"itemController.addItem testPostName","timestamp":"2016-10-07T09:47:23.303Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.items index: _id_ dup key: { : ObjectId('57f76f2b8a26152b2061f682') }","op":{"__v":0,"cuid":"citzl8v900001ioegslpebu87","name":"testPostname2times","_id":"57f76f2b8a26152b2061f682","lastModif":"2016-10-07T09:47:23.319Z","since":"2016-10-07T09:47:23.307Z"}}
+{"level":"error","message":"! itemController.addItem failed! - missing mandatory fields","timestamp":"2016-10-07T09:47:23.334Z"}
+{"level":"error","message":"... no req.body.item!","timestamp":"2016-10-07T09:47:23.334Z"}
+{"level":"info","message":"itemController.updateItem cuidUpdate1","timestamp":"2016-10-07T09:47:23.363Z"}
+{"level":"error","message":"! itemController.updateItem cuidUpdateUnknownItem failed to update! - err = ","timestamp":"2016-10-07T09:47:23.387Z"}
+{"level":"error","message":"! itemController.getItem cuidTestUnknownItem failed to find! - err = ","timestamp":"2016-10-07T09:47:23.405Z"}
+{"level":"info","message":"itemController.getItem cuidTestRetreive","timestamp":"2016-10-07T09:47:23.416Z"}
+{"level":"error","message":"! placeController.deleteItem cuidTestDeleteUnknown failed to find! - err = ","timestamp":"2016-10-07T09:47:23.425Z"}
+{"level":"info","message":"placeController.deleteItem cuidTestDelete","timestamp":"2016-10-07T09:47:23.442Z"}
+{"level":"info","message":"markController.getMarks length=0","timestamp":"2016-10-07T09:47:23.455Z"}
+{"level":"info","message":"markController.getMarks length=4","timestamp":"2016-10-07T09:47:23.477Z"}
+{"level":"error","message":"! markController.addMark failed! - missing mandatory fields","timestamp":"2016-10-07T09:47:23.487Z"}
+{"level":"error","message":"... no req.body.mark.mark!","timestamp":"2016-10-07T09:47:23.487Z"}
+{"level":"info","message":"markController.addMark 18","timestamp":"2016-10-07T09:47:23.511Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.marks index: _id_ dup key: { : ObjectId('57f76f2b8a26152b2061f68d') }","op":{"__v":0,"cuid":"citzl8vew0003ioegecz87ghh","mark":25,"_id":"57f76f2b8a26152b2061f68d","lastModif":"2016-10-07T09:47:23.532Z","since":"2016-10-07T09:47:23.519Z"}}
+{"level":"error","message":"! markController.addMark failed! - missing mandatory fields","timestamp":"2016-10-07T09:47:23.539Z"}
+{"level":"error","message":"... no req.body.mark!","timestamp":"2016-10-07T09:47:23.539Z"}
+{"level":"info","message":"markController.updateMark cuidUpdate1","timestamp":"2016-10-07T09:47:23.549Z"}
+{"level":"error","message":"! markController.updateMark cuidUpdateUnknownMark failed to update! - err = ","timestamp":"2016-10-07T09:47:23.570Z"}
+{"level":"error","message":"! markController.getMark cuidTestUnknownMark failed to find! - err = ","timestamp":"2016-10-07T09:47:23.594Z"}
+{"level":"info","message":"markController.getMark cuidTestRetreive","timestamp":"2016-10-07T09:47:23.609Z"}
+{"level":"error","message":"! placeController.deleteMark cuidTestDeleteUnknown failed to find! - err = ","timestamp":"2016-10-07T09:47:23.623Z"}
+{"level":"info","message":"placeController.deleteMark cuidTestDelete","timestamp":"2016-10-07T09:47:23.641Z"}
+{"level":"info","message":"placeController.getPlaces length=0","timestamp":"2016-10-07T09:47:23.651Z"}
+{"level":"info","message":"placeController.getPlaces length=9","timestamp":"2016-10-07T09:47:23.678Z"}
+{"level":"error","message":"! placeController.addPlace failed! - missing mandatory fields","timestamp":"2016-10-07T09:47:23.687Z"}
+{"level":"error","message":"... no req.body.place.name!","timestamp":"2016-10-07T09:47:23.688Z"}
+{"level":"info","message":"placeController.addPlace testPostName","timestamp":"2016-10-07T09:47:23.703Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.places index: _id_ dup key: { : ObjectId('57f76f2b8a26152b2061f69d') }","op":{"__v":0,"cuid":"citzl8vk20005ioegzk2opu00","name":"testPostname2times","_id":"57f76f2b8a26152b2061f69d","items":[],"lastModif":"2016-10-07T09:47:23.720Z","since":"2016-10-07T09:47:23.706Z","location":{"coordinates":[]}}}
+{"level":"error","message":"! placeController.addPlace failed! - missing mandatory fields","timestamp":"2016-10-07T09:47:23.730Z"}
+{"level":"error","message":"... no req.body.place!","timestamp":"2016-10-07T09:47:23.730Z"}
+{"level":"info","message":"placeController.updatePlace cuidUpdate1","timestamp":"2016-10-07T09:47:23.742Z"}
+{"level":"error","message":"! placeController.updatePlace cuidUpdateUnknownPlace failed to update! - err = ","timestamp":"2016-10-07T09:47:23.761Z"}
+{"level":"error","message":"! placeController.getPlace cuidTestUnknownPlace failed to find! - err = ","timestamp":"2016-10-07T09:47:23.779Z"}
+{"level":"info","message":"placeController.getPlace cuidTestRetreive","timestamp":"2016-10-07T09:47:23.794Z"}
+{"level":"error","message":"! placeController.deletePlace cuidTestDeleteUnknown failed to find! - err = ","timestamp":"2016-10-07T09:47:23.803Z"}
+{"level":"info","message":"placeController.deletePlace cuidTestDelete","timestamp":"2016-10-07T09:47:23.811Z"}
+{"level":"info","message":"userController.getUsers length=0","timestamp":"2016-10-07T09:47:23.820Z"}
+{"level":"info","message":"userController.getUsers length=5","timestamp":"2016-10-07T09:47:23.844Z"}
+{"level":"error","message":"! userController.addUser failed! - missing mandatory fields","timestamp":"2016-10-07T09:47:23.853Z"}
+{"level":"error","message":"... no req.body.user.last!","timestamp":"2016-10-07T09:47:23.853Z"}
+{"level":"info","message":"userController.addUser testPostLogin","timestamp":"2016-10-07T09:47:23.863Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.users index: _id_ dup key: { : ObjectId('57f76f2b8a26152b2061f6a9') }","op":{"__v":0,"cuid":"citzl8voj0007ioegaikrrw97","login":"testPostLogin2times","first":"testPostFirst2times","last":"testPostLast2times","_id":"57f76f2b8a26152b2061f6a9","mark":0,"nbPosts":0,"role":[],"lastModif":"2016-10-07T09:47:23.877Z","since":"2016-10-07T09:47:23.867Z"}}
+{"level":"error","message":"! userController.addUser failed! - missing mandatory fields","timestamp":"2016-10-07T09:47:23.889Z"}
+{"level":"error","message":"... no req.body.user!","timestamp":"2016-10-07T09:47:23.889Z"}
+{"level":"info","message":"userController.updateUser cuidUpdate1","timestamp":"2016-10-07T09:47:23.906Z"}
+{"level":"error","message":"! userController.updateUser cuidUpdateUnknownUser failed to update! - err = ","timestamp":"2016-10-07T09:47:23.927Z"}
+{"level":"error","message":"! userController.getUser cuidTestUnknownUser failed to find! - err = ","timestamp":"2016-10-07T09:47:23.943Z"}
+{"level":"info","message":"userController.getUser cuidTestRetreive","timestamp":"2016-10-07T09:47:23.954Z"}
+{"level":"error","message":"! userController.deleteUser cuidTestDeleteUnknown failed to find! - err = ","timestamp":"2016-10-07T09:47:23.960Z"}
+{"level":"info","message":"userController.deleteUser cuidTestDelete","timestamp":"2016-10-07T09:47:23.987Z"}

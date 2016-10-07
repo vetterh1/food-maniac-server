@@ -2,6 +2,7 @@ import { Router } from 'express';
 import * as UserController from '../controllers/userController';
 import * as ItemController from '../controllers/itemController';
 import * as PlaceController from '../controllers/placeController';
+import * as MarkController from '../controllers/markController';
 const router = new Router();
 
 
@@ -34,24 +35,47 @@ router.route('/items/:cuid').get(ItemController.getItem);
 // Add a new Item
 router.route('/items').post(ItemController.addItem);
 
+// Update a user by cuid
+router.route('/items/:cuid').post(ItemController.updateItem);
+
 // Delete a item by cuid
 router.route('/items/:cuid').delete(ItemController.deleteItem);
 
 
 // ----------------  PLACES ---------------- 
 
-// Get all Items
+// Get all places
 router.route('/places').get(PlaceController.getPlaces);
 
 // Get one place by cuid
-router.route('/places/:cuid').get(PlaceController.getPlaces);
+router.route('/places/:cuid').get(PlaceController.getPlace);
 
-// Add a new Item
+// Add a new place
 router.route('/places').post(PlaceController.addPlace);
+
+// Update a user by cuid
+router.route('/places/:cuid').post(PlaceController.updatePlace);
 
 // Delete a place by cuid
 router.route('/places/:cuid').delete(PlaceController.deletePlace);
 
+
+// ----------------  MARKS ---------------- 
+
+// Get all marks
+router.route('/marks').get(MarkController.getMarks);
+
+// Get one mark by cuid
+router.route('/marks/:cuid').get(MarkController.getMark);
+
+// Add a new mark
+router.route('/marks').post(MarkController.addMark);
+
+// Update a user by cuid
+router.route('/marks/:cuid').post(MarkController.updateMark);
+
+// Delete a mark by cuid
+router.route('/marks/:cuid').delete(MarkController.deleteMark);
 
 
 

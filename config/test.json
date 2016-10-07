@@ -12,7 +12,7 @@
 	"log":
 	{
 		"levelConsole": "none",
-		"levelFile": "info",
+		"levelFile": "debug",
 		"pathFile" : "./server/log/winston.log"
 	}
 	
