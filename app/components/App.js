@@ -4,12 +4,19 @@ import NavLink from './NavLink'
 import FontAwesome from 'react-fontawesome';  // https://github.com/danawoodman/react-fontawesome
 import Version from "./Version";
 
-const _version = "0.12-1";
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import MaterialUiTest from './MaterialUiTest'; // Our custom react component
+
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
+
+const _version = "0.13.2";
 
 var navStyle = {
 	listStyleType: 'none',
 	display: 'flex',
-  	listStyle: 'none',
+	listStyle: 'none'
 };
 
 var navItemStyle = {
@@ -28,7 +35,8 @@ const App = (props) => <div>
 			<li style={navItemStyle}><NavLink to="/where"><FontAwesome name='location-arrow'  style={marginRight}/>Location</NavLink></li>
 		</ul>
 		{ props.children }
-	    <Version version={_version}/>
+		<Version version={_version}/>
+		<MaterialUiTest />
 	</div>;
 
 export default App;
