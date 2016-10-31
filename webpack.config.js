@@ -68,7 +68,7 @@ plugins.push( HTMLWebpackPluginConfig );
  *   - babel: JSX --> JS
  *   
  */
-var loaders = ['babel-loader'];
+//var loaders = ['babel-loader'];
 if(process.env.NODE_ENV != 'production'){
   // loaders.push('react-hot');
 }

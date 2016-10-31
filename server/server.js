@@ -82,13 +82,39 @@ var accessLogStream = FileStreamRotator.getStream({
 
 
 
+
 //
-// ---------------------  INIT SERVER  ---------------------  
+// ---------------------  CREATE SERVER  ---------------------  
 //
 
 
 // Initialize the Express App
 const app = new Express();
+
+
+
+
+//
+// ---------------------  HOT RELOADING  ---------------------  
+//
+
+import webpack from 'webpack';
+import webpackConfig from '../webpack.config.hotreload';
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
+
+if (process.env.NODE_ENV === 'development') {
+  logger.info('Setup hot reloading (Dev only mode)');
+  const compiler = webpack(webpackConfig);
+  app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: webpackConfig.output.publicPath }));
+  app.use(webpackHotMiddleware(compiler));
+}
+
+
+
+//
+// ---------------------  INIT SERVER  ---------------------  
+//
 
 app.use(compression());
 app.use(morgan('combined', {stream: accessLogStream}))		// for logging

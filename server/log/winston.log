@@ -643,3 +643,41 @@
 {"level":"info","message":"Logger test: info level","timestamp":"2016-10-26T16:15:40.862Z"}
 {"level":"warn","message":"Logger test: warn level","timestamp":"2016-10-26T16:15:40.863Z"}
 {"level":"error","message":"Logger test: error level","timestamp":"2016-10-26T16:15:40.863Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-10-27T09:45:03.117Z"}
+{"level":"warn","message":"                    FOOD-MANIAC  START","timestamp":"2016-10-27T09:45:03.118Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-10-27T09:45:03.119Z"}
+{"level":"debug","message":"Logger test: debug level","timestamp":"2016-10-27T09:45:03.119Z"}
+{"level":"info","message":"Logger test: info level","timestamp":"2016-10-27T09:45:03.120Z"}
+{"level":"warn","message":"Logger test: warn level","timestamp":"2016-10-27T09:45:03.120Z"}
+{"level":"error","message":"Logger test: error level","timestamp":"2016-10-27T09:45:03.120Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-10-27T09:45:39.298Z"}
+{"level":"warn","message":"                    FOOD-MANIAC  START","timestamp":"2016-10-27T09:45:39.300Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-10-27T09:45:39.300Z"}
+{"level":"debug","message":"Logger test: debug level","timestamp":"2016-10-27T09:45:39.301Z"}
+{"level":"info","message":"Logger test: info level","timestamp":"2016-10-27T09:45:39.301Z"}
+{"level":"warn","message":"Logger test: warn level","timestamp":"2016-10-27T09:45:39.301Z"}
+{"level":"error","message":"Logger test: error level","timestamp":"2016-10-27T09:45:39.301Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-10-27T15:34:47.111Z"}
+{"level":"warn","message":"                    FOOD-MANIAC  START","timestamp":"2016-10-27T15:34:47.112Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-10-27T15:34:47.113Z"}
+{"level":"debug","message":"Logger test: debug level","timestamp":"2016-10-27T15:34:47.114Z"}
+{"level":"info","message":"Logger test: info level","timestamp":"2016-10-27T15:34:47.114Z"}
+{"level":"warn","message":"Logger test: warn level","timestamp":"2016-10-27T15:34:47.114Z"}
+{"level":"error","message":"Logger test: error level","timestamp":"2016-10-27T15:34:47.115Z"}
+{"level":"info","message":"Setup hot reloading (Dev only mode)","timestamp":"2016-10-27T15:34:47.142Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-10-27T15:35:44.083Z"}
+{"level":"warn","message":"                    FOOD-MANIAC  START","timestamp":"2016-10-27T15:35:44.084Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-10-27T15:35:44.084Z"}
+{"level":"debug","message":"Logger test: debug level","timestamp":"2016-10-27T15:35:44.085Z"}
+{"level":"info","message":"Logger test: info level","timestamp":"2016-10-27T15:35:44.085Z"}
+{"level":"warn","message":"Logger test: warn level","timestamp":"2016-10-27T15:35:44.085Z"}
+{"level":"error","message":"Logger test: error level","timestamp":"2016-10-27T15:35:44.085Z"}
+{"level":"info","message":"Setup hot reloading (Dev only mode)","timestamp":"2016-10-27T15:35:44.110Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-10-27T15:38:36.582Z"}
+{"level":"warn","message":"                    FOOD-MANIAC  START","timestamp":"2016-10-27T15:38:36.583Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-10-27T15:38:36.583Z"}
+{"level":"debug","message":"Logger test: debug level","timestamp":"2016-10-27T15:38:36.584Z"}
+{"level":"info","message":"Logger test: info level","timestamp":"2016-10-27T15:38:36.584Z"}
+{"level":"warn","message":"Logger test: warn level","timestamp":"2016-10-27T15:38:36.584Z"}
+{"level":"error","message":"Logger test: error level","timestamp":"2016-10-27T15:38:36.585Z"}
+{"level":"info","message":"Setup hot reloading (Dev only mode)","timestamp":"2016-10-27T15:38:36.599Z"}
