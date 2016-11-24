@@ -1,31 +1,55 @@
-//
-// To debug:
-//  - install node-inspector: npm install -g node-inspector
-//  - launch it: node-inspector
-//  - run the app: node --debug server.js
-//  (to rebuild client if necessary: npm run build )
+ /* eslint-disable no-multiple-empty-lines */
 
-var logger = require('./util/logger.js');  
+const logger = require('./util/logger.js');
 
 import Express from 'express';
 import compression from 'compression';
-import FileStreamRotator from 'file-stream-rotator';
-import fs from 'fs';
-import morgan from 'morgan';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import path from 'path';
+// import IntlWrapper from '../client/modules/Intl/IntlWrapper';
 
 import config from 'config';
-if( !process.env.NODE_ENV )
-	console.error("! NODE_ENV undefined !"); // eslint-disable-line no-console
 
-import apiRoutes from './routes/apiRoutes';
+if (!process.env.NODE_ENV) console.error('! NODE_ENV undefined !'); // eslint-disable-line no-console
+
+const serverPort = config.get('server.port');
+logger.warn(`Server Port: ${serverPort}`);
+
+if (process.env.PORT) {
+  console.error(`! PORT env var defined, but use ${serverPort} from config file !`); // eslint-disable-line no-console
+}
+
+
+
 
 
 
 //
-// ---------------------  INIT DB  ---------------------  
+// ---------------------  INIT LOGGER  ---------------------
+//
+
+import FileStreamRotator from 'file-stream-rotator';
+import fs from 'fs';
+import morgan from 'morgan';
+
+const logDirectory = `${__dirname}/log`;
+
+// ensure log directory exists
+if (!fs.existsSync(logDirectory)) fs.mkdirSync(logDirectory);
+
+// create a rotating write stream
+const accessLogStream = FileStreamRotator.getStream({
+  date_format: 'YYYYMMDD',
+  filename: `${logDirectory}/access-%DATE%.log`,
+  frequency: 'daily',
+  verbose: false,
+});
+
+
+
+//
+// ---------------------  INIT DB  ---------------------
 //
 
 import insertTestData from './testData';
@@ -34,26 +58,24 @@ import insertTestData from './testData';
 mongoose.Promise = global.Promise;
 
 // MongoDB Connection
-if (config.has('database.URL'))
-  var databaseURL = config.get('database.URL');
-else
-	console.error("! No config defined for database.URL (or no NODE_ENV defined!) !"); // eslint-disable-line no-console
-console.log(`Mongodb: ${databaseURL}`); // eslint-disable-line no-console
-let options = { 
-                server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } }, 
-                replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } 
-              }; 
+const databaseURL = config.get('database.URL');
+logger.warn(`Mongodb: ${databaseURL}`);
+if (!config.has('database.URL')) logger.error(`! No config defined for database.URL for env ${process.env.NODE_ENV} !`);
+
+const options = {
+  server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
+  replset: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
+};
 mongoose.connect(databaseURL, options, (error) => {
   if (error) {
-    console.error('Please make sure Mongodb is installed and running!'); // eslint-disable-line no-console
+    logger.error('Please make sure Mongodb is installed and running!');
     throw error;
   }
 
-  	// feed some dummy data in DB if empty
-	if( process.env.NODE_ENV != "test")
-  		insertTestData();
+  // feed some dummy data in DB if empty
+  if (process.env.NODE_ENV !== 'test') insertTestData();
 });
-let db = mongoose.connection;
+const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
 
@@ -61,30 +83,9 @@ db.on('error', console.error.bind(console, 'connection error:'));
 
 
 
-//
-// ---------------------  INIT LOGGER  ---------------------  
-//
-
-
-var logDirectory = __dirname + '/log'
-
-// ensure log directory exists 
-fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory)
- 
-// create a rotating write stream 
-var accessLogStream = FileStreamRotator.getStream({
-  date_format: 'YYYYMMDD',
-  filename: logDirectory + '/access-%DATE%.log',
-  frequency: 'daily',
-  verbose: false
-})
- 
-
-
-
 
 //
-// ---------------------  CREATE SERVER  ---------------------  
+// ---------------------  CREATE SERVER  ---------------------
 //
 
 
@@ -95,10 +96,10 @@ const app = new Express();
 
 
 //
-// ---------------------  HOT RELOADING  ---------------------  
+// ---------------------  HOT RELOADING  ---------------------
 //
 
-import webpack from 'webpack';
+import webpack from 'webpack'; // eslint-disable-line import
 import webpackConfig from '../webpack.config.hotreload';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
@@ -113,12 +114,14 @@ if (process.env.NODE_ENV === 'development') {
 
 
 //
-// ---------------------  INIT SERVER  ---------------------  
+// ---------------------  INIT SERVER  ---------------------
 //
 
+import apiRoutes from './routes/apiRoutes';
+
 app.use(compression());
-app.use(morgan('combined', {stream: accessLogStream}))		// for logging
-app.use(bodyParser.json());		// Mandatory to get body in post requests!
+app.use(morgan('combined', { stream: accessLogStream })); // for logging
+app.use(bodyParser.json()); // Mandatory to get body in post requests!
 
 // Serve our mongo apis:
 app.use('/api', apiRoutes);
@@ -128,17 +131,17 @@ app.use('/api', apiRoutes);
 app.use(Express.static(path.resolve(__dirname, '../dist')));
 
 // send all requests to index.html so browserHistory works
-app.get('*', function (req, res) {
-	res.sendFile(path.join(__dirname, '../dist', 'index.html'))
-})
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist', 'index.html'));
+});
 
-if (config.has('server.port'))
-  var PORT = config.get('server.port');
-else
-	console.error("! No config defined for server.port (or no NODE_ENV defined!) !"); // eslint-disable-line no-console
-
-app.listen(PORT, function() {
-  console.log('Node Express server running at localhost:' + PORT)
-})
+// start app
+app.listen(serverPort, (error) => {
+  if (!error) {
+    logger.info(`Server running on port: ${serverPort}`);
+  } else {
+    logger.error(`! Error, cannot run server on port: ${serverPort}`);
+  }
+});
 
 export default app;

@@ -681,3 +681,23 @@
 {"level":"warn","message":"Logger test: warn level","timestamp":"2016-10-27T15:38:36.584Z"}
 {"level":"error","message":"Logger test: error level","timestamp":"2016-10-27T15:38:36.585Z"}
 {"level":"info","message":"Setup hot reloading (Dev only mode)","timestamp":"2016-10-27T15:38:36.599Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-11-10T13:54:46.380Z"}
+{"level":"warn","message":"                    FOOD-MANIAC  START","timestamp":"2016-11-10T13:54:46.382Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-11-10T13:54:46.382Z"}
+{"level":"debug","message":"Logger test: debug level","timestamp":"2016-11-10T13:54:46.382Z"}
+{"level":"info","message":"Logger test: info level","timestamp":"2016-11-10T13:54:46.383Z"}
+{"level":"warn","message":"Logger test: warn level","timestamp":"2016-11-10T13:54:46.383Z"}
+{"level":"error","message":"Logger test: error level","timestamp":"2016-11-10T13:54:46.383Z"}
+{"level":"warn","message":"Server Port: 8080","timestamp":"2016-11-10T13:54:46.384Z"}
+{"level":"warn","message":"Mongodb: mongodb://localhost:27017/food_maniac_dev","timestamp":"2016-11-10T13:54:46.393Z"}
+{"level":"info","message":"Setup hot reloading (Dev only mode)","timestamp":"2016-11-10T13:54:46.403Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-11-10T14:01:35.741Z"}
+{"level":"warn","message":"                    FOOD-MANIAC  START","timestamp":"2016-11-10T14:01:35.743Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-11-10T14:01:35.744Z"}
+{"level":"debug","message":"Logger test: debug level","timestamp":"2016-11-10T14:01:35.744Z"}
+{"level":"info","message":"Logger test: info level","timestamp":"2016-11-10T14:01:35.744Z"}
+{"level":"warn","message":"Logger test: warn level","timestamp":"2016-11-10T14:01:35.745Z"}
+{"level":"error","message":"Logger test: error level","timestamp":"2016-11-10T14:01:35.745Z"}
+{"level":"warn","message":"Server Port: 8080","timestamp":"2016-11-10T14:01:35.745Z"}
+{"level":"warn","message":"Mongodb: mongodb://localhost:27017/food_maniac_dev","timestamp":"2016-11-10T14:01:35.754Z"}
+{"level":"info","message":"Setup hot reloading (Dev only mode)","timestamp":"2016-11-10T14:01:35.766Z"}

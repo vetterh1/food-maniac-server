@@ -1,4 +1,47 @@
 ---------------------------------------------------------------
+                           INSTALL 
+---------------------------------------------------------------
+
+Base: MERN-STARTER
+
+-------------  Additional modules ---------------
+
+// For managing multiple config files (per env) (default file: config/default.json) :
+npm install config --save
+
+// For nodejs logging:
+npm install winston --save
+
+// For HTTP node.js logging:
+npm install morgan --save
+npm install file-stream-rotator --save
+
+// For Google maps:
+npm install google-maps-react --save
+
+// For UI compornents:
+npm install material-ui --save
+npm install react-tap-event-plugin --save
+
+npm install react-fontawesome --save
+
+// For testing
+npm install mocha --save-dev
+npm install chai --save-dev
+npm install chai-http --save-dev
+
+// Note about Mocha error on css & images, use an ignore compiler:
+In package.json    
+    "test": "cross-env NODE_ENV=test ./node_modules/.bin/mocha --compilers js:babel-core/register,css:test/mocha_ignore.js,png:test/mocha_ignore.js -d test/**/*.js"
+In Test folder: add a mocha_ignore.js file:
+  function donothing() { return null; }
+  require.extensions['.png'] = donothing;
+  require.extensions['.css'] = donothing;
+
+
+
+
+---------------------------------------------------------------
                              BASICS
 ---------------------------------------------------------------
 
@@ -30,6 +73,14 @@ Workaround:  (but does not use node!!!!)
 
 	cd \workspace\mapTest\
 	npm run test
+
+---------------- Debug ----------------
+
+- install node-inspector: npm install -g node-inspector
+- launch it: node-inspector
+- run the app: node --debug server.js
+(to rebuild client if necessary: npm run build )
+
 
 
 
