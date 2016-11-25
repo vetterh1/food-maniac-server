@@ -11,7 +11,7 @@ import MaterialUiTest from './MaterialUiTest'; // Our custom react component
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
 
-const _version = '0.13.4';
+const _version = '0.13.7';
 
 const navStyle = {
   listStyleType: 'none',

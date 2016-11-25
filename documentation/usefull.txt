@@ -130,35 +130,3 @@ Workaround:  (but does not use node!!!!)
 
 
 
-
-
-
-
-
----------------------------------------------------------------
-                            MEX
----------------------------------------------------------------
-
-
-// Trad errors found:
-
-"tradeName": "Nom du Trade",
-"JRTreportnetworkAmex": "Network CB",
-"walletPage_FLAG_socitgnrale": "Walletpage",
-"ACCEPTANCE_settlement": "Settlement",
-"salesVendor_MERCHANT": "Sales vendor",
-"name_webshop": "nom Webshop",
-"walletURL": "Wallet URL",
-
-    "VATnumber": "VAT nombre" --> "Numéro TVA"
-    "Recurring_socitgnrale": "Recurring transactions"  --> "Transactions récurrentes"
-    "Action_Date": "Mesure Date" --> "Date action"
-    "Action": "Mesure" --> "Action"
-    "History_Type": "Histoire Type" --> "Type historique"
-    "new_standard_contact":"Nouvelle norme contacter" --> "Nouveau contact standard"
-	"bulkChanges":"Changements vrac" --> "Changements en bloc"
-	"PENDING": "en attendant" --> "En attente"
-	"LIGHT": "LUMIÈRE" --> "FAIBLE"
-	"STRONG": "STRONG" --> "FORT"
-
-    

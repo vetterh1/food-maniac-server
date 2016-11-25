@@ -98,7 +98,7 @@ const app = new Express();
 //
 // ---------------------  HOT RELOADING  ---------------------
 //
-
+/*
 import webpack from 'webpack'; // eslint-disable-line import
 import webpackConfig from '../webpack.config.hotreload';
 import webpackDevMiddleware from 'webpack-dev-middleware';
@@ -110,7 +110,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: webpackConfig.output.publicPath }));
   app.use(webpackHotMiddleware(compiler));
 }
-
+*/
 
 
 //

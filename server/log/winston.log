@@ -701,3 +701,175 @@
 {"level":"warn","message":"Server Port: 8080","timestamp":"2016-11-10T14:01:35.745Z"}
 {"level":"warn","message":"Mongodb: mongodb://localhost:27017/food_maniac_dev","timestamp":"2016-11-10T14:01:35.754Z"}
 {"level":"info","message":"Setup hot reloading (Dev only mode)","timestamp":"2016-11-10T14:01:35.766Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-11-24T16:35:07.591Z"}
+{"level":"warn","message":"                    FOOD-MANIAC  START","timestamp":"2016-11-24T16:35:07.593Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-11-24T16:35:07.593Z"}
+{"level":"debug","message":"Logger test: debug level","timestamp":"2016-11-24T16:35:07.594Z"}
+{"level":"info","message":"Logger test: info level","timestamp":"2016-11-24T16:35:07.594Z"}
+{"level":"warn","message":"Logger test: warn level","timestamp":"2016-11-24T16:35:07.595Z"}
+{"level":"error","message":"Logger test: error level","timestamp":"2016-11-24T16:35:07.595Z"}
+{"level":"warn","message":"Server Port: 8080","timestamp":"2016-11-24T16:35:07.596Z"}
+{"level":"warn","message":"Mongodb: mongodb://localhost:27017/food_maniac_dev","timestamp":"2016-11-24T16:35:07.611Z"}
+{"level":"info","message":"Setup hot reloading (Dev only mode)","timestamp":"2016-11-24T16:35:07.624Z"}
+{"level":"info","message":"Server running on port: 8080","timestamp":"2016-11-24T16:35:07.780Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-11-24T16:41:57.549Z"}
+{"level":"warn","message":"                    FOOD-MANIAC  START","timestamp":"2016-11-24T16:41:57.550Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-11-24T16:41:57.551Z"}
+{"level":"debug","message":"Logger test: debug level","timestamp":"2016-11-24T16:41:57.551Z"}
+{"level":"info","message":"Logger test: info level","timestamp":"2016-11-24T16:41:57.552Z"}
+{"level":"warn","message":"Logger test: warn level","timestamp":"2016-11-24T16:41:57.552Z"}
+{"level":"error","message":"Logger test: error level","timestamp":"2016-11-24T16:41:57.552Z"}
+{"level":"warn","message":"Server Port: 8080","timestamp":"2016-11-24T16:41:57.553Z"}
+{"level":"warn","message":"Mongodb: mongodb://localhost:27017/food_maniac_dev","timestamp":"2016-11-24T16:41:57.559Z"}
+{"level":"info","message":"Setup hot reloading (Dev only mode)","timestamp":"2016-11-24T16:41:57.572Z"}
+{"level":"info","message":"Server running on port: 8080","timestamp":"2016-11-24T16:41:57.689Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-11-24T16:43:31.995Z"}
+{"level":"warn","message":"                    FOOD-MANIAC  START","timestamp":"2016-11-24T16:43:31.997Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-11-24T16:43:31.997Z"}
+{"level":"debug","message":"Logger test: debug level","timestamp":"2016-11-24T16:43:31.998Z"}
+{"level":"info","message":"Logger test: info level","timestamp":"2016-11-24T16:43:31.998Z"}
+{"level":"warn","message":"Logger test: warn level","timestamp":"2016-11-24T16:43:31.998Z"}
+{"level":"error","message":"Logger test: error level","timestamp":"2016-11-24T16:43:31.998Z"}
+{"level":"warn","message":"Server Port: 8080","timestamp":"2016-11-24T16:43:31.999Z"}
+{"level":"warn","message":"Mongodb: mongodb://localhost:27017/food_maniac_dev","timestamp":"2016-11-24T16:43:32.010Z"}
+{"level":"info","message":"Setup hot reloading (Dev only mode)","timestamp":"2016-11-24T16:43:32.027Z"}
+{"level":"info","message":"Server running on port: 8080","timestamp":"2016-11-24T16:43:32.168Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-11-24T16:53:39.568Z"}
+{"level":"warn","message":"                    FOOD-MANIAC  START","timestamp":"2016-11-24T16:53:39.570Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-11-24T16:53:39.570Z"}
+{"level":"debug","message":"Logger test: debug level","timestamp":"2016-11-24T16:53:39.571Z"}
+{"level":"info","message":"Logger test: info level","timestamp":"2016-11-24T16:53:39.571Z"}
+{"level":"warn","message":"Logger test: warn level","timestamp":"2016-11-24T16:53:39.571Z"}
+{"level":"error","message":"Logger test: error level","timestamp":"2016-11-24T16:53:39.571Z"}
+{"level":"warn","message":"Server Port: 8080","timestamp":"2016-11-24T16:53:39.572Z"}
+{"level":"warn","message":"Mongodb: mongodb://localhost:27017/food_maniac_dev","timestamp":"2016-11-24T16:53:39.580Z"}
+{"level":"info","message":"Setup hot reloading (Dev only mode)","timestamp":"2016-11-24T16:53:39.593Z"}
+{"level":"info","message":"Server running on port: 8080","timestamp":"2016-11-24T16:53:39.713Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-11-24T16:55:54.159Z"}
+{"level":"warn","message":"                    FOOD-MANIAC  START","timestamp":"2016-11-24T16:55:54.161Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-11-24T16:55:54.161Z"}
+{"level":"debug","message":"Logger test: debug level","timestamp":"2016-11-24T16:55:54.161Z"}
+{"level":"info","message":"Logger test: info level","timestamp":"2016-11-24T16:55:54.162Z"}
+{"level":"warn","message":"Logger test: warn level","timestamp":"2016-11-24T16:55:54.162Z"}
+{"level":"error","message":"Logger test: error level","timestamp":"2016-11-24T16:55:54.162Z"}
+{"level":"warn","message":"Server Port: 8080","timestamp":"2016-11-24T16:55:54.162Z"}
+{"level":"warn","message":"Mongodb: mongodb://localhost:27017/food_maniac_dev","timestamp":"2016-11-24T16:55:54.168Z"}
+{"level":"info","message":"Setup hot reloading (Dev only mode)","timestamp":"2016-11-24T16:55:54.178Z"}
+{"level":"info","message":"Server running on port: 8080","timestamp":"2016-11-24T16:55:54.311Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-11-24T16:56:18.803Z"}
+{"level":"warn","message":"                    FOOD-MANIAC  START","timestamp":"2016-11-24T16:56:18.804Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-11-24T16:56:18.805Z"}
+{"level":"debug","message":"Logger test: debug level","timestamp":"2016-11-24T16:56:18.805Z"}
+{"level":"info","message":"Logger test: info level","timestamp":"2016-11-24T16:56:18.805Z"}
+{"level":"warn","message":"Logger test: warn level","timestamp":"2016-11-24T16:56:18.806Z"}
+{"level":"error","message":"Logger test: error level","timestamp":"2016-11-24T16:56:18.806Z"}
+{"level":"warn","message":"Server Port: 8080","timestamp":"2016-11-24T16:56:18.806Z"}
+{"level":"warn","message":"Mongodb: mongodb://localhost:27017/food_maniac_dev","timestamp":"2016-11-24T16:56:18.813Z"}
+{"level":"info","message":"Setup hot reloading (Dev only mode)","timestamp":"2016-11-24T16:56:18.825Z"}
+{"level":"info","message":"Server running on port: 8080","timestamp":"2016-11-24T16:56:18.954Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-11-24T16:58:26.880Z"}
+{"level":"warn","message":"                    FOOD-MANIAC  START","timestamp":"2016-11-24T16:58:26.881Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-11-24T16:58:26.882Z"}
+{"level":"debug","message":"Logger test: debug level","timestamp":"2016-11-24T16:58:26.882Z"}
+{"level":"info","message":"Logger test: info level","timestamp":"2016-11-24T16:58:26.882Z"}
+{"level":"warn","message":"Logger test: warn level","timestamp":"2016-11-24T16:58:26.883Z"}
+{"level":"error","message":"Logger test: error level","timestamp":"2016-11-24T16:58:26.883Z"}
+{"level":"warn","message":"Server Port: 8080","timestamp":"2016-11-24T16:58:26.883Z"}
+{"level":"warn","message":"Mongodb: mongodb://localhost:27017/food_maniac_dev","timestamp":"2016-11-24T16:58:26.892Z"}
+{"level":"info","message":"Server running on port: 8080","timestamp":"2016-11-24T16:58:26.960Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-11-24T17:01:04.877Z"}
+{"level":"warn","message":"                    FOOD-MANIAC  START","timestamp":"2016-11-24T17:01:04.879Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-11-24T17:01:04.879Z"}
+{"level":"debug","message":"Logger test: debug level","timestamp":"2016-11-24T17:01:04.880Z"}
+{"level":"info","message":"Logger test: info level","timestamp":"2016-11-24T17:01:04.880Z"}
+{"level":"warn","message":"Logger test: warn level","timestamp":"2016-11-24T17:01:04.881Z"}
+{"level":"error","message":"Logger test: error level","timestamp":"2016-11-24T17:01:04.881Z"}
+{"level":"warn","message":"Server Port: 8080","timestamp":"2016-11-24T17:01:04.882Z"}
+{"level":"warn","message":"Mongodb: mongodb://localhost:27017/food_maniac_dev","timestamp":"2016-11-24T17:01:04.888Z"}
+{"level":"info","message":"Server running on port: 8080","timestamp":"2016-11-24T17:01:04.943Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-11-24T17:01:22.050Z"}
+{"level":"warn","message":"                    FOOD-MANIAC  START","timestamp":"2016-11-24T17:01:22.052Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-11-24T17:01:22.052Z"}
+{"level":"debug","message":"Logger test: debug level","timestamp":"2016-11-24T17:01:22.052Z"}
+{"level":"info","message":"Logger test: info level","timestamp":"2016-11-24T17:01:22.053Z"}
+{"level":"warn","message":"Logger test: warn level","timestamp":"2016-11-24T17:01:22.053Z"}
+{"level":"error","message":"Logger test: error level","timestamp":"2016-11-24T17:01:22.053Z"}
+{"level":"warn","message":"Server Port: 8080","timestamp":"2016-11-24T17:01:22.054Z"}
+{"level":"warn","message":"Mongodb: mongodb://localhost:27017/food_maniac_dev","timestamp":"2016-11-24T17:01:22.060Z"}
+{"level":"info","message":"Server running on port: 8080","timestamp":"2016-11-24T17:01:22.117Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-11-25T08:09:42.747Z"}
+{"level":"warn","message":"                    FOOD-MANIAC  START","timestamp":"2016-11-25T08:09:42.748Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-11-25T08:09:42.748Z"}
+{"level":"debug","message":"Logger test: debug level","timestamp":"2016-11-25T08:09:42.749Z"}
+{"level":"info","message":"Logger test: info level","timestamp":"2016-11-25T08:09:42.749Z"}
+{"level":"warn","message":"Logger test: warn level","timestamp":"2016-11-25T08:09:42.749Z"}
+{"level":"error","message":"Logger test: error level","timestamp":"2016-11-25T08:09:42.749Z"}
+{"level":"warn","message":"Server Port: 8090","timestamp":"2016-11-25T08:09:42.749Z"}
+{"level":"warn","message":"Mongodb: mongodb://localhost:27017/food_maniac_test","timestamp":"2016-11-25T08:09:42.754Z"}
+{"level":"info","message":"Server running on port: 8090","timestamp":"2016-11-25T08:09:43.624Z"}
+{"level":"info","message":"itemController.getItems length=0","timestamp":"2016-11-25T08:09:43.695Z"}
+{"level":"info","message":"itemController.getItems length=12","timestamp":"2016-11-25T08:09:43.774Z"}
+{"level":"error","message":"! itemController.addItem failed! - missing mandatory fields","timestamp":"2016-11-25T08:09:43.814Z"}
+{"level":"error","message":"... no req.body.item.name!","timestamp":"2016-11-25T08:09:43.814Z"}
+{"level":"info","message":"itemController.addItem testPostName","timestamp":"2016-11-25T08:09:43.837Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.items index: _id_ dup key: { : ObjectId('5837f1c7a22c242180dd80e9') }","op":{"__v":0,"cuid":"civxic0py0001m8egaha0xr3x","name":"testPostname2times","_id":"5837f1c7a22c242180dd80e9","lastModif":"2016-11-25T08:09:43.848Z","since":"2016-11-25T08:09:43.840Z"}}
+{"level":"error","message":"! itemController.addItem failed! - missing mandatory fields","timestamp":"2016-11-25T08:09:43.859Z"}
+{"level":"error","message":"... no req.body.item!","timestamp":"2016-11-25T08:09:43.859Z"}
+{"level":"info","message":"itemController.updateItem cuidUpdate1","timestamp":"2016-11-25T08:09:43.882Z"}
+{"level":"error","message":"! itemController.updateItem cuidUpdateUnknownItem failed to update! - err = ","timestamp":"2016-11-25T08:09:43.910Z"}
+{"level":"error","message":"! itemController.getItem cuidTestUnknownItem failed to find! - err = ","timestamp":"2016-11-25T08:09:43.933Z"}
+{"level":"info","message":"itemController.getItem cuidTestRetreive","timestamp":"2016-11-25T08:09:43.945Z"}
+{"level":"error","message":"! placeController.deleteItem cuidTestDeleteUnknown failed to find! - err = ","timestamp":"2016-11-25T08:09:43.951Z"}
+{"level":"info","message":"placeController.deleteItem cuidTestDelete","timestamp":"2016-11-25T08:09:43.970Z"}
+{"level":"info","message":"markController.getMarks length=0","timestamp":"2016-11-25T08:09:43.977Z"}
+{"level":"info","message":"markController.getMarks length=4","timestamp":"2016-11-25T08:09:44.011Z"}
+{"level":"error","message":"! markController.addMark failed! - missing mandatory fields","timestamp":"2016-11-25T08:09:44.019Z"}
+{"level":"error","message":"... no req.body.mark.mark!","timestamp":"2016-11-25T08:09:44.019Z"}
+{"level":"info","message":"markController.addMark 18","timestamp":"2016-11-25T08:09:44.038Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.marks index: _id_ dup key: { : ObjectId('5837f1c8a22c242180dd80f4') }","op":{"__v":0,"cuid":"civxic0vm0003m8ege4katzdc","mark":25,"_id":"5837f1c8a22c242180dd80f4","lastModif":"2016-11-25T08:09:44.055Z","since":"2016-11-25T08:09:44.041Z"}}
+{"level":"error","message":"! markController.addMark failed! - missing mandatory fields","timestamp":"2016-11-25T08:09:44.062Z"}
+{"level":"error","message":"... no req.body.mark!","timestamp":"2016-11-25T08:09:44.063Z"}
+{"level":"info","message":"markController.updateMark cuidUpdate1","timestamp":"2016-11-25T08:09:44.075Z"}
+{"level":"error","message":"! markController.updateMark cuidUpdateUnknownMark failed to update! - err = ","timestamp":"2016-11-25T08:09:44.095Z"}
+{"level":"error","message":"! markController.getMark cuidTestUnknownMark failed to find! - err = ","timestamp":"2016-11-25T08:09:44.114Z"}
+{"level":"info","message":"markController.getMark cuidTestRetreive","timestamp":"2016-11-25T08:09:44.128Z"}
+{"level":"error","message":"! placeController.deleteMark cuidTestDeleteUnknown failed to find! - err = ","timestamp":"2016-11-25T08:09:44.140Z"}
+{"level":"info","message":"placeController.deleteMark cuidTestDelete","timestamp":"2016-11-25T08:09:44.154Z"}
+{"level":"info","message":"placeController.getPlaces length=0","timestamp":"2016-11-25T08:09:44.163Z"}
+{"level":"info","message":"placeController.getPlaces length=9","timestamp":"2016-11-25T08:09:44.199Z"}
+{"level":"error","message":"! placeController.addPlace failed! - missing mandatory fields","timestamp":"2016-11-25T08:09:44.208Z"}
+{"level":"error","message":"... no req.body.place.name!","timestamp":"2016-11-25T08:09:44.208Z"}
+{"level":"info","message":"placeController.addPlace testPostName","timestamp":"2016-11-25T08:09:44.220Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.places index: _id_ dup key: { : ObjectId('5837f1c8a22c242180dd8104') }","op":{"__v":0,"cuid":"civxic10n0005m8egutkrbrh0","name":"testPostname2times","_id":"5837f1c8a22c242180dd8104","items":[],"lastModif":"2016-11-25T08:09:44.233Z","since":"2016-11-25T08:09:44.223Z","location":{"coordinates":[]}}}
+{"level":"error","message":"! placeController.addPlace failed! - missing mandatory fields","timestamp":"2016-11-25T08:09:44.243Z"}
+{"level":"error","message":"... no req.body.place!","timestamp":"2016-11-25T08:09:44.243Z"}
+{"level":"info","message":"placeController.updatePlace cuidUpdate1","timestamp":"2016-11-25T08:09:44.253Z"}
+{"level":"error","message":"! placeController.updatePlace cuidUpdateUnknownPlace failed to update! - err = ","timestamp":"2016-11-25T08:09:44.271Z"}
+{"level":"error","message":"! placeController.getPlace cuidTestUnknownPlace failed to find! - err = ","timestamp":"2016-11-25T08:09:44.294Z"}
+{"level":"info","message":"placeController.getPlace cuidTestRetreive","timestamp":"2016-11-25T08:09:44.306Z"}
+{"level":"error","message":"! placeController.deletePlace cuidTestDeleteUnknown failed to find! - err = ","timestamp":"2016-11-25T08:09:44.313Z"}
+{"level":"info","message":"placeController.deletePlace cuidTestDelete","timestamp":"2016-11-25T08:09:44.324Z"}
+{"level":"info","message":"userController.getUsers length=0","timestamp":"2016-11-25T08:09:44.333Z"}
+{"level":"info","message":"userController.getUsers length=5","timestamp":"2016-11-25T08:09:44.374Z"}
+{"level":"error","message":"! userController.addUser failed! - missing mandatory fields","timestamp":"2016-11-25T08:09:44.382Z"}
+{"level":"error","message":"... no req.body.user.last!","timestamp":"2016-11-25T08:09:44.382Z"}
+{"level":"info","message":"userController.addUser testPostLogin","timestamp":"2016-11-25T08:09:44.391Z"}
+{"code":11000,"index":0,"errmsg":"E11000 duplicate key error collection: food_maniac_test.users index: _id_ dup key: { : ObjectId('5837f1c8a22c242180dd8110') }","op":{"__v":0,"cuid":"civxic15g0007m8egxwuoeidg","login":"testPostLogin2times","first":"testPostFirst2times","last":"testPostLast2times","_id":"5837f1c8a22c242180dd8110","mark":0,"nbPosts":0,"role":[],"lastModif":"2016-11-25T08:09:44.407Z","since":"2016-11-25T08:09:44.396Z"}}
+{"level":"error","message":"! userController.addUser failed! - missing mandatory fields","timestamp":"2016-11-25T08:09:44.416Z"}
+{"level":"error","message":"... no req.body.user!","timestamp":"2016-11-25T08:09:44.416Z"}
+{"level":"info","message":"userController.updateUser cuidUpdate1","timestamp":"2016-11-25T08:09:44.437Z"}
+{"level":"error","message":"! userController.updateUser cuidUpdateUnknownUser failed to update! - err = ","timestamp":"2016-11-25T08:09:44.453Z"}
+{"level":"error","message":"! userController.getUser cuidTestUnknownUser failed to find! - err = ","timestamp":"2016-11-25T08:09:44.474Z"}
+{"level":"info","message":"userController.getUser cuidTestRetreive","timestamp":"2016-11-25T08:09:44.487Z"}
+{"level":"error","message":"! userController.deleteUser cuidTestDeleteUnknown failed to find! - err = ","timestamp":"2016-11-25T08:09:44.494Z"}
+{"level":"info","message":"userController.deleteUser cuidTestDelete","timestamp":"2016-11-25T08:09:44.507Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-11-25T09:20:40.914Z"}
+{"level":"warn","message":"                    FOOD-MANIAC  START","timestamp":"2016-11-25T09:20:40.915Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2016-11-25T09:20:40.916Z"}
+{"level":"debug","message":"Logger test: debug level","timestamp":"2016-11-25T09:20:40.916Z"}
+{"level":"info","message":"Logger test: info level","timestamp":"2016-11-25T09:20:40.916Z"}
+{"level":"warn","message":"Logger test: warn level","timestamp":"2016-11-25T09:20:40.917Z"}
+{"level":"error","message":"Logger test: error level","timestamp":"2016-11-25T09:20:40.917Z"}
+{"level":"warn","message":"Server Port: 8080","timestamp":"2016-11-25T09:20:40.917Z"}
+{"level":"warn","message":"Mongodb: mongodb://localhost:27017/food_maniac_dev","timestamp":"2016-11-25T09:20:40.924Z"}
+{"level":"info","message":"Server running on port: 8080","timestamp":"2016-11-25T09:20:40.969Z"}

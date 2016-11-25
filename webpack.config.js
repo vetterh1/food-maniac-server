@@ -34,6 +34,8 @@
  *    
  */
 
+var logger = require('winston'); 
+logger.info('... in webpack.config.js');
 
 var webpack = require('webpack')
 
@@ -78,6 +80,13 @@ module.exports = {
   entry: [
     './app/index.js'
   ],
+  resolve: {
+    extensions: ['', '.js', '.jsx'],
+    modules: [
+      'app',
+      'node_modules',
+    ],
+  },
   output: {
     filename: "/bundle.js",
     path: __dirname + '/dist'

@@ -1,3 +1,6 @@
+var logger = require('winston'); 
+logger.info('... in webpack.config.babel.js');
+
 // var cssnext = require('postcss-cssnext');
 // var postcssFocus = require('postcss-focus');
 // var postcssReporter = require('postcss-reporter');
