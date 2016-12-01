@@ -529,15 +529,12 @@
 			}
 		},
 		{
-			"contents": "{\n  \"name\": \"food-maniac\",\n  \"version\": \"0.0.1\",\n  \"description\": \"\",\n  \"main\": \"index.js\",\n  \"scripts\": {\n    \"test\": \"cross-env NODE_ENV=test ./node_modules/.bin/mocha --compilers js:babel-core/register,css:test/mocha_ignore.js,png:test/mocha_ignore.js -d test/**/*.js\",\n    \"testOld\": \"./node_modules/.bin/mocha --compilers js:babel-core/register --reporter spec\",\n    \"start\": \"cross-env BABEL_DISABLE_CACHE=1 NODE_ENV=development nodemon index.js\",\n    \"start:dev\": \"npm run build && webpack-dev-server --inline --content-base dist --history-api-fallback\",\n    \"start:prod\": \"cross-env NODE_ENV=production npm run build && node server/server.js\",\n    \"build\": \"npm run build:cp_css && webpack\",\n    \"build:cp_css\": \"if-env OS=Windows_NT && copy .\\\\app\\\\index.css dist || cp ./app/index.css dist\",\n    \"pm2:restart\": \"pm2 restart maptest\",\n    \"start:old\": \"if-env NODE_ENV=production && npm run start:prod || npm run start:dev\",\n    \"lint\": \"eslint client server\",\n    \"webpack:test\": \"webpack --display-error-details\",\n    \"bn\": \"babel-node\"\n  },\n  \"dependencies\": {\n    \"babel-core\": \"^6.9.1\",\n    \"babel-eslint\": \"^7.0.0\",\n    \"babel-plugin-webpack-loaders\": \"^0.8.0\",\n    \"body-parser\": \"^1.15.2\",\n    \"compression\": \"^1.6.2\",\n    \"config\": \"^1.21.0\",\n    \"cross-env\": \"^3.0.0\",\n    \"cuid\": \"^1.3.8\",\n    \"eslint\": \"^3.8.1\",\n    \"eslint-config-airbnb\": \"^12.0.0\",\n    \"eslint-plugin-ava\": \"^3.1.1\",\n    \"eslint-plugin-import\": \"^2.0.1\",\n    \"eslint-plugin-jsx-a11y\": \"^2.2.3\",\n    \"eslint-plugin-react\": \"^6.4.1\",\n    \"express\": \"^4.14.0\",\n    \"file-stream-rotator\": \"0.0.7\",\n    \"fs\": \"0.0.1-security\",\n    \"google-maps-react\": \"^1.0.18\",\n    \"http-server\": \"^0.9.0\",\n    \"if-env\": \"^1.0.0\",\n    \"material-ui\": \"^0.16.1\",\n    \"mongoose\": \"^4.6.0\",\n    \"morgan\": \"^1.7.0\",\n    \"react\": \"^15.3.2\",\n    \"react-dom\": \"^15.3.2\",\n    \"react-fontawesome\": \"^1.2.0\",\n    \"react-redux\": \"^4.4.5\",\n    \"react-router\": \"^3.0.0\",\n    \"react-tap-event-plugin\": \"^1.0.0\",\n    \"redux\": \"^3.6.0\",\n    \"sanitize-html\": \"^1.13.0\",\n    \"winston\": \"^2.2.0\"\n  },\n  \"devDependencies\": {\n    \"babel-cli\": \"^6.18.0\",\n    \"babel-eslint\": \"^7.0.0\",\n    \"babel-loader\": \"^6.2.2\",\n    \"babel-plugin-transform-decorators-legacy\": \"^1.3.4\",\n    \"babel-plugin-webpack-loaders\": \"^0.8.0\",\n    \"babel-polyfill\": \"^6.9.1\",\n    \"babel-preset-es2015\": \"^6.14.0\",\n    \"babel-preset-es2015-native-modules\": \"^6.6.0\",\n    \"babel-preset-react\": \"^6.5.0\",\n    \"babel-preset-react-optimize\": \"^1.0.1\",\n    \"babel-preset-stage-0\": \"^6.5.0\",\n    \"babel-register\": \"^6.9.0\",\n    \"chai\": \"^3.5.0\",\n    \"chai-http\": \"^3.0.0\",\n    \"eslint\": \"^3.8.1\",\n    \"eslint-config-airbnb\": \"^12.0.0\",\n    \"eslint-plugin-ava\": \"^3.1.1\",\n    \"eslint-plugin-import\": \"^2.0.1\",\n    \"eslint-plugin-jsx-a11y\": \"^2.2.3\",\n    \"eslint-plugin-react\": \"^6.4.1\",\n    \"html-webpack-plugin\": \"^2.22.0\",\n    \"http-server\": \"^0.9.0\",\n    \"mocha\": \"^3.1.0\",\n    \"nodemon\": \"^1.10.2\",\n    \"redux-devtools\": \"^3.3.1\",\n    \"request\": \"^2.75.0\",\n    \"webpack\": \"^1.12.13\",\n    \"webpack-dev-middleware\": \"^1.8.4\",\n    \"webpack-dev-server\": \"^1.15.1\",\n    \"webpack-hot-middleware\": \"^2.13.0\"\n  }\n}\n",
 			"file": "/C/workspace/mapTest/package.json",
-			"file_size": 3185,
-			"file_write_time": 131245568129309274,
 			"settings":
 			{
-				"buffer_size": 3126,
+				"buffer_size": 3185,
 				"encoding": "UTF-8",
-				"line_ending": "Unix"
+				"line_ending": "Windows"
 			}
 		},
 		{
@@ -859,6 +856,9 @@
 	],
 	"file_history":
 	[
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp23029/MIDDLEDATA/mex_merchant_extranet/batch/merchant/error/initload/InitLoad_ErrorReport_1013_2016_11_29_07_00_01.xml",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp25070/MIDDLEDATA/mex_merchant_extranet/batch/merchant/error/initload/InitLoad_ErrorReport_1003_2016_11_10_02_00_01.xml",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp24910/MIDDLEDATA/mex_merchant_extranet/batch/merchant/error/initload/inputfile/MIF_MEXMEM_20161110130852.XML",
 		"/C/Utilisateurs/a545888/AppData/Local/Microsoft/Windows/Temporary Internet Files/Content.Outlook/76MSEO24/exemple_substatus_TEST_50014.txt",
 		"/C/workspace/mapTest/app/components/Root.jsx",
 		"/C/workspace/mapTest/app/index.js",
@@ -983,10 +983,7 @@
 		"/C/Utilisateurs/a545888/Google Drive/Business/dev/meteor/simple-todos-old/client/main.js",
 		"/C/Utilisateurs/a545888/Google Drive/Business/dev/meteor/simple-todos/client/main.js",
 		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/modules/Translation/i18n/locale-fr.json",
-		"/C/Utilisateurs/a545888/Documents/Mes fichiers reçus/locale-fr.json",
-		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp35205/MIDDLEDATA/mex_merchant_extranet/batch/transaction/archives/ppro/payment/PPRO.PAYMENT.25.20160906.010500.CSV",
-		"/C/workspace/mapTest/README.md",
-		"/C/Mex/trunk/mex/mex-gui/src/main/resources/net/atos/itg/guitransaction/admin/pages/TransactionDetails.properties"
+		"/C/Utilisateurs/a545888/Documents/Mes fichiers reçus/locale-fr.json"
 	],
 	"find":
 	{
@@ -1529,7 +1526,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3126,
+						"buffer_size": 3185,
 						"regions":
 						{
 						},
