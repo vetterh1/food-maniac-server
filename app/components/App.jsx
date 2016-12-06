@@ -50,6 +50,7 @@ body {
 
 const styles = {
   pageContainer: {
+    fontSize: '2em',
   },
 
   mainChoiceContainer: {
@@ -58,12 +59,12 @@ const styles = {
     justifyContent: 'space-around',
     listStyle: 'none',
     fontWeight: '700',
-    fontSize: '50px',
+    fontSize: '2em',
     lineHeight: '1.2',
     backgroundColor: 'lightblue',
-    '@media screen and (min-width: 600px)': {
+    '@media screen and (max-width: 400px)': {
       backgroundColor: 'lightgreen',
-      fontSize: '70px',
+      fontSize: '1.5em',
     },
   },
   mainChoiceItem: {
