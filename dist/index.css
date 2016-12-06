@@ -18,3 +18,25 @@
 .margin-right{
 	margin-right: 10px !important;
 }
+
+
+.navigation_main_choice {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    list-style-type: none;
+    list-style: none;
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 1.2;
+    @media (min-width: 900px): {
+      display: none;
+      font-size: 20px;
+    }
+  }
+
+.navigation_main_choice li {  
+    background: tomato;
+}
+
+
