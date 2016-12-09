@@ -6,11 +6,13 @@ import Radium, { StyleRoot } from 'radium';
 import React from 'react';
 import { Link } from 'react-router';
 import NavLink from './NavLink';
+import MainAppBar from './MainAppBar';
+import MainChoiceContainer from './MainChoiceContainer';
+
 
 import IconHome from 'material-ui/svg-icons/action/home'; // Icons list: https://material.io/icons/
 import IconLocation from 'material-ui/svg-icons/communication/location-on';
 import IconLogin from 'material-ui/svg-icons/action/account-circle';
-import IconStar from 'material-ui/svg-icons/action/stars';
 
 import Version from './Version';
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -20,7 +22,6 @@ import MaterialUiTest from './MaterialUiTest';
 import { blue500, red500, greenA200 } from 'material-ui/styles/colors';
 import FormsyTest1 from './FormsyTest1';
 
-import btnRadium from './btnRadium';
 
 // import FormItem from './FormItem';
 // import * as actionsItem from '../actions/FormActions';
@@ -59,12 +60,12 @@ const styles = {
     justifyContent: 'space-around',
     listStyle: 'none',
     fontWeight: '700',
-    fontSize: '2em',
+    fontSize: '4rem',
     lineHeight: '1.2',
     backgroundColor: 'lightblue',
-    '@media screen and (max-width: 400px)': {
+    '@media only screen and (max-width: 680px)': {
       backgroundColor: 'lightgreen',
-      fontSize: '1.5em',
+      fontSize: '2.6em',
     },
   },
   mainChoiceItem: {
@@ -108,20 +109,8 @@ const marginRight = {
   marginRight: '10px !important',
 };
 
+
 @Radium
-class MainChoiceContainer extends React.Component {
-  render() {
-    return (
-      <ul role="navigation" style={styles.mainChoiceContainer}>
-        <li style={styles.mainChoiceItem}><Link to="/"><IconStar style={styles.bigIconStyles} />Search</Link></li>
-        <li style={styles.mainChoiceItem}><Link to="/"><IconStar style={styles.bigIconStyles} />Rate</Link></li>
-      </ul>
-    );
-  }
-}
-
-
-//@Radium
 class App extends React.Component {
   static propTypes = {
     children: React.PropTypes.node,
@@ -132,22 +121,14 @@ class App extends React.Component {
       <StyleRoot>
         <MuiThemeProvider muiTheme={muiTheme}>
           <div style={styles.pageContainer}>
-            <h1>Food Maniac!</h1>
+            <MainAppBar />
+            <MainChoiceContainer />
 
             <ul role="navigation" style={navStyle}>
               <li style={navItemStyle}><Link to="/"><IconHome style={styles.menuIconStyles} />Home</Link></li>
               <li style={navItemStyle}><NavLink to="/login"><IconLogin style={styles.menuIconStyles} />Login</NavLink></li>
               <li style={navItemStyle}><NavLink to="/where"><IconLocation style={styles.menuIconStyles} />Location</NavLink></li>
             </ul>
-
-            <MainChoiceContainer />
-
-            <div>
-              <btnRadium key="button" style={{display: 'flex', ':hover': {}}}>Hover me!</btnRadium>
-              {Radium.getState(this.state, 'button', ':hover') ? (
-                <span>{' '}Hovering!</span>
-              ) : null}
-            </div>
 
             { this.props.children }
             <Version version={_version} />
@@ -159,30 +140,4 @@ class App extends React.Component {
     );
   }
 }
-module.exports = Radium(App);
-//export default App;
-
-
-/*
-      <MuiThemeProvider muiTheme={muiTheme}>
-        <div className="page_container">
-          <h1>Food Maniac!</h1>
-
-          <ul role="navigation" className="navigation_bar">
-            <li><Link to="/"><IconHome />Home</Link></li>
-            <li><NavLink to="/login"><IconLogin />Login</NavLink></li>
-            <li><NavLink to="/where"><IconLocation />Location</NavLink></li>
-          </ul>
-
-          <ul role="navigation" className="navigation_main_choice">
-            <li><Link to="/"><IconStar />Search</Link></li>
-            <li><Link to="/"><IconStar />Rate</Link></li>
-          </ul>
-
-          { props.children }
-          <Version version={_version} />
-          <MaterialUiTest />
-          <FormsyTest1 />
-        </div>
-      </MuiThemeProvider>
-*/
+export default App;
