@@ -4,216 +4,60 @@
 		"selected_items":
 		[
 			[
-				"sy",
-				"styles"
-			],
-			[
-				"st",
-				"style"
-			],
-			[
-				"card",
-				"CardMedia"
-			],
-			[
-				"res",
-				"restaurantBlock"
-			],
-			[
-				"di",
-				"div\t(App.jsx)"
-			],
-			[
-				"sta",
-				"star"
-			],
-			[
-				"bt",
-				"btnRadium"
-			],
-			[
-				"mainC",
-				"mainChoiceContainer"
-			],
-			[
-				"sty",
-				"styles"
-			],
-			[
-				"IconL",
-				"IconLogin"
-			],
-			[
-				"F",
-				"FormsyText"
-			],
-			[
-				"For",
-				"Form"
-			],
-			[
-				"prod",
-				"production"
-			],
-			[
-				"ex",
-				"extends\t(Geolocation.jsx)"
-			],
-			[
-				"nb",
-				"nbRefreshes"
-			],
-			[
-				"crea",
-				"creating"
-			],
-			[
-				"up",
-				"updateUser"
-			],
-			[
-				"con",
-				"console"
-			],
-			[
-				"fi",
-				"first"
-			],
-			[
-				"lo",
-				"login"
-			],
-			[
-				"us",
-				"userComplete"
-			],
-			[
-				"lt",
-				"length"
-			],
-			[
-				"ser",
-				"server.port"
-			],
-			[
-				"g",
-				"getPlaces"
-			],
-			[
-				"pla",
-				"place"
-			],
-			[
-				"j",
-				"json"
-			],
-			[
-				"cons",
-				"console.log"
-			],
-			[
-				"te",
-				"testItems"
-			],
-			[
-				"du",
-				"dummy"
-			],
-			[
-				"l",
-				"login"
-			],
-			[
-				"ap",
-				"apiRoutes"
-			],
-			[
-				"new",
-				"newItem"
-			],
-			[
-				"fin",
-				"findPromise〔variable〕"
-			],
-			[
-				"ne",
-				"newUser"
-			],
-			[
-				"last",
-				"lastModif"
-			],
-			[
-				"user",
-				"userData"
-			],
-			[
-				"ma",
-				"mapProps"
-			],
-			[
-				"pr",
-				"props\tReact: this.props"
-			],
-			[
-				"stat",
-				"state\tReact: this.state"
-			],
-			[
-				"co",
-				"coordinates"
+				"Ca",
+				"CardRate"
 			],
 			[
 				"pro",
-				"props\tReact: this.props"
-			],
-			[
-				"fun",
-				"function〔keyword〕"
-			],
-			[
-				"s",
-				"state\tReact: this.state"
-			],
-			[
-				"d",
-				"div"
-			],
-			[
-				"resu",
-				"result"
-			],
-			[
-				"c",
-				"coordinates"
-			],
-			[
-				"Pl",
-				"PlacesContainer"
-			],
-			[
-				"onMa",
-				"onMarkerClick"
-			],
-			[
-				"onM",
-				"onMapMoved"
-			],
-			[
-				"rcc",
-				"rcc\tReact: class component"
-			],
-			[
-				"de",
-				"defaultCenter"
-			],
-			[
-				"lon",
-				"longitude"
+				"production"
 			],
 			[
 				"rea",
+				"react-router"
+			],
+			[
+				"cp",
+				"cp_css"
+			],
+			[
+				"c",
+				"client"
+			],
+			[
+				"di",
+				"div"
+			],
+			[
+				"loa",
+				"loaders"
+			],
+			[
+				"fu",
+				"fun	Function"
+			],
+			[
+				"marg",
+				"margin-top"
+			],
+			[
+				"st",
+				"statistics"
+			],
+			[
+				"nb",
+				"nbReal"
+			],
+			[
+				"r",
 				"real"
+			],
+			[
+				"s",
+				"statistics"
+			],
+			[
+				"posit",
+				"positions"
 			],
 			[
 				"Te",
@@ -228,8 +72,16 @@
 				"Route"
 			],
 			[
+				"co",
+				"const"
+			],
+			[
 				"m",
 				"modules.test"
+			],
+			[
+				"pr",
+				"props"
 			],
 			[
 				"Re",
@@ -241,11 +93,15 @@
 			],
 			[
 				"a",
-				"a\tTag"
+				"a	Tag"
+			],
+			[
+				"rcc",
+				"rcc	React: class component"
 			],
 			[
 				"for",
-				"for\tfor (…) {…} (Improved Native For-Loop)"
+				"for	for (…) {…} (Improved Native For-Loop)"
 			],
 			[
 				"em",
@@ -258,6 +114,10 @@
 			[
 				"expo",
 				"exportStatus"
+			],
+			[
+				"res",
+				"response"
 			],
 			[
 				"op",
@@ -277,7 +137,7 @@
 			],
 			[
 				"cl",
-				"class\tAttr"
+				"class	Attr"
 			],
 			[
 				"télé",
@@ -313,15 +173,23 @@
 			],
 			[
 				"h",
-				"h2\tTag"
+				"h2	Tag"
 			],
 			[
 				"ord",
 				"ordered"
 			],
 			[
+				"cons",
+				"console"
+			],
+			[
 				"ng",
-				"ng-click\tAngularJS"
+				"ng-click	AngularJS"
+			],
+			[
+				"te",
+				"tests"
 			],
 			[
 				"cop",
@@ -428,6 +296,10 @@
 				"function"
 			],
 			[
+				"fun",
+				"function"
+			],
+			[
 				"WEEK",
 				"week"
 			],
@@ -468,6 +340,10 @@
 				"dateCrt"
 			],
 			[
+				"con",
+				"concat"
+			],
+			[
 				"la",
 				"labels"
 			],
@@ -480,6 +356,10 @@
 				"arrayPeriodData"
 			],
 			[
+				"ne",
+				"newData"
+			],
+			[
 				"arra",
 				"arrayFilteredRows"
 			],
@@ -489,7 +369,11 @@
 			],
 			[
 				"fo",
-				"for\tfor (…) {…}"
+				"for	for (…) {…}"
+			],
+			[
+				"fin",
+				"findPeriod"
 			],
 			[
 				"b",
@@ -498,10 +382,6 @@
 			[
 				"ret",
 				"return"
-			],
-			[
-				"fu",
-				"fun\tFunction"
 			],
 			[
 				"test",
@@ -514,6 +394,126 @@
 			[
 				"mar",
 				"marchand"
+			],
+			[
+				"comp",
+				"computeFromPackToUnpack"
+			],
+			[
+				"err",
+				"errorCode"
+			],
+			[
+				"ca",
+				"cause"
+			],
+			[
+				"er",
+				"errorCode"
+			],
+			[
+				"u",
+				"upload"
+			],
+			[
+				"clas",
+				"ng-class	AngularJS"
+			],
+			[
+				"repla",
+				"replace"
+			],
+			[
+				"re",
+				"resolve"
+			],
+			[
+				"ng-s",
+				"ng-show	AngularJS"
+			],
+			[
+				"REM_",
+				"_REM_01"
+			],
+			[
+				"Paiem",
+				"paiement"
+			],
+			[
+				"on",
+				"oneChild"
+			],
+			[
+				"str",
+				"stringNodeMainPart"
+			],
+			[
+				"succ",
+				"success"
+			],
+			[
+				"datet",
+				"datetimeMex"
+			],
+			[
+				"order",
+				"orderInitial"
+			],
+			[
+				"or",
+				"orderDirection"
+			],
+			[
+				"ode",
+				"orderColumn"
+			],
+			[
+				"rou",
+				"roundFactor"
+			],
+			[
+				"ste",
+				"stepInitial"
+			],
+			[
+				"rang",
+				"range"
+			],
+			[
+				"lo",
+				"log"
+			],
+			[
+				"filt",
+				"Filters"
+			],
+			[
+				"to",
+				"toString"
+			],
+			[
+				"hal",
+				"halSelectModel"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"$sc",
+				"$scope	AngularJS"
+			],
+			[
+				"$loc",
+				"$location	AngularJS(DI)"
+			],
+			[
+				"Pro",
+				"productUtils"
 			]
 		]
 	},
@@ -523,35 +523,34 @@
 			"file": "/C/workspace/mapTest/app/components/App.jsx",
 			"settings":
 			{
-				"buffer_size": 3312,
-				"encoding": "UTF-8",
+				"buffer_size": 3314,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/workspace/mapTest/app/components/MainChoiceContainer.jsx",
+			"file": "/C/workspace/mapTest/app/components/NavLink.jsx",
 			"settings":
 			{
-				"buffer_size": 1894,
-				"encoding": "UTF-8",
+				"buffer_size": 177,
 				"line_ending": "Windows"
 			}
 		},
 		{
+			"file": "/C/workspace/mapTest/package.json",
+			"settings":
+			{
+				"buffer_size": 3389,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "import React from 'react';\nimport { browserHistory } from 'react-router';\nimport { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';\nimport Radium from 'radium';\n\n\nconst styles = {\n  card: {\n    margin: '20px 20px',\n    padding: '0px',\n  },\n  img: {\n    maxWidth: '450px',\n  },\n  cardMedia: {\n  },\n};\n\n\n@Radium\nclass CardRate extends React.Component {\n  static propTypes = {\n    // children: React.PropTypes.node,\n  }\n\n  render() {\n    return (\n      <Card\n        style={styles.card}\n      >\n        <CardMedia\n          overlay={<CardTitle title=\"Rate...\" subtitle=\"Click here to rate a dish\" />}\n          style={styles.cardMedia}\n          onClick={this.gotoRatingPage}\n        >\n          <img src=\"images/star_pizza_600.jpg\" alt=\"\" style={styles.img} />\n        </CardMedia>\n      </Card>\n    );\n  }\n\n  gotoRatingPage() {\n    browserHistory.push('/where');\n  }\n}\n\nexport default CardRate;\n",
 			"file": "/C/workspace/mapTest/app/components/CardRate.jsx",
+			"file_size": 910,
+			"file_write_time": 131257878338943529,
 			"settings":
 			{
-				"buffer_size": 899,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/workspace/mapTest/app/components/MainAppBar.jsx",
-			"settings":
-			{
-				"buffer_size": 334,
-				"encoding": "UTF-8",
+				"buffer_size": 934,
 				"line_ending": "Windows"
 			}
 		}
@@ -563,81 +562,57 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 392.0,
-		"last_filter": "git g",
+		"height": 285.0,
+		"last_filter": "git comm",
 		"selected_items":
 		[
 			[
-				"git g",
-				"Git: Gui"
+				"git comm",
+				"Git: Quick Commit (current file)"
 			],
 			[
-				"git push",
-				"Git: Push"
+				"git stat",
+				"Git: Status"
 			],
 			[
 				"git commit",
-				"Git: Quick Commit (current file)"
+				"Git: Quick Commit (repo)"
 			],
 			[
 				"git add",
 				"Git: Add Current File"
 			],
 			[
-				"git status",
+				"git pus",
+				"Git: Push"
+			],
+			[
+				"git com",
+				"Git: Quick Commit (current file)"
+			],
+			[
+				"git sta",
 				"Git: Status"
+			],
+			[
+				"git st",
+				"Git: Status"
+			],
+			[
+				"gitg",
+				"GitGutter: Show Comparing Against"
 			],
 			[
 				"git qui",
 				"Git: Quick Commit (current file)"
 			],
 			[
-				"git comm",
-				"Git: Quick Commit (current file)"
-			],
-			[
-				"git",
-				"Git: Gui"
-			],
-			[
-				"git pus",
-				"Git: Push"
-			],
-			[
-				"git co",
-				"Git: Commit"
-			],
-			[
-				"git a",
-				"Git: Add All"
-			],
-			[
-				"commit ",
-				"Git: Quick Commit (current file)"
-			],
-			[
-				"git commit ",
-				"Git: Quick Commit (repo)"
-			],
-			[
-				"git ",
-				"Git: Status"
-			],
-			[
-				"git s",
-				"Git: Status"
-			],
-			[
 				"gi",
 				"Git: Commit"
 			],
 			[
-				"git com",
-				"Git: Commit"
-			],
-			[
-				"git stat",
-				"Git: Status"
+				"git push",
+				"Git: Push"
 			],
 			[
 				"git show",
@@ -720,6 +695,10 @@
 				"Git: Diff All Files"
 			],
 			[
+				"git",
+				"Git: Log All"
+			],
+			[
 				"pack",
 				"Preferences: Browse Packages"
 			],
@@ -760,7 +739,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 464.0
+		"width": 514.0
 	},
 	"console":
 	{
@@ -786,165 +765,155 @@
 	[
 		"/C/workspace/mapTest",
 		"/C/workspace/mapTest/app",
-		"/C/workspace/mapTest/app/actions",
 		"/C/workspace/mapTest/app/components",
 		"/C/workspace/mapTest/app/containers",
-		"/C/workspace/mapTest/app/reducers",
-		"/C/workspace/mapTest/app/tests",
-		"/C/workspace/mapTest/app/utils",
-		"/C/workspace/mapTest/old",
+		"/C/workspace/mapTest/dist",
+		"/C/workspace/mapTest/documentation",
 		"/C/workspace/mapTest/server",
 		"/C/workspace/mapTest/server/models",
-		"/C/workspace/mapTest/server/util",
-		"/C/workspace/mapTest/sublime"
+		"/C/workspace/mapTest/server/util"
 	],
 	"file_history":
 	[
-		"/C/workspace/mapTest/old/testcard.jsx",
-		"/C/workspace/mapTest/app/index.css",
+		"/C/workspace/mapTest/app/reducers/coordinatesReducer.js",
+		"/C/workspace/mapTest/app/reducers/formsReducer.js",
+		"/C/workspace/mapTest/app/components/Geolocation.jsx",
+		"/C/workspace/mapTest/app/components/FormsyTest1.jsx",
 		"/C/workspace/mapTest/app/index.html",
 		"/C/workspace/mapTest/package.json",
-		"/C/workspace/mapTest/app/index.jsx",
-		"/C/workspace/mapTest/app/components/btnRadium.jsx",
-		"/C/workspace/mapTest/app/components/FormsyTest1.jsx",
-		"/C/workspace/mapTest/app/utils/constants.js",
-		"/C/workspace/mapTest/app/reducers/combinedReducer.js",
-		"/C/Utilisateurs/a545888/AppData/Local/Microsoft/Windows/Temporary Internet Files/Content.Outlook/76MSEO24/MIF_MEXMEM_20161201031004.XML",
-		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp28817/MIDDLEDATA/mex_merchant_extranet/batch/merchant/error/initload/InitLoad_ErrorReport__2016_12_06_01_26_30.xml",
-		"/C/workspace/mapTest/app/components/Text.jsx",
-		"/C/workspace/mapTest/app/components/MaterialUiForm.jsx",
-		"/C/workspace/mapTest/app/components/FormTest1.jsx",
-		"/C/workspace/mapTest/app/components/FormItem.jsx",
-		"/C/workspace/mapTest/app/components/App.jsx",
-		"/C/workspace/mapTest/app/components/asyncValidate.js",
-		"/C/workspace/mapTest/app/components/Root.jsx",
-		"/C/workspace/mapTest/app/components/MaterialUiTest.jsx",
-		"/C/workspace/mapTest/documentation/usefull.txt",
-		"/C/workspace/mapTest/webpack.config.js",
-		"/C/workspace/mapTest/index.js",
-		"/C/workspace/mapTest/app/reducers/coordinatesReducer.js",
-		"/C/workspace/mapTest/app/actions/FormActions.js",
-		"/C/workspace/mapTest/app/reducers/formsReducer.js",
-		"/C/workspace/mapTest/app/reducers/mainStore.js",
-		"/C/workspace/mapTest/server/server.js",
-		"/C/workspace/mapTest/webpack.config.hotreload.js",
-		"/C/workspace/mapTest/webpack.config.babel.js",
-		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp24984/MIDDLEDATA/mex_merchant_extranet/batch/merchant/error/initload/InitLoad_ErrorReport_1003_2016_12_02_09_22_25.xml",
-		"/C/Utilisateurs/a545888/Downloads/initload error 0212.log",
-		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp23987/MIDDLELOGS/mex_merchant_extranet/ssl-mex-central/mex-central.log",
-		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp17218/MIDDLEDATA/mex_merchant_extranet/batch/merchant/error/initload/InitLoad_ErrorReport_1003_2016_12_02_03_16_22.xml",
-		"/C/MEX/trunk/mex/mex-core/src/main/java/net/atos/itg/mem/sipstomemmigration/impl/SIPSToMeMMigrationImpl.java",
-		"/C/Utilisateurs/a545888/Downloads/MIF_MEXMEM_20161122CG.XML",
-		"/C/Utilisateurs/a545888/Downloads/MIF_MEXMEM_20161201031004.XML",
-		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp19802/tmp/MIF_MEXMEM_20161201031004.XML",
-		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp34220/MIDDLEDATA/mex_merchant_extranet/batch/merchant/error/initload/InitLoad_ErrorReport_1003_2016_12_01_04_34_20.xml",
-		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp09059/MIDDLEDATA/mex_merchant_extranet/batch/merchant/error/initload/InitLoad_ErrorReport_1003_2016_12_01_04_04_38.xml",
-		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp47843/MIDDLELOGS/mex_merchant_extranet/ssl-mex-central/mex-usrManagement.log",
-		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp50159/MIDDLELOGS/mex_merchant_extranet/ssl-mex-central/mex-central.log",
-		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp58646/MIDDLEDATA/mex_merchant_extranet/batch/merchant/error/initload/InitLoad_ErrorReport_1003_2016_12_01_04_54_11.xml",
-		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp28878/MIDDLEDATA/mex_merchant_extranet/batch/merchant/error/initload/InitLoad_ErrorReport_1003_2016_12_01_04_27_59.xml",
-		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp17706/MIDDLEDATA/mex_merchant_extranet/batch/merchant/in/initload/MIF_MEXMEM_20161009022642.XML",
-		"/C/workspace/mapTest/node_modules/babel-cli/README.md",
-		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp23029/MIDDLEDATA/mex_merchant_extranet/batch/merchant/error/initload/InitLoad_ErrorReport_1013_2016_11_29_07_00_01.xml",
-		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp25070/MIDDLEDATA/mex_merchant_extranet/batch/merchant/error/initload/InitLoad_ErrorReport_1003_2016_11_10_02_00_01.xml",
-		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp24910/MIDDLEDATA/mex_merchant_extranet/batch/merchant/error/initload/inputfile/MIF_MEXMEM_20161110130852.XML",
-		"/C/Utilisateurs/a545888/AppData/Local/Microsoft/Windows/Temporary Internet Files/Content.Outlook/76MSEO24/exemple_substatus_TEST_50014.txt",
-		"/C/workspace/mapTest/app/index.js",
-		"/C/workspace/mapTest/.eslintrc",
-		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp41498/MIDDLEDATA/mex_merchant_extranet/batch/transaction/error/sips/offline/IR.OPERATION.20.161114.012822.OK",
-		"/C/Mex/trunk/mex/mex-gui/src/main/webapp/modules/Translation/i18n/locale-fr.old.json",
-		"/C/Mex/trunk/mex/mex-delivery/target/mex-delivery/modules/Translation/i18n/locale-fr.old.json",
-		"/C/workspace/mapTest/app/components/Login.jsx",
-		"/C/workspace/mapTest/app/components/ChooseLocation.jsx",
-		"/C/workspace/mapTest/app/components/Geolocation.jsx",
-		"/C/MEX/tools/sublime.ko/Data/Packages/User/Default (Windows).sublime-keymap",
-		"/C/MEX/tools/sublime/Data/Packages/User/Default (Windows).sublime-keymap",
-		"/C/MEX/tools/sublime/Data/Packages/BracketHighlighter/Example.sublime-keymap",
-		"/C/MEX/tools/sublime/Data/Packages/BracketHighlighter/bh_swapping.sublime-settings",
-		"/C/workspace/mapTest/app/actions/LocationActions.js",
-		"/C/workspace/mapTest/server/util/logger.js",
-		"/C/workspace/mapTest/server/util/setup-test-env.js",
-		"/C/workspace/mapTest/sublime/mapTest.sublime-workspace",
-		"/C/workspace/mapTest/test/mocha_ignore.js",
-		"/C/workspace/mapTest/server.js",
-		"/C/workspace/mapTest/app/components/Geolocation.js",
-		"/C/workspace/mapTest/app/reducers/coordinates.js",
-		"/C/workspace/mapTest/webpack.config.dev.js",
-		"/C/workspace/mapTest/dist/bundle.js",
-		"/C/workspace/mapTest/app/components/Root.js",
-		"/C/workspace/mapTest/app/components/App.js",
-		"/C/workspace/mern-starter/documentation/usefull.txt",
-		"/C/workspace/mapTest/app/components/MaterialUiTest.js",
-		"/C/workspace/mapTest/test/apiItemSpec.js",
-		"/C/workspace/mapTest/test/apiMarkSpec.js",
-		"/C/workspace/mapTest/test/apiPlaceSpec.js",
-		"/C/workspace/mapTest/test/apiUserSpec.js",
-		"/C/workspace/mapTest/.gitignore",
-		"/C/workspace/mapTest/dist/.gitignore",
-		"/C/workspace/mapTest/server/controllers/itemController.js",
 		"/C/workspace/mapTest/server/controllers/userController.js",
-		"/C/workspace/mapTest/server/controllers/placeController.js",
-		"/C/workspace/mapTest/server/controllers/markController.js",
-		"/C/workspace/mapTest/test_sav/apiMarkSpec.js",
-		"/C/workspace/mapTest/config/test.json",
-		"/C/workspace/mapTest/server/log/winston.log",
-		"/C/MEX/trunk/mex/mex-gui/src/main/webapp/modules/Translation/i18n/locale-en.json",
-		"/C/workspace/mapTest/server/models/mark.js",
-		"/C/workspace/mapTest/tests/apiMarkSpec.js",
-		"/C/workspace/mapTest/tests/apiUserSpec.js",
-		"/C/workspace/mapTest/tests/apiPlaceSpec.js",
-		"/C/workspace/mapTest/tests/apiItemSpec.js",
-		"/C/workspace/mapTest/test/apiSpec.js",
-		"/C/workspace/mapTest/server/models/place.js",
-		"/C/workspace/mapTest/server/routes/apiRoutes.js",
-		"/C/workspace/mapTest/server/testData.js",
-		"/C/workspace/mapTest/server/models/item.js",
-		"/C/workspace/mapTest/server/models/user.js",
-		"/C/workspace/mapTest/config/default.json",
-		"/C/workspace/mapTest/config/development.json",
-		"/C/workspace/mapTest/winston.log",
-		"/C/Utilisateurs/a545888/Desktop/UM Scripts.sql",
-		"/C/workspace/bookstore/app/models/book.js",
-		"/C/workspace/bookstore/config/test.json",
-		"/C/workspace/bookstore/test/book.js",
-		"/C/workspace/mapTest/server/config/default.json",
-		"/C/workspace/mapTest/server/config/dev.json",
-		"/C/Utilisateurs/a545888/Documents/tmp/0310/MIF_MEXMEM_20160927000006.XML",
-		"/C/Utilisateurs/a545888/Documents/tmp/0310/MIF_MEXMEM_20160927000005.XML",
-		"/C/Utilisateurs/a545888/Documents/tmp/0310/MIF_MEXMEM_20160927000004.XML",
-		"/C/Utilisateurs/a545888/Documents/tmp/0310/MIF_MEXMEM_20160927000003.XML",
-		"/C/workspace/mapTest/server/models/__tests__/user.spec.js",
+		"/C/workspace/mapTest/documentation/usefull.txt",
+		"/C/workspace/mapTest/index.js",
+		"/C/workspace/mapTest/app/components/App.js",
 		"/C/workspace/mapTest/server/util/test-helpers.js",
-		"/C/Utilisateurs/a545888/Documents/tmp/0310/MIF_MEXMEM_20160927000002.XML",
-		"/C/Utilisateurs/a545888/Documents/tmp/0310/MIF_MEXMEM_20160927000001.XML",
-		"/C/Utilisateurs/a545888/Desktop/Analysis_Dynamic_Search.sql",
-		"/C/Utilisateurs/a545888/Documents/tmp/0310/MIF_MEXMEM_20161001044901.XML",
+		"/C/workspace/mapTest/server/models/__tests__/user.spec.js",
+		"/C/workspace/mapTest/app/containers/MapBasicContainer.js",
+		"/C/workspace/mapTest/app/containers/PlacesContainer.jsx",
+		"/C/workspace/mapTest/db/mongo/testData.txt",
 		"/C/workspace/mapTest/server/dummyData.js",
-		"/C/workspace/mapTest/server/models/__tests__/item.spec.js",
-		"/C/workspace/mapTest/node_modules/mocha/mocha.js",
-		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp38574/MIDDLELOGS/mex_merchant_extranet/ssl-mex-central/mex-central.log",
-		"/C/workspace/mapTest/old/old_depend_and_babel.txt",
-		"/C/workspace/mapTest/.babelrc",
-		"/C/nodejs/.eslintrc",
+		"/C/workspace/mapTest/server/models/user.js",
+		"/C/workspace/mapTest/server/models/place.js",
+		"/C/workspace/mapTest/server/models/item.js",
+		"/C/workspace/mapTest/server/models/mark.js",
+		"/C/workspace/mapTest/server/models/users.js",
+		"/C/workspace/mapTest/app/tests/DisplayPositionFromStore.jsx",
+		"/C/workspace/mapTest/app/components/Geolocation.js",
+		"/C/workspace/mapTest/webpack.config.js",
+		"/C/workspace/mapTest/README.md",
+		"/C/Users/Laurent/dev/sublime/Data/Packages/Terminal/Terminal.sublime-settings",
+		"/C/Users/Laurent/dev/sublime/Data/Packages/Terminal/Default (Windows).sublime-keymap",
+		"/C/Users/Laurent/dev/sublime/Data/Packages/User/Terminal.sublime-settings",
+		"/C/Users/Laurent/dev/sublime/Data/Packages/User/Terminal (Windows).sublime-settings",
+		"/C/workspace/mapTest/server.js",
+		"/C/workspace/mapTest/dist/index.html",
+		"/C/workspace/mapTest/old/webpack.server.config.for.server.rendering.js",
+		"/C/workspace/mapTest/webpack.client.config.for.server.rendering.js",
+		"/C/workspace/mapTest/serverRendering.js",
+		"/C/workspace/mapTest/app/components/Routes.js",
+		"/C/workspace/mapTest/app/index.js",
+		"/C/workspace/mapTest/app/index.html.not used with server rendering",
+		"/C/workspace/mapTest/webpack.server.config.js",
+		"/C/workspace/mapTest/.gitignore",
+		"/C/workspace/mapTest/dist/index_bundle.js",
+		"/C/Users/Laurent/dev/sublime/Data/Packages/User/GitGutter.sublime-settings",
+		"/C/workspace/mapTest/app/webpack.config.js",
+		"/C/workspace/mapTest/app/package.json",
+		"/C/workspace/mapTest/npm-debug.log",
+		"/C/workspace/mapTest/app/index.css",
+		"/C/workspace/mapTest/app/components/Version.js",
+		"/C/Users/Laurent/dev/sublime/Data/Packages/GitGutter/GitGutter.sublime-settings",
+		"/C/MEX/tools/sublime/Data/Packages/Git/Git.sublime-settings",
+		"/C/MEX/tools/sublime/Data/Packages/User/Git.sublime-settings",
+		"/C/MEX/tools/sublime/Data/Packages/Default/Preferences.sublime-settings",
+		"/C/Utilisateurs/a545888/Google Drive/Business/dev/react/graphql-demo/index.js",
+		"/C/Utilisateurs/a545888/Google Drive/Business/dev/react/graphql-demo/data.json",
+		"/C/workspace/react-router-tutorial/lessons/07-more-nesting/modules/App.js",
+		"/C/workspace/react-router-tutorial/lessons/07-more-nesting/modules/Repos.js",
+		"/C/workspace/react-router-tutorial/lessons/07-more-nesting/bundle.js",
+		"/C/workspace/react-router-tutorial/lessons/07-more-nesting/modules/NavLink.js",
+		"/C/MEX/tools/sublime/Data/Packages/jsfmt/.jsfmtrc",
+		"/C/MEX/tools/sublime/Data/Packages/User/jsfmt.sublime-settings",
+		"/C/workspace/react-router-tutorial/lessons/07-more-nesting/index.html",
+		"/C/workspace/react-router-tutorial/lessons/07-more-nesting/modules/TestClass.js",
+		"/C/workspace/react-router-tutorial/lessons/07-more-nesting/modules/TestComponent.js",
+		"/C/workspace/react-router-tutorial/lessons/07-more-nesting/modules/Nested1.js",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp49980/MIDDLELOGS/mex_merchant_extranet/ssl-mex-central/mex-central.log",
+		"/C/nodejs/.esformatter",
+		"/C/workspace/react-router-tutorial/lessons/07-more-nesting/modules/About.js",
+		"/C/workspace/react-router-tutorial/lessons/07-more-nesting/index.js",
+		"/C/MEX/tools/sublime/Data/Packages/User/Default (Windows).sublime-keymap",
+		"/C/workspace/react-router-tutorial/lessons/07-more-nesting/modules/Nested2.js",
+		"/C/workspace/react-router-tutorial/lessons/07-more-nesting/modules/Layout.js",
+		"/C/MEX/tools/sublime/Data/Packages/User/SublimeLinter-html-tidy/linter.py",
+		"/C/MEX/tools/sublime/Data/Installed Packages/SublimeLinter-html-tidy/linter.py",
+		"/C/MEX/tools/sublime/Data/Installed Packages/SublimeLinter-html-tidy.lve.force.en.language/linter.py",
+		"/C/MEX/tools/sublime/Data/Packages/User/Preferences.sublime-settings",
+		"/C/MEX/tools/sublime/Data/Packages/SublimeLinter/SublimeLinter.sublime-settings",
 		"/C/MEX/tools/sublime/Data/Packages/User/SublimeLinter.sublime-settings",
-		"/C/workspace/mapTest/db/mongo/testData.txt"
+		"/C/workspace/react-router-tutorial/lessons/07-more-nesting/.eslintrc",
+		"/C/nodejs/.eslintrc",
+		"/C/MEX/tools/sublime/Data/Packages/User/SoDaReloaded Dark.sublime-theme",
+		"/C/MEX/tools/sublime/Data/Packages/DocBlockr/Base File.sublime-settings",
+		"/C/MEX/tools/sublime/Data/Packages/DocBlockr/README.md",
+		"/C/MEX/tools/sublime/Data/Installed Packages/Theme - SoDaReloaded/dark/SoDaReloaded Dark.sublime-theme",
+		"/C/MEX/tools/sublime/Data/Installed Packages/Theme - SoDaReloaded.sublime-package",
+		"/C/MEX/tools/sublime/Data/Packages/User/Default.sublime-theme",
+		"/C/MEX/tools/sublime/Data/Packages/User/Babel.sublime-settings",
+		"/C/MEX/tools/sublime/Data/Packages/User/Distraction Free.sublime-settings",
+		"/C/MEX/tools/sublime/Data/Packages/User/JavaScript.sublime-settings",
+		"/C/MEX/tools/sublime/Data/Packages/Babel/Babel.sublime-settings",
+		"/C/MEX/tools/sublime/Data/Packages/User/GitGutter.sublime-settings",
+		"/C/MEX/tools/sublime/Data/Installed Packages/GitGutter-Edge.sublime-package",
+		"/C/MEX/tools/sublime/Data/Packages/GitGutter/GitGutter.sublime-settings",
+		"/C/MEX/tools/sublime/Data/Packages/User/Zeal.sublime-settings",
+		"/C/MEX/tools/sublime/Data/Packages/Zeal/Zeal.sublime-settings",
+		"/C/MEX/tools/git/README.portable",
+		"/C/workspace/react-router-tutorial/lessons/react_router_lessons.sublime-project",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp58100/MIDDLELOGS/mex_merchant_extranet/ssl-mex-central/mex-easyflow-reporter.log",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp47233/MIDDLEDATA/mex_merchant_extranet/batch/merchant/synchro/out/Bnpp/report/report_sipsbnpp_2016_06_10_06_07_19.txt",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp47581/MIDDLEDATA/mex_merchant_extranet/batch/merchant/synchro/out/Bnpp/report/report_sipsbnpp_2016_06_16_06_09_06.txt",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp47954/MIDDLEDATA/mex_merchant_extranet/batch/merchant/synchro/out/Bnpp/report/report_sipsbnpp_2016_06_05_06_07_05.txt",
+		"/C/MEX/16R3/mex/mex-core/src/main/java/net/atos/itg/mem/synchro/SynchroJavaToXMLUtility.java",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp38658/MIDDLEDATA/mex_merchant_extranet/batch/transaction/error/ppro/payment/PPRO.SETTLEMENT.25.20160706.163420.CSV",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp38817/MIDDLEDATA/mex_merchant_extranet/batch/transaction/error/ppro/payment/PPRO.SETTLEMENT.25.20160711.102003.CSV",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp37759/MIDDLEDATA/mex_merchant_extranet/batch/transaction/error/ppro/payment/PPRO.SETTLEMENT.25.20160718.100001.CSV",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp37688/MIDDLEDATA/mex_merchant_extranet/batch/transaction/error/ppro/payment/PPRO.SETTLEMENT.25.20160720.102003.CSV",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp34477/MIDDLEDATA/mex_merchant_extranet/batch/transaction/archives/ppro/payment/PPRO.SETTLEMENT.25.20160725.100001.CSV",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp35653/MIDDLEDATA/mex_merchant_extranet/batch/transaction/archives/ppro/payment/PPRO.SETTLEMENT.25.20160616.125743.CSV",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp32828/MIDDLEDATA/mex_merchant_extranet/batch/transaction/archives/ppro/payment/PPRO.SETTLEMENT.25.20160704.101005.CSV",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp34455/MIDDLEDATA/mex_merchant_extranet/batch/transaction/archives/ppro/payment/PPRO.SETTLEMENT.25.20160704.100004.CSV",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp29523/MIDDLEDATA/mex_merchant_extranet/batch/transaction/archives/ppro/payment/PPRO.PAYMENT.25.20160727.030000.CSV",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp31762/MIDDLEDATA/mex_merchant_extranet/batch/transaction/archives/ppro/payment/PPRO.SETTLEMENT.25.20160706.163413.CSV",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp37653/MIDDLELOGS/mex_merchant_extranet/ssl-mex-central/mex-common.log",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp01676/MIDDLEDATA/mex_merchant_extranet/batch/merchant/error/initload/InitLoad_ErrorReport_1003_2016_05_26_08_00_02.xml",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp19178/MIDDLEDATA/mex_merchant_extranet/batch/merchant/error/initload/InitLoad_ErrorReport_1003_2016_06_02_08_00_01.xml",
+		"/C/Utilisateurs/a545888/AppData/Local/Microsoft/Windows/Temporary Internet Files/Content.Outlook/76MSEO24/ImportMerchant.xsd",
+		"/C/Utilisateurs/a545888/AppData/Local/Microsoft/Windows/Temporary Internet Files/Content.Outlook/76MSEO24/gescomMerchantTestDataStreamUpdate_2_3_10-RP.xml",
+		"/C/Utilisateurs/a545888/AppData/Local/Microsoft/Windows/Temporary Internet Files/Content.Outlook/76MSEO24/gescomMerchantTestDataStreamUpdate_2_3_10-ER.xml",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp52050/MIDDLEDATA/mex_merchant_extranet/batch/merchant/archives/initload/MIF_MEXMEM_20160706015326.XML",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp52701/MIDDLEDATA/mex_merchant_extranet/batch/merchant/out/initload/InitLoad_Report_1003_2016_07_06_08_00_46.txt",
+		"/C/Utilisateurs/a545888/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Utilisateurs/a545888/AppData/Roaming/Sublime Text 3/Packages/User/Plain text.sublime-settings",
+		"/C/Utilisateurs/a545888/Desktop/trunk/30 - mvn build mex.txt",
+		"/C/Utilisateurs/a545888/Downloads/RELEASES",
+		"/C/Utilisateurs/a545888/Google Drive/Business/dev/AngularJS/tests/angular2-quickstart/systemjs.config.js",
+		"/C/Utilisateurs/a545888/Google Drive/Business/dev/AngularJS/tests/angular2-quickstart/package.json",
+		"/C/Utilisateurs/a545888/Google Drive/Business/dev/AngularJS/tests/angular2-quickstart/typings.json",
+		"/C/Utilisateurs/a545888/Google Drive/Business/dev/AngularJS/tests/angular2-quickstart/tsconfig.json",
+		"/C/nodejs/gescomMerchantTestDataStream_1.xml",
+		"/C/Utilisateurs/a545888/AppData/Local/Microsoft/Windows/Temporary Internet Files/Content.Outlook/76MSEO24/crossmerchant.txt",
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/7zO3FA7.tmp/Transaction_List_Page_Search_For_Child_TRXs.txt"
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 54.0
 	},
 	"find_in_files":
 	{
-		"height": 105.0,
+		"height": 144.0,
 		"where_history":
 		[
-			"C:\\workspace\\mapTest\\",
-			"C:\\Mex\\trunk\\mex\\,*.json",
-			"C:\\Mex\\trunk\\mex\\,*.properties,*..json",
-			"C:\\Mex\\trunk\\mex\\,*.properties",
-			"C:\\workspace\\mapTest\\app, C:\\workspace\\mapTest\\server, C:\\workspace\\mapTest\\documentation",
-			"C:\\workspace\\mapTest\\",
-			"C:\\Mex\\trunk\\mex\\,*.properties",
+			"C:\\workspace\\mapTest\\app",
 			"C:\\MEX\\trunk\\mex\\mex-gui\\src\\main\\webapp\\static\\ng,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties,*.pom\n",
 			"C:\\Mex\\trunk\\mex\\,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties,*.pom\n",
 			"C:\\MEX\\trunk\\mex\\mex-gui\\src\\main\\webapp\\static\\ng,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties,*.pom\n",
@@ -1065,7 +1034,13 @@
 			"C:\\Mex\\trunk\\mex\\,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html,*.properties",
 			"C:\\Mex\\trunk\\mex\\,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html",
 			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json,*.css,*.html",
-			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json"
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml,*.json",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml",
+			"C:\\training\\,-*.jasper,-*.jrxml,*.java,*.js,*.tml",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml",
+			"C:\\Mex\\trunk\\mex,-*.jasper,-*.jrxml,*.java,*.js,*.tml",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js,*.tml",
+			"C:\\Mex\\trunk\\mex\\mex-gui\\src,C:\\MEX\\trunk\\mex\\mex-common\\src,C:\\MEX\\trunk\\mex\\mex-batch\\src,C:\\MEX\\trunk\\mex\\mex-core\\src,-*.jasper,-*.jrxml,*.java,*.js"
 		]
 	},
 	"find_state":
@@ -1073,134 +1048,134 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"mainChoiceContainer",
-			"450px",
-			"CardTest",
-			"2x",
-			"conStyles",
-			"MainChoice",
-			"validationError",
-			"validation",
-			"validationError",
-			"MenuItems",
-			"menu",
-			"company",
-			"container",
-			"styles",
-			"iconStyles",
-			"HomeIcon",
-			"ContactForm",
-			"\"/>",
-			"./app/index.js",
-			"mainStore",
-			"coordinatesReducer",
-			"Reducer.coordinates",
-			"coordinates",
-			"log.info",
-			"console.log",
-			"TEST",
-			"Error",
-			"ERROR",
-			"TESTLVE011200",
-			"webpack.config.hotreload",
-			"\"kycTreatment\":{",
-			"\"LUMIÈRE\"",
-			"JRTreportnetworkAmex",
-			"config.",
-			"setCurrentLocation",
-			"SET_CURRENT_LOCATION",
-			"webpack-dev-server",
-			"webpack-hot-middleware",
-			"logger",
-			"Main",
-			"Name",
-			"name",
-			"item",
-			"Item",
-			"name",
-			"item",
-			"Item",
-			"Place",
-			"place",
-			"describe",
-			"place",
-			"Place",
-			"place",
-			"Place",
-			"Item",
-			"user",
-			"User",
-			"user",
-			"User",
-			"Users",
-			"console",
-			"config",
-			"console.log",
-			"consol",
-			"cuidUpdateCuid",
-			"eql",
-			"NODE_ENV",
-			"userMissingFields",
-			"database.URL",
-			"Database.URL",
-			"DBHost",
-			"Book",
-			"user",
-			"User",
-			"user",
-			"j",
-			"User",
-			"user",
-			"users",
-			"user",
-			"User",
-			"user",
-			"User",
-			"item",
-			"Item",
-			"item",
-			"user",
-			"User",
-			"jsdom",
-			"babel-polyfill",
-			"babel-register",
-			"nodejieba",
-			"gyp",
-			"connectDB",
-			"Post",
-			"apiController",
-			"post",
-			"Post",
-			"ethod postTransaction(TransactionSI",
-			"users",
-			"Item",
-			"place",
-			"since:",
-			"user",
-			"what",
-			"NODE_SERVER_RENDER",
-			"assign",
-			"onReady",
-			"onMapReady",
-			"map",
-			"nbRenders",
-			"setCurrentLocation",
-			"center",
+			"loglevel",
+			".debug",
+			".info",
+			".error",
+			"0.13",
 			"currentLocation",
-			"console.log",
-			"console",
-			"loaded",
-			"\"block_",
-			"legal",
-			"billing",
-			"cash",
-			"Paypage",
-			"availableOperations.IDEAL_rabobank",
-			"createmessageReport",
-			"processSynchroBatchReport",
-			"processSynchroBatchReport ",
-			"processSynchroBatchReport",
-			"bnp"
+			"pm2:restartClientRendering",
+			"Geolocation",
+			"alert",
+			"current",
+			"hide",
+			"START_OF_PROCESS",
+			"path",
+			"BT0000049902200",
+			"<ns1:merchantType>CG</ns1:merchantType>",
+			"info@hotelvillaflora.nl",
+			"TEXT_INFO_A1",
+			"moment",
+			"date",
+			"999999999",
+			"/EXPORT!",
+			"/EXPORT!!s",
+			"/rest/uxiHTransactions/mifTransactions",
+			"export",
+			"getUUID",
+			"            <status>ACTIVE</status>\\r\\n\\",
+			"writeSubscriptions",
+			"getSubscription",
+			"\"INFO\":",
+			"credit",
+			"MAPPING",
+			"sipsType",
+			"credi",
+			"translate",
+			"transla",
+			"credit",
+			"no match found",
+			"MERCHANT_SELECTION",
+			"INVALID_START_DATE\"",
+			"Transacties kunnen enkel aangevraagd worden voor een periode van 31 kalenderdagen",
+			"helpComponent.questionWLE",
+			"Heeft u een vraag over het WL Extranet?",
+			"REGION",
+			"CARD_PRODUCT",
+			"ARN_CUT",
+			"APPROVAL_CODE",
+			"PRICE_BUNDLE",
+			"SCHEME_FEE_AMOUNT",
+			"MSC_FEE_AMOUNT",
+			"INTERCHANGE_AMOUNT",
+			"MERCHANT_ID",
+			"TRANSACTIONUID",
+			"MERCHANT_REFERENCE",
+			"MASKED_PAN",
+			"PAID_AMOUNT",
+			"CREDIT_DEBIT",
+			"TRX_TYPE",
+			"export",
+			"<mex-warning",
+			"alert alert",
+			"warningMifExportAsked",
+			"mex-warning",
+			"warningTopPage",
+			"warningMifUnknownFees",
+			"mex",
+			"mex-warning",
+			"stat",
+			"mex-warning",
+			"warning",
+			"-->\n",
+			"length",
+			"empty",
+			"class=\"alert ",
+			"alert-info",
+			"class=\"alert",
+			"alert-danger",
+			"class=\"alert",
+			"appInitialization",
+			"textInfoShown",
+			"appinitialisation",
+			"trnGraphModule",
+			"uniqueid",
+			"trnGraphModule",
+			"trnGraph",
+			"directive",
+			"instant(limitString)",
+			"$translate.instant",
+			"errorMessage",
+			"translate",
+			"minOccurs=\"",
+			"T:",
+			"            <",
+			"                <av>",
+			"                <ac",
+			"aValue",
+			"aCode",
+			"variableAttribute",
+			"VACode",
+			"variableAttribute",
+			"stat",
+			"recycle",
+			"webshop",
+			"createSubscriptions",
+			"153006227800",
+			"LveTestDuplEmail5",
+			"LveTestDuplEmail4",
+			"LveTestDuplEmail3",
+			"LveTestDuplEmail2",
+			"LveTestDuplEmail1",
+			"transaction",
+			"instance",
+			"office@cosyhouse.be",
+			"zIndex",
+			"z-index",
+			"04281405060",
+			"160428140143855",
+			"16042814014",
+			"1604281401438551158",
+			"$translate.instant",
+			"exponent",
+			"Exponent",
+			"genericFilters",
+			"/static/generic/img/",
+			"genericFilters",
+			"rangemodal",
+			"openPopup",
+			"mscFeeAmount",
+			"rangeModal"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1208,39 +1183,8 @@
 		"regex": false,
 		"replace_history":
 		[
-			"CardRate",
-			"5x",
-			"pageContainer",
-			"StarIcon",
-			"FormTest1",
-			"\" />",
-			"combinedReducer",
-			"formsReducer",
-			"coordinatesReducer",
-			"forms",
-			"log.debug",
-			"Mark",
-			"mark",
-			"Mark",
-			"mark",
-			"Mark",
-			"mark",
-			"item",
-			"Item",
-			"database.URL",
-			"Database.URL",
-			"Item",
-			"item",
-			"Item",
-			"mark",
-			"Mark",
-			"place",
-			"Place",
-			"item",
-			"Item",
-			"userController",
-			"user",
-			"results",
+			"// alert",
+			"position",
 			"warning",
 			"<",
 			"<av>",
@@ -1335,7 +1279,38 @@
 			"userInfoWasRetreivedFromServer",
 			"// window.location.reload(true);",
 			"window.location.reload(true);",
-			"$scope.userInfo.company"
+			"$scope.userInfo.company",
+			"$scope.userInfo.language",
+			"$scope.userInfo.alias",
+			"$scope.userInfo.isUserSessionData",
+			"$scope.userInfo.userType",
+			"$scope.userInfo.userIndex",
+			"$scope.userInfo",
+			"userInfoService",
+			"'",
+			" - hTransactions",
+			"uxiHTransactions",
+			"$scope.$storage.data",
+			"",
+			"To",
+			"dateTo",
+			"dateFrom",
+			"addFiltersToTable",
+			"indexAllColumns",
+			"indexDisplayedColumns",
+			"filterAndSearch",
+			"displayFilterAndSearches",
+			"tableColumnNames",
+			"tableColumnFilters",
+			"jTable",
+			"},\\n",
+			"decimalSeparator",
+			"hiddenByDefaultColumns",
+			"data",
+			"columnObjects",
+			"\"",
+			"\\\"",
+			"Status"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -1350,15 +1325,12 @@
 		},
 		{
 			"path": "C:\\workspace\\mapTest\\.git"
-		},
-		{
-			"path": "C:\\workspace\\mapTest\\node_modules\\google-maps-react"
 		}
 	],
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -1367,19 +1339,20 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3312,
+						"buffer_size": 3314,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2968,
-								2968
+								2442,
+								2379
 							]
 						],
 						"settings":
 						{
+							"auto_complete": false,
 							"bracket_highlighter.busy": false,
 							"bracket_highlighter.locations":
 							{
@@ -1387,15 +1360,15 @@
 								{
 									"1":
 									[
-										3283,
-										3284
+										3292,
+										3293
 									]
 								},
 								"icon":
 								{
 									"1":
 									[
-										"Packages/BracketHighlighter/icons/round_bracket.png",
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
 										"brackethighlighter.default"
 									]
 								},
@@ -1403,8 +1376,8 @@
 								{
 									"1":
 									[
-										2465,
-										2466
+										2377,
+										2378
 									]
 								},
 								"unmatched":
@@ -1413,204 +1386,190 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
-							],
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 2448.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/C/workspace/mapTest/app/components/MainChoiceContainer.jsx",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1894,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								728,
-								730
-							]
-						],
-						"settings":
-						{
-							"bracket_highlighter.busy": false,
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-									"1":
-									[
-										733,
-										734
-									]
-								},
-								"icon":
-								{
-									"1":
-									[
-										"Packages/BracketHighlighter/icons/round_bracket.png",
-										"brackethighlighter.default"
-									]
-								},
-								"open":
-								{
-									"1":
-									[
-										716,
-										717
-									]
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
 								"bh_round_close",
 								"bh_round_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
 							],
-							"open_with_edit": true,
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 216.0,
+						"translation.x": -0.0,
+						"translation.y": 3119.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "/C/workspace/mapTest/app/components/CardRate.jsx",
+					"buffer": 1,
+					"file": "/C/workspace/mapTest/app/components/NavLink.jsx",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 899,
+						"buffer_size": 177,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								301,
-								301
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/C/workspace/mapTest/package.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3389,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1622,15 +1581,15 @@
 								{
 									"1":
 									[
-										314,
-										315
+										3387,
+										3388
 									]
 								},
 								"icon":
 								{
 									"1":
 									[
-										"Packages/BracketHighlighter/icons/single_quote.png",
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
 										"brackethighlighter.default"
 									]
 								},
@@ -1638,8 +1597,8 @@
 								{
 									"1":
 									[
-										293,
-										294
+										0,
+										1
 									]
 								},
 								"unmatched":
@@ -1648,102 +1607,119 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
 								"bh_round_close",
 								"bh_round_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
 							],
-							"open_with_edit": true,
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
+							"syntax": "Packages/Theme - SoDaReloaded/settings/langs/npm JSON.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 114.0,
+						"translation.x": -0.0,
+						"translation.y": 1321.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "/C/workspace/mapTest/app/components/MainAppBar.jsx",
+					"file": "/C/workspace/mapTest/app/components/CardRate.jsx",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 334,
+						"buffer_size": 934,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								107,
-								107
+								421,
+								421
 							]
 						],
 						"settings":
 						{
+							"auto_complete": false,
 							"bracket_highlighter.busy": false,
 							"bracket_highlighter.locations":
 							{
 								"close":
 								{
+									"1":
+									[
+										455,
+										456
+									]
 								},
 								"icon":
 								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"brackethighlighter.default"
+									]
 								},
 								"open":
 								{
+									"1":
+									[
+										412,
+										413
+									]
 								},
 								"unmatched":
 								{
@@ -1751,70 +1727,71 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
 								"bh_round_close",
 								"bh_round_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
 							],
-							"open_with_edit": true,
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 450.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -1822,7 +1799,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 32.0
+		"height": 38.0
 	},
 	"input":
 	{
@@ -1861,7 +1838,7 @@
 	},
 	"output.git":
 	{
-		"height": 207.0
+		"height": 152.0
 	},
 	"output.unsaved_changes":
 	{
@@ -1871,7 +1848,7 @@
 	"project": "",
 	"replace":
 	{
-		"height": 74.0
+		"height": 72.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1913,7 +1890,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 303.0,
+	"side_bar_width": 432.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

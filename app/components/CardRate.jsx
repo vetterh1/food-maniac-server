@@ -1,4 +1,5 @@
 import React from 'react';
+import { browserHistory } from 'react-router';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import Radium from 'radium';
 
@@ -7,15 +8,9 @@ const styles = {
   card: {
     margin: '20px 20px',
     padding: '0px',
-    '@media only screen and (max-width: 680px)': {
-      margin: '80px 80px !important',
-    },
   },
   img: {
     maxWidth: '450px',
-    '@media only screen and (max-width: 680px)': {
-      maxWidth: '300px',
-    },
   },
   cardMedia: {
   },
@@ -32,11 +27,16 @@ class CardRate extends React.Component {
         <CardMedia
           overlay={<CardTitle title="Rate..." subtitle="Click here to rate a dish" />}
           style={styles.cardMedia}
+          onClick={this.gotoRatingPage}
         >
-          <img src="images/star_pizza_600.jpg" alt="" style= {styles.img} />
+          <img src="images/star_pizza_600.jpg" alt="" style={styles.img} />
         </CardMedia>
       </Card>
     );
+  }
+
+  gotoRatingPage() {
+    browserHistory.push('/where');
   }
 }
 

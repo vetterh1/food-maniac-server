@@ -58,6 +58,8 @@ const styles = {
     display: 'flex',
     flexFlow: 'row wrap',
     justifyContent: 'space-around',
+
+
     listStyle: 'none',
     fontWeight: '700',
     fontSize: '4rem',
