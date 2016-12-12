@@ -28225,6 +28225,7 @@
 	    display: 'flex',
 	    flexFlow: 'row wrap',
 	    justifyContent: 'space-around',
+	
 	    listStyle: 'none',
 	    fontWeight: '700',
 	    fontSize: '4rem',
@@ -30171,11 +30172,11 @@
 	 * MIT License | (c) Dustin Diaz 2015
 	 */
 	
-	!function (root, name, definition) {
+	!function (name, definition) {
 	  if (typeof module != 'undefined' && module.exports) module.exports = definition()
 	  else if (true) __webpack_require__(292)(name, definition)
-	  else root[name] = definition()
-	}(this, 'bowser', function () {
+	  else this[name] = definition()
+	}('bowser', function () {
 	  /**
 	    * See useragents.js for examples of navigator.userAgent
 	    */
@@ -39943,6 +39944,8 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _reactRouter = __webpack_require__(210);
+	
 	var _Card = __webpack_require__(484);
 	
 	var _radium = __webpack_require__(264);
@@ -39960,16 +39963,10 @@
 	var styles = {
 	  card: {
 	    margin: '20px 20px',
-	    padding: '0px',
-	    '@media only screen and (max-width: 680px)': {
-	      margin: '80px 80px !important'
-	    }
+	    padding: '0px'
 	  },
 	  img: {
-	    maxWidth: '450px',
-	    '@media only screen and (max-width: 680px)': {
-	      maxWidth: '300px'
-	    }
+	    maxWidth: '450px'
 	  },
 	  cardMedia: {}
 	};
@@ -39995,11 +39992,17 @@
 	          _Card.CardMedia,
 	          {
 	            overlay: _react2.default.createElement(_Card.CardTitle, { title: 'Rate...', subtitle: 'Click here to rate a dish' }),
-	            style: styles.cardMedia
+	            style: styles.cardMedia,
+	            onClick: this.gotoRatingPage
 	          },
 	          _react2.default.createElement('img', { src: 'images/star_pizza_600.jpg', alt: '', style: styles.img })
 	        )
 	      );
+	    }
+	  }, {
+	    key: 'gotoRatingPage',
+	    value: function gotoRatingPage() {
+	      _reactRouter.browserHistory.push('/where');
 	    }
 	  }]);
 	
