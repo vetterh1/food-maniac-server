@@ -35,13 +35,18 @@ class App extends React.Component {
     children: React.PropTypes.node,
   }
 
+  getChildContext() {
+    return {
+      muiTheme: this.muiTheme,
+    };
+  }
+
   render() {
     return (
       <StyleRoot>
         <MuiThemeProvider muiTheme={muiTheme}>
           <div style={styles.pageContainer}>
             <MainAppBar />
-            <MainChoiceContainer />
             { this.props.children }
             <Version version={_version} />
           </div>
@@ -50,6 +55,12 @@ class App extends React.Component {
     );
   }
 }
+
+App.childContextTypes = {
+  muiTheme: React.PropTypes.object,
+};
+
+
 export default App;
 
 

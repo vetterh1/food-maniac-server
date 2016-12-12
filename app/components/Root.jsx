@@ -1,7 +1,9 @@
 import React, { PropTypes } from 'react';
 import { Provider } from 'react-redux';
-import { Router, Route, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import App from './App';
+import MainChoiceContainer from './MainChoiceContainer';
+import Rate from './Rate';
 
 import TestComponent from './TestComponent';
 import TestClass from './TestClass';
@@ -15,6 +17,8 @@ const Root = ({ store }) => (
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
+        <IndexRoute component={MainChoiceContainer} />
+        <Route path="/rate" component={Rate} />
         <Route path="/where" component={ChooseLocation} />
         <Route path="/login" component={Login} />
         <Route path="/testClass" component={TestClass} />
@@ -30,3 +34,9 @@ Root.propTypes = {
 };
 
 export default Root;
+
+
+/*
+        <IndexRedirect to="/mainChoice" />
+        <Route path="/mainChoice" component={MainChoiceContainer} />
+*/

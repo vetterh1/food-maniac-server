@@ -25,8 +25,8 @@ class MainChoiceContainer extends React.Component {
   render() {
     return (
       <div style={styles.mainChoiceContainer}>
-        <CardButton title="Rate" subtitle="Click here to rate a dish" image="images/star_pizza_600.jpg" url="/where" />
-        <CardButton title="Search" subtitle="Find your favorite dish around" image="images/star_pasta_600.jpg" url="/login" />
+        <CardButton title="Rate" subtitle="Click here to rate a dish" image="images/star_pizza_600.jpg" url="/rate" />
+        <CardButton title="Search" subtitle="Find your favorite dish around" image="images/star_pasta_600.jpg" url="/search" />
       </div>
     );
   }
