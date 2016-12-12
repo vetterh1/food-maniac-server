@@ -6,11 +6,12 @@ import createLogger from 'redux-logger';
 import combinedReducer from './reducers/combinedReducer';
 import thunk from 'redux-thunk';
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const reduxMiddleware = applyMiddleware(thunk, createLogger());
 
 const store = createStore(
   combinedReducer,
-  compose(
+  composeEnhancers(
     reduxMiddleware));
 
 render(

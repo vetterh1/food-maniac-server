@@ -1,4 +1,6 @@
 import React from 'react';
+import Geosuggest from 'react-geosuggest';
+import ChooseLocation from './ChooseLocation';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Rating from 'react-rating';
 import Formsy from 'formsy-react';
@@ -127,6 +129,8 @@ class Rate extends React.Component {
             onInvalidSubmit={this.notifyFormError}
           >
             <h3>Where?</h3>
+            <Geosuggest />
+            <ChooseLocation />
             <FormsySelect
               name="where"
               required

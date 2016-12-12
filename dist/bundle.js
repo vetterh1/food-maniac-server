@@ -65,15 +65,15 @@
 	
 	var _redux = __webpack_require__(187);
 	
-	var _reduxLogger = __webpack_require__(689);
+	var _reduxLogger = __webpack_require__(698);
 	
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 	
-	var _combinedReducer = __webpack_require__(695);
+	var _combinedReducer = __webpack_require__(704);
 	
 	var _combinedReducer2 = _interopRequireDefault(_combinedReducer);
 	
-	var _reduxThunk = __webpack_require__(700);
+	var _reduxThunk = __webpack_require__(709);
 	
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 	
@@ -21522,21 +21522,17 @@
 	
 	var _Rate2 = _interopRequireDefault(_Rate);
 	
-	var _TestComponent = __webpack_require__(668);
+	var _TestComponent = __webpack_require__(694);
 	
 	var _TestComponent2 = _interopRequireDefault(_TestComponent);
 	
-	var _TestClass = __webpack_require__(669);
+	var _TestClass = __webpack_require__(695);
 	
 	var _TestClass2 = _interopRequireDefault(_TestClass);
 	
-	var _Login = __webpack_require__(670);
+	var _Login = __webpack_require__(696);
 	
 	var _Login2 = _interopRequireDefault(_Login);
-	
-	var _ChooseLocation = __webpack_require__(672);
-	
-	var _ChooseLocation2 = _interopRequireDefault(_ChooseLocation);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -21561,7 +21557,6 @@
 	        { path: '/', component: _App2.default },
 	        _react2.default.createElement(_reactRouter.IndexRoute, { component: _MainChoiceContainer2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: '/rate', component: _Rate2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: '/where', component: _ChooseLocation2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _Login2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: '/testClass', component: _TestClass2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: '/testComponent', component: _TestComponent2.default }),
@@ -28179,7 +28174,7 @@
 	
 	/* eslint-disable react/prefer-stateless-function */
 	
-	var _version = '2016-12-12 12:22 - rateForm';
+	var _version = '2016-12-12 21:00 - geoTest';
 	
 	var styles = {
 	  pageContainer: {
@@ -30208,11 +30203,11 @@
 	 * MIT License | (c) Dustin Diaz 2015
 	 */
 	
-	!function (name, definition) {
+	!function (root, name, definition) {
 	  if (typeof module != 'undefined' && module.exports) module.exports = definition()
 	  else if (true) __webpack_require__(293)(name, definition)
-	  else this[name] = definition()
-	}('bowser', function () {
+	  else root[name] = definition()
+	}(this, 'bowser', function () {
 	  /**
 	    * See useragents.js for examples of navigator.userAgent
 	    */
@@ -46781,51 +46776,59 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _reactGeosuggest = __webpack_require__(547);
+	
+	var _reactGeosuggest2 = _interopRequireDefault(_reactGeosuggest);
+	
+	var _ChooseLocation = __webpack_require__(558);
+	
+	var _ChooseLocation2 = _interopRequireDefault(_ChooseLocation);
+	
 	var _MuiThemeProvider = __webpack_require__(545);
 	
 	var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);
 	
-	var _reactRating = __webpack_require__(547);
+	var _reactRating = __webpack_require__(575);
 	
 	var _reactRating2 = _interopRequireDefault(_reactRating);
 	
-	var _formsyReact = __webpack_require__(548);
+	var _formsyReact = __webpack_require__(576);
 	
 	var _formsyReact2 = _interopRequireDefault(_formsyReact);
 	
-	var _lib = __webpack_require__(555);
+	var _lib = __webpack_require__(583);
 	
 	var _Paper = __webpack_require__(478);
 	
 	var _Paper2 = _interopRequireDefault(_Paper);
 	
-	var _MenuItem = __webpack_require__(656);
+	var _MenuItem = __webpack_require__(682);
 	
 	var _MenuItem2 = _interopRequireDefault(_MenuItem);
 	
-	var _GridList = __webpack_require__(660);
+	var _GridList = __webpack_require__(686);
 	
 	var _IconButton = __webpack_require__(425);
 	
 	var _IconButton2 = _interopRequireDefault(_IconButton);
 	
-	var _FlatButton = __webpack_require__(575);
+	var _FlatButton = __webpack_require__(601);
 	
 	var _FlatButton2 = _interopRequireDefault(_FlatButton);
 	
-	var _star = __webpack_require__(664);
+	var _star = __webpack_require__(690);
 	
 	var _star2 = _interopRequireDefault(_star);
 	
-	var _starBorder = __webpack_require__(665);
+	var _starBorder = __webpack_require__(691);
 	
 	var _starBorder2 = _interopRequireDefault(_starBorder);
 	
-	var _search = __webpack_require__(666);
+	var _search = __webpack_require__(692);
 	
 	var _search2 = _interopRequireDefault(_search);
 	
-	var _locationOn = __webpack_require__(667);
+	var _locationOn = __webpack_require__(693);
 	
 	var _locationOn2 = _interopRequireDefault(_locationOn);
 	
@@ -46856,7 +46859,17 @@
 	  },
 	  titleStyle: {
 	    color: 'rgb(0, 188, 212)'
-	  }
+	  },
+	  markContainer: {
+	    display: 'flex',
+	    flexWrap: 'wrap',
+	    justifyContent: 'flex-start'
+	  },
+	  markLine: {
+	    padding: '1em'
+	  },
+	  markLabel: {},
+	  markRate: {}
 	};
 	
 	var tilesData = [{
@@ -46948,6 +46961,8 @@
 	              null,
 	              'Where?'
 	            ),
+	            _react2.default.createElement(_reactGeosuggest2.default, null),
+	            _react2.default.createElement(_ChooseLocation2.default, null),
 	            _react2.default.createElement(
 	              _lib.FormsySelect,
 	              {
@@ -47001,8 +47016,79 @@
 	              null,
 	              'Marks'
 	            ),
-	            _react2.default.createElement(_reactRating2.default, { stop: 5, initialRate: 2 }),
-	            _react2.default.createElement(_reactRating2.default, { stop: 5, initialRate: 4.5 })
+	            _react2.default.createElement(
+	              'div',
+	              { style: styles.markContainer },
+	              _react2.default.createElement(
+	                'div',
+	                { style: styles.markLine },
+	                _react2.default.createElement(
+	                  'span',
+	                  { style: styles.markLabel },
+	                  'Overall'
+	                ),
+	                _react2.default.createElement(_reactRating2.default, {
+	                  stop: 5,
+	                  initialRate: 4.5,
+	                  full: _react2.default.createElement(_star2.default, null),
+	                  empty: _react2.default.createElement(_starBorder2.default, null),
+	                  style: styles.markRate
+	                })
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { style: styles.markLine },
+	                _react2.default.createElement(
+	                  'span',
+	                  { style: styles.markLabel },
+	                  'Quality'
+	                ),
+	                _react2.default.createElement(_reactRating2.default, {
+	                  stop: 5,
+	                  initialRate: 3,
+	                  full: _react2.default.createElement(_star2.default, null),
+	                  empty: _react2.default.createElement(_starBorder2.default, null),
+	                  style: styles.markRate
+	                })
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { style: styles.markLine },
+	                _react2.default.createElement(
+	                  'span',
+	                  { style: styles.markLabel },
+	                  'Place'
+	                ),
+	                _react2.default.createElement(_reactRating2.default, {
+	                  stop: 5,
+	                  initialRate: 2,
+	                  full: _react2.default.createElement(_star2.default, null),
+	                  empty: _react2.default.createElement(_starBorder2.default, null),
+	                  style: styles.markRate
+	                })
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { style: styles.markLine },
+	                _react2.default.createElement(
+	                  'span',
+	                  { style: styles.markLabel },
+	                  'Staff'
+	                ),
+	                _react2.default.createElement(_reactRating2.default, {
+	                  stop: 5,
+	                  initialRate: 5,
+	                  full: _react2.default.createElement(_star2.default, null),
+	                  empty: _react2.default.createElement(_starBorder2.default, null),
+	                  style: styles.markRate
+	                })
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'h3',
+	              null,
+	              'Picture'
+	            )
 	          )
 	        )
 	      );
@@ -47029,6 +47115,3582 @@
 
 /***/ },
 /* 547 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _classnames = __webpack_require__(548);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _lodash = __webpack_require__(549);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _defaults = __webpack_require__(550);
+	
+	var _defaults2 = _interopRequireDefault(_defaults);
+	
+	var _propTypes = __webpack_require__(551);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _filterInputAttributes = __webpack_require__(552);
+	
+	var _filterInputAttributes2 = _interopRequireDefault(_filterInputAttributes);
+	
+	var _input = __webpack_require__(553);
+	
+	var _input2 = _interopRequireDefault(_input);
+	
+	var _suggestList = __webpack_require__(556);
+	
+	var _suggestList2 = _interopRequireDefault(_suggestList);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* global window */
+	
+	// Escapes special characters in user input for regex
+	function escapeRegExp(str) {
+	  return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
+	}
+	
+	/**
+	 * Entry point for the Geosuggest component
+	 */
+	
+	var Geosuggest = function (_React$Component) {
+	  _inherits(Geosuggest, _React$Component);
+	
+	  /**
+	   * The constructor. Sets the initial state.
+	   * @param  {Object} props The properties object.
+	   */
+	  function Geosuggest(props) {
+	    _classCallCheck(this, Geosuggest);
+	
+	    var _this = _possibleConstructorReturn(this, (Geosuggest.__proto__ || Object.getPrototypeOf(Geosuggest)).call(this, props));
+	
+	    _this.onInputChange = function (userInput) {
+	      _this.setState({ userInput: userInput }, _this.onAfterInputChange);
+	    };
+	
+	    _this.onAfterInputChange = function () {
+	      if (!_this.state.isSuggestsHidden) {
+	        _this.showSuggests();
+	      }
+	      _this.props.onChange(_this.state.userInput);
+	    };
+	
+	    _this.onInputFocus = function () {
+	      _this.props.onFocus();
+	      _this.showSuggests();
+	    };
+	
+	    _this.onInputBlur = function () {
+	      if (!_this.state.ignoreBlur) {
+	        _this.hideSuggests();
+	      }
+	    };
+	
+	    _this.onNext = function () {
+	      return _this.activateSuggest('next');
+	    };
+	
+	    _this.onPrev = function () {
+	      return _this.activateSuggest('prev');
+	    };
+	
+	    _this.onSelect = function () {
+	      return _this.selectSuggest(_this.state.activeSuggest);
+	    };
+	
+	    _this.onSuggestMouseDown = function () {
+	      return _this.setState({ ignoreBlur: true });
+	    };
+	
+	    _this.onSuggestMouseOut = function () {
+	      return _this.setState({ ignoreBlur: false });
+	    };
+	
+	    _this.onSuggestNoResults = function () {
+	      _this.props.onSuggestNoResults(_this.state.userInput);
+	    };
+	
+	    _this.hideSuggests = function () {
+	      _this.props.onBlur(_this.state.userInput);
+	      var timer = setTimeout(function () {
+	        _this.setState({
+	          isSuggestsHidden: true,
+	          activeSuggest: null
+	        });
+	      }, 100);
+	
+	      _this.setState({ timer: timer });
+	    };
+	
+	    _this.selectSuggest = function (suggest) {
+	      if (!suggest) {
+	        suggest = {
+	          label: _this.state.userInput
+	        };
+	      }
+	
+	      _this.setState({
+	        isSuggestsHidden: true,
+	        userInput: suggest.label
+	      });
+	
+	      if (suggest.location) {
+	        _this.setState({ ignoreBlur: false });
+	        _this.props.onSuggestSelect(suggest);
+	        return;
+	      }
+	
+	      _this.geocodeSuggest(suggest);
+	    };
+	
+	    _this.state = {
+	      isSuggestsHidden: true,
+	      isLoading: false,
+	      userInput: props.initialValue,
+	      activeSuggest: null,
+	      suggests: [],
+	      timer: null
+	    };
+	
+	    _this.onInputChange = _this.onInputChange.bind(_this);
+	    _this.onAfterInputChange = _this.onAfterInputChange.bind(_this);
+	
+	    if (props.queryDelay) {
+	      _this.onAfterInputChange = (0, _lodash2.default)(_this.onAfterInputChange, props.queryDelay);
+	    }
+	    return _this;
+	  }
+	
+	  /**
+	   * Change inputValue if prop changes
+	   * @param {Object} props The new props
+	   */
+	
+	
+	  _createClass(Geosuggest, [{
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(props) {
+	      if (this.props.initialValue !== props.initialValue) {
+	        this.setState({ userInput: props.initialValue });
+	      }
+	    }
+	
+	    /**
+	     * Called on the client side after component is mounted.
+	     * Google api sdk object will be obtained and cached as a instance property.
+	     * Necessary objects of google api will also be determined and saved.
+	     */
+	
+	  }, {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      if (typeof window === 'undefined') {
+	        return;
+	      }
+	
+	      var googleMaps = this.props.googleMaps || window.google && // eslint-disable-line no-extra-parens
+	      window.google.maps || this.googleMaps;
+	
+	      /* istanbul ignore next */
+	      if (!googleMaps) {
+	        console.error( // eslint-disable-line no-console
+	        'Google map api was not found in the page.');
+	        return;
+	      }
+	      this.googleMaps = googleMaps;
+	
+	      this.autocompleteService = new googleMaps.places.AutocompleteService();
+	      this.geocoder = new googleMaps.Geocoder();
+	    }
+	
+	    /**
+	     * When the component will unmount
+	     */
+	
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      clearTimeout(this.state.timer);
+	    }
+	
+	    /**
+	     * When the input changed
+	     * @param {String} userInput The input value of the user
+	     */
+	
+	
+	    /**
+	     * On After the input got changed
+	     */
+	
+	
+	    /**
+	     * When the input gets focused
+	     */
+	
+	
+	    /**
+	     * When the input gets blurred
+	     */
+	
+	  }, {
+	    key: 'focus',
+	
+	
+	    /**
+	     * Focus the input
+	     */
+	    value: function focus() {
+	      this.refs.input.focus();
+	    }
+	
+	    /**
+	     * Update the value of the user input
+	     * @param {String} userInput the new value of the user input
+	     */
+	
+	  }, {
+	    key: 'update',
+	    value: function update(userInput) {
+	      this.setState({ userInput: userInput });
+	      this.props.onChange(userInput);
+	    }
+	
+	    /*
+	     * Clear the input and close the suggestion pane
+	     */
+	
+	  }, {
+	    key: 'clear',
+	    value: function clear() {
+	      this.setState({ userInput: '' }, this.hideSuggests);
+	    }
+	
+	    /**
+	     * Search for new suggests
+	     */
+	
+	  }, {
+	    key: 'searchSuggests',
+	    value: function searchSuggests() {
+	      var _this2 = this;
+	
+	      if (!this.state.userInput) {
+	        this.updateSuggests();
+	        return;
+	      }
+	
+	      var options = {
+	        input: this.state.userInput
+	      };
+	
+	      ['location', 'radius', 'bounds', 'types'].forEach(function (option) {
+	        if (_this2.props[option]) {
+	          options[option] = _this2.props[option];
+	        }
+	      });
+	
+	      if (this.props.country) {
+	        options.componentRestrictions = {
+	          country: this.props.country
+	        };
+	      }
+	
+	      this.setState({ isLoading: true }, function () {
+	        _this2.autocompleteService.getPlacePredictions(options, function (suggestsGoogle) {
+	          _this2.setState({ isLoading: false });
+	          _this2.updateSuggests(suggestsGoogle || [], // can be null
+	          function () {
+	            if (_this2.props.autoActivateFirstSuggest && !_this2.state.activeSuggest) {
+	              _this2.activateSuggest('next');
+	            }
+	          });
+	        });
+	      });
+	    }
+	
+	    /**
+	     * Update the suggests
+	     * @param {Array} suggestsGoogle The new google suggests
+	     * @param {Function} callback Called once the state has been updated
+	     */
+	
+	  }, {
+	    key: 'updateSuggests',
+	    value: function updateSuggests() {
+	      var _this3 = this;
+	
+	      var suggestsGoogle = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+	      var callback = arguments[1];
+	
+	      var suggests = [],
+	          regex = new RegExp(escapeRegExp(this.state.userInput), 'gim'),
+	          skipSuggest = this.props.skipSuggest,
+	          maxFixtures = 10,
+	          fixturesSearched = 0,
+	          activeSuggest = null;
+	
+	      this.props.fixtures.forEach(function (suggest) {
+	        if (fixturesSearched >= maxFixtures) {
+	          return;
+	        }
+	
+	        if (!skipSuggest(suggest) && suggest.label.match(regex)) {
+	          fixturesSearched++;
+	
+	          suggest.placeId = suggest.label;
+	          suggest.isFixture = true;
+	          suggests.push(suggest);
+	        }
+	      });
+	
+	      suggestsGoogle.forEach(function (suggest) {
+	        if (!skipSuggest(suggest)) {
+	          suggests.push({
+	            label: _this3.props.getSuggestLabel(suggest),
+	            placeId: suggest.place_id,
+	            isFixture: false
+	          });
+	        }
+	      });
+	
+	      activeSuggest = this.updateActiveSuggest(suggests);
+	      this.setState({ suggests: suggests, activeSuggest: activeSuggest }, callback);
+	    }
+	
+	    /**
+	     * Return the new activeSuggest object after suggests have been updated
+	     * @param {Array} suggests The new list of suggests
+	     * @return {Object} The new activeSuggest
+	     **/
+	
+	  }, {
+	    key: 'updateActiveSuggest',
+	    value: function updateActiveSuggest() {
+	      var suggests = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+	
+	      var activeSuggest = this.state.activeSuggest;
+	
+	      if (activeSuggest) {
+	        var newSuggest = suggests.find(function (listedSuggest) {
+	          return activeSuggest.placeId === listedSuggest.placeId && activeSuggest.isFixture === listedSuggest.isFixture;
+	        });
+	
+	        activeSuggest = newSuggest || null;
+	      }
+	
+	      return activeSuggest;
+	    }
+	
+	    /**
+	     * Show the suggestions
+	     */
+	
+	  }, {
+	    key: 'showSuggests',
+	    value: function showSuggests() {
+	      this.searchSuggests();
+	      this.setState({ isSuggestsHidden: false });
+	    }
+	
+	    /**
+	     * Hide the suggestions
+	     */
+	
+	  }, {
+	    key: 'activateSuggest',
+	
+	
+	    /**
+	     * Activate a new suggest
+	     * @param {String} direction The direction in which to activate new suggest
+	     */
+	    value: function activateSuggest(direction) {
+	      // eslint-disable-line complexity
+	      if (this.state.isSuggestsHidden) {
+	        this.showSuggests();
+	        return;
+	      }
+	
+	      var suggestsCount = this.state.suggests.length - 1,
+	          next = direction === 'next';
+	      var newActiveSuggest = null,
+	          newIndex = 0,
+	          i = 0;
+	
+	      for (i; i <= suggestsCount; i++) {
+	        if (this.state.suggests[i] === this.state.activeSuggest) {
+	          newIndex = next ? i + 1 : i - 1;
+	        }
+	      }
+	
+	      if (!this.state.activeSuggest) {
+	        newIndex = next ? 0 : suggestsCount;
+	      }
+	
+	      if (newIndex >= 0 && newIndex <= suggestsCount) {
+	        newActiveSuggest = this.state.suggests[newIndex];
+	      }
+	
+	      this.props.onActivateSuggest(newActiveSuggest);
+	
+	      this.setState({ activeSuggest: newActiveSuggest });
+	    }
+	
+	    /**
+	     * When an item got selected
+	     * @param {GeosuggestItem} suggest The selected suggest item
+	     */
+	
+	  }, {
+	    key: 'geocodeSuggest',
+	
+	
+	    /**
+	     * Geocode a suggest
+	     * @param  {Object} suggest The suggest
+	     */
+	    value: function geocodeSuggest(suggest) {
+	      var _this4 = this;
+	
+	      this.geocoder.geocode(suggest.placeId && !suggest.isFixture ? { placeId: suggest.placeId } : { address: suggest.label }, function (results, status) {
+	        if (status === _this4.googleMaps.GeocoderStatus.OK) {
+	          var gmaps = results[0],
+	              location = gmaps.geometry.location;
+	
+	          suggest.gmaps = gmaps;
+	          suggest.location = {
+	            lat: location.lat(),
+	            lng: location.lng()
+	          };
+	        }
+	        _this4.props.onSuggestSelect(suggest);
+	      });
+	    }
+	
+	    /**
+	     * Render the view
+	     * @return {Function} The React element to render
+	     */
+	
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var attributes = (0, _filterInputAttributes2.default)(this.props),
+	          classes = (0, _classnames2.default)('geosuggest', this.props.className, { 'geosuggest--loading': this.state.isLoading }),
+	          shouldRenderLabel = this.props.label && attributes.id,
+	          input = _react2.default.createElement(_input2.default, _extends({ className: this.props.inputClassName,
+	        ref: 'input',
+	        value: this.state.userInput,
+	        ignoreEnter: !this.state.isSuggestsHidden,
+	        ignoreTab: this.props.ignoreTab,
+	        style: this.props.style.input,
+	        onChange: this.onInputChange,
+	        onFocus: this.onInputFocus,
+	        onBlur: this.onInputBlur,
+	        onKeyPress: this.props.onKeyPress,
+	        onNext: this.onNext,
+	        onPrev: this.onPrev,
+	        onSelect: this.onSelect,
+	        onEscape: this.hideSuggests }, attributes)),
+	          suggestionsList = _react2.default.createElement(_suggestList2.default, { isHidden: this.state.isSuggestsHidden,
+	        style: this.props.style.suggests,
+	        suggestItemStyle: this.props.style.suggestItem,
+	        suggests: this.state.suggests,
+	        activeSuggest: this.state.activeSuggest,
+	        onSuggestNoResults: this.onSuggestNoResults,
+	        onSuggestMouseDown: this.onSuggestMouseDown,
+	        onSuggestMouseOut: this.onSuggestMouseOut,
+	        onSuggestSelect: this.selectSuggest });
+	
+	      return _react2.default.createElement(
+	        'div',
+	        { className: classes },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'geosuggest__input-wrapper' },
+	          shouldRenderLabel && _react2.default.createElement(
+	            'label',
+	            { htmlFor: attributes.id },
+	            this.props.label
+	          ),
+	          input
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'geosuggest__suggests-wrapper' },
+	          suggestionsList
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Geosuggest;
+	}(_react2.default.Component);
+	
+	/**
+	 * Types for the properties
+	 * @type {Object}
+	 */
+	
+	
+	Geosuggest.propTypes = _propTypes2.default;
+	
+	/**
+	 * Default values for the properties
+	 * @type {Object}
+	 */
+	Geosuggest.defaultProps = _defaults2.default;
+	
+	exports.default = Geosuggest;
+
+/***/ },
+/* 548 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
+	
+	(function () {
+		'use strict';
+	
+		var hasOwn = {}.hasOwnProperty;
+	
+		function classNames () {
+			var classes = [];
+	
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+	
+				var argType = typeof arg;
+	
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
+				} else if (Array.isArray(arg)) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
+						}
+					}
+				}
+			}
+	
+			return classes.join(' ');
+		}
+	
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	}());
+
+
+/***/ },
+/* 549 */
+/***/ function(module, exports) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {/**
+	 * lodash (Custom Build) <https://lodash.com/>
+	 * Build: `lodash modularize exports="npm" -o ./`
+	 * Copyright jQuery Foundation and other contributors <https://jquery.org/>
+	 * Released under MIT license <https://lodash.com/license>
+	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+	 * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+	 */
+	
+	/** Used as the `TypeError` message for "Functions" methods. */
+	var FUNC_ERROR_TEXT = 'Expected a function';
+	
+	/** Used as references for various `Number` constants. */
+	var NAN = 0 / 0;
+	
+	/** `Object#toString` result references. */
+	var symbolTag = '[object Symbol]';
+	
+	/** Used to match leading and trailing whitespace. */
+	var reTrim = /^\s+|\s+$/g;
+	
+	/** Used to detect bad signed hexadecimal string values. */
+	var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
+	
+	/** Used to detect binary string values. */
+	var reIsBinary = /^0b[01]+$/i;
+	
+	/** Used to detect octal string values. */
+	var reIsOctal = /^0o[0-7]+$/i;
+	
+	/** Built-in method references without a dependency on `root`. */
+	var freeParseInt = parseInt;
+	
+	/** Detect free variable `global` from Node.js. */
+	var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+	
+	/** Detect free variable `self`. */
+	var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+	
+	/** Used as a reference to the global object. */
+	var root = freeGlobal || freeSelf || Function('return this')();
+	
+	/** Used for built-in method references. */
+	var objectProto = Object.prototype;
+	
+	/**
+	 * Used to resolve the
+	 * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var objectToString = objectProto.toString;
+	
+	/* Built-in method references for those with the same name as other `lodash` methods. */
+	var nativeMax = Math.max,
+	    nativeMin = Math.min;
+	
+	/**
+	 * Gets the timestamp of the number of milliseconds that have elapsed since
+	 * the Unix epoch (1 January 1970 00:00:00 UTC).
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 2.4.0
+	 * @category Date
+	 * @returns {number} Returns the timestamp.
+	 * @example
+	 *
+	 * _.defer(function(stamp) {
+	 *   console.log(_.now() - stamp);
+	 * }, _.now());
+	 * // => Logs the number of milliseconds it took for the deferred invocation.
+	 */
+	var now = function() {
+	  return root.Date.now();
+	};
+	
+	/**
+	 * Creates a debounced function that delays invoking `func` until after `wait`
+	 * milliseconds have elapsed since the last time the debounced function was
+	 * invoked. The debounced function comes with a `cancel` method to cancel
+	 * delayed `func` invocations and a `flush` method to immediately invoke them.
+	 * Provide `options` to indicate whether `func` should be invoked on the
+	 * leading and/or trailing edge of the `wait` timeout. The `func` is invoked
+	 * with the last arguments provided to the debounced function. Subsequent
+	 * calls to the debounced function return the result of the last `func`
+	 * invocation.
+	 *
+	 * **Note:** If `leading` and `trailing` options are `true`, `func` is
+	 * invoked on the trailing edge of the timeout only if the debounced function
+	 * is invoked more than once during the `wait` timeout.
+	 *
+	 * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+	 * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+	 *
+	 * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
+	 * for details over the differences between `_.debounce` and `_.throttle`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 0.1.0
+	 * @category Function
+	 * @param {Function} func The function to debounce.
+	 * @param {number} [wait=0] The number of milliseconds to delay.
+	 * @param {Object} [options={}] The options object.
+	 * @param {boolean} [options.leading=false]
+	 *  Specify invoking on the leading edge of the timeout.
+	 * @param {number} [options.maxWait]
+	 *  The maximum time `func` is allowed to be delayed before it's invoked.
+	 * @param {boolean} [options.trailing=true]
+	 *  Specify invoking on the trailing edge of the timeout.
+	 * @returns {Function} Returns the new debounced function.
+	 * @example
+	 *
+	 * // Avoid costly calculations while the window size is in flux.
+	 * jQuery(window).on('resize', _.debounce(calculateLayout, 150));
+	 *
+	 * // Invoke `sendMail` when clicked, debouncing subsequent calls.
+	 * jQuery(element).on('click', _.debounce(sendMail, 300, {
+	 *   'leading': true,
+	 *   'trailing': false
+	 * }));
+	 *
+	 * // Ensure `batchLog` is invoked once after 1 second of debounced calls.
+	 * var debounced = _.debounce(batchLog, 250, { 'maxWait': 1000 });
+	 * var source = new EventSource('/stream');
+	 * jQuery(source).on('message', debounced);
+	 *
+	 * // Cancel the trailing debounced invocation.
+	 * jQuery(window).on('popstate', debounced.cancel);
+	 */
+	function debounce(func, wait, options) {
+	  var lastArgs,
+	      lastThis,
+	      maxWait,
+	      result,
+	      timerId,
+	      lastCallTime,
+	      lastInvokeTime = 0,
+	      leading = false,
+	      maxing = false,
+	      trailing = true;
+	
+	  if (typeof func != 'function') {
+	    throw new TypeError(FUNC_ERROR_TEXT);
+	  }
+	  wait = toNumber(wait) || 0;
+	  if (isObject(options)) {
+	    leading = !!options.leading;
+	    maxing = 'maxWait' in options;
+	    maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
+	    trailing = 'trailing' in options ? !!options.trailing : trailing;
+	  }
+	
+	  function invokeFunc(time) {
+	    var args = lastArgs,
+	        thisArg = lastThis;
+	
+	    lastArgs = lastThis = undefined;
+	    lastInvokeTime = time;
+	    result = func.apply(thisArg, args);
+	    return result;
+	  }
+	
+	  function leadingEdge(time) {
+	    // Reset any `maxWait` timer.
+	    lastInvokeTime = time;
+	    // Start the timer for the trailing edge.
+	    timerId = setTimeout(timerExpired, wait);
+	    // Invoke the leading edge.
+	    return leading ? invokeFunc(time) : result;
+	  }
+	
+	  function remainingWait(time) {
+	    var timeSinceLastCall = time - lastCallTime,
+	        timeSinceLastInvoke = time - lastInvokeTime,
+	        result = wait - timeSinceLastCall;
+	
+	    return maxing ? nativeMin(result, maxWait - timeSinceLastInvoke) : result;
+	  }
+	
+	  function shouldInvoke(time) {
+	    var timeSinceLastCall = time - lastCallTime,
+	        timeSinceLastInvoke = time - lastInvokeTime;
+	
+	    // Either this is the first call, activity has stopped and we're at the
+	    // trailing edge, the system time has gone backwards and we're treating
+	    // it as the trailing edge, or we've hit the `maxWait` limit.
+	    return (lastCallTime === undefined || (timeSinceLastCall >= wait) ||
+	      (timeSinceLastCall < 0) || (maxing && timeSinceLastInvoke >= maxWait));
+	  }
+	
+	  function timerExpired() {
+	    var time = now();
+	    if (shouldInvoke(time)) {
+	      return trailingEdge(time);
+	    }
+	    // Restart the timer.
+	    timerId = setTimeout(timerExpired, remainingWait(time));
+	  }
+	
+	  function trailingEdge(time) {
+	    timerId = undefined;
+	
+	    // Only invoke if we have `lastArgs` which means `func` has been
+	    // debounced at least once.
+	    if (trailing && lastArgs) {
+	      return invokeFunc(time);
+	    }
+	    lastArgs = lastThis = undefined;
+	    return result;
+	  }
+	
+	  function cancel() {
+	    if (timerId !== undefined) {
+	      clearTimeout(timerId);
+	    }
+	    lastInvokeTime = 0;
+	    lastArgs = lastCallTime = lastThis = timerId = undefined;
+	  }
+	
+	  function flush() {
+	    return timerId === undefined ? result : trailingEdge(now());
+	  }
+	
+	  function debounced() {
+	    var time = now(),
+	        isInvoking = shouldInvoke(time);
+	
+	    lastArgs = arguments;
+	    lastThis = this;
+	    lastCallTime = time;
+	
+	    if (isInvoking) {
+	      if (timerId === undefined) {
+	        return leadingEdge(lastCallTime);
+	      }
+	      if (maxing) {
+	        // Handle invocations in a tight loop.
+	        timerId = setTimeout(timerExpired, wait);
+	        return invokeFunc(lastCallTime);
+	      }
+	    }
+	    if (timerId === undefined) {
+	      timerId = setTimeout(timerExpired, wait);
+	    }
+	    return result;
+	  }
+	  debounced.cancel = cancel;
+	  debounced.flush = flush;
+	  return debounced;
+	}
+	
+	/**
+	 * Checks if `value` is the
+	 * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+	 * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 0.1.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+	 * @example
+	 *
+	 * _.isObject({});
+	 * // => true
+	 *
+	 * _.isObject([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isObject(_.noop);
+	 * // => true
+	 *
+	 * _.isObject(null);
+	 * // => false
+	 */
+	function isObject(value) {
+	  var type = typeof value;
+	  return !!value && (type == 'object' || type == 'function');
+	}
+	
+	/**
+	 * Checks if `value` is object-like. A value is object-like if it's not `null`
+	 * and has a `typeof` result of "object".
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+	 * @example
+	 *
+	 * _.isObjectLike({});
+	 * // => true
+	 *
+	 * _.isObjectLike([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isObjectLike(_.noop);
+	 * // => false
+	 *
+	 * _.isObjectLike(null);
+	 * // => false
+	 */
+	function isObjectLike(value) {
+	  return !!value && typeof value == 'object';
+	}
+	
+	/**
+	 * Checks if `value` is classified as a `Symbol` primitive or object.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
+	 * @example
+	 *
+	 * _.isSymbol(Symbol.iterator);
+	 * // => true
+	 *
+	 * _.isSymbol('abc');
+	 * // => false
+	 */
+	function isSymbol(value) {
+	  return typeof value == 'symbol' ||
+	    (isObjectLike(value) && objectToString.call(value) == symbolTag);
+	}
+	
+	/**
+	 * Converts `value` to a number.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @category Lang
+	 * @param {*} value The value to process.
+	 * @returns {number} Returns the number.
+	 * @example
+	 *
+	 * _.toNumber(3.2);
+	 * // => 3.2
+	 *
+	 * _.toNumber(Number.MIN_VALUE);
+	 * // => 5e-324
+	 *
+	 * _.toNumber(Infinity);
+	 * // => Infinity
+	 *
+	 * _.toNumber('3.2');
+	 * // => 3.2
+	 */
+	function toNumber(value) {
+	  if (typeof value == 'number') {
+	    return value;
+	  }
+	  if (isSymbol(value)) {
+	    return NAN;
+	  }
+	  if (isObject(value)) {
+	    var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
+	    value = isObject(other) ? (other + '') : other;
+	  }
+	  if (typeof value != 'string') {
+	    return value === 0 ? value : +value;
+	  }
+	  value = value.replace(reTrim, '');
+	  var isBinary = reIsBinary.test(value);
+	  return (isBinary || reIsOctal.test(value))
+	    ? freeParseInt(value.slice(2), isBinary ? 2 : 8)
+	    : (reIsBadHex.test(value) ? NAN : +value);
+	}
+	
+	module.exports = debounce;
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 550 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	/* istanbul ignore next */
+	/**
+	 * Default values
+	 */
+	exports.default = {
+	  fixtures: [],
+	  initialValue: '',
+	  placeholder: 'Search places',
+	  disabled: false,
+	  className: '',
+	  inputClassName: '',
+	  location: null,
+	  radius: null,
+	  bounds: null,
+	  country: null,
+	  types: null,
+	  queryDelay: 250,
+	  googleMaps: null,
+	  onActivateSuggest: function onActivateSuggest() {},
+	  onSuggestSelect: function onSuggestSelect() {},
+	  onSuggestNoResults: function onSuggestNoResults() {},
+	  onFocus: function onFocus() {},
+	  onBlur: function onBlur() {},
+	  onChange: function onChange() {},
+	  skipSuggest: function skipSuggest() {},
+	  getSuggestLabel: function getSuggestLabel(suggest) {
+	    return suggest.description;
+	  },
+	  autoActivateFirstSuggest: false,
+	  style: {
+	    'input': {},
+	    'suggests': {},
+	    'suggestItem': {}
+	  },
+	  ignoreTab: false
+	};
+
+/***/ },
+/* 551 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	/**
+	 * Default values
+	 */
+	exports.default = {
+	  fixtures: _react2.default.PropTypes.array,
+	  initialValue: _react2.default.PropTypes.string,
+	  placeholder: _react2.default.PropTypes.string,
+	  disabled: _react2.default.PropTypes.bool,
+	  className: _react2.default.PropTypes.string,
+	  inputClassName: _react2.default.PropTypes.string,
+	  location: _react2.default.PropTypes.object,
+	  radius: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.number]),
+	  bounds: _react2.default.PropTypes.object,
+	  country: _react2.default.PropTypes.string,
+	  types: _react2.default.PropTypes.array,
+	  queryDelay: _react2.default.PropTypes.number,
+	  googleMaps: _react2.default.PropTypes.object,
+	  onSuggestSelect: _react2.default.PropTypes.func,
+	  onFocus: _react2.default.PropTypes.func,
+	  onBlur: _react2.default.PropTypes.func,
+	  onChange: _react2.default.PropTypes.func,
+	  onKeyPress: _react2.default.PropTypes.func,
+	  skipSuggest: _react2.default.PropTypes.func,
+	  getSuggestLabel: _react2.default.PropTypes.func,
+	  autoActivateFirstSuggest: _react2.default.PropTypes.bool,
+	  style: _react2.default.PropTypes.shape({
+	    input: _react2.default.PropTypes.object,
+	    suggests: _react2.default.PropTypes.object,
+	    suggestItem: _react2.default.PropTypes.object
+	  }),
+	  ignoreTab: _react2.default.PropTypes.bool,
+	  label: _react2.default.PropTypes.string
+	};
+
+/***/ },
+/* 552 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	exports.default = function (props) {
+	  var attributes = {};
+	
+	  allowedAttributes.forEach(function (allowedAttribute) {
+	    if (props[allowedAttribute]) {
+	      attributes[allowedAttribute] = props[allowedAttribute];
+	    }
+	  });
+	
+	  return attributes;
+	};
+	
+	/**
+	 * Attributes allowed on input elements
+	 */
+	var allowedAttributes = ['autoFocus', 'disabled', 'form', 'formAction', 'formEncType', 'formMethod', 'formNoValidate', 'formTarget', 'height', 'id', 'inputMode', 'maxLength', 'name', 'onClick', 'onContextMenu', 'onCopy', 'onCut', 'onDoubleClick', 'onMouseDown', 'onMouseEnter', 'onMouseLeave', 'onMouseMove', 'onMouseOut', 'onMouseOver', 'onMouseUp', 'onPaste', 'pattern', 'placeholder', 'readOnly', 'required', 'size', 'spellCheck', 'tabIndex'];
+	
+	/**
+	 * Filter the properties for only allowed input properties
+	 * @param  {Object} props The properties to filter
+	 * @return {Object} The filtered, allowed properties
+	 */
+
+/***/ },
+/* 553 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactAddonsShallowCompare = __webpack_require__(554);
+	
+	var _reactAddonsShallowCompare2 = _interopRequireDefault(_reactAddonsShallowCompare);
+	
+	var _classnames = __webpack_require__(548);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _filterInputAttributes = __webpack_require__(552);
+	
+	var _filterInputAttributes2 = _interopRequireDefault(_filterInputAttributes);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // eslint-disable-line no-unused-vars
+	
+	
+	/**
+	 * The input field
+	 * @param {Object} props The component's props
+	 * @return {JSX} The icon component.
+	 */
+	var Input = function (_React$Component) {
+	  _inherits(Input, _React$Component);
+	
+	  function Input() {
+	    var _ref;
+	
+	    var _temp, _this, _ret;
+	
+	    _classCallCheck(this, Input);
+	
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+	
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Input.__proto__ || Object.getPrototypeOf(Input)).call.apply(_ref, [this].concat(args))), _this), _this.onChange = function () {
+	      _this.props.onChange(_this.refs.input.value);
+	    }, _this.onFocus = function () {
+	      _this.props.onFocus();
+	    }, _this.onBlur = function () {
+	      _this.props.onBlur();
+	    }, _this.onKeyPress = function (event) {
+	      _this.props.onKeyPress(event);
+	    }, _this.onInputKeyDown = function (event) {
+	      // eslint-disable-line complexity
+	      switch (event.which) {
+	        case 40:
+	          // DOWN
+	          event.preventDefault();
+	          _this.props.onNext();
+	          break;
+	        case 38:
+	          // UP
+	          event.preventDefault();
+	          _this.props.onPrev();
+	          break;
+	        case 13:
+	          // ENTER
+	          if (_this.props.ignoreEnter) {
+	            event.preventDefault();
+	          }
+	
+	          _this.props.onSelect();
+	          break;
+	        case 9:
+	          // TAB
+	          if (!_this.props.ignoreTab) {
+	            _this.props.onSelect();
+	          }
+	          break;
+	        case 27:
+	          // ESC
+	          _this.props.onEscape();
+	          break;
+	        /* istanbul ignore next */
+	        default:
+	          break;
+	      }
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	  }
+	
+	  _createClass(Input, [{
+	    key: 'shouldComponentUpdate',
+	
+	    /**
+	     * Whether or not the component should update
+	     * @param {Object} nextProps The new properties
+	     * @param {Object} nextState The new state
+	     * @return {Boolean} Update or not?
+	     */
+	    value: function shouldComponentUpdate(nextProps, nextState) {
+	      return (0, _reactAddonsShallowCompare2.default)(this, nextProps, nextState);
+	    }
+	
+	    /**
+	     * When the input got changed
+	     */
+	
+	
+	    /**
+	     * When the input got focused
+	     */
+	
+	
+	    /**
+	     * When the input loses focus
+	     */
+	
+	
+	    /**
+	     * When a key gets pressed in the input
+	     * @param  {Event} event The keypress event
+	     */
+	
+	
+	    /**
+	     * When a key gets pressed in the input
+	     * @param  {Event} event The keydown event
+	     */
+	
+	  }, {
+	    key: 'focus',
+	
+	
+	    /**
+	     * Focus the input
+	     */
+	    value: function focus() {
+	      this.refs.input.focus();
+	    }
+	
+	    /**
+	     * Render the view
+	     * @return {Function} The React element to render
+	     */
+	
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var attributes = (0, _filterInputAttributes2.default)(this.props),
+	          classes = (0, _classnames2.default)('geosuggest__input', this.props.className);
+	
+	      return _react2.default.createElement('input', _extends({ className: classes,
+	        ref: 'input',
+	        type: 'text',
+	        autoComplete: 'off'
+	      }, attributes, {
+	        value: this.props.value,
+	        style: this.props.style,
+	        onKeyDown: this.onInputKeyDown,
+	        onChange: this.onChange,
+	        onKeyPress: this.onKeyPress,
+	        onFocus: this.onFocus,
+	        onBlur: this.onBlur }));
+	    }
+	  }]);
+	
+	  return Input;
+	}(_react2.default.Component);
+	
+	/**
+	 * Default values for the properties
+	 * @type {Object}
+	 */
+	
+	
+	Input.defaultProps = {
+	  className: '',
+	  value: '',
+	  ignoreTab: false,
+	  onKeyDown: function onKeyDown() {},
+	  onKeyPress: function onKeyPress() {}
+	};
+	
+	exports.default = Input;
+
+/***/ },
+/* 554 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(555);
+
+/***/ },
+/* 555 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 */
+	
+	'use strict';
+	
+	var shallowEqual = __webpack_require__(124);
+	
+	/**
+	 * Does a shallow comparison for props and state.
+	 * See ReactComponentWithPureRenderMixin
+	 * See also https://facebook.github.io/react/docs/shallow-compare.html
+	 */
+	function shallowCompare(instance, nextProps, nextState) {
+	  return !shallowEqual(instance.props, nextProps) || !shallowEqual(instance.state, nextState);
+	}
+	
+	module.exports = shallowCompare;
+
+/***/ },
+/* 556 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactAddonsShallowCompare = __webpack_require__(554);
+	
+	var _reactAddonsShallowCompare2 = _interopRequireDefault(_reactAddonsShallowCompare);
+	
+	var _classnames = __webpack_require__(548);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _suggestItem = __webpack_require__(557);
+	
+	var _suggestItem2 = _interopRequireDefault(_suggestItem);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // eslint-disable-line no-unused-vars
+	
+	
+	/**
+	 * The list with suggestions. Either from an API or provided as fixture
+	 * @param {Object} props The component's props
+	 * @return {JSX} The icon component.
+	 */
+	var SuggestList = function (_React$Component) {
+	  _inherits(SuggestList, _React$Component);
+	
+	  function SuggestList() {
+	    _classCallCheck(this, SuggestList);
+	
+	    return _possibleConstructorReturn(this, (SuggestList.__proto__ || Object.getPrototypeOf(SuggestList)).apply(this, arguments));
+	  }
+	
+	  _createClass(SuggestList, [{
+	    key: 'shouldComponentUpdate',
+	
+	    /**
+	     * Whether or not the component should update
+	     * @param {Object} nextProps The new properties
+	     * @param {Object} nextState The new state
+	     * @return {Boolean} Update or not?
+	     */
+	    value: function shouldComponentUpdate(nextProps, nextState) {
+	      return (0, _reactAddonsShallowCompare2.default)(this, nextProps, nextState);
+	    }
+	
+	    /**
+	     * Whether or not it is hidden
+	     * @return {Boolean} Hidden or not?
+	     */
+	
+	  }, {
+	    key: 'isHidden',
+	    value: function isHidden() {
+	      return this.props.isHidden || this.props.suggests.length === 0;
+	    }
+	
+	    /**
+	     * There are new properties available for the list
+	     * @param {Object} nextProps The new properties
+	     */
+	
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      if (nextProps.suggests !== this.props.suggests) {
+	        if (nextProps.suggests.length === 0) {
+	          this.props.onSuggestNoResults();
+	        }
+	      }
+	    }
+	
+	    /**
+	     * Render the view
+	     * @return {Function} The React element to render
+	     */
+	
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+	
+	      var classes = (0, _classnames2.default)('geosuggest__suggests', { 'geosuggest__suggests--hidden': this.isHidden() });
+	
+	      return _react2.default.createElement(
+	        'ul',
+	        { className: classes, style: this.props.style },
+	        this.props.suggests.map(function (suggest) {
+	          var isActive = _this2.props.activeSuggest && suggest.placeId === _this2.props.activeSuggest.placeId;
+	
+	          return _react2.default.createElement(_suggestItem2.default, { key: suggest.placeId,
+	            className: suggest.className,
+	            suggest: suggest,
+	            style: _this2.props.suggestItemStyle,
+	            isActive: isActive,
+	            onMouseDown: _this2.props.onSuggestMouseDown,
+	            onMouseOut: _this2.props.onSuggestMouseOut,
+	            onSelect: _this2.props.onSuggestSelect });
+	        })
+	      );
+	    }
+	  }]);
+	
+	  return SuggestList;
+	}(_react2.default.Component);
+	
+	/**
+	 * Default values for the properties
+	 * @type {Object}
+	 */
+	
+	
+	exports.default = SuggestList;
+	SuggestList.defaultProps = {
+	  isHidden: true,
+	  suggests: []
+	};
+
+/***/ },
+/* 557 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactAddonsShallowCompare = __webpack_require__(554);
+	
+	var _reactAddonsShallowCompare2 = _interopRequireDefault(_reactAddonsShallowCompare);
+	
+	var _classnames = __webpack_require__(548);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	/**
+	 * A single Geosuggest item in the list
+	 * @param {Object} props The component's props
+	 * @return {JSX} The icon component.
+	 */
+	var SuggestItem = function (_React$Component) {
+	  _inherits(SuggestItem, _React$Component);
+	
+	  function SuggestItem() {
+	    var _ref;
+	
+	    var _temp, _this, _ret;
+	
+	    _classCallCheck(this, SuggestItem);
+	
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+	
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = SuggestItem.__proto__ || Object.getPrototypeOf(SuggestItem)).call.apply(_ref, [this].concat(args))), _this), _this.onClick = function (event) {
+	      event.preventDefault();
+	      _this.props.onSelect(_this.props.suggest);
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	  }
+	
+	  _createClass(SuggestItem, [{
+	    key: 'shouldComponentUpdate',
+	
+	    /**
+	     * Whether or not the component should update
+	     * @param {Object} nextProps The new properties
+	     * @param {Object} nextState The new state
+	     * @return {Boolean} Update or not?
+	     */
+	    value: function shouldComponentUpdate(nextProps, nextState) {
+	      return (0, _reactAddonsShallowCompare2.default)(this, nextProps, nextState);
+	    }
+	
+	    /**
+	     * When the suggest item got clicked
+	     * @param {Event} event The click event
+	     */
+	
+	  }, {
+	    key: 'render',
+	
+	
+	    /**
+	     * Render the view
+	     * @return {Function} The React element to render
+	     */
+	    value: function render() {
+	      var classes = (0, _classnames2.default)('geosuggest__item', this.props.className, { 'geosuggest__item--active': this.props.isActive });
+	
+	      return _react2.default.createElement(
+	        'li',
+	        { className: classes,
+	          style: this.props.style,
+	          onMouseDown: this.props.onMouseDown,
+	          onMouseOut: this.props.onMouseOut,
+	          onClick: this.onClick },
+	        this.props.suggest.label
+	      );
+	    }
+	  }]);
+	
+	  return SuggestItem;
+	}(_react2.default.Component);
+	
+	/**
+	 * Default values for the properties
+	 * @type {Object}
+	 */
+	
+	
+	exports.default = SuggestItem;
+	SuggestItem.defaultProps = {
+	  isActive: false,
+	  className: '',
+	  suggest: {}
+	};
+
+/***/ },
+/* 558 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Geolocation = __webpack_require__(559);
+	
+	var _Geolocation2 = _interopRequireDefault(_Geolocation);
+	
+	var _DisplayPositionFromStore = __webpack_require__(561);
+	
+	var _DisplayPositionFromStore2 = _interopRequireDefault(_DisplayPositionFromStore);
+	
+	var _PlacesContainer = __webpack_require__(562);
+	
+	var _PlacesContainer2 = _interopRequireDefault(_PlacesContainer);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var ChooseLocation = function ChooseLocation() {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      'h1',
+	      null,
+	      'Choose location'
+	    ),
+	    _react2.default.createElement(_Geolocation2.default, null),
+	    _react2.default.createElement(_DisplayPositionFromStore2.default, null),
+	    _react2.default.createElement(_PlacesContainer2.default, null)
+	  );
+	};
+	
+	exports.default = ChooseLocation;
+
+/***/ },
+/* 559 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(180);
+	
+	var _LocationActions = __webpack_require__(560);
+	
+	var LocationActions = _interopRequireWildcard(_LocationActions);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	// import { bindActionCreators } from 'redux';
+	
+	
+	var GeolocationDisplay = function GeolocationDisplay(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'geolocation_display {props.real ? geolocation_display_ok : geolocation_display_ko}' },
+	      'Latitude: ',
+	      props.latitude ? props.latitude : 'unknown',
+	      _react2.default.createElement('br', null),
+	      'Longitude: ',
+	      props.longitude ? props.longitude : 'unknown',
+	      _react2.default.createElement('br', null)
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'geolocation_statistics' },
+	      'Statistics:',
+	      _react2.default.createElement(
+	        'ul',
+	        null,
+	        _react2.default.createElement(
+	          'li',
+	          null,
+	          'Nb refreshes: ',
+	          props.nbRefreshes
+	        ),
+	        _react2.default.createElement(
+	          'li',
+	          null,
+	          'Nb different positions: ',
+	          props.nbDiffs
+	        ),
+	        _react2.default.createElement(
+	          'li',
+	          null,
+	          'Nb real positions: ',
+	          props.nbReal
+	        ),
+	        _react2.default.createElement(
+	          'li',
+	          null,
+	          'Nb estimated positions: ',
+	          props.nbEstimated
+	        ),
+	        _react2.default.createElement(
+	          'li',
+	          null,
+	          'Last error code: ',
+	          props.errorCode
+	        )
+	      )
+	    )
+	  );
+	};
+	
+	GeolocationDisplay.propTypes = {
+	  latitude: _react2.default.PropTypes.number,
+	  longitude: _react2.default.PropTypes.number,
+	  nbRefreshes: _react2.default.PropTypes.number,
+	  nbDiffs: _react2.default.PropTypes.number,
+	  nbReal: _react2.default.PropTypes.number,
+	  nbEstimated: _react2.default.PropTypes.number,
+	  errorCode: _react2.default.PropTypes.number
+	};
+	
+	function getPosition(position) {
+	  // alert("getPosition");
+	  var current = {
+	    latitude: position.coords.latitude,
+	    longitude: position.coords.longitude,
+	    real: true
+	  };
+	  var statistics = this.state.statistics;
+	  statistics.nbRefreshes += 1;
+	  statistics.nbReal += 1;
+	  if (current.latitude !== this.state.position.latitude || current.longitude !== this.state.position.longitude) {
+	    statistics.nbDiffs += 1;
+	  }
+	  this.setState({
+	    position: current,
+	    statistics: statistics
+	  });
+	
+	  var dispatch = this.props.dispatch; // Injected by react-redux
+	
+	  var action = LocationActions.setCurrentLocation(current.latitude, current.longitude, current.real);
+	  dispatch(action);
+	}
+	
+	/*
+	  showError: function (error) {
+	    switch(error.code) {
+	        case error.PERMISSION_DENIED:
+	            x.innerHTML = "User denied the request for Geolocation."
+	            break;
+	        case error.POSITION_UNAVAILABLE:
+	            x.innerHTML = "Location information is unavailable."
+	            break;
+	        case error.TIMEOUT:
+	            x.innerHTML = "The request to get user location timed out."
+	            break;
+	        case error.UNKNOWN_ERROR:
+	            x.innerHTML = "An unknown error occurred."
+	            break;
+	    }
+	  }
+	*/
+	
+	function errorPosition(error) {
+	  // alert("errorPosition");
+	  var position = this.state.position;
+	  var statistics = this.state.statistics;
+	  position.real = false;
+	  if (position.latitude != null && position.longitude != null) statistics.nbEstimated += 1;
+	  this.setState({
+	    position: position,
+	    statistics: statistics,
+	    errorCode: error.errorCode
+	  });
+	
+	  var dispatch = this.props.dispatch; // Injected by react-redux
+	
+	  var action = LocationActions.setCurrentLocation(position.latitude, position.longitude, false);
+	  dispatch(action);
+	}
+	
+	var Geolocation = function (_Component) {
+	  _inherits(Geolocation, _Component);
+	
+	  function Geolocation() {
+	    var _ref;
+	
+	    var _temp, _this, _ret;
+	
+	    _classCallCheck(this, Geolocation);
+	
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+	
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Geolocation.__proto__ || Object.getPrototypeOf(Geolocation)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+	      position: { latitude: 50.5467501, longitude: 3.0290698999999996, real: false },
+	      statistics: { nbRefreshes: 0, nbDiffs: 0, nbReal: 0, nbEstimated: 0 },
+	      errorCode: 0
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	  }
+	
+	  // watchID: (null: ?number),
+	
+	
+	  _createClass(Geolocation, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      // alert("componentDidMount");
+	      navigator.geolocation.getCurrentPosition(getPosition.bind(this), errorPosition.bind(this), { enableHighAccuracy: true, timeout: 3000, maximumAge: 3000 });
+	      this.watchID = navigator.geolocation.watchPosition(getPosition.bind(this), errorPosition.bind(this));
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      navigator.geolocation.clearWatch(this.watchID);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var displayLatitude = Math.round(this.state.position.latitude * 10000) / 10000;
+	      var displayLongitude = Math.round(this.state.position.longitude * 10000) / 10000;
+	      return _react2.default.createElement(GeolocationDisplay, {
+	        latitude: displayLatitude,
+	        longitude: displayLongitude,
+	        real: this.state.position.real,
+	        nbRefreshes: this.state.statistics.nbRefreshes,
+	        nbDiffs: this.state.statistics.nbDiffs,
+	        nbReal: this.state.statistics.nbReal,
+	        nbEstimated: this.state.statistics.nbEstimated,
+	        errorCode: this.state.errorCode
+	      });
+	    }
+	  }]);
+	
+	  return Geolocation;
+	}(_react.Component);
+	
+	Geolocation = (0, _reactRedux.connect)()(Geolocation); // eslint-disable-line no-class-assign
+	
+	exports.default = Geolocation;
+
+/***/ },
+/* 560 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.setCurrentLocation = setCurrentLocation;
+	function setCurrentLocation(latitude, longitude, real) {
+	  // eslint-disable-line import/prefer-default-export
+	  // console.log("Action: setCurrentLocation latitude=" + latitude + " longitude=" + longitude + " real=" +  real);
+	  return {
+	    type: 'SET_CURRENT_LOCATION',
+	    latitude: latitude, // property value shorthand for latitude: latitude,
+	    longitude: longitude, // property value shorthand for longitude: longitude
+	    real: real
+	  };
+	}
+
+/***/ },
+/* 561 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(180);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var DisplayPositionFromStore = _react2.default.createClass({
+	  displayName: 'DisplayPositionFromStore',
+	
+	
+	  getInitialState: function getInitialState() {
+	    return {
+	      nbChanges: 0
+	    };
+	  },
+	
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	    this.setState({
+	      nbChanges: this.state.nbChanges + 1
+	    });
+	  },
+	
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      'DisplayPositionFromStore test ==> latitude: ',
+	      this.props.coordinates.latitude,
+	      ' - longitude: ',
+	      this.props.coordinates.longitude,
+	      ' (real: ',
+	      this.props.coordinates.real === true ? "yes" : "no",
+	      ', changed: ',
+	      this.props.coordinates.changed === true ? "yes" : "no",
+	      ' - state nb changes: ',
+	      this.state.nbChanges,
+	      ')'
+	    );
+	  }
+	});
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	  // console.log("{   DisplayPositionFromStore.mapStateToProps (dpms)" );
+	  // console.log("       (dpms) state:", state);
+	
+	  var result = {
+	    coordinates: state.coordinates
+	  };
+	  // console.log("       (dpms) result:", result);
+	  // console.log("}   DisplayPositionFromStore.mapStateToProps" );
+	  return result;
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(DisplayPositionFromStore);
+
+/***/ },
+/* 562 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(180);
+	
+	var _LocationActions = __webpack_require__(560);
+	
+	var _googleMapsReact = __webpack_require__(563);
+	
+	var _googleMapsReact2 = _interopRequireDefault(_googleMapsReact);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var __GAPI_KEY__ = 'AIzaSyAPbswfvaojeQVe9eE-0CtZ4iEtWia9KO0';
+	
+	var Listing = function Listing(_ref) {
+	  var places = _ref.places;
+	
+	  console.log('   {   Listing.render (lr)');
+	  console.log('          (lr) places: ', places);
+	
+	  var result = _react2.default.createElement(
+	    'ul',
+	    null,
+	    places && places.map(function (p) {
+	      return _react2.default.createElement(
+	        'li',
+	        { key: p.id },
+	        p.name
+	      );
+	    })
+	  );
+	
+	  console.log('   }   Listing.render');
+	  return result;
+	};
+	
+	// @connect(mapStateToProps, mapDispatchToProps)
+	
+	var PlacesContainer = _react2.default.createClass({
+	  displayName: 'PlacesContainer',
+	
+	
+	  getInitialState: function getInitialState() {
+	    return {
+	      places: [],
+	      nbRenders: 0
+	    };
+	  },
+	
+	  onMapReady: function onMapReady(mapProps, map) {
+	    console.log('!!! onMapReady.mapProps: ', mapProps);
+	    console.log('!!! onMapReady.map: ', map);
+	    undefined.searchNearby(map, map.center);
+	  },
+	
+	  searchNearby: function searchNearby(map, center) {
+	    console.log('{   PlacesContainer.searchNearby (pcs)');
+	    console.log('       (pcs) center:', center);
+	    console.log('       (pcs) map:', map);
+	    var google = undefined.props.google;
+	
+	    var service = new google.maps.places.PlacesService(map);
+	    // Specify location, radius and place types for your Places API search.
+	    var request = {
+	      location: center,
+	      radius: '1000',
+	      type: ['food']
+	    };
+	
+	    service.nearbySearch(request, function (results, status, pagination) {
+	      if (status === google.maps.places.PlacesServiceStatus.OK) {
+	        undefined.pagination = pagination;
+	        undefined.setState({
+	          places: results,
+	          hasNextPage: pagination.hasNextPage,
+	          center: center
+	        });
+	      }
+	    });
+	    console.log('}   PlacesContainer.searchNearby (pcs)');
+	  },
+	
+	  onMapRecentered: function onMapRecentered(mapProps, map) {
+	    console.log('!!! onMapRecentered.mapProps: ', mapProps);
+	    console.log('!!! onMapRecentered.map: ', map);
+	    undefined.searchNearby(map, map.center);
+	  },
+	
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	    console.log('{   PlacesContainer.componentWillReceiveProps (cwrp)');
+	    console.log('       (cwrp) nextProps: ', nextProps);
+	    var nbRenders = undefined.state.nbRenders + 1;
+	    undefined.setState({ nbRenders: nbRenders });
+	    console.log('}   PlacesContainer.componentWillReceiveProps (cwrp)');
+	  },
+	
+	  render: function render() {
+	    console.log('{   PlacesContainer.render (pcr)');
+	    console.log('       (pcr) state:', undefined.state);
+	    console.log('       (pcr) props:', undefined.props);
+	
+	    var style = {
+	      width: '80%',
+	      height: '50%'
+	    };
+	
+	    //    if (!this.state || !this.state.center) {
+	    if (!undefined.props.loaded) {
+	      console.log('       returns loading msg');
+	      console.log('}   PlacesContainer.render');
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        'Loading...'
+	      );
+	    }
+	
+	    var result = _react2.default.createElement(
+	      'div',
+	      { style: style },
+	      _react2.default.createElement(
+	        _googleMapsReact2.default,
+	        {
+	          google: undefined.props.google,
+	          className: 'map',
+	          onReady: undefined.onMapReady,
+	          visible: false,
+	          center: undefined.props.position,
+	          onRecenter: undefined.onMapRecentered
+	        },
+	        _react2.default.createElement(Listing, { places: undefined.state.places })
+	      ),
+	      'nbRenders: ',
+	      undefined.state.nbRenders
+	    );
+	    console.log('}   PlacesContainer.render');
+	    return result;
+	  }
+	
+	});
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	  console.log('{   PlacesContainer.mapStateToProps (pcms)');
+	  console.log('       (pcms) state:', state);
+	  var result = {
+	    // center: [state.coordinates.latitude, state.coordinates.longitude]
+	    position: { lat: state.coordinates.latitude, lng: state.coordinates.longitude }
+	  };
+	  console.log('       (pcms) result:', result);
+	  console.log('}   PlacesContainer.mapStateToProps');
+	  return result;
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  console.log('{   PlacesContainer.mapDispatchToProps (pcmd)');
+	  console.log('       (pcmd) dispatch:', dispatch);
+	  console.log('}   PlacesContainer.mapDispatchToProps (pcmd)');
+	  return {};
+	};
+	
+	var PlacesContainerWrapped = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(PlacesContainer);
+	exports.default = (0, _googleMapsReact.GoogleApiWrapper)({ apiKey: __GAPI_KEY__ })(PlacesContainerWrapped);
+	
+	// Works too! :
+	// let PlacesContainerWrapped = GoogleApiWrapper({apiKey: __GAPI_KEY__})(PlacesContainer);
+	// export default connect(mapStateToProps, mapDispatchToProps)(PlacesContainerWrapped);
+
+/***/ },
+/* 563 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
+	  if (true) {
+	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(564), __webpack_require__(567), __webpack_require__(569), __webpack_require__(2), __webpack_require__(33), __webpack_require__(568), __webpack_require__(574), __webpack_require__(209)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	  } else if (typeof exports !== "undefined") {
+	    factory(exports, require('./GoogleApiComponent'), require('./components/Marker'), require('./components/InfoWindow'), require('react'), require('react-dom'), require('./lib/String'), require('./lib/cancelablePromise'), require('invariant'));
+	  } else {
+	    var mod = {
+	      exports: {}
+	    };
+	    factory(mod.exports, global.GoogleApiComponent, global.Marker, global.InfoWindow, global.react, global.reactDom, global.String, global.cancelablePromise, global.invariant);
+	    global.index = mod.exports;
+	  }
+	})(this, function (exports, _GoogleApiComponent, _Marker, _InfoWindow, _react, _reactDom, _String, _cancelablePromise, _invariant) {
+	  'use strict';
+	
+	  Object.defineProperty(exports, "__esModule", {
+	    value: true
+	  });
+	  exports.Map = exports.InfoWindow = exports.Marker = exports.GoogleApiWrapper = undefined;
+	  Object.defineProperty(exports, 'GoogleApiWrapper', {
+	    enumerable: true,
+	    get: function () {
+	      return _GoogleApiComponent.wrapper;
+	    }
+	  });
+	  Object.defineProperty(exports, 'Marker', {
+	    enumerable: true,
+	    get: function () {
+	      return _Marker.Marker;
+	    }
+	  });
+	  Object.defineProperty(exports, 'InfoWindow', {
+	    enumerable: true,
+	    get: function () {
+	      return _InfoWindow.InfoWindow;
+	    }
+	  });
+	
+	  var _react2 = _interopRequireDefault(_react);
+	
+	  var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	  var _invariant2 = _interopRequireDefault(_invariant);
+	
+	  function _interopRequireDefault(obj) {
+	    return obj && obj.__esModule ? obj : {
+	      default: obj
+	    };
+	  }
+	
+	  function _classCallCheck(instance, Constructor) {
+	    if (!(instance instanceof Constructor)) {
+	      throw new TypeError("Cannot call a class as a function");
+	    }
+	  }
+	
+	  var _createClass = function () {
+	    function defineProperties(target, props) {
+	      for (var i = 0; i < props.length; i++) {
+	        var descriptor = props[i];
+	        descriptor.enumerable = descriptor.enumerable || false;
+	        descriptor.configurable = true;
+	        if ("value" in descriptor) descriptor.writable = true;
+	        Object.defineProperty(target, descriptor.key, descriptor);
+	      }
+	    }
+	
+	    return function (Constructor, protoProps, staticProps) {
+	      if (protoProps) defineProperties(Constructor.prototype, protoProps);
+	      if (staticProps) defineProperties(Constructor, staticProps);
+	      return Constructor;
+	    };
+	  }();
+	
+	  function _possibleConstructorReturn(self, call) {
+	    if (!self) {
+	      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+	    }
+	
+	    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+	  }
+	
+	  function _inherits(subClass, superClass) {
+	    if (typeof superClass !== "function" && superClass !== null) {
+	      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+	    }
+	
+	    subClass.prototype = Object.create(superClass && superClass.prototype, {
+	      constructor: {
+	        value: subClass,
+	        enumerable: false,
+	        writable: true,
+	        configurable: true
+	      }
+	    });
+	    if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+	  }
+	
+	  var mapStyles = {
+	    container: {
+	      position: 'absolute',
+	      width: '100vw',
+	      height: '100vh'
+	    },
+	    map: {
+	      position: 'absolute',
+	      left: 0,
+	      right: 0,
+	      bottom: 0,
+	      top: 0
+	    }
+	  };
+	
+	  var evtNames = ['ready', 'click', 'dragend', 'recenter'];
+	
+	  var Map = exports.Map = function (_React$Component) {
+	    _inherits(Map, _React$Component);
+	
+	    function Map(props) {
+	      _classCallCheck(this, Map);
+	
+	      var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Map).call(this, props));
+	
+	      (0, _invariant2.default)(props.hasOwnProperty('google'), 'You must include a `google` prop.');
+	
+	      _this.listeners = {};
+	      _this.state = {
+	        currentLocation: {
+	          lat: _this.props.initialCenter.lat,
+	          lng: _this.props.initialCenter.lng
+	        }
+	      };
+	      return _this;
+	    }
+	
+	    _createClass(Map, [{
+	      key: 'componentDidMount',
+	      value: function componentDidMount() {
+	        var _this2 = this;
+	
+	        if (this.props.centerAroundCurrentLocation) {
+	          if (navigator && navigator.geolocation) {
+	            this.geoPromise = (0, _cancelablePromise.makeCancelable)(new Promise(function (resolve, reject) {
+	              navigator.geolocation.getCurrentPosition(resolve, reject);
+	            }));
+	
+	            this.geoPromise.promise.then(function (pos) {
+	              var coords = pos.coords;
+	              _this2.setState({
+	                currentLocation: {
+	                  lat: coords.latitude,
+	                  lng: coords.longitude
+	                }
+	              });
+	            }).catch(function (e) {
+	              return e;
+	            });
+	          }
+	        }
+	        this.loadMap();
+	      }
+	    }, {
+	      key: 'componentDidUpdate',
+	      value: function componentDidUpdate(prevProps, prevState) {
+	        if (prevProps.google !== this.props.google) {
+	          this.loadMap();
+	        }
+	        if (this.props.visible !== prevProps.visible) {
+	          this.restyleMap();
+	        }
+	        if (this.props.zoom !== prevProps.zoom) {
+	          this.map.setZoom(this.props.zoom);
+	        }
+	        if (this.props.center !== prevProps.center) {
+	          this.setState({
+	            currentLocation: this.props.center
+	          });
+	        }
+	        if (prevState.currentLocation !== this.state.currentLocation) {
+	          this.recenterMap();
+	        }
+	      }
+	    }, {
+	      key: 'componentWillUnmount',
+	      value: function componentWillUnmount() {
+	        var _this3 = this;
+	
+	        var google = this.props.google;
+	
+	        if (this.geoPromise) {
+	          this.geoPromise.cancel();
+	        }
+	        Object.keys(this.listeners).forEach(function (e) {
+	          google.maps.event.removeListener(_this3.listeners[e]);
+	        });
+	      }
+	    }, {
+	      key: 'loadMap',
+	      value: function loadMap() {
+	        var _this4 = this;
+	
+	        if (this.props && this.props.google && this._mapRef) {
+	          (function () {
+	            var google = _this4.props.google;
+	
+	            var maps = google.maps;
+	
+	            var mapRef = _this4._mapRef;
+	            var node = _reactDom2.default.findDOMNode(mapRef);
+	            var curr = _this4.state.currentLocation;
+	            var center = new maps.LatLng(curr.lat, curr.lng);
+	
+	            var mapTypeIds = _this4.props.google.maps.MapTypeId || {};
+	            var mapTypeFromProps = String(_this4.props.mapType).toUpperCase();
+	
+	            var mapConfig = Object.assign({}, {
+	              mapTypeId: mapTypeIds[mapTypeFromProps],
+	              center: center,
+	              zoom: _this4.props.zoom,
+	              maxZoom: _this4.props.maxZoom,
+	              minZoom: _this4.props.maxZoom,
+	              clickableIcons: _this4.props.clickableIcons,
+	              disableDefaultUI: _this4.props.disableDefaultUI,
+	              zoomControl: _this4.props.zoomControl,
+	              mapTypeControl: _this4.props.mapTypeControl,
+	              scaleControl: _this4.props.scaleControl,
+	              streetViewControl: _this4.props.streetViewControl,
+	              panControl: _this4.props.panControl,
+	              rotateControl: _this4.props.rotateControl,
+	              scrollwheel: _this4.props.scrollwheel,
+	              draggable: _this4.props.draggable,
+	              keyboardShortcuts: _this4.props.keyboardShortcuts,
+	              disableDoubleClickZoom: _this4.props.disableDoubleClickZoom,
+	              noClear: _this4.props.noClear,
+	              styles: _this4.props.styles
+	            });
+	
+	            Object.keys(mapConfig).forEach(function (key) {
+	              if (!mapConfig[key]) {
+	                delete mapConfig[key];
+	              }
+	            });
+	
+	            _this4.map = new maps.Map(node, mapConfig);
+	
+	            evtNames.forEach(function (e) {
+	              _this4.listeners[e] = _this4.map.addListener(e, _this4.handleEvent(e));
+	            });
+	            maps.event.trigger(_this4.map, 'ready');
+	            _this4.forceUpdate();
+	          })();
+	        }
+	      }
+	    }, {
+	      key: 'handleEvent',
+	      value: function handleEvent(evtName) {
+	        var _this5 = this;
+	
+	        var timeout = void 0;
+	        var handlerName = 'on' + (0, _String.camelize)(evtName);
+	
+	        return function (e) {
+	          if (timeout) {
+	            clearTimeout(timeout);
+	            timeout = null;
+	          }
+	          timeout = setTimeout(function () {
+	            if (_this5.props[handlerName]) {
+	              _this5.props[handlerName](_this5.props, _this5.map, e);
+	            }
+	          }, 0);
+	        };
+	      }
+	    }, {
+	      key: 'recenterMap',
+	      value: function recenterMap() {
+	        var map = this.map;
+	
+	        var google = this.props.google;
+	
+	        var maps = google.maps;
+	
+	        if (!google) return;
+	
+	        if (map) {
+	          var center = this.state.currentLocation;
+	          if (!(center instanceof google.maps.LatLng)) {
+	            center = new google.maps.LatLng(center.lat, center.lng);
+	          }
+	          // map.panTo(center)
+	          map.setCenter(center);
+	          maps.event.trigger(map, 'recenter');
+	        }
+	      }
+	    }, {
+	      key: 'restyleMap',
+	      value: function restyleMap() {
+	        if (this.map) {
+	          var google = this.props.google;
+	
+	          google.maps.event.trigger(this.map, 'resize');
+	        }
+	      }
+	    }, {
+	      key: 'renderChildren',
+	      value: function renderChildren() {
+	        var _this6 = this;
+	
+	        var children = this.props.children;
+	
+	
+	        if (!children) return;
+	
+	        return _react2.default.Children.map(children, function (c) {
+	          return _react2.default.cloneElement(c, {
+	            map: _this6.map,
+	            google: _this6.props.google,
+	            mapCenter: _this6.state.currentLocation
+	          });
+	        });
+	      }
+	    }, {
+	      key: 'render',
+	      value: function render() {
+	        var _this7 = this;
+	
+	        var style = Object.assign({}, mapStyles.map, this.props.style, {
+	          display: this.props.visible ? 'inherit' : 'none'
+	        });
+	
+	        var containerStyles = Object.assign({}, mapStyles.container, this.props.containerStyle);
+	
+	        return _react2.default.createElement(
+	          'div',
+	          {
+	            style: containerStyles,
+	            className: this.props.className },
+	          _react2.default.createElement(
+	            'div',
+	            { style: style, ref: function ref(map) {
+	                return _this7._mapRef = map;
+	              } },
+	            'Loading map...'
+	          ),
+	          this.renderChildren()
+	        );
+	      }
+	    }]);
+	
+	    return Map;
+	  }(_react2.default.Component);
+	
+	  ;
+	
+	  Map.propTypes = {
+	    google: _react.PropTypes.object,
+	    zoom: _react.PropTypes.number,
+	    centerAroundCurrentLocation: _react.PropTypes.bool,
+	    center: _react.PropTypes.object,
+	    initialCenter: _react.PropTypes.object,
+	    className: _react.PropTypes.string,
+	    style: _react.PropTypes.object,
+	    containerStyle: _react.PropTypes.object,
+	    visible: _react.PropTypes.bool,
+	    mapType: _react.PropTypes.string,
+	    maxZoom: _react.PropTypes.number,
+	    minZoom: _react.PropTypes.number,
+	    clickableIcons: _react.PropTypes.bool,
+	    disableDefaultUI: _react.PropTypes.bool,
+	    zoomControl: _react.PropTypes.bool,
+	    mapTypeControl: _react.PropTypes.bool,
+	    scaleControl: _react.PropTypes.bool,
+	    streetViewControl: _react.PropTypes.bool,
+	    panControl: _react.PropTypes.bool,
+	    rotateControl: _react.PropTypes.bool,
+	    scrollwheel: _react.PropTypes.bool,
+	    draggable: _react.PropTypes.bool,
+	    keyboardShortcuts: _react.PropTypes.bool,
+	    disableDoubleClickZoom: _react.PropTypes.bool,
+	    noClear: _react.PropTypes.bool,
+	    styles: _react.PropTypes.array
+	  };
+	
+	  evtNames.forEach(function (e) {
+	    return Map.propTypes[(0, _String.camelize)(e)] = _react.PropTypes.func;
+	  });
+	
+	  Map.defaultProps = {
+	    zoom: 14,
+	    initialCenter: {
+	      lat: 37.774929,
+	      lng: -122.419416
+	    },
+	    center: {},
+	    centerAroundCurrentLocation: false,
+	    style: {},
+	    containerStyle: {},
+	    visible: true
+	  };
+	
+	  exports.default = Map;
+	});
+
+/***/ },
+/* 564 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
+	    if (true) {
+	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(2), __webpack_require__(33), __webpack_require__(565), __webpack_require__(566)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	    } else if (typeof exports !== "undefined") {
+	        factory(exports, require('react'), require('react-dom'), require('./lib/ScriptCache'), require('./lib/GoogleApi'));
+	    } else {
+	        var mod = {
+	            exports: {}
+	        };
+	        factory(mod.exports, global.react, global.reactDom, global.ScriptCache, global.GoogleApi);
+	        global.GoogleApiComponent = mod.exports;
+	    }
+	})(this, function (exports, _react, _reactDom, _ScriptCache, _GoogleApi) {
+	    'use strict';
+	
+	    Object.defineProperty(exports, "__esModule", {
+	        value: true
+	    });
+	    exports.wrapper = undefined;
+	
+	    var _react2 = _interopRequireDefault(_react);
+	
+	    var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	    var _GoogleApi2 = _interopRequireDefault(_GoogleApi);
+	
+	    function _interopRequireDefault(obj) {
+	        return obj && obj.__esModule ? obj : {
+	            default: obj
+	        };
+	    }
+	
+	    function _classCallCheck(instance, Constructor) {
+	        if (!(instance instanceof Constructor)) {
+	            throw new TypeError("Cannot call a class as a function");
+	        }
+	    }
+	
+	    var _createClass = function () {
+	        function defineProperties(target, props) {
+	            for (var i = 0; i < props.length; i++) {
+	                var descriptor = props[i];
+	                descriptor.enumerable = descriptor.enumerable || false;
+	                descriptor.configurable = true;
+	                if ("value" in descriptor) descriptor.writable = true;
+	                Object.defineProperty(target, descriptor.key, descriptor);
+	            }
+	        }
+	
+	        return function (Constructor, protoProps, staticProps) {
+	            if (protoProps) defineProperties(Constructor.prototype, protoProps);
+	            if (staticProps) defineProperties(Constructor, staticProps);
+	            return Constructor;
+	        };
+	    }();
+	
+	    function _possibleConstructorReturn(self, call) {
+	        if (!self) {
+	            throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+	        }
+	
+	        return call && (typeof call === "object" || typeof call === "function") ? call : self;
+	    }
+	
+	    function _inherits(subClass, superClass) {
+	        if (typeof superClass !== "function" && superClass !== null) {
+	            throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+	        }
+	
+	        subClass.prototype = Object.create(superClass && superClass.prototype, {
+	            constructor: {
+	                value: subClass,
+	                enumerable: false,
+	                writable: true,
+	                configurable: true
+	            }
+	        });
+	        if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+	    }
+	
+	    var defaultMapConfig = {};
+	    var defaultCreateCache = function defaultCreateCache(options) {
+	        options = options || {};
+	        var apiKey = options.apiKey;
+	        var libraries = options.libraries || ['places'];
+	        var version = options.version || '3.24';
+	
+	        return (0, _ScriptCache.ScriptCache)({
+	            google: (0, _GoogleApi2.default)({ apiKey: apiKey, libraries: libraries, version: version })
+	        });
+	    };
+	
+	    var wrapper = exports.wrapper = function wrapper(options) {
+	        return function (WrappedComponent) {
+	            var apiKey = options.apiKey;
+	            var libraries = options.libraries || ['places'];
+	            var version = options.version || '3.24';
+	            var createCache = options.createCache || defaultCreateCache;
+	
+	            var Wrapper = function (_React$Component) {
+	                _inherits(Wrapper, _React$Component);
+	
+	                function Wrapper(props, context) {
+	                    _classCallCheck(this, Wrapper);
+	
+	                    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Wrapper).call(this, props, context));
+	
+	                    _this.scriptCache = createCache(options);
+	                    _this.scriptCache.google.onLoad(_this.onLoad.bind(_this));
+	
+	                    _this.state = {
+	                        loaded: false,
+	                        map: null,
+	                        google: null
+	                    };
+	                    return _this;
+	                }
+	
+	                _createClass(Wrapper, [{
+	                    key: 'onLoad',
+	                    value: function onLoad(err, tag) {
+	                        this._gapi = window.google;
+	
+	                        this.setState({ loaded: true, google: this._gapi });
+	                    }
+	                }, {
+	                    key: 'render',
+	                    value: function render() {
+	                        var props = Object.assign({}, this.props, {
+	                            loaded: this.state.loaded,
+	                            google: window.google
+	                        });
+	
+	                        return _react2.default.createElement(
+	                            'div',
+	                            null,
+	                            _react2.default.createElement(WrappedComponent, props),
+	                            _react2.default.createElement('div', { ref: 'map' })
+	                        );
+	                    }
+	                }]);
+	
+	                return Wrapper;
+	            }(_react2.default.Component);
+	
+	            return Wrapper;
+	        };
+	    };
+	
+	    exports.default = wrapper;
+	});
+
+/***/ },
+/* 565 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
+	    if (true) {
+	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	    } else if (typeof exports !== "undefined") {
+	        factory(exports);
+	    } else {
+	        var mod = {
+	            exports: {}
+	        };
+	        factory(mod.exports);
+	        global.ScriptCache = mod.exports;
+	    }
+	})(this, function (exports) {
+	    'use strict';
+	
+	    Object.defineProperty(exports, "__esModule", {
+	        value: true
+	    });
+	    var counter = 0;
+	    var scriptMap = window._scriptMap || new Map();
+	
+	    var ScriptCache = exports.ScriptCache = function (global) {
+	        global._scriptMap = global._scriptMap || scriptMap;
+	        return function ScriptCache(scripts) {
+	            var Cache = {};
+	
+	            Cache._onLoad = function (key) {
+	                return function (cb) {
+	                    var stored = scriptMap.get(key);
+	                    if (stored) {
+	                        stored.promise.then(function () {
+	                            stored.error ? cb(stored.error) : cb(null, stored);
+	                            return stored;
+	                        });
+	                    } else {
+	                        // TODO:
+	                    }
+	                };
+	            };
+	
+	            Cache._scriptTag = function (key, src) {
+	                if (!scriptMap.has(key)) {
+	                    (function () {
+	                        var tag = document.createElement('script');
+	                        var promise = new Promise(function (resolve, reject) {
+	                            var resolved = false,
+	                                errored = false,
+	                                body = document.getElementsByTagName('body')[0];
+	
+	                            tag.type = 'text/javascript';
+	                            tag.async = false; // Load in order
+	
+	                            var cbName = 'loaderCB' + counter++ + Date.now();
+	                            var cb = void 0;
+	
+	                            var handleResult = function handleResult(state) {
+	                                return function (evt) {
+	                                    var stored = scriptMap.get(key);
+	                                    if (state === 'loaded') {
+	                                        stored.resolved = true;
+	                                        resolve(src);
+	                                        // stored.handlers.forEach(h => h.call(null, stored))
+	                                        // stored.handlers = []
+	                                    } else if (state === 'error') {
+	                                            stored.errored = true;
+	                                            // stored.handlers.forEach(h => h.call(null, stored))
+	                                            // stored.handlers = [];
+	                                            reject(evt);
+	                                        }
+	                                    stored.loaded = true;
+	
+	                                    cleanup();
+	                                };
+	                            };
+	
+	                            var cleanup = function cleanup() {
+	                                if (global[cbName] && typeof global[cbName] === 'function') {
+	                                    global[cbName] = null;
+	                                    delete global[cbName];
+	                                }
+	                            };
+	
+	                            tag.onload = handleResult('loaded');
+	                            tag.onerror = handleResult('error');
+	                            tag.onreadystatechange = function () {
+	                                handleResult(tag.readyState);
+	                            };
+	
+	                            // Pick off callback, if there is one
+	                            if (src.match(/callback=CALLBACK_NAME/)) {
+	                                src = src.replace(/(callback=)[^\&]+/, '$1' + cbName);
+	                                cb = window[cbName] = tag.onload;
+	                            } else {
+	                                tag.addEventListener('load', tag.onload);
+	                            }
+	                            tag.addEventListener('error', tag.onerror);
+	
+	                            tag.src = src;
+	                            body.appendChild(tag);
+	
+	                            return tag;
+	                        });
+	                        var initialState = {
+	                            loaded: false,
+	                            error: false,
+	                            promise: promise,
+	                            tag: tag
+	                        };
+	                        scriptMap.set(key, initialState);
+	                    })();
+	                }
+	                return scriptMap.get(key);
+	            };
+	
+	            // let scriptTags = document.querySelectorAll('script')
+	            //
+	            // NodeList.prototype.filter = Array.prototype.filter;
+	            // NodeList.prototype.map = Array.prototype.map;
+	            // const initialScripts = scriptTags
+	            //   .filter(s => !!s.src)
+	            //   .map(s => s.src.split('?')[0])
+	            //   .reduce((memo, script) => {
+	            //     memo[script] = script;
+	            //     return memo;
+	            //   }, {});
+	
+	            Object.keys(scripts).forEach(function (key) {
+	                var script = scripts[key];
+	
+	                var tag = window._scriptMap.has(key) ? window._scriptMap.get(key).tag : Cache._scriptTag(key, script);
+	
+	                Cache[key] = {
+	                    tag: tag,
+	                    onLoad: Cache._onLoad(key)
+	                };
+	            });
+	
+	            return Cache;
+	        };
+	    }(window);
+	
+	    exports.default = ScriptCache;
+	});
+
+/***/ },
+/* 566 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
+	    if (true) {
+	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(209)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	    } else if (typeof exports !== "undefined") {
+	        factory(exports, require('invariant'));
+	    } else {
+	        var mod = {
+	            exports: {}
+	        };
+	        factory(mod.exports, global.invariant);
+	        global.GoogleApi = mod.exports;
+	    }
+	})(this, function (exports, _invariant) {
+	    'use strict';
+	
+	    Object.defineProperty(exports, "__esModule", {
+	        value: true
+	    });
+	    exports.GoogleApi = undefined;
+	
+	    var _invariant2 = _interopRequireDefault(_invariant);
+	
+	    function _interopRequireDefault(obj) {
+	        return obj && obj.__esModule ? obj : {
+	            default: obj
+	        };
+	    }
+	
+	    var GoogleApi = exports.GoogleApi = function GoogleApi(opts) {
+	        opts = opts || {};
+	
+	        (0, _invariant2.default)(opts.hasOwnProperty('apiKey'), 'You must pass an apiKey to use GoogleApi');
+	
+	        var apiKey = opts.apiKey;
+	        var libraries = opts.libraries || ['places'];
+	        var client = opts.client;
+	        var URL = 'https://maps.googleapis.com/maps/api/js';
+	
+	        var googleVersion = opts.version || '3.24';
+	
+	        var script = null;
+	        var google = window.google || null;
+	        var loading = false;
+	        var channel = null;
+	        var language = null;
+	        var region = null;
+	
+	        var onLoadEvents = [];
+	
+	        var url = function url() {
+	            var url = URL;
+	            var params = {
+	                key: apiKey,
+	                callback: 'CALLBACK_NAME',
+	                libraries: libraries.join(','),
+	                client: client,
+	                v: googleVersion,
+	                channel: channel,
+	                language: language,
+	                region: region
+	            };
+	
+	            var paramStr = Object.keys(params).filter(function (k) {
+	                return !!params[k];
+	            }).map(function (k) {
+	                return k + '=' + params[k];
+	            }).join('&');
+	
+	            return url + '?' + paramStr;
+	        };
+	
+	        return url();
+	    };
+	
+	    exports.default = GoogleApi;
+	});
+
+/***/ },
+/* 567 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
+	  if (true) {
+	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(2), __webpack_require__(568)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	  } else if (typeof exports !== "undefined") {
+	    factory(exports, require('react'), require('../lib/String'));
+	  } else {
+	    var mod = {
+	      exports: {}
+	    };
+	    factory(mod.exports, global.react, global.String);
+	    global.Marker = mod.exports;
+	  }
+	})(this, function (exports, _react, _String) {
+	  'use strict';
+	
+	  Object.defineProperty(exports, "__esModule", {
+	    value: true
+	  });
+	  exports.Marker = undefined;
+	
+	  var _react2 = _interopRequireDefault(_react);
+	
+	  function _interopRequireDefault(obj) {
+	    return obj && obj.__esModule ? obj : {
+	      default: obj
+	    };
+	  }
+	
+	  function _classCallCheck(instance, Constructor) {
+	    if (!(instance instanceof Constructor)) {
+	      throw new TypeError("Cannot call a class as a function");
+	    }
+	  }
+	
+	  var _createClass = function () {
+	    function defineProperties(target, props) {
+	      for (var i = 0; i < props.length; i++) {
+	        var descriptor = props[i];
+	        descriptor.enumerable = descriptor.enumerable || false;
+	        descriptor.configurable = true;
+	        if ("value" in descriptor) descriptor.writable = true;
+	        Object.defineProperty(target, descriptor.key, descriptor);
+	      }
+	    }
+	
+	    return function (Constructor, protoProps, staticProps) {
+	      if (protoProps) defineProperties(Constructor.prototype, protoProps);
+	      if (staticProps) defineProperties(Constructor, staticProps);
+	      return Constructor;
+	    };
+	  }();
+	
+	  function _possibleConstructorReturn(self, call) {
+	    if (!self) {
+	      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+	    }
+	
+	    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+	  }
+	
+	  function _inherits(subClass, superClass) {
+	    if (typeof superClass !== "function" && superClass !== null) {
+	      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+	    }
+	
+	    subClass.prototype = Object.create(superClass && superClass.prototype, {
+	      constructor: {
+	        value: subClass,
+	        enumerable: false,
+	        writable: true,
+	        configurable: true
+	      }
+	    });
+	    if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+	  }
+	
+	  var evtNames = ['click', 'mouseover', 'recenter'];
+	
+	  var wrappedPromise = function wrappedPromise() {
+	    var wrappedPromise = {},
+	        promise = new Promise(function (resolve, reject) {
+	      wrappedPromise.resolve = resolve;
+	      wrappedPromise.reject = reject;
+	    });
+	    wrappedPromise.then = promise.then.bind(promise);
+	    wrappedPromise.catch = promise.catch.bind(promise);
+	    wrappedPromise.promise = promise;
+	
+	    return wrappedPromise;
+	  };
+	
+	  var Marker = exports.Marker = function (_React$Component) {
+	    _inherits(Marker, _React$Component);
+	
+	    function Marker() {
+	      _classCallCheck(this, Marker);
+	
+	      return _possibleConstructorReturn(this, Object.getPrototypeOf(Marker).apply(this, arguments));
+	    }
+	
+	    _createClass(Marker, [{
+	      key: 'componentDidMount',
+	      value: function componentDidMount() {
+	        this.markerPromise = wrappedPromise();
+	        this.renderMarker();
+	      }
+	    }, {
+	      key: 'componentDidUpdate',
+	      value: function componentDidUpdate(prevProps) {
+	        if (this.props.map !== prevProps.map || this.props.position !== prevProps.position) {
+	          this.marker.setMap(null);
+	          this.renderMarker();
+	        }
+	      }
+	    }, {
+	      key: 'componentWillUnmount',
+	      value: function componentWillUnmount() {
+	        if (this.marker) {
+	          this.marker.setMap(null);
+	        }
+	      }
+	    }, {
+	      key: 'renderMarker',
+	      value: function renderMarker() {
+	        var _this2 = this;
+	
+	        var _props = this.props;
+	        var map = _props.map;
+	        var google = _props.google;
+	        var position = _props.position;
+	        var mapCenter = _props.mapCenter;
+	        var icon = _props.icon;
+	
+	        if (!google) {
+	          return null;
+	        }
+	
+	        var pos = position || mapCenter;
+	        if (!(pos instanceof google.maps.LatLng)) {
+	          position = new google.maps.LatLng(pos.lat, pos.lng);
+	        }
+	
+	        var pref = {
+	          map: map,
+	          position: position,
+	          icon: icon
+	        };
+	        this.marker = new google.maps.Marker(pref);
+	
+	        evtNames.forEach(function (e) {
+	          _this2.marker.addListener(e, _this2.handleEvent(e));
+	        });
+	
+	        this.markerPromise.resolve(this.marker);
+	      }
+	    }, {
+	      key: 'getMarker',
+	      value: function getMarker() {
+	        return this.markerPromise;
+	      }
+	    }, {
+	      key: 'handleEvent',
+	      value: function handleEvent(evt) {
+	        var _this3 = this;
+	
+	        return function (e) {
+	          var evtName = 'on' + (0, _String.camelize)(evt);
+	          if (_this3.props[evtName]) {
+	            _this3.props[evtName](_this3.props, _this3.marker, e);
+	          }
+	        };
+	      }
+	    }, {
+	      key: 'render',
+	      value: function render() {
+	        return null;
+	      }
+	    }]);
+	
+	    return Marker;
+	  }(_react2.default.Component);
+	
+	  Marker.propTypes = {
+	    position: _react.PropTypes.object,
+	    map: _react.PropTypes.object,
+	    icon: _react.PropTypes.string
+	  };
+	
+	  evtNames.forEach(function (e) {
+	    return Marker.propTypes[e] = _react.PropTypes.func;
+	  });
+	
+	  Marker.defaultProps = {
+	    name: 'Marker'
+	  };
+	
+	  exports.default = Marker;
+	});
+
+/***/ },
+/* 568 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
+	  if (true) {
+	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	  } else if (typeof exports !== "undefined") {
+	    factory(exports);
+	  } else {
+	    var mod = {
+	      exports: {}
+	    };
+	    factory(mod.exports);
+	    global.String = mod.exports;
+	  }
+	})(this, function (exports) {
+	  'use strict';
+	
+	  Object.defineProperty(exports, "__esModule", {
+	    value: true
+	  });
+	  var camelize = exports.camelize = function camelize(str) {
+	    return str.split(' ').map(function (word) {
+	      return word.charAt(0).toUpperCase() + word.slice(1);
+	    }).join('');
+	  };
+	});
+
+/***/ },
+/* 569 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
+	  if (true) {
+	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(2), __webpack_require__(33), __webpack_require__(570)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	  } else if (typeof exports !== "undefined") {
+	    factory(exports, require('react'), require('react-dom'), require('react-dom/server'));
+	  } else {
+	    var mod = {
+	      exports: {}
+	    };
+	    factory(mod.exports, global.react, global.reactDom, global.server);
+	    global.InfoWindow = mod.exports;
+	  }
+	})(this, function (exports, _react, _reactDom, _server) {
+	  'use strict';
+	
+	  Object.defineProperty(exports, "__esModule", {
+	    value: true
+	  });
+	  exports.InfoWindow = undefined;
+	
+	  var _react2 = _interopRequireDefault(_react);
+	
+	  var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	  var _server2 = _interopRequireDefault(_server);
+	
+	  function _interopRequireDefault(obj) {
+	    return obj && obj.__esModule ? obj : {
+	      default: obj
+	    };
+	  }
+	
+	  function _classCallCheck(instance, Constructor) {
+	    if (!(instance instanceof Constructor)) {
+	      throw new TypeError("Cannot call a class as a function");
+	    }
+	  }
+	
+	  var _createClass = function () {
+	    function defineProperties(target, props) {
+	      for (var i = 0; i < props.length; i++) {
+	        var descriptor = props[i];
+	        descriptor.enumerable = descriptor.enumerable || false;
+	        descriptor.configurable = true;
+	        if ("value" in descriptor) descriptor.writable = true;
+	        Object.defineProperty(target, descriptor.key, descriptor);
+	      }
+	    }
+	
+	    return function (Constructor, protoProps, staticProps) {
+	      if (protoProps) defineProperties(Constructor.prototype, protoProps);
+	      if (staticProps) defineProperties(Constructor, staticProps);
+	      return Constructor;
+	    };
+	  }();
+	
+	  function _possibleConstructorReturn(self, call) {
+	    if (!self) {
+	      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+	    }
+	
+	    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+	  }
+	
+	  function _inherits(subClass, superClass) {
+	    if (typeof superClass !== "function" && superClass !== null) {
+	      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+	    }
+	
+	    subClass.prototype = Object.create(superClass && superClass.prototype, {
+	      constructor: {
+	        value: subClass,
+	        enumerable: false,
+	        writable: true,
+	        configurable: true
+	      }
+	    });
+	    if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+	  }
+	
+	  var InfoWindow = exports.InfoWindow = function (_React$Component) {
+	    _inherits(InfoWindow, _React$Component);
+	
+	    function InfoWindow() {
+	      _classCallCheck(this, InfoWindow);
+	
+	      return _possibleConstructorReturn(this, Object.getPrototypeOf(InfoWindow).apply(this, arguments));
+	    }
+	
+	    _createClass(InfoWindow, [{
+	      key: 'componentDidMount',
+	      value: function componentDidMount() {
+	        this.renderInfoWindow();
+	      }
+	    }, {
+	      key: 'componentDidUpdate',
+	      value: function componentDidUpdate(prevProps) {
+	        var _props = this.props;
+	        var google = _props.google;
+	        var map = _props.map;
+	
+	
+	        if (!google || !map) {
+	          return;
+	        }
+	
+	        if (map !== prevProps.map) {
+	          this.renderInfoWindow();
+	        }
+	
+	        if (this.props.children !== prevProps.children) {
+	          this.updateContent();
+	        }
+	
+	        if (this.props.visible !== prevProps.visible || this.props.marker !== prevProps.marker) {
+	          this.props.visible ? this.openWindow() : this.closeWindow();
+	        }
+	      }
+	    }, {
+	      key: 'renderInfoWindow',
+	      value: function renderInfoWindow() {
+	        var _props2 = this.props;
+	        var map = _props2.map;
+	        var google = _props2.google;
+	        var mapCenter = _props2.mapCenter;
+	
+	
+	        if (!google || !google.maps) {
+	          return;
+	        }
+	
+	        var iw = this.infowindow = new google.maps.InfoWindow({
+	          content: ''
+	        });
+	
+	        google.maps.event.addListener(iw, 'closeclick', this.onClose.bind(this));
+	        google.maps.event.addListener(iw, 'domready', this.onOpen.bind(this));
+	      }
+	    }, {
+	      key: 'onOpen',
+	      value: function onOpen() {
+	        if (this.props.onOpen) {
+	          this.props.onOpen();
+	        }
+	      }
+	    }, {
+	      key: 'onClose',
+	      value: function onClose() {
+	        if (this.props.onClose) {
+	          this.props.onClose();
+	        }
+	      }
+	    }, {
+	      key: 'openWindow',
+	      value: function openWindow() {
+	        this.infowindow.open(this.props.map, this.props.marker);
+	      }
+	    }, {
+	      key: 'updateContent',
+	      value: function updateContent() {
+	        var content = this.renderChildren();
+	        this.infowindow.setContent(content);
+	      }
+	    }, {
+	      key: 'closeWindow',
+	      value: function closeWindow() {
+	        this.infowindow.close();
+	      }
+	    }, {
+	      key: 'renderChildren',
+	      value: function renderChildren() {
+	        var children = this.props.children;
+	
+	        return _server2.default.renderToString(children);
+	      }
+	    }, {
+	      key: 'render',
+	      value: function render() {
+	        return null;
+	      }
+	    }]);
+	
+	    return InfoWindow;
+	  }(_react2.default.Component);
+	
+	  InfoWindow.propTypes = {
+	    children: _react.PropTypes.element.isRequired,
+	    map: _react.PropTypes.object,
+	    marker: _react.PropTypes.object,
+	    visible: _react.PropTypes.bool,
+	
+	    // callbacks
+	    onClose: _react.PropTypes.func,
+	    onOpen: _react.PropTypes.func
+	  };
+	
+	  InfoWindow.defaultProps = {
+	    visible: false
+	  };
+	
+	  exports.default = InfoWindow;
+	});
+
+/***/ },
+/* 570 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports = __webpack_require__(571);
+
+
+/***/ },
+/* 571 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 */
+	
+	'use strict';
+	
+	var ReactDefaultInjection = __webpack_require__(39);
+	var ReactServerRendering = __webpack_require__(572);
+	var ReactVersion = __webpack_require__(172);
+	
+	ReactDefaultInjection.inject();
+	
+	var ReactDOMServer = {
+	  renderToString: ReactServerRendering.renderToString,
+	  renderToStaticMarkup: ReactServerRendering.renderToStaticMarkup,
+	  version: ReactVersion
+	};
+	
+	module.exports = ReactDOMServer;
+
+/***/ },
+/* 572 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 */
+	'use strict';
+	
+	var _prodInvariant = __webpack_require__(36);
+	
+	var React = __webpack_require__(3);
+	var ReactDOMContainerInfo = __webpack_require__(168);
+	var ReactDefaultBatchingStrategy = __webpack_require__(141);
+	var ReactInstrumentation = __webpack_require__(63);
+	var ReactMarkupChecksum = __webpack_require__(170);
+	var ReactReconciler = __webpack_require__(60);
+	var ReactServerBatchingStrategy = __webpack_require__(573);
+	var ReactServerRenderingTransaction = __webpack_require__(134);
+	var ReactUpdates = __webpack_require__(57);
+	
+	var emptyObject = __webpack_require__(21);
+	var instantiateReactComponent = __webpack_require__(119);
+	var invariant = __webpack_require__(9);
+	
+	var pendingTransactions = 0;
+	
+	/**
+	 * @param {ReactElement} element
+	 * @return {string} the HTML markup
+	 */
+	function renderToStringImpl(element, makeStaticMarkup) {
+	  var transaction;
+	  try {
+	    ReactUpdates.injection.injectBatchingStrategy(ReactServerBatchingStrategy);
+	
+	    transaction = ReactServerRenderingTransaction.getPooled(makeStaticMarkup);
+	
+	    pendingTransactions++;
+	
+	    return transaction.perform(function () {
+	      var componentInstance = instantiateReactComponent(element, true);
+	      var markup = ReactReconciler.mountComponent(componentInstance, transaction, null, ReactDOMContainerInfo(), emptyObject, 0 /* parentDebugID */
+	      );
+	      if (process.env.NODE_ENV !== 'production') {
+	        ReactInstrumentation.debugTool.onUnmountComponent(componentInstance._debugID);
+	      }
+	      if (!makeStaticMarkup) {
+	        markup = ReactMarkupChecksum.addChecksumToMarkup(markup);
+	      }
+	      return markup;
+	    }, null);
+	  } finally {
+	    pendingTransactions--;
+	    ReactServerRenderingTransaction.release(transaction);
+	    // Revert to the DOM batching strategy since these two renderers
+	    // currently share these stateful modules.
+	    if (!pendingTransactions) {
+	      ReactUpdates.injection.injectBatchingStrategy(ReactDefaultBatchingStrategy);
+	    }
+	  }
+	}
+	
+	/**
+	 * Render a ReactElement to its initial HTML. This should only be used on the
+	 * server.
+	 * See https://facebook.github.io/react/docs/top-level-api.html#reactdomserver.rendertostring
+	 */
+	function renderToString(element) {
+	  !React.isValidElement(element) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'renderToString(): You must pass a valid ReactElement.') : _prodInvariant('46') : void 0;
+	  return renderToStringImpl(element, false);
+	}
+	
+	/**
+	 * Similar to renderToString, except this doesn't create extra DOM attributes
+	 * such as data-react-id that React uses internally.
+	 * See https://facebook.github.io/react/docs/top-level-api.html#reactdomserver.rendertostaticmarkup
+	 */
+	function renderToStaticMarkup(element) {
+	  !React.isValidElement(element) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'renderToStaticMarkup(): You must pass a valid ReactElement.') : _prodInvariant('47') : void 0;
+	  return renderToStringImpl(element, true);
+	}
+	
+	module.exports = {
+	  renderToString: renderToString,
+	  renderToStaticMarkup: renderToStaticMarkup
+	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+
+/***/ },
+/* 573 */
+/***/ function(module, exports) {
+
+	/**
+	 * Copyright 2014-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 */
+	
+	'use strict';
+	
+	var ReactServerBatchingStrategy = {
+	  isBatchingUpdates: false,
+	  batchedUpdates: function (callback) {
+	    // Don't do anything here. During the server rendering we don't want to
+	    // schedule any updates. We will simply ignore them.
+	  }
+	};
+	
+	module.exports = ReactServerBatchingStrategy;
+
+/***/ },
+/* 574 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
+	  if (true) {
+	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	  } else if (typeof exports !== "undefined") {
+	    factory(exports);
+	  } else {
+	    var mod = {
+	      exports: {}
+	    };
+	    factory(mod.exports);
+	    global.cancelablePromise = mod.exports;
+	  }
+	})(this, function (exports) {
+	  "use strict";
+	
+	  Object.defineProperty(exports, "__esModule", {
+	    value: true
+	  });
+	  // https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html
+	
+	  var makeCancelable = exports.makeCancelable = function makeCancelable(promise) {
+	    var hasCanceled_ = false;
+	
+	    var wrappedPromise = new Promise(function (resolve, reject) {
+	      promise.then(function (val) {
+	        return hasCanceled_ ? reject({ isCanceled: true }) : resolve(val);
+	      });
+	      promise.catch(function (error) {
+	        return hasCanceled_ ? reject({ isCanceled: true }) : reject(error);
+	      });
+	    });
+	
+	    return {
+	      promise: wrappedPromise,
+	      cancel: function cancel() {
+	        hasCanceled_ = true;
+	      }
+	    };
+	  };
+	});
+
+/***/ },
+/* 575 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*! react-rating - 0.6.3 | (c) 2015, 2016  dreyescat | MIT | https://github.com/dreyescat/react-rating */
@@ -47431,7 +51093,7 @@
 	;
 
 /***/ },
-/* 548 */
+/* 576 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -47444,12 +51106,12 @@
 	
 	var React = global.React || __webpack_require__(2);
 	var Formsy = {};
-	var validationRules = __webpack_require__(549);
-	var formDataToObject = __webpack_require__(550);
-	var utils = __webpack_require__(551);
-	var Mixin = __webpack_require__(552);
-	var HOC = __webpack_require__(553);
-	var Decorator = __webpack_require__(554);
+	var validationRules = __webpack_require__(577);
+	var formDataToObject = __webpack_require__(578);
+	var utils = __webpack_require__(579);
+	var Mixin = __webpack_require__(580);
+	var HOC = __webpack_require__(581);
+	var Decorator = __webpack_require__(582);
 	var options = {};
 	var emptyArray = [];
 	
@@ -47897,7 +51559,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 549 */
+/* 577 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -47982,7 +51644,7 @@
 	module.exports = validations;
 
 /***/ },
-/* 550 */
+/* 578 */
 /***/ function(module, exports) {
 
 	function toObj(source) {
@@ -48033,7 +51695,7 @@
 	}
 
 /***/ },
-/* 551 */
+/* 579 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -48095,12 +51757,12 @@
 	};
 
 /***/ },
-/* 552 */
+/* 580 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
 	
-	var utils = __webpack_require__(551);
+	var utils = __webpack_require__(579);
 	var React = global.React || __webpack_require__(2);
 	
 	var convertValidationsToObject = function convertValidationsToObject(validations) {
@@ -48275,7 +51937,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 553 */
+/* 581 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -48283,7 +51945,7 @@
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var React = global.React || __webpack_require__(2);
-	var Mixin = __webpack_require__(552);
+	var Mixin = __webpack_require__(580);
 	module.exports = function (Component) {
 	  return React.createClass({
 	    displayName: 'Formsy(' + getDisplayName(Component) + ')',
@@ -48316,7 +51978,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 554 */
+/* 582 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -48324,7 +51986,7 @@
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var React = global.React || __webpack_require__(2);
-	var Mixin = __webpack_require__(552);
+	var Mixin = __webpack_require__(580);
 	module.exports = function () {
 	  return function (Component) {
 	    return React.createClass({
@@ -48354,7 +52016,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 555 */
+/* 583 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48364,39 +52026,39 @@
 	});
 	exports.FormsyAutoComplete = exports.FormsyToggle = exports.FormsyTime = exports.FormsyText = exports.FormsySelect = exports.FormsyRadioGroup = exports.FormsyRadio = exports.FormsyDate = exports.FormsyCheckbox = undefined;
 	
-	var _FormsyCheckbox2 = __webpack_require__(556);
+	var _FormsyCheckbox2 = __webpack_require__(584);
 	
 	var _FormsyCheckbox3 = _interopRequireDefault(_FormsyCheckbox2);
 	
-	var _FormsyDate2 = __webpack_require__(568);
+	var _FormsyDate2 = __webpack_require__(594);
 	
 	var _FormsyDate3 = _interopRequireDefault(_FormsyDate2);
 	
-	var _FormsyRadio2 = __webpack_require__(603);
+	var _FormsyRadio2 = __webpack_require__(629);
 	
 	var _FormsyRadio3 = _interopRequireDefault(_FormsyRadio2);
 	
-	var _FormsyRadioGroup2 = __webpack_require__(604);
+	var _FormsyRadioGroup2 = __webpack_require__(630);
 	
 	var _FormsyRadioGroup3 = _interopRequireDefault(_FormsyRadioGroup2);
 	
-	var _FormsySelect2 = __webpack_require__(610);
+	var _FormsySelect2 = __webpack_require__(636);
 	
 	var _FormsySelect3 = _interopRequireDefault(_FormsySelect2);
 	
-	var _FormsyText2 = __webpack_require__(630);
+	var _FormsyText2 = __webpack_require__(656);
 	
 	var _FormsyText3 = _interopRequireDefault(_FormsyText2);
 	
-	var _FormsyTime2 = __webpack_require__(631);
+	var _FormsyTime2 = __webpack_require__(657);
 	
 	var _FormsyTime3 = _interopRequireDefault(_FormsyTime2);
 	
-	var _FormsyToggle2 = __webpack_require__(649);
+	var _FormsyToggle2 = __webpack_require__(675);
 	
 	var _FormsyToggle3 = _interopRequireDefault(_FormsyToggle2);
 	
-	var _FormsyAutoComplete2 = __webpack_require__(652);
+	var _FormsyAutoComplete2 = __webpack_require__(678);
 	
 	var _FormsyAutoComplete3 = _interopRequireDefault(_FormsyAutoComplete2);
 	
@@ -48413,7 +52075,7 @@
 	exports.FormsyAutoComplete = _FormsyAutoComplete3.default;
 
 /***/ },
-/* 556 */
+/* 584 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48428,15 +52090,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _formsyReact = __webpack_require__(548);
+	var _formsyReact = __webpack_require__(576);
 	
 	var _formsyReact2 = _interopRequireDefault(_formsyReact);
 	
-	var _Checkbox = __webpack_require__(557);
+	var _Checkbox = __webpack_require__(585);
 	
 	var _Checkbox2 = _interopRequireDefault(_Checkbox);
 	
-	var _utils = __webpack_require__(567);
+	var _utils = __webpack_require__(593);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -48492,7 +52154,7 @@
 	exports.default = FormsyCheckbox;
 
 /***/ },
-/* 557 */
+/* 585 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48502,7 +52164,7 @@
 	});
 	exports.default = undefined;
 	
-	var _Checkbox = __webpack_require__(558);
+	var _Checkbox = __webpack_require__(586);
 	
 	var _Checkbox2 = _interopRequireDefault(_Checkbox);
 	
@@ -48511,7 +52173,7 @@
 	exports.default = _Checkbox2.default;
 
 /***/ },
-/* 558 */
+/* 586 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -48556,7 +52218,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _EnhancedSwitch = __webpack_require__(559);
+	var _EnhancedSwitch = __webpack_require__(587);
 	
 	var _EnhancedSwitch2 = _interopRequireDefault(_EnhancedSwitch);
 	
@@ -48564,11 +52226,11 @@
 	
 	var _transitions2 = _interopRequireDefault(_transitions);
 	
-	var _checkBoxOutlineBlank = __webpack_require__(565);
+	var _checkBoxOutlineBlank = __webpack_require__(591);
 	
 	var _checkBoxOutlineBlank2 = _interopRequireDefault(_checkBoxOutlineBlank);
 	
-	var _checkBox = __webpack_require__(566);
+	var _checkBox = __webpack_require__(592);
 	
 	var _checkBox2 = _interopRequireDefault(_checkBox);
 	
@@ -48807,7 +52469,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 559 */
+/* 587 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -48852,7 +52514,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactEventListener = __webpack_require__(560);
+	var _reactEventListener = __webpack_require__(588);
 	
 	var _reactEventListener2 = _interopRequireDefault(_reactEventListener);
 	
@@ -49264,7 +52926,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 560 */
+/* 588 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -49307,7 +52969,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactAddonsShallowCompare = __webpack_require__(561);
+	var _reactAddonsShallowCompare = __webpack_require__(554);
 	
 	var _reactAddonsShallowCompare2 = _interopRequireDefault(_reactAddonsShallowCompare);
 	
@@ -49315,7 +52977,7 @@
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _supports = __webpack_require__(563);
+	var _supports = __webpack_require__(589);
 	
 	var supports = _interopRequireWildcard(_supports);
 	
@@ -49477,42 +53139,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 561 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(562);
-
-/***/ },
-/* 562 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-present, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 */
-	
-	'use strict';
-	
-	var shallowEqual = __webpack_require__(124);
-	
-	/**
-	 * Does a shallow comparison for props and state.
-	 * See ReactComponentWithPureRenderMixin
-	 * See also https://facebook.github.io/react/docs/shallow-compare.html
-	 */
-	function shallowCompare(instance, nextProps, nextState) {
-	  return !shallowEqual(instance.props, nextProps) || !shallowEqual(instance.state, nextState);
-	}
-	
-	module.exports = shallowCompare;
-
-/***/ },
-/* 563 */
+/* 589 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49522,7 +53149,7 @@
 	});
 	exports.passiveOption = exports.detachEvent = exports.attachEvent = exports.removeEventListener = exports.addEventListener = exports.canUseDOM = undefined;
 	
-	var _defineProperty = __webpack_require__(564);
+	var _defineProperty = __webpack_require__(590);
 	
 	var _defineProperty2 = _interopRequireDefault(_defineProperty);
 	
@@ -49565,7 +53192,7 @@
 	}();
 
 /***/ },
-/* 564 */
+/* 590 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -49589,7 +53216,7 @@
 	}
 
 /***/ },
-/* 565 */
+/* 591 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49626,7 +53253,7 @@
 	exports.default = ToggleCheckBoxOutlineBlank;
 
 /***/ },
-/* 566 */
+/* 592 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49663,7 +53290,7 @@
 	exports.default = ToggleCheckBox;
 
 /***/ },
-/* 567 */
+/* 593 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -49701,7 +53328,7 @@
 	}
 
 /***/ },
-/* 568 */
+/* 594 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49716,15 +53343,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _formsyReact = __webpack_require__(548);
+	var _formsyReact = __webpack_require__(576);
 	
 	var _formsyReact2 = _interopRequireDefault(_formsyReact);
 	
-	var _DatePicker = __webpack_require__(569);
+	var _DatePicker = __webpack_require__(595);
 	
 	var _DatePicker2 = _interopRequireDefault(_DatePicker);
 	
-	var _utils = __webpack_require__(567);
+	var _utils = __webpack_require__(593);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -49783,7 +53410,7 @@
 	exports.default = FormsyDate;
 
 /***/ },
-/* 569 */
+/* 595 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49793,7 +53420,7 @@
 	});
 	exports.default = undefined;
 	
-	var _DatePicker = __webpack_require__(570);
+	var _DatePicker = __webpack_require__(596);
 	
 	var _DatePicker2 = _interopRequireDefault(_DatePicker);
 	
@@ -49802,7 +53429,7 @@
 	exports.default = _DatePicker2.default;
 
 /***/ },
-/* 570 */
+/* 596 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -49847,13 +53474,13 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _dateUtils = __webpack_require__(571);
+	var _dateUtils = __webpack_require__(597);
 	
-	var _DatePickerDialog = __webpack_require__(572);
+	var _DatePickerDialog = __webpack_require__(598);
 	
 	var _DatePickerDialog2 = _interopRequireDefault(_DatePickerDialog);
 	
-	var _TextField = __webpack_require__(597);
+	var _TextField = __webpack_require__(623);
 	
 	var _TextField2 = _interopRequireDefault(_TextField);
 	
@@ -50196,7 +53823,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 571 */
+/* 597 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -50382,7 +54009,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 572 */
+/* 598 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -50427,7 +54054,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactEventListener = __webpack_require__(560);
+	var _reactEventListener = __webpack_require__(588);
 	
 	var _reactEventListener2 = _interopRequireDefault(_reactEventListener);
 	
@@ -50435,23 +54062,23 @@
 	
 	var _keycode2 = _interopRequireDefault(_keycode);
 	
-	var _Calendar = __webpack_require__(573);
+	var _Calendar = __webpack_require__(599);
 	
 	var _Calendar2 = _interopRequireDefault(_Calendar);
 	
-	var _Dialog = __webpack_require__(588);
+	var _Dialog = __webpack_require__(614);
 	
 	var _Dialog2 = _interopRequireDefault(_Dialog);
 	
-	var _Popover = __webpack_require__(593);
+	var _Popover = __webpack_require__(619);
 	
 	var _Popover2 = _interopRequireDefault(_Popover);
 	
-	var _PopoverAnimationVertical = __webpack_require__(596);
+	var _PopoverAnimationVertical = __webpack_require__(622);
 	
 	var _PopoverAnimationVertical2 = _interopRequireDefault(_PopoverAnimationVertical);
 	
-	var _dateUtils = __webpack_require__(571);
+	var _dateUtils = __webpack_require__(597);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -50634,7 +54261,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 573 */
+/* 599 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -50671,7 +54298,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactEventListener = __webpack_require__(560);
+	var _reactEventListener = __webpack_require__(588);
 	
 	var _reactEventListener2 = _interopRequireDefault(_reactEventListener);
 	
@@ -50683,31 +54310,31 @@
 	
 	var _transitions2 = _interopRequireDefault(_transitions);
 	
-	var _CalendarActionButtons = __webpack_require__(574);
+	var _CalendarActionButtons = __webpack_require__(600);
 	
 	var _CalendarActionButtons2 = _interopRequireDefault(_CalendarActionButtons);
 	
-	var _CalendarMonth = __webpack_require__(578);
+	var _CalendarMonth = __webpack_require__(604);
 	
 	var _CalendarMonth2 = _interopRequireDefault(_CalendarMonth);
 	
-	var _CalendarYear = __webpack_require__(580);
+	var _CalendarYear = __webpack_require__(606);
 	
 	var _CalendarYear2 = _interopRequireDefault(_CalendarYear);
 	
-	var _CalendarToolbar = __webpack_require__(582);
+	var _CalendarToolbar = __webpack_require__(608);
 	
 	var _CalendarToolbar2 = _interopRequireDefault(_CalendarToolbar);
 	
-	var _DateDisplay = __webpack_require__(587);
+	var _DateDisplay = __webpack_require__(613);
 	
 	var _DateDisplay2 = _interopRequireDefault(_DateDisplay);
 	
-	var _SlideIn = __webpack_require__(585);
+	var _SlideIn = __webpack_require__(611);
 	
 	var _SlideIn2 = _interopRequireDefault(_SlideIn);
 	
-	var _dateUtils = __webpack_require__(571);
+	var _dateUtils = __webpack_require__(597);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -51087,7 +54714,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 574 */
+/* 600 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -51120,7 +54747,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _FlatButton = __webpack_require__(575);
+	var _FlatButton = __webpack_require__(601);
 	
 	var _FlatButton2 = _interopRequireDefault(_FlatButton);
 	
@@ -51193,7 +54820,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 575 */
+/* 601 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51203,7 +54830,7 @@
 	});
 	exports.default = undefined;
 	
-	var _FlatButton = __webpack_require__(576);
+	var _FlatButton = __webpack_require__(602);
 	
 	var _FlatButton2 = _interopRequireDefault(_FlatButton);
 	
@@ -51212,7 +54839,7 @@
 	exports.default = _FlatButton2.default;
 
 /***/ },
-/* 576 */
+/* 602 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -51269,7 +54896,7 @@
 	
 	var _EnhancedButton2 = _interopRequireDefault(_EnhancedButton);
 	
-	var _FlatButtonLabel = __webpack_require__(577);
+	var _FlatButtonLabel = __webpack_require__(603);
 	
 	var _FlatButtonLabel2 = _interopRequireDefault(_FlatButtonLabel);
 	
@@ -51543,7 +55170,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 577 */
+/* 603 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -51635,7 +55262,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 578 */
+/* 604 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -51668,9 +55295,9 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _dateUtils = __webpack_require__(571);
+	var _dateUtils = __webpack_require__(597);
 	
-	var _DayButton = __webpack_require__(579);
+	var _DayButton = __webpack_require__(605);
 	
 	var _DayButton2 = _interopRequireDefault(_DayButton);
 	
@@ -51807,7 +55434,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 579 */
+/* 605 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -51852,7 +55479,7 @@
 	
 	var _transitions2 = _interopRequireDefault(_transitions);
 	
-	var _dateUtils = __webpack_require__(571);
+	var _dateUtils = __webpack_require__(597);
 	
 	var _EnhancedButton = __webpack_require__(429);
 	
@@ -52008,7 +55635,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 580 */
+/* 606 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -52049,11 +55676,11 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _YearButton = __webpack_require__(581);
+	var _YearButton = __webpack_require__(607);
 	
 	var _YearButton2 = _interopRequireDefault(_YearButton);
 	
-	var _dateUtils = __webpack_require__(571);
+	var _dateUtils = __webpack_require__(597);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -52203,7 +55830,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 581 */
+/* 607 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -52363,7 +55990,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 582 */
+/* 608 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -52400,15 +56027,15 @@
 	
 	var _IconButton2 = _interopRequireDefault(_IconButton);
 	
-	var _chevronLeft = __webpack_require__(583);
+	var _chevronLeft = __webpack_require__(609);
 	
 	var _chevronLeft2 = _interopRequireDefault(_chevronLeft);
 	
-	var _chevronRight = __webpack_require__(584);
+	var _chevronRight = __webpack_require__(610);
 	
 	var _chevronRight2 = _interopRequireDefault(_chevronRight);
 	
-	var _SlideIn = __webpack_require__(585);
+	var _SlideIn = __webpack_require__(611);
 	
 	var _SlideIn2 = _interopRequireDefault(_SlideIn);
 	
@@ -52537,7 +56164,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 583 */
+/* 609 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -52574,7 +56201,7 @@
 	exports.default = NavigationChevronLeft;
 
 /***/ },
-/* 584 */
+/* 610 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -52611,7 +56238,7 @@
 	exports.default = NavigationChevronRight;
 
 /***/ },
-/* 585 */
+/* 611 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -52660,7 +56287,7 @@
 	
 	var _reactAddonsTransitionGroup2 = _interopRequireDefault(_reactAddonsTransitionGroup);
 	
-	var _SlideInChild = __webpack_require__(586);
+	var _SlideInChild = __webpack_require__(612);
 	
 	var _SlideInChild2 = _interopRequireDefault(_SlideInChild);
 	
@@ -52751,7 +56378,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 586 */
+/* 612 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -52905,7 +56532,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 587 */
+/* 613 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -52950,7 +56577,7 @@
 	
 	var _transitions2 = _interopRequireDefault(_transitions);
 	
-	var _SlideIn = __webpack_require__(585);
+	var _SlideIn = __webpack_require__(611);
 	
 	var _SlideIn2 = _interopRequireDefault(_SlideIn);
 	
@@ -53148,7 +56775,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 588 */
+/* 614 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53158,7 +56785,7 @@
 	});
 	exports.default = undefined;
 	
-	var _Dialog = __webpack_require__(589);
+	var _Dialog = __webpack_require__(615);
 	
 	var _Dialog2 = _interopRequireDefault(_Dialog);
 	
@@ -53167,7 +56794,7 @@
 	exports.default = _Dialog2.default;
 
 /***/ },
-/* 589 */
+/* 615 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -53216,7 +56843,7 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _reactEventListener = __webpack_require__(560);
+	var _reactEventListener = __webpack_require__(588);
 	
 	var _reactEventListener2 = _interopRequireDefault(_reactEventListener);
 	
@@ -53228,11 +56855,11 @@
 	
 	var _transitions2 = _interopRequireDefault(_transitions);
 	
-	var _Overlay = __webpack_require__(590);
+	var _Overlay = __webpack_require__(616);
 	
 	var _Overlay2 = _interopRequireDefault(_Overlay);
 	
-	var _RenderToLayer = __webpack_require__(592);
+	var _RenderToLayer = __webpack_require__(618);
 	
 	var _RenderToLayer2 = _interopRequireDefault(_RenderToLayer);
 	
@@ -53760,7 +57387,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 590 */
+/* 616 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -53809,7 +57436,7 @@
 	
 	var _transitions2 = _interopRequireDefault(_transitions);
 	
-	var _AutoLockScrolling = __webpack_require__(591);
+	var _AutoLockScrolling = __webpack_require__(617);
 	
 	var _AutoLockScrolling2 = _interopRequireDefault(_AutoLockScrolling);
 	
@@ -53906,7 +57533,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 591 */
+/* 617 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -54032,7 +57659,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 592 */
+/* 618 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -54217,7 +57844,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 593 */
+/* 619 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -54266,11 +57893,11 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _reactEventListener = __webpack_require__(560);
+	var _reactEventListener = __webpack_require__(588);
 	
 	var _reactEventListener2 = _interopRequireDefault(_reactEventListener);
 	
-	var _RenderToLayer = __webpack_require__(592);
+	var _RenderToLayer = __webpack_require__(618);
 	
 	var _RenderToLayer2 = _interopRequireDefault(_RenderToLayer);
 	
@@ -54282,11 +57909,11 @@
 	
 	var _Paper2 = _interopRequireDefault(_Paper);
 	
-	var _lodash = __webpack_require__(594);
+	var _lodash = __webpack_require__(620);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _PopoverAnimationDefault = __webpack_require__(595);
+	var _PopoverAnimationDefault = __webpack_require__(621);
 	
 	var _PopoverAnimationDefault2 = _interopRequireDefault(_PopoverAnimationDefault);
 	
@@ -54704,7 +58331,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 594 */
+/* 620 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -55150,7 +58777,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 595 */
+/* 621 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -55324,7 +58951,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 596 */
+/* 622 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -55473,7 +59100,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 597 */
+/* 623 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55483,7 +59110,7 @@
 	});
 	exports.default = undefined;
 	
-	var _TextField = __webpack_require__(598);
+	var _TextField = __webpack_require__(624);
 	
 	var _TextField2 = _interopRequireDefault(_TextField);
 	
@@ -55492,7 +59119,7 @@
 	exports.default = _TextField2.default;
 
 /***/ },
-/* 598 */
+/* 624 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -55549,19 +59176,19 @@
 	
 	var _transitions2 = _interopRequireDefault(_transitions);
 	
-	var _EnhancedTextarea = __webpack_require__(599);
+	var _EnhancedTextarea = __webpack_require__(625);
 	
 	var _EnhancedTextarea2 = _interopRequireDefault(_EnhancedTextarea);
 	
-	var _TextFieldHint = __webpack_require__(600);
+	var _TextFieldHint = __webpack_require__(626);
 	
 	var _TextFieldHint2 = _interopRequireDefault(_TextFieldHint);
 	
-	var _TextFieldLabel = __webpack_require__(601);
+	var _TextFieldLabel = __webpack_require__(627);
 	
 	var _TextFieldLabel2 = _interopRequireDefault(_TextFieldLabel);
 	
-	var _TextFieldUnderline = __webpack_require__(602);
+	var _TextFieldUnderline = __webpack_require__(628);
 	
 	var _TextFieldUnderline2 = _interopRequireDefault(_TextFieldUnderline);
 	
@@ -56056,7 +59683,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 599 */
+/* 625 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -56101,7 +59728,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactEventListener = __webpack_require__(560);
+	var _reactEventListener = __webpack_require__(588);
 	
 	var _reactEventListener2 = _interopRequireDefault(_reactEventListener);
 	
@@ -56302,7 +59929,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 600 */
+/* 626 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -56384,7 +60011,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 601 */
+/* 627 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -56501,7 +60128,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 602 */
+/* 628 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -56637,7 +60264,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 603 */
+/* 629 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56650,7 +60277,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _formsyReact = __webpack_require__(548);
+	var _formsyReact = __webpack_require__(576);
 	
 	var _formsyReact2 = _interopRequireDefault(_formsyReact);
 	
@@ -56669,7 +60296,7 @@
 	exports.default = FormsyRadio;
 
 /***/ },
-/* 604 */
+/* 630 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56684,13 +60311,13 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _formsyReact = __webpack_require__(548);
+	var _formsyReact = __webpack_require__(576);
 	
 	var _formsyReact2 = _interopRequireDefault(_formsyReact);
 	
-	var _RadioButton = __webpack_require__(605);
+	var _RadioButton = __webpack_require__(631);
 	
-	var _utils = __webpack_require__(567);
+	var _utils = __webpack_require__(593);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -56770,7 +60397,7 @@
 	exports.default = FormsyRadioGroup;
 
 /***/ },
-/* 605 */
+/* 631 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56780,11 +60407,11 @@
 	});
 	exports.default = exports.RadioButtonGroup = exports.RadioButton = undefined;
 	
-	var _RadioButton2 = __webpack_require__(606);
+	var _RadioButton2 = __webpack_require__(632);
 	
 	var _RadioButton3 = _interopRequireDefault(_RadioButton2);
 	
-	var _RadioButtonGroup2 = __webpack_require__(609);
+	var _RadioButtonGroup2 = __webpack_require__(635);
 	
 	var _RadioButtonGroup3 = _interopRequireDefault(_RadioButtonGroup2);
 	
@@ -56795,7 +60422,7 @@
 	exports.default = _RadioButton3.default;
 
 /***/ },
-/* 606 */
+/* 632 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -56844,15 +60471,15 @@
 	
 	var _transitions2 = _interopRequireDefault(_transitions);
 	
-	var _EnhancedSwitch = __webpack_require__(559);
+	var _EnhancedSwitch = __webpack_require__(587);
 	
 	var _EnhancedSwitch2 = _interopRequireDefault(_EnhancedSwitch);
 	
-	var _radioButtonUnchecked = __webpack_require__(607);
+	var _radioButtonUnchecked = __webpack_require__(633);
 	
 	var _radioButtonUnchecked2 = _interopRequireDefault(_radioButtonUnchecked);
 	
-	var _radioButtonChecked = __webpack_require__(608);
+	var _radioButtonChecked = __webpack_require__(634);
 	
 	var _radioButtonChecked2 = _interopRequireDefault(_radioButtonChecked);
 	
@@ -57072,7 +60699,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 607 */
+/* 633 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57109,7 +60736,7 @@
 	exports.default = ToggleRadioButtonUnchecked;
 
 /***/ },
-/* 608 */
+/* 634 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57146,7 +60773,7 @@
 	exports.default = ToggleRadioButtonChecked;
 
 /***/ },
-/* 609 */
+/* 635 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -57191,7 +60818,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _RadioButton = __webpack_require__(605);
+	var _RadioButton = __webpack_require__(631);
 	
 	var _RadioButton2 = _interopRequireDefault(_RadioButton);
 	
@@ -57387,7 +61014,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 610 */
+/* 636 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57402,15 +61029,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _formsyReact = __webpack_require__(548);
+	var _formsyReact = __webpack_require__(576);
 	
 	var _formsyReact2 = _interopRequireDefault(_formsyReact);
 	
-	var _SelectField = __webpack_require__(611);
+	var _SelectField = __webpack_require__(637);
 	
 	var _SelectField2 = _interopRequireDefault(_SelectField);
 	
-	var _utils = __webpack_require__(567);
+	var _utils = __webpack_require__(593);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -57477,7 +61104,7 @@
 	exports.default = FormsySelect;
 
 /***/ },
-/* 611 */
+/* 637 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57487,7 +61114,7 @@
 	});
 	exports.default = undefined;
 	
-	var _SelectField = __webpack_require__(612);
+	var _SelectField = __webpack_require__(638);
 	
 	var _SelectField2 = _interopRequireDefault(_SelectField);
 	
@@ -57496,7 +61123,7 @@
 	exports.default = _SelectField2.default;
 
 /***/ },
-/* 612 */
+/* 638 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -57541,11 +61168,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _TextField = __webpack_require__(597);
+	var _TextField = __webpack_require__(623);
 	
 	var _TextField2 = _interopRequireDefault(_TextField);
 	
-	var _DropDownMenu = __webpack_require__(613);
+	var _DropDownMenu = __webpack_require__(639);
 	
 	var _DropDownMenu2 = _interopRequireDefault(_DropDownMenu);
 	
@@ -57769,7 +61396,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 613 */
+/* 639 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57779,11 +61406,11 @@
 	});
 	exports.default = exports.MenuItem = exports.DropDownMenu = undefined;
 	
-	var _DropDownMenu2 = __webpack_require__(614);
+	var _DropDownMenu2 = __webpack_require__(640);
 	
 	var _DropDownMenu3 = _interopRequireDefault(_DropDownMenu2);
 	
-	var _MenuItem2 = __webpack_require__(624);
+	var _MenuItem2 = __webpack_require__(650);
 	
 	var _MenuItem3 = _interopRequireDefault(_MenuItem2);
 	
@@ -57794,7 +61421,7 @@
 	exports.default = _DropDownMenu3.default;
 
 /***/ },
-/* 614 */
+/* 640 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -57843,23 +61470,23 @@
 	
 	var _transitions2 = _interopRequireDefault(_transitions);
 	
-	var _arrowDropDown = __webpack_require__(615);
+	var _arrowDropDown = __webpack_require__(641);
 	
 	var _arrowDropDown2 = _interopRequireDefault(_arrowDropDown);
 	
-	var _Menu = __webpack_require__(616);
+	var _Menu = __webpack_require__(642);
 	
 	var _Menu2 = _interopRequireDefault(_Menu);
 	
-	var _ClearFix = __webpack_require__(622);
+	var _ClearFix = __webpack_require__(648);
 	
 	var _ClearFix2 = _interopRequireDefault(_ClearFix);
 	
-	var _Popover = __webpack_require__(593);
+	var _Popover = __webpack_require__(619);
 	
 	var _Popover2 = _interopRequireDefault(_Popover);
 	
-	var _PopoverAnimationVertical = __webpack_require__(596);
+	var _PopoverAnimationVertical = __webpack_require__(622);
 	
 	var _PopoverAnimationVertical2 = _interopRequireDefault(_PopoverAnimationVertical);
 	
@@ -58214,7 +61841,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 615 */
+/* 641 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58251,7 +61878,7 @@
 	exports.default = NavigationArrowDropDown;
 
 /***/ },
-/* 616 */
+/* 642 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -58308,7 +61935,7 @@
 	
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 	
-	var _ClickAwayListener = __webpack_require__(617);
+	var _ClickAwayListener = __webpack_require__(643);
 	
 	var _ClickAwayListener2 = _interopRequireDefault(_ClickAwayListener);
 	
@@ -58320,11 +61947,11 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _List = __webpack_require__(618);
+	var _List = __webpack_require__(644);
 	
 	var _List2 = _interopRequireDefault(_List);
 	
-	var _menuUtils = __webpack_require__(621);
+	var _menuUtils = __webpack_require__(647);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -58864,7 +62491,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 617 */
+/* 643 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -58995,7 +62622,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 618 */
+/* 644 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -59040,7 +62667,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Subheader = __webpack_require__(619);
+	var _Subheader = __webpack_require__(645);
 	
 	var _Subheader2 = _interopRequireDefault(_Subheader);
 	
@@ -59107,7 +62734,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 619 */
+/* 645 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59117,7 +62744,7 @@
 	});
 	exports.default = undefined;
 	
-	var _Subheader = __webpack_require__(620);
+	var _Subheader = __webpack_require__(646);
 	
 	var _Subheader2 = _interopRequireDefault(_Subheader);
 	
@@ -59126,7 +62753,7 @@
 	exports.default = _Subheader2.default;
 
 /***/ },
-/* 620 */
+/* 646 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -59211,7 +62838,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 621 */
+/* 647 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59255,7 +62882,7 @@
 	}();
 
 /***/ },
-/* 622 */
+/* 648 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -59276,7 +62903,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _BeforeAfterWrapper = __webpack_require__(623);
+	var _BeforeAfterWrapper = __webpack_require__(649);
 	
 	var _BeforeAfterWrapper2 = _interopRequireDefault(_BeforeAfterWrapper);
 	
@@ -59323,7 +62950,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 623 */
+/* 649 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -59479,7 +63106,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 624 */
+/* 650 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -59532,19 +63159,19 @@
 	
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 	
-	var _Popover = __webpack_require__(593);
+	var _Popover = __webpack_require__(619);
 	
 	var _Popover2 = _interopRequireDefault(_Popover);
 	
-	var _check = __webpack_require__(625);
+	var _check = __webpack_require__(651);
 	
 	var _check2 = _interopRequireDefault(_check);
 	
-	var _ListItem = __webpack_require__(626);
+	var _ListItem = __webpack_require__(652);
 	
 	var _ListItem2 = _interopRequireDefault(_ListItem);
 	
-	var _Menu = __webpack_require__(616);
+	var _Menu = __webpack_require__(642);
 	
 	var _Menu2 = _interopRequireDefault(_Menu);
 	
@@ -59861,7 +63488,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 625 */
+/* 651 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59898,7 +63525,7 @@
 	exports.default = NavigationCheck;
 
 /***/ },
-/* 626 */
+/* 652 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -59965,15 +63592,15 @@
 	
 	var _IconButton2 = _interopRequireDefault(_IconButton);
 	
-	var _expandLess = __webpack_require__(627);
+	var _expandLess = __webpack_require__(653);
 	
 	var _expandLess2 = _interopRequireDefault(_expandLess);
 	
-	var _expandMore = __webpack_require__(628);
+	var _expandMore = __webpack_require__(654);
 	
 	var _expandMore2 = _interopRequireDefault(_expandMore);
 	
-	var _NestedList = __webpack_require__(629);
+	var _NestedList = __webpack_require__(655);
 	
 	var _NestedList2 = _interopRequireDefault(_NestedList);
 	
@@ -60616,7 +64243,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 627 */
+/* 653 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60653,7 +64280,7 @@
 	exports.default = NavigationExpandLess;
 
 /***/ },
-/* 628 */
+/* 654 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60690,7 +64317,7 @@
 	exports.default = NavigationExpandMore;
 
 /***/ },
-/* 629 */
+/* 655 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -60703,7 +64330,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _List = __webpack_require__(618);
+	var _List = __webpack_require__(644);
 	
 	var _List2 = _interopRequireDefault(_List);
 	
@@ -60745,7 +64372,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 630 */
+/* 656 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60764,15 +64391,15 @@
 	
 	var _keycode2 = _interopRequireDefault(_keycode);
 	
-	var _formsyReact = __webpack_require__(548);
+	var _formsyReact = __webpack_require__(576);
 	
 	var _formsyReact2 = _interopRequireDefault(_formsyReact);
 	
-	var _TextField = __webpack_require__(597);
+	var _TextField = __webpack_require__(623);
 	
 	var _TextField2 = _interopRequireDefault(_TextField);
 	
-	var _utils = __webpack_require__(567);
+	var _utils = __webpack_require__(593);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -60901,7 +64528,7 @@
 	exports.default = FormsyText;
 
 /***/ },
-/* 631 */
+/* 657 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60916,15 +64543,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _formsyReact = __webpack_require__(548);
+	var _formsyReact = __webpack_require__(576);
 	
 	var _formsyReact2 = _interopRequireDefault(_formsyReact);
 	
-	var _TimePicker = __webpack_require__(632);
+	var _TimePicker = __webpack_require__(658);
 	
 	var _TimePicker2 = _interopRequireDefault(_TimePicker);
 	
-	var _utils = __webpack_require__(567);
+	var _utils = __webpack_require__(593);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -60983,7 +64610,7 @@
 	exports.default = FormsyTime;
 
 /***/ },
-/* 632 */
+/* 658 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60993,7 +64620,7 @@
 	});
 	exports.default = undefined;
 	
-	var _TimePicker = __webpack_require__(633);
+	var _TimePicker = __webpack_require__(659);
 	
 	var _TimePicker2 = _interopRequireDefault(_TimePicker);
 	
@@ -61002,7 +64629,7 @@
 	exports.default = _TimePicker2.default;
 
 /***/ },
-/* 633 */
+/* 659 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -61047,15 +64674,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _TimePickerDialog = __webpack_require__(634);
+	var _TimePickerDialog = __webpack_require__(660);
 	
 	var _TimePickerDialog2 = _interopRequireDefault(_TimePickerDialog);
 	
-	var _TextField = __webpack_require__(597);
+	var _TextField = __webpack_require__(623);
 	
 	var _TextField2 = _interopRequireDefault(_TextField);
 	
-	var _timeUtils = __webpack_require__(646);
+	var _timeUtils = __webpack_require__(672);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -61301,7 +64928,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 634 */
+/* 660 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -61346,7 +64973,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactEventListener = __webpack_require__(560);
+	var _reactEventListener = __webpack_require__(588);
 	
 	var _reactEventListener2 = _interopRequireDefault(_reactEventListener);
 	
@@ -61354,15 +64981,15 @@
 	
 	var _keycode2 = _interopRequireDefault(_keycode);
 	
-	var _Clock = __webpack_require__(635);
+	var _Clock = __webpack_require__(661);
 	
 	var _Clock2 = _interopRequireDefault(_Clock);
 	
-	var _Dialog = __webpack_require__(588);
+	var _Dialog = __webpack_require__(614);
 	
 	var _Dialog2 = _interopRequireDefault(_Dialog);
 	
-	var _FlatButton = __webpack_require__(575);
+	var _FlatButton = __webpack_require__(601);
 	
 	var _FlatButton2 = _interopRequireDefault(_FlatButton);
 	
@@ -61510,7 +65137,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 635 */
+/* 661 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -61543,15 +65170,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _TimeDisplay = __webpack_require__(636);
+	var _TimeDisplay = __webpack_require__(662);
 	
 	var _TimeDisplay2 = _interopRequireDefault(_TimeDisplay);
 	
-	var _ClockHours = __webpack_require__(644);
+	var _ClockHours = __webpack_require__(670);
 	
 	var _ClockHours2 = _interopRequireDefault(_ClockHours);
 	
-	var _ClockMinutes = __webpack_require__(648);
+	var _ClockMinutes = __webpack_require__(674);
 	
 	var _ClockMinutes2 = _interopRequireDefault(_ClockMinutes);
 	
@@ -61750,7 +65377,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 636 */
+/* 662 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -61763,7 +65390,7 @@
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
-	var _slicedToArray2 = __webpack_require__(637);
+	var _slicedToArray2 = __webpack_require__(663);
 	
 	var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
 	
@@ -61999,18 +65626,18 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 637 */
+/* 663 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	exports.__esModule = true;
 	
-	var _isIterable2 = __webpack_require__(638);
+	var _isIterable2 = __webpack_require__(664);
 	
 	var _isIterable3 = _interopRequireDefault(_isIterable2);
 	
-	var _getIterator2 = __webpack_require__(641);
+	var _getIterator2 = __webpack_require__(667);
 	
 	var _getIterator3 = _interopRequireDefault(_getIterator2);
 	
@@ -62055,21 +65682,21 @@
 	}();
 
 /***/ },
-/* 638 */
+/* 664 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(639), __esModule: true };
+	module.exports = { "default": __webpack_require__(665), __esModule: true };
 
 /***/ },
-/* 639 */
+/* 665 */
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(397);
 	__webpack_require__(385);
-	module.exports = __webpack_require__(640);
+	module.exports = __webpack_require__(666);
 
 /***/ },
-/* 640 */
+/* 666 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var classof   = __webpack_require__(458)
@@ -62083,21 +65710,21 @@
 	};
 
 /***/ },
-/* 641 */
+/* 667 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(642), __esModule: true };
+	module.exports = { "default": __webpack_require__(668), __esModule: true };
 
 /***/ },
-/* 642 */
+/* 668 */
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(397);
 	__webpack_require__(385);
-	module.exports = __webpack_require__(643);
+	module.exports = __webpack_require__(669);
 
 /***/ },
-/* 643 */
+/* 669 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var anObject = __webpack_require__(340)
@@ -62109,7 +65736,7 @@
 	};
 
 /***/ },
-/* 644 */
+/* 670 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -62146,15 +65773,15 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _ClockNumber = __webpack_require__(645);
+	var _ClockNumber = __webpack_require__(671);
 	
 	var _ClockNumber2 = _interopRequireDefault(_ClockNumber);
 	
-	var _ClockPointer = __webpack_require__(647);
+	var _ClockPointer = __webpack_require__(673);
 	
 	var _ClockPointer2 = _interopRequireDefault(_ClockPointer);
 	
-	var _timeUtils = __webpack_require__(646);
+	var _timeUtils = __webpack_require__(672);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -62353,7 +65980,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 645 */
+/* 671 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -62382,7 +66009,7 @@
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
-	var _slicedToArray2 = __webpack_require__(637);
+	var _slicedToArray2 = __webpack_require__(663);
 	
 	var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
 	
@@ -62390,7 +66017,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _timeUtils = __webpack_require__(646);
+	var _timeUtils = __webpack_require__(672);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -62497,7 +66124,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 646 */
+/* 672 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -62597,7 +66224,7 @@
 	}
 
 /***/ },
-/* 647 */
+/* 673 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -62630,7 +66257,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _timeUtils = __webpack_require__(646);
+	var _timeUtils = __webpack_require__(672);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -62749,7 +66376,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 648 */
+/* 674 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -62782,15 +66409,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _ClockNumber = __webpack_require__(645);
+	var _ClockNumber = __webpack_require__(671);
 	
 	var _ClockNumber2 = _interopRequireDefault(_ClockNumber);
 	
-	var _ClockPointer = __webpack_require__(647);
+	var _ClockPointer = __webpack_require__(673);
 	
 	var _ClockPointer2 = _interopRequireDefault(_ClockPointer);
 	
-	var _timeUtils = __webpack_require__(646);
+	var _timeUtils = __webpack_require__(672);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -62966,7 +66593,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 649 */
+/* 675 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62981,15 +66608,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _formsyReact = __webpack_require__(548);
+	var _formsyReact = __webpack_require__(576);
 	
 	var _formsyReact2 = _interopRequireDefault(_formsyReact);
 	
-	var _Toggle = __webpack_require__(650);
+	var _Toggle = __webpack_require__(676);
 	
 	var _Toggle2 = _interopRequireDefault(_Toggle);
 	
-	var _utils = __webpack_require__(567);
+	var _utils = __webpack_require__(593);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -63046,7 +66673,7 @@
 	exports.default = FormsyToggle;
 
 /***/ },
-/* 650 */
+/* 676 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -63056,7 +66683,7 @@
 	});
 	exports.default = undefined;
 	
-	var _Toggle = __webpack_require__(651);
+	var _Toggle = __webpack_require__(677);
 	
 	var _Toggle2 = _interopRequireDefault(_Toggle);
 	
@@ -63065,7 +66692,7 @@
 	exports.default = _Toggle2.default;
 
 /***/ },
-/* 651 */
+/* 677 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -63118,7 +66745,7 @@
 	
 	var _Paper2 = _interopRequireDefault(_Paper);
 	
-	var _EnhancedSwitch = __webpack_require__(559);
+	var _EnhancedSwitch = __webpack_require__(587);
 	
 	var _EnhancedSwitch2 = _interopRequireDefault(_EnhancedSwitch);
 	
@@ -63397,7 +67024,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 652 */
+/* 678 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -63416,15 +67043,15 @@
 	
 	var _keycode2 = _interopRequireDefault(_keycode);
 	
-	var _formsyReact = __webpack_require__(548);
+	var _formsyReact = __webpack_require__(576);
 	
 	var _formsyReact2 = _interopRequireDefault(_formsyReact);
 	
-	var _AutoComplete = __webpack_require__(653);
+	var _AutoComplete = __webpack_require__(679);
 	
 	var _AutoComplete2 = _interopRequireDefault(_AutoComplete);
 	
-	var _utils = __webpack_require__(659);
+	var _utils = __webpack_require__(685);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -63497,7 +67124,7 @@
 	exports.default = FormsyAutoComplete;
 
 /***/ },
-/* 653 */
+/* 679 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -63507,7 +67134,7 @@
 	});
 	exports.default = undefined;
 	
-	var _AutoComplete = __webpack_require__(654);
+	var _AutoComplete = __webpack_require__(680);
 	
 	var _AutoComplete2 = _interopRequireDefault(_AutoComplete);
 	
@@ -63516,7 +67143,7 @@
 	exports.default = _AutoComplete2.default;
 
 /***/ },
-/* 654 */
+/* 680 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -63573,23 +67200,23 @@
 	
 	var _keycode2 = _interopRequireDefault(_keycode);
 	
-	var _TextField = __webpack_require__(597);
+	var _TextField = __webpack_require__(623);
 	
 	var _TextField2 = _interopRequireDefault(_TextField);
 	
-	var _Menu = __webpack_require__(655);
+	var _Menu = __webpack_require__(681);
 	
 	var _Menu2 = _interopRequireDefault(_Menu);
 	
-	var _MenuItem = __webpack_require__(656);
+	var _MenuItem = __webpack_require__(682);
 	
 	var _MenuItem2 = _interopRequireDefault(_MenuItem);
 	
-	var _Divider = __webpack_require__(657);
+	var _Divider = __webpack_require__(683);
 	
 	var _Divider2 = _interopRequireDefault(_Divider);
 	
-	var _Popover = __webpack_require__(593);
+	var _Popover = __webpack_require__(619);
 	
 	var _Popover2 = _interopRequireDefault(_Popover);
 	
@@ -64182,7 +67809,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 655 */
+/* 681 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -64192,11 +67819,11 @@
 	});
 	exports.default = exports.MenuItem = exports.Menu = undefined;
 	
-	var _Menu2 = __webpack_require__(616);
+	var _Menu2 = __webpack_require__(642);
 	
 	var _Menu3 = _interopRequireDefault(_Menu2);
 	
-	var _MenuItem2 = __webpack_require__(656);
+	var _MenuItem2 = __webpack_require__(682);
 	
 	var _MenuItem3 = _interopRequireDefault(_MenuItem2);
 	
@@ -64207,7 +67834,7 @@
 	exports.default = _Menu3.default;
 
 /***/ },
-/* 656 */
+/* 682 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -64217,7 +67844,7 @@
 	});
 	exports.default = undefined;
 	
-	var _MenuItem = __webpack_require__(624);
+	var _MenuItem = __webpack_require__(650);
 	
 	var _MenuItem2 = _interopRequireDefault(_MenuItem);
 	
@@ -64226,7 +67853,7 @@
 	exports.default = _MenuItem2.default;
 
 /***/ },
-/* 657 */
+/* 683 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -64236,7 +67863,7 @@
 	});
 	exports.default = undefined;
 	
-	var _Divider = __webpack_require__(658);
+	var _Divider = __webpack_require__(684);
 	
 	var _Divider2 = _interopRequireDefault(_Divider);
 	
@@ -64245,7 +67872,7 @@
 	exports.default = _Divider2.default;
 
 /***/ },
-/* 658 */
+/* 684 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -64320,7 +67947,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 659 */
+/* 685 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -64379,7 +68006,7 @@
 
 
 /***/ },
-/* 660 */
+/* 686 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -64389,11 +68016,11 @@
 	});
 	exports.default = exports.GridTile = exports.GridList = undefined;
 	
-	var _GridList2 = __webpack_require__(661);
+	var _GridList2 = __webpack_require__(687);
 	
 	var _GridList3 = _interopRequireDefault(_GridList2);
 	
-	var _GridTile2 = __webpack_require__(662);
+	var _GridTile2 = __webpack_require__(688);
 	
 	var _GridTile3 = _interopRequireDefault(_GridTile2);
 	
@@ -64404,7 +68031,7 @@
 	exports.default = _GridList3.default;
 
 /***/ },
-/* 661 */
+/* 687 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -64551,7 +68178,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 662 */
+/* 688 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -64588,7 +68215,7 @@
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
-	var _defineProperty2 = __webpack_require__(663);
+	var _defineProperty2 = __webpack_require__(689);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
@@ -64857,7 +68484,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 663 */
+/* 689 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -64886,7 +68513,7 @@
 	};
 
 /***/ },
-/* 664 */
+/* 690 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -64923,7 +68550,7 @@
 	exports.default = ToggleStar;
 
 /***/ },
-/* 665 */
+/* 691 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -64960,7 +68587,7 @@
 	exports.default = ToggleStarBorder;
 
 /***/ },
-/* 666 */
+/* 692 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -64997,7 +68624,7 @@
 	exports.default = ActionSearch;
 
 /***/ },
-/* 667 */
+/* 693 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65034,7 +68661,7 @@
 	exports.default = CommunicationLocationOn;
 
 /***/ },
-/* 668 */
+/* 694 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65083,7 +68710,7 @@
 	exports.default = TestComponent;
 
 /***/ },
-/* 669 */
+/* 695 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65112,7 +68739,7 @@
 	exports.default = TestClass;
 
 /***/ },
-/* 670 */
+/* 696 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65127,7 +68754,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _FacebookLogin = __webpack_require__(671);
+	var _FacebookLogin = __webpack_require__(697);
 	
 	var _FacebookLogin2 = _interopRequireDefault(_FacebookLogin);
 	
@@ -65196,7 +68823,7 @@
 	exports.default = Login;
 
 /***/ },
-/* 671 */
+/* 697 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65302,1982 +68929,7 @@
 	exports.default = FacebookLogin;
 
 /***/ },
-/* 672 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _Geolocation = __webpack_require__(673);
-	
-	var _Geolocation2 = _interopRequireDefault(_Geolocation);
-	
-	var _DisplayPositionFromStore = __webpack_require__(675);
-	
-	var _DisplayPositionFromStore2 = _interopRequireDefault(_DisplayPositionFromStore);
-	
-	var _PlacesContainer = __webpack_require__(676);
-	
-	var _PlacesContainer2 = _interopRequireDefault(_PlacesContainer);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var ChooseLocation = function ChooseLocation() {
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(
-	      'h1',
-	      null,
-	      'Choose location'
-	    ),
-	    _react2.default.createElement(_Geolocation2.default, null),
-	    _react2.default.createElement(_DisplayPositionFromStore2.default, null),
-	    _react2.default.createElement(_PlacesContainer2.default, null)
-	  );
-	};
-	
-	exports.default = ChooseLocation;
-
-/***/ },
-/* 673 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRedux = __webpack_require__(180);
-	
-	var _LocationActions = __webpack_require__(674);
-	
-	var LocationActions = _interopRequireWildcard(_LocationActions);
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	// import { bindActionCreators } from 'redux';
-	
-	
-	var GeolocationDisplay = function GeolocationDisplay(props) {
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'geolocation_display {props.real ? geolocation_display_ok : geolocation_display_ko}' },
-	      'Latitude: ',
-	      props.latitude ? props.latitude : 'unknown',
-	      _react2.default.createElement('br', null),
-	      'Longitude: ',
-	      props.longitude ? props.longitude : 'unknown',
-	      _react2.default.createElement('br', null)
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'geolocation_statistics' },
-	      'Statistics:',
-	      _react2.default.createElement(
-	        'ul',
-	        null,
-	        _react2.default.createElement(
-	          'li',
-	          null,
-	          'Nb refreshes: ',
-	          props.nbRefreshes
-	        ),
-	        _react2.default.createElement(
-	          'li',
-	          null,
-	          'Nb different positions: ',
-	          props.nbDiffs
-	        ),
-	        _react2.default.createElement(
-	          'li',
-	          null,
-	          'Nb real positions: ',
-	          props.nbReal
-	        ),
-	        _react2.default.createElement(
-	          'li',
-	          null,
-	          'Nb estimated positions: ',
-	          props.nbEstimated
-	        ),
-	        _react2.default.createElement(
-	          'li',
-	          null,
-	          'Last error code: ',
-	          props.errorCode
-	        )
-	      )
-	    )
-	  );
-	};
-	
-	GeolocationDisplay.propTypes = {
-	  latitude: _react2.default.PropTypes.number,
-	  longitude: _react2.default.PropTypes.number,
-	  nbRefreshes: _react2.default.PropTypes.number,
-	  nbDiffs: _react2.default.PropTypes.number,
-	  nbReal: _react2.default.PropTypes.number,
-	  nbEstimated: _react2.default.PropTypes.number,
-	  errorCode: _react2.default.PropTypes.number
-	};
-	
-	function getPosition(position) {
-	  // alert("getPosition");
-	  var current = {
-	    latitude: position.coords.latitude,
-	    longitude: position.coords.longitude,
-	    real: true
-	  };
-	  var statistics = this.state.statistics;
-	  statistics.nbRefreshes += 1;
-	  statistics.nbReal += 1;
-	  if (current.latitude !== this.state.position.latitude || current.longitude !== this.state.position.longitude) {
-	    statistics.nbDiffs += 1;
-	  }
-	  this.setState({
-	    position: current,
-	    statistics: statistics
-	  });
-	
-	  var dispatch = this.props.dispatch; // Injected by react-redux
-	
-	  var action = LocationActions.setCurrentLocation(current.latitude, current.longitude, current.real);
-	  dispatch(action);
-	}
-	
-	/*
-	  showError: function (error) {
-	    switch(error.code) {
-	        case error.PERMISSION_DENIED:
-	            x.innerHTML = "User denied the request for Geolocation."
-	            break;
-	        case error.POSITION_UNAVAILABLE:
-	            x.innerHTML = "Location information is unavailable."
-	            break;
-	        case error.TIMEOUT:
-	            x.innerHTML = "The request to get user location timed out."
-	            break;
-	        case error.UNKNOWN_ERROR:
-	            x.innerHTML = "An unknown error occurred."
-	            break;
-	    }
-	  }
-	*/
-	
-	function errorPosition(error) {
-	  // alert("errorPosition");
-	  var position = this.state.position;
-	  var statistics = this.state.statistics;
-	  position.real = false;
-	  if (position.latitude != null && position.longitude != null) statistics.nbEstimated += 1;
-	  this.setState({
-	    position: position,
-	    statistics: statistics,
-	    errorCode: error.errorCode
-	  });
-	
-	  var dispatch = this.props.dispatch; // Injected by react-redux
-	
-	  var action = LocationActions.setCurrentLocation(position.latitude, position.longitude, false);
-	  dispatch(action);
-	}
-	
-	var Geolocation = function (_Component) {
-	  _inherits(Geolocation, _Component);
-	
-	  function Geolocation() {
-	    var _ref;
-	
-	    var _temp, _this, _ret;
-	
-	    _classCallCheck(this, Geolocation);
-	
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-	
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Geolocation.__proto__ || Object.getPrototypeOf(Geolocation)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-	      position: { latitude: 50.5467501, longitude: 3.0290698999999996, real: false },
-	      statistics: { nbRefreshes: 0, nbDiffs: 0, nbReal: 0, nbEstimated: 0 },
-	      errorCode: 0
-	    }, _temp), _possibleConstructorReturn(_this, _ret);
-	  }
-	
-	  // watchID: (null: ?number),
-	
-	
-	  _createClass(Geolocation, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      // alert("componentDidMount");
-	      navigator.geolocation.getCurrentPosition(getPosition.bind(this), errorPosition.bind(this), { enableHighAccuracy: true, timeout: 3000, maximumAge: 3000 });
-	      this.watchID = navigator.geolocation.watchPosition(getPosition.bind(this), errorPosition.bind(this));
-	    }
-	  }, {
-	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
-	      navigator.geolocation.clearWatch(this.watchID);
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var displayLatitude = Math.round(this.state.position.latitude * 10000) / 10000;
-	      var displayLongitude = Math.round(this.state.position.longitude * 10000) / 10000;
-	      return _react2.default.createElement(GeolocationDisplay, {
-	        latitude: displayLatitude,
-	        longitude: displayLongitude,
-	        real: this.state.position.real,
-	        nbRefreshes: this.state.statistics.nbRefreshes,
-	        nbDiffs: this.state.statistics.nbDiffs,
-	        nbReal: this.state.statistics.nbReal,
-	        nbEstimated: this.state.statistics.nbEstimated,
-	        errorCode: this.state.errorCode
-	      });
-	    }
-	  }]);
-	
-	  return Geolocation;
-	}(_react.Component);
-	
-	Geolocation = (0, _reactRedux.connect)()(Geolocation); // eslint-disable-line no-class-assign
-	
-	exports.default = Geolocation;
-
-/***/ },
-/* 674 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.setCurrentLocation = setCurrentLocation;
-	function setCurrentLocation(latitude, longitude, real) {
-	  // eslint-disable-line import/prefer-default-export
-	  // console.log("Action: setCurrentLocation latitude=" + latitude + " longitude=" + longitude + " real=" +  real);
-	  return {
-	    type: 'SET_CURRENT_LOCATION',
-	    latitude: latitude, // property value shorthand for latitude: latitude,
-	    longitude: longitude, // property value shorthand for longitude: longitude
-	    real: real
-	  };
-	}
-
-/***/ },
-/* 675 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRedux = __webpack_require__(180);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var DisplayPositionFromStore = _react2.default.createClass({
-	  displayName: 'DisplayPositionFromStore',
-	
-	
-	  getInitialState: function getInitialState() {
-	    return {
-	      nbChanges: 0
-	    };
-	  },
-	
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    this.setState({
-	      nbChanges: this.state.nbChanges + 1
-	    });
-	  },
-	
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      'DisplayPositionFromStore test ==> latitude: ',
-	      this.props.coordinates.latitude,
-	      ' - longitude: ',
-	      this.props.coordinates.longitude,
-	      ' (real: ',
-	      this.props.coordinates.real === true ? "yes" : "no",
-	      ', changed: ',
-	      this.props.coordinates.changed === true ? "yes" : "no",
-	      ' - state nb changes: ',
-	      this.state.nbChanges,
-	      ')'
-	    );
-	  }
-	});
-	
-	var mapStateToProps = function mapStateToProps(state) {
-	  // console.log("{   DisplayPositionFromStore.mapStateToProps (dpms)" );
-	  // console.log("       (dpms) state:", state);
-	
-	  var result = {
-	    coordinates: state.coordinates
-	  };
-	  // console.log("       (dpms) result:", result);
-	  // console.log("}   DisplayPositionFromStore.mapStateToProps" );
-	  return result;
-	};
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps)(DisplayPositionFromStore);
-
-/***/ },
-/* 676 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRedux = __webpack_require__(180);
-	
-	var _LocationActions = __webpack_require__(674);
-	
-	var _googleMapsReact = __webpack_require__(677);
-	
-	var _googleMapsReact2 = _interopRequireDefault(_googleMapsReact);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var __GAPI_KEY__ = "AIzaSyAPbswfvaojeQVe9eE-0CtZ4iEtWia9KO0";
-	
-	var Listing = function Listing(_ref) {
-	  var places = _ref.places;
-	
-	
-	  console.log("   {   Listing.render (lr)");
-	  console.log("          (lr) places: ", places);
-	
-	  var result = _react2.default.createElement(
-	    'ul',
-	    null,
-	    places && places.map(function (p) {
-	      return _react2.default.createElement(
-	        'li',
-	        { key: p.id },
-	        p.name
-	      );
-	    })
-	  );
-	
-	  console.log("   }   Listing.render");
-	  return result;
-	};
-	
-	// @connect(mapStateToProps, mapDispatchToProps)
-	
-	var PlacesContainer = _react2.default.createClass({
-	  displayName: 'PlacesContainer',
-	
-	
-	  getInitialState: function getInitialState() {
-	    return {
-	      places: [],
-	      nbRenders: 0
-	    };
-	  },
-	
-	  searchNearby: function searchNearby(map, center) {
-	    var _this = this;
-	
-	    console.log("{   PlacesContainer.searchNearby (pcs)");
-	    console.log("       (pcs) center:", center);
-	    console.log("       (pcs) map:", map);
-	    var google = this.props.google;
-	
-	    var service = new google.maps.places.PlacesService(map);
-	    // Specify location, radius and place types for your Places API search.
-	    var request = {
-	      location: center,
-	      radius: '1000',
-	      type: ['food']
-	    };
-	
-	    service.nearbySearch(request, function (results, status, pagination) {
-	      if (status == google.maps.places.PlacesServiceStatus.OK) {
-	
-	        _this.pagination = pagination;
-	        _this.setState({
-	          places: results,
-	          hasNextPage: pagination.hasNextPage,
-	          center: center
-	        });
-	      }
-	    });
-	    console.log("}   PlacesContainer.searchNearby (pcs)");
-	  },
-	
-	  onMapReady: function onMapReady(mapProps, map) {
-	    console.log("!!! onMapReady.mapProps: ", mapProps);
-	    console.log("!!! onMapReady.map: ", map);
-	    this.searchNearby(map, map.center);
-	  },
-	
-	  onMapRecentered: function onMapRecentered(mapProps, map) {
-	    console.log("!!! onMapRecentered.mapProps: ", mapProps);
-	    console.log("!!! onMapRecentered.map: ", map);
-	    this.searchNearby(map, map.center);
-	  },
-	
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    console.log("{   PlacesContainer.componentWillReceiveProps (cwrp)");
-	    console.log("       (cwrp) nextProps: ", nextProps);
-	    var nbRenders = this.state.nbRenders + 1;
-	    this.setState({ nbRenders: nbRenders });
-	    console.log("}   PlacesContainer.componentWillReceiveProps (cwrp)");
-	  },
-	
-	  render: function render() {
-	
-	    console.log("{   PlacesContainer.render (pcr)");
-	
-	    console.log("       (pcr) state:", this.state);
-	    console.log("       (pcr) props:", this.props);
-	
-	    var style = {
-	      width: '80%',
-	      height: '50%'
-	    };
-	
-	    //    if (!this.state || !this.state.center) {
-	    if (!this.props.loaded) {
-	      console.log("       returns loading msg");
-	      console.log("}   PlacesContainer.render");
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        'Loading...'
-	      );
-	    }
-	
-	    var result = _react2.default.createElement(
-	      'div',
-	      { style: style },
-	      _react2.default.createElement(
-	        _googleMapsReact2.default,
-	        { google: this.props.google,
-	          className: 'map',
-	          onReady: this.onMapReady,
-	          visible: false,
-	          center: this.props.position,
-	          onRecenter: this.onMapRecentered
-	        },
-	        _react2.default.createElement(Listing, { places: this.state.places })
-	      ),
-	      'nbRenders: ',
-	      this.state.nbRenders
-	    );
-	    console.log("}   PlacesContainer.render");
-	    return result;
-	  }
-	
-	});
-	
-	var mapStateToProps = function mapStateToProps(state) {
-	  console.log("{   PlacesContainer.mapStateToProps (pcms)");
-	  console.log("       (pcms) state:", state);
-	  var result = {
-	    //center: [state.coordinates.latitude, state.coordinates.longitude]
-	    position: { lat: state.coordinates.latitude, lng: state.coordinates.longitude }
-	  };
-	  console.log("       (pcms) result:", result);
-	  console.log("}   PlacesContainer.mapStateToProps");
-	  return result;
-	};
-	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  console.log("{   PlacesContainer.mapDispatchToProps (pcmd)");
-	  console.log("       (pcmd) dispatch:", dispatch);
-	  console.log("}   PlacesContainer.mapDispatchToProps (pcmd)");
-	  return {};
-	};
-	
-	var PlacesContainerWrapped = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(PlacesContainer);
-	exports.default = (0, _googleMapsReact.GoogleApiWrapper)({ apiKey: __GAPI_KEY__ })(PlacesContainerWrapped);
-	
-	// Works too! :
-	// let PlacesContainerWrapped = GoogleApiWrapper({apiKey: __GAPI_KEY__})(PlacesContainer);
-	// export default connect(mapStateToProps, mapDispatchToProps)(PlacesContainerWrapped);
-
-/***/ },
-/* 677 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
-	  if (true) {
-	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(678), __webpack_require__(681), __webpack_require__(683), __webpack_require__(2), __webpack_require__(33), __webpack_require__(682), __webpack_require__(688), __webpack_require__(209)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  } else if (typeof exports !== "undefined") {
-	    factory(exports, require('./GoogleApiComponent'), require('./components/Marker'), require('./components/InfoWindow'), require('react'), require('react-dom'), require('./lib/String'), require('./lib/cancelablePromise'), require('invariant'));
-	  } else {
-	    var mod = {
-	      exports: {}
-	    };
-	    factory(mod.exports, global.GoogleApiComponent, global.Marker, global.InfoWindow, global.react, global.reactDom, global.String, global.cancelablePromise, global.invariant);
-	    global.index = mod.exports;
-	  }
-	})(this, function (exports, _GoogleApiComponent, _Marker, _InfoWindow, _react, _reactDom, _String, _cancelablePromise, _invariant) {
-	  'use strict';
-	
-	  Object.defineProperty(exports, "__esModule", {
-	    value: true
-	  });
-	  exports.Map = exports.InfoWindow = exports.Marker = exports.GoogleApiWrapper = undefined;
-	  Object.defineProperty(exports, 'GoogleApiWrapper', {
-	    enumerable: true,
-	    get: function () {
-	      return _GoogleApiComponent.wrapper;
-	    }
-	  });
-	  Object.defineProperty(exports, 'Marker', {
-	    enumerable: true,
-	    get: function () {
-	      return _Marker.Marker;
-	    }
-	  });
-	  Object.defineProperty(exports, 'InfoWindow', {
-	    enumerable: true,
-	    get: function () {
-	      return _InfoWindow.InfoWindow;
-	    }
-	  });
-	
-	  var _react2 = _interopRequireDefault(_react);
-	
-	  var _reactDom2 = _interopRequireDefault(_reactDom);
-	
-	  var _invariant2 = _interopRequireDefault(_invariant);
-	
-	  function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : {
-	      default: obj
-	    };
-	  }
-	
-	  function _classCallCheck(instance, Constructor) {
-	    if (!(instance instanceof Constructor)) {
-	      throw new TypeError("Cannot call a class as a function");
-	    }
-	  }
-	
-	  var _createClass = function () {
-	    function defineProperties(target, props) {
-	      for (var i = 0; i < props.length; i++) {
-	        var descriptor = props[i];
-	        descriptor.enumerable = descriptor.enumerable || false;
-	        descriptor.configurable = true;
-	        if ("value" in descriptor) descriptor.writable = true;
-	        Object.defineProperty(target, descriptor.key, descriptor);
-	      }
-	    }
-	
-	    return function (Constructor, protoProps, staticProps) {
-	      if (protoProps) defineProperties(Constructor.prototype, protoProps);
-	      if (staticProps) defineProperties(Constructor, staticProps);
-	      return Constructor;
-	    };
-	  }();
-	
-	  function _possibleConstructorReturn(self, call) {
-	    if (!self) {
-	      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-	    }
-	
-	    return call && (typeof call === "object" || typeof call === "function") ? call : self;
-	  }
-	
-	  function _inherits(subClass, superClass) {
-	    if (typeof superClass !== "function" && superClass !== null) {
-	      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-	    }
-	
-	    subClass.prototype = Object.create(superClass && superClass.prototype, {
-	      constructor: {
-	        value: subClass,
-	        enumerable: false,
-	        writable: true,
-	        configurable: true
-	      }
-	    });
-	    if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-	  }
-	
-	  var mapStyles = {
-	    container: {
-	      position: 'absolute',
-	      width: '100vw',
-	      height: '100vh'
-	    },
-	    map: {
-	      position: 'absolute',
-	      left: 0,
-	      right: 0,
-	      bottom: 0,
-	      top: 0
-	    }
-	  };
-	
-	  var evtNames = ['ready', 'click', 'dragend', 'recenter'];
-	
-	  var Map = exports.Map = function (_React$Component) {
-	    _inherits(Map, _React$Component);
-	
-	    function Map(props) {
-	      _classCallCheck(this, Map);
-	
-	      var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Map).call(this, props));
-	
-	      (0, _invariant2.default)(props.hasOwnProperty('google'), 'You must include a `google` prop.');
-	
-	      _this.listeners = {};
-	      _this.state = {
-	        currentLocation: {
-	          lat: _this.props.initialCenter.lat,
-	          lng: _this.props.initialCenter.lng
-	        }
-	      };
-	      return _this;
-	    }
-	
-	    _createClass(Map, [{
-	      key: 'componentDidMount',
-	      value: function componentDidMount() {
-	        var _this2 = this;
-	
-	        if (this.props.centerAroundCurrentLocation) {
-	          if (navigator && navigator.geolocation) {
-	            this.geoPromise = (0, _cancelablePromise.makeCancelable)(new Promise(function (resolve, reject) {
-	              navigator.geolocation.getCurrentPosition(resolve, reject);
-	            }));
-	
-	            this.geoPromise.promise.then(function (pos) {
-	              var coords = pos.coords;
-	              _this2.setState({
-	                currentLocation: {
-	                  lat: coords.latitude,
-	                  lng: coords.longitude
-	                }
-	              });
-	            }).catch(function (e) {
-	              return e;
-	            });
-	          }
-	        }
-	        this.loadMap();
-	      }
-	    }, {
-	      key: 'componentDidUpdate',
-	      value: function componentDidUpdate(prevProps, prevState) {
-	        if (prevProps.google !== this.props.google) {
-	          this.loadMap();
-	        }
-	        if (this.props.visible !== prevProps.visible) {
-	          this.restyleMap();
-	        }
-	        if (this.props.zoom !== prevProps.zoom) {
-	          this.map.setZoom(this.props.zoom);
-	        }
-	        if (this.props.center !== prevProps.center) {
-	          this.setState({
-	            currentLocation: this.props.center
-	          });
-	        }
-	        if (prevState.currentLocation !== this.state.currentLocation) {
-	          this.recenterMap();
-	        }
-	      }
-	    }, {
-	      key: 'componentWillUnmount',
-	      value: function componentWillUnmount() {
-	        var _this3 = this;
-	
-	        var google = this.props.google;
-	
-	        if (this.geoPromise) {
-	          this.geoPromise.cancel();
-	        }
-	        Object.keys(this.listeners).forEach(function (e) {
-	          google.maps.event.removeListener(_this3.listeners[e]);
-	        });
-	      }
-	    }, {
-	      key: 'loadMap',
-	      value: function loadMap() {
-	        var _this4 = this;
-	
-	        if (this.props && this.props.google && this._mapRef) {
-	          (function () {
-	            var google = _this4.props.google;
-	
-	            var maps = google.maps;
-	
-	            var mapRef = _this4._mapRef;
-	            var node = _reactDom2.default.findDOMNode(mapRef);
-	            var curr = _this4.state.currentLocation;
-	            var center = new maps.LatLng(curr.lat, curr.lng);
-	
-	            var mapTypeIds = _this4.props.google.maps.MapTypeId || {};
-	            var mapTypeFromProps = String(_this4.props.mapType).toUpperCase();
-	
-	            var mapConfig = Object.assign({}, {
-	              mapTypeId: mapTypeIds[mapTypeFromProps],
-	              center: center,
-	              zoom: _this4.props.zoom,
-	              maxZoom: _this4.props.maxZoom,
-	              minZoom: _this4.props.maxZoom,
-	              clickableIcons: _this4.props.clickableIcons,
-	              disableDefaultUI: _this4.props.disableDefaultUI,
-	              zoomControl: _this4.props.zoomControl,
-	              mapTypeControl: _this4.props.mapTypeControl,
-	              scaleControl: _this4.props.scaleControl,
-	              streetViewControl: _this4.props.streetViewControl,
-	              panControl: _this4.props.panControl,
-	              rotateControl: _this4.props.rotateControl,
-	              scrollwheel: _this4.props.scrollwheel,
-	              draggable: _this4.props.draggable,
-	              keyboardShortcuts: _this4.props.keyboardShortcuts,
-	              disableDoubleClickZoom: _this4.props.disableDoubleClickZoom,
-	              noClear: _this4.props.noClear,
-	              styles: _this4.props.styles
-	            });
-	
-	            Object.keys(mapConfig).forEach(function (key) {
-	              if (!mapConfig[key]) {
-	                delete mapConfig[key];
-	              }
-	            });
-	
-	            _this4.map = new maps.Map(node, mapConfig);
-	
-	            evtNames.forEach(function (e) {
-	              _this4.listeners[e] = _this4.map.addListener(e, _this4.handleEvent(e));
-	            });
-	            maps.event.trigger(_this4.map, 'ready');
-	            _this4.forceUpdate();
-	          })();
-	        }
-	      }
-	    }, {
-	      key: 'handleEvent',
-	      value: function handleEvent(evtName) {
-	        var _this5 = this;
-	
-	        var timeout = void 0;
-	        var handlerName = 'on' + (0, _String.camelize)(evtName);
-	
-	        return function (e) {
-	          if (timeout) {
-	            clearTimeout(timeout);
-	            timeout = null;
-	          }
-	          timeout = setTimeout(function () {
-	            if (_this5.props[handlerName]) {
-	              _this5.props[handlerName](_this5.props, _this5.map, e);
-	            }
-	          }, 0);
-	        };
-	      }
-	    }, {
-	      key: 'recenterMap',
-	      value: function recenterMap() {
-	        var map = this.map;
-	
-	        var google = this.props.google;
-	
-	        var maps = google.maps;
-	
-	        if (!google) return;
-	
-	        if (map) {
-	          var center = this.state.currentLocation;
-	          if (!(center instanceof google.maps.LatLng)) {
-	            center = new google.maps.LatLng(center.lat, center.lng);
-	          }
-	          // map.panTo(center)
-	          map.setCenter(center);
-	          maps.event.trigger(map, 'recenter');
-	        }
-	      }
-	    }, {
-	      key: 'restyleMap',
-	      value: function restyleMap() {
-	        if (this.map) {
-	          var google = this.props.google;
-	
-	          google.maps.event.trigger(this.map, 'resize');
-	        }
-	      }
-	    }, {
-	      key: 'renderChildren',
-	      value: function renderChildren() {
-	        var _this6 = this;
-	
-	        var children = this.props.children;
-	
-	
-	        if (!children) return;
-	
-	        return _react2.default.Children.map(children, function (c) {
-	          return _react2.default.cloneElement(c, {
-	            map: _this6.map,
-	            google: _this6.props.google,
-	            mapCenter: _this6.state.currentLocation
-	          });
-	        });
-	      }
-	    }, {
-	      key: 'render',
-	      value: function render() {
-	        var _this7 = this;
-	
-	        var style = Object.assign({}, mapStyles.map, this.props.style, {
-	          display: this.props.visible ? 'inherit' : 'none'
-	        });
-	
-	        var containerStyles = Object.assign({}, mapStyles.container, this.props.containerStyle);
-	
-	        return _react2.default.createElement(
-	          'div',
-	          {
-	            style: containerStyles,
-	            className: this.props.className },
-	          _react2.default.createElement(
-	            'div',
-	            { style: style, ref: function ref(map) {
-	                return _this7._mapRef = map;
-	              } },
-	            'Loading map...'
-	          ),
-	          this.renderChildren()
-	        );
-	      }
-	    }]);
-	
-	    return Map;
-	  }(_react2.default.Component);
-	
-	  ;
-	
-	  Map.propTypes = {
-	    google: _react.PropTypes.object,
-	    zoom: _react.PropTypes.number,
-	    centerAroundCurrentLocation: _react.PropTypes.bool,
-	    center: _react.PropTypes.object,
-	    initialCenter: _react.PropTypes.object,
-	    className: _react.PropTypes.string,
-	    style: _react.PropTypes.object,
-	    containerStyle: _react.PropTypes.object,
-	    visible: _react.PropTypes.bool,
-	    mapType: _react.PropTypes.string,
-	    maxZoom: _react.PropTypes.number,
-	    minZoom: _react.PropTypes.number,
-	    clickableIcons: _react.PropTypes.bool,
-	    disableDefaultUI: _react.PropTypes.bool,
-	    zoomControl: _react.PropTypes.bool,
-	    mapTypeControl: _react.PropTypes.bool,
-	    scaleControl: _react.PropTypes.bool,
-	    streetViewControl: _react.PropTypes.bool,
-	    panControl: _react.PropTypes.bool,
-	    rotateControl: _react.PropTypes.bool,
-	    scrollwheel: _react.PropTypes.bool,
-	    draggable: _react.PropTypes.bool,
-	    keyboardShortcuts: _react.PropTypes.bool,
-	    disableDoubleClickZoom: _react.PropTypes.bool,
-	    noClear: _react.PropTypes.bool,
-	    styles: _react.PropTypes.array
-	  };
-	
-	  evtNames.forEach(function (e) {
-	    return Map.propTypes[(0, _String.camelize)(e)] = _react.PropTypes.func;
-	  });
-	
-	  Map.defaultProps = {
-	    zoom: 14,
-	    initialCenter: {
-	      lat: 37.774929,
-	      lng: -122.419416
-	    },
-	    center: {},
-	    centerAroundCurrentLocation: false,
-	    style: {},
-	    containerStyle: {},
-	    visible: true
-	  };
-	
-	  exports.default = Map;
-	});
-
-/***/ },
-/* 678 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
-	    if (true) {
-	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(2), __webpack_require__(33), __webpack_require__(679), __webpack_require__(680)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	    } else if (typeof exports !== "undefined") {
-	        factory(exports, require('react'), require('react-dom'), require('./lib/ScriptCache'), require('./lib/GoogleApi'));
-	    } else {
-	        var mod = {
-	            exports: {}
-	        };
-	        factory(mod.exports, global.react, global.reactDom, global.ScriptCache, global.GoogleApi);
-	        global.GoogleApiComponent = mod.exports;
-	    }
-	})(this, function (exports, _react, _reactDom, _ScriptCache, _GoogleApi) {
-	    'use strict';
-	
-	    Object.defineProperty(exports, "__esModule", {
-	        value: true
-	    });
-	    exports.wrapper = undefined;
-	
-	    var _react2 = _interopRequireDefault(_react);
-	
-	    var _reactDom2 = _interopRequireDefault(_reactDom);
-	
-	    var _GoogleApi2 = _interopRequireDefault(_GoogleApi);
-	
-	    function _interopRequireDefault(obj) {
-	        return obj && obj.__esModule ? obj : {
-	            default: obj
-	        };
-	    }
-	
-	    function _classCallCheck(instance, Constructor) {
-	        if (!(instance instanceof Constructor)) {
-	            throw new TypeError("Cannot call a class as a function");
-	        }
-	    }
-	
-	    var _createClass = function () {
-	        function defineProperties(target, props) {
-	            for (var i = 0; i < props.length; i++) {
-	                var descriptor = props[i];
-	                descriptor.enumerable = descriptor.enumerable || false;
-	                descriptor.configurable = true;
-	                if ("value" in descriptor) descriptor.writable = true;
-	                Object.defineProperty(target, descriptor.key, descriptor);
-	            }
-	        }
-	
-	        return function (Constructor, protoProps, staticProps) {
-	            if (protoProps) defineProperties(Constructor.prototype, protoProps);
-	            if (staticProps) defineProperties(Constructor, staticProps);
-	            return Constructor;
-	        };
-	    }();
-	
-	    function _possibleConstructorReturn(self, call) {
-	        if (!self) {
-	            throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-	        }
-	
-	        return call && (typeof call === "object" || typeof call === "function") ? call : self;
-	    }
-	
-	    function _inherits(subClass, superClass) {
-	        if (typeof superClass !== "function" && superClass !== null) {
-	            throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-	        }
-	
-	        subClass.prototype = Object.create(superClass && superClass.prototype, {
-	            constructor: {
-	                value: subClass,
-	                enumerable: false,
-	                writable: true,
-	                configurable: true
-	            }
-	        });
-	        if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-	    }
-	
-	    var defaultMapConfig = {};
-	    var defaultCreateCache = function defaultCreateCache(options) {
-	        options = options || {};
-	        var apiKey = options.apiKey;
-	        var libraries = options.libraries || ['places'];
-	        var version = options.version || '3.24';
-	
-	        return (0, _ScriptCache.ScriptCache)({
-	            google: (0, _GoogleApi2.default)({ apiKey: apiKey, libraries: libraries, version: version })
-	        });
-	    };
-	
-	    var wrapper = exports.wrapper = function wrapper(options) {
-	        return function (WrappedComponent) {
-	            var apiKey = options.apiKey;
-	            var libraries = options.libraries || ['places'];
-	            var version = options.version || '3.24';
-	            var createCache = options.createCache || defaultCreateCache;
-	
-	            var Wrapper = function (_React$Component) {
-	                _inherits(Wrapper, _React$Component);
-	
-	                function Wrapper(props, context) {
-	                    _classCallCheck(this, Wrapper);
-	
-	                    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Wrapper).call(this, props, context));
-	
-	                    _this.scriptCache = createCache(options);
-	                    _this.scriptCache.google.onLoad(_this.onLoad.bind(_this));
-	
-	                    _this.state = {
-	                        loaded: false,
-	                        map: null,
-	                        google: null
-	                    };
-	                    return _this;
-	                }
-	
-	                _createClass(Wrapper, [{
-	                    key: 'onLoad',
-	                    value: function onLoad(err, tag) {
-	                        this._gapi = window.google;
-	
-	                        this.setState({ loaded: true, google: this._gapi });
-	                    }
-	                }, {
-	                    key: 'render',
-	                    value: function render() {
-	                        var props = Object.assign({}, this.props, {
-	                            loaded: this.state.loaded,
-	                            google: window.google
-	                        });
-	
-	                        return _react2.default.createElement(
-	                            'div',
-	                            null,
-	                            _react2.default.createElement(WrappedComponent, props),
-	                            _react2.default.createElement('div', { ref: 'map' })
-	                        );
-	                    }
-	                }]);
-	
-	                return Wrapper;
-	            }(_react2.default.Component);
-	
-	            return Wrapper;
-	        };
-	    };
-	
-	    exports.default = wrapper;
-	});
-
-/***/ },
-/* 679 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
-	    if (true) {
-	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	    } else if (typeof exports !== "undefined") {
-	        factory(exports);
-	    } else {
-	        var mod = {
-	            exports: {}
-	        };
-	        factory(mod.exports);
-	        global.ScriptCache = mod.exports;
-	    }
-	})(this, function (exports) {
-	    'use strict';
-	
-	    Object.defineProperty(exports, "__esModule", {
-	        value: true
-	    });
-	    var counter = 0;
-	    var scriptMap = window._scriptMap || new Map();
-	
-	    var ScriptCache = exports.ScriptCache = function (global) {
-	        global._scriptMap = global._scriptMap || scriptMap;
-	        return function ScriptCache(scripts) {
-	            var Cache = {};
-	
-	            Cache._onLoad = function (key) {
-	                return function (cb) {
-	                    var stored = scriptMap.get(key);
-	                    if (stored) {
-	                        stored.promise.then(function () {
-	                            stored.error ? cb(stored.error) : cb(null, stored);
-	                            return stored;
-	                        });
-	                    } else {
-	                        // TODO:
-	                    }
-	                };
-	            };
-	
-	            Cache._scriptTag = function (key, src) {
-	                if (!scriptMap.has(key)) {
-	                    (function () {
-	                        var tag = document.createElement('script');
-	                        var promise = new Promise(function (resolve, reject) {
-	                            var resolved = false,
-	                                errored = false,
-	                                body = document.getElementsByTagName('body')[0];
-	
-	                            tag.type = 'text/javascript';
-	                            tag.async = false; // Load in order
-	
-	                            var cbName = 'loaderCB' + counter++ + Date.now();
-	                            var cb = void 0;
-	
-	                            var handleResult = function handleResult(state) {
-	                                return function (evt) {
-	                                    var stored = scriptMap.get(key);
-	                                    if (state === 'loaded') {
-	                                        stored.resolved = true;
-	                                        resolve(src);
-	                                        // stored.handlers.forEach(h => h.call(null, stored))
-	                                        // stored.handlers = []
-	                                    } else if (state === 'error') {
-	                                            stored.errored = true;
-	                                            // stored.handlers.forEach(h => h.call(null, stored))
-	                                            // stored.handlers = [];
-	                                            reject(evt);
-	                                        }
-	                                    stored.loaded = true;
-	
-	                                    cleanup();
-	                                };
-	                            };
-	
-	                            var cleanup = function cleanup() {
-	                                if (global[cbName] && typeof global[cbName] === 'function') {
-	                                    global[cbName] = null;
-	                                    delete global[cbName];
-	                                }
-	                            };
-	
-	                            tag.onload = handleResult('loaded');
-	                            tag.onerror = handleResult('error');
-	                            tag.onreadystatechange = function () {
-	                                handleResult(tag.readyState);
-	                            };
-	
-	                            // Pick off callback, if there is one
-	                            if (src.match(/callback=CALLBACK_NAME/)) {
-	                                src = src.replace(/(callback=)[^\&]+/, '$1' + cbName);
-	                                cb = window[cbName] = tag.onload;
-	                            } else {
-	                                tag.addEventListener('load', tag.onload);
-	                            }
-	                            tag.addEventListener('error', tag.onerror);
-	
-	                            tag.src = src;
-	                            body.appendChild(tag);
-	
-	                            return tag;
-	                        });
-	                        var initialState = {
-	                            loaded: false,
-	                            error: false,
-	                            promise: promise,
-	                            tag: tag
-	                        };
-	                        scriptMap.set(key, initialState);
-	                    })();
-	                }
-	                return scriptMap.get(key);
-	            };
-	
-	            // let scriptTags = document.querySelectorAll('script')
-	            //
-	            // NodeList.prototype.filter = Array.prototype.filter;
-	            // NodeList.prototype.map = Array.prototype.map;
-	            // const initialScripts = scriptTags
-	            //   .filter(s => !!s.src)
-	            //   .map(s => s.src.split('?')[0])
-	            //   .reduce((memo, script) => {
-	            //     memo[script] = script;
-	            //     return memo;
-	            //   }, {});
-	
-	            Object.keys(scripts).forEach(function (key) {
-	                var script = scripts[key];
-	
-	                var tag = window._scriptMap.has(key) ? window._scriptMap.get(key).tag : Cache._scriptTag(key, script);
-	
-	                Cache[key] = {
-	                    tag: tag,
-	                    onLoad: Cache._onLoad(key)
-	                };
-	            });
-	
-	            return Cache;
-	        };
-	    }(window);
-	
-	    exports.default = ScriptCache;
-	});
-
-/***/ },
-/* 680 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
-	    if (true) {
-	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(209)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	    } else if (typeof exports !== "undefined") {
-	        factory(exports, require('invariant'));
-	    } else {
-	        var mod = {
-	            exports: {}
-	        };
-	        factory(mod.exports, global.invariant);
-	        global.GoogleApi = mod.exports;
-	    }
-	})(this, function (exports, _invariant) {
-	    'use strict';
-	
-	    Object.defineProperty(exports, "__esModule", {
-	        value: true
-	    });
-	    exports.GoogleApi = undefined;
-	
-	    var _invariant2 = _interopRequireDefault(_invariant);
-	
-	    function _interopRequireDefault(obj) {
-	        return obj && obj.__esModule ? obj : {
-	            default: obj
-	        };
-	    }
-	
-	    var GoogleApi = exports.GoogleApi = function GoogleApi(opts) {
-	        opts = opts || {};
-	
-	        (0, _invariant2.default)(opts.hasOwnProperty('apiKey'), 'You must pass an apiKey to use GoogleApi');
-	
-	        var apiKey = opts.apiKey;
-	        var libraries = opts.libraries || ['places'];
-	        var client = opts.client;
-	        var URL = 'https://maps.googleapis.com/maps/api/js';
-	
-	        var googleVersion = opts.version || '3.24';
-	
-	        var script = null;
-	        var google = window.google || null;
-	        var loading = false;
-	        var channel = null;
-	        var language = null;
-	        var region = null;
-	
-	        var onLoadEvents = [];
-	
-	        var url = function url() {
-	            var url = URL;
-	            var params = {
-	                key: apiKey,
-	                callback: 'CALLBACK_NAME',
-	                libraries: libraries.join(','),
-	                client: client,
-	                v: googleVersion,
-	                channel: channel,
-	                language: language,
-	                region: region
-	            };
-	
-	            var paramStr = Object.keys(params).filter(function (k) {
-	                return !!params[k];
-	            }).map(function (k) {
-	                return k + '=' + params[k];
-	            }).join('&');
-	
-	            return url + '?' + paramStr;
-	        };
-	
-	        return url();
-	    };
-	
-	    exports.default = GoogleApi;
-	});
-
-/***/ },
-/* 681 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
-	  if (true) {
-	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(2), __webpack_require__(682)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  } else if (typeof exports !== "undefined") {
-	    factory(exports, require('react'), require('../lib/String'));
-	  } else {
-	    var mod = {
-	      exports: {}
-	    };
-	    factory(mod.exports, global.react, global.String);
-	    global.Marker = mod.exports;
-	  }
-	})(this, function (exports, _react, _String) {
-	  'use strict';
-	
-	  Object.defineProperty(exports, "__esModule", {
-	    value: true
-	  });
-	  exports.Marker = undefined;
-	
-	  var _react2 = _interopRequireDefault(_react);
-	
-	  function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : {
-	      default: obj
-	    };
-	  }
-	
-	  function _classCallCheck(instance, Constructor) {
-	    if (!(instance instanceof Constructor)) {
-	      throw new TypeError("Cannot call a class as a function");
-	    }
-	  }
-	
-	  var _createClass = function () {
-	    function defineProperties(target, props) {
-	      for (var i = 0; i < props.length; i++) {
-	        var descriptor = props[i];
-	        descriptor.enumerable = descriptor.enumerable || false;
-	        descriptor.configurable = true;
-	        if ("value" in descriptor) descriptor.writable = true;
-	        Object.defineProperty(target, descriptor.key, descriptor);
-	      }
-	    }
-	
-	    return function (Constructor, protoProps, staticProps) {
-	      if (protoProps) defineProperties(Constructor.prototype, protoProps);
-	      if (staticProps) defineProperties(Constructor, staticProps);
-	      return Constructor;
-	    };
-	  }();
-	
-	  function _possibleConstructorReturn(self, call) {
-	    if (!self) {
-	      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-	    }
-	
-	    return call && (typeof call === "object" || typeof call === "function") ? call : self;
-	  }
-	
-	  function _inherits(subClass, superClass) {
-	    if (typeof superClass !== "function" && superClass !== null) {
-	      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-	    }
-	
-	    subClass.prototype = Object.create(superClass && superClass.prototype, {
-	      constructor: {
-	        value: subClass,
-	        enumerable: false,
-	        writable: true,
-	        configurable: true
-	      }
-	    });
-	    if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-	  }
-	
-	  var evtNames = ['click', 'mouseover', 'recenter'];
-	
-	  var wrappedPromise = function wrappedPromise() {
-	    var wrappedPromise = {},
-	        promise = new Promise(function (resolve, reject) {
-	      wrappedPromise.resolve = resolve;
-	      wrappedPromise.reject = reject;
-	    });
-	    wrappedPromise.then = promise.then.bind(promise);
-	    wrappedPromise.catch = promise.catch.bind(promise);
-	    wrappedPromise.promise = promise;
-	
-	    return wrappedPromise;
-	  };
-	
-	  var Marker = exports.Marker = function (_React$Component) {
-	    _inherits(Marker, _React$Component);
-	
-	    function Marker() {
-	      _classCallCheck(this, Marker);
-	
-	      return _possibleConstructorReturn(this, Object.getPrototypeOf(Marker).apply(this, arguments));
-	    }
-	
-	    _createClass(Marker, [{
-	      key: 'componentDidMount',
-	      value: function componentDidMount() {
-	        this.markerPromise = wrappedPromise();
-	        this.renderMarker();
-	      }
-	    }, {
-	      key: 'componentDidUpdate',
-	      value: function componentDidUpdate(prevProps) {
-	        if (this.props.map !== prevProps.map || this.props.position !== prevProps.position) {
-	          this.marker.setMap(null);
-	          this.renderMarker();
-	        }
-	      }
-	    }, {
-	      key: 'componentWillUnmount',
-	      value: function componentWillUnmount() {
-	        if (this.marker) {
-	          this.marker.setMap(null);
-	        }
-	      }
-	    }, {
-	      key: 'renderMarker',
-	      value: function renderMarker() {
-	        var _this2 = this;
-	
-	        var _props = this.props;
-	        var map = _props.map;
-	        var google = _props.google;
-	        var position = _props.position;
-	        var mapCenter = _props.mapCenter;
-	        var icon = _props.icon;
-	
-	        if (!google) {
-	          return null;
-	        }
-	
-	        var pos = position || mapCenter;
-	        if (!(pos instanceof google.maps.LatLng)) {
-	          position = new google.maps.LatLng(pos.lat, pos.lng);
-	        }
-	
-	        var pref = {
-	          map: map,
-	          position: position,
-	          icon: icon
-	        };
-	        this.marker = new google.maps.Marker(pref);
-	
-	        evtNames.forEach(function (e) {
-	          _this2.marker.addListener(e, _this2.handleEvent(e));
-	        });
-	
-	        this.markerPromise.resolve(this.marker);
-	      }
-	    }, {
-	      key: 'getMarker',
-	      value: function getMarker() {
-	        return this.markerPromise;
-	      }
-	    }, {
-	      key: 'handleEvent',
-	      value: function handleEvent(evt) {
-	        var _this3 = this;
-	
-	        return function (e) {
-	          var evtName = 'on' + (0, _String.camelize)(evt);
-	          if (_this3.props[evtName]) {
-	            _this3.props[evtName](_this3.props, _this3.marker, e);
-	          }
-	        };
-	      }
-	    }, {
-	      key: 'render',
-	      value: function render() {
-	        return null;
-	      }
-	    }]);
-	
-	    return Marker;
-	  }(_react2.default.Component);
-	
-	  Marker.propTypes = {
-	    position: _react.PropTypes.object,
-	    map: _react.PropTypes.object,
-	    icon: _react.PropTypes.string
-	  };
-	
-	  evtNames.forEach(function (e) {
-	    return Marker.propTypes[e] = _react.PropTypes.func;
-	  });
-	
-	  Marker.defaultProps = {
-	    name: 'Marker'
-	  };
-	
-	  exports.default = Marker;
-	});
-
-/***/ },
-/* 682 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
-	  if (true) {
-	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  } else if (typeof exports !== "undefined") {
-	    factory(exports);
-	  } else {
-	    var mod = {
-	      exports: {}
-	    };
-	    factory(mod.exports);
-	    global.String = mod.exports;
-	  }
-	})(this, function (exports) {
-	  'use strict';
-	
-	  Object.defineProperty(exports, "__esModule", {
-	    value: true
-	  });
-	  var camelize = exports.camelize = function camelize(str) {
-	    return str.split(' ').map(function (word) {
-	      return word.charAt(0).toUpperCase() + word.slice(1);
-	    }).join('');
-	  };
-	});
-
-/***/ },
-/* 683 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
-	  if (true) {
-	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(2), __webpack_require__(33), __webpack_require__(684)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  } else if (typeof exports !== "undefined") {
-	    factory(exports, require('react'), require('react-dom'), require('react-dom/server'));
-	  } else {
-	    var mod = {
-	      exports: {}
-	    };
-	    factory(mod.exports, global.react, global.reactDom, global.server);
-	    global.InfoWindow = mod.exports;
-	  }
-	})(this, function (exports, _react, _reactDom, _server) {
-	  'use strict';
-	
-	  Object.defineProperty(exports, "__esModule", {
-	    value: true
-	  });
-	  exports.InfoWindow = undefined;
-	
-	  var _react2 = _interopRequireDefault(_react);
-	
-	  var _reactDom2 = _interopRequireDefault(_reactDom);
-	
-	  var _server2 = _interopRequireDefault(_server);
-	
-	  function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : {
-	      default: obj
-	    };
-	  }
-	
-	  function _classCallCheck(instance, Constructor) {
-	    if (!(instance instanceof Constructor)) {
-	      throw new TypeError("Cannot call a class as a function");
-	    }
-	  }
-	
-	  var _createClass = function () {
-	    function defineProperties(target, props) {
-	      for (var i = 0; i < props.length; i++) {
-	        var descriptor = props[i];
-	        descriptor.enumerable = descriptor.enumerable || false;
-	        descriptor.configurable = true;
-	        if ("value" in descriptor) descriptor.writable = true;
-	        Object.defineProperty(target, descriptor.key, descriptor);
-	      }
-	    }
-	
-	    return function (Constructor, protoProps, staticProps) {
-	      if (protoProps) defineProperties(Constructor.prototype, protoProps);
-	      if (staticProps) defineProperties(Constructor, staticProps);
-	      return Constructor;
-	    };
-	  }();
-	
-	  function _possibleConstructorReturn(self, call) {
-	    if (!self) {
-	      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-	    }
-	
-	    return call && (typeof call === "object" || typeof call === "function") ? call : self;
-	  }
-	
-	  function _inherits(subClass, superClass) {
-	    if (typeof superClass !== "function" && superClass !== null) {
-	      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-	    }
-	
-	    subClass.prototype = Object.create(superClass && superClass.prototype, {
-	      constructor: {
-	        value: subClass,
-	        enumerable: false,
-	        writable: true,
-	        configurable: true
-	      }
-	    });
-	    if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-	  }
-	
-	  var InfoWindow = exports.InfoWindow = function (_React$Component) {
-	    _inherits(InfoWindow, _React$Component);
-	
-	    function InfoWindow() {
-	      _classCallCheck(this, InfoWindow);
-	
-	      return _possibleConstructorReturn(this, Object.getPrototypeOf(InfoWindow).apply(this, arguments));
-	    }
-	
-	    _createClass(InfoWindow, [{
-	      key: 'componentDidMount',
-	      value: function componentDidMount() {
-	        this.renderInfoWindow();
-	      }
-	    }, {
-	      key: 'componentDidUpdate',
-	      value: function componentDidUpdate(prevProps) {
-	        var _props = this.props;
-	        var google = _props.google;
-	        var map = _props.map;
-	
-	
-	        if (!google || !map) {
-	          return;
-	        }
-	
-	        if (map !== prevProps.map) {
-	          this.renderInfoWindow();
-	        }
-	
-	        if (this.props.children !== prevProps.children) {
-	          this.updateContent();
-	        }
-	
-	        if (this.props.visible !== prevProps.visible || this.props.marker !== prevProps.marker) {
-	          this.props.visible ? this.openWindow() : this.closeWindow();
-	        }
-	      }
-	    }, {
-	      key: 'renderInfoWindow',
-	      value: function renderInfoWindow() {
-	        var _props2 = this.props;
-	        var map = _props2.map;
-	        var google = _props2.google;
-	        var mapCenter = _props2.mapCenter;
-	
-	
-	        if (!google || !google.maps) {
-	          return;
-	        }
-	
-	        var iw = this.infowindow = new google.maps.InfoWindow({
-	          content: ''
-	        });
-	
-	        google.maps.event.addListener(iw, 'closeclick', this.onClose.bind(this));
-	        google.maps.event.addListener(iw, 'domready', this.onOpen.bind(this));
-	      }
-	    }, {
-	      key: 'onOpen',
-	      value: function onOpen() {
-	        if (this.props.onOpen) {
-	          this.props.onOpen();
-	        }
-	      }
-	    }, {
-	      key: 'onClose',
-	      value: function onClose() {
-	        if (this.props.onClose) {
-	          this.props.onClose();
-	        }
-	      }
-	    }, {
-	      key: 'openWindow',
-	      value: function openWindow() {
-	        this.infowindow.open(this.props.map, this.props.marker);
-	      }
-	    }, {
-	      key: 'updateContent',
-	      value: function updateContent() {
-	        var content = this.renderChildren();
-	        this.infowindow.setContent(content);
-	      }
-	    }, {
-	      key: 'closeWindow',
-	      value: function closeWindow() {
-	        this.infowindow.close();
-	      }
-	    }, {
-	      key: 'renderChildren',
-	      value: function renderChildren() {
-	        var children = this.props.children;
-	
-	        return _server2.default.renderToString(children);
-	      }
-	    }, {
-	      key: 'render',
-	      value: function render() {
-	        return null;
-	      }
-	    }]);
-	
-	    return InfoWindow;
-	  }(_react2.default.Component);
-	
-	  InfoWindow.propTypes = {
-	    children: _react.PropTypes.element.isRequired,
-	    map: _react.PropTypes.object,
-	    marker: _react.PropTypes.object,
-	    visible: _react.PropTypes.bool,
-	
-	    // callbacks
-	    onClose: _react.PropTypes.func,
-	    onOpen: _react.PropTypes.func
-	  };
-	
-	  InfoWindow.defaultProps = {
-	    visible: false
-	  };
-	
-	  exports.default = InfoWindow;
-	});
-
-/***/ },
-/* 684 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports = __webpack_require__(685);
-
-
-/***/ },
-/* 685 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-present, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 */
-	
-	'use strict';
-	
-	var ReactDefaultInjection = __webpack_require__(39);
-	var ReactServerRendering = __webpack_require__(686);
-	var ReactVersion = __webpack_require__(172);
-	
-	ReactDefaultInjection.inject();
-	
-	var ReactDOMServer = {
-	  renderToString: ReactServerRendering.renderToString,
-	  renderToStaticMarkup: ReactServerRendering.renderToStaticMarkup,
-	  version: ReactVersion
-	};
-	
-	module.exports = ReactDOMServer;
-
-/***/ },
-/* 686 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright 2013-present, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 */
-	'use strict';
-	
-	var _prodInvariant = __webpack_require__(36);
-	
-	var React = __webpack_require__(3);
-	var ReactDOMContainerInfo = __webpack_require__(168);
-	var ReactDefaultBatchingStrategy = __webpack_require__(141);
-	var ReactInstrumentation = __webpack_require__(63);
-	var ReactMarkupChecksum = __webpack_require__(170);
-	var ReactReconciler = __webpack_require__(60);
-	var ReactServerBatchingStrategy = __webpack_require__(687);
-	var ReactServerRenderingTransaction = __webpack_require__(134);
-	var ReactUpdates = __webpack_require__(57);
-	
-	var emptyObject = __webpack_require__(21);
-	var instantiateReactComponent = __webpack_require__(119);
-	var invariant = __webpack_require__(9);
-	
-	var pendingTransactions = 0;
-	
-	/**
-	 * @param {ReactElement} element
-	 * @return {string} the HTML markup
-	 */
-	function renderToStringImpl(element, makeStaticMarkup) {
-	  var transaction;
-	  try {
-	    ReactUpdates.injection.injectBatchingStrategy(ReactServerBatchingStrategy);
-	
-	    transaction = ReactServerRenderingTransaction.getPooled(makeStaticMarkup);
-	
-	    pendingTransactions++;
-	
-	    return transaction.perform(function () {
-	      var componentInstance = instantiateReactComponent(element, true);
-	      var markup = ReactReconciler.mountComponent(componentInstance, transaction, null, ReactDOMContainerInfo(), emptyObject, 0 /* parentDebugID */
-	      );
-	      if (process.env.NODE_ENV !== 'production') {
-	        ReactInstrumentation.debugTool.onUnmountComponent(componentInstance._debugID);
-	      }
-	      if (!makeStaticMarkup) {
-	        markup = ReactMarkupChecksum.addChecksumToMarkup(markup);
-	      }
-	      return markup;
-	    }, null);
-	  } finally {
-	    pendingTransactions--;
-	    ReactServerRenderingTransaction.release(transaction);
-	    // Revert to the DOM batching strategy since these two renderers
-	    // currently share these stateful modules.
-	    if (!pendingTransactions) {
-	      ReactUpdates.injection.injectBatchingStrategy(ReactDefaultBatchingStrategy);
-	    }
-	  }
-	}
-	
-	/**
-	 * Render a ReactElement to its initial HTML. This should only be used on the
-	 * server.
-	 * See https://facebook.github.io/react/docs/top-level-api.html#reactdomserver.rendertostring
-	 */
-	function renderToString(element) {
-	  !React.isValidElement(element) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'renderToString(): You must pass a valid ReactElement.') : _prodInvariant('46') : void 0;
-	  return renderToStringImpl(element, false);
-	}
-	
-	/**
-	 * Similar to renderToString, except this doesn't create extra DOM attributes
-	 * such as data-react-id that React uses internally.
-	 * See https://facebook.github.io/react/docs/top-level-api.html#reactdomserver.rendertostaticmarkup
-	 */
-	function renderToStaticMarkup(element) {
-	  !React.isValidElement(element) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'renderToStaticMarkup(): You must pass a valid ReactElement.') : _prodInvariant('47') : void 0;
-	  return renderToStringImpl(element, true);
-	}
-	
-	module.exports = {
-	  renderToString: renderToString,
-	  renderToStaticMarkup: renderToStaticMarkup
-	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
-
-/***/ },
-/* 687 */
-/***/ function(module, exports) {
-
-	/**
-	 * Copyright 2014-present, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 */
-	
-	'use strict';
-	
-	var ReactServerBatchingStrategy = {
-	  isBatchingUpdates: false,
-	  batchedUpdates: function (callback) {
-	    // Don't do anything here. During the server rendering we don't want to
-	    // schedule any updates. We will simply ignore them.
-	  }
-	};
-	
-	module.exports = ReactServerBatchingStrategy;
-
-/***/ },
-/* 688 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
-	  if (true) {
-	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  } else if (typeof exports !== "undefined") {
-	    factory(exports);
-	  } else {
-	    var mod = {
-	      exports: {}
-	    };
-	    factory(mod.exports);
-	    global.cancelablePromise = mod.exports;
-	  }
-	})(this, function (exports) {
-	  "use strict";
-	
-	  Object.defineProperty(exports, "__esModule", {
-	    value: true
-	  });
-	  // https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html
-	
-	  var makeCancelable = exports.makeCancelable = function makeCancelable(promise) {
-	    var hasCanceled_ = false;
-	
-	    var wrappedPromise = new Promise(function (resolve, reject) {
-	      promise.then(function (val) {
-	        return hasCanceled_ ? reject({ isCanceled: true }) : resolve(val);
-	      });
-	      promise.catch(function (error) {
-	        return hasCanceled_ ? reject({ isCanceled: true }) : reject(error);
-	      });
-	    });
-	
-	    return {
-	      promise: wrappedPromise,
-	      cancel: function cancel() {
-	        hasCanceled_ = true;
-	      }
-	    };
-	  };
-	});
-
-/***/ },
-/* 689 */
+/* 698 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67288,11 +68940,11 @@
 	  value: true
 	});
 	
-	var _core = __webpack_require__(690);
+	var _core = __webpack_require__(699);
 	
-	var _helpers = __webpack_require__(691);
+	var _helpers = __webpack_require__(700);
 	
-	var _defaults = __webpack_require__(694);
+	var _defaults = __webpack_require__(703);
 	
 	var _defaults2 = _interopRequireDefault(_defaults);
 	
@@ -67395,7 +69047,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 690 */
+/* 699 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67405,9 +69057,9 @@
 	});
 	exports.printBuffer = printBuffer;
 	
-	var _helpers = __webpack_require__(691);
+	var _helpers = __webpack_require__(700);
 	
-	var _diff = __webpack_require__(692);
+	var _diff = __webpack_require__(701);
 	
 	var _diff2 = _interopRequireDefault(_diff);
 	
@@ -67536,7 +69188,7 @@
 	}
 
 /***/ },
-/* 691 */
+/* 700 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -67560,7 +69212,7 @@
 	var timer = exports.timer = typeof performance !== "undefined" && performance !== null && typeof performance.now === "function" ? performance : Date;
 
 /***/ },
-/* 692 */
+/* 701 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67570,7 +69222,7 @@
 	});
 	exports.default = diffLogger;
 	
-	var _deepDiff = __webpack_require__(693);
+	var _deepDiff = __webpack_require__(702);
 	
 	var _deepDiff2 = _interopRequireDefault(_deepDiff);
 	
@@ -67656,7 +69308,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 693 */
+/* 702 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -68085,7 +69737,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 694 */
+/* 703 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -68136,7 +69788,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 695 */
+/* 704 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68147,11 +69799,11 @@
 	
 	var _redux = __webpack_require__(187);
 	
-	var _coordinatesReducer = __webpack_require__(696);
+	var _coordinatesReducer = __webpack_require__(705);
 	
 	var _coordinatesReducer2 = _interopRequireDefault(_coordinatesReducer);
 	
-	var _formsReducer = __webpack_require__(699);
+	var _formsReducer = __webpack_require__(708);
 	
 	var _formsReducer2 = _interopRequireDefault(_formsReducer);
 	
@@ -68165,7 +69817,7 @@
 	exports.default = combinedReducer;
 
 /***/ },
-/* 696 */
+/* 705 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68176,13 +69828,13 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var _constants = __webpack_require__(697);
+	var _constants = __webpack_require__(706);
 	
 	var c = _interopRequireWildcard(_constants);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
-	var log = __webpack_require__(698);
+	var log = __webpack_require__(707);
 	
 	log.debug('--> entering coordinatesReducer.js');
 	
@@ -68238,7 +69890,7 @@
 	exports.default = coordinatesReducer;
 
 /***/ },
-/* 697 */
+/* 706 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -68254,7 +69906,7 @@
 	var FORM_ITEM_RESET = exports.FORM_ITEM_RESET = 'FORM_ITEM_RESET';
 
 /***/ },
-/* 698 */
+/* 707 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -68483,7 +70135,7 @@
 
 
 /***/ },
-/* 699 */
+/* 708 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68492,7 +70144,7 @@
 	  value: true
 	});
 	
-	var _constants = __webpack_require__(697);
+	var _constants = __webpack_require__(706);
 	
 	var c = _interopRequireWildcard(_constants);
 	
@@ -68500,7 +70152,7 @@
 	
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
-	var log = __webpack_require__(698);
+	var log = __webpack_require__(707);
 	
 	log.debug('--> entering formsReducer.js');
 	
@@ -68533,7 +70185,7 @@
 	exports.default = formsReducer;
 
 /***/ },
-/* 700 */
+/* 709 */
 /***/ function(module, exports) {
 
 	'use strict';
