@@ -1,6 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
 
-const _version = '2016-12-12 11:58';
+const _version = '2016-12-12 12:22 - rateForm';
 
 import React from 'react';
 import MainAppBar from './MainAppBar';
