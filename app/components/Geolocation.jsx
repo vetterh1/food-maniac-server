@@ -7,6 +7,11 @@ import Popover from 'material-ui/Popover';
 
 
 const styles = {
+
+  Popover: {
+    padding: '1em',
+  },
+
   locationOK: {
     color: 'green',
   },
@@ -26,7 +31,7 @@ class GeolocationDisplay extends React.Component {
   static propTypes = {
     latitude: React.PropTypes.number,
     longitude: React.PropTypes.number,
-    real: React.PropTypes.boolean,
+    real: React.PropTypes.bool,
     nbRefreshes: React.PropTypes.number,
     nbDiffs: React.PropTypes.number,
     nbReal: React.PropTypes.number,
@@ -36,11 +41,11 @@ class GeolocationDisplay extends React.Component {
 
   constructor() {
     super();
+    this.handleTouchTap = this.handleTouchTap.bind(this);
 
     this.state = {
       open: false,
     };
-    // this._handleClick = this._handleClick.bind(this);
   }
 
   handleTouchTap = (event) => {
@@ -67,6 +72,7 @@ class GeolocationDisplay extends React.Component {
           onTouchTap={this.handleTouchTap}
         />
         <Popover
+          style={styles.Popover}
           open={this.state.open}
           anchorEl={this.state.anchorEl}
           anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}

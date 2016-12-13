@@ -9,7 +9,7 @@ import TestComponent from './TestComponent';
 import TestClass from './TestClass';
 
 import Login from './Login';
-import ChooseLocation from './ChooseLocation';
+import ChooseLocation from './TestChooseLocation';
 
 const NotFound = () => <h1>404 error - This page is not found!</h1>;
 

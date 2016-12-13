@@ -1,13 +1,12 @@
 import React from 'react';
-import Geosuggest from 'react-geosuggest';
-import ChooseLocation from './ChooseLocation';
+import SelectCurrentLocation from '../containers/SelectCurrentLocation';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Rating from 'react-rating';
 import Formsy from 'formsy-react';
 import { FormsyCheckbox, FormsyDate, FormsyRadio, FormsyRadioGroup,
           FormsySelect, FormsyText, FormsyTime, FormsyToggle, FormsyAutoComplete } from 'formsy-material-ui/lib';
 import Paper from 'material-ui/Paper';
-import MenuItem from 'material-ui/MenuItem';
+// import MenuItem from 'material-ui/MenuItem';
 import { GridList, GridTile } from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
@@ -15,7 +14,7 @@ import FlatButton from 'material-ui/FlatButton';
 import IconStar from 'material-ui/svg-icons/toggle/star';
 import IconStarBorder from 'material-ui/svg-icons/toggle/star-border';
 import IconSearch from 'material-ui/svg-icons/action/search';
-import IconLocation from 'material-ui/svg-icons/communication/location-on';
+// import IconLocation from 'material-ui/svg-icons/communication/location-on';
 
 const styles = {
   paperStyle: {
@@ -129,19 +128,8 @@ class Rate extends React.Component {
             onInvalidSubmit={this.notifyFormError}
           >
             <h3>Where?</h3>
-            <Geosuggest />
-            <ChooseLocation />
-            <FormsySelect
-              name="where"
-              required
-              floatingLabelText="Where did you eat?"
-            >
-              <MenuItem value={'home'} primaryText="Home" />
-              <MenuItem value={'place1'} primaryText="Place 1" />
-              <MenuItem value={'place2'} primaryText="Place 2" />
-              <MenuItem value={'place3'} primaryText="Place 3" />
-            </FormsySelect>
-
+            <SelectCurrentLocation />
+    
             <h3>What?</h3>
             <GridList
               cellHeight={180}
