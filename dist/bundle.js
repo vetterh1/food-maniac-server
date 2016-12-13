@@ -21523,19 +21523,19 @@
 	
 	var _Rate2 = _interopRequireDefault(_Rate);
 	
-	var _TestComponent = __webpack_require__(684);
+	var _TestComponent = __webpack_require__(685);
 	
 	var _TestComponent2 = _interopRequireDefault(_TestComponent);
 	
-	var _TestClass = __webpack_require__(685);
+	var _TestClass = __webpack_require__(686);
 	
 	var _TestClass2 = _interopRequireDefault(_TestClass);
 	
-	var _Login = __webpack_require__(686);
+	var _Login = __webpack_require__(687);
 	
 	var _Login2 = _interopRequireDefault(_Login);
 	
-	var _TestChooseLocation = __webpack_require__(688);
+	var _TestChooseLocation = __webpack_require__(689);
 	
 	var _TestChooseLocation2 = _interopRequireDefault(_TestChooseLocation);
 	
@@ -28180,7 +28180,7 @@
 	
 	/* eslint-disable react/prefer-stateless-function */
 	
-	var _version = '2016-12-12 21:00 - geoTest';
+	var _version = '2016-12-13 21:00 - geoTest';
 	
 	var styles = {
 	  pageContainer: {
@@ -46779,6 +46779,7 @@
 	
 	// import Subheader from 'material-ui/Subheader';
 	
+	// import IconLocation from 'material-ui/svg-icons/communication/location-on';
 	
 	var _react = __webpack_require__(2);
 	
@@ -46828,6 +46829,10 @@
 	
 	var _search2 = _interopRequireDefault(_search);
 	
+	var _DisplayPositionFromStore = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../tests/DisplayPositionFromStore\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
+	var _DisplayPositionFromStore2 = _interopRequireDefault(_DisplayPositionFromStore);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -46835,8 +46840,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	// import IconLocation from 'material-ui/svg-icons/communication/location-on';
 	
 	var styles = {
 	  paperStyle: {
@@ -47074,7 +47077,8 @@
 	              null,
 	              'Picture'
 	            )
-	          )
+	          ),
+	          _react2.default.createElement(_DisplayPositionFromStore2.default, null)
 	        )
 	      );
 	    }
@@ -67141,7 +67145,8 @@
 	exports.default = ActionSearch;
 
 /***/ },
-/* 684 */
+/* 684 */,
+/* 685 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67190,7 +67195,7 @@
 	exports.default = TestComponent;
 
 /***/ },
-/* 685 */
+/* 686 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67219,7 +67224,7 @@
 	exports.default = TestClass;
 
 /***/ },
-/* 686 */
+/* 687 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67234,7 +67239,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _FacebookLogin = __webpack_require__(687);
+	var _FacebookLogin = __webpack_require__(688);
 	
 	var _FacebookLogin2 = _interopRequireDefault(_FacebookLogin);
 	
@@ -67303,7 +67308,7 @@
 	exports.default = Login;
 
 /***/ },
-/* 687 */
+/* 688 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67409,7 +67414,7 @@
 	exports.default = FacebookLogin;
 
 /***/ },
-/* 688 */
+/* 689 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67426,7 +67431,7 @@
 	
 	var _Geolocation2 = _interopRequireDefault(_Geolocation);
 	
-	var _DisplayPositionFromStore = __webpack_require__(689);
+	var _DisplayPositionFromStore = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../tests/DisplayPositionFromStore\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	
 	var _DisplayPositionFromStore2 = _interopRequireDefault(_DisplayPositionFromStore);
 	
@@ -67447,73 +67452,6 @@
 	};
 	
 	exports.default = ChooseLocation;
-
-/***/ },
-/* 689 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRedux = __webpack_require__(180);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var DisplayPositionFromStore = _react2.default.createClass({
-	  displayName: 'DisplayPositionFromStore',
-	
-	
-	  getInitialState: function getInitialState() {
-	    return {
-	      nbChanges: 0
-	    };
-	  },
-	
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    this.setState({
-	      nbChanges: this.state.nbChanges + 1
-	    });
-	  },
-	
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      'DisplayPositionFromStore test ==> latitude: ',
-	      this.props.coordinates.latitude,
-	      ' - longitude: ',
-	      this.props.coordinates.longitude,
-	      ' (real: ',
-	      this.props.coordinates.real === true ? "yes" : "no",
-	      ', changed: ',
-	      this.props.coordinates.changed === true ? "yes" : "no",
-	      ' - state nb changes: ',
-	      this.state.nbChanges,
-	      ')'
-	    );
-	  }
-	});
-	
-	var mapStateToProps = function mapStateToProps(state) {
-	  // console.log("{   DisplayPositionFromStore.mapStateToProps (dpms)" );
-	  // console.log("       (dpms) state:", state);
-	
-	  var result = {
-	    coordinates: state.coordinates
-	  };
-	  // console.log("       (dpms) result:", result);
-	  // console.log("}   DisplayPositionFromStore.mapStateToProps" );
-	  return result;
-	};
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps)(DisplayPositionFromStore);
 
 /***/ },
 /* 690 */
@@ -67689,6 +67627,7 @@
 	  return {};
 	};
 	
+	// export default connect(mapStateToProps, mapDispatchToProps)(PlacesContainer);
 	var PlacesContainerWrapped = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(PlacesContainer);
 	exports.default = (0, _googleMapsReact.GoogleApiWrapper)({ apiKey: __GAPI_KEY__ })(PlacesContainerWrapped);
 	
