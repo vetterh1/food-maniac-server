@@ -79,9 +79,10 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	var composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || _redux.compose;
 	var reduxMiddleware = (0, _redux.applyMiddleware)(_reduxThunk2.default, (0, _reduxLogger2.default)());
 	
-	var store = (0, _redux.createStore)(_combinedReducer2.default, (0, _redux.compose)(reduxMiddleware));
+	var store = (0, _redux.createStore)(_combinedReducer2.default, composeEnhancers(reduxMiddleware));
 	
 	(0, _reactDom.render)(_react2.default.createElement(_Root2.default, { store: store }), document.getElementById('app'));
 
@@ -21534,6 +21535,10 @@
 	
 	var _Login2 = _interopRequireDefault(_Login);
 	
+	var _ChooseLocation = __webpack_require__(558);
+	
+	var _ChooseLocation2 = _interopRequireDefault(_ChooseLocation);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var NotFound = function NotFound() {
@@ -21557,6 +21562,7 @@
 	        { path: '/', component: _App2.default },
 	        _react2.default.createElement(_reactRouter.IndexRoute, { component: _MainChoiceContainer2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: '/rate', component: _Rate2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: '/where', component: _ChooseLocation2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _Login2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: '/testClass', component: _TestClass2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: '/testComponent', component: _TestComponent2.default }),
@@ -30203,11 +30209,11 @@
 	 * MIT License | (c) Dustin Diaz 2015
 	 */
 	
-	!function (root, name, definition) {
+	!function (name, definition) {
 	  if (typeof module != 'undefined' && module.exports) module.exports = definition()
 	  else if (true) __webpack_require__(293)(name, definition)
-	  else root[name] = definition()
-	}(this, 'bowser', function () {
+	  else this[name] = definition()
+	}('bowser', function () {
 	  /**
 	    * See useragents.js for examples of navigator.userAgent
 	    */
@@ -48751,11 +48757,6 @@
 	  return _react2.default.createElement(
 	    'div',
 	    null,
-	    _react2.default.createElement(
-	      'h1',
-	      null,
-	      'Choose location'
-	    ),
 	    _react2.default.createElement(_Geolocation2.default, null),
 	    _react2.default.createElement(_DisplayPositionFromStore2.default, null),
 	    _react2.default.createElement(_PlacesContainer2.default, null)
@@ -49138,14 +49139,16 @@
 	  onMapReady: function onMapReady(mapProps, map) {
 	    console.log('!!! onMapReady.mapProps: ', mapProps);
 	    console.log('!!! onMapReady.map: ', map);
-	    undefined.searchNearby(map, map.center);
+	    this.searchNearby(map, map.center);
 	  },
 	
 	  searchNearby: function searchNearby(map, center) {
+	    var _this = this;
+	
 	    console.log('{   PlacesContainer.searchNearby (pcs)');
 	    console.log('       (pcs) center:', center);
 	    console.log('       (pcs) map:', map);
-	    var google = undefined.props.google;
+	    var google = this.props.google;
 	
 	    var service = new google.maps.places.PlacesService(map);
 	    // Specify location, radius and place types for your Places API search.
@@ -49157,8 +49160,8 @@
 	
 	    service.nearbySearch(request, function (results, status, pagination) {
 	      if (status === google.maps.places.PlacesServiceStatus.OK) {
-	        undefined.pagination = pagination;
-	        undefined.setState({
+	        _this.pagination = pagination;
+	        _this.setState({
 	          places: results,
 	          hasNextPage: pagination.hasNextPage,
 	          center: center
@@ -49171,21 +49174,21 @@
 	  onMapRecentered: function onMapRecentered(mapProps, map) {
 	    console.log('!!! onMapRecentered.mapProps: ', mapProps);
 	    console.log('!!! onMapRecentered.map: ', map);
-	    undefined.searchNearby(map, map.center);
+	    this.searchNearby(map, map.center);
 	  },
 	
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
 	    console.log('{   PlacesContainer.componentWillReceiveProps (cwrp)');
 	    console.log('       (cwrp) nextProps: ', nextProps);
-	    var nbRenders = undefined.state.nbRenders + 1;
-	    undefined.setState({ nbRenders: nbRenders });
+	    var nbRenders = this.state.nbRenders + 1;
+	    this.setState({ nbRenders: nbRenders });
 	    console.log('}   PlacesContainer.componentWillReceiveProps (cwrp)');
 	  },
 	
 	  render: function render() {
 	    console.log('{   PlacesContainer.render (pcr)');
-	    console.log('       (pcr) state:', undefined.state);
-	    console.log('       (pcr) props:', undefined.props);
+	    console.log('       (pcr) state:', this.state);
+	    console.log('       (pcr) props:', this.props);
 	
 	    var style = {
 	      width: '80%',
@@ -49193,7 +49196,7 @@
 	    };
 	
 	    //    if (!this.state || !this.state.center) {
-	    if (!undefined.props.loaded) {
+	    if (!this.props.loaded) {
 	      console.log('       returns loading msg');
 	      console.log('}   PlacesContainer.render');
 	      return _react2.default.createElement(
@@ -49209,17 +49212,17 @@
 	      _react2.default.createElement(
 	        _googleMapsReact2.default,
 	        {
-	          google: undefined.props.google,
+	          google: this.props.google,
 	          className: 'map',
-	          onReady: undefined.onMapReady,
+	          onReady: this.onMapReady,
 	          visible: false,
-	          center: undefined.props.position,
-	          onRecenter: undefined.onMapRecentered
+	          center: this.props.position,
+	          onRecenter: this.onMapRecentered
 	        },
-	        _react2.default.createElement(Listing, { places: undefined.state.places })
+	        _react2.default.createElement(Listing, { places: this.state.places })
 	      ),
 	      'nbRenders: ',
-	      undefined.state.nbRenders
+	      this.state.nbRenders
 	    );
 	    console.log('}   PlacesContainer.render');
 	    return result;

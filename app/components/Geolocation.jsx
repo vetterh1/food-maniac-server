@@ -2,36 +2,101 @@ import React, { Component } from 'react';
 // import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as LocationActions from '../actions/LocationActions';
-
-const GeolocationDisplay = props =>
-  <div>
-    <div className="geolocation_display {props.real ? geolocation_display_ok : geolocation_display_ko}">
-      Latitude: {props.latitude ? props.latitude : 'unknown'}<br />
-      Longitude: {props.longitude ? props.longitude : 'unknown'}<br />
-      {/* Real: {props.real?"true":"false"} */}
-    </div>
-    <div className="geolocation_statistics">
-      Statistics:
-      <ul>
-        <li>Nb refreshes: {props.nbRefreshes}</li>
-        <li>Nb different positions: {props.nbDiffs}</li>
-        <li>Nb real positions: {props.nbReal}</li>
-        <li>Nb estimated positions: {props.nbEstimated}</li>
-        <li>Last error code: {props.errorCode}</li>
-      </ul>
-    </div>
-  </div>;
+import IconLocation from 'material-ui/svg-icons/communication/location-on';
+import Popover from 'material-ui/Popover';
 
 
-GeolocationDisplay.propTypes = {
-  latitude: React.PropTypes.number,
-  longitude: React.PropTypes.number,
-  nbRefreshes: React.PropTypes.number,
-  nbDiffs: React.PropTypes.number,
-  nbReal: React.PropTypes.number,
-  nbEstimated: React.PropTypes.number,
-  errorCode: React.PropTypes.number,
+const styles = {
+  locationOK: {
+    color: 'green',
+  },
+
+  locationKO: {
+    color: 'red',
+  },
+
+  statistics: {
+    color: 'grey',
+    marginTop: 40,
+  },
 };
+
+
+class GeolocationDisplay extends React.Component {
+  static propTypes = {
+    latitude: React.PropTypes.number,
+    longitude: React.PropTypes.number,
+    real: React.PropTypes.boolean,
+    nbRefreshes: React.PropTypes.number,
+    nbDiffs: React.PropTypes.number,
+    nbReal: React.PropTypes.number,
+    nbEstimated: React.PropTypes.number,
+    errorCode: React.PropTypes.number,
+  }
+
+  constructor() {
+    super();
+
+    this.state = {
+      open: false,
+    };
+    // this._handleClick = this._handleClick.bind(this);
+  }
+
+  handleTouchTap = (event) => {
+    // This prevents ghost click.
+    event.preventDefault();
+
+    this.setState({
+      open: true,
+      anchorEl: event.currentTarget,
+    });
+  };
+
+  handleRequestClose = () => {
+    this.setState({
+      open: false,
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <IconLocation
+          style={this.props.real ? styles.locationOK : styles.locationKO}
+          onTouchTap={this.handleTouchTap}
+        />
+        <Popover
+          open={this.state.open}
+          anchorEl={this.state.anchorEl}
+          anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+          targetOrigin={{ horizontal: 'left', vertical: 'top' }}
+          onRequestClose={this.handleRequestClose}
+        >
+          <div className="geolocation_statistics">
+            Coordinates:
+            <ul>
+              <li>Latitude: {this.props.latitude ? this.props.latitude : 'unknown'}</li>
+              <li>Longitude: {this.props.longitude ? this.props.longitude : 'unknown'}</li>
+              <li>Real: {this.props.real ? 'true' : 'false'}</li>
+            </ul>
+          </div>
+
+          <div className="geolocation_statistics">
+            Statistics:
+            <ul>
+              <li>Nb refreshes: {this.props.nbRefreshes}</li>
+              <li>Nb different positions: {this.props.nbDiffs}</li>
+              <li>Nb real positions: {this.props.nbReal}</li>
+              <li>Nb estimated positions: {this.props.nbEstimated}</li>
+              <li>Last error code: {this.props.errorCode}</li>
+            </ul>
+          </div>
+        </Popover>
+      </div>
+    );
+  }
+}
 
 
 
