@@ -36,8 +36,9 @@ const styles = {
     bottom: 0,
   },
   map: {
-    width: '10px',
-    height: '10px',
+    margin: '1em',
+    width: '100%',
+    height: '400px',
   },
 };
 
@@ -124,11 +125,13 @@ const PlacesContainer = React.createClass({
     console.log('       (pcr) props:', this.props);
 
 
+    if (!this.state || !this.state.center || !this.props.position.lat) {
 //    if (!this.state || !this.state.center) {
-    if (!this.props.loaded) {
+//    if (!this.props.loaded || !this.props.position.lat ) {
+//    if (!this.props.loaded ) {
       console.log('       returns loading msg');
       console.log('}   PlacesContainer.render');
-      return <div>Loading...</div>;
+      return <div><Geolocation style="{styles.geolocation}" />Loading...</div>;
     }
 
     const result = (
