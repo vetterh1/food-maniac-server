@@ -30209,11 +30209,11 @@
 	 * MIT License | (c) Dustin Diaz 2015
 	 */
 	
-	!function (name, definition) {
+	!function (root, name, definition) {
 	  if (typeof module != 'undefined' && module.exports) module.exports = definition()
 	  else if (true) __webpack_require__(293)(name, definition)
-	  else this[name] = definition()
-	}('bowser', function () {
+	  else root[name] = definition()
+	}(this, 'bowser', function () {
 	  /**
 	    * See useragents.js for examples of navigator.userAgent
 	    */
@@ -47158,8 +47158,9 @@
 	    bottom: 0
 	  },
 	  map: {
-	    width: '10px',
-	    height: '10px'
+	    margin: '1em',
+	    width: '100%',
+	    height: '400px'
 	  }
 	};
 	
@@ -47255,13 +47256,16 @@
 	    console.log('       (pcr) state:', this.state);
 	    console.log('       (pcr) props:', this.props);
 	
-	    //    if (!this.state || !this.state.center) {
-	    if (!this.props.loaded) {
+	    if (!this.state || !this.state.center || !this.props.position.lat) {
+	      //    if (!this.state || !this.state.center) {
+	      //    if (!this.props.loaded || !this.props.position.lat ) {
+	      //    if (!this.props.loaded ) {
 	      console.log('       returns loading msg');
 	      console.log('}   PlacesContainer.render');
 	      return _react2.default.createElement(
 	        'div',
 	        null,
+	        _react2.default.createElement(_Geolocation2.default, { style: '{styles.geolocation}' }),
 	        'Loading...'
 	      );
 	    }

@@ -141,6 +141,7 @@ const mapDispatchToProps = function(dispatch) {
   };
 };
 
+// export default connect(mapStateToProps, mapDispatchToProps)(PlacesContainer);
 const PlacesContainerWrapped = connect(mapStateToProps, mapDispatchToProps)(PlacesContainer);
 export default GoogleApiWrapper({ apiKey: __GAPI_KEY__ })(PlacesContainerWrapped);
 
