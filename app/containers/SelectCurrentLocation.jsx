@@ -64,7 +64,7 @@ const Listing = ({ places }) => {
 
 // @connect(mapStateToProps, mapDispatchToProps)
 
-const PlacesContainer = React.createClass({
+const SelectCurrentLocation = React.createClass({
 
   getInitialState: function() {
     return {
@@ -80,7 +80,7 @@ const PlacesContainer = React.createClass({
   },
 
   searchNearby: function(map, center) {
-    console.log('{   PlacesContainer.searchNearby (pcs)');
+    console.log('{   SelectCurrentLocation.searchNearby (pcs)');
     console.log('       (pcs) center:', center);
     console.log('       (pcs) map:', map);
     const { google } = this.props;
@@ -102,7 +102,7 @@ const PlacesContainer = React.createClass({
         });
       }
     });
-    console.log('}   PlacesContainer.searchNearby (pcs)');
+    console.log('}   SelectCurrentLocation.searchNearby (pcs)');
   },
 
   onMapRecentered: function(mapProps, map) {
@@ -111,28 +111,29 @@ const PlacesContainer = React.createClass({
     this.searchNearby(map, map.center);
   },
 
+  // 2nd to receive store changes
   componentWillReceiveProps: function(nextProps) {
-    console.log('{   PlacesContainer.componentWillReceiveProps (cwrp)');
+    console.log('{   SelectCurrentLocation.componentWillReceiveProps (cwrp)');
     console.log('       (cwrp) nextProps: ', nextProps);
     const nbRenders = this.state.nbRenders + 1;
     this.setState({ nbRenders });
-    console.log('}   PlacesContainer.componentWillReceiveProps (cwrp)');
+    console.log('}   SelectCurrentLocation.componentWillReceiveProps (cwrp)');
   },
 
   render: function() {
-    console.log('{   PlacesContainer.render (pcr)');
+    console.log('{   SelectCurrentLocation.render (pcr)');
     console.log('       (pcr) state:', this.state);
     console.log('       (pcr) props:', this.props);
 
 
-should check why listing ko 
+// should check why listing ko
 
 //    if (!this.state || !this.state.center || !this.props.position.lat) {
 //    if (!this.state || !this.state.center) {
-    if (!this.props.loaded || !this.props.position.lat ) {
-//    if (!this.props.loaded ) {
+//    if (!this.props.loaded || !this.props.position.lat ) {
+    if (!this.props.loaded ) {
       console.log('       returns loading msg');
-      console.log('}   PlacesContainer.render');
+      console.log('}   SelectCurrentLocation.render');
       return <div><Geolocation style="{styles.geolocation}" />Loading...</div>;
     }
 
@@ -145,7 +146,7 @@ should check why listing ko
               google={this.props.google}
               className={'map'}
               onReady={this.onMapReady}
-              visible={false}
+              visible={true}
               center={this.props.position}
               onRecenter={this.onMapRecentered}
             />
@@ -160,35 +161,38 @@ should check why listing ko
         />
       </div>
     );
-    console.log('}   PlacesContainer.render');
+    console.log('}   SelectCurrentLocation.render');
     return result;
   },
 
 });
 
+// 1st to receive store changes
+// Role of mapStateToProps: transform the "interesting" part of the store state
+// into some props that will be received by componentWillReceiveProps
 const mapStateToProps = function(state) {
-  console.log('{   PlacesContainer.mapStateToProps (pcms)');
+  console.log('{   SelectCurrentLocation.mapStateToProps (pcms)');
   console.log('       (pcms) state:', state);
   const result = {
     // center: [state.coordinates.latitude, state.coordinates.longitude]
     position: { lat: state.coordinates.latitude, lng: state.coordinates.longitude }
   };
   console.log('       (pcms) result:', result);
-  console.log('}   PlacesContainer.mapStateToProps');
+  console.log('}   SelectCurrentLocation.mapStateToProps');
   return result;
 };
 
 const mapDispatchToProps = function(dispatch) {
-  console.log('{   PlacesContainer.mapDispatchToProps (pcmd)');
+  console.log('{   SelectCurrentLocation.mapDispatchToProps (pcmd)');
   console.log('       (pcmd) dispatch:', dispatch);
-  console.log('}   PlacesContainer.mapDispatchToProps (pcmd)');
+  console.log('}   SelectCurrentLocation.mapDispatchToProps (pcmd)');
   return {
   };
 };
 
-const PlacesContainerWrapped = connect(mapStateToProps, mapDispatchToProps)(PlacesContainer);
-export default GoogleApiWrapper({ apiKey: __GAPI_KEY__ })(PlacesContainerWrapped);
+const SelectCurrentLocationWrapped = connect(mapStateToProps, mapDispatchToProps)(SelectCurrentLocation);
+export default GoogleApiWrapper({ apiKey: __GAPI_KEY__ })(SelectCurrentLocationWrapped);
 
 // Works too! :
-// let PlacesContainerWrapped = GoogleApiWrapper({apiKey: __GAPI_KEY__})(PlacesContainer);
-// export default connect(mapStateToProps, mapDispatchToProps)(PlacesContainerWrapped);
+// let SelectCurrentLocationWrapped = GoogleApiWrapper({apiKey: __GAPI_KEY__})(SelectCurrentLocation);
+// export default connect(mapStateToProps, mapDispatchToProps)(SelectCurrentLocationWrapped);

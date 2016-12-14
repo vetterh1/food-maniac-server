@@ -16,7 +16,7 @@ import IconStarBorder from 'material-ui/svg-icons/toggle/star-border';
 import IconSearch from 'material-ui/svg-icons/action/search';
 // import IconLocation from 'material-ui/svg-icons/communication/location-on';
 
-import DisplayPositionFromStore from '../tests/DisplayPositionFromStore';
+import TestDisplayPositionFromStore from '../tests/TestDisplayPositionFromStore';
 
 
 const styles = {
@@ -212,7 +212,7 @@ class Rate extends React.Component {
 
           </Formsy.Form>
   
-          <DisplayPositionFromStore />
+          <TestDisplayPositionFromStore />
 
         </Paper>
       </MuiThemeProvider>
