@@ -38,7 +38,6 @@
     "formsy-material-ui": "^0.5.3",
     "formsy-react": "^0.18.1",
     "fs": "0.0.1-security",
-    "google-maps-react": "^1.0.18",
     "http-server": "^0.9.0",
     "if-env": "^1.0.0",
     "loglevel": "^1.4.1",
