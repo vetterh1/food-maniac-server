@@ -1,5 +1,6 @@
 import React from 'react';
-import SelectCurrentLocation from '../containers/SelectCurrentLocation';
+// import SelectCurrentLocation from '../containers/SelectCurrentLocation';
+import SelectLocation from './SelectLocation';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Rating from 'react-rating';
 import Formsy from 'formsy-react';
@@ -131,7 +132,7 @@ class Rate extends React.Component {
             onInvalidSubmit={this.notifyFormError}
           >
             <h3>Where?</h3>
-            <SelectCurrentLocation />
+            <SelectLocation />
     
             <h3>What?</h3>
             <GridList

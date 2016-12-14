@@ -30209,11 +30209,11 @@
 	 * MIT License | (c) Dustin Diaz 2015
 	 */
 	
-	!function (name, definition) {
+	!function (root, name, definition) {
 	  if (typeof module != 'undefined' && module.exports) module.exports = definition()
 	  else if (true) __webpack_require__(293)(name, definition)
-	  else this[name] = definition()
-	}('bowser', function () {
+	  else root[name] = definition()
+	}(this, 'bowser', function () {
 	  /**
 	    * See useragents.js for examples of navigator.userAgent
 	    */
@@ -35315,13 +35315,17 @@
 	        onKeyUp: this.handleKeyUp,
 	        onKeyDown: this.handleKeyDown,
 	        onTouchTap: this.handleTouchTap,
-	        tabIndex: tabIndex,
-	        type: type
+	        tabIndex: disabled || disableKeyboardFocus ? -1 : tabIndex
 	      });
+	
 	      var buttonChildren = this.createButtonChildren();
 	
 	      if (_react2.default.isValidElement(containerElement)) {
 	        return _react2.default.cloneElement(containerElement, buttonProps, buttonChildren);
+	      }
+	
+	      if (!href && containerElement === 'button') {
+	        buttonProps.type = type;
 	      }
 	
 	      return _react2.default.createElement(href ? 'a' : containerElement, buttonProps, buttonChildren);
@@ -42097,6 +42101,7 @@
 	  }).filter(function (t) {
 	    return t;
 	  });
+	
 	  muiTheme.prepareStyles = _compose2.default.apply(undefined, (0, _toConsumableArray3.default)(transformers));
 	
 	  return muiTheme;
@@ -44970,13 +44975,29 @@
 	    hasWarnedAboutUserAgent = true;
 	  }
 	
+	  var isServer = typeof window === 'undefined';
+	
 	  if (userAgent === false) {
 	    // Disabled autoprefixer
 	    return null;
 	  } else if (userAgent === 'all' || userAgent === undefined) {
 	    // Prefix for all user agent
 	    return function (style) {
-	      return _inlineStylePrefixer2.default.prefixAll(style);
+	      var isFlex = false;
+	
+	      if (isServer) {
+	        isFlex = ['flex', 'inline-flex'].indexOf(style.display) !== -1;
+	      }
+	
+	      var stylePrefixed = _inlineStylePrefixer2.default.prefixAll(style);
+	
+	      // We can't apply this join with react-dom:
+	      // #https://github.com/facebook/react/issues/6467
+	      if (isFlex) {
+	        stylePrefixed.display = stylePrefixed.display.join('; display: ');
+	      }
+	
+	      return stylePrefixed;
 	    };
 	  } else {
 	    var _ret = function () {
@@ -47851,7 +47872,8 @@
 	
 	      if (!animated) {
 	        styleRoot = {
-	          position: 'fixed'
+	          position: 'fixed',
+	          zIndex: _this.context.muiTheme.zIndex.popover
 	        };
 	
 	        if (!_this.state.open) {
@@ -47860,7 +47882,7 @@
 	
 	        return _react2.default.createElement(
 	          _Paper2.default,
-	          (0, _extends3.default)({ style: (0, _simpleAssign2.default)({}, styleRoot, style) }, other),
+	          (0, _extends3.default)({ style: (0, _simpleAssign2.default)(styleRoot, style) }, other),
 	          children
 	        );
 	      }
@@ -48164,8 +48186,8 @@
 	   * This is the point on the anchor where the popover's
 	   * `targetOrigin` will attach to.
 	   * Options:
-	   * vertical: [top, middle, bottom];
-	   * horizontal: [left, center, right].
+	   * vertical: [top, center, bottom]
+	   * horizontal: [left, middle, right].
 	   */
 	  anchorOrigin: _propTypes2.default.origin,
 	  /**
@@ -48214,8 +48236,8 @@
 	   * This is the point on the popover which will attach to
 	   * the anchor's origin.
 	   * Options:
-	   * vertical: [top, middle, bottom];
-	   * horizontal: [left, center, right].
+	   * vertical: [top, center, bottom]
+	   * horizontal: [left, middle, right].
 	   */
 	  targetOrigin: _propTypes2.default.origin,
 	  /**
@@ -49249,11 +49271,11 @@
 	
 	  return {
 	    root: {
+	      position: 'fixed',
+	      zIndex: muiTheme.zIndex.popover,
 	      opacity: open ? 1 : 0,
 	      transform: open ? 'scale(1, 1)' : 'scale(0, 0)',
 	      transformOrigin: horizontal + ' ' + targetOrigin.vertical,
-	      position: 'fixed',
-	      zIndex: muiTheme.zIndex.popover,
 	      transition: _transitions2.default.easeOut('250ms', ['transform', 'opacity']),
 	      maxHeight: '100%'
 	    },
@@ -49423,11 +49445,11 @@
 	
 	  return {
 	    root: {
+	      position: 'fixed',
+	      zIndex: muiTheme.zIndex.popover,
 	      opacity: open ? 1 : 0,
 	      transform: open ? 'scaleY(1)' : 'scaleY(0)',
 	      transformOrigin: horizontal + ' ' + targetOrigin.vertical,
-	      position: 'fixed',
-	      zIndex: muiTheme.zIndex.popover,
 	      transition: _transitions2.default.easeOut('450ms', ['transform', 'opacity']),
 	      maxHeight: '100%'
 	    }
@@ -52501,6 +52523,7 @@
 	      var date = (0, _dateUtils.cloneDate)(_this.state.selectedDate);
 	      date.setFullYear(year);
 	      _this.setSelectedDate(date, event);
+	      _this.handleTouchTapDateDisplayMonthDay();
 	    }, _this.handleTouchTapDateDisplayMonthDay = function () {
 	      _this.setState({
 	        displayMonthDay: true
@@ -55938,8 +55961,6 @@
 	      appearance: 'textfield' }
 	  };
 	
-	  (0, _simpleAssign2.default)(styles.error, props.errorStyle);
-	
 	  styles.textarea = (0, _simpleAssign2.default)({}, styles.input, {
 	    marginTop: props.floatingLabelText ? 36 : 12,
 	    marginBottom: props.floatingLabelText ? -36 : -12,
@@ -56005,10 +56026,14 @@
 	      hasValue: false
 	    }, _this.handleInputBlur = function (event) {
 	      _this.setState({ isFocused: false });
-	      if (_this.props.onBlur) _this.props.onBlur(event);
+	      if (_this.props.onBlur) {
+	        _this.props.onBlur(event);
+	      }
 	    }, _this.handleInputChange = function (event) {
 	      _this.setState({ hasValue: isValid(event.target.value) });
-	      if (_this.props.onChange) _this.props.onChange(event, event.target.value);
+	      if (_this.props.onChange) {
+	        _this.props.onChange(event, event.target.value);
+	      }
 	    }, _this.handleInputFocus = function (event) {
 	      if (_this.props.disabled) {
 	        return;
@@ -56078,17 +56103,23 @@
 	  }, {
 	    key: 'blur',
 	    value: function blur() {
-	      if (this.input) this.getInputNode().blur();
+	      if (this.input) {
+	        this.getInputNode().blur();
+	      }
 	    }
 	  }, {
 	    key: 'focus',
 	    value: function focus() {
-	      if (this.input) this.getInputNode().focus();
+	      if (this.input) {
+	        this.getInputNode().focus();
+	      }
 	    }
 	  }, {
 	    key: 'select',
 	    value: function select() {
-	      if (this.input) this.getInputNode().select();
+	      if (this.input) {
+	        this.getInputNode().select();
+	      }
 	    }
 	  }, {
 	    key: 'getValue',
@@ -56118,6 +56149,7 @@
 	          errorText = _props2.errorText,
 	          floatingLabelFixed = _props2.floatingLabelFixed,
 	          floatingLabelFocusStyle = _props2.floatingLabelFocusStyle,
+	          floatingLabelShrinkStyle = _props2.floatingLabelShrinkStyle,
 	          floatingLabelStyle = _props2.floatingLabelStyle,
 	          floatingLabelText = _props2.floatingLabelText,
 	          fullWidth = _props2.fullWidth,
@@ -56138,7 +56170,7 @@
 	          rows = _props2.rows,
 	          rowsMax = _props2.rowsMax,
 	          textareaStyle = _props2.textareaStyle,
-	          other = (0, _objectWithoutProperties3.default)(_props2, ['children', 'className', 'disabled', 'errorStyle', 'errorText', 'floatingLabelFixed', 'floatingLabelFocusStyle', 'floatingLabelStyle', 'floatingLabelText', 'fullWidth', 'hintText', 'hintStyle', 'id', 'inputStyle', 'multiLine', 'onBlur', 'onChange', 'onFocus', 'style', 'type', 'underlineDisabledStyle', 'underlineFocusStyle', 'underlineShow', 'underlineStyle', 'rows', 'rowsMax', 'textareaStyle']);
+	          other = (0, _objectWithoutProperties3.default)(_props2, ['children', 'className', 'disabled', 'errorStyle', 'errorText', 'floatingLabelFixed', 'floatingLabelFocusStyle', 'floatingLabelShrinkStyle', 'floatingLabelStyle', 'floatingLabelText', 'fullWidth', 'hintText', 'hintStyle', 'id', 'inputStyle', 'multiLine', 'onBlur', 'onChange', 'onFocus', 'style', 'type', 'underlineDisabledStyle', 'underlineFocusStyle', 'underlineShow', 'underlineStyle', 'rows', 'rowsMax', 'textareaStyle']);
 	      var prepareStyles = this.context.muiTheme.prepareStyles;
 	
 	      var styles = getStyles(this.props, this.context, this.state);
@@ -56146,7 +56178,7 @@
 	
 	      var errorTextElement = this.state.errorText && _react2.default.createElement(
 	        'div',
-	        { style: prepareStyles(styles.error) },
+	        { style: prepareStyles((0, _simpleAssign2.default)(styles.error, errorStyle)) },
 	        this.state.errorText
 	      );
 	
@@ -56155,6 +56187,7 @@
 	        {
 	          muiTheme: this.context.muiTheme,
 	          style: (0, _simpleAssign2.default)(styles.floatingLabel, floatingLabelStyle, this.state.isFocused ? floatingLabelFocusStyle : null),
+	          shrinkStyle: floatingLabelShrinkStyle,
 	          htmlFor: inputId,
 	          shrink: this.state.hasValue || this.state.isFocused || floatingLabelFixed,
 	          disabled: disabled
@@ -56273,6 +56306,10 @@
 	   * The style object to use to override floating label styles when focused.
 	   */
 	  floatingLabelFocusStyle: _react.PropTypes.object,
+	  /**
+	   * The style object to use to override floating label styles when shrunk.
+	   */
+	  floatingLabelShrinkStyle: _react.PropTypes.object,
 	  /**
 	   * The style object to use to override floating label styles.
 	   */
@@ -56798,7 +56835,7 @@
 	   */
 	  shrink: _react.PropTypes.bool,
 	  /**
-	   * Override the inline-styles of the root element when focused.
+	   * Override the inline-styles of the root element when shrunk.
 	   */
 	  shrinkStyle: _react.PropTypes.object,
 	  /**
@@ -56905,7 +56942,9 @@
 	
 	  var styles = {
 	    root: {
-	      border: 'none',
+	      borderTop: 'none',
+	      borderLeft: 'none',
+	      borderRight: 'none',
 	      borderBottom: 'solid 1px',
 	      borderColor: borderColor,
 	      bottom: 8,
@@ -57915,13 +57954,14 @@
 	          hintText = _props.hintText,
 	          fullWidth = _props.fullWidth,
 	          errorText = _props.errorText,
+	          listStyle = _props.listStyle,
 	          maxHeight = _props.maxHeight,
 	          menuStyle = _props.menuStyle,
 	          onFocus = _props.onFocus,
 	          onBlur = _props.onBlur,
 	          onChange = _props.onChange,
 	          value = _props.value,
-	          other = (0, _objectWithoutProperties3.default)(_props, ['autoWidth', 'children', 'style', 'labelStyle', 'iconStyle', 'id', 'underlineDisabledStyle', 'underlineFocusStyle', 'underlineStyle', 'errorStyle', 'disabled', 'floatingLabelFixed', 'floatingLabelText', 'floatingLabelStyle', 'hintStyle', 'hintText', 'fullWidth', 'errorText', 'maxHeight', 'menuStyle', 'onFocus', 'onBlur', 'onChange', 'value']);
+	          other = (0, _objectWithoutProperties3.default)(_props, ['autoWidth', 'children', 'style', 'labelStyle', 'iconStyle', 'id', 'underlineDisabledStyle', 'underlineFocusStyle', 'underlineStyle', 'errorStyle', 'disabled', 'floatingLabelFixed', 'floatingLabelText', 'floatingLabelStyle', 'hintStyle', 'hintText', 'fullWidth', 'errorText', 'listStyle', 'maxHeight', 'menuStyle', 'onFocus', 'onBlur', 'onChange', 'value']);
 	
 	
 	      var styles = getStyles(this.props, this.context);
@@ -57954,6 +57994,7 @@
 	            labelStyle: (0, _simpleAssign2.default)(styles.label, labelStyle),
 	            iconStyle: (0, _simpleAssign2.default)(styles.icon, iconStyle),
 	            underlineStyle: styles.hideDropDownUnderline,
+	            listStyle: listStyle,
 	            autoWidth: autoWidth,
 	            value: value,
 	            onChange: onChange,
@@ -58036,6 +58077,10 @@
 	   * Override the label style when the select field is inactive.
 	   */
 	  labelStyle: _react.PropTypes.object,
+	  /**
+	   * Override the inline-styles of the underlying `List` element.
+	   */
+	  listStyle: _react.PropTypes.object,
 	  /**
 	   * Override the default max-height of the underlying `DropDownMenu` element.
 	   */
@@ -58207,11 +58252,14 @@
 	    label: {
 	      color: disabled ? palette.disabledColor : palette.textColor,
 	      lineHeight: spacing.desktopToolbarHeight + 'px',
+	      overflow: 'hidden',
 	      opacity: 1,
 	      position: 'relative',
 	      paddingLeft: spacing.desktopGutter,
 	      paddingRight: spacing.iconSize + spacing.desktopGutterLess + spacing.desktopGutterMini,
-	      top: 0
+	      textOverflow: 'ellipsis',
+	      top: 0,
+	      whiteSpace: 'nowrap'
 	    },
 	    labelWhenOpen: {
 	      opacity: 0,
@@ -58268,12 +58316,19 @@
 	      _this.setState({
 	        open: false,
 	        anchorEl: null
+	      }, function () {
+	        if (_this.props.onClose) {
+	          _this.props.onClose();
+	        }
 	      });
 	    }, _this.handleItemTouchTap = function (event, child, index) {
 	      event.persist();
 	      _this.setState({
 	        open: false
 	      }, function () {
+	        if (_this.props.onClose) {
+	          _this.props.onClose();
+	        }
 	        if (_this.props.onChange) {
 	          _this.props.onChange(event, index, child.props.value);
 	        }
@@ -58362,11 +58417,12 @@
 	          listStyle = _props.listStyle,
 	          maxHeight = _props.maxHeight,
 	          menuStyleProp = _props.menuStyle,
+	          onClose = _props.onClose,
 	          openImmediately = _props.openImmediately,
 	          style = _props.style,
 	          underlineStyle = _props.underlineStyle,
 	          value = _props.value,
-	          other = (0, _objectWithoutProperties3.default)(_props, ['animated', 'animation', 'autoWidth', 'children', 'className', 'iconStyle', 'labelStyle', 'listStyle', 'maxHeight', 'menuStyle', 'openImmediately', 'style', 'underlineStyle', 'value']);
+	          other = (0, _objectWithoutProperties3.default)(_props, ['animated', 'animation', 'autoWidth', 'children', 'className', 'iconStyle', 'labelStyle', 'listStyle', 'maxHeight', 'menuStyle', 'onClose', 'openImmediately', 'style', 'underlineStyle', 'value']);
 	      var _state = this.state,
 	          anchorEl = _state.anchorEl,
 	          open = _state.open;
@@ -58508,6 +58564,10 @@
 	   * @param {any} payload The `value` prop of the clicked menu item.
 	   */
 	  onChange: _react.PropTypes.func,
+	  /**
+	   * Callback function fired when the menu is closed.
+	   */
+	  onClose: _react.PropTypes.func,
 	  /**
 	   * Set to true to have the `DropDownMenu` automatically open on mount.
 	   */
@@ -58931,6 +58991,13 @@
 	      }
 	    }
 	  }, {
+	    key: 'cancelScrollEvent',
+	    value: function cancelScrollEvent(event) {
+	      event.stopPropagation();
+	      event.preventDefault();
+	      return false;
+	    }
+	  }, {
 	    key: 'setWidth',
 	    value: function setWidth() {
 	      var el = _reactDom2.default.findDOMNode(this);
@@ -59001,6 +59068,7 @@
 	          'div',
 	          {
 	            onKeyDown: this.handleKeyDown,
+	            onWheel: this.handleOnWheel,
 	            style: prepareStyles(mergedRootStyles),
 	            ref: 'scrollContainer'
 	          },
@@ -59078,6 +59146,27 @@
 	        }
 	    }
 	    _this5.props.onKeyDown(event);
+	  };
+	
+	  this.handleOnWheel = function (event) {
+	    var scrollContainer = _this5.refs.scrollContainer;
+	    // Only scroll lock if the the Menu is scrollable.
+	    if (scrollContainer.scrollHeight <= scrollContainer.clientHeight) return;
+	
+	    var scrollTop = scrollContainer.scrollTop,
+	        scrollHeight = scrollContainer.scrollHeight,
+	        clientHeight = scrollContainer.clientHeight;
+	
+	    var wheelDelta = event.deltaY;
+	    var isDeltaPositive = wheelDelta > 0;
+	
+	    if (isDeltaPositive && wheelDelta > scrollHeight - clientHeight - scrollTop) {
+	      scrollContainer.scrollTop = scrollHeight;
+	      return _this5.cancelScrollEvent(event);
+	    } else if (!isDeltaPositive && -wheelDelta > scrollTop) {
+	      scrollContainer.scrollTop = 0;
+	      return _this5.cancelScrollEvent(event);
+	    }
 	  };
 	};
 	
@@ -59388,9 +59477,7 @@
 	
 	      var styles = {
 	        root: {
-	          padding: 0,
-	          paddingBottom: 8,
-	          paddingTop: hasSubheader ? 0 : 8
+	          padding: (hasSubheader ? 0 : 8) + 'px 0px 8px 0px'
 	        }
 	      };
 	
@@ -59872,7 +59959,7 @@
 	function getStyles(props, context) {
 	  var disabledColor = context.muiTheme.baseTheme.palette.disabledColor;
 	  var textColor = context.muiTheme.baseTheme.palette.textColor;
-	  var leftIndent = props.desktop ? 64 : 72;
+	  var indent = props.desktop ? 64 : 72;
 	  var sidePadding = props.desktop ? 24 : 16;
 	
 	  var styles = {
@@ -59886,8 +59973,8 @@
 	    },
 	
 	    innerDivStyle: {
-	      paddingLeft: props.leftIcon || props.insetChildren || props.checked ? leftIndent : sidePadding,
-	      paddingRight: sidePadding,
+	      paddingLeft: props.leftIcon || props.insetChildren || props.checked ? indent : sidePadding,
+	      paddingRight: props.rightIcon ? indent : sidePadding,
 	      paddingBottom: 0,
 	      paddingTop: 0
 	    },
@@ -60744,7 +60831,6 @@
 	          (0, _extends3.default)({
 	            containerElement: 'span'
 	          }, other, {
-	            disabled: disabled,
 	            disableKeyboardFocus: disableKeyboardFocus || this.state.rightIconButtonKeyboardFocused,
 	            onKeyboardFocus: this.handleKeyboardFocus,
 	            onMouseLeave: this.handleMouseLeave,
@@ -63981,17 +64067,19 @@
 	      var chosenRequest = dataSource[index];
 	      var searchText = _this.chosenRequestText(chosenRequest);
 	
-	      _this.timerTouchTapCloseId = setTimeout(function () {
-	        _this.timerTouchTapCloseId = null;
-	
-	        _this.setState({
-	          searchText: searchText
+	      _this.setState({
+	        searchText: searchText
+	      }, function () {
+	        _this.props.onUpdateInput(searchText, _this.props.dataSource, {
+	          source: 'touchTap'
 	        });
-	        _this.close();
 	
-	        _this.props.onUpdateInput(searchText, dataSource);
-	        _this.props.onNewRequest(chosenRequest, index);
-	      }, _this.props.menuCloseDelay);
+	        _this.timerTouchTapCloseId = setTimeout(function () {
+	          _this.timerTouchTapCloseId = null;
+	          _this.close();
+	          _this.props.onNewRequest(chosenRequest, index);
+	        }, _this.props.menuCloseDelay);
+	      });
 	    }, _this.chosenRequestText = function (chosenRequest) {
 	      if (typeof chosenRequest === 'string') {
 	        return chosenRequest;
@@ -64042,11 +64130,15 @@
 	        open: true,
 	        anchorEl: _reactDom2.default.findDOMNode(_this.refs.searchTextField)
 	      }, function () {
-	        _this.props.onUpdateInput(searchText, _this.props.dataSource);
+	        _this.props.onUpdateInput(searchText, _this.props.dataSource, {
+	          source: 'change'
+	        });
 	      });
 	    }, _this.handleBlur = function (event) {
 	      if (_this.state.focusTextField && _this.timerTouchTapCloseId === null) {
-	        _this.close();
+	        _this.timerBlurClose = setTimeout(function () {
+	          _this.close();
+	        }, 0);
 	      }
 	
 	      if (_this.props.onBlur) {
@@ -64093,6 +64185,7 @@
 	    key: 'componentWillUnmount',
 	    value: function componentWillUnmount() {
 	      clearTimeout(this.timerTouchTapCloseId);
+	      clearTimeout(this.timerBlurClose);
 	    }
 	  }, {
 	    key: 'close',
@@ -64101,6 +64194,10 @@
 	        open: false,
 	        anchorEl: null
 	      });
+	
+	      if (this.props.onClose) {
+	        this.props.onClose();
+	      }
 	    }
 	  }, {
 	    key: 'blur',
@@ -64137,12 +64234,13 @@
 	          menuProps = _props.menuProps,
 	          listStyle = _props.listStyle,
 	          targetOrigin = _props.targetOrigin,
+	          onClose = _props.onClose,
 	          onNewRequest = _props.onNewRequest,
 	          onUpdateInput = _props.onUpdateInput,
 	          openOnFocus = _props.openOnFocus,
 	          popoverProps = _props.popoverProps,
 	          searchTextProp = _props.searchText,
-	          other = (0, _objectWithoutProperties3.default)(_props, ['anchorOrigin', 'animated', 'animation', 'dataSource', 'dataSourceConfig', 'disableFocusRipple', 'errorStyle', 'floatingLabelText', 'filter', 'fullWidth', 'style', 'hintText', 'maxSearchResults', 'menuCloseDelay', 'textFieldStyle', 'menuStyle', 'menuProps', 'listStyle', 'targetOrigin', 'onNewRequest', 'onUpdateInput', 'openOnFocus', 'popoverProps', 'searchText']);
+	          other = (0, _objectWithoutProperties3.default)(_props, ['anchorOrigin', 'animated', 'animation', 'dataSource', 'dataSourceConfig', 'disableFocusRipple', 'errorStyle', 'floatingLabelText', 'filter', 'fullWidth', 'style', 'hintText', 'maxSearchResults', 'menuCloseDelay', 'textFieldStyle', 'menuStyle', 'menuProps', 'listStyle', 'targetOrigin', 'onClose', 'onNewRequest', 'onUpdateInput', 'openOnFocus', 'popoverProps', 'searchText']);
 	
 	      var _ref2 = popoverProps || {},
 	          popoverStyle = _ref2.style,
@@ -64382,6 +64480,10 @@
 	  menuStyle: _react.PropTypes.object,
 	  /** @ignore */
 	  onBlur: _react.PropTypes.func,
+	  /**
+	   * Callback function fired when the menu is closed.
+	   */
+	  onClose: _react.PropTypes.func,
 	  /** @ignore */
 	  onFocus: _react.PropTypes.func,
 	  /** @ignore */
@@ -64400,6 +64502,7 @@
 	   *
 	   * @param {string} searchText The auto-complete's `searchText` value.
 	   * @param {array} dataSource The auto-complete's `dataSource` array.
+	   * @param {object} params Additional information linked the update.
 	   */
 	  onUpdateInput: _react.PropTypes.func,
 	  /**

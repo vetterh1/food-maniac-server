@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+/*import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setCurrentLocation } from '../actions/LocationActions';
 import Map, { GoogleApiWrapper } from 'google-maps-react';
@@ -148,3 +148,4 @@ export default GoogleApiWrapper({ apiKey: __GAPI_KEY__ })(PlacesContainerWrapped
 // Works too! :
 // let PlacesContainerWrapped = GoogleApiWrapper({apiKey: __GAPI_KEY__})(PlacesContainer);
 // export default connect(mapStateToProps, mapDispatchToProps)(PlacesContainerWrapped);
+*/
