@@ -79,8 +79,26 @@ const SelectLocation = React.createClass({
     console.log('       (cwrp) nextProps: ', nextProps);
     const nbRenders = this.state.nbRenders + 1;
     this.setState({ nbRenders });
+
+    const service = new google.maps.places.AutocompleteService();
+    service.getQueryPredictions({ input: 'pizza near Syd' }, this.displaySuggestions);
+
+
     console.log('}   SelectLocation.componentWillReceiveProps (cwrp)');
   },
+
+
+  displaySuggestions: (predictions, status) => {
+    if (status != google.maps.places.PlacesServiceStatus.OK) {
+      alert(status);
+      return;
+    }
+
+    predictions.forEach((prediction) => {
+      console.log(prediction.description);
+    });
+  },
+
 
   render: function() {
     console.log('{   SelectLocation.render (pcr)');
@@ -98,6 +116,9 @@ const SelectLocation = React.createClass({
       <div style={styles.div}>
         <div style={styles.mapDiv1}>
           <div style={styles.mapDiv2}>
+
+
+
             --map--
           </div>
         </div>

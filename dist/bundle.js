@@ -46796,6 +46796,8 @@
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _class, _temp;
+	// import SelectCurrentLocation from '../containers/SelectCurrentLocation';
+	
 	// import MenuItem from 'material-ui/MenuItem';
 	
 	// import Subheader from 'material-ui/Subheader';
@@ -46806,9 +46808,9 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _SelectCurrentLocation = __webpack_require__(547);
+	var _SelectLocation = __webpack_require__(547);
 	
-	var _SelectCurrentLocation2 = _interopRequireDefault(_SelectCurrentLocation);
+	var _SelectLocation2 = _interopRequireDefault(_SelectLocation);
 	
 	var _MuiThemeProvider = __webpack_require__(545);
 	
@@ -46983,7 +46985,7 @@
 	              null,
 	              'Where?'
 	            ),
-	            _react2.default.createElement(_SelectCurrentLocation2.default, null),
+	            _react2.default.createElement(_SelectLocation2.default, null),
 	            _react2.default.createElement(
 	              'h3',
 	              null,
@@ -47141,10 +47143,6 @@
 	
 	var _LocationActions = __webpack_require__(548);
 	
-	var _googleMapsReact = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"google-maps-react\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-	
-	var _googleMapsReact2 = _interopRequireDefault(_googleMapsReact);
-	
 	var _Geolocation = __webpack_require__(549);
 	
 	var _Geolocation2 = _interopRequireDefault(_Geolocation);
@@ -47216,8 +47214,8 @@
 	
 	// @connect(mapStateToProps, mapDispatchToProps)
 	
-	var SelectCurrentLocation = _react2.default.createClass({
-	  displayName: 'SelectCurrentLocation',
+	var SelectLocation = _react2.default.createClass({
+	  displayName: 'SelectLocation',
 	
 	
 	  getInitialState: function getInitialState() {
@@ -47227,77 +47225,41 @@
 	    };
 	  },
 	
-	  onMapReady: function onMapReady(mapProps, map) {
-	    console.log('!!! onMapReady.mapProps: ', mapProps);
-	    console.log('!!! onMapReady.map: ', map);
-	    this.searchNearby(map, map.center);
-	  },
-	
-	  searchNearby: function searchNearby(map, center) {
-	    var _this = this;
-	
-	    console.log('{   SelectCurrentLocation.searchNearby (pcs)');
-	    console.log('       (pcs) center:', center);
-	    console.log('       (pcs) map:', map);
-	    var google = this.props.google;
-	
-	    var service = new google.maps.places.PlacesService(map);
-	    // Specify location, radius and place types for your Places API search.
-	    var request = {
-	      location: center,
-	      radius: '1000',
-	      type: ['food']
-	    };
-	
-	    service.nearbySearch(request, function (results, status, pagination) {
-	      if (status === google.maps.places.PlacesServiceStatus.OK) {
-	        _this.pagination = pagination;
-	        _this.setState({
-	          places: results,
-	          hasNextPage: pagination.hasNextPage,
-	          center: center
-	        });
-	      }
-	    });
-	    console.log('}   SelectCurrentLocation.searchNearby (pcs)');
-	  },
-	
-	  onMapRecentered: function onMapRecentered(mapProps, map) {
-	    console.log('!!! onMapRecentered.mapProps: ', mapProps);
-	    console.log('!!! onMapRecentered.map: ', map);
-	    this.searchNearby(map, map.center);
-	  },
-	
 	  // 2nd to receive store changes
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    console.log('{   SelectCurrentLocation.componentWillReceiveProps (cwrp)');
+	    console.log('{   SelectLocation.componentWillReceiveProps (cwrp)');
 	    console.log('       (cwrp) nextProps: ', nextProps);
 	    var nbRenders = this.state.nbRenders + 1;
 	    this.setState({ nbRenders: nbRenders });
-	    console.log('}   SelectCurrentLocation.componentWillReceiveProps (cwrp)');
+	
+	    var service = new google.maps.places.AutocompleteService();
+	    service.getQueryPredictions({ input: 'pizza near Syd' }, this.displaySuggestions);
+	
+	    console.log('}   SelectLocation.componentWillReceiveProps (cwrp)');
+	  },
+	
+	  displaySuggestions: function displaySuggestions(predictions, status) {
+	    if (status != google.maps.places.PlacesServiceStatus.OK) {
+	      alert(status);
+	      return;
+	    }
+	
+	    predictions.forEach(function (prediction) {
+	      console.log(prediction.description);
+	    });
 	  },
 	
 	  render: function render() {
-	    console.log('{   SelectCurrentLocation.render (pcr)');
+	    console.log('{   SelectLocation.render (pcr)');
 	    console.log('       (pcr) state:', this.state);
 	    console.log('       (pcr) props:', this.props);
 	
-	    // should check why listing ko
-	
-	    //    if (!this.state || !this.state.center || !this.props.position.lat) {
-	    //    if (!this.state || !this.state.center) {
-	    //    if (!this.props.loaded || !this.props.position.lat ) {
-	    if (!this.props.loaded) {
-	      console.log('       returns loading msg');
-	      console.log('}   SelectCurrentLocation.render');
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(_Geolocation2.default, { style: '{styles.geolocation}' }),
-	        'Loading...'
-	      );
-	    }
-	
+	    /*    if (!this.props.loaded ) {
+	          console.log('       returns loading msg');
+	          console.log('}   SelectLocation.render');
+	          return <div><Geolocation style="{styles.geolocation}" />Loading...</div>;
+	        }
+	    */
 	    var result = _react2.default.createElement(
 	      'div',
 	      { style: styles.div },
@@ -47307,15 +47269,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { style: styles.mapDiv2 },
-	          _react2.default.createElement(_googleMapsReact2.default, {
-	            style: styles.map,
-	            google: this.props.google,
-	            className: 'map',
-	            onReady: this.onMapReady,
-	            visible: true,
-	            center: this.props.position,
-	            onRecenter: this.onMapRecentered
-	          })
+	          '--map--'
 	        )
 	      ),
 	      _react2.default.createElement(Listing, {
@@ -47326,7 +47280,7 @@
 	        style: styles.geolocation
 	      })
 	    );
-	    console.log('}   SelectCurrentLocation.render');
+	    console.log('}   SelectLocation.render');
 	    return result;
 	  }
 	
@@ -47336,30 +47290,25 @@
 	// Role of mapStateToProps: transform the "interesting" part of the store state
 	// into some props that will be received by componentWillReceiveProps
 	var mapStateToProps = function mapStateToProps(state) {
-	  console.log('{   SelectCurrentLocation.mapStateToProps (pcms)');
+	  console.log('{   SelectLocation.mapStateToProps (pcms)');
 	  console.log('       (pcms) state:', state);
 	  var result = {
 	    // center: [state.coordinates.latitude, state.coordinates.longitude]
 	    position: { lat: state.coordinates.latitude, lng: state.coordinates.longitude }
 	  };
 	  console.log('       (pcms) result:', result);
-	  console.log('}   SelectCurrentLocation.mapStateToProps');
+	  console.log('}   SelectLocation.mapStateToProps');
 	  return result;
 	};
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  console.log('{   SelectCurrentLocation.mapDispatchToProps (pcmd)');
+	  console.log('{   SelectLocation.mapDispatchToProps (pcmd)');
 	  console.log('       (pcmd) dispatch:', dispatch);
-	  console.log('}   SelectCurrentLocation.mapDispatchToProps (pcmd)');
+	  console.log('}   SelectLocation.mapDispatchToProps (pcmd)');
 	  return {};
 	};
 	
-	var SelectCurrentLocationWrapped = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SelectCurrentLocation);
-	exports.default = (0, _googleMapsReact.GoogleApiWrapper)({ apiKey: __GAPI_KEY__ })(SelectCurrentLocationWrapped);
-	
-	// Works too! :
-	// let SelectCurrentLocationWrapped = GoogleApiWrapper({apiKey: __GAPI_KEY__})(SelectCurrentLocation);
-	// export default connect(mapStateToProps, mapDispatchToProps)(SelectCurrentLocationWrapped);
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SelectLocation);
 
 /***/ },
 /* 548 */
@@ -66227,163 +66176,135 @@
 
 /***/ },
 /* 678 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRedux = __webpack_require__(180);
-	
-	var _LocationActions = __webpack_require__(548);
-	
-	var _googleMapsReact = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"google-maps-react\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-	
-	var _googleMapsReact2 = _interopRequireDefault(_googleMapsReact);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var __GAPI_KEY__ = 'AIzaSyAPbswfvaojeQVe9eE-0CtZ4iEtWia9KO0';
-	
-	var Listing = function Listing(_ref) {
-	  var places = _ref.places;
-	
+	/*import React, { Component } from 'react';
+	import { connect } from 'react-redux';
+	import { setCurrentLocation } from '../actions/LocationActions';
+	import Map, { GoogleApiWrapper } from 'google-maps-react';
+
+	const __GAPI_KEY__ = 'AIzaSyAPbswfvaojeQVe9eE-0CtZ4iEtWia9KO0';
+
+	const Listing = ({ places }) => {
 	  console.log('   {   Listing.render (lr)');
 	  console.log('          (lr) places: ', places);
-	
-	  var result = _react2.default.createElement(
-	    'ul',
-	    null,
-	    places && places.map(function (p) {
-	      return _react2.default.createElement(
-	        'li',
-	        { key: p.id },
-	        p.name
-	      );
-	    })
+
+	  const result = (
+	    <ul>
+	      {places && places.map((p) => {
+	        return (
+	          <li key={p.id}>
+	            {p.name}
+	          </li>
+	        );
+	      })}
+	    </ul>
 	  );
-	
+
 	  console.log('   }   Listing.render');
 	  return result;
 	};
-	
+
+
 	// @connect(mapStateToProps, mapDispatchToProps)
-	
-	var PlacesContainer = _react2.default.createClass({
-	  displayName: 'PlacesContainer',
-	
-	
-	  getInitialState: function getInitialState() {
+
+	const PlacesContainer = React.createClass({
+
+	  getInitialState: function() {
 	    return {
 	      places: [],
 	      nbRenders: 0
 	    };
 	  },
-	
-	  onMapReady: function onMapReady(mapProps, map) {
+
+	  onMapReady: function(mapProps, map) {
 	    console.log('!!! onMapReady.mapProps: ', mapProps);
 	    console.log('!!! onMapReady.map: ', map);
 	    this.searchNearby(map, map.center);
 	  },
-	
-	  searchNearby: function searchNearby(map, center) {
-	    var _this = this;
-	
+
+	  searchNearby: function(map, center) {
 	    console.log('{   PlacesContainer.searchNearby (pcs)');
 	    console.log('       (pcs) center:', center);
 	    console.log('       (pcs) map:', map);
-	    var google = this.props.google;
-	
-	    var service = new google.maps.places.PlacesService(map);
+	    const { google } = this.props;
+	    const service = new google.maps.places.PlacesService(map);
 	    // Specify location, radius and place types for your Places API search.
-	    var request = {
-	      location: center,
-	      radius: '1000',
-	      type: ['food']
-	    };
-	
-	    service.nearbySearch(request, function (results, status, pagination) {
+	    const request = {
+	       location: center,
+	       radius: '1000',
+	       type: ['food']
+	     };
+
+	    service.nearbySearch(request, (results, status, pagination) => {
 	      if (status === google.maps.places.PlacesServiceStatus.OK) {
-	        _this.pagination = pagination;
-	        _this.setState({
+	        this.pagination = pagination;
+	        this.setState({
 	          places: results,
 	          hasNextPage: pagination.hasNextPage,
-	          center: center
+	          center,
 	        });
 	      }
 	    });
 	    console.log('}   PlacesContainer.searchNearby (pcs)');
 	  },
-	
-	  onMapRecentered: function onMapRecentered(mapProps, map) {
+
+	  onMapRecentered: function(mapProps, map) {
 	    console.log('!!! onMapRecentered.mapProps: ', mapProps);
 	    console.log('!!! onMapRecentered.map: ', map);
 	    this.searchNearby(map, map.center);
 	  },
-	
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+
+	  componentWillReceiveProps: function(nextProps) {
 	    console.log('{   PlacesContainer.componentWillReceiveProps (cwrp)');
 	    console.log('       (cwrp) nextProps: ', nextProps);
-	    var nbRenders = this.state.nbRenders + 1;
-	    this.setState({ nbRenders: nbRenders });
+	    const nbRenders = this.state.nbRenders + 1;
+	    this.setState({ nbRenders });
 	    console.log('}   PlacesContainer.componentWillReceiveProps (cwrp)');
 	  },
-	
-	  render: function render() {
+
+	  render: function() {
 	    console.log('{   PlacesContainer.render (pcr)');
 	    console.log('       (pcr) state:', this.state);
 	    console.log('       (pcr) props:', this.props);
-	
-	    var style = {
+
+	    const style = {
 	      width: '80%',
-	      height: '50%'
+	      height: '50%',
 	    };
-	
-	    //    if (!this.state || !this.state.center) {
+
+	//    if (!this.state || !this.state.center) {
 	    if (!this.props.loaded) {
 	      console.log('       returns loading msg');
 	      console.log('}   PlacesContainer.render');
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        'Loading...'
-	      );
+	      return <div>Loading...</div>;
 	    }
-	
-	    var result = _react2.default.createElement(
-	      'div',
-	      { style: style },
-	      _react2.default.createElement(
-	        _googleMapsReact2.default,
-	        {
-	          google: this.props.google,
-	          className: 'map',
-	          onReady: this.onMapReady,
-	          visible: false,
-	          center: this.props.position,
-	          onRecenter: this.onMapRecentered
-	        },
-	        _react2.default.createElement(Listing, { places: this.state.places })
-	      ),
-	      'nbRenders: ',
-	      this.state.nbRenders
+
+	    const result = (
+	      <div style={style}>
+	        <Map
+	          google={this.props.google}
+	          className={'map'}
+	          onReady={this.onMapReady}
+	          visible={false}
+	          center={this.props.position}
+	          onRecenter={this.onMapRecentered}
+	        >
+	          <Listing places={this.state.places} />
+	        </Map>
+	        nbRenders: {this.state.nbRenders}
+	      </div>
 	    );
 	    console.log('}   PlacesContainer.render');
 	    return result;
-	  }
-	
+	  },
+
 	});
-	
-	var mapStateToProps = function mapStateToProps(state) {
+
+	const mapStateToProps = function(state) {
 	  console.log('{   PlacesContainer.mapStateToProps (pcms)');
 	  console.log('       (pcms) state:', state);
-	  var result = {
+	  const result = {
 	    // center: [state.coordinates.latitude, state.coordinates.longitude]
 	    position: { lat: state.coordinates.latitude, lng: state.coordinates.longitude }
 	  };
@@ -66391,21 +66312,24 @@
 	  console.log('}   PlacesContainer.mapStateToProps');
 	  return result;
 	};
-	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+
+	const mapDispatchToProps = function(dispatch) {
 	  console.log('{   PlacesContainer.mapDispatchToProps (pcmd)');
 	  console.log('       (pcmd) dispatch:', dispatch);
 	  console.log('}   PlacesContainer.mapDispatchToProps (pcmd)');
-	  return {};
+	  return {
+	  };
 	};
-	
+
 	// export default connect(mapStateToProps, mapDispatchToProps)(PlacesContainer);
-	var PlacesContainerWrapped = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(PlacesContainer);
-	exports.default = (0, _googleMapsReact.GoogleApiWrapper)({ apiKey: __GAPI_KEY__ })(PlacesContainerWrapped);
-	
+	const PlacesContainerWrapped = connect(mapStateToProps, mapDispatchToProps)(PlacesContainer);
+	export default GoogleApiWrapper({ apiKey: __GAPI_KEY__ })(PlacesContainerWrapped);
+
 	// Works too! :
 	// let PlacesContainerWrapped = GoogleApiWrapper({apiKey: __GAPI_KEY__})(PlacesContainer);
 	// export default connect(mapStateToProps, mapDispatchToProps)(PlacesContainerWrapped);
+	*/
+	"use strict";
 
 /***/ },
 /* 679 */
