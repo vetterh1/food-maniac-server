@@ -520,18 +520,10 @@
 	"buffers":
 	[
 		{
-			"file": "/C/workspace/mapTest/app/tests/DisplayPositionFromStore.jsx",
+			"file": "/C/workspace/mapTest/app/components/SelectLocation.jsx",
 			"settings":
 			{
-				"buffer_size": 1707,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/workspace/mapTest/app/containers/SelectCurrentLocation.jsx",
-			"settings":
-			{
-				"buffer_size": 5600,
+				"buffer_size": 4987,
 				"line_ending": "Windows"
 			}
 		},
@@ -539,7 +531,15 @@
 			"file": "/C/workspace/mapTest/app/components/Rate.jsx",
 			"settings":
 			{
-				"buffer_size": 6286,
+				"buffer_size": 6341,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/workspace/mapTest/app/index.html",
+			"settings":
+			{
+				"buffer_size": 1407,
 				"line_ending": "Windows"
 			}
 		}
@@ -766,16 +766,20 @@
 	],
 	"file_history":
 	[
-		"/C/workspace/mapTest/app/containers/PlacesContainer.jsx",
 		"/C/workspace/mapTest/app/components/Geolocation.jsx",
-		"/C/workspace/mapTest/app/index.html",
+		"/C/workspace/mapTest/app/components/Root.jsx",
+		"/C/workspace/mapTest/app/containers/SelectCurrentLocation.jsx",
+		"/C/Users/Laurent/Google Drive/Lync Mobile Feedback_ 2ff53dd2-ad21-453c-abe7-28d3c51a957e",
+		"/C/workspace/mapTest/app/containers/PlacesContainer.jsx",
 		"/C/workspace/mapTest/app/components/Rate.jsx",
+		"/C/workspace/mapTest/app/components/SelectLocation.jsx",
+		"/C/workspace/mapTest/app/tests/DisplayPositionFromStore.jsx",
+		"/C/workspace/mapTest/app/index.html",
 		"/C/workspace/mapTest/app/components/App.jsx",
 		"/C/workspace/mapTest/app/components/TestChooseLocation.jsx",
 		"/C/workspace/mapTest/app/components/ChooseLocation.jsx",
 		"/C/workspace/mapTest/package.json",
 		"/C/workspace/mapTest/app/index.jsx",
-		"/C/workspace/mapTest/app/components/Root.jsx",
 		"/C/workspace/mapTest/app/containers/MapBasicContainer.jsx",
 		"/C/workspace/mapTest/app/components/NavLink.jsx",
 		"/C/workspace/mapTest/app/components/CardRate.jsx",
@@ -796,7 +800,6 @@
 		"/C/workspace/mapTest/server/models/item.js",
 		"/C/workspace/mapTest/server/models/mark.js",
 		"/C/workspace/mapTest/server/models/users.js",
-		"/C/workspace/mapTest/app/tests/DisplayPositionFromStore.jsx",
 		"/C/workspace/mapTest/app/components/Geolocation.js",
 		"/C/workspace/mapTest/webpack.config.js",
 		"/C/workspace/mapTest/README.md",
@@ -890,10 +893,7 @@
 		"/C/Utilisateurs/a545888/AppData/Local/Microsoft/Windows/Temporary Internet Files/Content.Outlook/76MSEO24/ImportMerchant.xsd",
 		"/C/Utilisateurs/a545888/AppData/Local/Microsoft/Windows/Temporary Internet Files/Content.Outlook/76MSEO24/gescomMerchantTestDataStreamUpdate_2_3_10-RP.xml",
 		"/C/Utilisateurs/a545888/AppData/Local/Microsoft/Windows/Temporary Internet Files/Content.Outlook/76MSEO24/gescomMerchantTestDataStreamUpdate_2_3_10-ER.xml",
-		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp52050/MIDDLEDATA/mex_merchant_extranet/batch/merchant/archives/initload/MIF_MEXMEM_20160706015326.XML",
-		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp52701/MIDDLEDATA/mex_merchant_extranet/batch/merchant/out/initload/InitLoad_Report_1003_2016_07_06_08_00_46.txt",
-		"/C/Utilisateurs/a545888/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
-		"/C/Utilisateurs/a545888/AppData/Roaming/Sublime Text 3/Packages/User/Plain text.sublime-settings"
+		"/C/Utilisateurs/a545888/AppData/Local/Temp/scp52050/MIDDLEDATA/mex_merchant_extranet/batch/merchant/archives/initload/MIF_MEXMEM_20160706015326.XML"
 	],
 	"find":
 	{
@@ -1039,6 +1039,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"SelectLocation",
+			"selectlocation",
+			"SelectLocation",
+			"SelectCurrentLocation",
 			"state.center",
 			"componentWillReceiveProps",
 			"LocationActions",
@@ -1162,11 +1166,7 @@
 			"zIndex",
 			"z-index",
 			"04281405060",
-			"160428140143855",
-			"16042814014",
-			"1604281401438551158",
-			"$translate.instant",
-			"exponent"
+			"160428140143855"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1174,6 +1174,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"SelectLocation",
 			"// alert",
 			"position",
 			"warning",
@@ -1300,8 +1301,7 @@
 			"data",
 			"columnObjects",
 			"\"",
-			"\\\"",
-			"Status"
+			"\\\""
 		],
 		"reverse": false,
 		"show_context": true,
@@ -1321,24 +1321,24 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/C/workspace/mapTest/app/tests/DisplayPositionFromStore.jsx",
+					"file": "/C/workspace/mapTest/app/components/SelectLocation.jsx",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1707,
+						"buffer_size": 4987,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								642,
-								642
+								2334,
+								2334
 							]
 						],
 						"settings":
@@ -1351,8 +1351,8 @@
 								{
 									"1":
 									[
-										768,
-										769
+										2805,
+										2806
 									]
 								},
 								"icon":
@@ -1367,8 +1367,8 @@
 								{
 									"1":
 									[
-										610,
-										611
+										1634,
+										1635
 									]
 								},
 								"unmatched":
@@ -1377,208 +1377,89 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
 								"bh_tag",
 								"bh_tag_center",
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
-								"bh_angle_content"
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
 							],
+							"git_gutter_enabled": true,
 							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 610.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/C/workspace/mapTest/app/containers/SelectCurrentLocation.jsx",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5600,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3400,
-								3400
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"bracket_highlighter.busy": false,
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-									"1":
-									[
-										4517,
-										4518
-									]
-								},
-								"icon":
-								{
-									"1":
-									[
-										"Packages/BracketHighlighter/icons/curly_bracket.png",
-										"brackethighlighter.default"
-									]
-								},
-								"open":
-								{
-									"1":
-									[
-										3212,
-										3213
-									]
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content"
-							],
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": -0.0,
-						"translation.y": 3429.0,
+						"translation.y": 2610.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 1,
 					"file": "/C/workspace/mapTest/app/components/Rate.jsx",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6286,
+						"buffer_size": 6341,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4154,
-								3950
+								3313,
+								3327
 							]
 						],
 						"settings":
@@ -1588,17 +1469,128 @@
 							{
 								"close":
 								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
 									"1":
 									[
-										5822,
-										5823
+										2923,
+										2924
+									]
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"git_gutter_enabled": true,
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 3595.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/C/workspace/mapTest/app/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1407,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								747,
+								747
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										754,
+										760
 									]
 								},
 								"icon":
 								{
 									"1":
 									[
-										"Packages/BracketHighlighter/icons/round_bracket.png",
+										"Packages/BracketHighlighter/icons/tag.png",
 										"brackethighlighter.default"
 									]
 								},
@@ -1606,8 +1598,8 @@
 								{
 									"1":
 									[
-										2865,
-										2866
+										621,
+										627
 									]
 								},
 								"unmatched":
@@ -1616,68 +1608,68 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
 								"bh_tag",
 								"bh_tag_center",
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
-								"bh_angle_content"
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
 							],
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": -0.0,
-						"translation.y": 4165.0,
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -1737,7 +1729,7 @@
 	"project": "",
 	"replace":
 	{
-		"height": 72.0
+		"height": 99.0
 	},
 	"save_all_on_build": true,
 	"select_file":

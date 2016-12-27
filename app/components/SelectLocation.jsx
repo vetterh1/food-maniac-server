@@ -80,22 +80,41 @@ const SelectLocation = React.createClass({
     const nbRenders = this.state.nbRenders + 1;
     this.setState({ nbRenders });
 
-    const service = new google.maps.places.AutocompleteService();
-    service.getQueryPredictions({ input: 'pizza near Syd' }, this.displaySuggestions);
+    // To use for auto complete... 
+    // but this is NOT a method to find places 
+    // use radarSearch or nearby search instead
+    // const service = new google.maps.places.AutocompleteService();
+    // service.getQueryPredictions({ input: 'pizza near Syd' }, this.displaySuggestions);
 
+    const pyrmont = new google.maps.LatLng(-33.8665433, 151.1956316);
+
+    const map = new google.maps.Map(document.getElementById('map'), {
+        center: pyrmont,
+        zoom: 15,
+      });
+
+    const request = {
+      location: pyrmont,
+      radius: '2000',
+      types: ['restaurant'],
+    };
+    console.log("/////////////////////// before service creation /////////////////////");
+    const service = new google.maps.places.PlacesService(map);
+    console.log("/////////////////////// service created /////////////////////");
+    service.radarSearch(request, this.callbackPlaces);
 
     console.log('}   SelectLocation.componentWillReceiveProps (cwrp)');
   },
 
 
-  displaySuggestions: (predictions, status) => {
+  callbackPlaces: (predictions, status) => {
     if (status != google.maps.places.PlacesServiceStatus.OK) {
       alert(status);
       return;
     }
-
+    console.log("/////////////////////// in callbackPlaces /////////////////////");
     predictions.forEach((prediction) => {
-      console.log(prediction.description);
+      // console.log(prediction);
     });
   },
 
@@ -116,7 +135,7 @@ const SelectLocation = React.createClass({
       <div style={styles.div}>
         <div style={styles.mapDiv1}>
           <div style={styles.mapDiv2}>
-
+            <div id="map" style={styles.map}></div>
 
 
             --map--
