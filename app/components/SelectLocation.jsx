@@ -80,12 +80,6 @@ const SelectLocation = React.createClass({
     const nbRenders = this.state.nbRenders + 1;
     this.setState({ nbRenders });
 
-    // To use for auto complete... 
-    // but this is NOT a method to find places 
-    // use radarSearch or nearby search instead
-    // const service = new google.maps.places.AutocompleteService();
-    // service.getQueryPredictions({ input: 'pizza near Syd' }, this.displaySuggestions);
-
     const pyrmont = new google.maps.LatLng(-33.8665433, 151.1956316);
 
     const map = new google.maps.Map(document.getElementById('map'), {
@@ -93,29 +87,54 @@ const SelectLocation = React.createClass({
         zoom: 15,
       });
 
+    const strasbourg = new google.maps.LatLng(48.5876, 7.7408);
+    //const location = new google.maps.LatLng(48.5876, 7.7408);
+    console.log('this.props.location', this.props.location);
     const request = {
-      location: pyrmont,
-      radius: '2000',
-      types: ['restaurant'],
-    };
+       location: this.props.location,
+       // radius: '100',
+       types: ['restaurant'],
+       rankBy: google.maps.places.RankBy.DISTANCE,
+     };
+
     console.log("/////////////////////// before service creation /////////////////////");
     const service = new google.maps.places.PlacesService(map);
-    console.log("/////////////////////// service created /////////////////////");
-    service.radarSearch(request, this.callbackPlaces);
+    console.log("/////////////////////// service created /////////////////////");    
 
-    console.log('}   SelectLocation.componentWillReceiveProps (cwrp)');
-  },
-
-
-  callbackPlaces: (predictions, status) => {
-    if (status != google.maps.places.PlacesServiceStatus.OK) {
-      alert(status);
-      return;
-    }
-    console.log("/////////////////////// in callbackPlaces /////////////////////");
-    predictions.forEach((prediction) => {
-      // console.log(prediction);
+    service.nearbySearch(request, (results, status, pagination) => {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        this.pagination = pagination;
+        this.setState({
+          places: results,
+          hasNextPage: pagination.hasNextPage,
+          strasbourg,
+        });
+      }
     });
+
+  //   const request = {
+  //     location: pyrmont,
+  //     radius: '2000',
+  //     types: ['restaurant'],
+  //   };
+  //   console.log("/////////////////////// before service creation /////////////////////");
+  //   const service = new google.maps.places.PlacesService(map);
+  //   console.log("/////////////////////// service created /////////////////////");
+  //   service.radarSearch(request, this.callbackPlaces);
+
+  //   console.log('}   SelectLocation.componentWillReceiveProps (cwrp)');
+  // },
+
+
+  // callbackPlaces: (predictions, status) => {
+  //   if (status != google.maps.places.PlacesServiceStatus.OK) {
+  //     alert(status);
+  //     return;
+  //   }
+  //   console.log("/////////////////////// in callbackPlaces /////////////////////");
+  //   predictions.forEach((prediction) => {
+  //     console.log(prediction.name);
+  //   });
   },
 
 
@@ -164,7 +183,7 @@ const mapStateToProps = function(state) {
   console.log('       (pcms) state:', state);
   const result = {
     // center: [state.coordinates.latitude, state.coordinates.longitude]
-    position: { lat: state.coordinates.latitude, lng: state.coordinates.longitude }
+    location: { lat: state.coordinates.latitude, lng: state.coordinates.longitude },
   };
   console.log('       (pcms) result:', result);
   console.log('}   SelectLocation.mapStateToProps');
