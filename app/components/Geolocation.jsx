@@ -58,9 +58,6 @@ class GeolocationDisplay extends React.Component {
   };
 
   render = () => {
-    // const displayLatitude = Math.round(this.state.position.latitude * 10000) / 10000;
-    // const displayLongitude = Math.round(this.state.position.longitude * 10000) / 10000;
-
     console.log('{   GeolocationDisplay.render (gldr)');
     console.log('       (gldr) props:', this.props);
 
@@ -81,8 +78,8 @@ class GeolocationDisplay extends React.Component {
           <div className="geolocation_statistics">
             Coordinates:
             <ul>
-              <li>Latitude: {this.props.coordinates.latitude ? this.props.coordinates.latitude : 'unknown'}</li>
-              <li>Longitude: {this.props.coordinates.longitude ? this.props.coordinates.longitude : 'unknown'}</li>
+              <li>Latitude: {this.props.coordinates.latitude ? Math.round(this.props.coordinates.latitude * 100000) / 100000 : 'unknown'}</li>
+              <li>Longitude: {this.props.coordinates.longitude ? Math.round(this.props.coordinates.longitude * 100000) / 100000 : 'unknown'}</li>
               <li>Real: {this.props.coordinates.real ? 'true' : 'false'}</li>
             </ul>
           </div>
@@ -94,6 +91,7 @@ class GeolocationDisplay extends React.Component {
               <li>Nb different positions: {this.props.coordinates.nbDiffs}</li>
               <li>Nb real positions: {this.props.coordinates.nbReal}</li>
               <li>Nb estimated positions: {this.props.coordinates.nbEstimated}</li>
+              <li>Nb closed positions: {this.props.coordinates.nbClose}</li>
             </ul>
           </div>
 
