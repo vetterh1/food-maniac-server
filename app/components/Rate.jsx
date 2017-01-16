@@ -17,8 +17,6 @@ import IconStarBorder from 'material-ui/svg-icons/toggle/star-border';
 import IconSearch from 'material-ui/svg-icons/action/search';
 // import IconLocation from 'material-ui/svg-icons/communication/location-on';
 
-import TestDisplayPositionFromStore from '../tests/TestDisplayPositionFromStore';
-
 
 const styles = {
   paperStyle: {
@@ -212,8 +210,6 @@ class Rate extends React.Component {
             <h3>Picture</h3>
 
           </Formsy.Form>
-  
-          <TestDisplayPositionFromStore />
 
         </Paper>
       </MuiThemeProvider>

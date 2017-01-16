@@ -4,7 +4,6 @@ const _version = '2016-12-13 21:00 - geoTest';
 
 import React from 'react';
 import MainAppBar from './MainAppBar';
-import MainChoiceContainer from './MainChoiceContainer';
 import Version from './Version';
 import Radium, { StyleRoot } from 'radium';
 import injectTapEventPlugin from 'react-tap-event-plugin';

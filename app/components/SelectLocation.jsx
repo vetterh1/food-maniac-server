@@ -88,10 +88,11 @@ const SelectLocation = React.createClass({
       });
 
     const strasbourg = new google.maps.LatLng(48.5876, 7.7408);
-    //const location = new google.maps.LatLng(48.5876, 7.7408);
+    const location = new google.maps.LatLng(48.5876, 7.7408);
     console.log('this.props.location', this.props.location);
     const request = {
-       location: this.props.location,
+       location,
+       // location: this.props.location,
        // radius: '100',
        types: ['restaurant'],
        rankBy: google.maps.places.RankBy.DISTANCE,

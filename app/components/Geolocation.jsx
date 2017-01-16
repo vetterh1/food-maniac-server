@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as LocationActions from '../actions/LocationActions';
 import IconLocation from 'material-ui/svg-icons/communication/location-on';
 import Popover from 'material-ui/Popover';
+import TestDisplayPositionFromStore from '../tests/TestDisplayPositionFromStore';
 
 
 const styles = {
@@ -29,14 +30,6 @@ const styles = {
 
 class GeolocationDisplay extends React.Component {
   static propTypes = {
-    latitude: React.PropTypes.number,
-    longitude: React.PropTypes.number,
-    real: React.PropTypes.bool,
-    nbRefreshes: React.PropTypes.number,
-    nbDiffs: React.PropTypes.number,
-    nbReal: React.PropTypes.number,
-    nbEstimated: React.PropTypes.number,
-    errorCode: React.PropTypes.number,
   }
 
   constructor() {
@@ -64,11 +57,17 @@ class GeolocationDisplay extends React.Component {
     });
   };
 
-  render() {
+  render = () => {
+    // const displayLatitude = Math.round(this.state.position.latitude * 10000) / 10000;
+    // const displayLongitude = Math.round(this.state.position.longitude * 10000) / 10000;
+
+    console.log('{   GeolocationDisplay.render (gldr)');
+    console.log('       (gldr) props:', this.props);
+
     return (
       <div>
         <IconLocation
-          style={this.props.real ? styles.locationOK : styles.locationKO}
+          style={this.props.coordinates.real ? styles.locationOK : styles.locationKO}
           onTouchTap={this.handleTouchTap}
         />
         <Popover
@@ -82,27 +81,51 @@ class GeolocationDisplay extends React.Component {
           <div className="geolocation_statistics">
             Coordinates:
             <ul>
-              <li>Latitude: {this.props.latitude ? this.props.latitude : 'unknown'}</li>
-              <li>Longitude: {this.props.longitude ? this.props.longitude : 'unknown'}</li>
-              <li>Real: {this.props.real ? 'true' : 'false'}</li>
+              <li>Latitude: {this.props.coordinates.latitude ? this.props.coordinates.latitude : 'unknown'}</li>
+              <li>Longitude: {this.props.coordinates.longitude ? this.props.coordinates.longitude : 'unknown'}</li>
+              <li>Real: {this.props.coordinates.real ? 'true' : 'false'}</li>
             </ul>
           </div>
 
           <div className="geolocation_statistics">
             Statistics:
             <ul>
-              <li>Nb refreshes: {this.props.nbRefreshes}</li>
-              <li>Nb different positions: {this.props.nbDiffs}</li>
-              <li>Nb real positions: {this.props.nbReal}</li>
-              <li>Nb estimated positions: {this.props.nbEstimated}</li>
-              <li>Last error code: {this.props.errorCode}</li>
+              <li>Nb refreshes: {this.props.coordinates.nbRefreshes}</li>
+              <li>Nb different positions: {this.props.coordinates.nbDiffs}</li>
+              <li>Nb real positions: {this.props.coordinates.nbReal}</li>
+              <li>Nb estimated positions: {this.props.coordinates.nbEstimated}</li>
             </ul>
           </div>
+
+          <div className="geolocation_statistics">
+            Simulation:
+            <TestDisplayPositionFromStore />
+          </div>
+
         </Popover>
       </div>
     );
   }
 }
+
+
+// 1st to receive store changes
+// Role of mapStateToProps: transform the "interesting" part of the store state
+// into some props that will be received by componentWillReceiveProps
+const mapStateToProps = function (state) {
+  console.log('{   GeolocationDisplay.mapStateToProps (pcms)');
+  console.log('       (pcms) state:', state);
+  const result = {
+    coordinates: state.coordinates,
+  };
+  console.log('       (pcms) result:', result);
+  console.log('}   GeolocationDisplay.mapStateToProps');
+  return result;
+};
+
+GeolocationDisplay = connect(mapStateToProps)(GeolocationDisplay); // eslint-disable-line no-class-assign
+
+
 
 
 
@@ -116,26 +139,8 @@ class GeolocationDisplay extends React.Component {
 
 
 function getPosition(position) {
-  // alert("getPosition");
-  const current = {
-    latitude: position.coords.latitude,
-    longitude: position.coords.longitude,
-    real: true,
-  };
-  const statistics = this.state.statistics;
-  statistics.nbRefreshes += 1;
-  statistics.nbReal += 1;
-  if (current.latitude !== this.state.position.latitude ||
-      current.longitude !== this.state.position.longitude) {
-    statistics.nbDiffs += 1;
-  }
-  this.setState({
-    position: current,
-    statistics,
-  });
-
   const { dispatch } = this.props;  // Injected by react-redux
-  const action = LocationActions.setCurrentLocation(current.latitude, current.longitude, current.real);
+  const action = LocationActions.setCurrentLocation(position.coords.latitude, position.coords.longitude, true);
   dispatch(action);
 }
 
@@ -160,37 +165,18 @@ function getPosition(position) {
 */
 
 function errorPosition(error) {
-  // alert("errorPosition");
-  const position = this.state.position;
-  const statistics = this.state.statistics;
-  position.real = false;
-  if (position.latitude != null && position.longitude != null) statistics.nbEstimated += 1;
-  this.setState({
-    position,
-    statistics,
-    errorCode: error.errorCode,
-  });
-
-  const { dispatch } = this.props;  // Injected by react-redux
-  const action = LocationActions.setCurrentLocation(position.latitude, position.longitude, false);
-  dispatch(action);
 }
 
 
 
 class Geolocation extends Component {
 
-  // watchID: (null: ?number),
-
-
-  state = {
-    position: { latitude: 50.5467501, longitude: 3.0290698999999996, real: false },
-    statistics: { nbRefreshes: 0, nbDiffs: 0, nbReal: 0, nbEstimated: 0 },
-    errorCode: 0,
+  constructor() {
+    super();
+    this.watchID = null;
   }
 
   componentDidMount() {
-    // alert("componentDidMount");
     navigator.geolocation.getCurrentPosition(
       getPosition.bind(this),
       errorPosition.bind(this),
@@ -207,19 +193,8 @@ class Geolocation extends Component {
   }
 
   render() {
-    const displayLatitude = Math.round(this.state.position.latitude * 10000) / 10000;
-    const displayLongitude = Math.round(this.state.position.longitude * 10000) / 10000;
     return (
-      <GeolocationDisplay
-        latitude={displayLatitude}
-        longitude={displayLongitude}
-        real={this.state.position.real}
-        nbRefreshes={this.state.statistics.nbRefreshes}
-        nbDiffs={this.state.statistics.nbDiffs}
-        nbReal={this.state.statistics.nbReal}
-        nbEstimated={this.state.statistics.nbEstimated}
-        errorCode={this.state.errorCode}
-      />
+      <GeolocationDisplay />
     );
   }
 }
