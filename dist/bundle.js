@@ -46553,6 +46553,18 @@
 	                null,
 	                'Real: ',
 	                _this.props.coordinates.real ? 'true' : 'false'
+	              ),
+	              _react2.default.createElement(
+	                'li',
+	                null,
+	                'Changed: ',
+	                _this.props.coordinates.changed ? 'true' : 'false'
+	              ),
+	              _react2.default.createElement(
+	                'li',
+	                null,
+	                'Changed (real): ',
+	                _this.props.coordinates.changedReal ? 'true' : 'false'
 	              )
 	            )
 	          ),
@@ -66483,17 +66495,18 @@
 	        log.debug('       (rsl) previous state:', state);
 	        log.debug('       (rsl) action:', action);
 	
-	        if (!changed) {
-	          log.debug('       (rsl) === no change in state');
+	        if (!changedReal) {
+	          log.debug('       (rsl) === no real change in state');
 	          log.debug('}   coordinatesReducer.SET_CURRENT_LOCATION');
 	          return state;
 	        }
 	
 	        var newState = _extends({}, state, {
+	          changed: changed,
+	          changedReal: changedReal,
 	          latitude: action.latitude,
 	          longitude: action.longitude,
 	          real: action.real,
-	          changed: changed,
 	          nbRefreshes: state.nbRefreshes + 1,
 	          nbDiffs: nbDiffs,
 	          nbReal: nbReal,

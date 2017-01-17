@@ -81,6 +81,8 @@ class GeolocationDisplay extends React.Component {
               <li>Latitude: {this.props.coordinates.latitude ? Math.round(this.props.coordinates.latitude * 100000) / 100000 : 'unknown'}</li>
               <li>Longitude: {this.props.coordinates.longitude ? Math.round(this.props.coordinates.longitude * 100000) / 100000 : 'unknown'}</li>
               <li>Real: {this.props.coordinates.real ? 'true' : 'false'}</li>
+              <li>Changed: {this.props.coordinates.changed ? 'true' : 'false'}</li>
+              <li>Changed (real): {this.props.coordinates.changedReal ? 'true' : 'false'}</li>
             </ul>
           </div>
 

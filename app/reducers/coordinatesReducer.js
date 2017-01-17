@@ -35,17 +35,18 @@ const coordinatesReducer = (state = initialState, action) => {
       log.debug('       (rsl) previous state:', state);
       log.debug('       (rsl) action:', action);
 
-      if (!changed) {
-        log.debug('       (rsl) === no change in state');
+      if (!changedReal) {
+        log.debug('       (rsl) === no real change in state');
         log.debug('}   coordinatesReducer.SET_CURRENT_LOCATION');
         return state;
       }
 
       const newState = { ...state,
+        changed,
+        changedReal,
         latitude: action.latitude,
         longitude: action.longitude,
         real: action.real,
-        changed,
         nbRefreshes: state.nbRefreshes + 1,
         nbDiffs,
         nbReal,
