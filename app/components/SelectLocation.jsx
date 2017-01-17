@@ -1,17 +1,16 @@
-import React, { Component } from 'react';
+/* eslint-disable no-console */
+/* global google */
+
+import React, { /* Component */ } from 'react';
 import { connect } from 'react-redux';
-import { setCurrentLocation } from '../actions/LocationActions';
+// import { setCurrentLocation } from '../actions/LocationActions';
 
 import Geolocation from '../components/Geolocation';
 
-import Formsy from 'formsy-react';
-import { FormsyCheckbox, FormsyDate, FormsyRadio, FormsyRadioGroup,
-          FormsySelect, FormsyText, FormsyTime, FormsyToggle, FormsyAutoComplete } from 'formsy-material-ui/lib';
+// import Formsy from 'formsy-react';
+// import FlatButton from 'material-ui/FlatButton';
+import { FormsySelect /* , FormsyCheckbox, FormsyDate, FormsyRadio, FormsyRadioGroup, FormsyText, FormsyTime, FormsyToggle, FormsyAutoComplete */ } from 'formsy-material-ui/lib';
 import MenuItem from 'material-ui/MenuItem';
-
-const __GAPI_KEY__ = 'AIzaSyAPbswfvaojeQVe9eE-0CtZ4iEtWia9KO0';
-
-
 
 const styles = {
   div: {
@@ -43,7 +42,8 @@ const styles = {
 
 const Listing = ({ places }) => {
   console.log('   {   Listing.render (lr)');
-  console.log('          (lr) places: ', places);
+  console.log('          (lr) nb places: ', places.length);
+  if (places.length > 0) console.log('          (lr) 1st places: ', places[0].name);
 
   const result = (
     <div>
@@ -65,99 +65,88 @@ const Listing = ({ places }) => {
 
 const SelectLocation = React.createClass({
 
-  getInitialState: function() {
+  getInitialState: () => {
     return {
       places: [],
-      nbRenders: 0
+      nbRenders: 0,
     };
   },
 
 
   // 2nd to receive store changes
-  componentWillReceiveProps: function(nextProps) {
-    console.log('{   SelectLocation.componentWillReceiveProps (cwrp)');
-    console.log('       (cwrp) nextProps: ', nextProps);
+  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+    console.log('{   SelectLocation.componentWillReceiveProps (sl-cwrp)');
+    console.log('       (sl-cwrp) nextProps: ', nextProps);
+
+    if (!nextProps) {
+      console.log('}   SelectLocation.componentWillReceiveProps: nextProps null !!!');
+      return;
+    }
+
+    if (!nextProps.coordinates) {
+      console.log('}   SelectLocation.componentWillReceiveProps: coordinates null !!!');
+      return;
+    }
+
+    if (!nextProps.coordinates.latitude || !nextProps.coordinates.longitude) {
+      console.log('}   SelectLocation.componentWillReceiveProps: lat or long null !!!');
+      return;
+    }
+
+    if (!nextProps.coordinates.changed) {
+      console.log('}   SelectLocation.componentWillReceiveProps: no change in coordinates');
+      return;
+    }
+
     const nbRenders = this.state.nbRenders + 1;
     this.setState({ nbRenders });
 
-    const pyrmont = new google.maps.LatLng(-33.8665433, 151.1956316);
+    const currentLatLng = new google.maps.LatLng(nextProps.coordinates.latitude, nextProps.coordinates.longitude);
 
     const map = new google.maps.Map(document.getElementById('map'), {
-        center: pyrmont,
-        zoom: 15,
-      });
+      center: currentLatLng,
+      zoom: 15,
+    });
 
-    const strasbourg = new google.maps.LatLng(48.5876, 7.7408);
-    const location = new google.maps.LatLng(48.5876, 7.7408);
-    console.log('this.props.location', this.props.location);
+    console.log('       (sl-cwrp) currentLatLng : ', currentLatLng);
     const request = {
-       location,
-       // location: this.props.location,
-       // radius: '100',
-       types: ['restaurant'],
-       rankBy: google.maps.places.RankBy.DISTANCE,
-     };
+      location: currentLatLng,
+      // radius: '100',
+      types: ['restaurant'],
+      rankBy: google.maps.places.RankBy.DISTANCE,
+    };
 
-    console.log("/////////////////////// before service creation /////////////////////");
     const service = new google.maps.places.PlacesService(map);
-    console.log("/////////////////////// service created /////////////////////");    
 
     service.nearbySearch(request, (results, status, pagination) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
+        console.log('          (sl-cwrp) nearby nb results: ', results.length);
+        if (results.length > 0) console.log('          (sl-cwrp) nearby 1st results', results[0].name);
         this.pagination = pagination;
         this.setState({
           places: results,
           hasNextPage: pagination.hasNextPage,
-          strasbourg,
+          currentLatLng,
         });
+      } else {
+        console.log('          (sl-cwrp) nearby search error : ', status);
       }
     });
 
-  //   const request = {
-  //     location: pyrmont,
-  //     radius: '2000',
-  //     types: ['restaurant'],
-  //   };
-  //   console.log("/////////////////////// before service creation /////////////////////");
-  //   const service = new google.maps.places.PlacesService(map);
-  //   console.log("/////////////////////// service created /////////////////////");
-  //   service.radarSearch(request, this.callbackPlaces);
-
-  //   console.log('}   SelectLocation.componentWillReceiveProps (cwrp)');
-  // },
-
-
-  // callbackPlaces: (predictions, status) => {
-  //   if (status != google.maps.places.PlacesServiceStatus.OK) {
-  //     alert(status);
-  //     return;
-  //   }
-  //   console.log("/////////////////////// in callbackPlaces /////////////////////");
-  //   predictions.forEach((prediction) => {
-  //     console.log(prediction.name);
-  //   });
+    console.log('}   SelectLocation.componentWillReceiveProps');
   },
 
 
-  render: function() {
-    console.log('{   SelectLocation.render (pcr)');
-    console.log('       (pcr) state:', this.state);
-    console.log('       (pcr) props:', this.props);
+  render: function render() {
+    console.log('{   SelectLocation.render (slr)');
+    console.log('       (slr) state:', this.state);
+    console.log('       (slr) props:', this.props);
 
-
-/*    if (!this.props.loaded ) {
-      console.log('       returns loading msg');
-      console.log('}   SelectLocation.render');
-      return <div><Geolocation style="{styles.geolocation}" />Loading...</div>;
-    }
-*/
     const result = (
       <div style={styles.div}>
         <div style={styles.mapDiv1}>
           <div style={styles.mapDiv2}>
-            <div id="map" style={styles.map}></div>
-
-
+            <div id="map" style={styles.map} />
             --map--
           </div>
         </div>
@@ -176,27 +165,6 @@ const SelectLocation = React.createClass({
 
 });
 
-// 1st to receive store changes
-// Role of mapStateToProps: transform the "interesting" part of the store state
-// into some props that will be received by componentWillReceiveProps
-const mapStateToProps = function(state) {
-  console.log('{   SelectLocation.mapStateToProps (pcms)');
-  console.log('       (pcms) state:', state);
-  const result = {
-    // center: [state.coordinates.latitude, state.coordinates.longitude]
-    location: { lat: state.coordinates.latitude, lng: state.coordinates.longitude },
-  };
-  console.log('       (pcms) result:', result);
-  console.log('}   SelectLocation.mapStateToProps');
-  return result;
-};
+const mapStateToProps = (state) => { return { coordinates: state.coordinates }; };
 
-const mapDispatchToProps = function(dispatch) {
-  console.log('{   SelectLocation.mapDispatchToProps (pcmd)');
-  console.log('       (pcmd) dispatch:', dispatch);
-  console.log('}   SelectLocation.mapDispatchToProps (pcmd)');
-  return {
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SelectLocation);
+export default connect(mapStateToProps)(SelectLocation);

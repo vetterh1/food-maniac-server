@@ -1,3 +1,6 @@
+/* eslint-disable react/no-multi-comp */
+/* eslint-disable react/prop-types */
+
 import React, { Component } from 'react';
 // import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -58,9 +61,6 @@ class GeolocationDisplay extends React.Component {
   };
 
   render = () => {
-    console.log('{   GeolocationDisplay.render (gldr)');
-    console.log('       (gldr) props:', this.props);
-
     return (
       <div>
         <IconLocation
@@ -112,16 +112,8 @@ class GeolocationDisplay extends React.Component {
 // 1st to receive store changes
 // Role of mapStateToProps: transform the "interesting" part of the store state
 // into some props that will be received by componentWillReceiveProps
-const mapStateToProps = function (state) {
-  console.log('{   GeolocationDisplay.mapStateToProps (pcms)');
-  console.log('       (pcms) state:', state);
-  const result = {
-    coordinates: state.coordinates,
-  };
-  console.log('       (pcms) result:', result);
-  console.log('}   GeolocationDisplay.mapStateToProps');
-  return result;
-};
+const mapStateToProps = (state) => { return { coordinates: state.coordinates }; };
+
 
 GeolocationDisplay = connect(mapStateToProps)(GeolocationDisplay); // eslint-disable-line no-class-assign
 
@@ -164,7 +156,7 @@ function getPosition(position) {
   }
 */
 
-function errorPosition(error) {
+function errorPosition(/* error */) {
 }
 
 
@@ -177,14 +169,10 @@ class Geolocation extends Component {
   }
 
   componentDidMount() {
-    navigator.geolocation.getCurrentPosition(
+    this.watchID = navigator.geolocation.watchPosition(
       getPosition.bind(this),
       errorPosition.bind(this),
       { enableHighAccuracy: true, timeout: 3000, maximumAge: 3000 }
-    );
-    this.watchID = navigator.geolocation.watchPosition(
-      getPosition.bind(this),
-      errorPosition.bind(this)
     );
   }
 
