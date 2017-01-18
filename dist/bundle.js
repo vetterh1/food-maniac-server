@@ -28808,7 +28808,7 @@
 	
 	/* eslint-disable react/prefer-stateless-function */
 	
-	var _version = '2016-12-13 21:00 - geoTest';
+	var _version = '2017-01-18 16:00 - add_new_item';
 	
 	var styles = {
 	  pageContainer: {
@@ -46395,7 +46395,7 @@
 	var styles = {
 	  paperStyle: {
 	    // width: 300,
-	    margin: '20 auto',
+	    // margin: '20 auto',
 	    padding: 20
 	  },
 	  switchStyle: {
@@ -46493,7 +46493,7 @@
 	        _MuiThemeProvider2.default,
 	        { muiTheme: this.context.muiTheme },
 	        _react2.default.createElement(
-	          _Paper2.default,
+	          'div',
 	          { style: styles.paperStyle },
 	          _react2.default.createElement(
 	            'h1',
@@ -65589,6 +65589,9 @@
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _class, _temp;
+	// import FlatButton from 'material-ui/FlatButton';
+	// import IconSearch from 'material-ui/svg-icons/action/search';
+	
 	
 	var _react = __webpack_require__(2);
 	
@@ -65607,14 +65610,6 @@
 	var _Paper = __webpack_require__(481);
 	
 	var _Paper2 = _interopRequireDefault(_Paper);
-	
-	var _FlatButton = __webpack_require__(590);
-	
-	var _FlatButton2 = _interopRequireDefault(_FlatButton);
-	
-	var _search = __webpack_require__(677);
-	
-	var _search2 = _interopRequireDefault(_search);
 	
 	var _RaisedButton = __webpack_require__(679);
 	
@@ -65641,7 +65636,7 @@
 	var styles = {
 	  paperStyle: {
 	    // width: 300,
-	    margin: '20 auto',
+	    // margin: '20 auto',
 	    padding: 20
 	  },
 	  submitStyle: {
@@ -65651,6 +65646,20 @@
 	    display: 'flex',
 	    flexWrap: 'nowrap',
 	    overflowX: 'auto'
+	  },
+	  form_content: {
+	    display: 'flex',
+	    flexWrap: 'wrap',
+	    justifyContent: 'flex-start'
+	  },
+	  form_buttons: {
+	    display: 'flex',
+	    flexWrap: 'wrap',
+	    justifyContent: 'flex-start'
+	  },
+	  item: {
+	    padding: '0.5em',
+	    marginRight: 32
 	  }
 	};
 	
@@ -65664,14 +65673,32 @@
 	
 	    _this.enableButton = _this.enableButton.bind(_this);
 	    _this.disableButton = _this.disableButton.bind(_this);
+	    _this.categoryChange = _this.categoryChange.bind(_this);
+	    _this.kindChange = _this.kindChange.bind(_this);
 	
 	    _this.state = {
-	      canSubmit: false
+	      canSubmit: false,
+	      category: '',
+	      kind: ''
 	    };
 	    return _this;
 	  }
 	
 	  _createClass(AddItem, [{
+	    key: 'categoryChange',
+	    value: function categoryChange(event, value) {
+	      this.setState({
+	        category: value
+	      });
+	    }
+	  }, {
+	    key: 'kindChange',
+	    value: function kindChange(event, value) {
+	      this.setState({
+	        kind: value
+	      });
+	    }
+	  }, {
 	    key: 'enableButton',
 	    value: function enableButton() {
 	      this.setState({
@@ -65692,12 +65719,12 @@
 	        _MuiThemeProvider2.default,
 	        { muiTheme: this.context.muiTheme },
 	        _react2.default.createElement(
-	          _Paper2.default,
+	          'div',
 	          { style: styles.paperStyle },
 	          _react2.default.createElement(
 	            'h1',
 	            null,
-	            'Add a new dish...'
+	            'New dish...'
 	          ),
 	          _react2.default.createElement(
 	            _formsyReact2.default.Form,
@@ -65708,47 +65735,67 @@
 	              onInvalidSubmit: this.notifyFormError
 	            },
 	            _react2.default.createElement(
-	              _lib.FormsySelect,
+	              'div',
 	              {
-	                name: 'frequency',
-	                required: true,
-	                floatingLabelText: 'How often do you?'
-	                // menuItems={this.selectFieldItems}
+	                style: styles.form_content
 	              },
-	              _react2.default.createElement(_MenuItem2.default, { value: 'never', primaryText: 'Never' }),
-	              _react2.default.createElement(_MenuItem2.default, { value: 'nightly', primaryText: 'Every Night' }),
-	              _react2.default.createElement(_MenuItem2.default, { value: 'weeknights', primaryText: 'Weeknights' })
+	              _react2.default.createElement(
+	                _lib.FormsySelect,
+	                {
+	                  name: 'category',
+	                  required: true,
+	                  floatingLabelText: 'Category',
+	                  onChange: this.categoryChange,
+	                  style: styles.item
+	                },
+	                _react2.default.createElement(_MenuItem2.default, { value: 'dish', primaryText: 'Dish' }),
+	                _react2.default.createElement(_MenuItem2.default, { value: 'dessert', primaryText: 'Dessert' }),
+	                _react2.default.createElement(_MenuItem2.default, { value: 'drink', primaryText: 'Drink' })
+	              ),
+	              _react2.default.createElement(
+	                _lib.FormsySelect,
+	                {
+	                  name: 'kind',
+	                  required: true,
+	                  floatingLabelText: 'Kind',
+	                  onChange: this.kindChange,
+	                  style: styles.item
+	                },
+	                _react2.default.createElement(_MenuItem2.default, { value: 'italian', primaryText: 'Italian' }),
+	                _react2.default.createElement(_MenuItem2.default, { value: 'french', primaryText: 'French' }),
+	                _react2.default.createElement(_MenuItem2.default, { value: 'mexican', primaryText: 'Mexican' }),
+	                _react2.default.createElement(_MenuItem2.default, { value: 'indian', primaryText: 'Indian' }),
+	                _react2.default.createElement(_MenuItem2.default, { value: 'american', primaryText: 'American' }),
+	                _react2.default.createElement(_MenuItem2.default, { value: 'other', primaryText: 'Other' })
+	              )
 	            ),
-	            _react2.default.createElement(_lib.FormsyText, {
-	              name: 'name',
-	              validations: 'isWords',
-	              validationError: errorMessages.wordsError,
-	              required: true,
-	              hintText: 'What is your name?',
-	              floatingLabelText: 'Name'
-	            }),
-	            _react2.default.createElement(_lib.FormsyText, {
-	              name: 'age',
-	              validations: 'isNumeric',
-	              validationError: errorMessages.numericError,
-	              hintText: 'Are you a wrinkly?',
-	              floatingLabelText: 'Age (optional)'
-	            }),
-	            _react2.default.createElement(_lib.FormsyText, {
-	              name: 'url',
-	              validations: 'isUrl',
-	              validationError: errorMessages.urlError,
-	              required: true,
-	              hintText: 'http://www.example.com',
-	              floatingLabelText: 'URL',
-	              updateImmediately: true
-	            }),
-	            _react2.default.createElement(_RaisedButton2.default, {
-	              style: styles.submitStyle,
-	              type: 'submit',
-	              label: 'Submit',
-	              disabled: !this.state.canSubmit
-	            })
+	            _react2.default.createElement(
+	              'div',
+	              {
+	                style: styles.form_content
+	              },
+	              _react2.default.createElement(_lib.FormsyText, {
+	                name: 'name',
+	                required: true,
+	                validations: 'isWords',
+	                validationError: errorMessages.wordsError,
+	                hintText: 'Name',
+	                floatingLabelText: 'Name',
+	                style: styles.item
+	              })
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              {
+	                style: styles.form_buttons
+	              },
+	              _react2.default.createElement(_RaisedButton2.default, {
+	                style: styles.submitStyle,
+	                type: 'submit',
+	                label: 'Add',
+	                disabled: !this.state.canSubmit
+	              })
+	            )
 	          )
 	        )
 	      );
@@ -65759,19 +65806,8 @@
 	}(_react2.default.Component), _class.propTypes = {}, _temp);
 	exports.default = AddItem;
 	
-	/*
-	              <Subheader>What did you eat?</Subheader>
-
-	import DropDownMenu from 'material-ui/DropDownMenu';
-
-	            <DropDownMenu>
-	              <MenuItem value={'home'} primaryText="Home" />
-	              <MenuItem value={'place1'} primaryText="Place 1" />
-	              <MenuItem value={'place2'} primaryText="Place 2" />
-	              <MenuItem value={'place3'} primaryText="Place 3" />
-	            </DropDownMenu>
-
-	*/
+	// <div>Category: {this.state.category}</div>
+	// <div>Kind: {this.state.kind}</div>
 
 /***/ },
 /* 679 */

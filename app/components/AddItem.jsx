@@ -65,32 +65,11 @@ class AddItem extends React.Component {
     };
   }
 
+  categoryChange(event, value) { this.setState({ category: value }); }
+  kindChange(event, value) { this.setState({ kind: value }); }
 
-  categoryChange(event, value) {
-    this.setState({
-      category: value,
-    });
-  }
-
-  kindChange(event, value) {
-    this.setState({
-      kind: value,
-    });
-  }
-
-  enableButton() {
-    this.setState({
-      canSubmit: true,
-    });
-  }
-
-  disableButton() {
-    this.setState({
-      canSubmit: false,
-    });
-  }
-
-
+  enableButton() { this.setState({ canSubmit: true }); }
+  disableButton() { this.setState({ canSubmit: false }); }
 
   render() {
     return (

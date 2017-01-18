@@ -10,6 +10,12 @@ const styles = {
     padding: '0px',
     cursor: 'pointer',
   },
+  clickedCard: {
+    margin: '0px',
+    padding: '0px',
+    cursor: 'pointer',
+    transition: 'margin 1s ease-in',
+  },
   cardMedia: {
   },
   img: {
@@ -25,21 +31,28 @@ class CardButton extends React.Component {
     subtitle: React.PropTypes.string.isRequired,
     image: React.PropTypes.string.isRequired,
     url: React.PropTypes.string.isRequired,
+    onClick: React.PropTypes.func,
   }
 
   constructor() {
     super();
     this._handleClick = this._handleClick.bind(this);
+
+    this.state = {
+      clicked: false,
+    };
   }
 
   _handleClick() {
+    this.setState({ clicked: true });
+    this.props.onClick();
     browserHistory.push(this.props.url);
   }
 
   render() {
     return (
       <Card
-        style={styles.card}
+        style={this.state.clicked ? styles.clickedCard : styles.card}
       >
         <CardMedia
           overlay={<CardTitle title={this.props.title} subtitle={this.props.subtitle} />}
