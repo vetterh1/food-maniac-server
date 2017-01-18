@@ -4,6 +4,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import App from './App';
 import MainChoiceContainer from './MainChoiceContainer';
 import Rate from './Rate';
+import AddItem from './AddItem';
 
 import TestComponent from './TestComponent';
 import TestClass from './TestClass';
@@ -20,6 +21,7 @@ const Root = ({ store }) => (
         <IndexRoute component={MainChoiceContainer} />
         <Route path="/rate" component={Rate} />
         <Route path="/where" component={ChooseLocation} />
+        <Route path="/addItem" component={AddItem} />
         <Route path="/login" component={Login} />
         <Route path="/testClass" component={TestClass} />
         <Route path="/testComponent" component={TestComponent} />

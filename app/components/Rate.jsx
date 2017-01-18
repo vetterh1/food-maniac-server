@@ -21,7 +21,7 @@ import IconSearch from 'material-ui/svg-icons/action/search';
 const styles = {
   paperStyle: {
     // width: 300,
-    margin: '20 auto',
+    // margin: '20 auto',
     padding: 20,
   },
   switchStyle: {
@@ -121,7 +121,7 @@ class Rate extends React.Component {
   render() {
     return (
       <MuiThemeProvider muiTheme={this.context.muiTheme}>
-        <Paper style={styles.paperStyle}>
+        <div style={styles.paperStyle}>
           <h1>Rate a dish...</h1>
           <Formsy.Form
             onValid={this.enableButton}
@@ -211,7 +211,7 @@ class Rate extends React.Component {
 
           </Formsy.Form>
 
-        </Paper>
+        </div>
       </MuiThemeProvider>
     );
   }

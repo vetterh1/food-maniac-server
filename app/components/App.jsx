@@ -1,6 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
 
-const _version = '2016-12-13 21:00 - geoTest';
+const _version = '2017-01-18 16:00 - add_new_item';
 
 import React from 'react';
 import MainAppBar from './MainAppBar';
