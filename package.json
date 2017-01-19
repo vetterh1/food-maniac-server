@@ -47,6 +47,7 @@
     "morgan": "^1.7.0",
     "radium": "^0.18.1",
     "react": "^15.4.1",
+    "react-addons-css-transition-group": "^15.4.2",
     "react-dom": "^15.4.1",
     "react-fontawesome": "^1.4.0",
     "react-geosuggest": "^2.0.0",
