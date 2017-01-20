@@ -51,9 +51,10 @@ class App extends React.Component {
             <MainAppBar />
             <RouteTransition
               pathname={this.props.location.pathname}
-              atEnter={{ opacity: 0 }}
-              atLeave={{ opacity: 0 }}
-              atActive={{ opacity: 1 }}
+              atEnter={{ translateX: 100 }}
+              atLeave={{ translateX: -100 }}
+              atActive={{ translateX: 0 }}
+              mapStyles={style => ({ transform: `translateX(${style.translateX}%)` })}
             >
               {this.props.children}
             </RouteTransition>

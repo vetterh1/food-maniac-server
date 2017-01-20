@@ -28852,9 +28852,12 @@
 	              _reactRouterTransition.RouteTransition,
 	              {
 	                pathname: this.props.location.pathname,
-	                atEnter: { opacity: 0 },
-	                atLeave: { opacity: 0 },
-	                atActive: { opacity: 1 }
+	                atEnter: { translateX: 100 },
+	                atLeave: { translateX: -100 },
+	                atActive: { translateX: 0 },
+	                mapStyles: function mapStyles(styles) {
+	                  return { transform: 'translateX(' + styles.translateX + '%)' };
+	                }
 	              },
 	              this.props.children
 	            ),
