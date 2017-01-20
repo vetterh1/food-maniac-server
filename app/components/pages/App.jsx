@@ -1,11 +1,11 @@
 /* eslint-disable react/prefer-stateless-function */
 /* eslint-disable react/prop-types */
 
-const _version = '2017-01-20 16:00 - add_new_item';
+const _version = '2017-01-20 18:00 - add_new_item';
 
 import React from 'react';
-import MainAppBar from './MainAppBar';
-import Version from './Version';
+import MainAppBar from '../navigation/MainAppBar';
+import Version from '../utils/Version';
 import Radium, { StyleRoot } from 'radium';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';

@@ -3,11 +3,11 @@
 import React, { PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-import App from './App';
+import App from '../pages/App';
 import MainChoiceContainer from './MainChoiceContainer';
-import Rate from './Rate';
-import AddItem from './AddItem';
-import Login from './Login';
+import Rate from '../pages/Rate';
+import AddItem from '../pages/AddItem';
+import Login from '../pages/Login';
 
 const NotFound = () => <h1>404 error - This page is not found!</h1>;
 

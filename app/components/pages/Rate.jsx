@@ -1,12 +1,12 @@
 import React from 'react';
 // import SelectCurrentLocation from '../containers/SelectCurrentLocation';
-import SelectLocation from './SelectLocation';
+import SelectLocation from '../utils/SelectLocation';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Rating from 'react-rating';
 import Formsy from 'formsy-react';
 import { FormsyCheckbox, FormsyDate, FormsyRadio, FormsyRadioGroup,
           FormsySelect, FormsyText, FormsyTime, FormsyToggle, FormsyAutoComplete } from 'formsy-material-ui/lib';
-import Paper from 'material-ui/Paper';
+// import Paper from 'material-ui/Paper';
 // import MenuItem from 'material-ui/MenuItem';
 import { GridList, GridTile } from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';

@@ -28799,7 +28799,7 @@
 	/* eslint-disable react/prefer-stateless-function */
 	/* eslint-disable react/prop-types */
 	
-	var _version = '2017-01-20 16:00 - add_new_item';
+	var _version = '2017-01-20 18:00 - add_new_item';
 	// import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 	
 	
@@ -28855,8 +28855,8 @@
 	                atEnter: { translateX: 100 },
 	                atLeave: { translateX: -100 },
 	                atActive: { translateX: 0 },
-	                mapStyles: function mapStyles(styles) {
-	                  return { transform: 'translateX(' + styles.translateX + '%)' };
+	                mapStyles: function mapStyles(style) {
+	                  return { transform: 'translateX(' + style.translateX + '%)' };
 	                }
 	              },
 	              this.props.children
@@ -48204,6 +48204,7 @@
 	var _class, _temp;
 	// import SelectCurrentLocation from '../containers/SelectCurrentLocation';
 	
+	// import Paper from 'material-ui/Paper';
 	// import MenuItem from 'material-ui/MenuItem';
 	
 	// import Subheader from 'material-ui/Subheader';
@@ -48230,10 +48231,6 @@
 	var _formsyReact2 = _interopRequireDefault(_formsyReact);
 	
 	var _lib = __webpack_require__(569);
-	
-	var _Paper = __webpack_require__(481);
-	
-	var _Paper2 = _interopRequireDefault(_Paper);
 	
 	var _GridList = __webpack_require__(672);
 	

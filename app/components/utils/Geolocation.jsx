@@ -4,10 +4,10 @@
 import React, { Component } from 'react';
 // import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as LocationActions from '../actions/LocationActions';
+import * as LocationActions from '../../actions/LocationActions';
 import IconLocation from 'material-ui/svg-icons/communication/location-on';
 import Popover from 'material-ui/Popover';
-import TestDisplayPositionFromStore from '../tests/TestDisplayPositionFromStore';
+import TestDisplayPositionFromStore from './TestDisplayPositionFromStore';
 
 
 const styles = {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import Root from './components/Root';
+import Root from './components/navigation/Root';
 import { createStore, applyMiddleware, compose } from 'redux';
 import createLogger from 'redux-logger';
 import combinedReducer from './reducers/combinedReducer';

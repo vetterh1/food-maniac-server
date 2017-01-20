@@ -5,7 +5,7 @@ import React, { /* Component */ } from 'react';
 import { connect } from 'react-redux';
 // import { setCurrentLocation } from '../actions/LocationActions';
 
-import Geolocation from '../components/Geolocation';
+import Geolocation from './Geolocation';
 
 // import Formsy from 'formsy-react';
 // import FlatButton from 'material-ui/FlatButton';

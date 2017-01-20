@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import * as LocationActions from '../actions/LocationActions';
+import * as LocationActions from '../../actions/LocationActions';
 
 class TestDisplayPositionFromStore extends React.Component {
 
