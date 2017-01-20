@@ -2,7 +2,6 @@ import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Formsy from 'formsy-react';
 import { FormsySelect, FormsyText /* ,FormsyCheckbox, FormsyDate, FormsyRadio, FormsyRadioGroup, FormsyTime, FormsyToggle, FormsyAutoComplete */ } from 'formsy-material-ui/lib';
-import Paper from 'material-ui/Paper';
 // import FlatButton from 'material-ui/FlatButton';
 // import IconSearch from 'material-ui/svg-icons/action/search';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -55,41 +54,78 @@ class AddItem extends React.Component {
     super();
     this.enableButton = this.enableButton.bind(this);
     this.disableButton = this.disableButton.bind(this);
-    this.categoryChange = this.categoryChange.bind(this);
-    this.kindChange = this.kindChange.bind(this);
+    this.submitForm = this.submitForm.bind(this);
+    this.sendFormData = this.sendFormData.bind(this);
+    this.notifyFormError = this.notifyFormError.bind(this);
+    // this.categoryChange = this.categoryChange.bind(this);
+    // this.kindChange = this.kindChange.bind(this);
+    this.nameChange = this.nameChange.bind(this);
 
     this.state = {
       canSubmit: false,
-      category: '',
-      kind: '',
+      messageType: null,
+      messageText: null,
+      name: '',
+      // category: '',
+      // kind: '',
     };
   }
 
-  categoryChange(event, value) { this.setState({ category: value }); }
-  kindChange(event, value) { this.setState({ kind: value }); }
+  // categoryChange(event, value) { this.setState({ category: value }); }
+  // kindChange(event, value) { this.setState({ kind: value }); }
+
+  nameChange(event, value) {
+    this.setState({ name: value });
+    console.log('AddItem.nameChange value:', value);
+    // TODO : Should verify on server side if name already exists
+  }
 
   enableButton() { this.setState({ canSubmit: true }); }
   disableButton() { this.setState({ canSubmit: false }); }
 
+  sendFormData(data) {
+    alert(JSON.stringify(data, null, 4));
+  }
+
+  submitForm(data) {
+    // alert(JSON.stringify(data, null, 4));
+    this.setState(
+      { messageType: 'info', messageText: 'Sending...' },
+      this.sendFormData(data)
+    );
+  }
+
+  notifyFormError(data) {
+    console.error('Form error:', data);
+  }
+
+
   render() {
+    let status = '';
+    if (this.state.messageType && this.state.messageText) {
+      const classString = `alert alert-${this.state.messageType}`;
+      status = <div id="status" className={classString} ref={(node) => { this.status = node; }}>{this.state.messageText}</div>;
+    }
+
     return (
       <MuiThemeProvider muiTheme={this.context.muiTheme}>
         <div style={styles.paperStyle}>
           <h1>New dish...</h1>
+          {status}
           <Formsy.Form
             onValid={this.enableButton}
             onInvalid={this.disableButton}
             onValidSubmit={this.submitForm}
             onInvalidSubmit={this.notifyFormError}
           >
-            <div 
+            <div
               style={styles.form_content}
             >
               <FormsySelect
                 name="category"
                 required
                 floatingLabelText="Category"
-                onChange={this.categoryChange}
+                // onChange={this.categoryChange}
                 style={styles.item}
               >
                 <MenuItem value={'dish'} primaryText="Dish" />
@@ -101,7 +137,7 @@ class AddItem extends React.Component {
                 name="kind"
                 required
                 floatingLabelText="Kind"
-                onChange={this.kindChange}
+                // onChange={this.kindChange}
                 style={styles.item}
               >
                 <MenuItem value={'italian'} primaryText="Italian" />
@@ -123,6 +159,7 @@ class AddItem extends React.Component {
                 validationError={errorMessages.wordsError}
                 hintText="Name"
                 floatingLabelText="Name"
+                onChange={this.nameChange}
                 style={styles.item}
               />
             </div>
@@ -147,6 +184,3 @@ class AddItem extends React.Component {
 }
 
 export default AddItem;
-
-// <div>Category: {this.state.category}</div>
-// <div>Kind: {this.state.kind}</div>

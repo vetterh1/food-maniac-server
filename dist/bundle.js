@@ -67546,6 +67546,8 @@
 	
 	    _this.enableButton = _this.enableButton.bind(_this);
 	    _this.disableButton = _this.disableButton.bind(_this);
+	    _this.submitForm = _this.submitForm.bind(_this);
+	    _this.notifyFormError = _this.notifyFormError.bind(_this);
 	    _this.categoryChange = _this.categoryChange.bind(_this);
 	    _this.kindChange = _this.kindChange.bind(_this);
 	
@@ -67576,6 +67578,16 @@
 	    key: 'disableButton',
 	    value: function disableButton() {
 	      this.setState({ canSubmit: false });
+	    }
+	  }, {
+	    key: 'submitForm',
+	    value: function submitForm(data) {
+	      alert(JSON.stringify(data, null, 4));
+	    }
+	  }, {
+	    key: 'notifyFormError',
+	    value: function notifyFormError(data) {
+	      console.error('Form error:', data);
 	    }
 	  }, {
 	    key: 'render',
