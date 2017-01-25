@@ -48,6 +48,7 @@ const styles = {
 
 class AddItem extends React.Component {
   static propTypes = {
+    onSubmit: React.PropTypes.func.isRequired,
   }
 
   constructor() {
@@ -55,7 +56,6 @@ class AddItem extends React.Component {
     this.enableButton = this.enableButton.bind(this);
     this.disableButton = this.disableButton.bind(this);
     this.submitForm = this.submitForm.bind(this);
-    this.sendFormData = this.sendFormData.bind(this);
     this.notifyFormError = this.notifyFormError.bind(this);
     // this.categoryChange = this.categoryChange.bind(this);
     // this.kindChange = this.kindChange.bind(this);
@@ -83,15 +83,10 @@ class AddItem extends React.Component {
   enableButton() { this.setState({ canSubmit: true }); }
   disableButton() { this.setState({ canSubmit: false }); }
 
-  sendFormData(data) {
-    alert(JSON.stringify(data, null, 4));
-  }
-
   submitForm(data) {
-    // alert(JSON.stringify(data, null, 4));
     this.setState(
       { messageType: 'info', messageText: 'Sending...' },
-      this.sendFormData(data)
+      this.props.onSubmit(data) // callback fn: send data back to container
     );
   }
 

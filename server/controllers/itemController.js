@@ -1,4 +1,4 @@
-var logger = require('winston'); 
+import * as logger from 'winston';
 import Item from '../models/item';
 import cuid from 'cuid';
 import sanitizeHtml from 'sanitize-html';
@@ -10,11 +10,9 @@ import sanitizeHtml from 'sanitize-html';
 export function getItems(req, res) {
   Item.find().sort('-since').exec((err, items) => {
     if (err) {
-      logger.error("! itemController.getItems returns err: ", err);
+      logger.error('! itemController.getItems returns err: ', err);
       res.status(500).send(err);
-    }
-    else
-    {
+    } else {
       res.json({ items });
       logger.info(`itemController.getItems length=${items.length}`);
     }
@@ -27,29 +25,27 @@ export function getItems(req, res) {
  */
 
 export function addItem(req, res) {
-
   if (!req.body || !req.body.item || !req.body.item.name) {
-    logger.error("! itemController.addItem failed! - missing mandatory fields");
-    if (!req.body )
-      logger.error("... no req.body!");
-    if (req.body && !req.body.item )
-      logger.error("... no req.body.item!");
-    if (req.body && req.body.item && !req.body.item.name )
-      logger.error("... no req.body.item.name!");
+    logger.error('! itemController.addItem failed! - missing mandatory fields');
+    if (!req.body) logger.error('... no req.body!');
+    if (req.body && !req.body.item) logger.error('... no req.body.item!');
+    if (req.body && req.body.item && !req.body.item.name) logger.error('... no req.body.item.name!');
+    if (req.body && req.body.item && !req.body.item.category) logger.error('... no req.body.item.category!');
+    if (req.body && req.body.item && !req.body.item.kind) logger.error('... no req.body.item.kind!');
     res.status(400).end();
-  }
-  else {
+  } else {
     const newItem = new Item(req.body.item);
 
     // Let's sanitize inputs
+    newItem.category = sanitizeHtml(newItem.category).toLowerCase();
+    newItem.kind = sanitizeHtml(newItem.kind).toLowerCase();
     newItem.name = sanitizeHtml(newItem.name);
     newItem.cuid = cuid();
     newItem.save((err, saved) => {
       if (err) {
         logger.error(`! itemController.addItem ${newItem.name} failed! - err = `, err);
         res.status(500).send(err);
-      }
-      else {
+      } else {
         res.json({ item: saved });
         logger.info(`itemController.addItem ${newItem.name}`);
       }

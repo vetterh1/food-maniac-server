@@ -3,6 +3,8 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const itemSchema = new Schema({
+  category: { type: 'String', required: true },
+  kind: { type: 'String', required: true },
   name: { type: 'String', required: true },
   picture: { type: 'String' },
   since: { type: 'Date', default: Date.now, required: true },

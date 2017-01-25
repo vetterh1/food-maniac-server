@@ -1,0 +1,18 @@
+{
+	"server":
+	{
+		"port": 8080
+	},
+
+	"database":
+	{
+		"URL" : "mongodb://localhost:27017/food_maniac"		
+	},
+	
+	"log":
+	{
+		"levelConsole": "warn",
+		"levelFile": "warn",
+		"pathFile" : "./distBoServer/log/winston.log"
+	}
+}
