@@ -8,7 +8,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import MenuItem from 'material-ui/MenuItem';
 
 
-
 const errorMessages = {
   wordsError: 'Please only use letters',
   numericError: 'Please provide a number',
@@ -44,6 +43,11 @@ const styles = {
     padding: '0.5em',
     marginRight: 32,
   },
+
+  video: {
+    maxWidth: '100%',
+    width: '320px',
+  },
 };
 
 class AddItem extends React.Component {
@@ -61,15 +65,74 @@ class AddItem extends React.Component {
     // this.kindChange = this.kindChange.bind(this);
     this.nameChange = this.nameChange.bind(this);
 
+    // Picture
+    this.hasGetUserMedia = this.hasGetUserMedia.bind(this);
+    this.successVideoCallback = this.successVideoCallback.bind(this);
+    this.errorVideoCallback = this.errorVideoCallback.bind(this);
+    this.handleTakeSnapshot = this.handleTakeSnapshot.bind(this);
+    this.handleSwitchCamera = this.handleSwitchCamera.bind(this);
+    this._video = null;
+
     this.state = {
       canSubmit: false,
       messageType: null,
       messageText: null,
       name: '',
+      picture: null,
       // category: '',
       // kind: '',
     };
   }
+
+  componentDidMount() {
+    if (!this.hasGetUserMedia()) {
+      alert('getUserMedia() is not supported in your browser');
+    } else {
+      navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+      this._video = document.querySelector('video');
+      navigator.getUserMedia({ audio: false, video: true }, this.successVideoCallback, this.errorVideoCallback);
+    }
+  }
+
+  hasGetUserMedia() {
+    return !!(navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
+  }
+
+  successVideoCallback(stream) {
+    window.stream = stream; // stream available to console
+    if (window.URL) {
+      this._video.src = window.URL.createObjectURL(stream);
+    } else {
+      this._video.src = stream;
+    }
+  }
+
+  errorVideoCallback(error) {
+    console.log('navigator.getUserMedia error: ', error);
+  }
+
+  handleTakeSnapshot = (event) => {
+    // This prevents ghost click.
+    event.preventDefault();
+
+    const canvas = window.canvas = document.querySelector('canvas');
+    canvas.width = this._video.videoWidth;
+    canvas.height = this._video.videoHeight;
+    canvas.getContext('2d').drawImage(this._video, 0, 0, canvas.width, canvas.height);
+
+    const dataSnapshot = canvas.toDataURL('image/jpeg', 0.9);
+    this.setState({ picture: dataSnapshot });
+  }
+
+  handleSwitchCamera = (event) => {
+    // This prevents ghost click.
+    event.preventDefault();
+
+    // see example here: https://webrtc.github.io/samples/src/content/devices/input-output/
+  }
+
+
+
 
   // categoryChange(event, value) { this.setState({ category: value }); }
   // kindChange(event, value) { this.setState({ kind: value }); }
@@ -84,9 +147,11 @@ class AddItem extends React.Component {
   disableButton() { this.setState({ canSubmit: false }); }
 
   submitForm(data) {
+    // Add picture to data
+    const dataWithPicture = Object.assign(data, { picture: this.state.picture });
     this.setState(
       { messageType: 'info', messageText: 'Sending...' },
-      this.props.onSubmit(data) // callback fn: send data back to container
+      this.props.onSubmit(dataWithPicture) // callback fn: send data back to container
     );
   }
 
@@ -157,6 +222,28 @@ class AddItem extends React.Component {
                 onChange={this.nameChange}
                 style={styles.item}
               />
+            </div>
+
+            <div>
+              <h4>Picture</h4>
+              <video autoPlay style={styles.video} />
+              <div>
+                <RaisedButton
+                  style={styles.submitStyle}
+                  type="button"
+                  label="Take snapshot"
+                  disabled={!this._video}
+                  onTouchTap={this.handleTakeSnapshot}
+                />
+                <RaisedButton
+                  style={styles.submitStyle}
+                  type="button"
+                  label="Switch camera"
+                  disabled={!this._video}
+                  onTouchTap={this.handleSwitchCamera}
+                />
+              </div>
+              <canvas />
             </div>
 
             <div

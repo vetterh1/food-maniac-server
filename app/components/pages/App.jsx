@@ -16,7 +16,7 @@ import { RouteTransition } from 'react-router-transition';
 
 const styles = {
   pageContainer: {
-    fontSize: '2em',
+    fontSize: '1.5em',
   },
 };
 

@@ -2,6 +2,8 @@ import * as logger from 'winston';
 import Item from '../models/item';
 import cuid from 'cuid';
 import sanitizeHtml from 'sanitize-html';
+import fs from 'fs';
+import config from 'config';
 
 
 /**
@@ -40,6 +42,7 @@ export function addItem(req, res) {
     newItem.category = sanitizeHtml(newItem.category).toLowerCase();
     newItem.kind = sanitizeHtml(newItem.kind).toLowerCase();
     newItem.name = sanitizeHtml(newItem.name);
+    newItem.picture = cuid(); // generate a random number for the file name
     newItem.cuid = cuid();
     newItem.save((err, saved) => {
       if (err) {
@@ -47,9 +50,29 @@ export function addItem(req, res) {
         res.status(500).send(err);
       } else {
         res.json({ item: saved });
-        logger.info(`itemController.addItem ${newItem.name}`);
+        logger.info(`itemController.addItem ${newItem.name} - saved in DB OK`);
       }
     });
+
+    // Save image directly in a file on the server
+    if (req.body.item.picture) {
+        logger.info(`itemController.addItem ${newItem.name} - saving image ${newItem.picture} (size: ${Math.floor(req.body.item.picture.length / 1024)}KB)`);
+
+        // need to strip the beginning of the pic by removing 'data:image/jpeg;base64,'
+        // and save the remaining using the 'base64' encoding option
+        const data = req.body.item.picture.replace(/^data:image\/\w+;base64,/, '');
+        const folderPicturesItems = config.get('storage.pictures.items');
+        fs.writeFile(
+          `${folderPicturesItems}/${newItem.picture}.jpg`,
+          data, { encoding: 'base64' },
+          (err) => {
+            if (err) {
+              logger.error(`! itemController.addItem ${newItem.name} - saving image ${newItem.picture} failed !`);
+            } else {
+              logger.info(`itemController.addItem ${newItem.name} - saving image ${newItem.picture} (path: ${folderPicturesItems})`);
+            }
+          });
+    }
   }
 }
 
@@ -62,9 +85,8 @@ export function getItem(req, res) {
     if (err || !item) {
       logger.error(`! itemController.getItem ${req.params.cuid} failed to find! - err = `, err);
       res.status(500).send(err);
-    }
-    else {
-      res.json({ item: item });
+    } else {
+      res.json({ item });
       logger.info(`itemController.getItem ${req.params.cuid}`);
     }
   });

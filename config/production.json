@@ -4,15 +4,22 @@
 		"port": 8080
 	},
 
-	"database":
-	{
-		"URL" : "mongodb://localhost:27017/food_maniac"		
-	},
-	
+  "storage":
+  {
+  	"database":
+  	{
+  		"URL" : "mongodb://localhost:27017/food_maniac"		
+  	},
+    "pictures":
+    {
+      "items" : "./distBoServer/storage/pictures/items"
+    }
+  },
+
 	"log":
 	{
-		"levelConsole": "warn",
-		"levelFile": "warn",
+		"levelConsole": "info",
+		"levelFile": "info",
 		"pathFile" : "./distBoServer/log/winston.log"
 	}
 }

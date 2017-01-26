@@ -11,9 +11,10 @@
     "BoServer:testVerbose": "./node_modules/.bin/mocha --compilers js:babel-register --reporter spec",
     "BoServer:lint": "eslint server",
 
+    "start": "npm run build && webpack-dev-server --progress --colors --inline --content-base dist --history-api-fallback",
+
     "dev-server": "node server/server2.js localhost 8080",
     "dev-client": "npm run build && webpack-dev-server --progress --colors --inline --content-base dist --history-api-fallback --port 3000",
-    "start": "npm run build && webpack-dev-server --progress --colors --inline --content-base dist --history-api-fallback",
     "start:devnode": "cross-env BABEL_DISABLE_CACHE=1 NODE_ENV=development nodemon index.js",
     "start:prod": "cross-env NODE_ENV=production npm run build && node server/server.js",
     "build": "npm run build:cp_css && npm run build:cp_images && webpack",

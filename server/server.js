@@ -58,9 +58,9 @@ import insertTestData from './testData';
 mongoose.Promise = global.Promise;
 
 // MongoDB Connection
-const databaseURL = config.get('database.URL');
+const databaseURL = config.get('storage.database.URL');
 logger.warn(`Mongodb: ${databaseURL}`);
-if (!config.has('database.URL')) logger.error(`! No config defined for database.URL for env ${process.env.NODE_ENV} !`);
+if (!config.has('storage.database.URL')) logger.error(`! No config defined for storage.database.URL for env ${process.env.NODE_ENV} !`);
 
 const options = {
   server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },

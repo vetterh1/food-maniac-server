@@ -6,6 +6,7 @@ import Express from 'express';
 import compression from 'compression';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
+import fs from 'fs';
 import path from 'path';
 // import IntlWrapper from '../client/modules/Intl/IntlWrapper';
 
@@ -30,7 +31,6 @@ if (process.env.PORT) {
 //
 
 import FileStreamRotator from 'file-stream-rotator';
-import fs from 'fs';
 import morgan from 'morgan';
 
 const logDirectory = `${__dirname}/log`;
@@ -48,6 +48,7 @@ const accessLogStream = FileStreamRotator.getStream({
 
 
 
+
 //
 // ---------------------  INIT DB  ---------------------
 //
@@ -58,9 +59,9 @@ import insertTestData from './testData';
 mongoose.Promise = global.Promise;
 
 // MongoDB Connection
-const databaseURL = config.get('database.URL');
+const databaseURL = config.get('storage.database.URL');
 logger.warn(`Mongodb: ${databaseURL}`);
-if (!config.has('database.URL')) logger.error(`! No config defined for database.URL for env ${process.env.NODE_ENV} !`);
+if (!config.has('storage.database.URL')) logger.error(`! No config defined for storage.database.URL for env ${process.env.NODE_ENV} !`);
 
 const options = {
   server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
@@ -78,6 +79,27 @@ mongoose.connect(databaseURL, options, (error) => {
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
+
+//
+// ---------------------  CREATE FOLDERS IN DON'T EXIST ---------------------
+//
+
+
+// Create dir recursively if it does not exist!
+function mkdirReccursive(completePath) {
+  completePath.split('/').forEach((dir, index, splits) => {
+    const parent = splits.slice(0, index).join('/');
+    const dirPath = path.resolve(parent, dir);
+    if (!fs.existsSync(dirPath)) {
+      fs.mkdirSync(dirPath);
+    }
+  });
+}
+
+const folderPicturesItems = config.get('storage.pictures.items');
+logger.warn(`Folder Pictures/Items: ${folderPicturesItems}`);
+if (!config.has('storage.pictures.items')) logger.error(`! No config defined for storage.pictures.items for env ${process.env.NODE_ENV} !`);
+mkdirReccursive(folderPicturesItems);
 
 
 
@@ -132,8 +154,8 @@ import apiRoutes from './routes/apiRoutes';
 
 app.use(compression());
 app.use(morgan('combined', { stream: accessLogStream })); // for logging
-app.use(bodyParser.json()); // Mandatory to get body in post requests!
-
+app.use(bodyParser.json({ limit: '5mb' })); // Mandatory to get body in post requests!
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 app.use(allowCrossDomain);
 

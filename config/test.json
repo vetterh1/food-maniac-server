@@ -4,11 +4,17 @@
 		"port": 8090
 	},
 
-	"database":
-	{
-		"URL" : "mongodb://localhost:27017/food_maniac_test"		
-	},
-	
+	"storage":
+  {
+    "database":
+    {
+      "URL" : "mongodb://localhost:27017/food_maniac_test"    
+    },
+    "pictures":
+    {
+      "items" : "./server/storage_test/pictures/items"
+    }
+  },
 	"log":
 	{
 		"levelConsole": "none",
