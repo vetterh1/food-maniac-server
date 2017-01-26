@@ -1,7 +1,10 @@
 {
 	"server":
 	{
-		"port": 8090
+		"BoServer":
+		{
+			"port": 8090
+		}
 	},
 
 	"storage":

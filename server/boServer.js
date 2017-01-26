@@ -14,8 +14,8 @@ import config from 'config';
 
 if (!process.env.NODE_ENV) console.error('! NODE_ENV undefined !'); // eslint-disable-line no-console
 
-const serverPort = config.get('server.port');
-logger.warn(`Server Port: ${serverPort}`);
+const serverPort = config.get('server.BoServer.port');
+logger.warn(`BoServer Port: ${serverPort}`);
 
 if (process.env.PORT) {
   console.error(`! PORT env var defined, but use ${serverPort} from config file !`); // eslint-disable-line no-console

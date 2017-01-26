@@ -108,30 +108,14 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     inline: true,
-    port: 8090,
+    port: 8080,
     proxy: {
       '^/api/*': {
-        target: 'http://localhost:8080/api/',
+        target: 'http://localhost:8085/api/',
         secure: false,
       },
     },
   },
-
-
-  devServerTest: {
-    historyApiFallback: true,
-    hot: true,
-    inline: true,
-
-    host: 'localhost', // Defaults to `localhost`
-    port: 3000, // Defaults to 8080
-    proxy: {
-      '^/api/*': {
-        target: 'http://localhost:8080/api/',
-        secure: false
-      }
-    }
-  },  
-
+  
   devtool: "source-map"
 }
