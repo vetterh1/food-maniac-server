@@ -52,27 +52,8 @@ In Test folder: add a mocha_ignore.js file:
 	\mongodb\bin\mongod
 
 
--------------  Start project ---------------
-
-// In new console, type:
-
-	cd \workspace\mapTest\
-	npm start
-
-error with npm start: 
-- does not use latest version, must always run: npm run build
-- does not detect code changes correctly (same pb: does not build)
-
-Workaround:  (but does not use node!!!!)
-	npm run start:dev
 
 
--------------  Run tests ---------------
-
-// In new console, type:
-
-	cd \workspace\mapTest\
-	npm run test
 
 ---------------- Debug ----------------
 

@@ -4,7 +4,11 @@
 		"BoServer":
 		{
 			"port": 8090
-		}
+		},
+    "FoServer":
+    {
+      "port": 8080
+    }
 	},
 
 	"storage":

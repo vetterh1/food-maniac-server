@@ -4,7 +4,6 @@ const logger = require('./util/logger.js');
 
 import Express from 'express';
 import compression from 'compression';
-import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import fs from 'fs';
 import path from 'path';
@@ -14,8 +13,8 @@ import config from 'config';
 
 if (!process.env.NODE_ENV) console.error('! NODE_ENV undefined !'); // eslint-disable-line no-console
 
-const serverPort = config.get('server.BoServer.port');
-logger.warn(`BoServer Port: ${serverPort}`);
+const serverPort = config.get('server.FoServer.port');
+logger.warn(`FoServer Port: ${serverPort}`);
 
 if (process.env.PORT) {
   console.error(`! PORT env var defined, but use ${serverPort} from config file !`); // eslint-disable-line no-console
@@ -41,65 +40,11 @@ if (!fs.existsSync(logDirectory)) fs.mkdirSync(logDirectory);
 // create a rotating write stream
 const accessLogStream = FileStreamRotator.getStream({
   date_format: 'YYYYMMDD',
-  filename: `${logDirectory}/access-BoServer-%DATE%.log`,
+  filename: `${logDirectory}/access-FoServer-%DATE%.log`,
   frequency: 'daily',
   verbose: false,
 });
 
-
-
-
-//
-// ---------------------  INIT DB  ---------------------
-//
-
-import insertTestData from './testData';
-
-// Set native promises as mongoose promise
-mongoose.Promise = global.Promise;
-
-// MongoDB Connection
-const databaseURL = config.get('storage.database.URL');
-logger.warn(`Mongodb: ${databaseURL}`);
-if (!config.has('storage.database.URL')) logger.error(`! No config defined for storage.database.URL for env ${process.env.NODE_ENV} !`);
-
-const options = {
-  server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
-  replset: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
-};
-mongoose.connect(databaseURL, options, (error) => {
-  if (error) {
-    logger.error('Please make sure Mongodb is installed and running!');
-    throw error;
-  }
-
-  // feed some dummy data in DB if empty
-  if (process.env.NODE_ENV !== 'test') insertTestData();
-});
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-
-
-//
-// ---------------------  CREATE FOLDERS IN DON'T EXIST ---------------------
-//
-
-
-// Create dir recursively if it does not exist!
-function mkdirReccursive(completePath) {
-  completePath.split('/').forEach((dir, index, splits) => {
-    const parent = splits.slice(0, index).join('/');
-    const dirPath = path.resolve(parent, dir);
-    if (!fs.existsSync(dirPath)) {
-      fs.mkdirSync(dirPath);
-    }
-  });
-}
-
-const folderPicturesItems = config.get('storage.pictures.items');
-logger.warn(`Folder Pictures/Items: ${folderPicturesItems}`);
-if (!config.has('storage.pictures.items')) logger.error(`! No config defined for storage.pictures.items for env ${process.env.NODE_ENV} !`);
-mkdirReccursive(folderPicturesItems);
 
 
 
@@ -150,8 +95,6 @@ if (process.env.NODE_ENV === 'development') {
 // ---------------------  INIT SERVER  ---------------------
 //
 
-import apiRoutes from './routes/apiRoutes';
-
 app.use(compression());
 app.use(morgan('combined', { stream: accessLogStream })); // for logging
 app.use(bodyParser.json({ limit: '5mb' })); // Mandatory to get body in post requests!
@@ -160,15 +103,21 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(allowCrossDomain);
 
 
-// Serve our mongo apis:
-app.use('/api', apiRoutes);
+// serve our static stuff like index.css
+// explanations here: http://expressjs.com/en/starter/static-files.html
+app.use(Express.static(path.resolve(__dirname, '../distFoServer')));
+
+// send all requests to index.html so browserHistory works
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../distFoServer', 'index.html'));
+});
 
 // start app
 app.listen(serverPort, (error) => {
   if (!error) {
-    logger.info(`BoServer running on port: ${serverPort}`);
+    logger.info(`FoServer running on port: ${serverPort}`);
   } else {
-    logger.error(`! Error, cannot run BoServer on port: ${serverPort}`);
+    logger.error(`! Error, cannot run FoServer on port: ${serverPort}`);
   }
 });
 

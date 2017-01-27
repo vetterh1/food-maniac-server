@@ -3,11 +3,11 @@
  *
  *    1 - Set Dev or Prod env:
  *
- *    - Unix: 
+ *    - Unix:
  *            NODE_ENV=production
  *            NODE_ENV=dev
- *        
- *    - Windows: 
+ *
+ *    - Windows:
  *            SET "NODE_ENV=production"
  *            SET "NODE_ENV=dev"
  *
@@ -16,14 +16,14 @@
  *            ...env... npm run build
  *
  *    3 - Build & Run: add "npm start"
- *    
+ *
  *            ...env... npm start
  *
  *    4 - Process Manager
  *
  *          npm run pm2:restart
- * 
- *    Note on combining: 
+ *
+ *    Note on combining:
  *    - Unix: NODE_ENV=production; npm start
  *    - Windows: SET "NODE_ENV=dev" && npm start
  *
@@ -31,55 +31,63 @@
  *
  *          NODE_ENV=production npm run build
  *          npm run pm2:restart
- *    
+ *
  */
 
-var logger = require('winston'); 
-logger.info('... in webpack.config.js');
+const logger = require('winston');
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-var webpack = require('webpack')
+logger.info('[FoServer] Start webpack (using webpack.config.js)');
 
-console.log("[lve] Start webpack");
+//
+// Plug-ins (prod & dev)
+//
+// In prod mode: call minifiers plugins
+// (in addition to the inject bundle plugin)
+//
 
-var plugins = [];
-if(process.env.NODE_ENV === 'production'){
-  console.log("[lve] Production mode");
-  plugins.push(    
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin(),
+const plugins = [];
+if (process.env.NODE_ENV === 'production') {
+  logger.info('[FoServer] Production mode');
+  plugins.push(
+    // new webpack.optimize.DedupePlugin(),
+    // new webpack.optimize.OccurrenceOrderPlugin(),
+    // new webpack.optimize.UglifyJsPlugin()
+    new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('production') } }),
     new webpack.optimize.UglifyJsPlugin()
   );
+} else {
+  logger.info('[FoServer] NOT in Production mode');
 }
-else {  
-  console.log("[lve] NOT in Production mode");
-}
-
-/* Plugin to inject bundle dist path in index.html */  
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: __dirname + '/app/index.html',
+// Plugin to inject bundle dist path in index.html
+const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
+  template: path.join(__dirname, '/app/index.html'),
   filename: 'index.html',
-  inject: 'body'
+  inject: 'body',
 });
-plugins.push( HTMLWebpackPluginConfig );
+plugins.push(HTMLWebpackPluginConfig);
 
 
 /*
  *   Loaders:
  *   - babel: ES6 --> ES5
  *   - babel: JSX --> JS
- *   
+ *
  */
-//var loaders = ['babel-loader'];
-if(process.env.NODE_ENV != 'production'){
-  // loaders.push('react-hot');
+
+const loaders = ['babel-loader'];
+if (process.env.NODE_ENV !== 'production') {
+  loaders.push('react-hot');
 }
 
 
 module.exports = {
   entry: [
-    './app/index.jsx'
+    './app/index.jsx',
   ],
+
   resolve: {
     extensions: ['', '.js', '.jsx'],
     modules: [
@@ -87,22 +95,21 @@ module.exports = {
       'node_modules',
     ],
   },
+
   output: {
-    filename: "/bundle.js",
-    path: __dirname + '/dist'
+    filename: '/bundle.js',
+    path: path.join(__dirname, '/distFoServer'),
   },
-  /*
-   * In prod mode: call minifiers plugins
-   * (in addition to the inject bundle plugin )
-   */
-  plugins: 
-    plugins,
+
+  plugins,
+
   module: {
-    loaders: [{ 
-      test: /\.js.?$/, 
-      exclude: /node_modules/, 
-      loader: 'babel-loader'
-    }]
+    loaders: [{
+      test: /\.js.?$/,
+      exclude: /node_modules/,
+      loader: 'babel-loader',
+      // loader: loaders
+    }],
   },
 
   devServer: {
@@ -116,6 +123,6 @@ module.exports = {
       },
     },
   },
-  
-  devtool: "source-map"
-}
+
+  devtool: 'source-map',
+};

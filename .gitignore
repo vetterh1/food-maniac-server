@@ -3,4 +3,5 @@ sublime
 npm-debug*.*
 dist
 distBoServer
+distFoServer
 server/storage_dev
