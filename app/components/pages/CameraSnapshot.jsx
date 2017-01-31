@@ -2,6 +2,7 @@ import React from 'react';
 import IconButton from 'material-ui/IconButton';
 import IconCamera from 'material-ui/svg-icons/image/photo-camera';
 import IconCameraSwitch from 'material-ui/svg-icons/image/switch-camera';
+import LogOnDisplay from '../utils/LogOnDisplay';
 
 const styles = {
   main: {
@@ -46,6 +47,7 @@ export default class CameraSnaphotContainer extends React.Component {
     this._canvasCameraSnapshot = null;
     this._sources = [];
     this._indexSources = 0;
+    this._logOnDisplay = null;
 
     this.state = {
       video: false,
@@ -135,11 +137,12 @@ export default class CameraSnaphotContainer extends React.Component {
     sourceInfos.forEach((source, index) => {
       if (source.kind === 'video'){
         this._sources.push(source.label);
-        this._sources.push(source.label);
       }
     });
     this._indexSources = 0;
     console.log('CameraSnaphot.gotSources() sources: ', this._sources);
+    this._logOnDisplay.addLog(`gotSources() - sources.length=${this._sources.length}`);
+    this._sources.forEach((source, index) => { this._logOnDisplay.addLog(`gotSources() - sources ${index}=${source}`); });
   }
 
 
@@ -147,8 +150,11 @@ export default class CameraSnaphotContainer extends React.Component {
     // This prevents ghost click.
     event.preventDefault();
     this._indexSources++;
-    if(this._indexSources >= this._sources.length) this._indexSources = 0;
+    if (this._indexSources >= this._sources.length) this._indexSources = 0;
     console.log('CameraSnaphot.handleSwitchCamera() _indexSources,_sources : ', this._indexSources, this._sources);
+    this._logOnDisplay.addLog(`sources.length=${this._sources.length}`);
+    this._logOnDisplay.addLog(`index sources=${this._indexSources}`);
+    this._indexSources.forEach((source) => { this._logOnDisplay.addLog(`source: ${source}`); });
     this.initVideo();
     // see example here: https://webrtc.github.io/samples/src/content/devices/input-output/
   }
@@ -160,6 +166,7 @@ export default class CameraSnaphotContainer extends React.Component {
 
     return (
       <div style={styles.main}>
+        <LogOnDisplay ref={(r) => { this._logOnDisplay = r; }} />
         <div>
           <IconButton
             style={styles.cameraIconStyle}
