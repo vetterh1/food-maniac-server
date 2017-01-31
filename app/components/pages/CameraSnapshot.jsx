@@ -15,8 +15,11 @@ const styles = {
     height: '100%',
     maxHeight: 'none',
   },
-  canvas: {
-    // visibility: 'hidden',
+  hidden: {
+    visibility: 'hidden',
+  },
+  visible: {
+    visibility: 'visible',
   },
 };
 
@@ -31,14 +34,18 @@ export default class CameraSnaphotContainer extends React.Component {
 
     // Picture
     this.hasGetUserMedia = this.hasGetUserMedia.bind(this);
+    this.initVideo = this.initVideo.bind(this);
     this.successVideoCallback = this.successVideoCallback.bind(this);
     this.errorVideoCallback = this.errorVideoCallback.bind(this);
     this.handleTakeSnapshot = this.handleTakeSnapshot.bind(this);
     this.handleSwitchCamera = this.handleSwitchCamera.bind(this);
     this.stopMediaStream = this.stopMediaStream.bind(this);
+    this.gotSources = this.gotSources.bind(this);
     this._video = null;
     this._stream = null;
     this._canvasCameraSnapshot = null;
+    this._sources = [];
+    this._indexSources = 0;
 
     this.state = {
       video: false,
@@ -46,13 +53,28 @@ export default class CameraSnaphotContainer extends React.Component {
   }
 
   componentDidMount() {
+    MediaStreamTrack.getSources(this.gotSources);
+    this.initVideo();
+  }
+
+
+  initVideo() {
     if (!this.hasGetUserMedia()) {
       alert('getUserMedia() is not supported in your browser');
     } else {
+      const videoConstraints = { 
+        audio: false, 
+        video: {
+          optional: [{
+            sourceId: this._sources[this._indexSources]
+          }]
+        }
+      };
+
       navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
       this._video = document.querySelector('video');
       console.log('this._video: ', this._video);
-      navigator.getUserMedia({ audio: false, video: true }, this.successVideoCallback, this.errorVideoCallback);
+      navigator.getUserMedia(videoConstraints, this.successVideoCallback, this.errorVideoCallback);
       // navigator.getUserMedia is deprecated. should use navigator.mediaDevices.getUserMedia({ audio: false, video: true }).then(this.successVideoCallback).catch(this.errorVideoCallback);
     }
   }
@@ -108,14 +130,34 @@ export default class CameraSnaphotContainer extends React.Component {
     this.props.onSnapshot(dataSnapshot); // callback fn: send data back to container
   }
 
+
+  gotSources(sourceInfos) {
+    sourceInfos.forEach((source, index) => {
+      if (source.kind === 'video'){
+        this._sources.push(source.label);
+        this._sources.push(source.label);
+      }
+    });
+    this._indexSources = 0;
+    console.log('CameraSnaphot.gotSources() sources: ', this._sources);
+  }
+
+
   handleSwitchCamera = (event) => {
     // This prevents ghost click.
     event.preventDefault();
-
+    this._indexSources++;
+    if(this._indexSources >= this._sources.length) this._indexSources = 0;
+    console.log('CameraSnaphot.handleSwitchCamera() _indexSources,_sources : ', this._indexSources, this._sources);
+    this.initVideo();
     // see example here: https://webrtc.github.io/samples/src/content/devices/input-output/
   }
 
+
+
   render() {
+    const switchStyle = this._sources.length > 1 ? styles.visible : styles.hidden;
+
     return (
       <div style={styles.main}>
         <div>
@@ -127,14 +169,14 @@ export default class CameraSnaphotContainer extends React.Component {
             <IconCamera color="rgb(0, 188, 212)" />
           </IconButton>
           <IconButton
-            style={styles.cameraIconSwitchStyle}
+            style={switchStyle}
             disabled={!this.state.video}
-            onTouchTap={this.handleTakeSnapshot}
+            onTouchTap={this.handleSwitchCamera}
           >
             <IconCameraSwitch color="rgb(0, 188, 212)" />
           </IconButton>
         </div>
-        <video autoPlay style={styles.video} />
+        <video autoPlay style={styles.video} onTouchTap={this.handleTakeSnapshot} />
       </div>
     );
   }

@@ -97,7 +97,7 @@ class AddItem extends React.Component {
 
 
   onSnapshot = (data) => {
-    console.log('AddItem.onSnapshot() snapshot length: ', data.length);
+    console.log('AddItem.onSnapshot() snapshot length: ', data ? data.length : 'null');
     this.setState({ picture: data });
   }
 

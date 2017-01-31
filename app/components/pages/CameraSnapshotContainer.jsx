@@ -1,8 +1,11 @@
 import React from 'react';
 import Dialog from 'material-ui/Dialog';
+import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
+// import RaisedButton from 'material-ui/RaisedButton';
 import CameraSnapshot from './CameraSnapshot';
+import IconAddAPhoto from 'material-ui/svg-icons/image/add-a-photo';
+import IconDelete from 'material-ui/svg-icons/action/delete';
 
 const styles = {
   dialog: {
@@ -10,6 +13,12 @@ const styles = {
     maxWidth: 'none',
     height: '100%',
     maxHeight: 'none',
+  },
+  hidden: {
+    visibility: 'hidden',
+  },
+  visible: {
+    visibility: 'visible',
   },
 };
 
@@ -24,11 +33,13 @@ export default class CameraSnapshotContainer extends React.Component {
 
   constructor() {
     super();
+    this._canvasCameraSnapshot = null;
     this.onSnapshot = this.onSnapshot.bind(this);
+    this.onDeleteSnapshot = this.onDeleteSnapshot.bind(this);
 
     this.state = {
       open: false,
-      picture: null,
+      snapshot: false,
     };
   }
 
@@ -37,6 +48,15 @@ export default class CameraSnapshotContainer extends React.Component {
     console.log('CameraSnapshotContainer.onSnapshot() snapshot length: ', data.length);
     this.handleClose();
     this.props.onSnapshot(data);
+    this._imageSnapshot.src = data;
+    this.setState({ snapshot: true });
+  }
+
+  onDeleteSnapshot = () => {
+    console.log('CameraSnapshotContainer.onDeleteSnapshot()');
+    this.props.onSnapshot(null);
+    this._imageSnapshot.src = null;
+    this.setState({ snapshot: false });
   }
 
 
@@ -58,9 +78,15 @@ export default class CameraSnapshotContainer extends React.Component {
       />,
     ];
 
+    const styleTakeSnapshot = this.state.snapshot ? styles.hidden : styles.visible;
+    const styleDeleteSnapshot = this.state.snapshot ? styles.visible : styles.hidden;
+//    console.log('render this.state.snapshot, styleTakeSnapshot, styleDeleteSnapshot', this.state.snapshot, styleTakeSnapshot, styleDeleteSnapshot);
+
     return (
       <div>
-        <RaisedButton label="Take snapshot" onTouchTap={this.handleOpen} />
+        <IconButton style={styleTakeSnapshot} onTouchTap={this.handleOpen}><IconAddAPhoto /></IconButton>
+        <IconButton style={styleDeleteSnapshot} onTouchTap={this.onDeleteSnapshot}><IconDelete /></IconButton>
+
         <Dialog
           title="Snapshot"
           actions={actions}
@@ -70,7 +96,12 @@ export default class CameraSnapshotContainer extends React.Component {
         >
           <CameraSnapshot onSnapshot={this.onSnapshot} />
         </Dialog>
+        <img role="presentation" ref={(c) => { this._imageSnapshot = c; }} style={styles.imageSnapshot} />
       </div>
     );
   }
 }
+
+
+//        <canvas ref={(c) => { this._canvasCameraSnapshotContainer = c; }} style={styles.canvas} />
+//        <RaisedButton label="Take snapshot" onTouchTap={this.handleOpen} style={styleTakeSnapshot} />
