@@ -97,19 +97,14 @@ class AddItem extends React.Component {
 
 
   onSnapshot = (data) => {
+    this.displayAsImage(data);
     console.log('AddItem.onSnapshot() snapshot length: ', data ? data.length : 'null');
     this.setState({ picture: data });
   }
 
-  displayAsImage(file) {
-    const imgURL = URL.createObjectURL(file);
+  displayAsImage = (data) => {
     const img = document.createElement('img');
-
-    img.onload = () => {
-      URL.revokeObjectURL(imgURL);
-    };
-
-    img.src = imgURL;
+    img.src = data;
     document.body.appendChild(img);
   }
 

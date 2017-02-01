@@ -45,19 +45,19 @@ const styles = {
   },
 };
 
-
+/*
 function displayAsImage(file) {
-  var imgURL = URL.createObjectURL(file),
-      img = document.createElement('img');
+  const imgURL = URL.createObjectURL(file);
+  const img = document.createElement('img');
 
-  img.onload = function() {
+  img.onload = function () {
     URL.revokeObjectURL(imgURL);
   };
 
   img.src = imgURL;
   document.body.appendChild(img);
 }
-
+*/
 
 /**
  * The dialog width has been set to occupy the full width of browser through the `contentStyle` property.
@@ -73,6 +73,7 @@ export default class CameraSnapshotContainer extends React.Component {
     this._inputSnapshot= null;
     this.onSnapshot = this.onSnapshot.bind(this);
     this.onDeleteSnapshot = this.onDeleteSnapshot.bind(this);
+    this.sendDataToParent = this.sendDataToParent.bind(this);
     this._logOnDisplay = null;
 
     this.state = {
@@ -81,10 +82,22 @@ export default class CameraSnapshotContainer extends React.Component {
   }
 
 
+  sendDataToParent = (file) => {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const dataURL = e.target.result;
+      this.props.onSnapshot(dataURL);
+    }.bind(this);
+
+    reader.readAsDataURL(file);
+  }
+
+
   onSnapshot = (event) => {
     const file = event.target.files[0];
     console.log('CameraSnapshotContainer.onSnapshot() file: ', file);
-    displayAsImage(file);
+    // displayAsImage(file);
+    this.sendDataToParent(file);
 
 //    this.props.onSnapshot(data);
 //    this._imageSnapshot.src = data;
