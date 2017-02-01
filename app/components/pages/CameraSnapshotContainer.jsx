@@ -1,11 +1,9 @@
 import React from 'react';
-import Dialog from 'material-ui/Dialog';
 import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
-// import RaisedButton from 'material-ui/RaisedButton';
-import CameraSnapshot from './CameraSnapshot';
 import IconAddAPhoto from 'material-ui/svg-icons/image/add-a-photo';
 import IconDelete from 'material-ui/svg-icons/action/delete';
+import LogOnDisplay from '../utils/LogOnDisplay';
 
 const styles = {
   dialog: {
@@ -20,7 +18,45 @@ const styles = {
   visible: {
     visibility: 'visible',
   },
+
+  // snapshotInputBlock: {
+  //   display: 'block',
+  //   width: '100px',
+  //   height: '20px',
+  //   overflow: 'hidden',
+  // },
+
+  snapshotButton: {
+    width: '110px',
+    height: '30px',
+    position: 'relative',
+    top: '-5px',
+    left: '-5px',
+  },
+
+  snapshotInput: {
+    fontSize: '50px',
+    width: '120px',
+    opacity: 0,
+    filter: 'alpha(opacity=0)',
+    position: 'relative',
+    top: '-40px',
+    left: '-20px',
+  },
 };
+
+
+function displayAsImage(file) {
+  var imgURL = URL.createObjectURL(file),
+      img = document.createElement('img');
+
+  img.onload = function() {
+    URL.revokeObjectURL(imgURL);
+  };
+
+  img.src = imgURL;
+  document.body.appendChild(img);
+}
 
 
 /**
@@ -34,21 +70,24 @@ export default class CameraSnapshotContainer extends React.Component {
   constructor() {
     super();
     this._canvasCameraSnapshot = null;
+    this._inputSnapshot= null;
     this.onSnapshot = this.onSnapshot.bind(this);
     this.onDeleteSnapshot = this.onDeleteSnapshot.bind(this);
+    this._logOnDisplay = null;
 
     this.state = {
-      open: false,
       snapshot: false,
     };
   }
 
 
-  onSnapshot = (data) => {
-    console.log('CameraSnapshotContainer.onSnapshot() snapshot length: ', data.length);
-    this.handleClose();
-    this.props.onSnapshot(data);
-    this._imageSnapshot.src = data;
+  onSnapshot = (event) => {
+    const file = event.target.files[0];
+    console.log('CameraSnapshotContainer.onSnapshot() file: ', file);
+    displayAsImage(file);
+
+//    this.props.onSnapshot(data);
+//    this._imageSnapshot.src = data;
     this.setState({ snapshot: true });
   }
 
@@ -59,34 +98,26 @@ export default class CameraSnapshotContainer extends React.Component {
     this.setState({ snapshot: false });
   }
 
-
-  handleOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-
-
   render() {
-    const actions = [
-      <FlatButton
-        label="Cancel"
-        primary
-        onTouchTap={this.handleClose}
-      />,
-    ];
-
     const styleTakeSnapshot = this.state.snapshot ? styles.hidden : styles.visible;
     const styleDeleteSnapshot = this.state.snapshot ? styles.visible : styles.hidden;
-//    console.log('render this.state.snapshot, styleTakeSnapshot, styleDeleteSnapshot', this.state.snapshot, styleTakeSnapshot, styleDeleteSnapshot);
 
     return (
       <div>
-        <IconButton style={styleTakeSnapshot} onTouchTap={this.handleOpen}><IconAddAPhoto /></IconButton>
         <IconButton style={styleDeleteSnapshot} onTouchTap={this.onDeleteSnapshot}><IconDelete /></IconButton>
+        <div style={styles.snapshotInputBlock}>
+          <div style={styles.snapshotButton}><IconAddAPhoto /></div>
+          <input type="file" ref={(r) => { this._inputSnapshot = r; }} style={styles.snapshotInput} onChange={this.onSnapshot} accept="image/*" capture />
+        </div>
+        <img role="presentation" ref={(c) => { this._imageSnapshot = c; }} style={styles.imageSnapshot} />
+        <LogOnDisplay ref={(r) => { this._logOnDisplay = r; }} />
+      </div>
+    );
+  }
+}
 
+/*
+        <IconButton style={styleTakeSnapshot} onTouchTap={this.handleOpen}><IconAddAPhoto /></IconButton>
         <Dialog
           title="Snapshot"
           actions={actions}
@@ -96,12 +127,7 @@ export default class CameraSnapshotContainer extends React.Component {
         >
           <CameraSnapshot onSnapshot={this.onSnapshot} />
         </Dialog>
-        <img role="presentation" ref={(c) => { this._imageSnapshot = c; }} style={styles.imageSnapshot} />
-      </div>
-    );
-  }
-}
-
-
+*/
+//        <input type="file" name="image" accept="image/*" capture />
 //        <canvas ref={(c) => { this._canvasCameraSnapshotContainer = c; }} style={styles.canvas} />
 //        <RaisedButton label="Take snapshot" onTouchTap={this.handleOpen} style={styleTakeSnapshot} />

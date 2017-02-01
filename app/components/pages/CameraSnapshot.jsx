@@ -42,6 +42,8 @@ export default class CameraSnaphotContainer extends React.Component {
     this.handleSwitchCamera = this.handleSwitchCamera.bind(this);
     this.stopMediaStream = this.stopMediaStream.bind(this);
     this.gotSources = this.gotSources.bind(this);
+    this.gotDevices = this.gotDevices.bind(this);
+    this.handleErrorEnumerateDevices = this.handleErrorEnumerateDevices.bind(this);
     this._video = null;
     this._stream = null;
     this._canvasCameraSnapshot = null;
@@ -55,35 +57,40 @@ export default class CameraSnaphotContainer extends React.Component {
   }
 
   componentDidMount() {
-    MediaStreamTrack.getSources(this.gotSources);
-    this.initVideo();
-  }
-
-
-  initVideo() {
-    if (!this.hasGetUserMedia()) {
-      alert('getUserMedia() is not supported in your browser');
-    } else {
-      const videoConstraints = { 
-        audio: false, 
-        video: {
-          optional: [{
-            sourceId: this._sources[this._indexSources]
-          }]
-        }
-      };
-
-      navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-      this._video = document.querySelector('video');
-      console.log('this._video: ', this._video);
-      navigator.getUserMedia(videoConstraints, this.successVideoCallback, this.errorVideoCallback);
-      // navigator.getUserMedia is deprecated. should use navigator.mediaDevices.getUserMedia({ audio: false, video: true }).then(this.successVideoCallback).catch(this.errorVideoCallback);
-    }
+//    navigator.mediaDevices.enumerateDevices().then(this.gotDevices).catch(this.handleErrorEnumerateDevices);
+//    this.initVideo();
   }
 
   componentWillUnmount() {
     this.stopMediaStream();
   }
+
+  initVideo() {
+    if (!this.hasGetUserMedia()) {
+      alert('getUserMedia() is not supported in your browser');
+    } else {
+      const videoConstraints = {
+        audio: false,
+        video: {
+          optional: [{
+            sourceId: this._sources[this._indexSources],
+          }],
+        },
+      };
+
+      navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+      this._video = document.querySelector('video');
+      console.log('this._video: ', this._video);
+      // navigator.getUserMedia(videoConstraints, this.successVideoCallback, this.errorVideoCallback);
+      // navigator.getUserMedia is deprecated. should use navigator.mediaDevices.getUserMedia({ audio: false, video: true }).then(this.successVideoCallback).catch(this.errorVideoCallback);
+
+      navigator.mediaDevices.getUserMedia(videoConstraints).then(this.gotSources).then(this.gotDevices).catch(this.handleErrorEnumerateDevices);
+      // navigator.mediaDevices.enumerateDevices().then(this.gotDevices).catch(this.handleErrorEnumerateDevices);
+      // MediaStreamTrack.getSources(this.gotSources);
+    }
+  }
+
+
 
   stopMediaStream() {
     if (this._video) {
@@ -134,8 +141,9 @@ export default class CameraSnaphotContainer extends React.Component {
 
 
   gotSources(sourceInfos) {
-    sourceInfos.forEach((source, index) => {
-      if (source.kind === 'video'){
+    this._sources.length = 0;
+    sourceInfos.forEach((source) => {
+      if (source.kind === 'video') {
         this._sources.push(source.label);
       }
     });
@@ -145,6 +153,27 @@ export default class CameraSnaphotContainer extends React.Component {
     this._sources.forEach((source, index) => { this._logOnDisplay.addLog(`gotSources() - sources ${index}=${source}`); });
   }
 
+
+
+  gotDevices(deviceInfos) {
+    this._sources.length = 0;
+    deviceInfos.forEach((device) => {
+      if (device.kind === 'videoinput') {
+        this._sources.push(device.deviceId);
+      }
+    });
+    this._indexSources = 0;
+    console.log('CameraSnaphot.gotDevices() sources: ', this._sources);
+    this._logOnDisplay.addLog(`gotDevices() - sources.length=${this._sources.length}`);
+    this._sources.forEach((source, index) => { this._logOnDisplay.addLog(`gotDevices() - sources ${index}=${source}`); });
+  }
+
+
+
+  handleErrorEnumerateDevices(error) {
+    console.log('CameraSnapshot handleErrorEnumerateDevices: ', error);
+    this._logOnDisplay.addLog(`CameraSnapshot handleErrorEnumerateDevices: ${error}`);
+  }
 
   handleSwitchCamera = (event) => {
     // This prevents ghost click.

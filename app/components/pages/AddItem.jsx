@@ -101,6 +101,17 @@ class AddItem extends React.Component {
     this.setState({ picture: data });
   }
 
+  displayAsImage(file) {
+    const imgURL = URL.createObjectURL(file);
+    const img = document.createElement('img');
+
+    img.onload = () => {
+      URL.revokeObjectURL(imgURL);
+    };
+
+    img.src = imgURL;
+    document.body.appendChild(img);
+  }
 
   render() {
     let status = '';
