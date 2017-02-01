@@ -50,13 +50,13 @@ export function addItem(req, res) {
         res.status(500).send(err);
       } else {
         res.json({ item: saved });
-        logger.info(`itemController.addItem ${newItem.name} - saved in DB OK`);
+        logger.error(`itemController.addItem ${newItem.name} - saved in DB OK`);
       }
     });
 
     // Save image directly in a file on the server
     if (req.body.item.picture) {
-        logger.info(`itemController.addItem ${newItem.name} - saving image ${newItem.picture} (size: ${Math.floor(req.body.item.picture.length / 1024)}KB)`);
+        logger.error(`itemController.addItem ${newItem.name} - saving image ${newItem.picture} (size: ${Math.floor(req.body.item.picture.length / 1024)}KB)`);
 
         // need to strip the beginning of the pic by removing 'data:image/jpeg;base64,'
         // and save the remaining using the 'base64' encoding option
@@ -69,7 +69,7 @@ export function addItem(req, res) {
             if (err) {
               logger.error(`! itemController.addItem ${newItem.name} - saving image ${newItem.picture} failed !`);
             } else {
-              logger.info(`itemController.addItem ${newItem.name} - saving image ${newItem.picture} (path: ${folderPicturesItems})`);
+              logger.error(`itemController.addItem ${newItem.name} - saving image ${newItem.picture} (path: ${folderPicturesItems})`);
             }
           });
     }
