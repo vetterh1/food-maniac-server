@@ -103,10 +103,14 @@ class AddItem extends React.Component {
   }
 
 
-  onSnapshot = (data) => {
+  onSnapshot = (data, nowUpdateParent) => {
     this.displaySnapshot(data);
     console.log('AddItem.onSnapshot() snapshot length: ', data ? data.length : 'null');
     this.setState({ picture: data });
+
+    const nowUpdateCanvas = new Date().getTime();
+    const timeDiff = nowUpdateCanvas - nowUpdateParent;
+    this._logOnDisplay.addLog(`AddItem() - time to display image = ${timeDiff}`);
   }
 
   displaySnapshot = (data) => {

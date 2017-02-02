@@ -53,7 +53,7 @@ export default class CameraSnapshotContainer extends React.Component {
   constructor() {
     super();
     this._canvasCameraSnapshot = null;
-    this._inputSnapshot= null;
+    this._inputSnapshot = null;
     this.onSnapshot = this.onSnapshot.bind(this);
     this.onDeleteSnapshot = this.onDeleteSnapshot.bind(this);
     this.updateCanvas = this.updateCanvas.bind(this);
@@ -65,22 +65,40 @@ export default class CameraSnapshotContainer extends React.Component {
   }
 
 
-  updateParent = (finalData) => {
-    console.log('CameraSnapshotContainer.updateCanvas() finalData length: ', finalData.length);
-    this._logOnDisplay.addLog(`updateCanvas() - finalData.length=${finalData.length}`);
+  onSnapshot = (event) => {
+    this._nowOnSnapshot = new Date().getTime();
+    const file = event.target.files[0];
+    console.log('CameraSnapshotContainer.onSnapshot() file: ', file);
 
-    this.props.onSnapshot(finalData);   // callback fn: send data back to parent
+    PromiseFileReader.readAsDataURL(file)
+      .then(this.updateCanvas)
+      .then(this.updateParent);
+
+    this.setState({ snapshot: true });
+  }
+
+  onDeleteSnapshot = () => {
+    console.log('CameraSnapshotContainer.onDeleteSnapshot()');
+    this.props.onSnapshot(null);
+    this.setState({ snapshot: false });
   }
 
 
-
   updateCanvas = (rawData) => {
+    this._nowUpdateCanvas = new Date().getTime();
+    const timeDiff = this._nowUpdateCanvas - this._nowOnSnapshot;
+    this._logOnDisplay.addLog(`updateCanvas() - time for readAsDataURL = ${timeDiff}`);
+
     console.log('CameraSnapshotContainer.updateCanvas() rawData length: ', rawData.length);
     this._logOnDisplay.addLog(`updateCanvas() - rawData.length=${rawData.length}`);
     return new Promise((resolve, reject) => {
       this._canvasCameraSnapshot = this._canvasCameraSnapshot || document.createElement('canvas');
       const image = new Image();
       image.onload = function () {
+        this._nowOnLoad = new Date().getTime();
+        const timeDiff2 = this._nowOnLoad - this._nowUpdateCanvas;
+        this._logOnDisplay.addLog(`updateCanvas() - time for image load = ${timeDiff2}`);
+
         const maxWidth = 1024;
         const maxHeight = 1024;
         console.log('CameraSnapshotContainer.updateCanvas() in onload');
@@ -96,21 +114,16 @@ export default class CameraSnapshotContainer extends React.Component {
   }
 
 
-  onSnapshot = (event) => {
-    const file = event.target.files[0];
-    console.log('CameraSnapshotContainer.onSnapshot() file: ', file);
+  updateParent = (finalData) => {
+    this._nowUpdateParent = new Date().getTime();
+    const timeDiff = this._nowUpdateParent - this._nowOnLoad;
+    this._logOnDisplay.addLog(`updateCanvas() - time for jpeg creation = ${timeDiff}`);
 
-    PromiseFileReader.readAsDataURL(file)
-      .then(this.updateCanvas)
-      .then(this.updateParent);
 
-    this.setState({ snapshot: true });
-  }
+    console.log('CameraSnapshotContainer.updateCanvas() finalData length: ', finalData.length);
+    this._logOnDisplay.addLog(`updateCanvas() - finalData.length=${finalData.length}`);
 
-  onDeleteSnapshot = () => {
-    console.log('CameraSnapshotContainer.onDeleteSnapshot()');
-    this.props.onSnapshot(null);
-    this.setState({ snapshot: false });
+    this.props.onSnapshot(finalData, this._nowUpdateParent);   // callback fn: send data back to parent
   }
 
   render() {
