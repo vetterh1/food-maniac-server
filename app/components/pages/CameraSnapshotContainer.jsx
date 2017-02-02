@@ -47,7 +47,8 @@ const styles = {
 
 export default class CameraSnapshotContainer extends React.Component {
   static propTypes = {
-    onSnapshot: React.PropTypes.func.isRequired,
+    onSnapshotStartProcessing: React.PropTypes.func.isRequired,
+    onSnapshotReady: React.PropTypes.func.isRequired,
   }
 
   constructor() {
@@ -66,6 +67,8 @@ export default class CameraSnapshotContainer extends React.Component {
 
 
   onSnapshot = (event) => {
+    // callback fn: tell parent we start processing the snapshot
+    this.props.onSnapshotStartProcessing();
     this._nowOnSnapshot = new Date().getTime();
     const file = event.target.files[0];
     console.log('CameraSnapshotContainer.onSnapshot() file: ', file);
@@ -123,7 +126,7 @@ export default class CameraSnapshotContainer extends React.Component {
     console.log('CameraSnapshotContainer.updateCanvas() finalData length: ', finalData.length);
     this._logOnDisplay.addLog(`updateCanvas() - finalData.length=${finalData.length}`);
 
-    this.props.onSnapshot(finalData, this._nowUpdateParent);   // callback fn: send data back to parent
+    this.props.onSnapshotReady(finalData, this._nowUpdateParent);   // callback fn: send data back to parent
   }
 
   render() {

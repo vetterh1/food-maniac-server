@@ -7,6 +7,7 @@ import { FormsySelect, FormsyText /* ,FormsyCheckbox, FormsyDate, FormsyRadio, F
 import RaisedButton from 'material-ui/RaisedButton';
 import MenuItem from 'material-ui/MenuItem';
 import CameraSnapshotContainer from './CameraSnapshotContainer';
+import LogOnDisplay from '../utils/LogOnDisplay';
 
 
 const errorMessages = {
@@ -60,9 +61,12 @@ class AddItem extends React.Component {
     // this.categoryChange = this.categoryChange.bind(this);
     // this.kindChange = this.kindChange.bind(this);
     this.nameChange = this.nameChange.bind(this);
-    this.onSnapshot = this.onSnapshot.bind(this);
 
+    this.onSnapshotStartProcessing = this.onSnapshotStartProcessing.bind(this);
+    this.onSnapshotReady = this.onSnapshotReady.bind(this);
     this._imageCameraSnapshot = null;
+
+    this._logOnDisplay = null;
 
     this.state = {
       canSubmit: false,
@@ -103,7 +107,12 @@ class AddItem extends React.Component {
   }
 
 
-  onSnapshot = (data, nowUpdateParent) => {
+  onSnapshotStartProcessing = () => {
+    this._nowStartProcessing = new Date().getTime();
+  }
+
+
+  onSnapshotReady = (data, nowUpdateParent) => {
     this.displaySnapshot(data);
     console.log('AddItem.onSnapshot() snapshot length: ', data ? data.length : 'null');
     this.setState({ picture: data });
@@ -111,6 +120,8 @@ class AddItem extends React.Component {
     const nowUpdateCanvas = new Date().getTime();
     const timeDiff = nowUpdateCanvas - nowUpdateParent;
     this._logOnDisplay.addLog(`AddItem() - time to display image = ${timeDiff}`);
+    const timeDiffTotal = nowUpdateCanvas - this._nowStartProcessing;
+    this._logOnDisplay.addLog(`AddItem() - total time to process snapshot = ${timeDiffTotal}`);
   }
 
   displaySnapshot = (data) => {
@@ -183,7 +194,7 @@ class AddItem extends React.Component {
 
             <div>
               <h4>Picture</h4>
-              <CameraSnapshotContainer onSnapshot={this.onSnapshot} />
+              <CameraSnapshotContainer onSnapshotStartProcessing={this.onSnapshotStartProcessing} onSnapshotReady={this.onSnapshotReady} />
               <img ref={(r) => { this._imageCameraSnapshot = r; }} style={styles.imageCameraSnapshot} />
             </div>
 
@@ -199,6 +210,7 @@ class AddItem extends React.Component {
             </div>
 
           </Formsy.Form>
+          <LogOnDisplay ref={(r) => { this._logOnDisplay = r; }} />
         </div>
       </MuiThemeProvider>
     );
