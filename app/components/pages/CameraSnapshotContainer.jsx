@@ -49,6 +49,7 @@ export default class CameraSnapshotContainer extends React.Component {
   static propTypes = {
     onSnapshotStartProcessing: React.PropTypes.func.isRequired,
     onSnapshotReady: React.PropTypes.func.isRequired,
+    onDeleteSnapshot: React.PropTypes.func.isRequired,
   }
 
   constructor() {
@@ -82,7 +83,7 @@ export default class CameraSnapshotContainer extends React.Component {
 
   onDeleteSnapshot = () => {
     console.log('CameraSnapshotContainer.onDeleteSnapshot()');
-    this.props.onSnapshot(null);
+    this.props.onDeleteSnapshot();
     this.setState({ snapshot: false });
   }
 

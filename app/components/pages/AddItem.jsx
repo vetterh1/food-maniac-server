@@ -44,8 +44,8 @@ const styles = {
   },
 
   imageCameraSnapshot: {
-    maxWidth: 500,
-    maxHeight: 300,
+    maxWidth: 300,
+    maxHeight: 200,
   },
 };
 
@@ -85,9 +85,20 @@ class AddItem extends React.Component {
   }
 
 
-  onStartSaving() { this.setState({ snackbarOpen: true, snackbarMessage: 'Saving...', snackbarTimeout: 60000 }); }
-  onEndSavingOK() { this.setState({ snackbarOpen: true, snackbarMessage: 'Item saved!', snackbarTimeout: 4000 }); }
-  onEndSavingFailed(errorMessage) { this.setState({ snackbarOpen: true, snackbarMessage: `Error while saving item (${errorMessage}`, snackbarTimeout: 10000 }); }
+  onStartSaving() {
+    this._nowStartSaving = new Date().getTime();
+    this.setState({ snackbarOpen: true, snackbarMessage: 'Saving...', snackbarTimeout: 60000 });
+  }
+
+  onEndSavingOK() {
+    const durationSaving = new Date().getTime() - this._nowStartSaving;
+    this.setState({ snackbarOpen: true, snackbarMessage: `Item saved! (duration=${durationSaving}ms)`, snackbarTimeout: 4000 });
+  }
+
+  onEndSavingFailed(errorMessage){
+    const durationSaving = new Date().getTime() - this._nowStartSaving;
+    this.setState({ snackbarOpen: true, snackbarMessage: `Error while saving item (error=${errorMessage}, duration=${durationSaving}ms)`, snackbarTimeout: 10000 });
+  }
 
   // categoryChange(event, value) { this.setState({ category: value }); }
   // kindChange(event, value) { this.setState({ kind: value }); }
@@ -133,6 +144,11 @@ class AddItem extends React.Component {
     this._logOnDisplay.addLog(`AddItem() - total time to process snapshot = ${timeDiffTotal}`);
 
     // this.setState({ openSnackbarProcessingPicture: false });
+  }
+
+  onDeleteSnapshot = () => {
+    this._imageCameraSnapshot.src = '';
+    this.setState({ picture: null });
   }
 
   displaySnapshot = (data) => {
@@ -198,8 +214,7 @@ class AddItem extends React.Component {
 
             <div>
               <h4>Picture</h4>
-              <CameraSnapshotContainer onSnapshotStartProcessing={this.onSnapshotStartProcessing} onSnapshotReady={this.onSnapshotReady} />
-              <img ref={(r) => { this._imageCameraSnapshot = r; }} style={styles.imageCameraSnapshot} role="presentation" />
+              <CameraSnapshotContainer onSnapshotStartProcessing={this.onSnapshotStartProcessing} onSnapshotReady={this.onSnapshotReady} onDeleteSnapshot={this.onDeleteSnapshot} />
             </div>
 
             <div
@@ -214,6 +229,7 @@ class AddItem extends React.Component {
             </div>
 
           </Formsy.Form>
+          <img ref={(r) => { this._imageCameraSnapshot = r; }} style={styles.imageCameraSnapshot} role="presentation" />
           <LogOnDisplay ref={(r) => { this._logOnDisplay = r; }} />
           <Snackbar
             open={this.state.snackbarOpen}
@@ -228,3 +244,5 @@ class AddItem extends React.Component {
 }
 
 export default AddItem;
+
+//            bodyStyle={{ height: 'auto', lineHeight: '28px', padding: 24, whiteSpace: 'pre-line' }}
