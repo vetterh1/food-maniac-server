@@ -39,6 +39,11 @@ const styles = {
     padding: '0.5em',
     marginRight: 32,
   },
+
+  imageCameraSnapshot: {
+    maxWidth: 500,
+    maxHeight: 300,
+  },
 };
 
 class AddItem extends React.Component {
@@ -56,6 +61,8 @@ class AddItem extends React.Component {
     // this.kindChange = this.kindChange.bind(this);
     this.nameChange = this.nameChange.bind(this);
     this.onSnapshot = this.onSnapshot.bind(this);
+
+    this._imageCameraSnapshot = null;
 
     this.state = {
       canSubmit: false,
@@ -97,15 +104,13 @@ class AddItem extends React.Component {
 
 
   onSnapshot = (data) => {
-    this.displayAsImage(data);
+    this.displaySnapshot(data);
     console.log('AddItem.onSnapshot() snapshot length: ', data ? data.length : 'null');
     this.setState({ picture: data });
   }
 
-  displayAsImage = (data) => {
-    const img = document.createElement('img');
-    img.src = data;
-    document.body.appendChild(img);
+  displaySnapshot = (data) => {
+    this._imageCameraSnapshot.src = data;
   }
 
   render() {
@@ -175,6 +180,7 @@ class AddItem extends React.Component {
             <div>
               <h4>Picture</h4>
               <CameraSnapshotContainer onSnapshot={this.onSnapshot} />
+              <img ref={(r) => { this._imageCameraSnapshot = r; }} style={styles.imageCameraSnapshot} />
             </div>
 
             <div
