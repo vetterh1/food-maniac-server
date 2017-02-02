@@ -10,6 +10,7 @@ class AddItemContainer extends React.Component {
   constructor() {
     super();
     this.submitForm = this.submitForm.bind(this);
+    this._addItemComponent = null;
 
     this.state = {
     };
@@ -17,6 +18,8 @@ class AddItemContainer extends React.Component {
 
 
   submitForm(data) {
+    this._addItemComponent.onStartSaving();
+
     fetch('http://localhost:8085/api/items', {
       method: 'POST',
       headers: {
@@ -27,19 +30,22 @@ class AddItemContainer extends React.Component {
     .then((response) => {
       console.log('fetch result: ', response);
       if (response.ok) {
+        this._addItemComponent.onEndSavingOK();
         console.log('fetch operation OK');
         return response.blob();
       }
+      this._addItemComponent.onEndSavingOK('01');
       throw new Error('Network response was not ok.');
     })
     .catch((error) => {
+      this._addItemComponent.onEndSavingOK('02');
       console.error(`There has been a problem with your fetch operation: ${error.message}`);
     });
   }
 
 
   render() {
-    return (<AddItem onSubmit={this.submitForm} />);
+    return (<AddItem ref={(r) => { this._addItemComponent = r; }} onSubmit={this.submitForm} />);
   }
 
 }

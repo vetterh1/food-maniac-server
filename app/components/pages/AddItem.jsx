@@ -6,6 +6,8 @@ import { FormsySelect, FormsyText /* ,FormsyCheckbox, FormsyDate, FormsyRadio, F
 // import IconSearch from 'material-ui/svg-icons/action/search';
 import RaisedButton from 'material-ui/RaisedButton';
 import MenuItem from 'material-ui/MenuItem';
+import Snackbar from 'material-ui/Snackbar';
+
 import CameraSnapshotContainer from './CameraSnapshotContainer';
 import LogOnDisplay from '../utils/LogOnDisplay';
 
@@ -76,10 +78,16 @@ class AddItem extends React.Component {
       picture: null,
       // category: '',
       // kind: '',
+      snackbarOpen: false,
+      snackbarMessage: '.',
+      snackbarTimeout: 4000,
     };
   }
 
 
+  onStartSaving() { this.setState({ snackbarOpen: true, snackbarMessage: 'Saving...', snackbarTimeout: 60000 }); }
+  onEndSavingOK() { this.setState({ snackbarOpen: true, snackbarMessage: 'Item saved!', snackbarTimeout: 4000 }); }
+  onEndSavingFailed(errorMessage) { this.setState({ snackbarOpen: true, snackbarMessage: `Error while saving item (${errorMessage}`, snackbarTimeout: 10000 }); }
 
   // categoryChange(event, value) { this.setState({ category: value }); }
   // kindChange(event, value) { this.setState({ kind: value }); }
@@ -109,6 +117,7 @@ class AddItem extends React.Component {
 
   onSnapshotStartProcessing = () => {
     this._nowStartProcessing = new Date().getTime();
+    this.setState({ snackbarOpen: true, snackbarMessage: 'Processing snapshot...', snackbarTimeout: 2000 });
   }
 
 
@@ -122,6 +131,8 @@ class AddItem extends React.Component {
     this._logOnDisplay.addLog(`AddItem() - time to display image = ${timeDiff}`);
     const timeDiffTotal = nowUpdateCanvas - this._nowStartProcessing;
     this._logOnDisplay.addLog(`AddItem() - total time to process snapshot = ${timeDiffTotal}`);
+
+    // this.setState({ openSnackbarProcessingPicture: false });
   }
 
   displaySnapshot = (data) => {
@@ -129,17 +140,10 @@ class AddItem extends React.Component {
   }
 
   render() {
-    let status = '';
-    if (this.state.messageType && this.state.messageText) {
-      const classString = `alert alert-${this.state.messageType}`;
-      status = <div id="status" className={classString} ref={(node) => { this.status = node; }}>{this.state.messageText}</div>;
-    }
-
     return (
       <MuiThemeProvider muiTheme={this.context.muiTheme}>
         <div style={styles.paperStyle}>
           <h1>New dish...</h1>
-          {status}
           <Formsy.Form
             onValid={this.enableButton}
             onInvalid={this.disableButton}
@@ -195,7 +199,7 @@ class AddItem extends React.Component {
             <div>
               <h4>Picture</h4>
               <CameraSnapshotContainer onSnapshotStartProcessing={this.onSnapshotStartProcessing} onSnapshotReady={this.onSnapshotReady} />
-              <img ref={(r) => { this._imageCameraSnapshot = r; }} style={styles.imageCameraSnapshot} />
+              <img ref={(r) => { this._imageCameraSnapshot = r; }} style={styles.imageCameraSnapshot} role="presentation" />
             </div>
 
             <div
@@ -211,6 +215,11 @@ class AddItem extends React.Component {
 
           </Formsy.Form>
           <LogOnDisplay ref={(r) => { this._logOnDisplay = r; }} />
+          <Snackbar
+            open={this.state.snackbarOpen}
+            message={this.state.snackbarMessage}
+            autoHideDuration={this.state.snackbarTimeout}
+          />
         </div>
       </MuiThemeProvider>
     );
