@@ -28,7 +28,7 @@ logger.add(logger.transports.Console, { level: levelConsole, colorize: true });
 logger.add(logger.transports.File, { level: levelFile, filename: pathFile });
 
 logger.warn('------------------------------------------------------------------------');
-logger.warn('                    FOOD-MANIAC  START');
+logger.warn(`                    FOOD-MANIAC  START  (${process.env.SERVER_NAME})`);
 logger.warn('------------------------------------------------------------------------');
 
 logger.debug('Logger test: debug level');
