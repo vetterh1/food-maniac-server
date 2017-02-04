@@ -27,6 +27,13 @@
 	{
 		"levelConsole": "info",
 		"levelFile": "info",
-		"pathFile" : "./distBoServer/log/winston.log"
+    "BoServer":
+    {
+      "pathFile" : "./distBoServer/log/winston.log"
+    },
+    "FoServer":
+    {
+      "pathFile" : "./distFoServer/log/winston.log"
+    }
 	}
 }

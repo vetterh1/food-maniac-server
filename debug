@@ -1,0 +1,22 @@
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2017-02-04T18:00:56.960Z"}
+{"level":"warn","message":"                    FOOD-MANIAC  START","timestamp":"2017-02-04T18:00:56.969Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2017-02-04T18:00:56.987Z"}
+{"level":"debug","message":"Logger test: debug level","timestamp":"2017-02-04T18:00:56.988Z"}
+{"level":"info","message":"Logger test: info level","timestamp":"2017-02-04T18:00:56.988Z"}
+{"level":"warn","message":"Logger test: warn level","timestamp":"2017-02-04T18:00:56.989Z"}
+{"level":"error","message":"Logger test: error level","timestamp":"2017-02-04T18:00:56.989Z"}
+{"level":"warn","message":"BoServer Port: 8085","timestamp":"2017-02-04T18:00:56.990Z"}
+{"level":"warn","message":"Mongodb: mongodb://localhost:27017/food_maniac_dev","timestamp":"2017-02-04T18:00:56.997Z"}
+{"level":"warn","message":"Folder Pictures/Items: ./server/storage_dev/pictures/items","timestamp":"2017-02-04T18:00:57.013Z"}
+{"level":"info","message":"BoServer running on port: 8085","timestamp":"2017-02-04T18:00:57.092Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2017-02-04T19:59:39.181Z"}
+{"level":"warn","message":"                    FOOD-MANIAC  START","timestamp":"2017-02-04T19:59:39.188Z"}
+{"level":"warn","message":"------------------------------------------------------------------------","timestamp":"2017-02-04T19:59:39.195Z"}
+{"level":"debug","message":"Logger test: debug level","timestamp":"2017-02-04T19:59:39.202Z"}
+{"level":"info","message":"Logger test: info level","timestamp":"2017-02-04T19:59:39.210Z"}
+{"level":"warn","message":"Logger test: warn level","timestamp":"2017-02-04T19:59:39.210Z"}
+{"level":"error","message":"Logger test: error level","timestamp":"2017-02-04T19:59:39.210Z"}
+{"level":"warn","message":"BoServer Port: 8085","timestamp":"2017-02-04T19:59:39.215Z"}
+{"level":"warn","message":"Mongodb: mongodb://localhost:27017/food_maniac_dev","timestamp":"2017-02-04T19:59:39.239Z"}
+{"level":"warn","message":"Folder Pictures/Items: ./server/storage_dev/pictures/items","timestamp":"2017-02-04T19:59:39.255Z"}
+{"level":"info","message":"BoServer running on port: 8085","timestamp":"2017-02-04T19:59:39.326Z"}

@@ -26,7 +26,5 @@
 	{
 		"levelConsole": "none",
 		"levelFile": "debug",
-		"pathFile" : "./server/log/winston.log"
-	}
-	
+  }
 }

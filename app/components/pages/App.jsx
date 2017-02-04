@@ -1,7 +1,7 @@
 /* eslint-disable react/prefer-stateless-function */
 /* eslint-disable react/prop-types */
 
-const _version = '2017-02-02 19:00 - add_new_item';
+const _version = '2017-02-04 21:00 - add_new_item';
 
 import React from 'react';
 import MainAppBar from '../navigation/MainAppBar';

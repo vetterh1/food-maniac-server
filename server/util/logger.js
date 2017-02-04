@@ -11,9 +11,10 @@ const levelFile = config.has('log.levelFile') ? config.get('log.levelFile') : 'd
 console.warn(`Config for log.levelFile: ${levelFile}`);
 if (!config.has('log.levelFile')) console.error(`! No config defined for log.levelFile for env ${process.env.NODE_ENV} !`);
 
-const pathFile = config.has('log.pathFile') ? config.get('log.pathFile') : 'debug';
-console.warn(`Config for log.pathFile: ${pathFile}`);
-if (!config.has('log.pathFile')) console.error(`! No config defined for log.pathFile for env ${process.env.NODE_ENV} !`);
+const pathWithServer = `log.${process.env.SERVER_NAME}.pathFile`;
+const pathFile = config.has(pathWithServer) ? config.get(pathWithServer) : 'debug';
+console.warn(`Config for log: ${pathFile}`);
+if (!config.has(pathWithServer)) console.error(`! No config defined for ${pathWithServer} for server ${process.env.SERVER_NAME} !`);
 
 logger.addColors({
   debug: 'green',

@@ -11,6 +11,7 @@ import path from 'path';
 
 import config from 'config';
 
+if (!process.env.SERVER_NAME) console.error('! SERVER_NAME undefined !'); // eslint-disable-line no-console
 if (!process.env.NODE_ENV) console.error('! NODE_ENV undefined !'); // eslint-disable-line no-console
 
 const serverPort = config.get('server.FoServer.port');

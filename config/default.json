@@ -27,6 +27,13 @@
   {
     "levelConsole": "debug",
     "levelFile": "debug",
-    "pathFile" : "./server/log/winston.log"
+    "BoServer":
+    {
+        "pathFile" : "./server/log/winstonBo.log"
+    },
+    "FoServer":
+    {
+        "pathFile" : "./server/log/winstonFo.log"
+    }
   }
 }
