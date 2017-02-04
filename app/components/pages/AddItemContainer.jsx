@@ -20,6 +20,7 @@ class AddItemContainer extends React.Component {
   submitForm(data) {
     this._addItemComponent.onStartSaving();
 
+
     fetch('/api/items', {
       method: 'POST',
       headers: {

@@ -111,3 +111,15 @@ In Test folder: add a mocha_ignore.js file:
 
 
 
+
+
+
+---------------------------------------------------------------
+                            nginx
+---------------------------------------------------------------
+
+cd /etc/nginx/
+more nginx.conf
+
+        include /etc/nginx/conf.d/*.conf;
+        include /etc/nginx/sites-enabled/*;
