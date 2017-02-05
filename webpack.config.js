@@ -93,7 +93,10 @@ const defineConfig = new webpack.DefinePlugin({
 });
 plugins.push(defineConfig);
 
-
+logger.info(`npm version: ${process.env.npm_package_version}`);
+logger.info(`git branch: ${distGitBranch}`);
+logger.info(`git last commit comment: ${distGitLastCommitComment}`);
+logger.info(`git last commit date: ${distGitLastCommitDate}`);
 
 /*
  *   Loaders:
