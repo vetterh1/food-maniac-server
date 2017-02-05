@@ -29,6 +29,7 @@ logger.add(logger.transports.File, { level: levelFile, filename: pathFile });
 
 logger.warn('------------------------------------------------------------------------');
 logger.warn(`                    FOOD-MANIAC  START  (${process.env.SERVER_NAME})`);
+logger.warn(`Version: ${process.env.npm_package_version}`);
 logger.warn('------------------------------------------------------------------------');
 
 logger.debug('Logger test: debug level');

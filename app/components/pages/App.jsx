@@ -1,8 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
 /* eslint-disable react/prop-types */
 
-const _version = '2017-02-05 00:55 - add_new_item';
-
 import React from 'react';
 import MainAppBar from '../navigation/MainAppBar';
 import Version from '../utils/Version';
@@ -58,7 +56,7 @@ class App extends React.Component {
             >
               {this.props.children}
             </RouteTransition>
-            <Version version={_version} />
+            <Version />
           </div>
         </MuiThemeProvider>
       </StyleRoot>

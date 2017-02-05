@@ -38,8 +38,13 @@ const logger = require('winston');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const WebpackShellPlugin = require('webpack-shell-plugin');
 
 logger.info('[FoServer] Start webpack (using webpack.config.js)');
+
+var distPath = path.join(__dirname, '/distFoServer');
+logger.info(`distPath: ${distPath}`);
+
 
 //
 // Plug-ins (prod & dev)
@@ -68,6 +73,26 @@ const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
   inject: 'body',
 });
 plugins.push(HTMLWebpackPluginConfig);
+
+const distGitversion = path.join(distPath, '/gitversion.txt');
+const webpackShellPlugin = new WebpackShellPlugin({
+      onBuildStart: [
+        'echo "Starting shell plugin"',
+        `git name-rev --name-only HEAD > ${distGitversion}`,
+        'git rev-list HEAD --count >> gitversion.txt',
+        'git rev-parse HEAD >> gitversion.txt']
+    });
+plugins.push(webpackShellPlugin);
+
+
+// Plugin to define version 
+var gitVersion = "git version";
+const defineConfig = new webpack.DefinePlugin({
+  __VERSION__: JSON.stringify(process.env.npm_package_version),
+  __GIT_VERSION__: gitVersion,
+});
+plugins.push(defineConfig);
+
 
 
 /*
@@ -98,7 +123,7 @@ module.exports = {
 
   output: {
     filename: '/bundle.js',
-    path: path.join(__dirname, '/distFoServer'),
+    path: distPath,
   },
 
   plugins,

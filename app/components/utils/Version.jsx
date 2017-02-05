@@ -6,7 +6,7 @@ const divStyle = {
   padding: '1em 1em',
 };
 
-const Version = props => <div style={divStyle}><br />Version: {props.version}</div>;
+const Version = props => <div style={divStyle}><br />Version: {__VERSION__}<br />Git version: {__GIT_VERSION__}</div>;
 
 Version.propTypes = { version: React.PropTypes.string };
 export default Version;
