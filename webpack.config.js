@@ -74,22 +74,22 @@ const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 });
 plugins.push(HTMLWebpackPluginConfig);
 
-const distGitversion = path.join(distPath, '/gitversion.txt');
+const distGitBranch = path.join(distPath, '/gitbranch.txt');
+const distGitLastCommitComment = path.join(distPath, '/gitlastcommitcomment.txt');
+const distGitLastCommitDate = path.join(distPath, '/gitlastcommitdate.txt');
 const webpackShellPlugin = new WebpackShellPlugin({
-      onBuildStart: [
-        'echo "Starting shell plugin"',
-        `git name-rev --name-only HEAD > ${distGitversion}`,
-        'git rev-list HEAD --count >> gitversion.txt',
-        'git rev-parse HEAD >> gitversion.txt']
-    });
+  onBuildStart: [
+    'echo "Starting shell plugin"',
+    `git name-rev --name-only HEAD > ${distGitBranch}`,
+    `git log -1 --pretty=%B > ${distGitLastCommitComment}`,
+    `git log -1 --format=%cd > ${distGitLastCommitDate}`,
+  ],
+});
 plugins.push(webpackShellPlugin);
 
-
-// Plugin to define version 
-var gitVersion = "git version";
+// Plugin to define version
 const defineConfig = new webpack.DefinePlugin({
   __VERSION__: JSON.stringify(process.env.npm_package_version),
-  __GIT_VERSION__: gitVersion,
 });
 plugins.push(defineConfig);
 
