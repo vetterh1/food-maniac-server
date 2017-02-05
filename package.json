@@ -1,6 +1,6 @@
 {
   "name": "food-maniac",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,23 +11,17 @@
     "BoServer:test": "cross-env  SERVER_NAME=BoServer NODE_ENV=test ./node_modules/.bin/mocha --compilers js:babel-core/register,css:test/mocha_ignore.js,png:test/mocha_ignore.js -d test/**/*.js",
     "BoServer:testVerbose": "./node_modules/.bin/mocha --compilers js:babel-register --reporter spec",
     "BoServer:lint": "eslint server",
-
     "FoServer:dev": "npm run FoServer:build:dev && cross-env NODE_ENV=development SERVER_NAME=FoServer webpack-dev-server --progress --colors --inline --content-base distFoServer --history-api-fallback",
     "FoServer:build:dev": "npm run FoServer:build:misc && cross-env NODE_ENV=development  SERVER_NAME=FoServer webpack",
     "FoServer:build:prod": "npm run FoServer:build:server && npm run FoServer:build:misc && cross-env NODE_ENV=production  SERVER_NAME=FoServer webpack",
     "FoServer:prod": "npm run FoServer:build:prod && cross-env BABEL_DISABLE_CACHE=1 NODE_ENV=production  SERVER_NAME=FoServer nodemon distFoServer/foServer.js",
     "FoServer:prod:node": "cross-env NODE_ENV=production SERVER_NAME=FoServer node distFoServer/foServer.js",
     "FoServer:testBuildWithWebpack": "webpack-dev-server --progress --colors --inline --content-base distFoServer --history-api-fallback",
-
     "FoServer:build:server": "babel server -d distFoServer --presets es2015,stage-2",
     "FoServer:build:misc": "npm run FoServer:build:cp_css && npm run FoServer:build:cp_images",
     "FoServer:build:mkdir": "if-env OS=Windows_NT && mkdir distFoServer\\images || mkdir distFoServer/images",
     "FoServer:build:cp_images": "if-env OS=Windows_NT && copy .\\app\\images\\*.* distFoServer\\images || cp ./app/images/*.* distFoServer/images",
     "FoServer:build:cp_css": "if-env OS=Windows_NT && copy .\\app\\index.css distFoServer || cp ./app/index.css distFoServer",
-
-
-    
-
     "start:devnode": "cross-env BABEL_DISABLE_CACHE=1 NODE_ENV=development nodemon index.js",
     "start:prod": "cross-env NODE_ENV=production npm run FoServer:build && node server/server.js",
     "pm2:restart": "pm2 restart maptest",
