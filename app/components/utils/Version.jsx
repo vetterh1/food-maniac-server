@@ -6,7 +6,6 @@ const divStyle = {
   padding: '1em 1em',
 };
 
-const Version = props => <div style={divStyle}><br />Version: {__VERSION__}<br />Git version: <iframe src="/gitbranch.txt"></iframe><br />Git last commit comment: <iframe src="/gitlastcommitcomment.txt"></iframe><br />Git last commit date: <iframe src="/gitlastcommitdate.txt"></iframe></div>;
+const Version = props => <div style={divStyle}><br />Version: {process.env.NODE_ENV}  -  Git version: {process.env.NPM_VERSION} - Last commit comment: {process.env.GIT_LAST_COMMIT_COMMENT}  -  Last commit date: {process.env.GIT_LAST_COMMIT_DATE}</div>;
 
-Version.propTypes = { version: React.PropTypes.string };
 export default Version;

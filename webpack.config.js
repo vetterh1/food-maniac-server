@@ -38,13 +38,22 @@ const logger = require('winston');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const WebpackShellPlugin = require('webpack-shell-plugin');
+// const WebpackShellPlugin = require('webpack-shell-plugin');
+// const GenerateJsonPlugin = require('generate-json-webpack-plugin');
+
+const childProcess = require('child_process');
 
 logger.info('[FoServer] Start webpack (using webpack.config.js)');
 
-var distPath = path.join(__dirname, '/distFoServer');
+const distPath = path.join(__dirname, '/distFoServer');
 logger.info(`distPath: ${distPath}`);
 
+const gitBranch = childProcess.execSync('git name-rev --name-only HEAD').toString();
+const gitLastCommitComment = childProcess.execSync('git log -1 --pretty=%B ').toString();
+const gitLastCommitDate = childProcess.execSync('git log -1 --format=%cd').toString();
+logger.info(`Branch: ${gitBranch}`);
+logger.info(`Last commit comment: ${gitLastCommitComment}`);
+logger.info(`Last commit date: ${gitLastCommitDate}`);
 
 //
 // Plug-ins (prod & dev)
@@ -54,18 +63,32 @@ logger.info(`distPath: ${distPath}`);
 //
 
 const plugins = [];
+
+// Provide variables to JS client code (see Version component):
+plugins.push(
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        NPM_VERSION: JSON.stringify(process.env.npm_package_version),
+        GIT_BRANCH: JSON.stringify(gitBranch),
+        GIT_LAST_COMMIT_COMMENT: JSON.stringify(gitLastCommitComment),
+        GIT_LAST_COMMIT_DATE: JSON.stringify(gitLastCommitDate),
+      },
+    })
+  );
+
+// PRODUCTION OPTIMIZATIONS
 if (process.env.NODE_ENV === 'production') {
   logger.info('[FoServer] Production mode');
   plugins.push(
-    // new webpack.optimize.DedupePlugin(),
-    // new webpack.optimize.OccurrenceOrderPlugin(),
-    // new webpack.optimize.UglifyJsPlugin()
-    new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('production') } }),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin()
   );
 } else {
   logger.info('[FoServer] NOT in Production mode');
 }
+
 // Plugin to inject bundle dist path in index.html
 const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
   template: path.join(__dirname, '/app/index.html'),
@@ -74,29 +97,7 @@ const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 });
 plugins.push(HTMLWebpackPluginConfig);
 
-const distGitBranch = path.join(distPath, '/gitbranch.txt');
-const distGitLastCommitComment = path.join(distPath, '/gitlastcommitcomment.txt');
-const distGitLastCommitDate = path.join(distPath, '/gitlastcommitdate.txt');
-const webpackShellPlugin = new WebpackShellPlugin({
-  onBuildStart: [
-    'echo "Starting shell plugin"',
-    `git name-rev --name-only HEAD > ${distGitBranch}`,
-    `git log -1 --pretty=%B > ${distGitLastCommitComment}`,
-    `git log -1 --format=%cd > ${distGitLastCommitDate}`,
-  ],
-});
-plugins.push(webpackShellPlugin);
 
-// Plugin to define version
-const defineConfig = new webpack.DefinePlugin({
-  __VERSION__: JSON.stringify(process.env.npm_package_version),
-});
-plugins.push(defineConfig);
-
-logger.info(`npm version: ${process.env.npm_package_version}`);
-logger.info(`git branch: ${distGitBranch}`);
-logger.info(`git last commit comment: ${distGitLastCommitComment}`);
-logger.info(`git last commit date: ${distGitLastCommitDate}`);
 
 /*
  *   Loaders:
