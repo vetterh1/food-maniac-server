@@ -7,7 +7,7 @@
 
     // First application
     {
-      "name"      : "BoServer",
+      "name"      : "boServer",
       "script"    : "/home/lve/workspace/mapTest/distBoServer/boServer.js",
       "env": {
         "COMMON_VARIABLE": "true"
