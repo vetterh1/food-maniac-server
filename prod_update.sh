@@ -1,6 +1,7 @@
 cd ./workspace/mapTest/
+pm2 stop ecosystem.json
 git pull
-pm2 stop boServer foServer
-npm run BoServer:build:prod
-npm run FoServer:build:prod
-pm2 start boServer foServer
+npm install
+NODE_ENV=production  npm run BoServer:build:prod
+NODE_ENV=production  npm run FoServer:build:prod
+pm2 start ecosystem.json
