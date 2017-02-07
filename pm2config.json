@@ -10,10 +10,12 @@
       "name"      : "boServer",
       "script"    : "/home/lve/workspace/mapTest/distBoServer/boServer.js",
       "env": {
-        "COMMON_VARIABLE": "true"
+        "NODE_ENV": "development",
+        "SERVER_NAME": "BoServer"
       },
       "env_production" : {
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "SERVER_NAME": "BoServer"
       }
     },
 
@@ -22,10 +24,12 @@
       "name"      : "foServer",
       "script"    : "/home/lve/workspace/mapTest/distFoServer/foServer.js",
       "env": {
-        "COMMON_VARIABLE": "true"
+        "NODE_ENV": "development",
+        "SERVER_NAME": "FoServer"
       },
       "env_production" : {
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "SERVER_NAME": "FoServer"
       }    
     }
   ]
