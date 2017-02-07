@@ -6,6 +6,6 @@ const divStyle = {
   padding: '1em 1em',
 };
 
-const Version = props => <div style={divStyle}><br />Version: {process.env.NODE_ENV}  -  Git version: {process.env.NPM_VERSION} - Last commit comment: {process.env.GIT_LAST_COMMIT_COMMENT}  -  Last commit date: {process.env.GIT_LAST_COMMIT_DATE}</div>;
+const Version = props => <div style={divStyle}><br />Version: {process.env.NODE_ENV}  -  Git branch: {process.env.GIT_BRANCH} - Git version: {process.env.NPM_VERSION} - Last commit comment: {process.env.GIT_LAST_COMMIT_COMMENT}  -  Last commit date: {process.env.GIT_LAST_COMMIT_DATE}</div>;
 
 export default Version;

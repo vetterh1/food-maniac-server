@@ -48,7 +48,7 @@ logger.info('[FoServer] Start webpack (using webpack.config.js)');
 const distPath = path.join(__dirname, '/distFoServer');
 logger.info(`distPath: ${distPath}`);
 
-const gitBranch = childProcess.execSync('git name-rev --name-only HEAD').toString();
+const gitBranch = childProcess.execSync('git rev-parse --abbrev-ref HEAD').toString();
 const gitLastCommitComment = childProcess.execSync('git log -1 --pretty=%B ').toString();
 const gitLastCommitDate = childProcess.execSync('git log -1 --format=%cd').toString();
 logger.info(`Branch: ${gitBranch}`);
