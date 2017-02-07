@@ -25,6 +25,30 @@ class ListItemsContainer extends React.Component {
   load() {
     this._ListItemsComponent.onStartLoading();
 
+
+
+
+    fetch('/api/items')
+      .then((response) => {
+        console.log('fetch operation OK', response.statusText);
+        return response.json();
+      }).then((json) => {
+        console.log('parsed json', json);
+      }).catch((ex) => {
+        console.log('parsing failed', ex);
+      });
+
+ /*
+
+    fetch('/api/items')
+      .then(function(response) {
+        return response.json()
+      }).then(function(json) {
+        console.log('parsed json', json)
+      }).catch(function(ex) {
+        console.log('parsing failed', ex)
+      });
+
     fetch('/api/items', {
       method: 'GET',
       headers: {
@@ -48,6 +72,7 @@ class ListItemsContainer extends React.Component {
       this._ListItemsComponent.onEndLoadingFailed('02');
       console.error(`There has been a problem with your fetch operation: ${error.message}`);
     });
+    */
   }
 
 

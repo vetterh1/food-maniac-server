@@ -146,8 +146,8 @@ module.exports = {
     inline: true,
     port: 8080,
     proxy: {
-      '^/api/*': {
-        target: 'http://localhost:8085/api/',
+      '/api': {
+        target: 'http://localhost:8085',
         secure: false,
       },
     },
