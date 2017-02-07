@@ -7,6 +7,7 @@ import App from '../pages/App';
 import MainChoiceContainer from './MainChoiceContainer';
 import Rate from '../pages/Rate';
 import AddItemContainer from '../pages/AddItemContainer';
+import ListItemsContainer from '../pages/ListItemsContainer';
 import Login from '../pages/Login';
 
 const NotFound = () => <h1>404 error - This page is not found!</h1>;
@@ -20,6 +21,7 @@ const Root = ({ store }) => (
         <Route path="/search" component={AddItemContainer} />
         <Route path="/addItem" component={AddItemContainer} />
         <Route path="/login" component={Login} />
+        <Route path="/listItems" component={ListItemsContainer} />
         <Route path="*" component={NotFound} />
       </Route>
     </Router>

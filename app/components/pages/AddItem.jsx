@@ -95,19 +95,37 @@ class AddItem extends React.Component {
     this.setState({ snackbarOpen: true, snackbarMessage: `Item saved! (duration=${durationSaving}ms)`, snackbarTimeout: 4000 });
   }
 
-  onEndSavingFailed(errorMessage){
+  onEndSavingFailed(errorMessage) {
     const durationSaving = new Date().getTime() - this._nowStartSaving;
     this.setState({ snackbarOpen: true, snackbarMessage: `Error while saving item (error=${errorMessage}, duration=${durationSaving}ms)`, snackbarTimeout: 10000 });
   }
 
+  onSnapshotStartProcessing = () => {
+    this._nowStartProcessing = new Date().getTime();
+    this.setState({ snackbarOpen: true, snackbarMessage: 'Processing snapshot...', snackbarTimeout: 2000 });
+  }
+
+  onDeleteSnapshot = () => {
+    this._imageCameraSnapshot.src = '';
+    this.setState({ picture: null });
+  }
+
+  onSnapshotReady = (data, nowUpdateParent) => {
+    this.displaySnapshot(data);
+    console.log('AddItem.onSnapshot() snapshot length: ', data ? data.length : 'null');
+    this.setState({ picture: data });
+
+    const nowUpdateCanvas = new Date().getTime();
+    const timeDiff = nowUpdateCanvas - nowUpdateParent;
+    this._logOnDisplay.addLog(`AddItem() - time to display image = ${timeDiff}`);
+    const timeDiffTotal = nowUpdateCanvas - this._nowStartProcessing;
+    this._logOnDisplay.addLog(`AddItem() - total time to process snapshot = ${timeDiffTotal}`);
+
+    // this.setState({ openSnackbarProcessingPicture: false });
+  }
+
   // categoryChange(event, value) { this.setState({ category: value }); }
   // kindChange(event, value) { this.setState({ kind: value }); }
-
-  nameChange(event, value) {
-    this.setState({ name: value });
-    console.log('AddItem.nameChange value:', value);
-    // TODO : Should verify on server side if name already exists
-  }
 
   enableButton() { this.setState({ canSubmit: true }); }
   disableButton() { this.setState({ canSubmit: false }); }
@@ -126,34 +144,16 @@ class AddItem extends React.Component {
   }
 
 
-  onSnapshotStartProcessing = () => {
-    this._nowStartProcessing = new Date().getTime();
-    this.setState({ snackbarOpen: true, snackbarMessage: 'Processing snapshot...', snackbarTimeout: 2000 });
-  }
-
-
-  onSnapshotReady = (data, nowUpdateParent) => {
-    this.displaySnapshot(data);
-    console.log('AddItem.onSnapshot() snapshot length: ', data ? data.length : 'null');
-    this.setState({ picture: data });
-
-    const nowUpdateCanvas = new Date().getTime();
-    const timeDiff = nowUpdateCanvas - nowUpdateParent;
-    this._logOnDisplay.addLog(`AddItem() - time to display image = ${timeDiff}`);
-    const timeDiffTotal = nowUpdateCanvas - this._nowStartProcessing;
-    this._logOnDisplay.addLog(`AddItem() - total time to process snapshot = ${timeDiffTotal}`);
-
-    // this.setState({ openSnackbarProcessingPicture: false });
-  }
-
-  onDeleteSnapshot = () => {
-    this._imageCameraSnapshot.src = '';
-    this.setState({ picture: null });
-  }
-
   displaySnapshot = (data) => {
     this._imageCameraSnapshot.src = data;
   }
+
+  nameChange(event, value) {
+    this.setState({ name: value });
+    console.log('AddItem.nameChange value:', value);
+    // TODO : Should verify on server side if name already exists
+  }
+
 
   render() {
     return (

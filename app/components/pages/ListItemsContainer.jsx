@@ -1,55 +1,60 @@
 import React from 'react';
-import AddItem from './AddItem';
+import ListItems from './ListItems';
 
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
-class AddItemContainer extends React.Component {
+class ListItemsContainer extends React.Component {
   static propTypes = {
   }
 
   constructor() {
     super();
-    this.submitForm = this.submitForm.bind(this);
-    this._addItemComponent = null;
+    this.load = this.load.bind(this);
+    this._ListItemsComponent = null;
 
     this.state = {
     };
   }
 
 
-  submitForm(data) {
-    this._addItemComponent.onStartSaving();
+  componentDidMount() {
+    this.load();
+  }
 
+  load() {
+    this._ListItemsComponent.onStartLoading();
 
     fetch('/api/items', {
-      method: 'POST',
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ item: data }, null, 4),
     })
     .then((response) => {
       console.log('fetch result: ', response);
       if (response.ok) {
-        this._addItemComponent.onEndSavingOK();
+        this._ListItemsComponent.onEndLoadingOK();
         console.log('fetch operation OK');
         return response.blob();
       }
-      this._addItemComponent.onEndSavingFailed('01');
+      this._ListItemsComponent.onEndLoadingFailed('01');
       throw new Error('Network response was not ok.');
     })
+    .then((items) => {
+        console.log('items: ', items);
+    })
     .catch((error) => {
-      this._addItemComponent.onEndSavingFailed('02');
+      this._ListItemsComponent.onEndLoadingFailed('02');
       console.error(`There has been a problem with your fetch operation: ${error.message}`);
     });
   }
 
 
   render() {
-    return (<AddItem ref={(r) => { this._addItemComponent = r; }} onSubmit={this.submitForm} />);
+    return (<ListItems ref={(r) => { this._ListItemsComponent = r; }} />);
   }
 
 }
 
-export default AddItemContainer;
+export default ListItemsContainer;
