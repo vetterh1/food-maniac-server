@@ -37,6 +37,7 @@ const styles = {
 
 class ListItems extends React.Component {
   static propTypes = {
+    items: React.PropTypes.array.isRequired,
   }
 
   constructor() {
@@ -66,10 +67,14 @@ class ListItems extends React.Component {
   }
 
   render() {
+    console.log("props.item: ", this.props.items);
     return (
       <MuiThemeProvider muiTheme={this.context.muiTheme}>
         <div style={styles.paperStyle}>
           <h1>Items list</h1>
+          <ul>
+            {this.props.items.map((item, index) => (<li key={index}>{item.name}</li>))}
+          </ul>
           <Snackbar
             open={this.state.snackbarOpen}
             message={this.state.snackbarMessage}

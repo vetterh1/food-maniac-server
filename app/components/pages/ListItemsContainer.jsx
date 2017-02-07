@@ -14,6 +14,7 @@ class ListItemsContainer extends React.Component {
     this._ListItemsComponent = null;
 
     this.state = {
+      items: [],
     };
   }
 
@@ -32,52 +33,19 @@ class ListItemsContainer extends React.Component {
       .then((response) => {
         console.log('fetch operation OK', response.statusText);
         return response.json();
-      }).then((json) => {
-        console.log('parsed json', json);
+      }).then((jsonItems) => {
+        console.log('parsed json: ', jsonItems);
+        this.setState({ items: jsonItems.items });
       }).catch((ex) => {
         console.log('parsing failed', ex);
       });
 
- /*
-
-    fetch('/api/items')
-      .then(function(response) {
-        return response.json()
-      }).then(function(json) {
-        console.log('parsed json', json)
-      }).catch(function(ex) {
-        console.log('parsing failed', ex)
-      });
-
-    fetch('/api/items', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-    .then((response) => {
-      console.log('fetch result: ', response);
-      if (response.ok) {
-        this._ListItemsComponent.onEndLoadingOK();
-        console.log('fetch operation OK');
-        return response.blob();
-      }
-      this._ListItemsComponent.onEndLoadingFailed('01');
-      throw new Error('Network response was not ok.');
-    })
-    .then((items) => {
-        console.log('items: ', items);
-    })
-    .catch((error) => {
-      this._ListItemsComponent.onEndLoadingFailed('02');
-      console.error(`There has been a problem with your fetch operation: ${error.message}`);
-    });
-    */
+ 
   }
 
 
   render() {
-    return (<ListItems ref={(r) => { this._ListItemsComponent = r; }} />);
+    return (<ListItems ref={(r) => { this._ListItemsComponent = r; }} items={this.state.items} />);
   }
 
 }
