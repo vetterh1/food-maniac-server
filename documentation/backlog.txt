@@ -1,0 +1,1 @@
+FIX: iPhone screenshot orientation issue (use https://github.com/blueimp/javascript-load-image)
