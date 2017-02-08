@@ -4,6 +4,7 @@ import cuid from 'cuid';
 import sanitizeHtml from 'sanitize-html';
 import fs from 'fs';
 import config from 'config';
+import path from 'path';
 
 
 /**
@@ -46,11 +47,11 @@ export function addItem(req, res) {
     newItem.cuid = cuid();
     newItem.save((err, saved) => {
       if (err) {
-        logger.error(`! itemController.addItem ${newItem.name} failed! - err = `, err);
+        logger.error(`! itemController.addItem ${newItem.name} failed - _id: ${newItem._id} - err:`, err);
         res.status(500).send(err);
       } else {
         res.json({ item: saved });
-        logger.info(`itemController.addItem ${newItem.name} - saved in DB OK`);
+        logger.info(`itemController.addItem ${newItem.name} - saved in DB OK - _id: ${newItem._id}`);
       }
     });
 
@@ -61,15 +62,17 @@ export function addItem(req, res) {
         // need to strip the beginning of the pic by removing 'data:image/jpeg;base64,'
         // and save the remaining using the 'base64' encoding option
         const data = req.body.item.picture.replace(/^data:image\/\w+;base64,/, '');
-        const folderPicturesItems = config.get('storage.pictures.items');
+
+        const folderStatic = config.get('storage.static');
+        const folderPicturesItems = path.join(__dirname, '..', folderStatic, '/pictures/items');
         fs.writeFile(
           `${folderPicturesItems}/${newItem.picture}.jpg`,
           data, { encoding: 'base64' },
           (err) => {
             if (err) {
-              logger.error(`! itemController.addItem ${newItem.name} - saving image ${newItem.picture} failed !`);
+              logger.error(`! itemController.addItem ${newItem.name} - saving image FAILED - _id: ${newItem._id} - Picture id: ${newItem.picture} (path: ${folderPicturesItems}) !`);
             } else {
-              logger.info(`itemController.addItem ${newItem.name} - saving image ${newItem.picture} (path: ${folderPicturesItems})`);
+              logger.info(`itemController.addItem ${newItem.name} - saved image OK - _id: ${newItem._id} - Picture id: ${newItem.picture} (path: ${folderPicturesItems})`);
             }
           });
     }

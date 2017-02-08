@@ -203,7 +203,6 @@ class AddItem extends React.Component {
               <FormsyText
                 name="name"
                 required
-                validations="isWords"
                 validationError={errorMessages.wordsError}
                 hintText="Name"
                 floatingLabelText="Name"
