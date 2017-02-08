@@ -1,7 +1,5 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import RaisedButton from 'material-ui/RaisedButton';
-import MenuItem from 'material-ui/MenuItem';
 import Snackbar from 'material-ui/Snackbar';
 
 
@@ -35,6 +33,36 @@ const styles = {
   },
 };
 
+
+class ItemImage extends React.Component {
+
+  static propTypes = {
+    id: React.PropTypes.string,
+  }
+
+  render() {
+    if (!this.props.id) return null;
+    const srcUrl = `/static/pictures/items/${this.props.id}.jpg`;
+    return (<img src={srcUrl} role="presentation" />);
+  }
+}
+
+
+
+class ListOneItem extends React.Component {
+
+  static propTypes = {
+    index: React.PropTypes.number.isRequired,
+    item: React.PropTypes.object.isRequired,
+  }
+
+  render() {
+    return (<li>{this.props.index}: {this.props.item.name} <ItemImage id={this.props.item.picture} /></li>);
+  }
+}
+
+
+
 class ListItems extends React.Component {
   static propTypes = {
     items: React.PropTypes.array.isRequired,
@@ -52,17 +80,17 @@ class ListItems extends React.Component {
 
 
   onStartLoading() {
-    this._nowStartSaving = new Date().getTime();
+    this._nowStartLoading = new Date().getTime();
     this.setState({ snackbarOpen: true, snackbarMessage: 'Loading...', snackbarTimeout: 60000 });
   }
 
   onEndLoadingOK() {
-    const durationLoading = new Date().getTime() - this._nowStartSaving;
-    this.setState({ snackbarOpen: true, snackbarMessage: `Loading items completed! (duration=${durationLoading}ms)`, snackbarTimeout: 4000 });
+    const durationLoading = new Date().getTime() - this._nowStartLoading;
+    this.setState({ snackbarOpen: true, snackbarMessage: `Loading items completed! (duration=${durationLoading}ms)`, snackbarTimeout: 10000 });
   }
 
   onEndLoadingFailed(errorMessage) {
-    const durationSaving = new Date().getTime() - this._nowStartSaving;
+    const durationSaving = new Date().getTime() - this._nowStartLoading;
     this.setState({ snackbarOpen: true, snackbarMessage: `Error while loading items (error=${errorMessage}, duration=${durationSaving}ms)`, snackbarTimeout: 10000 });
   }
 
@@ -73,7 +101,7 @@ class ListItems extends React.Component {
         <div style={styles.paperStyle}>
           <h1>Items list</h1>
           <ul>
-            {this.props.items.map((item, index) => (<li key={index}>{item.name}</li>))}
+            {this.props.items.map((item, index) => (<ListOneItem index={index} item={item} key={item._id} />))}
           </ul>
           <Snackbar
             open={this.state.snackbarOpen}

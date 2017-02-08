@@ -36,8 +36,10 @@ class ListItemsContainer extends React.Component {
       }).then((jsonItems) => {
         console.log('parsed json: ', jsonItems);
         this.setState({ items: jsonItems.items });
+        this._ListItemsComponent.onEndLoadingOK();
       }).catch((ex) => {
         console.log('parsing failed', ex);
+        this._ListItemsComponent.onEndLoadingFailed();
       });
 
  
