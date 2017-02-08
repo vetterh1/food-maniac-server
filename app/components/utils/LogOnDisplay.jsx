@@ -3,26 +3,11 @@
 
 import React from 'react';
 
-
-const styles = {
-  Popover: {
-    padding: '1em',
-  },
-
-  locationOK: {
-    color: 'green',
-  },
-
-  locationKO: {
-    color: 'red',
-  },
-
-  statistics: {
-    color: 'grey',
-    marginTop: 40,
-  },
+const divStyle = {
+  color: 'grey',
+  fontSize: '0.5rem',
+  padding: '1em 1em',
 };
-
 
 class LogOnDisplay extends React.Component {
   static propTypes = {
@@ -61,7 +46,7 @@ class LogOnDisplay extends React.Component {
 
   render = () => {
     return (
-      <div>
+      <div style={divStyle}>
         <ul>
           {this.state.list.map((line, index) => (<li key={index}>{line}</li>))}
         </ul>
