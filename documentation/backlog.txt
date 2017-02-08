@@ -1,1 +1,2 @@
+NEW: display items image & name in Rate
 FIX: iPhone screenshot orientation issue (use https://github.com/blueimp/javascript-load-image)
