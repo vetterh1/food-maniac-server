@@ -17,10 +17,7 @@
   	{
   		"URL" : "mongodb://localhost:27017/food_maniac"		
   	},
-    "pictures":
-    {
-      "items" : "./distBoServer/storage/pictures/items"
-    }
+    "static": "/static"
   },
 
 	"log":

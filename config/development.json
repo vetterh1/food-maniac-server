@@ -17,10 +17,7 @@
     {
       "URL" : "mongodb://localhost:27017/food_maniac_dev"
     },
-    "pictures":
-    {
-      "items" : "./server/storage_dev/pictures/items"
-    }
+    "static": "/static_dev"
   },
   
   "log":

@@ -67,7 +67,7 @@ class ListItems extends React.Component {
   }
 
   render() {
-    console.log("props.item: ", this.props.items);
+    console.log('props.item: ', this.props.items);
     return (
       <MuiThemeProvider muiTheme={this.context.muiTheme}>
         <div style={styles.paperStyle}>

@@ -88,18 +88,22 @@ db.on('error', console.error.bind(console, 'connection error:'));
 
 // Create dir recursively if it does not exist!
 function mkdirReccursive(completePath) {
-  completePath.split('/').forEach((dir, index, splits) => {
+  const separator = completePath.indexOf('/') !== -1 ? '/' : '\\';
+  completePath.split(separator).forEach((dir, index, splits) => {
     const parent = splits.slice(0, index).join('/');
     const dirPath = path.resolve(parent, dir);
+    logger.debug(`mkdirReccursive: ${dirPath}`);
     if (!fs.existsSync(dirPath)) {
       fs.mkdirSync(dirPath);
     }
   });
 }
 
-const folderPicturesItems = config.get('storage.pictures.items');
-logger.warn(`Folder Pictures/Items: ${folderPicturesItems}`);
-if (!config.has('storage.pictures.items')) logger.error(`! No config defined for storage.pictures.items for env ${process.env.NODE_ENV} !`);
+const folderStatic = config.get('storage.static');
+logger.warn(`Folder static: ${folderStatic}`);
+if (!config.has('storage.static')) logger.error(`! No config defined for storage.static for env ${process.env.NODE_ENV} !`);
+const folderPicturesItems = path.join(__dirname, folderStatic, '/pictures/items');
+logger.warn(`Folder pictures items: ${folderPicturesItems}`);
 mkdirReccursive(folderPicturesItems);
 
 
@@ -163,6 +167,13 @@ app.use(allowCrossDomain);
 
 // Serve our mongo apis:
 app.use('/api', apiRoutes);
+
+// Serve static assets (pictures,...)
+// app.use(Express.static(folderStatic));
+const folderStaticAbsolute = path.join(__dirname, folderStatic);
+logger.info(`BoServer serves static files from: ${folderStaticAbsolute} to /static.`);
+app.use('/static', Express.static(folderStaticAbsolute));
+
 
 // start app
 app.listen(serverPort, (error) => {
