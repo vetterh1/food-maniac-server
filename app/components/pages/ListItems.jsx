@@ -101,7 +101,9 @@ class ListItems extends React.Component {
         <div style={styles.paperStyle}>
           <h1>Items list</h1>
           <ul>
-            {this.props.items.map((item, index) => (<ListOneItem index={index} item={item} key={item._id} />))}
+            {this.props.items.map((item, index) => (
+              <ListOneItem index={index} item={item} key={item._id} />
+            ))}
           </ul>
           <Snackbar
             open={this.state.snackbarOpen}

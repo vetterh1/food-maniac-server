@@ -78,7 +78,7 @@ mongoose.connect(databaseURL, options, (error) => {
   if (process.env.NODE_ENV !== 'test') insertTestData();
 });
 const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
+db.on('error', logger.error.bind(console, '!Mongoose connection error!'));
 
 
 //
@@ -156,6 +156,7 @@ if (process.env.NODE_ENV === 'development') {
 //
 
 import apiRoutes from './routes/apiRoutes';
+import utilRoutes from './routes/utilRoutes';
 
 app.use(compression());
 app.use(morgan('combined', { stream: accessLogStream })); // for logging
@@ -164,9 +165,61 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 app.use(allowCrossDomain);
 
+/*
+ *   ------------------ IMPORTANT NOTE ON ADDING PATHES TO THE SERVER ------------------
+ *
+ * Whenever ADDING a PATH, server configurations & proxy configuration MUST be UPDATED:
+ *
+ * - Development environment running webpack dev server:
+ *    add a section to webpack in the devServer / proxy section
+ *
+ *    config ex:
+        proxy: {
+          ...
+          '/util': {
+          target: 'http://localhost:8085',
+          secure: false,
+          },
+          ...
+        }
+ *
+ * - Production environment
+ *
+ *      - ngInx proxy server:
+ *          add a section to the config file & restart
+ *            commands:
+ *              sudo nano /etc/nginx/sites-available/default
+ *              /etc/init.d/nginx restart
+ *
+ *            config ex:
+                # Pass requests for /util to localhost:8085:
+                location /util/ {
+                        proxy_set_header X-Real-IP $remote_addr;
+                        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                        proxy_set_header X-NginX-Proxy true;
+                        proxy_pass http://localhost:8085/util/;
+                        proxy_ssl_session_reuse off;
+                        proxy_set_header Host $http_host;
+                        proxy_cache_bypass $http_upgrade;
+                        proxy_redirect off;
+                }
+ *
+ *
+ *      - Node server:
+ *
+ *
+ *
+ * - Code
+ *
+ *          add a route below & a route file in the routes folder
+ */
+
 
 // Serve our mongo apis:
 app.use('/api', apiRoutes);
+
+// Serve our utility functions:
+app.use('/util', utilRoutes);
 
 // Serve static assets (pictures,...)
 // app.use(Express.static(folderStatic));

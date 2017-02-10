@@ -3,10 +3,11 @@ import * as UserController from '../controllers/userController';
 import * as ItemController from '../controllers/itemController';
 import * as PlaceController from '../controllers/placeController';
 import * as MarkController from '../controllers/markController';
+
 const router = new Router();
 
 
-// ----------------  USERS ---------------- 
+// ----------------  USERS ----------------
 
 // Get all Items
 router.route('/users').get(UserController.getUsers);
@@ -24,7 +25,7 @@ router.route('/users/:cuid').post(UserController.updateUser);
 router.route('/users/:cuid').delete(UserController.deleteUser);
 
 
-// ----------------  ITEMS ---------------- 
+// ----------------  ITEMS ----------------
 
 // Get all Items
 router.route('/items').get(ItemController.getItems);
@@ -42,7 +43,7 @@ router.route('/items/:cuid').post(ItemController.updateItem);
 router.route('/items/:cuid').delete(ItemController.deleteItem);
 
 
-// ----------------  PLACES ---------------- 
+// ----------------  PLACES ----------------
 
 // Get all places
 router.route('/places').get(PlaceController.getPlaces);
@@ -60,7 +61,7 @@ router.route('/places/:cuid').post(PlaceController.updatePlace);
 router.route('/places/:cuid').delete(PlaceController.deletePlace);
 
 
-// ----------------  MARKS ---------------- 
+// ----------------  MARKS ----------------
 
 // Get all marks
 router.route('/marks').get(MarkController.getMarks);

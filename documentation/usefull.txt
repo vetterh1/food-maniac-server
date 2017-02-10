@@ -115,6 +115,17 @@ In Test folder: add a mocha_ignore.js file:
 
 
 ---------------------------------------------------------------
+                            ubuntu
+---------------------------------------------------------------
+
+Version: 16.04
+Note: get version with: lsb_release -a
+
+Packages:
+- imagemagick for thumbnails : sudo apt-get install imagemagick
+
+
+---------------------------------------------------------------
                             nginx
 ---------------------------------------------------------------
 
@@ -123,6 +134,8 @@ more nginx.conf
 
         include /etc/nginx/conf.d/*.conf;
         include /etc/nginx/sites-enabled/*;
+
+IMPORTANT NOTE ON ADDING PATHES TO THE SERVER: look comment in boServer.js
 
 ------------------  To restart nginx  ------------
 
@@ -159,6 +172,18 @@ server {
                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
                 proxy_set_header X-NginX-Proxy true;
                 proxy_pass http://localhost:8085/api/;
+                proxy_ssl_session_reuse off;
+                proxy_set_header Host $http_host;
+                proxy_cache_bypass $http_upgrade;
+                proxy_redirect off;
+        }
+
+        # Pass requests for /util to localhost:8085:
+        location /util/ {
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-NginX-Proxy true;
+                proxy_pass http://localhost:8085/util/;
                 proxy_ssl_session_reuse off;
                 proxy_set_header Host $http_host;
                 proxy_cache_bypass $http_upgrade;
