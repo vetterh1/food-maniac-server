@@ -57,24 +57,26 @@ export function addItem(req, res) {
 
     // Save image directly in a file on the server
     if (req.body.item.picture) {
-        logger.info(`itemController.addItem ${newItem.name} - saving image ${newItem.picture} (size: ${Math.floor(req.body.item.picture.length / 1024)}KB)`);
+      logger.info(`itemController.addItem ${newItem.name} - saving image ${newItem.picture} (size: ${Math.floor(req.body.item.picture.length / 1024)}KB)`);
 
-        // need to strip the beginning of the pic by removing 'data:image/jpeg;base64,'
-        // and save the remaining using the 'base64' encoding option
-        const data = req.body.item.picture.replace(/^data:image\/\w+;base64,/, '');
+      // need to strip the beginning of the pic by removing 'data:image/jpeg;base64,'
+      // and save the remaining using the 'base64' encoding option
+      const data = req.body.item.picture.replace(/^data:image\/\w+;base64,/, '');
 
-        const folderStatic = config.get('storage.static');
-        const folderPicturesItems = path.join(__dirname, '..', folderStatic, '/pictures/items');
-        fs.writeFile(
-          `${folderPicturesItems}/${newItem.picture}.jpg`,
-          data, { encoding: 'base64' },
-          (err) => {
-            if (err) {
-              logger.error(`! itemController.addItem ${newItem.name} - saving image FAILED - _id: ${newItem._id} - Picture id: ${newItem.picture} (path: ${folderPicturesItems}) !`);
-            } else {
-              logger.info(`itemController.addItem ${newItem.name} - saved image OK - _id: ${newItem._id} - Picture id: ${newItem.picture} (path: ${folderPicturesItems})`);
-            }
-          });
+      const folderStatic = config.get('storage.static');
+      // const folderPicturesItems = path.join(__dirname, '..', folderStatic, '/pictures/items');
+      const filePath = path.join(__dirname, '..', folderStatic, '/pictures/items', `${newItem.picture}.jpg`);
+      fs.writeFile(
+        filePath,
+        // `${folderPicturesItems}/${newItem.picture}.jpg`,
+        data, { encoding: 'base64' },
+        (err) => {
+          if (err) {
+            logger.error(`! itemController.addItem ${newItem.name} - saving image FAILED - _id: ${newItem._id} - Picture id: ${newItem.picture} (path: ${filePath}) !`);
+          } else {
+            logger.info(`itemController.addItem ${newItem.name} - saved image OK - _id: ${newItem._id} - Picture id: ${newItem.picture} (path: ${filePath})`);
+          }
+        });
     }
   }
 }

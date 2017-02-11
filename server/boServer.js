@@ -102,9 +102,17 @@ function mkdirReccursive(completePath) {
 const folderStatic = config.get('storage.static');
 logger.warn(`Folder static: ${folderStatic}`);
 if (!config.has('storage.static')) logger.error(`! No config defined for storage.static for env ${process.env.NODE_ENV} !`);
+
+// Items Pictures
 const folderPicturesItems = path.join(__dirname, folderStatic, '/pictures/items');
 logger.warn(`Folder pictures items: ${folderPicturesItems}`);
 mkdirReccursive(folderPicturesItems);
+
+// Pictures Thumbnails
+const folderThumbnails = path.join(__dirname, folderStatic, '/thumbnails');
+logger.warn(`Folder thumbnails: ${folderThumbnails}`);
+mkdirReccursive(folderPicturesItems);
+
 
 
 

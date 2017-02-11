@@ -41,6 +41,14 @@ In Test folder: add a mocha_ignore.js file:
 
 
 
+--------------  For windows  -----------------
+
+node_gyp install after:
+npm install --global --production windows-build-tools
+
+ImageMagik:
+https://www.imagemagick.org/download/binaries/ImageMagick-7.0.4-7-Q16-x64-dll.exe
+
 ---------------------------------------------------------------
                              BASICS
 ---------------------------------------------------------------
@@ -62,6 +70,22 @@ In Test folder: add a mocha_ignore.js file:
 - run the app: node --debug server.js
 (to rebuild client if necessary: npm run build )
 
+
+
+
+---------------------------------------------------------------
+                            GIT
+---------------------------------------------------------------
+
+
+---------- Git issue with proxy ---------- 
+
+- Edit C:\Utilisateurs\a545888\.gitconfig
+- For Github : 
+    [http]
+      proxy = proxy:3128
+- For gitlab: remove http proxy! 
+    [http]
 
 
 

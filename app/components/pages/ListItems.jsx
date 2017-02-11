@@ -42,7 +42,7 @@ class ItemImage extends React.Component {
 
   render() {
     if (!this.props.id) return null;
-    const srcUrl = `/static/pictures/items/${this.props.id}.jpg`;
+    const srcUrl = `/static/thumbnails/${this.props.id}.jpg`;
     return (<img src={srcUrl} role="presentation" />);
   }
 }
