@@ -22,7 +22,7 @@ const Root = ({ store }) => (
         <Route path="/addItem" component={AddItemContainer} />
         <Route path="/login" component={Login} />
         <Route path="/listItems" component={() => (<ListItemsContainer URL="/api/items" />)} />
-        <Route path="/generateThumbnailsContainer" component={() => (<ListItemsContainer URL="/util/regenerateAllThumbnails" socketRoom="regenerateAllThumbnails" />)} />
+        <Route path="/generateThumbnailsContainer" component={() => (<ListItemsContainer URL="/util/regenerateAllThumbnails" socketName="regenerateAllThumbnails" />)} />
         <Route path="*" component={NotFound} />
       </Route>
     </Router>

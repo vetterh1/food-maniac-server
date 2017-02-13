@@ -26,7 +26,15 @@ const styles = {
     padding: '0.5em',
     marginRight: 32,
   },
-
+  serverUnknown: {
+    // color: 'grey',
+  },
+  serverOK: {
+    color: 'green',
+  },
+  serverKO: {
+    color: 'red',
+  },
   imageCameraSnapshot: {
     maxWidth: 300,
     maxHeight: 200,
@@ -57,7 +65,10 @@ class ListOneItem extends React.Component {
   }
 
   render() {
-    return (<li>{this.props.index}: {this.props.item.name} <ItemImage id={this.props.item.picture} /></li>);
+    let styleGivenByServer = styles.serverUnknown;
+    if (this.props.item.serverState === 'OK') styleGivenByServer = styles.serverOK;
+    if (this.props.item.serverState === 'KO') styleGivenByServer = styles.serverKO;
+    return (<li style={styleGivenByServer}>{this.props.item.name} <ItemImage id={this.props.item.picture} /></li>);
   }
 }
 
@@ -95,7 +106,7 @@ class ListItems extends React.Component {
   }
 
   render() {
-    console.log('props.item: ', this.props.items);
+    // console.log('props.item: ', this.props.items);
     return (
       <MuiThemeProvider muiTheme={this.context.muiTheme}>
         <div style={styles.paperStyle}>

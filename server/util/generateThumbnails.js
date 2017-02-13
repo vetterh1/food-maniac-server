@@ -56,10 +56,27 @@ function walk(dir, doneCallbackFn) {
 //
 
 export function regenerateAll(req, res) {
+  const io = req.app.get('socketio');
+  // console.log('socket io req response: ', io);
+
+  //
+  // ---------------------   Real time sockets  ---------------------
+  //
+
+  io.on('connection', (socket) => {
+    logger.info('generateThumbnails.regenerateAll - a user connected');
+    io.emit('connected');
+
+    socket.on('disconnect', () => {
+      logger.info('generateThumbnails.regenerateAll - a user disconnected');
+    });
+  });
+
+
   const folderStatic = config.get('storage.static');
   const folderPictures = path.join(__dirname, '..', folderStatic, '/pictures');
   const folderThumbnails = path.join(__dirname, '..', folderStatic, '/thumbnails');
-  const folderThumbnailsBackup = path.join(__dirname, '..', folderStatic, `/thumbnails.save`);
+  const folderThumbnailsBackup = path.join(__dirname, '..', folderStatic, '/thumbnails.save');
 
   // Delete backup
   try {
@@ -107,9 +124,11 @@ export function regenerateAll(req, res) {
           picture.scaleToFit(256, 256)            // resize
            .quality(60)                 // set JPEG quality
            .write(path.join(folderThumbnails, `${pictureFileObject.name}.jpg`));
+          io.emit('regenerateAllThumbnails.OK', pictureFileObject._id);
           logger.info('generateThumbnails.regenerateAll generating thumbnail: ', path.join(folderThumbnails, `${pictureFileObject.name}.jpg`));
         }).catch((errJimp) => {
           logger.error('! generateThumbnails.regenerateAll returns err (2): ', errJimp);
+          io.emit('regenerateAllThumbnails.KO', pictureFileObject._id);
         });
       }
     }

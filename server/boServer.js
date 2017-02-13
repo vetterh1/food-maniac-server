@@ -142,21 +142,12 @@ const app = express();
 const server = http.Server(app);
 const io = new SocketIO(server);
 
+// Save the socket io reference in express
+// so it can be used in other places
+// ex: var io = req.app.get('socketio'); io.emit('hi!');
+app.set('socketio', io);
 
 
-
-
-//
-// ---------------------   Real time sockets  ---------------------
-//
-
-io.on('connection', (socket) => {
-  console.log('---------------- a user connected');
-
-  socket.on('disconnect', () => {
-    console.log('----------------  user disconnected');
-  });
-});
 
 
 //
