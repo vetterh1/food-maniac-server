@@ -2,7 +2,9 @@
 
 const logger = require('./util/logger.js');
 
-import Express from 'express';
+import express from 'express';
+import http from 'http';
+import SocketIO from 'socket.io';
 import compression from 'compression';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
@@ -136,9 +138,25 @@ function allowCrossDomain(req, res, next) {
 
 
 // Initialize the Express App
-const app = new Express();
+const app = express();
+const server = http.Server(app);
+const io = new SocketIO(server);
 
 
+
+
+
+//
+// ---------------------   Real time sockets  ---------------------
+//
+
+io.on('connection', (socket) => {
+  console.log('---------------- a user connected');
+
+  socket.on('disconnect', () => {
+    console.log('----------------  user disconnected');
+  });
+});
 
 
 //
@@ -233,11 +251,11 @@ app.use('/util', utilRoutes);
 // app.use(Express.static(folderStatic));
 const folderStaticAbsolute = path.join(__dirname, folderStatic);
 logger.info(`BoServer serves static files from: ${folderStaticAbsolute} to /static.`);
-app.use('/static', Express.static(folderStaticAbsolute));
+app.use('/static', express.static(folderStaticAbsolute));
 
 
 // start app
-app.listen(serverPort, (error) => {
+server.listen(serverPort, (error) => {
   if (!error) {
     logger.info(`BoServer running on port: ${serverPort}`);
   } else {

@@ -154,6 +154,10 @@ module.exports = {
         target: 'http://localhost:8085',
         secure: false,
       },
+      '/socket.io': {
+        target: 'http://localhost:8085',
+        secure: false,
+      },
       '/static': {
         target: 'http://localhost:8085',
         secure: false,

@@ -95,24 +95,19 @@ export function regenerateAll(req, res) {
       logger.error('! generateThumbnails.regenerateAll returns err: ', err);
       res.status(500).send(err);
     } else {
-      const itemsWithValidPicture = items.filter(item => item.picture);
-      const validPictures = itemsWithValidPicture.map(item => item.picture);
-      let htmlValidPictures = validPictures.join('</li><li>');
-      const pictureFiles = [];
+      const pictureFileObjects = [];
       for (const item of items) {
-        // if (item.picture) pictureFiles.push(path.join(folderPictures, '/items', `${item.picture}.jpg`));
-        if (item.picture) pictureFiles.push(item.picture);
+        if (item.picture) pictureFileObjects.push({ name: item.picture, _id: item.picture });
       }
-      if (!htmlValidPictures) htmlValidPictures = 'No item image found';
-      res.send(`<h1>Thumbnails regeneration (all)</h1><div>${items.length} files to process:</div><div><ul><li>${htmlValidPictures}</li></ul></div>`);
-      logger.info(`generateThumbnails.regenerateAll nbItems=${items.length}`);
+      res.json({ items: pictureFileObjects });
+      logger.info(`generateThumbnails.regenerateAll nbItems=${pictureFileObjects.length}`);
 
-      for (const pictureFile of pictureFiles) {
-        Jimp.read(path.join(folderPictures, '/items', `${pictureFile}.jpg`)).then((picture) => {
+      for (const pictureFileObject of pictureFileObjects) {
+        Jimp.read(path.join(folderPictures, '/items', `${pictureFileObject.name}.jpg`)).then((picture) => {
           picture.scaleToFit(256, 256)            // resize
            .quality(60)                 // set JPEG quality
-           .write(path.join(folderThumbnails, `${pictureFile}.jpg`));
-          logger.info('generateThumbnails.regenerateAll generating thumbnail: ', path.join(folderThumbnails, `${pictureFile}.jpg`));
+           .write(path.join(folderThumbnails, `${pictureFileObject.name}.jpg`));
+          logger.info('generateThumbnails.regenerateAll generating thumbnail: ', path.join(folderThumbnails, `${pictureFileObject.name}.jpg`));
         }).catch((errJimp) => {
           logger.error('! generateThumbnails.regenerateAll returns err (2): ', errJimp);
         });
