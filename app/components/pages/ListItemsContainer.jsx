@@ -47,11 +47,18 @@ class ListItemsContainer extends React.Component {
 
 
   updateServerStateById(itemId, value) {
+    let found = false;
     const newItems = this.state.items.map((item) => {
-      return item._id === itemId ?
-        { ...item, serverState: value } :
-        item;
+      if (item._id === itemId) {
+        found = true;
+        return { ...item, serverState: value };
+      }
+      return item;
     });
+    if (!found) {
+      newItems.push({ name: itemId, _id: itemId, serverState: value });
+      console.log('added new item: ', itemId);
+    }
     this.setState({ items: newItems });
   }
 
@@ -62,12 +69,14 @@ class ListItemsContainer extends React.Component {
 
     fetch(this.props.URL)
       .then((response) => {
-        console.log('fetch operation OK: ', response.statusText);
+        console.log('ListItemsContainer - fetch operation OK');
         return response.json();
       }).then((jsonItems) => {
         // console.log('parsed json: ', jsonItems);
-        this.setState({ items: jsonItems.items });
-        this._ListItemsComponent.onEndLoadingOK();
+        if (jsonItems && jsonItems.items && jsonItems.items.length > 0) {
+          this.setState({ items: jsonItems.items });
+          this._ListItemsComponent.onEndLoadingOK();
+        }
       }).catch((ex) => {
         console.log('parsing failed', ex);
         this._ListItemsComponent.onEndLoadingFailed();
