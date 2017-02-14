@@ -56,6 +56,8 @@ function walk(dir, doneCallbackFn) {
 //
 
 export function regenerateAll(req, res) {
+  const _timeStart = new Date().getTime();
+
   const io = req.app.get('socketio');
   // console.log('socket io req response: ', io);
 
@@ -81,15 +83,18 @@ export function regenerateAll(req, res) {
   // Delete backup
   try {
     fs.rmdirSync(folderThumbnailsBackup);
-    logger.info(`generateThumbnails.regenerateAll deleted ${folderThumbnailsBackup}...`);
+    // logger.info(`generateThumbnails.regenerateAll deleted ${folderThumbnailsBackup}...`);
   } catch (err) {
     logger.error(`generateThumbnails.regenerateAll failed to delete ${folderThumbnailsBackup}: ${err}`);
   }
+  const _timeDeleteBackup = new Date().getTime();
+  logger.info(`generateThumbnails.regenerateAll duration deleteBackup = ${_timeDeleteBackup - _timeStart}`);
+
 
   // Rename thumbnails folder
   try {
     fs.renameSync(folderThumbnails, folderThumbnailsBackup);
-    logger.info(`generateThumbnails.regenerateAll renamed ${folderThumbnails} to ${folderThumbnailsBackup}...`);
+    // logger.info(`generateThumbnails.regenerateAll renamed ${folderThumbnails} to ${folderThumbnailsBackup}...`);
   } catch (err) {
     if (err && err.code === 'ENOENT') {
       logger.info(`generateThumbnails.regenerateAll could not rename ${folderThumbnails} to ${folderThumbnailsBackup}: source does not exist!`);
@@ -104,6 +109,8 @@ export function regenerateAll(req, res) {
   } catch (err) {
     logger.error(`generateThumbnails.regenerateAll re-create ${folderThumbnails}: ${err}`);
   }
+  const _timeRecreate = new Date().getTime();
+  logger.info(`generateThumbnails.regenerateAll duration recreate folders = ${_timeRecreate - _timeDeleteBackup}`);
 
 
   // Loop on all the Items pictures
@@ -118,19 +125,27 @@ export function regenerateAll(req, res) {
       }
       res.json({ items: pictureFileObjects });
       logger.info(`generateThumbnails.regenerateAll nbItems=${pictureFileObjects.length}`);
+      const _timeProcessingIntermediate1 = new Date().getTime();
+      logger.info(`generateThumbnails.regenerateAll duration processing intermediate1 = ${_timeProcessingIntermediate1 - _timeRecreate}`);
 
       for (const pictureFileObject of pictureFileObjects) {
         Jimp.read(path.join(folderPictures, '/items', `${pictureFileObject.name}.jpg`)).then((picture) => {
           picture.scaleToFit(256, 256)            // resize
-           .quality(60)                 // set JPEG quality
-           .write(path.join(folderThumbnails, `${pictureFileObject.name}.jpg`));
-          io.emit('regenerateAllThumbnails.OK', pictureFileObject._id);
-          logger.info('generateThumbnails.regenerateAll generating thumbnail: ', path.join(folderThumbnails, `${pictureFileObject.name}.jpg`));
+          .quality(60)                 // set JPEG quality
+          .write(path.join(folderThumbnails, `${pictureFileObject.name}.jpg`), () => {
+            io.emit('regenerateAllThumbnails.OK', pictureFileObject._id);
+            // logger.info('generateThumbnails.regenerateAll generating thumbnail: ', path.join(folderThumbnails, `${pictureFileObject.name}.jpg`));
+            const _timeProcessing = new Date().getTime();
+            logger.info(`generateThumbnails.regenerateAll duration processing = ${_timeProcessing - _timeRecreate}`);
+          });
         }).catch((errJimp) => {
+          const _timeProcessing = new Date().getTime();
+          logger.info(`generateThumbnails.regenerateAll duration processing = ${_timeProcessing - _timeRecreate}`);
           logger.error('! generateThumbnails.regenerateAll returns err (2): ', errJimp);
           io.emit('regenerateAllThumbnails.KO', pictureFileObject._id);
         });
       }
+      io.emit('regenerateAllThumbnails.done');
     }
   });
 }

@@ -23,11 +23,8 @@ class ListItemsContainer extends React.Component {
   }
 
   componentDidMount() {
-    // if (this.props.socketRoom) {
-    //   this.socket.emit('join', this.props.socketRoom);
-    // }
-
     if (this.props.socketName) {
+      console.log(`ListItemsContainer.componentDidMount connects to ${this.props.socketName}`);
       this.socket = io();
       this.socket.on(`${this.props.socketName}.OK`, (itemId) => {
         this.updateServerStateById(itemId, 'OK');
@@ -36,15 +33,16 @@ class ListItemsContainer extends React.Component {
       this.socket.on(`${this.props.socketName}.KO`, (itemId) => {
         this.updateServerStateById(itemId, 'KO');
       });
+
+      this.socket.on(`${this.props.socketName}.done`, () => {
+        
+      });
     }
 
     this.load();
   }
 
   componentWillUnmount() {
-    // if (this.props.socketRoom) {
-    //   this.socket.emit('leave', this.props.socketRoom);
-    // }
   }
 
 
