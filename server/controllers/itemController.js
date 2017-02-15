@@ -5,6 +5,7 @@ import sanitizeHtml from 'sanitize-html';
 import fs from 'fs';
 import config from 'config';
 import path from 'path';
+import * as GenerateThumbnails from '../util/generateThumbnails';
 
 
 /**
@@ -75,6 +76,11 @@ export function addItem(req, res) {
             logger.error(`! itemController.addItem ${newItem.name} - saving image FAILED - _id: ${newItem._id} - Picture id: ${newItem.picture} (path: ${filePath}) !`);
           } else {
             logger.info(`itemController.addItem ${newItem.name} - saved image OK - _id: ${newItem._id} - Picture id: ${newItem.picture} (path: ${filePath})`);
+            // const folderStatic = config.get('storage.static');
+            const folderThumbnails = path.join(__dirname, '..', folderStatic, '/thumbnails');
+            GenerateThumbnails.generateThumbnail(filePath, folderThumbnails, null, () => {
+              logger.info(`itemController.addItem ${newItem.name} - saved thumbnail OK`);
+            });
           }
         });
     }
@@ -103,27 +109,22 @@ export function getItem(req, res) {
  */
 export function updateItem(req, res) {
   if (!req.body || !req.body.item) {
-    let error = { status: "error", message: "! itemController.updateItem failed! - no body or item" };
-    if (!req.body )
-      error.message += "... no req.body!";
-    if (req.body && !req.body.item )
-      error.message += "... no req.body.item!";
+    const error = { status: 'error', message: '! itemController.updateItem failed! - no body or item' };
+    if (!req.body) error.message += '... no req.body!';
+    if (req.body && !req.body.item) error.message += '... no req.body.item!';
     res.status(400).json(error);
-  }
-  else if (req.body && req.body.item && req.body.item.cuid) {
-    res.status(400).json({ status: "error", message: "! itemController.updateItem failed! - cuid cannot be changed" });
-  }
-  else {
-    Item.findOneAndUpdate({ cuid: req.params.cuid }, req.body.item, {new: true}, (err, item) => {
-      if(err || !item){
+  } else if (req.body && req.body.item && req.body.item.cuid) {
+    res.status(400).json({ status: 'error', message: '! itemController.updateItem failed! - cuid cannot be changed' });
+  } else {
+    Item.findOneAndUpdate({ cuid: req.params.cuid }, req.body.item, { new: true }, (err, item) => {
+      if (err || !item) {
         logger.error(`! itemController.updateItem ${req.params.cuid} failed to update! - err = `, err);
         res.status(500).send(err);
-      }
-      else {
-        res.json({ item: item });
+      } else {
+        res.json({ item });
         logger.info(`itemController.updateItem ${req.params.cuid}`);
       }
-    }); 
+    });
   }
 }
 

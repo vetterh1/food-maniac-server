@@ -19,9 +19,18 @@
     },
     "static": "/static_test"
   },
+  
 	"log":
 	{
 		"levelConsole": "none",
 		"levelFile": "debug",
+    "BoServer":
+    {
+        "pathFile" : "./server/log/winstonBo.log"
+    },
+    "FoServer":
+    {
+        "pathFile" : "./server/log/winstonFo.log"
+    }
   }
 }

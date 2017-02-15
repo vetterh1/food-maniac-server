@@ -72,6 +72,13 @@ https://www.imagemagick.org/download/binaries/ImageMagick-7.0.4-7-Q16-x64-dll.ex
 
 
 
+---------------------------------------------------------------
+                          SUBLIME
+---------------------------------------------------------------
+
+Find in files:
+C:\workspace\mapTest\, -*/node_modules/*, -*/distBoServer/*, -*/distFoServer/*, -*/server/log*
+
 
 ---------------------------------------------------------------
                             GIT

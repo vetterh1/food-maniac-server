@@ -6,7 +6,10 @@ const router = new Router();
 
 // ----------------  THUMBNAILS ----------------
 
-// Get all Items
-router.route('/regenerateAllThumbnails').get(GenerateThumbnails.regenerateAll);
+// Regenerate all items
+router.route('/regenerateAllThumbnails').post(GenerateThumbnails.regenerateAll);
+
+// Generate one item
+router.route('/generateOneThumbnail').post(GenerateThumbnails.generateOneThumbnail);
 
 export default router;
