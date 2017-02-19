@@ -33,6 +33,7 @@ class ListItemsContainer extends React.Component {
   static propTypes = {
     URL: React.PropTypes.string.isRequired,
     socketName: React.PropTypes.string,
+    pagination: React.PropTypes.string,
   }
 
   constructor() {
@@ -109,8 +110,9 @@ class ListItemsContainer extends React.Component {
 
   load() {
     this._ListItemsComponent.onStartLoading();
+    const urlWithParams = this.props.URL.concat('/', this.props.pagination );
 
-    fetch(this.props.URL)
+    fetch(urlWithParams)
       .then((response) => {
         console.log('ListItemsContainer - fetch operation OK');
         return response.json();

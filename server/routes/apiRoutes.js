@@ -28,7 +28,7 @@ router.route('/users/:cuid').delete(UserController.deleteUser);
 // ----------------  ITEMS ----------------
 
 // Get all Items
-router.route('/items').get(ItemController.getItems);
+router.route('/items/:pagination').get(ItemController.getItems);
 
 // Get one item by cuid
 router.route('/items/:cuid').get(ItemController.getItem);

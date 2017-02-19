@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+var mongoosePaginate = require('mongoose-paginate');
 
 const Schema = mongoose.Schema;
 
@@ -11,6 +12,7 @@ const itemSchema = new Schema({
   lastModif: { type: 'Date', default: Date.now, required: true },
   cuid: { type: 'String', required: true },
 });
+itemSchema.plugin(mongoosePaginate);
 
 // on every save, add the date
 itemSchema.pre('save', function(next) {

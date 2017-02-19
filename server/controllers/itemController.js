@@ -12,13 +12,26 @@ import * as GenerateThumbnails from '../util/generateThumbnails';
  * Get all items
  */
 export function getItems(req, res) {
-  Item.find().sort('-since').exec((err, items) => {
+  const pagination = Number(req.params.pagination);
+
+  // TODO: query should return items of current user.
+  const query = {};
+  const options = {
+    // select: 'title date author',
+    sort: { since: -1 },
+    // populate: 'author',
+    lean: true,
+    offset: pagination < 0 ? 0 : pagination,
+    limit: pagination < 0 ? 0 : 5,
+  };
+
+  Item.paginate(query, options, (err, items) => {
     if (err) {
       logger.error('! itemController.getItems returns err: ', err);
       res.status(500).send(err);
     } else {
-      res.json({ items });
-      logger.info(`itemController.getItems length=${items.length}`);
+      res.json({ items: items.docs });
+      logger.info(`itemController.getItems length=${items.docs.length}`);
     }
   });
 }

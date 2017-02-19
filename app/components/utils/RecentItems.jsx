@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { GridList, GridTile } from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import IconStarBorder from 'material-ui/svg-icons/toggle/star-border';
+import ListItemsContainer from '../pages/ListItemsContainer';
 
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
@@ -41,6 +42,13 @@ class RecentItems extends React.Component {
 
   render = () => {
     return (
+      <ListItemsContainer URL="/api/items" pagination="5" />
+    );
+  }
+/*
+
+  render = () => {
+    return (
       <GridList
         cellHeight={180}
         style={styles.gridList}
@@ -64,6 +72,7 @@ class RecentItems extends React.Component {
       </GridList>
     );
   }
+*/
 }
 
 

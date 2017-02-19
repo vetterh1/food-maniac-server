@@ -1,7 +1,8 @@
 import React from 'react';
 // import SelectCurrentLocation from '../containers/SelectCurrentLocation';
 import SelectLocation from '../utils/SelectLocation';
-import RecentItemsContainer from '../utils/RecentItems';
+// import RecentItemsContainer from '../utils/RecentItems';
+import ListItemsContainer from '../pages/ListItemsContainer';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Rating from 'react-rating';
 import Formsy from 'formsy-react';
@@ -15,7 +16,6 @@ import IconStar from 'material-ui/svg-icons/toggle/star';
 import IconStarBorder from 'material-ui/svg-icons/toggle/star-border';
 import IconSearch from 'material-ui/svg-icons/action/search';
 // import IconLocation from 'material-ui/svg-icons/communication/location-on';
-
 
 const styles = {
   paperStyle: {
@@ -80,9 +80,9 @@ class Rate extends React.Component {
           >
             <h3>Where?</h3>
             <SelectLocation />
-            
+
             <h3>What?</h3>
-            <RecentItemsContainer />
+            <ListItemsContainer URL="/api/items" pagination="5" />
 
             <FlatButton
               label="other dish..."
@@ -156,6 +156,10 @@ export default Rate;
 
 
 /*
+
+            <RecentItemsContainer />
+
+
               <Subheader>What did you eat?</Subheader>
 
 import DropDownMenu from 'material-ui/DropDownMenu';
