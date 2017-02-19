@@ -7,6 +7,8 @@ import App from '../pages/App';
 import MainChoiceContainer from './MainChoiceContainer';
 import Rate from '../pages/Rate';
 import AddItemContainer from '../pages/AddItemContainer';
+import AddItemContainerHtml from '../pages/AddItemContainerHtml';
+import AddItemContainerMaterial from '../pages/AddItemContainerMaterial';
 import ListItemsContainer from '../pages/ListItemsContainer';
 import Login from '../pages/Login';
 
@@ -20,6 +22,8 @@ const Root = ({ store }) => (
         <Route path="/rate" component={Rate} />
         <Route path="/search" component={AddItemContainer} />
         <Route path="/addItem" component={AddItemContainer} />
+        <Route path="/addItemHtml" component={AddItemContainerHtml} />
+        <Route path="/addItemMaterial" component={AddItemContainerMaterial} />
         <Route path="/login" component={Login} />
         <Route path="/listItems" component={() => (<ListItemsContainer URL="/api/items" />)} />
         <Route path="/generateThumbnails" component={() => (<ListItemsContainer URL="/util/regenerateAllThumbnails" socketName="regenerateAllThumbnails" />)} />
