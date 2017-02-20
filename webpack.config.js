@@ -133,12 +133,10 @@ module.exports = {
   plugins,
 
   module: {
-    loaders: [{
-      test: /\.js.?$/,
-      exclude: /node_modules/,
-      loader: 'babel-loader',
-      // loader: loaders
-    }],
+    loaders: [
+      { test: /\.js.?$/, exclude: /node_modules/, loader: 'babel-loader' },
+      { test: /\.css$/, loader: 'style-loader!css-loader' },
+    ],
   },
 
   devServer: {

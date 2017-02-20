@@ -6,6 +6,9 @@ import createLogger from 'redux-logger';
 import combinedReducer from './reducers/combinedReducer';
 import thunk from 'redux-thunk';
 
+import 'bootstrap/dist/css/bootstrap.css';
+
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const reduxMiddleware = applyMiddleware(thunk, createLogger());
 
