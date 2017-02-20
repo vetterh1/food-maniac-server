@@ -5,26 +5,13 @@ import React, { Component } from 'react';
 // import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 // import * as LocationActions from '../../actions/LocationActions';
-import { GridList, GridTile } from 'material-ui/GridList';
-import IconButton from 'material-ui/IconButton';
-import IconStarBorder from 'material-ui/svg-icons/toggle/star-border';
+// import { GridList, GridTile } from 'material-ui/GridList';
+// import IconButton from 'material-ui/IconButton';
+// import IconStarBorder from 'material-ui/svg-icons/toggle/star-border';
 import ListItemsContainer from '../pages/ListItemsContainer';
 
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
-
-const styles = {
-  gridList: {
-    display: 'flex',
-    // flexWrap: 'nowrap',
-    overflowX: 'auto',
-  },
-  titleStyle: {
-    color: 'rgb(0, 188, 212)',
-  },
-};
-
-
 
 class RecentItems extends React.Component {
   static propTypes = {
@@ -125,8 +112,6 @@ class RecentItemsContainer extends React.Component {
         console.log('parsing failed', ex);
         // this._RecentItemsComponent.onEndLoadingFailed();
       });
-
- 
   }
 
 

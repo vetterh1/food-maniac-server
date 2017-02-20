@@ -4,11 +4,8 @@
 import React from 'react';
 import MainAppBar from '../navigation/MainAppBar';
 import Version from '../utils/Version';
-import Radium, { StyleRoot } from 'radium';
+// import Radium, { StyleRoot } from 'radium';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { red500 } from 'material-ui/styles/colors';
 // import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { RouteTransition } from 'react-router-transition';
 
@@ -18,18 +15,12 @@ const styles = {
   },
 };
 
-const muiTheme = getMuiTheme({
-  palette: {
-    accent1Color: red500,
-  },
-});
-
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
 
 
-@Radium
+// @Radium
 class App extends React.Component {
   static propTypes = {
     children: React.PropTypes.node,
@@ -43,23 +34,21 @@ class App extends React.Component {
 
   render() {
     return (
-      <StyleRoot>
-        <MuiThemeProvider muiTheme={muiTheme}>
-          <div style={styles.pageContainer}>
-            <MainAppBar />
-            <RouteTransition
-              pathname={this.props.location.pathname}
-              atEnter={{ translateX: 100 }}
-              atLeave={{ translateX: -100 }}
-              atActive={{ translateX: 0 }}
-              mapStyles={style => ({ transform: `translateX(${style.translateX}%)` })}
-            >
-              {this.props.children}
-            </RouteTransition>
-            <Version />
-          </div>
-        </MuiThemeProvider>
-      </StyleRoot>
+      <div>
+        <div style={styles.pageContainer}>
+          <MainAppBar />
+          <RouteTransition
+            pathname={this.props.location.pathname}
+            atEnter={{ translateX: 100 }}
+            atLeave={{ translateX: -100 }}
+            atActive={{ translateX: 0 }}
+            mapStyles={style => ({ transform: `translateX(${style.translateX}%)` })}
+          >
+            {this.props.children}
+          </RouteTransition>
+          <Version />
+        </div>
+      </div>
     );
   }
 }

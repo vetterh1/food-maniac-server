@@ -1,7 +1,7 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
-import { Card, CardMedia, CardTitle } from 'material-ui/Card';
-import Radium from 'radium';
+// import { Card, CardMedia, CardTitle } from 'material-ui/Card';
+// import Radium from 'radium';
 
 
 const styles = {
@@ -24,7 +24,7 @@ const styles = {
 };
 
 
-@Radium
+// @Radium
 class CardButton extends React.Component {
   static propTypes = {
     title: React.PropTypes.string.isRequired,
@@ -49,19 +49,27 @@ class CardButton extends React.Component {
     browserHistory.push(this.props.url);
   }
 
+  // render() {
+  //   return (
+  //     <Card
+  //       style={this.state.clicked ? styles.clickedCard : styles.card}
+  //     >
+  //       <CardMedia
+  //         overlay={<CardTitle title={this.props.title} subtitle={this.props.subtitle} />}
+  //         style={styles.cardMedia}
+  //         onClick={this._handleClick}
+  //       >
+  //         <img src={this.props.image} alt="" style={styles.img} />
+  //       </CardMedia>
+  //     </Card>
+  //   );
+  // }
+
   render() {
     return (
-      <Card
-        style={this.state.clicked ? styles.clickedCard : styles.card}
-      >
-        <CardMedia
-          overlay={<CardTitle title={this.props.title} subtitle={this.props.subtitle} />}
-          style={styles.cardMedia}
-          onClick={this._handleClick}
-        >
-          <img src={this.props.image} alt="" style={styles.img} />
-        </CardMedia>
-      </Card>
+      <div>
+        <img src={this.props.image} alt="" style={styles.img} />
+      </div>
     );
   }
 

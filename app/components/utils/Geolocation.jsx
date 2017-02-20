@@ -5,8 +5,8 @@ import React, { Component } from 'react';
 // import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as LocationActions from '../../actions/LocationActions';
-import IconLocation from 'material-ui/svg-icons/communication/location-on';
-import Popover from 'material-ui/Popover';
+// import IconLocation from 'material-ui/svg-icons/communication/location-on';
+// import Popover from 'material-ui/Popover';
 import TestDisplayPositionFromStore from './TestDisplayPositionFromStore';
 
 
@@ -60,21 +60,57 @@ class GeolocationDisplay extends React.Component {
     });
   };
 
+  // render = () => {
+  //   return (
+  //     <div>
+  //       <IconLocation
+  //         style={this.props.coordinates.real ? styles.locationOK : styles.locationKO}
+  //         onTouchTap={this.handleTouchTap}
+  //       />
+  //       <Popover
+  //         style={styles.Popover}
+  //         open={this.state.open}
+  //         anchorEl={this.state.anchorEl}
+  //         anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+  //         targetOrigin={{ horizontal: 'left', vertical: 'top' }}
+  //         onRequestClose={this.handleRequestClose}
+  //       >
+  //         <div className="geolocation_statistics">
+  //           Coordinates:
+  //           <ul>
+  //             <li>Latitude: {this.props.coordinates.latitude ? Math.round(this.props.coordinates.latitude * 100000) / 100000 : 'unknown'}</li>
+  //             <li>Longitude: {this.props.coordinates.longitude ? Math.round(this.props.coordinates.longitude * 100000) / 100000 : 'unknown'}</li>
+  //             <li>Real: {this.props.coordinates.real ? 'true' : 'false'}</li>
+  //             <li>Changed: {this.props.coordinates.changed ? 'true' : 'false'}</li>
+  //             <li>Changed (real): {this.props.coordinates.changedReal ? 'true' : 'false'}</li>
+  //           </ul>
+  //         </div>
+
+  //         <div className="geolocation_statistics">
+  //           Statistics:
+  //           <ul>
+  //             <li>Nb refreshes: {this.props.coordinates.nbRefreshes}</li>
+  //             <li>Nb different positions: {this.props.coordinates.nbDiffs}</li>
+  //             <li>Nb real positions: {this.props.coordinates.nbReal}</li>
+  //             <li>Nb estimated positions: {this.props.coordinates.nbEstimated}</li>
+  //             <li>Nb closed positions: {this.props.coordinates.nbClose}</li>
+  //           </ul>
+  //         </div>
+
+  //         <div className="geolocation_statistics">
+  //           Simulation:
+  //           <TestDisplayPositionFromStore />
+  //         </div>
+
+  //       </Popover>
+  //     </div>
+  //   );
+  // }
+
+
   render = () => {
     return (
       <div>
-        <IconLocation
-          style={this.props.coordinates.real ? styles.locationOK : styles.locationKO}
-          onTouchTap={this.handleTouchTap}
-        />
-        <Popover
-          style={styles.Popover}
-          open={this.state.open}
-          anchorEl={this.state.anchorEl}
-          anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
-          targetOrigin={{ horizontal: 'left', vertical: 'top' }}
-          onRequestClose={this.handleRequestClose}
-        >
           <div className="geolocation_statistics">
             Coordinates:
             <ul>
@@ -101,11 +137,11 @@ class GeolocationDisplay extends React.Component {
             Simulation:
             <TestDisplayPositionFromStore />
           </div>
-
-        </Popover>
       </div>
     );
   }
+
+
 }
 
 

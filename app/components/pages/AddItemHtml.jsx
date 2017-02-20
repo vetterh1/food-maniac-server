@@ -1,5 +1,5 @@
 import React from 'react';
-import Snackbar from 'material-ui/Snackbar';
+import { Button, Form, FormGroup, Label, Input, FormText } from 'react-bootstrap';
 
 import CameraSnapshotContainer from './CameraSnapshotContainer';
 import LogOnDisplay from '../utils/LogOnDisplay';
@@ -117,7 +117,8 @@ class AddItem extends React.Component {
 
   submitForm(data) {
     // Add picture to data
-    const dataWithPicture = Object.assign(data, { picture: this.state.picture });
+    console.log('submitForm - state:', this.state);
+    const dataWithPicture = Object.assign({}, this.state, { picture: this.state.picture });
     this.setState(
       { messageType: 'info', messageText: 'Sending...' },
       this.props.onSubmit(dataWithPicture) // callback fn: send data back to container
@@ -142,71 +143,50 @@ class AddItem extends React.Component {
 
   render() {
     return (
-        <div style={styles.paperStyle}>
-          <h1>New dish...</h1>
-          <form
-            // onValid={this.enableButton}
-            // onInvalid={this.disableButton}
-            onSubmit={this.submitForm}
-            // onInvalidSubmit={this.notifyFormError}
-          >
-            <div
-              style={styles.form_content}
-            >
-              <select
-                value={this.state.category}
-                onChange={this.categoryChange}
-                style={styles.item}
-              >
-                <option value={'dish'}>Dish</option>
-                <option value={'dessert'}>Dessert</option>
-                <option value={'drink'}>Drink</option>
-              </select>
+      <div style={styles.paperStyle}>
+        <h1>New dish...</h1>
+        <Form
+          // onValid={this.enableButton}
+          // onInvalid={this.disableButton}
+          onSubmit={this.submitForm}
+          // onInvalidSubmit={this.notifyFormError}
+        >
+          <FormGroup>
+            <Label for="selectCategory" size="lg">Category</Label>
+            <Input type="select" name="category" id="selectCategory" size="lg">
+              <option value={'dish'}>Dish</option>
+              <option value={'dessert'}>Dessert</option>
+              <option value={'drink'}>Drink</option>
+            </Input>
+          </FormGroup>
 
-              <select
-                value={this.state.category}
-                onChange={this.kindChange}
-                style={styles.item}
-              >
-                <option value={'italian'}>Italian</option>
-                <option value={'french'}>French</option>
-                <option value={'mexican'}>Mexican</option>
-                <option value={'indian'}>Indian</option>
-                <option value={'american'}>American</option>
-                <option value={'other'}>Other</option>
-              </select>
-            </div>
+          <FormGroup>
+            <Label for="selectKind" size="lg">Kind</Label>
+            <Input type="select" name="kind" id="selectKind" size="lg">
+              <option value={'italian'}>Italian</option>
+              <option value={'french'}>French</option>
+              <option value={'mexican'}>Mexican</option>
+              <option value={'indian'}>Indian</option>
+              <option value={'american'}>American</option>
+              <option value={'other'}>Other</option>
+            </Input>
+          </FormGroup>
 
-            <div
-              style={styles.form_content}
-            >
-              <input type="text" value={this.state.name} onChange={this.nameChange} style={styles.item} />
-            </div>
+          <FormGroup>
+            <Label for="inputName">Name</Label>
+            <Input name="name" id="inputName" placeholder="..." />
+          </FormGroup>
 
-            <div>
-              <h4>Picture</h4>
-              <CameraSnapshotContainer onSnapshotStartProcessing={this.onSnapshotStartProcessing} onSnapshotReady={this.onSnapshotReady} onDeleteSnapshot={this.onDeleteSnapshot} />
-            </div>
+          <div>
+            <h4>Picture</h4>
+            <CameraSnapshotContainer onSnapshotStartProcessing={this.onSnapshotStartProcessing} onSnapshotReady={this.onSnapshotReady} onDeleteSnapshot={this.onDeleteSnapshot} />
+          </div>
 
-            <div
-              style={styles.form_buttons}
-            >
-              <input
-                style={styles.submitStyle}
-                type="submit"
-                label="Add"
-              />
-            </div>
-
-          </form>
-          <img ref={(r) => { this._imageCameraSnapshot = r; }} style={styles.imageCameraSnapshot} role="presentation" />
-          <LogOnDisplay ref={(r) => { this._logOnDisplay = r; }} />
-          <Snackbar
-            open={this.state.snackbarOpen}
-            message={this.state.snackbarMessage}
-            autoHideDuration={this.state.snackbarTimeout}
-          />
-        </div>
+          <Button type="submit">Add</Button>
+        </Form>
+        <img ref={(r) => { this._imageCameraSnapshot = r; }} style={styles.imageCameraSnapshot} role="presentation" />
+        <LogOnDisplay ref={(r) => { this._logOnDisplay = r; }} />
+      </div>
     );
   }
 
@@ -215,3 +195,10 @@ class AddItem extends React.Component {
 export default AddItem;
 
 //            bodyStyle={{ height: 'auto', lineHeight: '28px', padding: 24, whiteSpace: 'pre-line' }}
+/*
+          <Snackbar
+            open={this.state.snackbarOpen}
+            message={this.state.snackbarMessage}
+            autoHideDuration={this.state.snackbarTimeout}
+          />
+ */

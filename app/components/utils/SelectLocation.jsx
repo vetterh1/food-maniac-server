@@ -9,8 +9,8 @@ import Geolocation from './Geolocation';
 
 // import Formsy from 'formsy-react';
 // import FlatButton from 'material-ui/FlatButton';
-import { FormsySelect /* , FormsyCheckbox, FormsyDate, FormsyRadio, FormsyRadioGroup, FormsyText, FormsyTime, FormsyToggle, FormsyAutoComplete */ } from 'formsy-material-ui/lib';
-import MenuItem from 'material-ui/MenuItem';
+// import { FormsySelect  , FormsyCheckbox, FormsyDate, FormsyRadio, FormsyRadioGroup, FormsyText, FormsyTime, FormsyToggle, FormsyAutoComplete  } from 'formsy-material-ui/lib';
+// import MenuItem from 'material-ui/MenuItem';
 
 const styles = {
   div: {
@@ -47,12 +47,9 @@ const Listing = ({ places }) => {
 
   const result = (
     <div>
-      <FormsySelect
-        name="where"
-        required
-      >
-        {places && places.map((p) => { return (<MenuItem key={p.id} value={p.id} primaryText={p.name} />); })}
-      </FormsySelect>
+      <select>
+        {places && places.map((p) => { return (<option key={p.id} value={p.id}>{p.name}</option>); })}
+      </select>
     </div>
   );
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import IconButton from 'material-ui/IconButton';
-import IconAddAPhoto from 'material-ui/svg-icons/image/add-a-photo';
-import IconDelete from 'material-ui/svg-icons/action/delete';
+// import IconButton from 'material-ui/IconButton';
+// import IconAddAPhoto from 'material-ui/svg-icons/image/add-a-photo';
+// import IconDelete from 'material-ui/svg-icons/action/delete';
 import PromiseFileReader from '../utils/PromiseFileReader';
 import LogOnDisplay from '../utils/LogOnDisplay';
 
@@ -169,15 +169,31 @@ export default class CameraSnapshotContainer extends React.Component {
   }
 
 
+  // render() {
+  //   const styleTakeSnapshot = Object.assign({}, styles.snapshotInputBlock, this.state.snapshot ? styles.hidden : styles.visible);
+  //   const styleDeleteSnapshot = this.state.snapshot ? styles.visible : styles.hidden;
+
+  //   return (
+  //     <div>
+  //       <IconButton style={styleDeleteSnapshot} onTouchTap={this.onDeleteSnapshot}><IconDelete /></IconButton>
+  //       <div style={styleTakeSnapshot}>
+  //         <div style={styles.snapshotButton}><IconAddAPhoto /></div>
+  //         <input type="file" ref={(r) => { this._inputSnapshot = r; }} style={styles.snapshotInput} onChange={this.onSnapshot} accept="image/*" capture />
+  //       </div>
+  //       <canvas ref={(c) => { this._canvasCameraSnapshot = c; }} style={styles.canvas} />
+  //       <LogOnDisplay ref={(r) => { this._logOnDisplay = r; }} />
+  //     </div>
+  //   );
+  // }
+
   render() {
     const styleTakeSnapshot = Object.assign({}, styles.snapshotInputBlock, this.state.snapshot ? styles.hidden : styles.visible);
     const styleDeleteSnapshot = this.state.snapshot ? styles.visible : styles.hidden;
 
     return (
       <div>
-        <IconButton style={styleDeleteSnapshot} onTouchTap={this.onDeleteSnapshot}><IconDelete /></IconButton>
         <div style={styleTakeSnapshot}>
-          <div style={styles.snapshotButton}><IconAddAPhoto /></div>
+          <div style={styles.snapshotButton}>+</div>
           <input type="file" ref={(r) => { this._inputSnapshot = r; }} style={styles.snapshotInput} onChange={this.onSnapshot} accept="image/*" capture />
         </div>
         <canvas ref={(c) => { this._canvasCameraSnapshot = c; }} style={styles.canvas} />

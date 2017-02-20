@@ -1,6 +1,6 @@
 import React from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Snackbar from 'material-ui/Snackbar';
+// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+// import Snackbar from 'material-ui/Snackbar';
 
 
 const styles = {
@@ -107,7 +107,6 @@ class ListItems extends React.Component {
   render() {
     // console.log('props.item: ', this.props.items);
     return (
-      <MuiThemeProvider muiTheme={this.context.muiTheme}>
         <div style={styles.paperStyle}>
           <h1>Items list</h1>
           <ul>
@@ -115,16 +114,16 @@ class ListItems extends React.Component {
               <ListOneItem index={index} item={item} key={item._id} />
             ))}
           </ul>
-          <Snackbar
-            open={this.state.snackbarOpen}
-            message={this.state.snackbarMessage}
-            autoHideDuration={this.state.snackbarTimeout}
-          />
         </div>
-      </MuiThemeProvider>
     );
   }
 
 }
 
 export default ListItems;
+
+          // <Snackbar
+          //   open={this.state.snackbarOpen}
+          //   message={this.state.snackbarMessage}
+          //   autoHideDuration={this.state.snackbarTimeout}
+          // />

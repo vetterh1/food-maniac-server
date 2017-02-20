@@ -3,19 +3,21 @@ import React from 'react';
 import SelectLocation from '../utils/SelectLocation';
 // import RecentItemsContainer from '../utils/RecentItems';
 import ListItemsContainer from '../pages/ListItemsContainer';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Rating from 'react-rating';
+/*
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Formsy from 'formsy-react';
 import { FormsyCheckbox, FormsyDate, FormsyRadio, FormsyRadioGroup,
           FormsySelect, FormsyText, FormsyTime, FormsyToggle, FormsyAutoComplete } from 'formsy-material-ui/lib';
-// import Paper from 'material-ui/Paper';
-// import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
-// import Subheader from 'material-ui/Subheader';
 import IconStar from 'material-ui/svg-icons/toggle/star';
 import IconStarBorder from 'material-ui/svg-icons/toggle/star-border';
 import IconSearch from 'material-ui/svg-icons/action/search';
+*/
+// import Subheader from 'material-ui/Subheader';
 // import IconLocation from 'material-ui/svg-icons/communication/location-on';
+// import Paper from 'material-ui/Paper';
+// import MenuItem from 'material-ui/MenuItem';
 
 const styles = {
   paperStyle: {
@@ -67,6 +69,12 @@ class Rate extends React.Component {
   }
 
 
+  render() {
+    return (
+          <h1>Rate a dish...</h1>
+    );
+  }          
+          /*
   render() {
     return (
       <MuiThemeProvider muiTheme={this.context.muiTheme}>
@@ -148,7 +156,8 @@ class Rate extends React.Component {
         </div>
       </MuiThemeProvider>
     );
-  }
+  }      */
+
 
 }
 
