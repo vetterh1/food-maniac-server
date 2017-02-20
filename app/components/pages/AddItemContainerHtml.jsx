@@ -21,7 +21,7 @@ class AddItemContainer extends React.Component {
   submitForm(data) {
     this._addItemComponent.onStartSaving();
 
-
+    console.log('AddItemContainer.submitForm - 1', data);
     fetch('/api/items', {
       method: 'POST',
       headers: {
@@ -43,6 +43,7 @@ class AddItemContainer extends React.Component {
       this._addItemComponent.onEndSavingFailed('02');
       console.error(`There has been a problem with your fetch operation: ${error.message}`);
     });
+    console.log('AddItemContainer.submitForm - 2');
   }
 
 

@@ -42,13 +42,16 @@ export function getItems(req, res) {
  */
 
 export function addItem(req, res) {
-  if (!req.body || !req.body.item || !req.body.item.name) {
+  if (!req.body || !req.body.item || !req.body.item.name || !req.body.item.category || !req.body.item.kind) {
     logger.error('! itemController.addItem failed! - missing mandatory fields');
     if (!req.body) logger.error('... no req.body!');
     if (req.body && !req.body.item) logger.error('... no req.body.item!');
     if (req.body && req.body.item && !req.body.item.name) logger.error('... no req.body.item.name!');
+    if (req.body && req.body.item && req.body.item.name && req.body.item.name.length <= 0) logger.error('... req.body.item.name empty!');
     if (req.body && req.body.item && !req.body.item.category) logger.error('... no req.body.item.category!');
+    if (req.body && req.body.item && req.body.item.category && req.body.item.category.length <= 0) logger.error('... req.body.item.category empty!');
     if (req.body && req.body.item && !req.body.item.kind) logger.error('... no req.body.item.kind!');
+    if (req.body && req.body.item && req.body.item.kind && req.body.item.kind.length <= 0) logger.error('... req.body.item.kind empty!');
     res.status(400).end();
   } else {
     const newItem = new Item(req.body.item);
@@ -61,7 +64,7 @@ export function addItem(req, res) {
     newItem.cuid = cuid();
     newItem.save((err, saved) => {
       if (err) {
-        logger.error(`! itemController.addItem ${newItem.name} failed - _id: ${newItem._id} - err:`, err);
+        logger.error(`! itemController.addItem ${newItem.name} failed - _id: ${newItem._id} - name: ${newItem.name} - category: ${newItem.category} - kind: ${newItem.kind} - err:`, err);
         res.status(500).send(err);
       } else {
         res.json({ item: saved });

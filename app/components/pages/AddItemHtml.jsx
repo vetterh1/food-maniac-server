@@ -1,33 +1,15 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-
+import { Button, Label, FormGroup } from 'reactstrap';
+import { AvForm, AvField, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
 import CameraSnapshotContainer from './CameraSnapshotContainer';
 import LogOnDisplay from '../utils/LogOnDisplay';
 
 const styles = {
-  paperStyle: {
+  form: {
     // width: 300,
     // margin: '20 auto',
     padding: 20,
   },
-  submitStyle: {
-    marginTop: 32,
-  },
-  form_content: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'flex-start',
-  },
-  form_buttons: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'flex-start',
-  },
-  item: {
-    padding: '0.5em',
-    marginRight: 32,
-  },
-
   imageCameraSnapshot: {
     maxWidth: 300,
     maxHeight: 200,
@@ -41,13 +23,7 @@ class AddItem extends React.Component {
 
   constructor() {
     super();
-    this.enableButton = this.enableButton.bind(this);
-    this.disableButton = this.disableButton.bind(this);
     this.submitForm = this.submitForm.bind(this);
-    this.notifyFormError = this.notifyFormError.bind(this);
-    this.categoryChange = this.categoryChange.bind(this);
-    this.kindChange = this.kindChange.bind(this);
-    this.nameChange = this.nameChange.bind(this);
 
     this.onSnapshotStartProcessing = this.onSnapshotStartProcessing.bind(this);
     this.onSnapshotReady = this.onSnapshotReady.bind(this);
@@ -59,16 +35,11 @@ class AddItem extends React.Component {
       canSubmit: false,
       messageType: null,
       messageText: null,
-      name: '',
-      picture: null,
-      category: '',
-      kind: '',
       snackbarOpen: false,
       snackbarMessage: '.',
       snackbarTimeout: 4000,
     };
   }
-
 
   onStartSaving() {
     this._nowStartSaving = new Date().getTime();
@@ -109,26 +80,15 @@ class AddItem extends React.Component {
     // this.setState({ openSnackbarProcessingPicture: false });
   }
 
-  categoryChange(event, value) { this.setState({ category: value }); }
-  kindChange(event, value) { this.setState({ kind: value }); }
-
-  enableButton() { this.setState({ canSubmit: true }); }
-  disableButton() { this.setState({ canSubmit: false }); }
-
-  submitForm(data) {
+  submitForm(event, values) {
     // Add picture to data
     console.log('submitForm - state:', this.state);
-    const dataWithPicture = Object.assign({}, this.state, { picture: this.state.picture });
+    const dataWithPicture = Object.assign({}, values, { picture: this.state.picture });
     this.setState(
-      { messageType: 'info', messageText: 'Sending...' },
+      { values, messageType: 'info', messageText: 'Sending...' },
       this.props.onSubmit(dataWithPicture) // callback fn: send data back to container
     );
   }
-
-  notifyFormError(data) {
-    console.error('Form error:', data);
-  }
-
 
   displaySnapshot = (data) => {
     this._imageCameraSnapshot.src = data;
@@ -142,48 +102,55 @@ class AddItem extends React.Component {
 
 
   render() {
+    const defaultValues = {
+      name: '',
+      category: 'dish',
+      kind: 'other',
+    };
+
     return (
-      <div style={styles.paperStyle}>
-        <h1>New dish...</h1>
-        <Form
+      <div style={styles.form}>
+        <h1>Add new dish...</h1>
+        <AvForm
           // onValid={this.enableButton}
           // onInvalid={this.disableButton}
-          onSubmit={this.submitForm}
+          onValidSubmit={this.submitForm}
           // onInvalidSubmit={this.notifyFormError}
+          model={defaultValues}
         >
           <FormGroup>
-            <Label for="selectCategory" size="lg">Category</Label>
-            <Input type="select" name="category" id="selectCategory" size="lg">
+            <AvField type="select" name="category" label="Category" size="lg">
               <option value={'dish'}>Dish</option>
               <option value={'dessert'}>Dessert</option>
               <option value={'drink'}>Drink</option>
-            </Input>
+            </AvField>
           </FormGroup>
 
           <FormGroup>
-            <Label for="selectKind" size="lg">Kind</Label>
-            <Input type="select" name="kind" id="selectKind" size="lg">
+            <AvField type="select" name="kind" label="Kind" size="lg">
               <option value={'italian'}>Italian</option>
               <option value={'french'}>French</option>
               <option value={'mexican'}>Mexican</option>
               <option value={'indian'}>Indian</option>
               <option value={'american'}>American</option>
               <option value={'other'}>Other</option>
-            </Input>
+            </AvField>
           </FormGroup>
 
-          <FormGroup>
-            <Label for="inputName">Name</Label>
-            <Input name="name" id="inputName" placeholder="..." />
-          </FormGroup>
+          <AvGroup>
+            <Label for="inputName" size="lg">Name</Label>
+            <AvInput name="name" id="inputName" placeholder="..." required size="lg" />
+            <AvFeedback>This field is mandatory!</AvFeedback>
+          </AvGroup>
 
           <div>
-            <h4>Picture</h4>
+            <Label size="lg">Picture</Label>
             <CameraSnapshotContainer onSnapshotStartProcessing={this.onSnapshotStartProcessing} onSnapshotReady={this.onSnapshotReady} onDeleteSnapshot={this.onDeleteSnapshot} />
           </div>
 
-          <Button type="submit">Add</Button>
-        </Form>
+          <Button type="submit" size="lg">Add</Button>
+        </AvForm>
+
         <img ref={(r) => { this._imageCameraSnapshot = r; }} style={styles.imageCameraSnapshot} role="presentation" />
         <LogOnDisplay ref={(r) => { this._logOnDisplay = r; }} />
       </div>
@@ -193,12 +160,3 @@ class AddItem extends React.Component {
 }
 
 export default AddItem;
-
-//            bodyStyle={{ height: 'auto', lineHeight: '28px', padding: 24, whiteSpace: 'pre-line' }}
-/*
-          <Snackbar
-            open={this.state.snackbarOpen}
-            message={this.state.snackbarMessage}
-            autoHideDuration={this.state.snackbarTimeout}
-          />
- */
