@@ -13,6 +13,7 @@ import * as GenerateThumbnails from '../util/generateThumbnails';
  */
 export function getItems(req, res) {
   const pagination = Number(req.params.pagination);
+  const limit = req.params.limit ? Number(req.params.limit) : 10;
 
   // TODO: query should return items of current user.
   const query = {};
@@ -22,7 +23,7 @@ export function getItems(req, res) {
     // populate: 'author',
     lean: true,
     offset: pagination < 0 ? 0 : pagination,
-    limit: pagination < 0 ? 0 : 5,
+    limit,
   };
 
   Item.paginate(query, options, (err, items) => {
