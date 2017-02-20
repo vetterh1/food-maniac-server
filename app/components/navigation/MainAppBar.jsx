@@ -1,7 +1,7 @@
 /* eslint-disable react/prefer-stateless-function */
 
 import React from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'react-bootstrap';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 
 
 class MainAppBar extends React.Component {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'react-bootstrap';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 import CameraSnapshotContainer from './CameraSnapshotContainer';
 import LogOnDisplay from '../utils/LogOnDisplay';
