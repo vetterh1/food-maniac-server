@@ -10,6 +10,7 @@ class MainAppBar extends React.Component {
     this.toggle = this.toggle.bind(this);
 
     this.state = {
+      route: window.location.pathname,
       isOpen: false,
     };
   }
@@ -21,12 +22,15 @@ class MainAppBar extends React.Component {
   }
 
   render() {
+    const onMainPage = this.state.route === '/';
+    const isOpen = this.state.isOpen || onMainPage;
+    const isToggleable = !onMainPage;
     return (
       <div>
-        <Navbar color="faded" light toggleable>
-          <NavbarToggler right onClick={this.toggle} />
+        <Navbar color="faded" light toggleable={!onMainPage}>
+          {isToggleable && <NavbarToggler right onClick={this.toggle} />}
           <NavbarBrand href="/">Food Maniac!</NavbarBrand>
-          <Collapse isOpen={this.state.isOpen} navbar>
+          <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
                 <NavLink href="/rate">Rate</NavLink>

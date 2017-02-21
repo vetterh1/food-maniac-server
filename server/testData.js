@@ -14,12 +14,12 @@ export const testUsers = [
 ];
 
 export const testItems = [
-  new Item({ category: 'dish', kind: 'french', name: 'testItem1', cuid: 'cuidTestItem1' }),
-  new Item({ category: 'dish', kind: 'italian', name: 'testItem2', cuid: 'cuidTestItem2' }),
-  new Item({ category: 'dish', kind: 'mexican', name: 'testItem3', cuid: 'cuidTestItem3' }),
-  new Item({ category: 'dessert', kind: 'other', name: 'testItem4', cuid: 'cuidTestItem4' }),
-  new Item({ category: 'dessert', kind: 'other', name: 'testItem5', cuid: 'cuidTestItem5' }),
-  new Item({ category: 'drink', kind: 'other', name: 'testItem6', cuid: 'cuidTestItem6' }),
+  new Item({ category: 'dish', kind: 'french', name: 'testItem1', cuid: 'cuidTestItem1', since: '2015-02-21T09:01:42.206Z', lastModif: '2015-02-21T09:01:42.206Z' }),
+  new Item({ category: 'dish', kind: 'italian', name: 'testItem2', cuid: 'cuidTestItem2', since: '2015-02-22T09:01:42.206Z', lastModif: '2015-02-21T09:01:42.206Z' }),
+  new Item({ category: 'dish', kind: 'mexican', name: 'testItem3', cuid: 'cuidTestItem3', since: '2015-02-23T09:01:42.206Z', lastModif: '2015-02-21T09:01:42.206Z' }),
+  new Item({ category: 'dessert', kind: 'other', name: 'testItem4', cuid: 'cuidTestItem4', since: '2015-02-24T09:01:42.206Z', lastModif: '2015-02-21T09:01:42.206Z' }),
+  new Item({ category: 'dessert', kind: 'other', name: 'testItem5', cuid: 'cuidTestItem5', since: '2015-02-25T09:01:42.206Z', lastModif: '2015-02-21T09:01:42.206Z' }),
+  new Item({ category: 'drink', kind: 'other', name: 'testItem6', cuid: 'cuidTestItem6', since: '2015-02-26T09:01:42.206Z', lastModif: '2015-02-21T09:01:42.206Z' }),
 ];
 
 export const testPlaces = [
