@@ -26,25 +26,23 @@ class MainAppBar extends React.Component {
     const isOpen = this.state.isOpen || onMainPage;
     const isToggleable = !onMainPage;
     return (
-      <div>
-        <Navbar color="faded" light toggleable={!onMainPage}>
-          {isToggleable && <NavbarToggler right onClick={this.toggle} />}
-          <NavbarBrand href="/">Food Maniac!</NavbarBrand>
-          <Collapse isOpen={isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href="/rate">Rate</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/search">Search</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/addItem">Add item</NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
-      </div>
+      <Navbar color="" light toggleable={!onMainPage}>
+        {isToggleable && <NavbarToggler right onClick={this.toggle} />}
+        <NavbarBrand href="/">Food Maniac!</NavbarBrand>
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="ml-auto" navbar>
+            <NavItem>
+              <NavLink href="/rate">&gt; Rate</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/search">&gt; Search</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/addItem">&gt; Add item</NavLink>
+            </NavItem>
+          </Nav>
+        </Collapse>
+      </Navbar>
     );
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import AddItem from './AddItemHtml';
+import AddItem from './AddItem';
 
 require('es6-promise').polyfill();
 require('isomorphic-fetch');

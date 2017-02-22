@@ -8,7 +8,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 const styles = {
   pageContainer: {
-    // fontSize: '1.5em',
+    background: 'rgba(255,255,255,1) url("images/pasta_alpha30_qty50.jpg") no-repeat left top',
   },
 };
 

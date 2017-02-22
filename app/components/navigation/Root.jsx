@@ -4,9 +4,9 @@ import React, { PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import App from '../pages/App';
-import MainChoiceContainer from './MainChoiceContainer';
+import MainPageContent from '../pages/MainPageContent';
 import Rate from '../pages/Rate';
-import AddItemContainerHtml from '../pages/AddItemContainerHtml';
+import AddItemContainer from '../pages/AddItemContainer';
 import ListItemsContainer from '../pages/ListItemsContainer';
 import Login from '../pages/Login';
 
@@ -16,10 +16,10 @@ const Root = ({ store }) => (
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
-        <IndexRoute component={MainChoiceContainer} />
+        <IndexRoute component={MainPageContent} />
         <Route path="/rate" component={Rate} />
-        <Route path="/search" component={AddItemContainerHtml} />
-        <Route path="/addItem" component={AddItemContainerHtml} />
+        <Route path="/search" component={AddItemContainer} />
+        <Route path="/addItem" component={AddItemContainer} />
         <Route path="/login" component={Login} />
         <Route path="/listItems" component={() => (<ListItemsContainer URL="/api/items" />)} />
         <Route path="/generateThumbnails" component={() => (<ListItemsContainer URL="/util/regenerateAllThumbnails" socketName="regenerateAllThumbnails" />)} />
@@ -37,6 +37,9 @@ export default Root;
 
 
 /*
+        <IndexRoute component={MainChoiceContainer} />
+
+
         <IndexRedirect to="/mainChoice" />
         <Route path="/mainChoice" component={MainChoiceContainer} />
 */
