@@ -157,6 +157,34 @@ Packages:
 
 
 ---------------------------------------------------------------
+                SSL with letsencrypt certbot
+---------------------------------------------------------------
+
+Did not do this:
+  sudo apt install letsencrypt
+
+Instead:
+
+- Renew Letsencrypt certificate:
+    - Ssh on the server
+    - pm2 stop all
+    - sudo systemctl stop nginx
+    - /opt/letsencrypt/letsencrypt-auto renew
+    - pm2 start all
+    result (ceritificate) is there: /etc/letsencrypt/live/food-maniac.com/fullchain.pem 
+
+- Creation process:
+    - sudo git clone https://github.com/letsencrypt/letsencrypt /opt/letsencrypt
+    - cd /opt/letsencrypt
+    - sudo systemctl stop nginx
+    - ./letsencrypt-auto certonly –standalone
+    - sudo nano /etc/nginx/sites-enabled/default
+    - sudo systemctl start nginx
+
+
+
+
+---------------------------------------------------------------
                             nginx
 ---------------------------------------------------------------
 
@@ -257,3 +285,8 @@ server {
                 proxy_redirect off;
         }
 }
+
+
+
+
+
