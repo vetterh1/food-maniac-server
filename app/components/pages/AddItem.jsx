@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button, Label, FormGroup } from 'reactstrap';
+import { Button, Label, FormGroup, Alert } from 'reactstrap';
 import { AvForm, AvField, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
 import CameraSnapshotContainer from './CameraSnapshotContainer';
-import LogOnDisplay from '../utils/LogOnDisplay';
+// import LogOnDisplay from '../utils/LogOnDisplay';
 
 const styles = {
   form: {
@@ -29,36 +29,39 @@ class AddItem extends React.Component {
     this.onSnapshotReady = this.onSnapshotReady.bind(this);
     this._imageCameraSnapshot = null;
 
-    this._logOnDisplay = null;
+    // this._logOnDisplay = null;
 
     this.state = {
       canSubmit: false,
-      messageType: null,
-      messageText: null,
-      snackbarOpen: false,
-      snackbarMessage: '.',
-      snackbarTimeout: 4000,
+      // alertStatus possible values:
+      // -  0: no alerts
+      //  - saving alerts:  1: saving, 2: saving OK, -1: saving KO
+      //  - snapshot alerts: 11: snapshot processing, 12: snapshot OK, -11: snapshot KO
+      alertStatus: 0,
+      alertMessage: '',
     };
   }
 
   onStartSaving() {
     this._nowStartSaving = new Date().getTime();
-    this.setState({ snackbarOpen: true, snackbarMessage: 'Saving...', snackbarTimeout: 60000 });
+    this.setState({ alertStatus: 1, alertColor: 'info', alertMessage: 'Saving item...' });
+    window.scrollTo(0, 0);
   }
 
   onEndSavingOK() {
     const durationSaving = new Date().getTime() - this._nowStartSaving;
-    this.setState({ snackbarOpen: true, snackbarMessage: `Item saved! (duration=${durationSaving}ms)`, snackbarTimeout: 4000 });
+    this.setState({ alertStatus: 2, alertColor: 'success', alertMessage: `Item saved! (duration=${durationSaving}ms)` });
+    setTimeout(() => { this.setState({ alertStatus: 0 }); }, 3000);
   }
 
   onEndSavingFailed(errorMessage) {
     const durationSaving = new Date().getTime() - this._nowStartSaving;
-    this.setState({ snackbarOpen: true, snackbarMessage: `Error while saving item (error=${errorMessage}, duration=${durationSaving}ms)`, snackbarTimeout: 10000 });
+    this.setState({ alertStatus: -1, alertColor: 'danger', alertMessage: `Error while saving item (error=${errorMessage}, duration=${durationSaving}ms)` });
   }
 
   onSnapshotStartProcessing = () => {
     this._nowStartProcessing = new Date().getTime();
-    this.setState({ snackbarOpen: true, snackbarMessage: 'Processing snapshot...', snackbarTimeout: 2000 });
+    this.setState({ alertStatus: 11, alertColor: 'info', alertMessage: 'Processing snapshot...' });
   }
 
   onDeleteSnapshot = () => {
@@ -72,22 +75,21 @@ class AddItem extends React.Component {
     this.setState({ picture: data });
 
     const nowUpdateCanvas = new Date().getTime();
-    const timeDiff = nowUpdateCanvas - nowUpdateParent;
-    this._logOnDisplay.addLog(`AddItem() - time to display image = ${timeDiff}`);
     const timeDiffTotal = nowUpdateCanvas - this._nowStartProcessing;
-    this._logOnDisplay.addLog(`AddItem() - total time to process snapshot = ${timeDiffTotal}`);
+    this.setState({ alertStatus: 12, alertColor: 'success', alertMessage: `Snapshot processed (duration=${timeDiffTotal}ms)` });
+    setTimeout(() => { this.setState({ alertStatus: 0 }); }, 3000);
 
-    // this.setState({ openSnackbarProcessingPicture: false });
+    // const timeDiff = nowUpdateCanvas - nowUpdateParent;
+    // this._logOnDisplay.addLog(`AddItem() - time to display image = ${timeDiff}`);
+    // this._logOnDisplay.addLog(`AddItem() - total time to process snapshot = ${timeDiffTotal}`);
   }
 
   submitForm(event, values) {
+    // console.log('submitForm - state:', this.state);
+
     // Add picture to data
-    console.log('submitForm - state:', this.state);
     const dataWithPicture = Object.assign({}, values, { picture: this.state.picture });
-    this.setState(
-      { values, messageType: 'info', messageText: 'Sending...' },
-      this.props.onSubmit(dataWithPicture) // callback fn: send data back to container
-    );
+    this.setState({ values }, this.props.onSubmit(dataWithPicture)); // callback fn: send data back to container
   }
 
   displaySnapshot = (data) => {
@@ -110,6 +112,9 @@ class AddItem extends React.Component {
 
     return (
       <div style={styles.form}>
+
+        {this.state.alertStatus !== 0 && <Alert color={this.state.alertColor}>{this.state.alertMessage}</Alert>}
+
         <h1>Add new dish...</h1>
         <AvForm
           // onValid={this.enableButton}
@@ -146,13 +151,11 @@ class AddItem extends React.Component {
           <div>
             <Label size="lg">Picture</Label>
             <CameraSnapshotContainer onSnapshotStartProcessing={this.onSnapshotStartProcessing} onSnapshotReady={this.onSnapshotReady} onDeleteSnapshot={this.onDeleteSnapshot} />
+            <img ref={(r) => { this._imageCameraSnapshot = r; }} style={styles.imageCameraSnapshot} role="presentation" />
           </div>
 
           <Button type="submit" size="lg">Add</Button>
         </AvForm>
-
-        <img ref={(r) => { this._imageCameraSnapshot = r; }} style={styles.imageCameraSnapshot} role="presentation" />
-        <LogOnDisplay ref={(r) => { this._logOnDisplay = r; }} />
       </div>
     );
   }
@@ -160,3 +163,6 @@ class AddItem extends React.Component {
 }
 
 export default AddItem;
+
+
+//        <LogOnDisplay ref={(r) => { this._logOnDisplay = r; }} />

@@ -3,7 +3,7 @@ import React from 'react';
 // import IconAddAPhoto from 'material-ui/svg-icons/image/add-a-photo';
 // import IconDelete from 'material-ui/svg-icons/action/delete';
 import PromiseFileReader from '../utils/PromiseFileReader';
-import LogOnDisplay from '../utils/LogOnDisplay';
+// import LogOnDisplay from '../utils/LogOnDisplay';
 
 const styles = {
   hidden: {
@@ -58,7 +58,7 @@ export default class CameraSnapshotContainer extends React.Component {
     this.onSnapshot = this.onSnapshot.bind(this);
     this.onDeleteSnapshot = this.onDeleteSnapshot.bind(this);
     this.updateCanvas = this.updateCanvas.bind(this);
-    this._logOnDisplay = null;
+    // this._logOnDisplay = null;
 
     this.state = {
       snapshot: false,
@@ -107,9 +107,9 @@ export default class CameraSnapshotContainer extends React.Component {
     // profiling stats
     this._nowUpdateCanvas = new Date().getTime();
     const timeDiff = this._nowUpdateCanvas - this._nowOnSnapshot;
-    this._logOnDisplay.addLog(`updateCanvas() - time for readAsDataURL = ${timeDiff}`);
+    // this._logOnDisplay.addLog(`updateCanvas() - time for readAsDataURL = ${timeDiff}`);
     console.log('CameraSnapshotContainer.updateCanvas() rawData length: ', rawData.length);
-    this._logOnDisplay.addLog(`updateCanvas() - rawData.length=${rawData.length}`);
+    // this._logOnDisplay.addLog(`updateCanvas() - rawData.length=${rawData.length}`);
 
     // Async process...
     return new Promise((resolve, /* reject */) => {
@@ -121,8 +121,7 @@ export default class CameraSnapshotContainer extends React.Component {
       image.onload = function () {
         // profiling stats
         this._nowOnLoad = new Date().getTime();
-        const timeDiff2 = this._nowOnLoad - this._nowUpdateCanvas;
-        this._logOnDisplay.addLog(`updateCanvas() - time for image load = ${timeDiff2}`);
+        // this._logOnDisplay.addLog(`updateCanvas() - time for image load = ${timeDiff2}`);
 
         const maxWidth = 1500;
         const maxHeight = 1500;
@@ -140,7 +139,7 @@ export default class CameraSnapshotContainer extends React.Component {
           this._canvasCameraSnapshot.height = maxHeight;
           this._canvasCameraSnapshot.width = maxHeight * ratio;
         }
-        this._logOnDisplay.addLog(`updateCanvas() - image: (${image.width}x${image.height}) - ratio=${ratio} - final: (${this._canvasCameraSnapshot.width}x${this._canvasCameraSnapshot.height}) with ratio: ${this._canvasCameraSnapshot.width / this._canvasCameraSnapshot.height}`);
+        // this._logOnDisplay.addLog(`updateCanvas() - image: (${image.width}x${image.height}) - ratio=${ratio} - final: (${this._canvasCameraSnapshot.width}x${this._canvasCameraSnapshot.height}) with ratio: ${this._canvasCameraSnapshot.width / this._canvasCameraSnapshot.height}`);
         this._canvasCameraSnapshot.getContext('2d').drawImage(image, 0, 0, this._canvasCameraSnapshot.width, this._canvasCameraSnapshot.height);
         const dataSnapshot = this._canvasCameraSnapshot.toDataURL('image/jpeg', 0.8);
         resolve(dataSnapshot);  // returns jpeg smaller data to parent instead of bigger raw data
@@ -159,10 +158,10 @@ export default class CameraSnapshotContainer extends React.Component {
   updateParent = (finalData) => {
     // profiling stats
     this._nowUpdateParent = new Date().getTime();
-    const timeDiff = this._nowUpdateParent - this._nowOnLoad;
-    this._logOnDisplay.addLog(`updateCanvas() - time for jpeg creation = ${timeDiff}`);
+    // const timeDiff = this._nowUpdateParent - this._nowOnLoad;
+    // this._logOnDisplay.addLog(`updateCanvas() - time for jpeg creation = ${timeDiff}`);
     console.log('CameraSnapshotContainer.updateCanvas() finalData length: ', finalData.length);
-    this._logOnDisplay.addLog(`updateCanvas() - finalData.length=${finalData.length}`);
+    // this._logOnDisplay.addLog(`updateCanvas() - finalData.length=${finalData.length}`);
 
     // Callback fn: send data back to parent
     this.props.onSnapshotReady(finalData, this._nowUpdateParent);
@@ -197,8 +196,9 @@ export default class CameraSnapshotContainer extends React.Component {
           <input type="file" ref={(r) => { this._inputSnapshot = r; }} style={styles.snapshotInput} onChange={this.onSnapshot} accept="image/*" capture />
         </div>
         <canvas ref={(c) => { this._canvasCameraSnapshot = c; }} style={styles.canvas} />
-        <LogOnDisplay ref={(r) => { this._logOnDisplay = r; }} />
       </div>
     );
   }
 }
+
+//         <LogOnDisplay ref={(r) => { this._logOnDisplay = r; }} />
