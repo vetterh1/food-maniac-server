@@ -1,13 +1,19 @@
 /* eslint-disable react/prefer-stateless-function */
 
 import React from 'react';
+import { Link } from 'react-router';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 
 
 class MainAppBar extends React.Component {
+  static propTypes = {
+    location: React.PropTypes.object,
+  }
+
   constructor() {
     super();
     this.toggle = this.toggle.bind(this);
+    this.resetOpenState = this.resetOpenState.bind(this);
 
     this.state = {
       route: window.location.pathname,
@@ -21,24 +27,30 @@ class MainAppBar extends React.Component {
     });
   }
 
+  resetOpenState() {
+    this.setState({
+      isOpen: false,
+    });
+  }
+
   render() {
-    const onMainPage = this.state.route === '/';
+    const onMainPage = this.props.location.pathname === '/';
     const isOpen = this.state.isOpen || onMainPage;
     const isToggleable = !onMainPage;
     return (
       <Navbar color="" light toggleable={!onMainPage}>
         {isToggleable && <NavbarToggler right onClick={this.toggle} />}
-        <NavbarBrand href="/">Food Maniac!</NavbarBrand>
+        <NavbarBrand tag={Link} to="/" onClick={this.resetOpenState}>Food Maniac!</NavbarBrand>
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink href="/rate">&gt; Rate</NavLink>
+              <NavLink tag={Link} to="/rate" onClick={this.resetOpenState}>&gt; Rate</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/search">&gt; Search</NavLink>
+              <NavLink tag={Link} to="/search" onClick={this.resetOpenState}>&gt; Search</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/addItem">&gt; Add item</NavLink>
+              <NavLink tag={Link} to="/addItem" onClick={this.resetOpenState}>&gt; Add item</NavLink>
             </NavItem>
           </Nav>
         </Collapse>

@@ -25,7 +25,7 @@ class App extends React.Component {
   render() {
     return (
       <div style={styles.pageContainer}>
-        <MainAppBar />
+        <MainAppBar location={this.props.location} location={this.props.location} router={this.props.router} route={this.props.route} />
         {this.props.children}
         <Version />
       </div>
