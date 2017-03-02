@@ -24,8 +24,10 @@ class AddItem extends React.Component {
   constructor() {
     super();
     this.submitForm = this.submitForm.bind(this);
+    this.resetForm = this.resetForm.bind(this);
 
     this.onSnapshotStartProcessing = this.onSnapshotStartProcessing.bind(this);
+    this.onSnapshotError = this.onSnapshotError.bind(this);
     this.onSnapshotReady = this.onSnapshotReady.bind(this);
     this._imageCameraSnapshot = null;
 
@@ -39,6 +41,7 @@ class AddItem extends React.Component {
       //  - snapshot alerts: 11: snapshot processing, 12: snapshot OK, -11: snapshot KO
       alertStatus: 0,
       alertMessage: '',
+      keyForm: Date.now(),
     };
   }
 
@@ -52,6 +55,7 @@ class AddItem extends React.Component {
     const durationSaving = new Date().getTime() - this._nowStartSaving;
     this.setState({ alertStatus: 2, alertColor: 'success', alertMessage: `Item saved! (duration=${durationSaving}ms)` });
     setTimeout(() => { this.setState({ alertStatus: 0 }); }, 3000);
+    this.resetForm();
   }
 
   onEndSavingFailed(errorMessage) {
@@ -64,12 +68,17 @@ class AddItem extends React.Component {
     this.setState({ alertStatus: 11, alertColor: 'info', alertMessage: 'Processing snapshot...' });
   }
 
+  onSnapshotError = (errorMessage) => {
+    const durationSaving = new Date().getTime() - this._nowStartProcessing;
+    this.setState({ alertStatus: -11, alertColor: 'danger', alertMessage: `Error while processing snapshot (error=${errorMessage}, duration=${durationSaving}ms)` });
+  }
+
   onDeleteSnapshot = () => {
     this._imageCameraSnapshot.src = '';
     this.setState({ picture: null });
   }
 
-  onSnapshotReady = (data, nowUpdateParent) => {
+  onSnapshotReady = (data /* , nowUpdateParent */) => {
     this.displaySnapshot(data);
     console.log('AddItem.onSnapshot() snapshot length: ', data ? data.length : 'null');
     this.setState({ picture: data });
@@ -102,6 +111,11 @@ class AddItem extends React.Component {
     // TODO : Should verify on server side if name already exists
   }
 
+  resetForm() {
+    // Reset the form & clear the image
+    this.setState({ keyForm: Date.now() });
+  }
+
 
   render() {
     const defaultValues = {
@@ -117,6 +131,7 @@ class AddItem extends React.Component {
 
         <h1>Add new dish...</h1>
         <AvForm
+          key={this.state.keyForm}  // unique key that let reset the form by changing the state keyForm
           // onValid={this.enableButton}
           // onInvalid={this.disableButton}
           onValidSubmit={this.submitForm}
@@ -150,11 +165,12 @@ class AddItem extends React.Component {
 
           <div>
             <Label size="lg">Picture</Label>
-            <CameraSnapshotContainer onSnapshotStartProcessing={this.onSnapshotStartProcessing} onSnapshotReady={this.onSnapshotReady} onDeleteSnapshot={this.onDeleteSnapshot} />
+            <CameraSnapshotContainer onError={this.onSnapshotError} onSnapshotStartProcessing={this.onSnapshotStartProcessing} onSnapshotReady={this.onSnapshotReady} onDeleteSnapshot={this.onDeleteSnapshot} />
             <img ref={(r) => { this._imageCameraSnapshot = r; }} style={styles.imageCameraSnapshot} role="presentation" />
           </div>
 
           <Button type="submit" size="lg">Add</Button>
+          <Button color="link" onClick={this.resetForm} size="lg">Reset</Button>
         </AvForm>
       </div>
     );

@@ -62,6 +62,7 @@
     "react-addons-transition-group": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-fontawesome": "^1.4.0",
+    "react-icons": "^2.2.3",
     "react-rating": "^0.6.3",
     "react-redux": "^5.0.2",
     "react-router": "^3.0.0",

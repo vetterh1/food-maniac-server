@@ -134,8 +134,12 @@ module.exports = {
 
   module: {
     loaders: [
+      // loader for all app (NOT node modules):
       { test: /\.js.?$/, exclude: /node_modules/, loader: 'babel-loader' },
+      // css loader to import CSS ES6 style (ex: import 'bootstrap/dist/css/bootstrap.css')
       { test: /\.css$/, loader: 'style-loader!css-loader' },
+      // loader for react-icons:
+      { test: /(\.js|\.jsx)$/, loader: 'babel', include: [path.resolve(__dirname, './node_modules/react-icons/fa'), path.resolve(__dirname, './node_modules/react-icons/go')], query: { presets: ['es2015', 'stage-0', 'react'] } },
     ],
   },
 
