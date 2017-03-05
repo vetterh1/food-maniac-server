@@ -34,6 +34,7 @@ class AddItem extends React.Component {
     // this._logOnDisplay = null;
 
     this.state = {
+      keyForm: Date.now(),  // unique key for the form --> used for reset form 
       canSubmit: false,
       // alertStatus possible values:
       // -  0: no alerts
@@ -41,7 +42,6 @@ class AddItem extends React.Component {
       //  - snapshot alerts: 11: snapshot processing, 12: snapshot OK, -11: snapshot KO
       alertStatus: 0,
       alertMessage: '',
-      keyForm: Date.now(),
     };
   }
 

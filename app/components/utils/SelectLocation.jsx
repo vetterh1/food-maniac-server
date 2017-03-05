@@ -6,11 +6,8 @@ import { connect } from 'react-redux';
 // import { setCurrentLocation } from '../actions/LocationActions';
 
 import Geolocation from './Geolocation';
-
-// import Formsy from 'formsy-react';
-// import FlatButton from 'material-ui/FlatButton';
-// import { FormsySelect  , FormsyCheckbox, FormsyDate, FormsyRadio, FormsyRadioGroup, FormsyText, FormsyTime, FormsyToggle, FormsyAutoComplete  } from 'formsy-material-ui/lib';
-// import MenuItem from 'material-ui/MenuItem';
+import { AvField } from 'availity-reactstrap-validation';
+import { FormGroup, Alert } from 'reactstrap';
 
 const styles = {
   div: {
@@ -45,12 +42,12 @@ const Listing = ({ places }) => {
   console.log('          (lr) nb places: ', places.length);
   if (places.length > 0) console.log('          (lr) 1st places: ', places[0].name);
 
+//  <AvField type="select" name="category" label="Category" size="lg">
+
   const result = (
-    <div>
-      <select>
-        {places && places.map((p) => { return (<option key={p.id} value={p.id}>{p.name}</option>); })}
-      </select>
-    </div>
+    <AvField type="select" name="category" size="lg">
+      {places && places.map((p) => { return (<option key={p.id} value={p.id}>{p.name}</option>); })}
+    </AvField>
   );
 
   console.log('   }   Listing.render');
@@ -147,13 +144,15 @@ const SelectLocation = React.createClass({
             --map--
           </div>
         </div>
-        <Listing
-          style={styles.listing}
-          places={this.state.places}
-        />
-        <Geolocation
-          style={styles.geolocation}
-        />
+        <FormGroup>
+          <Listing
+            style={styles.listing}
+            places={this.state.places}
+          />
+          <Geolocation
+            style={styles.geolocation}
+          />
+        </FormGroup>
       </div>
     );
     console.log('}   SelectLocation.render');

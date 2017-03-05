@@ -8,13 +8,12 @@ import * as LocationActions from '../../actions/LocationActions';
 // import IconLocation from 'material-ui/svg-icons/communication/location-on';
 // import Popover from 'material-ui/Popover';
 import TestDisplayPositionFromStore from './TestDisplayPositionFromStore';
+import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
+import MdLocationOn from 'react-icons/lib/md/location-on';
+
 
 
 const styles = {
-
-  Popover: {
-    padding: '1em',
-  },
 
   locationOK: {
     color: 'green',
@@ -22,11 +21,6 @@ const styles = {
 
   locationKO: {
     color: 'red',
-  },
-
-  statistics: {
-    color: 'grey',
-    marginTop: 40,
   },
 };
 
@@ -37,110 +31,57 @@ class GeolocationDisplay extends React.Component {
 
   constructor() {
     super();
-    this.handleTouchTap = this.handleTouchTap.bind(this);
+    this.toggle = this.toggle.bind(this);
 
     this.state = {
-      open: false,
+      statisticsOpen: false
     };
   }
 
-  handleTouchTap = (event) => {
-    // This prevents ghost click.
-    event.preventDefault();
-
-    this.setState({
-      open: true,
-      anchorEl: event.currentTarget,
-    });
-  };
-
-  handleRequestClose = () => {
-    this.setState({
-      open: false,
-    });
-  };
-
-  // render = () => {
-  //   return (
-  //     <div>
-  //       <IconLocation
-  //         style={this.props.coordinates.real ? styles.locationOK : styles.locationKO}
-  //         onTouchTap={this.handleTouchTap}
-  //       />
-  //       <Popover
-  //         style={styles.Popover}
-  //         open={this.state.open}
-  //         anchorEl={this.state.anchorEl}
-  //         anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
-  //         targetOrigin={{ horizontal: 'left', vertical: 'top' }}
-  //         onRequestClose={this.handleRequestClose}
-  //       >
-  //         <div className="geolocation_statistics">
-  //           Coordinates:
-  //           <ul>
-  //             <li>Latitude: {this.props.coordinates.latitude ? Math.round(this.props.coordinates.latitude * 100000) / 100000 : 'unknown'}</li>
-  //             <li>Longitude: {this.props.coordinates.longitude ? Math.round(this.props.coordinates.longitude * 100000) / 100000 : 'unknown'}</li>
-  //             <li>Real: {this.props.coordinates.real ? 'true' : 'false'}</li>
-  //             <li>Changed: {this.props.coordinates.changed ? 'true' : 'false'}</li>
-  //             <li>Changed (real): {this.props.coordinates.changedReal ? 'true' : 'false'}</li>
-  //           </ul>
-  //         </div>
-
-  //         <div className="geolocation_statistics">
-  //           Statistics:
-  //           <ul>
-  //             <li>Nb refreshes: {this.props.coordinates.nbRefreshes}</li>
-  //             <li>Nb different positions: {this.props.coordinates.nbDiffs}</li>
-  //             <li>Nb real positions: {this.props.coordinates.nbReal}</li>
-  //             <li>Nb estimated positions: {this.props.coordinates.nbEstimated}</li>
-  //             <li>Nb closed positions: {this.props.coordinates.nbClose}</li>
-  //           </ul>
-  //         </div>
-
-  //         <div className="geolocation_statistics">
-  //           Simulation:
-  //           <TestDisplayPositionFromStore />
-  //         </div>
-
-  //       </Popover>
-  //     </div>
-  //   );
-  // }
-
+  toggle() {
+    this.setState({ statisticsOpen: !this.state.statisticsOpen });
+  }
 
   render = () => {
     return (
       <div>
-          <div className="geolocation_statistics">
-            Coordinates:
-            <ul>
-              <li>Latitude: {this.props.coordinates.latitude ? Math.round(this.props.coordinates.latitude * 100000) / 100000 : 'unknown'}</li>
-              <li>Longitude: {this.props.coordinates.longitude ? Math.round(this.props.coordinates.longitude * 100000) / 100000 : 'unknown'}</li>
-              <li>Real: {this.props.coordinates.real ? 'true' : 'false'}</li>
-              <li>Changed: {this.props.coordinates.changed ? 'true' : 'false'}</li>
-              <li>Changed (real): {this.props.coordinates.changedReal ? 'true' : 'false'}</li>
-            </ul>
-          </div>
+        <Button onClick={this.toggle}  size="lg" style={this.props.coordinates.real ? styles.locationOK : styles.locationKO}>
+          <MdLocationOn size={12} />
+        </Button>
+        <Modal isOpen={this.state.statisticsOpen} toggle={this.toggle}>
+          <ModalHeader>Geolocation Statistics</ModalHeader>
+          <ModalBody>
+            <div className="geolocation_statistics">
+              Coordinates:
+              <ul>
+                <li>Latitude: {this.props.coordinates.latitude ? Math.round(this.props.coordinates.latitude * 100000) / 100000 : 'unknown'}</li>
+                <li>Longitude: {this.props.coordinates.longitude ? Math.round(this.props.coordinates.longitude * 100000) / 100000 : 'unknown'}</li>
+                <li>Real: {this.props.coordinates.real ? 'true' : 'false'}</li>
+                <li>Changed: {this.props.coordinates.changed ? 'true' : 'false'}</li>
+                <li>Changed (real): {this.props.coordinates.changedReal ? 'true' : 'false'}</li>
+              </ul>
+            </div>
 
-          <div className="geolocation_statistics">
-            Statistics:
-            <ul>
-              <li>Nb refreshes: {this.props.coordinates.nbRefreshes}</li>
-              <li>Nb different positions: {this.props.coordinates.nbDiffs}</li>
-              <li>Nb real positions: {this.props.coordinates.nbReal}</li>
-              <li>Nb estimated positions: {this.props.coordinates.nbEstimated}</li>
-              <li>Nb closed positions: {this.props.coordinates.nbClose}</li>
-            </ul>
-          </div>
+            <div className="geolocation_statistics">
+              Statistics:
+              <ul>
+                <li>Nb refreshes: {this.props.coordinates.nbRefreshes}</li>
+                <li>Nb different positions: {this.props.coordinates.nbDiffs}</li>
+                <li>Nb real positions: {this.props.coordinates.nbReal}</li>
+                <li>Nb estimated positions: {this.props.coordinates.nbEstimated}</li>
+                <li>Nb closed positions: {this.props.coordinates.nbClose}</li>
+              </ul>
+            </div>
 
-          <div className="geolocation_statistics">
-            Simulation:
-            <TestDisplayPositionFromStore />
-          </div>
+            <div className="geolocation_statistics">
+              Simulation:
+              <TestDisplayPositionFromStore onClick={this.toggle} />
+            </div>
+          </ModalBody>
+        </Modal>
       </div>
     );
   }
-
 
 }
 
