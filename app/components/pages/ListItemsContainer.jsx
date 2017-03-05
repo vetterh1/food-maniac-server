@@ -133,8 +133,12 @@ class ListItemsContainer extends React.Component {
   }
 
 
-  load() {
+  load(imposedIndexPagination = -1) {
     // this._ListItemsComponent.onStartLoading();
+
+    if (imposedIndexPagination !== -1) {
+      this.indexPagination = imposedIndexPagination
+    }
 
     const urlCount = this.props.URL.concat('/count' );
     fetch(urlCount)
@@ -176,16 +180,25 @@ class ListItemsContainer extends React.Component {
     console.log(`ListItemsContainer.render: indexPagination=${this.indexPagination}`);
     const disabledPrevious = this.indexPagination <= 0;
     const disabledNext = this.indexPagination > this.state.count - this.props.itemsPerPage;
+    const nbPages = Math.floor(((this.state.count - 1) / this.props.itemsPerPage) + 1);
+    const activePage = Math.floor((this.indexPagination  / this.props.itemsPerPage) + 1);
 
     return (
       <div>
         <StatisticsProcessing stats={this.state.processingInfo} />
         <div>
           { this.state.count > this.props.itemsPerPage && 
-            <Pagination size="lg">
+            <Pagination size="sm">
               <PaginationItem disabled={disabledPrevious} >
                 <PaginationLink previous href="#" onClick={() => this.previous()} />
               </PaginationItem>
+              {Array.apply(null, Array(nbPages)).map((item, i) =>
+                 <PaginationItem active={activePage === i+1}>
+                  <PaginationLink previous href="#" onClick={() => this.load(i * this.props.itemsPerPage)}>
+                  {i+1}
+                  </PaginationLink>
+                </PaginationItem>
+               )}
               <PaginationItem disabled={disabledNext} >
                 <PaginationLink next href="#" onClick={() => this.next()} />
               </PaginationItem>
