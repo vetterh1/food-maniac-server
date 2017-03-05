@@ -143,7 +143,7 @@ class Rate extends React.Component {
                 <Rating
                   stop={5}
                   initialRate={4.5}
-                  full={<MdStar />}
+                  full={<MdStar  size={14} />}
                   empty={<MdStarOutline />}
                   style={styles.markRate}
                 />
@@ -155,7 +155,7 @@ class Rate extends React.Component {
                   stop={5}
                   initialRate={3}
                   full={<MdStar />}
-                  empty={<MdStarOutline />}
+                  empty={<MdStarOutline  size={10} />}
                   style={styles.markRate}
                 />
               </div>

@@ -9,6 +9,24 @@ import * as GenerateThumbnails from '../util/generateThumbnails';
 
 
 /**
+ * Get nb items
+ */
+export function getItemsCount(req, res) {
+  // TODO: query should return items of current user.
+  const query = {};
+  Item.count(query, (err, count) => {
+    if (err) {
+      logger.error('! itemController.getItemsCount returns err: ', err);
+      res.status(500).send(err);
+    } else {
+      res.json({ count });
+      logger.info(`itemController.getItemsCount returns ${count}`);
+    }
+  });
+}
+
+
+/**
  * Get all items
  */
 export function getItems(req, res) {

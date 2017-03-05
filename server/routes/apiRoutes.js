@@ -27,6 +27,9 @@ router.route('/users/:cuid').delete(UserController.deleteUser);
 
 // ----------------  ITEMS ----------------
 
+// Get items count
+router.route('/items/count').get(ItemController.getItemsCount);
+
 // Get all Items
 router.route('/items/:offset?/:limit?').get(ItemController.getItems);
 

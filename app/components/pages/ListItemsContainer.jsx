@@ -1,6 +1,7 @@
 import React from 'react';
 import ListItems from './ListItems';
 import io from 'socket.io-client';
+import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
@@ -31,19 +32,31 @@ class StatisticsProcessing extends React.Component {
 
 class ListItemsContainer extends React.Component {
   static propTypes = {
+    // URL that provides the items list. Possible values: ["/api/items", "/util/regenerateAllThumbnails"]
     URL: React.PropTypes.string.isRequired,
+    // Socket name (socket.io-client) that will provide additional items after loading. Possible values: ["/util/regenerateAllThumbnails"]
     socketName: React.PropTypes.string,
-    pagination: React.PropTypes.string,
-  }
+    // Index of the item to fetch. Ex: 5 -> will omit to display the 1st 5 items to start at the 6th
+    indexPagination: React.PropTypes.number,
+    // Nb max of item to fetch. Ex: 10 -> will retreive max 10 items
+    itemsPerPage: React.PropTypes.number,
+  };
 
-  constructor() {
-    super();
+  static defaultProps = { itemsPerPage: 7, indexPagination: 0 };
+
+  constructor(props) {
+    super(props);
     this.load = this.load.bind(this);
+    this.next = this.next.bind(this);
+    this.previous = this.previous.bind(this);
     this.updateServerStateById = this.updateServerStateById.bind(this);
-    this._ListItemsComponent = null;
+    // this._ListItemsComponent = null;
+
+    this.indexPagination = props.indexPagination;
 
     this.state = {
       items: [],
+      count: 0,
       processingInfo: {
         status: '? (might be running)',
         duration: 0,
@@ -107,37 +120,78 @@ class ListItemsContainer extends React.Component {
   }
 
 
+  next() {
+    this.indexPagination += this.props.itemsPerPage;
+    this.load();
+    console.log('ListItemsContainer - next');
+  }
+
+  previous() {
+    this.indexPagination -= this.props.itemsPerPage;
+    this.load();
+    console.log('ListItemsContainer - previous');
+  }
+
 
   load() {
-    this._ListItemsComponent.onStartLoading();
-    const urlWithParams = this.props.URL.concat('/', this.props.pagination );
+    // this._ListItemsComponent.onStartLoading();
 
+    const urlCount = this.props.URL.concat('/count' );
+    fetch(urlCount)
+      .then((response) => {
+        console.log('ListItemsContainer - fetch count OK');
+        return response.json();
+      }).then((jsonCount) => {
+        if (jsonCount && jsonCount.count) {
+          this.setState({ count: jsonCount.count });
+        }
+      }).catch((ex) => {
+        console.log('count parsing failed', ex);
+      });
+    
+    const urlWithParams = this.props.URL.concat('/', this.indexPagination, '/', this.props.itemsPerPage );
+    console.log('ListItemsContainer - fetch:', urlWithParams);
     fetch(urlWithParams)
       .then((response) => {
         console.log('ListItemsContainer - fetch operation OK');
         return response.json();
       }).then((jsonItems) => {
-        // console.log('parsed json: ', jsonItems);
         if (jsonItems && jsonItems.items && jsonItems.items.length > 0) {
           this.setState({ items: jsonItems.items });
-          this._ListItemsComponent.onEndLoadingOK();
+          // this._ListItemsComponent.onEndLoadingOK();
         }
         if (jsonItems && jsonItems.error) {
-          this._ListItemsComponent.onEndLoadingFailed(jsonItems.error);
+          // this._ListItemsComponent.onEndLoadingFailed(jsonItems.error);
         }
       }).catch((ex) => {
         console.log('parsing failed', ex);
-        this._ListItemsComponent.onEndLoadingFailed(ex);
+        // this._ListItemsComponent.onEndLoadingFailed(ex);
       });
   }
 
 
   render() {
+    if( this.state.count === 0 || this.state.items.length === 0) return null;
+
+    console.log(`ListItemsContainer.render: indexPagination=${this.indexPagination}`);
+    const disabledPrevious = this.indexPagination <= 0;
+    const disabledNext = this.indexPagination > this.state.count - this.props.itemsPerPage;
+
     return (
       <div>
         <StatisticsProcessing stats={this.state.processingInfo} />
         <div>
-          <ListItems ref={(r) => { this._ListItemsComponent = r; }} items={this.state.items} />
+          { this.state.count > this.props.itemsPerPage && 
+            <Pagination size="lg">
+              <PaginationItem disabled={disabledPrevious} >
+                <PaginationLink previous href="#" onClick={() => this.previous()} />
+              </PaginationItem>
+              <PaginationItem disabled={disabledNext} >
+                <PaginationLink next href="#" onClick={() => this.next()} />
+              </PaginationItem>
+            </Pagination>
+          }
+          <ListItems items={this.state.items} />
         </div>
       </div>
     );
@@ -146,3 +200,5 @@ class ListItemsContainer extends React.Component {
 }
 
 export default ListItemsContainer;
+
+//          <ListItems ref={(r) => { this._ListItemsComponent = r; }} items={this.state.items} />

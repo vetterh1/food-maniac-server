@@ -80,15 +80,16 @@ class ListItems extends React.Component {
 
   constructor() {
     super();
-
+/*
     this.state = {
       snackbarOpen: false,
       snackbarMessage: '.',
       snackbarTimeout: 4000,
     };
+  */
   }
 
-
+/*
   onStartLoading() {
     this._nowStartLoading = new Date().getTime();
     this.setState({ snackbarOpen: true, snackbarMessage: 'Loading...', snackbarTimeout: 60000 });
@@ -103,7 +104,7 @@ class ListItems extends React.Component {
     const durationSaving = new Date().getTime() - this._nowStartLoading;
     this.setState({ snackbarOpen: true, snackbarMessage: `Error while loading items (error=${errorMessage}, duration=${durationSaving}ms)`, snackbarTimeout: 10000 });
   }
-
+*/
   render() {
     // console.log('props.item: ', this.props.items);
     return (
