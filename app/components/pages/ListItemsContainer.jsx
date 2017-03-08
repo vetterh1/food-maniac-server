@@ -30,6 +30,95 @@ class StatisticsProcessing extends React.Component {
 
 
 
+
+class FullPagination extends React.Component {
+  static propTypes = {
+    onPrevious: React.PropTypes.func.isRequired,
+    onNext: React.PropTypes.func.isRequired,
+    onNumber: React.PropTypes.func.isRequired,
+    count: React.PropTypes.number.isRequired,
+    itemsPerPage: React.PropTypes.number.isRequired,
+    indexPagination: React.PropTypes.number.isRequired,
+  }
+
+  render() {
+    console.log(`FullPagination.render: indexPagination=${this.props.indexPagination} count=${this.props.count} itemsPerPage=${this.props.itemsPerPage}`);
+
+    const disabledPrevious = this.props.indexPagination <= 0;
+    const disabledNext = this.props.indexPagination > this.props.count - this.props.itemsPerPage;
+    const nbPages = Math.floor(((this.props.count - 1) / this.props.itemsPerPage) + 1);
+    const activePage = Math.floor((this.props.indexPagination / this.props.itemsPerPage) + 1);
+
+    return (
+      <Pagination size="sm">
+        <PaginationItem disabled={disabledPrevious} >
+          <PaginationLink previous href="#" onClick={() => this.props.onPrevious()} />
+        </PaginationItem>
+        {Array.apply(null, Array(nbPages)).map((item, i) =>
+          <PaginationItem active={activePage === i + 1} key={i}>
+            <PaginationLink previous href="#" onClick={() => this.props.onNumber(i * this.props.itemsPerPage)}>
+              {i + 1}
+            </PaginationLink>
+          </PaginationItem>
+         )}
+        <PaginationItem disabled={disabledNext} >
+          <PaginationLink next href="#" onClick={() => this.props.onNext()} />
+        </PaginationItem>
+      </Pagination>
+    );
+  }
+}
+
+
+class BbPagination extends React.Component {
+  static propTypes = {
+    onNumber: React.PropTypes.func.isRequired,
+    count: React.PropTypes.number.isRequired,
+    itemsPerPage: React.PropTypes.number.isRequired,
+    indexPagination: React.PropTypes.number.isRequired,
+  }
+
+  render() {
+    const disabledPrevious = this.props.indexPagination <= 0;
+    const disabledNext = this.props.indexPagination >= this.props.count - this.props.itemsPerPage;
+    const nbPages = Math.floor(((this.props.count - 1) / this.props.itemsPerPage) + 1);
+    const activePage = Math.floor((this.props.indexPagination / this.props.itemsPerPage) + 1);
+
+    // Full display TRUE ex:   1 2 3 4 5
+    // Full display FALSE ex:   1 ... 8 9 10 11 12 ... 20   (here nbBeforeAfterChoice = 2)
+    // Full display FALSE ex:   1 ... 7 8 9 10 11 12 13 ... 20   (here nbBeforeAfterChoice = 3)
+    const nbBeforeAfterChoice = 2;
+    const nbPagesShortDisplay = ((nbBeforeAfterChoice * 2) + 1);
+    const fullDisplay = (nbPages <= (nbPagesShortDisplay + 2));
+    let offset = fullDisplay ? 0 : (activePage - nbBeforeAfterChoice - 1);
+    if (offset < 0) offset = 0;
+    const nbPagesToDisplay = fullDisplay ? nbPages : nbPagesShortDisplay;
+    if (!fullDisplay && (activePage + nbBeforeAfterChoice) > nbPages) offset = nbPages - nbPagesShortDisplay;
+
+    console.log(`BbPagination.render: indexPagination=${this.props.indexPagination} activePage=${activePage} count=${this.props.count} itemsPerPage=${this.props.itemsPerPage} nbPages=${nbPages} nbPagesToDisplay=${nbPagesToDisplay} fullDisplay=${fullDisplay} offset=${offset} `);
+
+    return (
+      <Pagination size="sm">
+        { !disabledPrevious && <PaginationItem disabled={disabledPrevious} ><PaginationLink previous href="#" onClick={() => this.props.onNumber((activePage - 2) * this.props.itemsPerPage)} /></PaginationItem> }
+        { (!fullDisplay && (activePage > nbBeforeAfterChoice + 1)) && <PaginationItem ><PaginationLink href="#" onClick={() => this.props.onNumber(0)}>1</PaginationLink></PaginationItem>}
+        { (!fullDisplay && (activePage > nbBeforeAfterChoice + 2)) && <PaginationItem disabled><PaginationLink href="#">...</PaginationLink></PaginationItem>}
+        { Array.apply(null, Array(nbPagesToDisplay)).map((item, i) =>
+          <PaginationItem active={activePage === i + offset + 1} key={i + offset}>
+            <PaginationLink previous href="#" onClick={() => this.props.onNumber((i + offset) * this.props.itemsPerPage)}>
+              {i + offset + 1}
+            </PaginationLink>
+          </PaginationItem>
+         )}
+        { (!fullDisplay && (activePage < (nbPages - nbBeforeAfterChoice - 1))) && <PaginationItem disabled><PaginationLink href="#">...</PaginationLink></PaginationItem>}
+        { (!fullDisplay && (activePage < (nbPages - nbBeforeAfterChoice))) && <PaginationItem><PaginationLink href="#" onClick={() => this.props.onNumber((nbPages - 1) * this.props.itemsPerPage)}>{nbPages}</PaginationLink></PaginationItem>}
+        { !disabledNext && <PaginationItem disabled={disabledNext} ><PaginationLink next href="#" onClick={() => this.props.onNumber((activePage) * this.props.itemsPerPage)} /></PaginationItem> }
+      </Pagination>
+    );
+  }
+}
+
+
+
 class ListItemsContainer extends React.Component {
   static propTypes = {
     // URL that provides the items list. Possible values: ["/api/items", "/util/regenerateAllThumbnails"]
@@ -37,22 +126,22 @@ class ListItemsContainer extends React.Component {
     // Socket name (socket.io-client) that will provide additional items after loading. Possible values: ["/util/regenerateAllThumbnails"]
     socketName: React.PropTypes.string,
     // Index of the item to fetch. Ex: 5 -> will omit to display the 1st 5 items to start at the 6th
-    indexPagination: React.PropTypes.number,
+    initialIndexPagination: React.PropTypes.number,
     // Nb max of item to fetch. Ex: 10 -> will retreive max 10 items
     itemsPerPage: React.PropTypes.number,
   };
 
-  static defaultProps = { itemsPerPage: 7, indexPagination: 0 };
+  static defaultProps = { itemsPerPage: 7, initialIndexPagination: 0 };
 
   constructor(props) {
     super(props);
     this.load = this.load.bind(this);
-    this.next = this.next.bind(this);
-    this.previous = this.previous.bind(this);
+    // this.next = this.next.bind(this);
+    // this.previous = this.previous.bind(this);
     this.updateServerStateById = this.updateServerStateById.bind(this);
     // this._ListItemsComponent = null;
 
-    this.indexPagination = props.indexPagination;
+    this.indexPagination = props.initialIndexPagination;
 
     this.state = {
       items: [],
@@ -120,27 +209,28 @@ class ListItemsContainer extends React.Component {
   }
 
 
-  next() {
-    this.indexPagination += this.props.itemsPerPage;
-    this.load();
-    console.log('ListItemsContainer - next');
-  }
+  // next() {
+  //   this.indexPagination += this.props.itemsPerPage;
+  //   this.load();
+  //   console.log(`ListItemsContainer - next (new indexPagination=${this.indexPagination})`);
+  // }
 
-  previous() {
-    this.indexPagination -= this.props.itemsPerPage;
-    this.load();
-    console.log('ListItemsContainer - previous');
-  }
+  // previous() {
+  //   this.indexPagination -= this.props.itemsPerPage;
+  //   this.load();
+  //   console.log(`ListItemsContainer - previous (new indexPagination=${this.indexPagination})`);
+  // }
 
 
   load(imposedIndexPagination = -1) {
     // this._ListItemsComponent.onStartLoading();
 
     if (imposedIndexPagination !== -1) {
-      this.indexPagination = imposedIndexPagination
+      this.indexPagination = imposedIndexPagination;
     }
+    console.log(`ListItemsContainer - load (imposedIndexPagination=${imposedIndexPagination}, new indexPagination=${this.indexPagination})`);
 
-    const urlCount = this.props.URL.concat('/count' );
+    const urlCount = this.props.URL.concat('/count');
     fetch(urlCount)
       .then((response) => {
         console.log('ListItemsContainer - fetch count OK');
@@ -152,8 +242,8 @@ class ListItemsContainer extends React.Component {
       }).catch((ex) => {
         console.log('count parsing failed', ex);
       });
-    
-    const urlWithParams = this.props.URL.concat('/', this.indexPagination, '/', this.props.itemsPerPage );
+
+    const urlWithParams = this.props.URL.concat('/', this.indexPagination, '/', this.props.itemsPerPage);
     console.log('ListItemsContainer - fetch:', urlWithParams);
     fetch(urlWithParams)
       .then((response) => {
@@ -175,34 +265,18 @@ class ListItemsContainer extends React.Component {
 
 
   render() {
-    if( this.state.count === 0 || this.state.items.length === 0) return null;
-
-    console.log(`ListItemsContainer.render: indexPagination=${this.indexPagination}`);
-    const disabledPrevious = this.indexPagination <= 0;
-    const disabledNext = this.indexPagination > this.state.count - this.props.itemsPerPage;
-    const nbPages = Math.floor(((this.state.count - 1) / this.props.itemsPerPage) + 1);
-    const activePage = Math.floor((this.indexPagination  / this.props.itemsPerPage) + 1);
-
+    if (this.state.count === 0 || this.state.items.length === 0) return null;
     return (
       <div>
         <StatisticsProcessing stats={this.state.processingInfo} />
         <div>
-          { this.state.count > this.props.itemsPerPage && 
-            <Pagination size="sm">
-              <PaginationItem disabled={disabledPrevious} >
-                <PaginationLink previous href="#" onClick={() => this.previous()} />
-              </PaginationItem>
-              {Array.apply(null, Array(nbPages)).map((item, i) =>
-                 <PaginationItem active={activePage === i+1}>
-                  <PaginationLink previous href="#" onClick={() => this.load(i * this.props.itemsPerPage)}>
-                  {i+1}
-                  </PaginationLink>
-                </PaginationItem>
-               )}
-              <PaginationItem disabled={disabledNext} >
-                <PaginationLink next href="#" onClick={() => this.next()} />
-              </PaginationItem>
-            </Pagination>
+          { this.state.count > this.props.itemsPerPage &&
+            <BbPagination
+              onNumber={i => this.load(i)}
+              count={this.state.count}
+              itemsPerPage={this.props.itemsPerPage}
+              indexPagination={this.indexPagination}
+            />
           }
           <ListItems items={this.state.items} />
         </div>
@@ -213,5 +287,3 @@ class ListItemsContainer extends React.Component {
 }
 
 export default ListItemsContainer;
-
-//          <ListItems ref={(r) => { this._ListItemsComponent = r; }} items={this.state.items} />

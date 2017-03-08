@@ -49,7 +49,7 @@ class GeolocationDisplay extends React.Component {
           <MdLocationOn size={12} />
         </Button>
         <Modal isOpen={this.state.statisticsOpen} toggle={this.toggle}>
-          <ModalHeader>Geolocation Statistics</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Geolocation Statistics</ModalHeader>
           <ModalBody>
             <div className="geolocation_statistics">
               Coordinates:

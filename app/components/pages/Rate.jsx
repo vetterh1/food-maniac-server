@@ -131,7 +131,7 @@ class Rate extends React.Component {
 
           <FormGroup>
             <h3>What?</h3>
-            <ListItemsContainer URL="/api/items" pagination="5" />
+            <ListItemsContainer URL="/api/items" itemsPerPage={7} />
           </FormGroup>
 
           <FormGroup>
@@ -143,8 +143,8 @@ class Rate extends React.Component {
                 <Rating
                   stop={5}
                   initialRate={4.5}
-                  full={<MdStar  size={14} />}
-                  empty={<MdStarOutline />}
+                  full={<MdStar size={32} />}
+                  empty={<MdStarOutline size={32} />}
                   style={styles.markRate}
                 />
               </div>
@@ -154,8 +154,8 @@ class Rate extends React.Component {
                 <Rating
                   stop={5}
                   initialRate={3}
-                  full={<MdStar />}
-                  empty={<MdStarOutline  size={10} />}
+                  full={<MdStar size={26} />}
+                  empty={<MdStarOutline size={26} />}
                   style={styles.markRate}
                 />
               </div>
@@ -165,8 +165,8 @@ class Rate extends React.Component {
                 <Rating
                   stop={5}
                   initialRate={2}
-                  full={<MdStar />}
-                  empty={<MdStarOutline />}
+                  full={<MdStar size={26} />}
+                  empty={<MdStarOutline size={26} />}
                   style={styles.markRate}
                 />
               </div>
@@ -176,8 +176,8 @@ class Rate extends React.Component {
                 <Rating
                   stop={5}
                   initialRate={5}
-                  full={<MdStar />}
-                  empty={<MdStarOutline />}
+                  full={<MdStar size={26} />}
+                  empty={<MdStarOutline size={26} />}
                   style={styles.markRate}
                 />
               </div>
