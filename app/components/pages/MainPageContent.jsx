@@ -1,8 +1,25 @@
 import React from 'react';
 
-const divStyle = {
+const styles = {
+  divStyle: {
+    // background: 'url("images/pasta_alpha30_qty50.jpg") no-repeat center center fixed',
+    // backgroundSize: 'cover',
+  },
 };
 
-const MainPageContent = () => <div style={divStyle}>Some text<br />to present Food Maniac :)</div>;
+class MainPageContent extends React.Component {
+  static propTypes = {
+    children: React.PropTypes.node,
+  }
+
+  render() {
+    return (
+      <div style={styles.divStyle}>
+      </div>
+    );
+  }
+}
+
+
 
 export default MainPageContent;

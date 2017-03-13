@@ -1,30 +1,21 @@
 import React from 'react';
+import Slider from 'react-slick';
+import MdLocalRestaurant from 'react-icons/lib/md/local-restaurant';
+
 // import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // import Snackbar from 'material-ui/Snackbar';
 
 
 const styles = {
-  paperStyle: {
-    // width: 300,
-    // margin: '20 auto',
-    padding: 20,
+  carroussel: {
+    margin: '0px 0px',
+    padding: '5px 80px',
+    // width: '80%',
+    // color: '#333',
+    background: '#419be0',
   },
-  submitStyle: {
-    marginTop: 32,
-  },
-  form_content: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'flex-start',
-  },
-  form_buttons: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'flex-start',
-  },
-  item: {
-    padding: '0.5em',
-    marginRight: 32,
+  carrousselInner: {
+    height: 'auto',
   },
   serverUnknown: {
     // color: 'grey',
@@ -34,10 +25,6 @@ const styles = {
   },
   serverKO: {
     color: 'red',
-  },
-  imageCameraSnapshot: {
-    maxWidth: 300,
-    maxHeight: 200,
   },
 };
 
@@ -50,7 +37,7 @@ class ItemImage extends React.Component {
 
   render() {
     if (!this.props.id) return null;
-    return (<img src={`/static/thumbnails/${this.props.id}.jpg`} role="presentation" />);
+    return (<object data={`/static/thumbnails/${this.props.id}.jpg`} type="image/jpg"><MdLocalRestaurant size={96} /></object>);
   }
 }
 
@@ -72,9 +59,27 @@ class ListOneItem extends React.Component {
 }
 
 
+class CarrousselOneItem extends React.Component {
+
+  static propTypes = {
+    index: React.PropTypes.number.isRequired,
+    item: React.PropTypes.object.isRequired,
+  }
+
+  render() {
+    let styleGivenByServer = styles.serverUnknown;
+    if (this.props.item.serverState === 'OK') styleGivenByServer = styles.serverOK;
+    if (this.props.item.serverState === 'KO') styleGivenByServer = styles.serverKO;
+    return (<div style={styleGivenByServer}>{this.props.item.name} <ItemImage id={this.props.item.picture} /></div>);
+    // return (<div style={styleGivenByServer}>{this.props.item.name}</div>);
+  }
+}
+
+
 
 class ListItems extends React.Component {
   static propTypes = {
+    carroussel: React.PropTypes.bool.isRequired,
     items: React.PropTypes.array.isRequired,
   }
 
@@ -107,24 +112,76 @@ class ListItems extends React.Component {
 */
   render() {
     // console.log('props.item: ', this.props.items);
+    const settings = {
+      dots: true,
+      lazyLoad: false,
+      infinite: false,
+      speed: 500,
+      slidesToShow: 4,
+      slidesToScroll: 4,
+      initialSlide: 0,
+      adaptiveHeight: false,
+      responsive: [
+        {
+          breakpoint: 1680,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            dots: true,
+          },
+        }, {
+          breakpoint: 1280,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            dots: false,
+          },
+        }, {
+          breakpoint: 800,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            dots: false,
+          },
+        }],
+    };
+
+    const settingsBasic = {
+      dots: true,
+      lazyLoad: false,
+      infinite: false,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      initialSlide: 0,
+      adaptiveHeight: true,
+    };
+
     return (
-        <div style={styles.paperStyle}>
-          <h1>Items list</h1>
+      <div>
+        <h1>Items list</h1>
+        { !this.props.carroussel &&
           <ul>
             {this.props.items.map((item, index) => (
               <ListOneItem index={index} item={item} key={item._id} />
             ))}
           </ul>
-        </div>
+        }
+        { this.props.carroussel &&
+          <div style={styles.carroussel}>
+            <Slider {...settings} style={styles.carrousselInner}>
+              {this.props.items.map((item, index) => (
+                <div key={item._id}><h5><div class="row"><object data={`/static/thumbnails/${item.picture}.jpg`} type="image/jpg"><MdLocalRestaurant size={96} /></object></div><div class="row">{item.name}</div></h5></div>
+              ))}
+            </Slider>
+          </div>
+        }
+      </div>
     );
   }
 
 }
 
-export default ListItems;
 
-          // <Snackbar
-          //   open={this.state.snackbarOpen}
-          //   message={this.state.snackbarMessage}
-          //   autoHideDuration={this.state.snackbarTimeout}
-          // />
+
+export default ListItems;

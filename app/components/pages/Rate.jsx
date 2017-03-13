@@ -125,13 +125,13 @@ class Rate extends React.Component {
           model={defaultValues}
         >
           <FormGroup>
-            <h3>Where?</h3>
-            <SelectLocation />
+            <h3>What?</h3>
+            <ListItemsContainer URL="/api/items" itemsPerPage={10} />
           </FormGroup>
 
           <FormGroup>
-            <h3>What?</h3>
-            <ListItemsContainer URL="/api/items" itemsPerPage={7} />
+            <h3>Where?</h3>
+            <SelectLocation />
           </FormGroup>
 
           <FormGroup>
