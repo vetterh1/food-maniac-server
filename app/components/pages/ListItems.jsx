@@ -104,7 +104,7 @@ class ListItems extends React.Component {
     // console.log('props.item: ', this.props.items);
     const settings = {
       dots: true,
-      lazyLoad: false,
+      lazyLoad: true,
       infinite: false,
       speed: 500,
       slidesToShow: 4,
