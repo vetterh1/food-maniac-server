@@ -127,13 +127,13 @@ class ListItemsContainer extends React.Component {
     socketName: React.PropTypes.string,
     // Index of the item to fetch. Ex: 5 -> will omit to display the 1st 5 items to start at the 6th
     initialIndexPagination: React.PropTypes.number,
-    // Display a carroussel instead of a list. In this case, the itemsPerPage is NOT used
-    carroussel: React.PropTypes.bool,
+    // Display a carrousel instead of a list. In this case, the itemsPerPage is NOT used
+    carrousel: React.PropTypes.bool,
     // Nb max of item to fetch. Ex: 10 -> will retreive max 10 items
     itemsPerPage: React.PropTypes.number,
   };
 
-  static defaultProps = { carroussel: true, itemsPerPage: 7, initialIndexPagination: 0 };
+  static defaultProps = { carrousel: true, itemsPerPage: 7, initialIndexPagination: 0 };
 
   constructor(props) {
     super(props);
@@ -246,9 +246,9 @@ class ListItemsContainer extends React.Component {
       });
 
     const urlWithParams = this.props.URL.concat('/', this.indexPagination, '/', this.props.itemsPerPage);
-    // Add pagination if only if not carroussel 
+    // Add pagination if only if not carrousel
     // let urlWithParams = this.props.URL.concat('/', this.indexPagination);
-    // if (!this.props.carroussel) urlWithParams = this.props.URL.concat('/', this.indexPagination, '/', this.props.itemsPerPage);
+    // if (!this.props.carrousel) urlWithParams = this.props.URL.concat('/', this.indexPagination, '/', this.props.itemsPerPage);
     console.log('ListItemsContainer - fetch:', urlWithParams);
     fetch(urlWithParams)
       .then((response) => {
@@ -276,7 +276,7 @@ class ListItemsContainer extends React.Component {
       <div>
         <StatisticsProcessing stats={this.state.processingInfo} />
         <div>
-          { !this.props.carroussel && this.state.count > this.props.itemsPerPage &&
+          { !this.props.carrousel && this.state.count > this.props.itemsPerPage &&
             <BbPagination
               onNumber={i => this.load(i)}
               count={this.state.count}
@@ -284,7 +284,7 @@ class ListItemsContainer extends React.Component {
               indexPagination={this.indexPagination}
             />
           }
-          <ListItems items={this.state.items} carroussel={this.props.carroussel} />
+          <ListItems items={this.state.items} carrousel={this.props.carrousel} />
         </div>
       </div>
     );

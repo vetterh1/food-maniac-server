@@ -3,18 +3,23 @@ html, body {
     height: 100%;
 }
 
+
+.carrousel {
+  margin: 0px 0px;
+  padding: 5px 50px;
+}
+
 h5 {
-  background: #00558B;
-  color: #fff;
-  font-size: 36px;
-  line-height: 100px;
-  margin: 10px;
-  padding: 2%;
+  color: inherit;
+  font-size: 24px;
+  line-height: 32px;
+  margin: 0px;
+  padding: 10px;
   position: relative;
   text-align: center;
 }
 .variable-width .slick-slide p {
-  background: #00558B;
+  background: #eee;
   height: 100px;
   color: #fff;
   margin: 5px;
@@ -30,11 +35,6 @@ h5 {
   opacity: 0.8;
   transition: all 300ms ease;
 }
-.content {
-  padding: 20px;
-  margin: auto;
-  width: 90%;
-}
 .slick-slide .image {
   padding: 10px;
 }
@@ -47,7 +47,6 @@ h5 {
   border: 0
 }
 .slick-slider {
-  margin: 30px auto 50px;
 }
 .slick-dots {
   margin-left: 0;
@@ -69,11 +68,29 @@ h5 {
 }
 .slick-prev:before,
 .slick-next:before {
-    font-size: 60px;
+    font-size: 48px;
+    color: #607d8b;
 }
+
+.slick-next {
+    right: -24px;
+}
+
+.slick-prev {
+    left: -52px;
+}
+
+
+
 @media (max-width: 768px) {
+
+  .carrousel {
+    padding: 5px 40px;
+  }
+
   h5 {
-    font-size:24px;
+    font-size:20px;
+    line-height: 30px;
   }
   .center {
     margin-left: -40px;
@@ -88,6 +105,16 @@ h5 {
     opacity: 0.8;
     transform: scale(0.95);
     transition: all 300ms ease;
+  }
+  .slick-prev:before,
+  .slick-next:before {
+      font-size: 32px;
+  }
+  .slick-next {
+      right: -29px;
+  }
+  .slick-prev {
+      left: -41px;
   }
 }
 // just like in the regular library, we cannot simply have a vertical

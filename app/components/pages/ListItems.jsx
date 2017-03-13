@@ -7,16 +7,6 @@ import MdLocalRestaurant from 'react-icons/lib/md/local-restaurant';
 
 
 const styles = {
-  carroussel: {
-    margin: '0px 0px',
-    padding: '5px 80px',
-    // width: '80%',
-    // color: '#333',
-    background: '#419be0',
-  },
-  carrousselInner: {
-    height: 'auto',
-  },
   serverUnknown: {
     // color: 'grey',
   },
@@ -59,7 +49,7 @@ class ListOneItem extends React.Component {
 }
 
 
-class CarrousselOneItem extends React.Component {
+class CarrouselOneItem extends React.Component {
 
   static propTypes = {
     index: React.PropTypes.number.isRequired,
@@ -79,7 +69,7 @@ class CarrousselOneItem extends React.Component {
 
 class ListItems extends React.Component {
   static propTypes = {
-    carroussel: React.PropTypes.bool.isRequired,
+    carrousel: React.PropTypes.bool.isRequired,
     items: React.PropTypes.array.isRequired,
   }
 
@@ -137,7 +127,7 @@ class ListItems extends React.Component {
             dots: false,
           },
         }, {
-          breakpoint: 800,
+          breakpoint: 768,
           settings: {
             slidesToShow: 1,
             slidesToScroll: 1,
@@ -146,32 +136,22 @@ class ListItems extends React.Component {
         }],
     };
 
-    const settingsBasic = {
-      dots: true,
-      lazyLoad: false,
-      infinite: false,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      initialSlide: 0,
-      adaptiveHeight: true,
-    };
 
     return (
       <div>
         <h1>Items list</h1>
-        { !this.props.carroussel &&
+        { !this.props.carrousel &&
           <ul>
             {this.props.items.map((item, index) => (
               <ListOneItem index={index} item={item} key={item._id} />
             ))}
           </ul>
         }
-        { this.props.carroussel &&
-          <div style={styles.carroussel}>
-            <Slider {...settings} style={styles.carrousselInner}>
+        { this.props.carrousel &&
+          <div style={styles.carrousel} className="carrousel">
+            <Slider {...settings} style={styles.carrouselInner}>
               {this.props.items.map((item, index) => (
-                <div key={item._id}><h5><div class="row"><object data={`/static/thumbnails/${item.picture}.jpg`} type="image/jpg"><MdLocalRestaurant size={96} /></object></div><div class="row">{item.name}</div></h5></div>
+                <div key={item._id}><h5><div className="row justify-content-center"><object data={`/static/thumbnails/${item.picture}.jpg`} type="image/jpg"><MdLocalRestaurant size={96} /></object></div><div className="row justify-content-center">{item.name}</div></h5></div>
               ))}
             </Slider>
           </div>
