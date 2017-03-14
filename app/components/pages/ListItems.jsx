@@ -104,7 +104,7 @@ class ListItems extends React.Component {
     // console.log('props.item: ', this.props.items);
     const settings = {
       dots: true,
-      lazyLoad: true,
+      lazyLoad: false,
       infinite: false,
       speed: 500,
       slidesToShow: 4,
@@ -113,21 +113,21 @@ class ListItems extends React.Component {
       adaptiveHeight: false,
       responsive: [
         {
-          breakpoint: 1680,
+          breakpoint: 1200,
           settings: {
             slidesToShow: 3,
             slidesToScroll: 3,
             dots: true,
           },
         }, {
-          breakpoint: 1280,
+          breakpoint: 950,
           settings: {
             slidesToShow: 2,
             slidesToScroll: 2,
             dots: false,
           },
         }, {
-          breakpoint: 768,
+          breakpoint: 640,
           settings: {
             slidesToShow: 1,
             slidesToScroll: 1,
@@ -139,7 +139,6 @@ class ListItems extends React.Component {
 
     return (
       <div>
-        <h1>Items list</h1>
         { !this.props.carrousel &&
           <ul>
             {this.props.items.map((item, index) => (
@@ -151,7 +150,7 @@ class ListItems extends React.Component {
           <div style={styles.carrousel} className="carrousel">
             <Slider {...settings} style={styles.carrouselInner}>
               {this.props.items.map((item, index) => (
-                <div key={item._id}><h5><div className="row justify-content-center"><object data={`/static/thumbnails/${item.picture}.jpg`} type="image/jpg"><MdLocalRestaurant size={96} /></object></div><div className="row justify-content-center">{item.name}</div></h5></div>
+                <div key={item._id}><h6><div className="row justify-content-center"><object data={`/static/thumbnails/${item.picture}.jpg`} type="image/jpg"><MdLocalRestaurant size={96} /></object></div><div className="row justify-content-center">{item.name}</div></h6></div>
               ))}
             </Slider>
           </div>

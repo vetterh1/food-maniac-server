@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Label, FormGroup, Alert } from 'reactstrap';
+import { Container, Col, Button, Label, FormGroup, Alert } from 'reactstrap';
 import { AvForm, AvField, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
 // import SelectCurrentLocation from '../containers/SelectCurrentLocation';
 import SelectLocation from '../utils/SelectLocation';
@@ -111,11 +111,11 @@ class Rate extends React.Component {
     };
 
     return (
-      <div style={styles.form}>
+      <Container>
 
         {this.state.alertStatus !== 0 && <Alert color={this.state.alertColor}>{this.state.alertMessage}</Alert>}
 
-        <h1>Rate a dish...</h1>
+        <h2>Rate a dish...</h2>
         <AvForm
           key={this.state.keyForm}  // unique key that let reset the form by changing the state keyForm
           // onValid={this.enableButton}
@@ -125,72 +125,90 @@ class Rate extends React.Component {
           model={defaultValues}
         >
           <FormGroup>
-            <h3>What?</h3>
+            <h4>What?</h4>
             <ListItemsContainer URL="/api/items" itemsPerPage={10} />
           </FormGroup>
 
           <FormGroup>
-            <h3>Where?</h3>
+            <h4>Where?</h4>
             <SelectLocation />
           </FormGroup>
 
           <FormGroup>
-            <h3>Marks</h3>
-            <div style={styles.markContainer}>
+            <h4>Marks</h4>
+            <div>
+              <FormGroup row>
+                <Col xs={3} lg={2} >
+                  <Label for="markOverall" className="text-right">Overall</Label>
+                </Col>
+                <Col xs={9} lg={10} >
+                  <Rating
+                    id="markOverall"
+                    stop={5}
+                    initialRate={4.5}
+                    full={<MdStar size={30} />}
+                    empty={<MdStarOutline size={30} />}
+                    style={styles.markRate}
+                  />
+                </Col>
+              </FormGroup>
 
-              <div style={styles.markLine}>
-                <span style={styles.markLabel}>Overall</span>
-                <Rating
-                  stop={5}
-                  initialRate={4.5}
-                  full={<MdStar size={32} />}
-                  empty={<MdStarOutline size={32} />}
-                  style={styles.markRate}
-                />
-              </div>
+              <FormGroup row>
+                <Col xs={3} lg={2} >
+                  <Label for="markQuality" className="text-right">Quality</Label>
+                </Col>
+                <Col xs={9} lg={10} >
+                  <Rating
+                    id="markQuality"
+                    stop={5}
+                    initialRate={3}
+                    full={<MdStar size={26} />}
+                    empty={<MdStarOutline size={26} />}
+                    style={styles.markRate}
+                  />
+                </Col>
+              </FormGroup>
 
-              <div style={styles.markLine}>
-                <span style={styles.markLabel}>Quality</span>
-                <Rating
-                  stop={5}
-                  initialRate={3}
-                  full={<MdStar size={26} />}
-                  empty={<MdStarOutline size={26} />}
-                  style={styles.markRate}
-                />
-              </div>
+              <FormGroup row>
+                <Col xs={3} lg={2} >
+                  <Label for="markPlace" className="text-right">Place</Label>
+                </Col>
+                <Col xs={9} lg={10} >
+                  <Rating
+                    id="markPlace"
+                    stop={5}
+                    initialRate={3}
+                    full={<MdStar size={26} />}
+                    empty={<MdStarOutline size={26} />}
+                    style={styles.markRate}
+                  />
+                </Col>
+              </FormGroup>
 
-              <div style={styles.markLine}>
-                <span style={styles.markLabel}>Place</span>
-                <Rating
-                  stop={5}
-                  initialRate={2}
-                  full={<MdStar size={26} />}
-                  empty={<MdStarOutline size={26} />}
-                  style={styles.markRate}
-                />
-              </div>
-
-              <div style={styles.markLine}>
-                <span style={styles.markLabel}>Staff</span>
-                <Rating
-                  stop={5}
-                  initialRate={5}
-                  full={<MdStar size={26} />}
-                  empty={<MdStarOutline size={26} />}
-                  style={styles.markRate}
-                />
-              </div>
-
+              <FormGroup row>
+                <Col xs={3} lg={2} >
+                  <Label for="markStaff" className="text-right">Staff</Label>
+                </Col>
+                <Col xs={9} lg={10} >
+                  <Rating
+                    id="markStaff"
+                    stop={5}
+                    initialRate={3}
+                    full={<MdStar size={26} />}
+                    empty={<MdStarOutline size={26} />}
+                    style={styles.markRate}
+                  />
+                </Col>
+              </FormGroup>
             </div>
           </FormGroup>
 
 
 
-          <Button type="submit" size="lg">Add</Button>
-          <Button color="link" onClick={this.resetForm} size="lg">Reset</Button>
+          <Button type="submit" size="md">Add</Button>
+          <Button color="link" onClick={this.resetForm} size="md">Reset</Button>
         </AvForm>
-      </div>
+      </Container>
     );
   }
 
@@ -207,10 +225,10 @@ class Rate extends React.Component {
             onValidSubmit={this.submitForm}
             onInvalidSubmit={this.notifyFormError}
           >
-            <h3>Where?</h3>
+            <h4>Where?</h4>
             <SelectLocation />
 
-            <h3>What?</h3>
+            <h4>What?</h4>
             <ListItemsContainer URL="/api/items" pagination="5" />
 
             <FlatButton
@@ -221,7 +239,7 @@ class Rate extends React.Component {
               icon={<IconSearch />}
             />
 
-            <h3>Marks</h3>
+            <h4>Marks</h4>
             <div style={styles.markContainer}>
 
               <div style={styles.markLine}>
@@ -270,7 +288,7 @@ class Rate extends React.Component {
 
             </div>
 
-            <h3>Picture</h3>
+            <h4>Picture</h4>
 
           </Formsy.Form>
 

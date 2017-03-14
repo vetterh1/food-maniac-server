@@ -10,10 +10,9 @@ import AddItemContainer from '../pages/AddItemContainer';
 import ListItemsContainer from '../pages/ListItemsContainer';
 import Login from '../pages/Login';
 
-// import bootstrap directly in index.html through CDN
-// import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
-const NotFound = () => <h1>404 error - This page is not found!</h1>;
+const NotFound = () => <h2>404 error - This page is not found!</h2>;
 
 const Root = ({ store }) => (
   <Provider store={store}>

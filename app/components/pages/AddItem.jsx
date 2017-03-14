@@ -129,7 +129,7 @@ class AddItem extends React.Component {
 
         {this.state.alertStatus !== 0 && <Alert color={this.state.alertColor}>{this.state.alertMessage}</Alert>}
 
-        <h1>Add new dish...</h1>
+        <h2>Add new dish...</h2>
         <AvForm
           key={this.state.keyForm}  // unique key that let reset the form by changing the state keyForm
           // onValid={this.enableButton}

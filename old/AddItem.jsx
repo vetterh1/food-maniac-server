@@ -159,7 +159,7 @@ class AddItem extends React.Component {
     return (
       <MuiThemeProvider muiTheme={this.context.muiTheme}>
         <div style={styles.paperStyle}>
-          <h1>New dish...</h1>
+          <h2>New dish...</h2>
           <Formsy.Form
             onValid={this.enableButton}
             onInvalid={this.disableButton}

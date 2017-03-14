@@ -45,7 +45,7 @@ const Listing = ({ places }) => {
 //  <AvField type="select" name="category" label="Category" size="lg">
 
   const result = (
-    <AvField type="select" name="category" size="lg">
+    <AvField type="select" name="category" size="md">
       {places && places.map((p) => { return (<option key={p.id} value={p.id}>{p.name}</option>); })}
     </AvField>
   );

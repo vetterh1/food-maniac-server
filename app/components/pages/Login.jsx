@@ -24,7 +24,7 @@ buttonText="Login With Facebook"/>
   render() {
     return (
       <div>
-        <h1>Login</h1>
+        <h2>Login</h2>
         <FacebookLogin
           socialId="327120524301121"
           language="en_US"
