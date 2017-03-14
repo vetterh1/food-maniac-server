@@ -7,35 +7,7 @@ import { connect } from 'react-redux';
 
 import Geolocation from './Geolocation';
 import { AvField } from 'availity-reactstrap-validation';
-import { FormGroup, Alert } from 'reactstrap';
-
-const styles = {
-  div: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  geolocation: {
-  },
-  listing: {
-  },
-  mapDiv1: {
-    position: 'relative',
-  },
-  mapDiv2: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-  },
-  map: {
-    margin: '1em',
-    width: '100%',
-    height: '400px',
-  },
-};
+import { Col, FormGroup } from 'reactstrap';
 
 const Listing = ({ places }) => {
   console.log('   {   Listing.render (lr)');
@@ -137,21 +109,17 @@ const SelectLocation = React.createClass({
     console.log('       (slr) props:', this.props);
 
     const result = (
-      <div style={styles.div}>
-        <div style={styles.mapDiv1}>
-          <div style={styles.mapDiv2}>
-            <div id="map" style={styles.map} />
-            --map--
-          </div>
-        </div>
-        <FormGroup>
-          <Listing
-            style={styles.listing}
-            places={this.state.places}
-          />
-          <Geolocation
-            style={styles.geolocation}
-          />
+      <div>
+        <div id="map" className="hidden-xs-up" />
+        <FormGroup row className="no-gutters">
+          <Col xs={11}>
+            <Listing
+              places={this.state.places}
+            />
+          </Col>
+          <Col xs={1}>
+            <Geolocation />
+          </Col>
         </FormGroup>
       </div>
     );

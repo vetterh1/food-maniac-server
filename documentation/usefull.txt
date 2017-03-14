@@ -152,8 +152,17 @@ C:\workspace\mapTest\, -*/node_modules/*, -*/distBoServer/*, -*/distFoServer/*, 
 Version: 16.04
 Note: get version with: lsb_release -a
 
-Packages:
-- imagemagick for thumbnails : sudo apt-get install imagemagick
+Update:
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt autoremove
+sudo apt-get dist-upgrade
+
+Update Ubuntu:
+sudo do-release-upgrade
+
+sudo reboot
+sudo shutdown -r now
 
 
 ---------------------------------------------------------------

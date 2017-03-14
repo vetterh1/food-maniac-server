@@ -34,7 +34,7 @@ class GeolocationDisplay extends React.Component {
     this.toggle = this.toggle.bind(this);
 
     this.state = {
-      statisticsOpen: false
+      statisticsOpen: false,
     };
   }
 
@@ -45,8 +45,8 @@ class GeolocationDisplay extends React.Component {
   render = () => {
     return (
       <div>
-        <Button onClick={this.toggle}  size="lg" style={this.props.coordinates.real ? styles.locationOK : styles.locationKO}>
-          <MdLocationOn size={12} />
+        <Button onClick={this.toggle} size="md" color="link" style={this.props.coordinates.real ? styles.locationOK : styles.locationKO}>
+          <MdLocationOn size={18} />
         </Button>
         <Modal isOpen={this.state.statisticsOpen} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Geolocation Statistics</ModalHeader>

@@ -111,11 +111,11 @@ class Rate extends React.Component {
     };
 
     return (
-      <Container>
+      <Container fluid>
 
         {this.state.alertStatus !== 0 && <Alert color={this.state.alertColor}>{this.state.alertMessage}</Alert>}
 
-        <h2>Rate a dish...</h2>
+        <h2 className="mb-4">Rate a dish...</h2>
         <AvForm
           key={this.state.keyForm}  // unique key that let reset the form by changing the state keyForm
           // onValid={this.enableButton}
@@ -125,17 +125,17 @@ class Rate extends React.Component {
           model={defaultValues}
         >
           <FormGroup>
-            <h4>What?</h4>
+            <h4 className="mb-4">What?</h4>
             <ListItemsContainer URL="/api/items" itemsPerPage={10} />
           </FormGroup>
 
           <FormGroup>
-            <h4>Where?</h4>
+            <h4 className="mb-4">Where?</h4>
             <SelectLocation />
           </FormGroup>
 
           <FormGroup>
-            <h4>Marks</h4>
+            <h4 className="mb-4">Marks</h4>
             <div>
               <FormGroup row>
                 <Col xs={3} lg={2} >
@@ -211,112 +211,6 @@ class Rate extends React.Component {
       </Container>
     );
   }
-
-
-  /*
-  render() {
-    return (
-      <MuiThemeProvider muiTheme={this.context.muiTheme}>
-        <div style={styles.paperStyle}>
-          <h1>Rate a dish...</h1>
-          <Formsy.Form
-            onValid={this.enableButton}
-            onInvalid={this.disableButton}
-            onValidSubmit={this.submitForm}
-            onInvalidSubmit={this.notifyFormError}
-          >
-            <h4>Where?</h4>
-            <SelectLocation />
-
-            <h4>What?</h4>
-            <ListItemsContainer URL="/api/items" pagination="5" />
-
-            <FlatButton
-              label="other dish..."
-              labelPosition="after"
-              primary
-              style={styles.button}
-              icon={<IconSearch />}
-            />
-
-            <h4>Marks</h4>
-            <div style={styles.markContainer}>
-
-              <div style={styles.markLine}>
-                <span style={styles.markLabel}>Overall</span>
-                <Rating
-                  stop={5}
-                  initialRate={4.5}
-                  full={<MdStar />}
-                  empty={<MdStarOutline />}
-                  style={styles.markRate}
-                />
-              </div>
-
-              <div style={styles.markLine}>
-                <span style={styles.markLabel}>Quality</span>
-                <Rating
-                  stop={5}
-                  initialRate={3}
-                  full={<MdStar />}
-                  empty={<MdStarOutline />}
-                  style={styles.markRate}
-                />
-              </div>
-
-              <div style={styles.markLine}>
-                <span style={styles.markLabel}>Place</span>
-                <Rating
-                  stop={5}
-                  initialRate={2}
-                  full={<MdStar />}
-                  empty={<MdStarOutline />}
-                  style={styles.markRate}
-                />
-              </div>
-
-              <div style={styles.markLine}>
-                <span style={styles.markLabel}>Staff</span>
-                <Rating
-                  stop={5}
-                  initialRate={5}
-                  full={<MdStar />}
-                  empty={<MdStarOutline />}
-                  style={styles.markRate}
-                />
-              </div>
-
-            </div>
-
-            <h4>Picture</h4>
-
-          </Formsy.Form>
-
-        </div>
-      </MuiThemeProvider>
-    );
-  }      */
-
-
 }
 
 export default Rate;
-
-
-/*
-
-            <RecentItemsContainer />
-
-
-              <Subheader>What did you eat?</Subheader>
-
-import DropDownMenu from 'material-ui/DropDownMenu';
-
-            <DropDownMenu>
-              <MenuItem value={'home'} primaryText="Home" />
-              <MenuItem value={'place1'} primaryText="Place 1" />
-              <MenuItem value={'place2'} primaryText="Place 2" />
-              <MenuItem value={'place3'} primaryText="Place 3" />
-            </DropDownMenu>
-
-*/
