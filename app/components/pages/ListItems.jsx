@@ -103,27 +103,29 @@ class ListItems extends React.Component {
   render() {
     // console.log('props.item: ', this.props.items);
     const settings = {
+      centerMode: true,
+      centerPadding: '60px',
+      infinite: true,
       dots: true,
       lazyLoad: false,
-      infinite: false,
       speed: 500,
-      slidesToShow: 4,
-      slidesToScroll: 4,
+      slidesToShow: 5,
+      slidesToScroll: 5,
       initialSlide: 0,
       adaptiveHeight: false,
       responsive: [
         {
-          breakpoint: 1200,
+          breakpoint: 1560,
           settings: {
             slidesToShow: 3,
             slidesToScroll: 3,
             dots: true,
           },
         }, {
-          breakpoint: 950,
+          breakpoint: 1040,
           settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2,
+            slidesToShow: 1,
+            slidesToScroll: 1,
             dots: false,
           },
         }, {
