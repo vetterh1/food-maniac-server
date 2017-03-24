@@ -158,7 +158,7 @@ class ListItems extends React.Component {
       infinite: true,
       dots: false,
       lazyLoad: false,
-      speed: 500,
+      speed: 300,
       slidesToShow: 1,
       initialSlide: 0,
       adaptiveHeight: false,

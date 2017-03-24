@@ -2,9 +2,9 @@
 /* eslint-disable react/prop-types */
 
 import React from 'react';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import MainAppBar from '../navigation/MainAppBar';
 import Version from '../utils/Version';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 
 const styles = {
   pageContainer: {
@@ -25,7 +25,7 @@ class App extends React.Component {
   render() {
     return (
       <div style={styles.pageContainer}>
-        <MainAppBar location={this.props.location} location={this.props.location} router={this.props.router} route={this.props.route} />
+        <MainAppBar location={this.props.location} router={this.props.router} route={this.props.route} />
         {this.props.children}
         <Version />
       </div>

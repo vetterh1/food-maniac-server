@@ -118,7 +118,7 @@ module.exports = {
   ],
 
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
     modules: [
       'app',
       'node_modules',
@@ -126,7 +126,7 @@ module.exports = {
   },
 
   output: {
-    filename: '/bundle.js',
+    filename: 'bundle.js',
     path: distPath,
   },
 
