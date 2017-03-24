@@ -67,14 +67,28 @@ class CarrouselOneItem extends React.Component {
 
 
 
+
+
+
+
+
 class ListItems extends React.Component {
   static propTypes = {
     carrousel: React.PropTypes.bool.isRequired,
     items: React.PropTypes.array.isRequired,
   }
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
+
+    this.state = {
+      indexSelected: 0,
+      idSelected: props.items[0]._id,
+    };
+
+    console.log(`ListItems idSelected=${props.items[0]._id} (initial value)`);
+
 /*
     this.state = {
       snackbarOpen: false,
@@ -83,6 +97,7 @@ class ListItems extends React.Component {
     };
   */
   }
+
 
 /*
   onStartLoading() {
@@ -102,40 +117,55 @@ class ListItems extends React.Component {
 */
   render() {
     // console.log('props.item: ', this.props.items);
+
+    // const settings = {
+    //   centerMode: true,
+    //   centerPadding: '60px',
+    //   infinite: true,
+    //   dots: true,
+    //   lazyLoad: false,
+    //   speed: 500,
+    //   slidesToShow: 5,
+    //   slidesToScroll: 5,
+    //   initialSlide: 0,
+    //   adaptiveHeight: false,
+    //   responsive: [
+    //     {
+    //       breakpoint: 1560,
+    //       settings: {
+    //         slidesToShow: 3,
+    //         slidesToScroll: 3,
+    //         dots: true,
+    //       },
+    //     }, {
+    //       breakpoint: 1040,
+    //       settings: {
+    //         slidesToShow: 1,
+    //         slidesToScroll: 1,
+    //         dots: false,
+    //       },
+    //     }, {
+    //       breakpoint: 640,
+    //       settings: {
+    //         slidesToShow: 1,
+    //         slidesToScroll: 1,
+    //         dots: false,
+    //       },
+    //     }],
+    // };
+
     const settings = {
-      centerMode: true,
-      centerPadding: '60px',
       infinite: true,
-      dots: true,
+      dots: false,
       lazyLoad: false,
       speed: 500,
-      slidesToShow: 5,
-      slidesToScroll: 5,
+      slidesToShow: 1,
       initialSlide: 0,
       adaptiveHeight: false,
-      responsive: [
-        {
-          breakpoint: 1560,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 3,
-            dots: true,
-          },
-        }, {
-          breakpoint: 1040,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            dots: false,
-          },
-        }, {
-          breakpoint: 640,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            dots: false,
-          },
-        }],
+      afterChange: (currentSlide) => {
+        this.setState({ idSelected: this.props.items[currentSlide]._id });
+        console.log(`ListItems idSelected=${this.props.items[currentSlide]._id}`);
+      },
     };
 
 
