@@ -1,9 +1,14 @@
 import React from 'react';
 import Slider from 'react-slick';
 import MdLocalRestaurant from 'react-icons/lib/md/local-restaurant';
+import * as log from 'loglevel';
 
 // import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // import Snackbar from 'material-ui/Snackbar';
+
+const logListItems = log.getLogger('logListItems');
+logListItems.setLevel('warn');
+logListItems.debug('--> entering ListItems.jsx');
 
 
 const styles = {
@@ -87,7 +92,7 @@ class ListItems extends React.Component {
       idSelected: props.items[0]._id,
     };
 
-    console.log(`ListItems idSelected=${props.items[0]._id} (initial value)`);
+    logListItems.debug(`ListItems idSelected=${props.items[0]._id} (initial value)`);
 
 /*
     this.state = {
@@ -116,7 +121,7 @@ class ListItems extends React.Component {
   }
 */
   render() {
-    // console.log('props.item: ', this.props.items);
+    // logListItems.debug('props.item: ', this.props.items);
 
     // const settings = {
     //   centerMode: true,
@@ -164,7 +169,7 @@ class ListItems extends React.Component {
       adaptiveHeight: false,
       afterChange: (currentSlide) => {
         this.setState({ idSelected: this.props.items[currentSlide]._id });
-        console.log(`ListItems idSelected=${this.props.items[currentSlide]._id}`);
+        logListItems.debug(`ListItems idSelected=${this.props.items[currentSlide]._id}`);
       },
     };
 

@@ -1,7 +1,12 @@
 import React from 'react';
-import ListItems from './ListItems';
 import io from 'socket.io-client';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+import * as log from 'loglevel';
+import ListItems from './ListItems';
+
+const logListItemsContainer = log.getLogger('logListItemsContainer');
+logListItemsContainer.setLevel('warn');
+logListItemsContainer.debug('--> entering ListItemsContainer.jsx');
 
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
@@ -42,7 +47,7 @@ class FullPagination extends React.Component {
   }
 
   render() {
-    console.log(`FullPagination.render: indexPagination=${this.props.indexPagination} count=${this.props.count} itemsPerPage=${this.props.itemsPerPage}`);
+    logListItemsContainer.debug(`FullPagination.render: indexPagination=${this.props.indexPagination} count=${this.props.count} itemsPerPage=${this.props.itemsPerPage}`);
 
     const disabledPrevious = this.props.indexPagination <= 0;
     const disabledNext = this.props.indexPagination > this.props.count - this.props.itemsPerPage;
@@ -95,7 +100,7 @@ class BbPagination extends React.Component {
     const nbPagesToDisplay = fullDisplay ? nbPages : nbPagesShortDisplay;
     if (!fullDisplay && (activePage + nbBeforeAfterChoice) > nbPages) offset = nbPages - nbPagesShortDisplay;
 
-    console.log(`BbPagination.render: indexPagination=${this.props.indexPagination} activePage=${activePage} count=${this.props.count} itemsPerPage=${this.props.itemsPerPage} nbPages=${nbPages} nbPagesToDisplay=${nbPagesToDisplay} fullDisplay=${fullDisplay} offset=${offset} `);
+    logListItemsContainer.debug(`BbPagination.render: indexPagination=${this.props.indexPagination} activePage=${activePage} count=${this.props.count} itemsPerPage=${this.props.itemsPerPage} nbPages=${nbPages} nbPagesToDisplay=${nbPagesToDisplay} fullDisplay=${fullDisplay} offset=${offset} `);
 
     return (
       <Pagination size="sm">
@@ -160,7 +165,7 @@ class ListItemsContainer extends React.Component {
 
   componentDidMount() {
     if (this.props.socketName) {
-      console.log(`ListItemsContainer.componentDidMount connects to ${this.props.socketName}`);
+      logListItemsContainer.debug(`ListItemsContainer.componentDidMount connects to ${this.props.socketName}`);
 
       this.socket = io();
 
@@ -205,7 +210,7 @@ class ListItemsContainer extends React.Component {
     });
     if (!found) {
       newItems.push({ name: itemId, _id: itemId, serverState: value });
-      console.log('added new item: ', itemId);
+      logListItemsContainer.debug('added new item: ', itemId);
     }
     this.setState({ items: newItems });
   }
@@ -214,13 +219,13 @@ class ListItemsContainer extends React.Component {
   // next() {
   //   this.indexPagination += this.props.itemsPerPage;
   //   this.load();
-  //   console.log(`ListItemsContainer - next (new indexPagination=${this.indexPagination})`);
+  //   logListItemsContainer.debug(`ListItemsContainer - next (new indexPagination=${this.indexPagination})`);
   // }
 
   // previous() {
   //   this.indexPagination -= this.props.itemsPerPage;
   //   this.load();
-  //   console.log(`ListItemsContainer - previous (new indexPagination=${this.indexPagination})`);
+  //   logListItemsContainer.debug(`ListItemsContainer - previous (new indexPagination=${this.indexPagination})`);
   // }
 
 
@@ -230,29 +235,29 @@ class ListItemsContainer extends React.Component {
     if (imposedIndexPagination !== -1) {
       this.indexPagination = imposedIndexPagination;
     }
-    console.log(`ListItemsContainer - load (imposedIndexPagination=${imposedIndexPagination}, new indexPagination=${this.indexPagination})`);
+    logListItemsContainer.debug(`ListItemsContainer - load (imposedIndexPagination=${imposedIndexPagination}, new indexPagination=${this.indexPagination})`);
 
     const urlCount = this.props.URL.concat('/count');
     fetch(urlCount)
       .then((response) => {
-        console.log('ListItemsContainer - fetch count OK');
+        logListItemsContainer.debug('ListItemsContainer - fetch count OK');
         return response.json();
       }).then((jsonCount) => {
         if (jsonCount && jsonCount.count) {
           this.setState({ count: jsonCount.count });
         }
       }).catch((ex) => {
-        console.log('count parsing failed', ex);
+        logListItemsContainer.debug('count parsing failed', ex);
       });
 
     const urlWithParams = this.props.URL.concat('/', this.indexPagination, '/', this.props.itemsPerPage);
     // Add pagination if only if not carrousel
     // let urlWithParams = this.props.URL.concat('/', this.indexPagination);
     // if (!this.props.carrousel) urlWithParams = this.props.URL.concat('/', this.indexPagination, '/', this.props.itemsPerPage);
-    console.log('ListItemsContainer - fetch:', urlWithParams);
+    logListItemsContainer.debug('ListItemsContainer - fetch:', urlWithParams);
     fetch(urlWithParams)
       .then((response) => {
-        console.log('ListItemsContainer - fetch operation OK');
+        logListItemsContainer.debug('ListItemsContainer - fetch operation OK');
         return response.json();
       }).then((jsonItems) => {
         if (jsonItems && jsonItems.items && jsonItems.items.length > 0) {
@@ -263,7 +268,7 @@ class ListItemsContainer extends React.Component {
           // this._ListItemsComponent.onEndLoadingFailed(jsonItems.error);
         }
       }).catch((ex) => {
-        console.log('parsing failed', ex);
+        logListItemsContainer.debug('parsing failed', ex);
         // this._ListItemsComponent.onEndLoadingFailed(ex);
       });
   }

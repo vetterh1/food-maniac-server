@@ -1,18 +1,20 @@
-/* eslint-disable no-console */
 /* global google */
 
 import React, { /* Component */ } from 'react';
 import { connect } from 'react-redux';
-// import { setCurrentLocation } from '../actions/LocationActions';
-
-import Geolocation from './Geolocation';
 import { AvField } from 'availity-reactstrap-validation';
 import { Col, FormGroup } from 'reactstrap';
+import * as log from 'loglevel';
+import Geolocation from './Geolocation';
+
+const logSelectLocation = log.getLogger('logSelectLocation');
+logSelectLocation.setLevel('warn');
+logSelectLocation.debug('--> entering SelectLocation.jsx');
 
 const Listing = ({ places }) => {
-  console.log('   {   Listing.render (lr)');
-  console.log('          (lr) nb places: ', places.length);
-  if (places.length > 0) console.log('          (lr) 1st places: ', places[0].name);
+  logSelectLocation.debug('   {   Listing.render (lr)');
+  logSelectLocation.debug('          (lr) nb places: ', places.length);
+  if (places.length > 0) logSelectLocation.debug('          (lr) 1st places: ', places[0].name);
 
 //  <AvField type="select" name="category" label="Category" size="lg">
 
@@ -22,7 +24,7 @@ const Listing = ({ places }) => {
     </AvField>
   );
 
-  console.log('   }   Listing.render');
+  logSelectLocation.debug('   }   Listing.render');
   return result;
 };
 
@@ -41,26 +43,26 @@ const SelectLocation = React.createClass({
 
   // 2nd to receive store changes
   componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-    console.log('{   SelectLocation.componentWillReceiveProps (sl-cwrp)');
-    console.log('       (sl-cwrp) nextProps: ', nextProps);
+    logSelectLocation.debug('{   SelectLocation.componentWillReceiveProps (sl-cwrp)');
+    logSelectLocation.debug('       (sl-cwrp) nextProps: ', nextProps);
 
     if (!nextProps) {
-      console.log('}   SelectLocation.componentWillReceiveProps: nextProps null !!!');
+      logSelectLocation.debug('}   SelectLocation.componentWillReceiveProps: nextProps null !!!');
       return;
     }
 
     if (!nextProps.coordinates) {
-      console.log('}   SelectLocation.componentWillReceiveProps: coordinates null !!!');
+      logSelectLocation.debug('}   SelectLocation.componentWillReceiveProps: coordinates null !!!');
       return;
     }
 
     if (!nextProps.coordinates.latitude || !nextProps.coordinates.longitude) {
-      console.log('}   SelectLocation.componentWillReceiveProps: lat or long null !!!');
+      logSelectLocation.debug('}   SelectLocation.componentWillReceiveProps: lat or long null !!!');
       return;
     }
 
     if (!nextProps.coordinates.changed) {
-      console.log('}   SelectLocation.componentWillReceiveProps: no change in coordinates');
+      logSelectLocation.debug('}   SelectLocation.componentWillReceiveProps: no change in coordinates');
       return;
     }
 
@@ -74,7 +76,7 @@ const SelectLocation = React.createClass({
       zoom: 15,
     });
 
-    console.log('       (sl-cwrp) currentLatLng : ', currentLatLng);
+    logSelectLocation.debug('       (sl-cwrp) currentLatLng : ', currentLatLng);
     const request = {
       location: currentLatLng,
       // radius: '100',
@@ -86,8 +88,8 @@ const SelectLocation = React.createClass({
 
     service.nearbySearch(request, (results, status, pagination) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
-        console.log('          (sl-cwrp) nearby nb results: ', results.length);
-        if (results.length > 0) console.log('          (sl-cwrp) nearby 1st results', results[0].name);
+        logSelectLocation.debug('          (sl-cwrp) nearby nb results: ', results.length);
+        if (results.length > 0) logSelectLocation.debug('          (sl-cwrp) nearby 1st results', results[0].name);
         this.pagination = pagination;
         this.setState({
           places: results,
@@ -95,18 +97,18 @@ const SelectLocation = React.createClass({
           currentLatLng,
         });
       } else {
-        console.log('          (sl-cwrp) nearby search error : ', status);
+        logSelectLocation.debug('          (sl-cwrp) nearby search error : ', status);
       }
     });
 
-    console.log('}   SelectLocation.componentWillReceiveProps');
+    logSelectLocation.debug('}   SelectLocation.componentWillReceiveProps');
   },
 
 
   render: function render() {
-    console.log('{   SelectLocation.render (slr)');
-    console.log('       (slr) state:', this.state);
-    console.log('       (slr) props:', this.props);
+    logSelectLocation.debug('{   SelectLocation.render (slr)');
+    logSelectLocation.debug('       (slr) state:', this.state);
+    logSelectLocation.debug('       (slr) props:', this.props);
 
     const result = (
       <div>
@@ -123,7 +125,7 @@ const SelectLocation = React.createClass({
         </FormGroup>
       </div>
     );
-    console.log('}   SelectLocation.render');
+    logSelectLocation.debug('}   SelectLocation.render');
     return result;
   },
 
