@@ -51,6 +51,7 @@ export function getItems(req, res) {
     } else {
       res.json({ items: items.docs });
       logger.info(`itemController.getItems length=${items.docs.length}`);
+      logger.info(JSON.stringify(items.docs));
     }
   });
 }
