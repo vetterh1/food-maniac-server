@@ -1,13 +1,16 @@
 import React from 'react';
-import { Container, Col, Button, Label, FormGroup, Alert } from 'reactstrap';
-import { AvForm, AvField, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
-// import SelectCurrentLocation from '../containers/SelectCurrentLocation';
-import SelectLocation from '../utils/SelectLocation';
-// import RecentItemsContainer from '../utils/RecentItems';
-import ListItemsContainer from '../pages/ListItemsContainer';
+import { reduxForm } from 'redux-form';
+import { Container, Col, Button, Label, Form, FormGroup, Alert } from 'reactstrap';
 import Rating from 'react-rating';
 import MdStar from 'react-icons/lib/md/star';
 import MdStarOutline from 'react-icons/lib/md/star-outline';
+import ListItemsContainer from '../pages/ListItemsContainer';
+// import SelectLocation from '../utils/SelectLocation';
+
+
+// import { AvForm, AvField, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
+// import SelectCurrentLocation from '../containers/SelectCurrentLocation';
+// import RecentItemsContainer from '../utils/RecentItems';
 /*
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Formsy from 'formsy-react';
@@ -116,22 +119,17 @@ class Rate extends React.Component {
         {this.state.alertStatus !== 0 && <Alert color={this.state.alertColor}>{this.state.alertMessage}</Alert>}
 
         <h2 className="mb-4">Rate a dish...</h2>
-        <AvForm
-          key={this.state.keyForm}  // unique key that let reset the form by changing the state keyForm
+        <Form
+          // key={this.state.keyForm}  // unique key that let reset the form by changing the state keyForm
           // onValid={this.enableButton}
           // onInvalid={this.disableButton}
-          onValidSubmit={this.submitForm}
+          onSubmit={this.submitForm}
           // onInvalidSubmit={this.notifyFormError}
-          model={defaultValues}
+          // model={defaultValues}
         >
           <FormGroup>
             <h4 className="mb-4">What?</h4>
             <ListItemsContainer URL="/api/items" itemsPerPage={10} />
-          </FormGroup>
-
-          <FormGroup>
-            <h4 className="mb-4">Where?</h4>
-            <SelectLocation />
           </FormGroup>
 
           <FormGroup>
@@ -207,10 +205,25 @@ class Rate extends React.Component {
 
           <Button type="submit" size="md">Add</Button>
           <Button color="link" onClick={this.resetForm} size="md">Reset</Button>
-        </AvForm>
+        </Form>
       </Container>
     );
   }
 }
+
+
+/*
+          <FormGroup>
+            <h4 className="mb-4">Where?</h4>
+            <SelectLocation />
+          </FormGroup>
+
+*/
+
+
+// Decorate the form component
+Rate = reduxForm({
+  form: 'rate',
+})(Rate);
 
 export default Rate;
