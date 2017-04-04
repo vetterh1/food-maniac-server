@@ -57,7 +57,7 @@ router.route('/places/:cuid').get(PlaceController.getPlace);
 // Add a new place
 router.route('/places').post(PlaceController.addPlace);
 
-// Update a user by cuid
+// Update a place by cuid
 router.route('/places/:cuid').post(PlaceController.updatePlace);
 
 // Delete a place by cuid

@@ -88,7 +88,7 @@ plugins.push(
 //   }),
 // );
 
-
+/*
 plugins.push(
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
@@ -102,7 +102,7 @@ plugins.push(
     name: 'manifest' // But since there are no more common modules between them we end up with just the runtime code included in the manifest file
   })
 );
-
+*/
 
 // PRODUCTION OPTIMIZATIONS
 if (process.env.NODE_ENV === 'production') {
@@ -158,7 +158,8 @@ module.exports = {
   },
 
   output: {
-    filename: '[name].[chunkhash].js',
+    filename: 'bundle.js',
+//    filename: '[name].[chunkhash].js',
     path: distPath,
     // chunkFilename: '[name].[hash].bundle.js',
   },

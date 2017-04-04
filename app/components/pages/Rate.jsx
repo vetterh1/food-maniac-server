@@ -1,30 +1,11 @@
 import React from 'react';
-import { reduxForm } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 import { Container, Col, Button, Label, Form, FormGroup, Alert } from 'reactstrap';
-import Rating from 'react-rating';
 import MdStar from 'react-icons/lib/md/star';
 import MdStarOutline from 'react-icons/lib/md/star-outline';
-import ListItemsContainer from '../pages/ListItemsContainer';
-// import SelectLocation from '../utils/SelectLocation';
-
-
-// import { AvForm, AvField, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
-// import SelectCurrentLocation from '../containers/SelectCurrentLocation';
-// import RecentItemsContainer from '../utils/RecentItems';
-/*
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Formsy from 'formsy-react';
-import { FormsyCheckbox, FormsyDate, FormsyRadio, FormsyRadioGroup,
-          FormsySelect, FormsyText, FormsyTime, FormsyToggle, FormsyAutoComplete } from 'formsy-material-ui/lib';
-import FlatButton from 'material-ui/FlatButton';
-import MdStar from 'material-ui/svg-icons/toggle/star';
-import MdStarOutline from 'material-ui/svg-icons/toggle/star-border';
-import IconSearch from 'material-ui/svg-icons/action/search';
-*/
-// import Subheader from 'material-ui/Subheader';
-// import IconLocation from 'material-ui/svg-icons/communication/location-on';
-// import Paper from 'material-ui/Paper';
-// import MenuItem from 'material-ui/MenuItem';
+import ReactFormRating from '../utils/ReactFormRating';
+import SelectLocation from '../utils/SelectLocation';
+// import ListItemsContainer from '../pages/ListItemsContainer';
 
 const styles = {
   form: {
@@ -113,7 +94,108 @@ class Rate extends React.Component {
     const defaultValues = {
     };
 
+    const { handleSubmit } = this.props;
+
     return (
+      <Container fluid>
+        {this.state.alertStatus !== 0 && <Alert color={this.state.alertColor}>{this.state.alertMessage}</Alert>}
+
+        <h2 className="mb-4">Rate a dish...</h2>
+        <Form
+          // key={this.state.keyForm}  // unique key that let reset the form by changing the state keyForm
+          // onValid={this.enableButton}
+          // onInvalid={this.disableButton}
+          onSubmit={this.submitForm}
+          // onInvalidSubmit={this.notifyFormError}
+          // model={defaultValues}
+        >
+          <FormGroup>
+            <h4 className="mb-4">Where?</h4>
+            <SelectLocation />
+          </FormGroup>
+
+          <FormGroup>
+            <h4 className="mb-4">Marks</h4>
+            <div>
+              <FormGroup row>
+                <Col xs={3} lg={2} >
+                  <Label for="markOverall" className="text-right">Overall</Label>
+                </Col>
+                <Col xs={9} lg={10} >
+                  <Field
+                    name="markOverall"
+                    component={ReactFormRating} 
+                    stop={5}
+                    full={<MdStar size={30} />}
+                    empty={<MdStarOutline size={30} />}
+                    style={styles.markRate}
+                  />
+                </Col>
+              </FormGroup>
+
+              <FormGroup row>
+                <Col xs={3} lg={2} >
+                  <Label for="markQuality" className="text-right">Quality</Label>
+                </Col>
+                <Col xs={9} lg={10} >
+                  <Field
+                    name="markQuality"
+                    component={ReactFormRating} 
+                    stop={5}
+                    full={<MdStar size={26} />}
+                    empty={<MdStarOutline size={26} />}
+                    style={styles.markRate}
+                  />
+                </Col>
+              </FormGroup>
+
+              <FormGroup row>
+                <Col xs={3} lg={2} >
+                  <Label for="markPlace" className="text-right">Place</Label>
+                </Col>
+                <Col xs={9} lg={10} >
+                  <Field
+                    name="markPlace"
+                    component={ReactFormRating} 
+                    stop={5}
+                    full={<MdStar size={26} />}
+                    empty={<MdStarOutline size={26} />}
+                    style={styles.markRate}
+                  />
+                </Col>
+              </FormGroup>
+
+              <FormGroup row>
+                <Col xs={3} lg={2} >
+                  <Label for="markStaff" className="text-right">Staff</Label>
+                </Col>
+                <Col xs={9} lg={10} >
+                  <Field
+                    name="markStaff"
+                    component={ReactFormRating} 
+                    stop={5}
+                    full={<MdStar size={26} />}
+                    empty={<MdStarOutline size={26} />}
+                    style={styles.markRate}
+                  />
+                </Col>
+              </FormGroup>
+            </div>
+          </FormGroup>
+
+          <Button type="submit" size="md">Add</Button>
+          <Button color="link" onClick={this.resetForm} size="md">Reset</Button>
+        </Form>
+      </Container>
+
+    );
+  }
+}
+
+
+
+/*
+
       <Container fluid>
 
         {this.state.alertStatus !== 0 && <Alert color={this.state.alertColor}>{this.state.alertMessage}</Alert>}
@@ -132,74 +214,6 @@ class Rate extends React.Component {
             <ListItemsContainer URL="/api/items" itemsPerPage={10} />
           </FormGroup>
 
-          <FormGroup>
-            <h4 className="mb-4">Marks</h4>
-            <div>
-              <FormGroup row>
-                <Col xs={3} lg={2} >
-                  <Label for="markOverall" className="text-right">Overall</Label>
-                </Col>
-                <Col xs={9} lg={10} >
-                  <Rating
-                    id="markOverall"
-                    stop={5}
-                    initialRate={4.5}
-                    full={<MdStar size={30} />}
-                    empty={<MdStarOutline size={30} />}
-                    style={styles.markRate}
-                  />
-                </Col>
-              </FormGroup>
-
-              <FormGroup row>
-                <Col xs={3} lg={2} >
-                  <Label for="markQuality" className="text-right">Quality</Label>
-                </Col>
-                <Col xs={9} lg={10} >
-                  <Rating
-                    id="markQuality"
-                    stop={5}
-                    initialRate={3}
-                    full={<MdStar size={26} />}
-                    empty={<MdStarOutline size={26} />}
-                    style={styles.markRate}
-                  />
-                </Col>
-              </FormGroup>
-
-              <FormGroup row>
-                <Col xs={3} lg={2} >
-                  <Label for="markPlace" className="text-right">Place</Label>
-                </Col>
-                <Col xs={9} lg={10} >
-                  <Rating
-                    id="markPlace"
-                    stop={5}
-                    initialRate={3}
-                    full={<MdStar size={26} />}
-                    empty={<MdStarOutline size={26} />}
-                    style={styles.markRate}
-                  />
-                </Col>
-              </FormGroup>
-
-              <FormGroup row>
-                <Col xs={3} lg={2} >
-                  <Label for="markStaff" className="text-right">Staff</Label>
-                </Col>
-                <Col xs={9} lg={10} >
-                  <Rating
-                    id="markStaff"
-                    stop={5}
-                    initialRate={3}
-                    full={<MdStar size={26} />}
-                    empty={<MdStarOutline size={26} />}
-                    style={styles.markRate}
-                  />
-                </Col>
-              </FormGroup>
-            </div>
-          </FormGroup>
 
 
 
@@ -207,18 +221,8 @@ class Rate extends React.Component {
           <Button color="link" onClick={this.resetForm} size="md">Reset</Button>
         </Form>
       </Container>
-    );
-  }
-}
 
-
-/*
-          <FormGroup>
-            <h4 className="mb-4">Where?</h4>
-            <SelectLocation />
-          </FormGroup>
-
-*/
+ */
 
 
 // Decorate the form component
