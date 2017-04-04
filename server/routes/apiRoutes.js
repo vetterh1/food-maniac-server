@@ -47,6 +47,7 @@ router.route('/items/:cuid').delete(ItemController.deleteItem);
 
 
 // ----------------  PLACES ----------------
+// Note: cuid is currently the google id
 
 // Get all places
 router.route('/places').get(PlaceController.getPlaces);

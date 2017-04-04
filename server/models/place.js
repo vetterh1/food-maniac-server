@@ -9,7 +9,7 @@ const placeSchema = new Schema({
   since: { type: 'Date', default: Date.now, required: true },
   lastModif: { type: 'Date', default: Date.now, required: true },
   items: [{ type: Schema.Types.ObjectId, ref: 'Item' }],
-  cuid: { type: 'String', required: true }
+  cuid: { type: 'String', required: true },	// google id!
 });
 
 // on every save, add the date

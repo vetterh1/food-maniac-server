@@ -44,6 +44,9 @@ export function addPlace(req, res) {
 
     // Let's sanitize inputs
     newPlace.name = sanitizeHtml(newPlace.name);
+
+    // If no id provided, generate one
+    // Note: normally, a google map id should be provided
     newPlace.cuid = cuid();
     newPlace.save((err, saved) => {
       if (err) {
