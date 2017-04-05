@@ -58,6 +58,9 @@ router.route('/places/:cuid').get(PlaceController.getPlace);
 // Add a new place
 router.route('/places').post(PlaceController.addPlace);
 
+// Add a new place (or update if already exists)
+router.route('/places/addOrUpdatePlace').post(PlaceController.addOrUpdatePlace);
+
 // Update a place by cuid
 router.route('/places/:cuid').post(PlaceController.updatePlace);
 

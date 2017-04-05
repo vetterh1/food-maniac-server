@@ -79,8 +79,8 @@ describe('API Places', () => {
         });
     });
 
-    it('it should succeed creating a complete place', (done) => {
-      const placeComplete = { name: 'testPostName' };
+    it('it should succeed creating a complete place (without id)', (done) => {
+      const placeComplete = { name: 'testPostNameNoId' };
       chai.request(app)
         .post('/api/places')
         .send({ place: placeComplete })
@@ -90,6 +90,23 @@ describe('API Places', () => {
           res.body.should.have.property('place');
           res.body.place.should.be.a('object');
           res.body.place.should.have.property('name').eql(placeComplete.name);
+          res.body.place.should.have.property('cuid').and.to.be.a('string');
+          done();
+        });
+    });
+
+    it('it should succeed creating a complete place (with id)', (done) => {
+      const placeComplete = { name: 'testPostNameWithId', cuid: 'cuidTestPostNameWithId' };
+      chai.request(app)
+        .post('/api/places')
+        .send({ place: placeComplete })
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('place');
+          res.body.place.should.be.a('object');
+          res.body.place.should.have.property('name').eql(placeComplete.name);
+          res.body.place.should.have.property('cuid').eql(placeComplete.cuid);
           done();
         });
     });
@@ -117,6 +134,85 @@ describe('API Places', () => {
         });
     });
   });  /* End test the /POST route */
+
+
+
+  /*
+  * Test the /POST addOrUpdatePlace route
+  */
+  describe('Place Add Or Update', () => {
+    it('it should fail creating an incomplete place', (done) => {
+      chai.request(app)
+        .post('/api/places/addOrUpdatePlace')
+        .send({ place: {} })
+        .end((err, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+
+    it('it should succeed creating a complete place (without id)', (done) => {
+      const placeComplete = { name: 'testAddOrUpdtNameNoId' };
+      chai.request(app)
+        .post('/api/places/addOrUpdatePlace')
+        .send({ place: placeComplete })
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('place');
+          res.body.place.should.be.a('object');
+          res.body.place.should.have.property('name').eql(placeComplete.name);
+          res.body.place.should.have.property('cuid').and.to.be.a('string');
+          done();
+        });
+    });
+
+    it('it should succeed creating a complete place (with id)', (done) => {
+      const placeComplete = { name: 'testAddOrUpdtNameWithId', cuid: 'cuidtestAddOrUpdtNameWithId' };
+      chai.request(app)
+        .post('/api/places/addOrUpdatePlace')
+        .send({ place: placeComplete })
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('place');
+          res.body.place.should.be.a('object');
+          res.body.place.should.have.property('name').eql(placeComplete.name);
+          res.body.place.should.have.property('cuid').eql(placeComplete.cuid);
+          done();
+        });
+    });
+
+    it('it should succeed creating an existing place', (done) => {
+      const place = new Place({ cuid: 'cuidTestAddOrUpdt2times', name: 'testAddOrUpdtname2times' });
+      const placeUpdt = { cuid: 'cuidTestAddOrUpdt2times', name: 'testAddOrUpdtname2times.2' };
+      place.save(() => {
+        chai.request(app)
+          .post('/api/places/addOrUpdatePlace')
+          .send({ place: placeUpdt })
+          .end((err2, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.should.have.property('place');
+            res.body.place.should.be.a('object');
+            res.body.place.should.have.property('name').eql(placeUpdt.name);
+            res.body.place.should.have.property('cuid').eql(placeUpdt.cuid);
+            done();
+          });
+      });
+    });
+
+    it('it should fail creating with wrong place info', (done) => {
+      chai.request(app)
+        .post('/api/places/addOrUpdatePlace')
+        .send({ WRONG_place: { name: 'testAddOrUpdtname' } })
+        .end((err, res) => {
+          res.should.have.status(400);
+          done();
+        });
+    });
+  });  /* End test the /POST addOrUpdatePlace route */
+
 
 
   /*
@@ -154,7 +250,7 @@ describe('API Places', () => {
       });
     });
 
-    it('it should fail updating an unknown place', (done) => {
+    it('it should fail updating an unknown place (default behavior)', (done) => {
       chai.request(app)
         .post('/api/places/cuidUpdateUnknownPlace')
         .send({ place: { name: 'newname' } })

@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import Item from './item';
 
 const Schema = mongoose.Schema;
 
@@ -9,11 +8,11 @@ const placeSchema = new Schema({
   since: { type: 'Date', default: Date.now, required: true },
   lastModif: { type: 'Date', default: Date.now, required: true },
   items: [{ type: Schema.Types.ObjectId, ref: 'Item' }],
-  cuid: { type: 'String', required: true },	// google id!
+  cuid: { type: 'String', required: true }, // google id!
 });
 
 // on every save, add the date
-placeSchema.pre('save', function(next) {
+placeSchema.pre('save', function (next) {
   this.lastModif = new Date();
   next();
 });

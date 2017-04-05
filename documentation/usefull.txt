@@ -50,7 +50,7 @@ ImageMagik:
 https://www.imagemagick.org/download/binaries/ImageMagick-7.0.4-7-Q16-x64-dll.exe
 
 ---------------------------------------------------------------
-                             BASICS
+                             MONGO
 ---------------------------------------------------------------
 
 -------------  Start DB ---------------
@@ -59,7 +59,26 @@ https://www.imagemagick.org/download/binaries/ImageMagick-7.0.4-7-Q16-x64-dll.ex
 
 	\mongodb\bin\mongod
 
+-------------  Windows Console ---------------
 
+c:\mongodb\bin\mongo
+
+-------------  List dbs & use ---------------
+show dbs
+use food_maniac_dev
+
+-------------  List collections & content ---------------
+show collections
+db.items.find()
+
+-------------  Change column name ---------------
+
+db.items.update({}, {$rename: {'cuid': 'id'}}, { upsert:false, multi:true } )
+
+
+---------------------------------------------------------------
+                             BASICS
+---------------------------------------------------------------
 
 
 

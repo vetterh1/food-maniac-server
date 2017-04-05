@@ -1,10 +1,10 @@
 import * as logger from 'winston';
-import Item from '../models/item';
 import cuid from 'cuid';
 import sanitizeHtml from 'sanitize-html';
 import fs from 'fs';
 import config from 'config';
 import path from 'path';
+import Item from '../models/item';
 import * as GenerateThumbnails from '../util/generateThumbnails';
 
 
