@@ -79,7 +79,7 @@ describe('API Places', () => {
         });
     });
 
-    it('it should succeed creating a complete place (without id)', (done) => {
+    it('it should succeed creating a simple place (without id)', (done) => {
       const placeComplete = { name: 'testPostNameNoId' };
       chai.request(app)
         .post('/api/places')
@@ -95,7 +95,7 @@ describe('API Places', () => {
         });
     });
 
-    it('it should succeed creating a complete place (with id)', (done) => {
+    it('it should succeed creating a simple place (with id)', (done) => {
       const placeComplete = { name: 'testPostNameWithId', cuid: 'cuidTestPostNameWithId' };
       chai.request(app)
         .post('/api/places')
@@ -107,6 +107,25 @@ describe('API Places', () => {
           res.body.place.should.be.a('object');
           res.body.place.should.have.property('name').eql(placeComplete.name);
           res.body.place.should.have.property('cuid').eql(placeComplete.cuid);
+          done();
+        });
+    });
+
+    it('it should succeed creating a place with coordinates', (done) => {
+      const placeComplete = { name: 'testPostNameNoId', location: { type: 'Point', coordinates: [40.73061, -73.935242] } };
+      chai.request(app)
+        .post('/api/places')
+        .send({ place: placeComplete })
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('place');
+          res.body.place.should.be.a('object');
+          res.body.place.should.have.property('name').eql(placeComplete.name);
+          res.body.place.should.have.property('cuid').and.to.be.a('string');
+          res.body.place.should.have.property('location').and.to.be.an('object');
+          res.body.place.location.should.have.property('type').eql('Point');
+          res.body.place.location.should.have.property('coordinates').eql([40.73061, -73.935242]);
           done();
         });
     });

@@ -4,10 +4,15 @@ const Schema = mongoose.Schema;
 
 const placeSchema = new Schema({
   name: { type: 'String', required: true },
-  location: { type: { type: String }, coordinates: [Number] },
+  location: {
+    type: { type: String, default: 'Point' },
+    coordinates: { type: [Number], default: [0, 0] },
+  },
   since: { type: 'Date', default: Date.now, required: true },
   lastModif: { type: 'Date', default: Date.now, required: true },
-  items: [{ type: Schema.Types.ObjectId, ref: 'Item' }],
+  items: [
+    { type: Schema.Types.ObjectId, ref: 'Item' },
+  ],
   cuid: { type: 'String', required: true }, // google id!
 });
 
