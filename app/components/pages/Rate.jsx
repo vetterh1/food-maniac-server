@@ -1,11 +1,9 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { Container, Col, Button, Label, Form, FormGroup, Alert } from 'reactstrap';
-import MdStar from 'react-icons/lib/md/star';
-import MdStarOutline from 'react-icons/lib/md/star-outline';
 import ReactFormRating from '../utils/ReactFormRating';
 import SelectLocation from '../utils/SelectLocation';
-// import ListItemsContainer from '../pages/ListItemsContainer';
+import ListItemsContainer from '../pages/ListItemsContainer';
 
 const styles = {
   form: {
@@ -110,6 +108,11 @@ class Rate extends React.Component {
           // model={defaultValues}
         >
           <FormGroup>
+            <h4 className="mb-4">What?</h4>
+            <ListItemsContainer URL="/api/items" itemsPerPage={10} carrousel={false} />
+          </FormGroup>
+
+          <FormGroup>
             <h4 className="mb-4">Where?</h4>
             <SelectLocation />
           </FormGroup>
@@ -124,10 +127,8 @@ class Rate extends React.Component {
                 <Col xs={9} lg={10} >
                   <Field
                     name="markOverall"
-                    component={ReactFormRating} 
-                    stop={5}
-                    full={<MdStar size={30} />}
-                    empty={<MdStarOutline size={30} />}
+                    component={ReactFormRating}
+                    size={30}
                     style={styles.markRate}
                   />
                 </Col>
@@ -140,10 +141,7 @@ class Rate extends React.Component {
                 <Col xs={9} lg={10} >
                   <Field
                     name="markQuality"
-                    component={ReactFormRating} 
-                    stop={5}
-                    full={<MdStar size={26} />}
-                    empty={<MdStarOutline size={26} />}
+                    component={ReactFormRating}
                     style={styles.markRate}
                   />
                 </Col>
@@ -156,10 +154,7 @@ class Rate extends React.Component {
                 <Col xs={9} lg={10} >
                   <Field
                     name="markPlace"
-                    component={ReactFormRating} 
-                    stop={5}
-                    full={<MdStar size={26} />}
-                    empty={<MdStarOutline size={26} />}
+                    component={ReactFormRating}
                     style={styles.markRate}
                   />
                 </Col>
@@ -172,10 +167,7 @@ class Rate extends React.Component {
                 <Col xs={9} lg={10} >
                   <Field
                     name="markStaff"
-                    component={ReactFormRating} 
-                    stop={5}
-                    full={<MdStar size={26} />}
-                    empty={<MdStarOutline size={26} />}
+                    component={ReactFormRating}
                     style={styles.markRate}
                   />
                 </Col>

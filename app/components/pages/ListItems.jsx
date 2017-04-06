@@ -1,7 +1,9 @@
 import React from 'react';
+import { Field } from 'redux-form';
 import Slider from 'react-slick';
-import MdLocalRestaurant from 'react-icons/lib/md/local-restaurant';
 import * as log from 'loglevel';
+import MdLocalRestaurant from 'react-icons/lib/md/local-restaurant';
+import reactFormInput from '../utils/reactFormInput';
 
 // import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // import Snackbar from 'material-ui/Snackbar';
@@ -80,6 +82,7 @@ class CarrouselOneItem extends React.Component {
 class ListItems extends React.Component {
   static propTypes = {
     carrousel: React.PropTypes.bool.isRequired,
+    dropdown: React.PropTypes.bool.isRequired,
     items: React.PropTypes.array.isRequired,
   }
 
@@ -176,12 +179,17 @@ class ListItems extends React.Component {
 
     return (
       <div>
-        { !this.props.carrousel &&
+        { !this.props.carrousel && !this.props.dropdown &&
           <ul>
             {this.props.items.map((item, index) => (
               <ListOneItem index={index} item={item} key={item._id} />
             ))}
           </ul>
+        }
+        { !this.props.carrousel && this.props.dropdown &&
+          <Field name="item" component={reactFormInput} type="select" size="md">
+            {this.props.items && this.props.items.map((item, index) => { return (<option key={item._id} value={item._id}>{item.name}</option>); })}
+          </Field>
         }
         { this.props.carrousel &&
           <div style={styles.carrousel} className="carrousel">

@@ -1,3 +1,5 @@
+/* eslint-disable react/forbid-prop-types */
+
 import React from 'react';
 import io from 'socket.io-client';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
@@ -134,11 +136,13 @@ class ListItemsContainer extends React.Component {
     initialIndexPagination: React.PropTypes.number,
     // Display a carrousel instead of a list. In this case, the itemsPerPage is NOT used
     carrousel: React.PropTypes.bool,
+    // Display a simple dropdown instead of a list. In this case, the itemsPerPage is NOT used
+    dropdown: React.PropTypes.bool,
     // Nb max of item to fetch. Ex: 10 -> will retreive max 10 items
     itemsPerPage: React.PropTypes.number,
   };
 
-  static defaultProps = { carrousel: true, itemsPerPage: 7, initialIndexPagination: 0 };
+  static defaultProps = { socketName: null, initialIndexPagination: 0, carrousel: false, dropdown: true, itemsPerPage: 7 };
 
   constructor(props) {
     super(props);
@@ -289,7 +293,7 @@ class ListItemsContainer extends React.Component {
               indexPagination={this.indexPagination}
             />
           }
-          <ListItems items={this.state.items} carrousel={this.props.carrousel} />
+          <ListItems items={this.state.items} carrousel={this.props.carrousel} dropdown={this.props.dropdown} />
         </div>
       </div>
     );

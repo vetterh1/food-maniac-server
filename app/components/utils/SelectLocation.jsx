@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import { Field } from 'redux-form';
 import { Col, FormGroup } from 'reactstrap';
 import * as log from 'loglevel';
-import Geolocation from './Geolocation';
-import reactFormSelect from './reactFormSelect';
+import Geolocation from '../utils/Geolocation';
+import reactFormInput from '../utils/reactFormInput';
 
 const logSelectLocation = log.getLogger('logSelectLocation');
 logSelectLocation.setLevel('warn');
@@ -20,7 +20,7 @@ const Listing = ({ places }) => {
 //  <AvField type="select" name="category" label="Category" size="lg">
 
   const result = (
-    <Field name="location" component={reactFormSelect} size="md">
+    <Field name="location" component={reactFormInput} type="select" size="md">
       {places && places.map((p) => { return (<option key={p.id} value={p.id}>{p.name}</option>); })}
     </Field>
   );
