@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 import Slider from 'react-slick';
 import * as log from 'loglevel';
 import MdLocalRestaurant from 'react-icons/lib/md/local-restaurant';
-import reactFormInput from '../utils/reactFormInput';
+import ReactFormInput from '../utils/ReactFormInput';
 
 // import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // import Snackbar from 'material-ui/Snackbar';
@@ -187,7 +187,7 @@ class ListItems extends React.Component {
           </ul>
         }
         { !this.props.carrousel && this.props.dropdown &&
-          <Field name="item" component={reactFormInput} type="select" size="md">
+          <Field name="item" component={ReactFormInput} type="select" size="md">
             {this.props.items && this.props.items.map((item, index) => { return (<option key={item._id} value={item._id}>{item.name}</option>); })}
           </Field>
         }
