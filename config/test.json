@@ -22,7 +22,7 @@
   
 	"log":
 	{
-		"levelConsole": "none",
+		"levelConsole": "debug",
 		"levelFile": "debug",
     "BoServer":
     {

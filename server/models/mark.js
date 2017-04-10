@@ -6,12 +6,15 @@ import User from './user';
 const Schema = mongoose.Schema;
 
 const markSchema = new Schema({
-  item: { type: Schema.Types.ObjectId, ref: 'Item' },
-  place: { type: Schema.Types.ObjectId, ref: 'Place' },
+  item: { type: Schema.Types.ObjectId, ref: 'Item', required: true },
+  place: { type: Schema.Types.ObjectId, ref: 'Place', required: true },
   user: { type: Schema.Types.ObjectId, ref: 'User' },
   since: { type: 'Date', default: Date.now, required: true },
   lastModif: { type: 'Date', default: Date.now, required: true },
-  mark: { type: 'Number', required: true },
+  marks: [{
+    name: { type: 'String', required: true },
+    value: { type: 'Number', required: true },
+  }],
   cuid: { type: 'String', required: true },
 });
 
