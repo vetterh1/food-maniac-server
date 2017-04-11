@@ -52,10 +52,10 @@ describe('API Marks', () => {
 
     it('it should list all the marks', (done) => {
       const marksList = [
-        { item: global.item1._id, place: global.place1._id, marks: [{ name: 'markOverall', value: 3 }], cuid: 'cuidTestMark1' },
-        { item: global.item1._id, place: global.place1._id, marks: [{ name: 'markOverall', value: 3 }], cuid: 'cuidTestMark2' },
-        { item: global.item1._id, place: global.place1._id, marks: [{ name: 'markOverall', value: 3 }], cuid: 'cuidTestMark3' },
-        { item: global.item1._id, place: global.place1._id, marks: [{ name: 'markOverall', value: 3 }], cuid: 'cuidTestMark4' },
+        { item: global.item1._id, place: global.place1._id, marks: [{ name: 'markOverall', value: 3 }] },
+        { item: global.item1._id, place: global.place1._id, marks: [{ name: 'markOverall', value: 3 }] },
+        { item: global.item1._id, place: global.place1._id, marks: [{ name: 'markOverall', value: 3 }] },
+        { item: global.item1._id, place: global.place1._id, marks: [{ name: 'markOverall', value: 3 }] },
       ];
       Mark.create(marksList, () => {
         chai.request(app)
@@ -106,7 +106,7 @@ describe('API Marks', () => {
     });
 
     it('it should fail creating an existing mark', (done) => {
-      const mark = new Mark({ cuid: 'cuidTestPost2times', item: global.item1._id, place: global.place1._id, marks: [{ name: 'markOverall', value: 3 }] });
+      const mark = new Mark({ item: global.item1._id, place: global.place1._id, marks: [{ name: 'markOverall', value: 3 }] });
       mark.save((err, markSaved) => {
         chai.request(app)
           .post('/api/marks')
@@ -131,7 +131,7 @@ describe('API Marks', () => {
 
 
   /*
-  * Test the /POST/:cuid route
+  * Test the /POST/:_id route
   */
   describe('Mark Update', () => {
     it('it should succeed updating a complete mark', (done) => {
@@ -189,11 +189,11 @@ describe('API Marks', () => {
           });
       });
     });
-  });  /* End test the /POST/:cuid route */
+  });  /* End test the /POST/:_id route */
 
 
   /*
-  * Test the /GET/:cuid route
+  * Test the /GET/:_id route
   */
   describe('Mark Retrieval', () => {
     it('it should fail finding an unknown mark', (done) => {
@@ -228,7 +228,7 @@ describe('API Marks', () => {
 
 
   /*
-  * Test the /DELETE/:cuid route
+  * Test the /DELETE/:_id route
   */
   describe('Mark Deletion', () => {
     it('it should fail deleting an unknown mark', (done) => {

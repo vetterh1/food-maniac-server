@@ -6,7 +6,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.css';
 import App from '../pages/App';
 import MainPageContent from '../pages/MainPageContent';
-import Rate from '../pages/Rate';
+import RateContainer from '../pages/RateContainer';
 import AddItemContainer from '../pages/AddItemContainer';
 import ListItemsContainer from '../pages/ListItemsContainer';
 import Login from '../pages/Login';
@@ -18,7 +18,7 @@ const Root = ({ store }) => (
     <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={MainPageContent} />
-        <Route path="/rate" component={Rate} />
+        <Route path="/rate" component={RateContainer} />
         <Route path="/search" component={AddItemContainer} />
         <Route path="/addItem" component={AddItemContainer} />
         <Route path="/login" component={Login} />

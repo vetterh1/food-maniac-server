@@ -71,10 +71,14 @@ use food_maniac_dev
 show collections
 db.items.find()
 
--------------  Change column name ---------------
-
+-------------  Change field name ---------------
 db.items.update({}, {$rename: {'cuid': 'id'}}, { upsert:false, multi:true } )
 
+-------------  Remove field ---------------
+db.items.update({},{$unset: {cuid:1}}, {multi: true})
+db.users.update({},{$unset: {cuid:1}}, {multi: true})
+db.marks.update({},{$unset: {cuid:1}}, {multi: true})
+db.places.update({},{$unset: {cuid:1}}, {multi: true})
 
 ---------------------------------------------------------------
                              BASICS
