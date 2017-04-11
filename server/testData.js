@@ -8,30 +8,30 @@ import User from './models/user';
 // import Mark from './models/mark';
 
 export const testUsers = [
-  new User({ login: 'testUser1', first: 'testFirst1', last: 'testLast1', mark: 0, cuid: 'cuidTestUser1' }),
-  new User({ login: 'testUser2', first: 'testFirst2', last: 'testLast2', mark: 0, cuid: 'cuidTestUser2' }),
-  new User({ login: 'testUser3', first: 'testFirst3', last: 'testLast3', mark: 0, cuid: 'cuidTestUser3' }),
+  new User({ login: 'testUser1', first: 'testFirst1', last: 'testLast1', mark: 0 }),
+  new User({ login: 'testUser2', first: 'testFirst2', last: 'testLast2', mark: 0 }),
+  new User({ login: 'testUser3', first: 'testFirst3', last: 'testLast3', mark: 0 }),
 ];
 
 export const testItems = [
-  new Item({ category: 'dish', kind: 'french', name: 'testItem1', cuid: 'cuidTestItem1', since: '2015-02-21T09:01:42.206Z', lastModif: '2015-02-21T09:01:42.206Z' }),
-  new Item({ category: 'dish', kind: 'italian', name: 'testItem2', cuid: 'cuidTestItem2', since: '2015-02-22T09:01:42.206Z', lastModif: '2015-02-21T09:01:42.206Z' }),
-  new Item({ category: 'dish', kind: 'mexican', name: 'testItem3', cuid: 'cuidTestItem3', since: '2015-02-23T09:01:42.206Z', lastModif: '2015-02-21T09:01:42.206Z' }),
-  new Item({ category: 'dessert', kind: 'other', name: 'testItem4', cuid: 'cuidTestItem4', since: '2015-02-24T09:01:42.206Z', lastModif: '2015-02-21T09:01:42.206Z' }),
-  new Item({ category: 'dessert', kind: 'other', name: 'testItem5', cuid: 'cuidTestItem5', since: '2015-02-25T09:01:42.206Z', lastModif: '2015-02-21T09:01:42.206Z' }),
-  new Item({ category: 'drink', kind: 'other', name: 'testItem6', cuid: 'cuidTestItem6', since: '2015-02-26T09:01:42.206Z', lastModif: '2015-02-21T09:01:42.206Z' }),
+  new Item({ category: 'dish', kind: 'french', name: 'testItem1', since: '2015-02-21T09:01:42.206Z', lastModif: '2015-02-21T09:01:42.206Z' }),
+  new Item({ category: 'dish', kind: 'italian', name: 'testItem2', since: '2015-02-22T09:01:42.206Z', lastModif: '2015-02-21T09:01:42.206Z' }),
+  new Item({ category: 'dish', kind: 'mexican', name: 'testItem3', since: '2015-02-23T09:01:42.206Z', lastModif: '2015-02-21T09:01:42.206Z' }),
+  new Item({ category: 'dessert', kind: 'other', name: 'testItem4', since: '2015-02-24T09:01:42.206Z', lastModif: '2015-02-21T09:01:42.206Z' }),
+  new Item({ category: 'dessert', kind: 'other', name: 'testItem5', since: '2015-02-25T09:01:42.206Z', lastModif: '2015-02-21T09:01:42.206Z' }),
+  new Item({ category: 'drink', kind: 'other', name: 'testItem6', since: '2015-02-26T09:01:42.206Z', lastModif: '2015-02-21T09:01:42.206Z' }),
 ];
 
 export const testPlaces = [
-  new Place({ name: 'testPlace1', cuid: 'cuidTestPlace1' }),
-  new Place({ name: 'testPlace2', cuid: 'cuidTestPlace2' }),
-  new Place({ name: 'testPlace3', cuid: 'cuidTestPlace3' }),
-  new Place({ name: 'testPlace4', cuid: 'cuidTestPlace4' }),
-  new Place({ name: 'testPlace5', cuid: 'cuidTestPlace5' }),
-  new Place({ name: 'testPlace6', cuid: 'cuidTestPlace6' }),
-  new Place({ name: 'testPlace7', cuid: 'cuidTestPlace7' }),
-  new Place({ name: 'testPlace8', cuid: 'cuidTestPlace8' }),
-  new Place({ name: 'testPlace9', cuid: 'cuidTestPlace9' }),
+  new Place({ name: 'testPlace1', googleMapId: 'googleMapIdTestPlace1' }),
+  new Place({ name: 'testPlace2', googleMapId: 'googleMapIdTestPlace2' }),
+  new Place({ name: 'testPlace3', googleMapId: 'googleMapIdTestPlace3' }),
+  new Place({ name: 'testPlace4', googleMapId: 'googleMapIdTestPlace4' }),
+  new Place({ name: 'testPlace5', googleMapId: 'googleMapIdTestPlace5' }),
+  new Place({ name: 'testPlace6', googleMapId: 'googleMapIdTestPlace6' }),
+  new Place({ name: 'testPlace7', googleMapId: 'googleMapIdTestPlace7' }),
+  new Place({ name: 'testPlace8', googleMapId: 'googleMapIdTestPlace8' }),
+  new Place({ name: 'testPlace9', googleMapId: 'googleMapIdTestPlace9' }),
 ];
 
 export default function insertTestData() {
