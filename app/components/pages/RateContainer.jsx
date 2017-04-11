@@ -74,12 +74,10 @@ class RateContainer extends React.Component {
       const mark = { 
         item: this.values.item,
         place: idLocation,
-        marks: [
-          { name: 'markOverall', value: this.values.markOverall },
-          { name: 'markFood', value: this.values.markFood },
-          { name: 'markPlace', value: this.values.markPlace },
-          { name: 'markStaff', value: this.values.markStaff },
-        ],
+        markOverall: this.values.markOverall,
+        markFood: this.values.markFood,
+        markPlace: this.values.markPlace,
+        markStaff: this.values.markStaff,
       };
       console.log('   mark: ', mark);
 

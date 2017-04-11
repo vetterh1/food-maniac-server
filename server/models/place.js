@@ -6,8 +6,8 @@ const placeSchema = new Schema({
   name: { type: 'String', required: true },
   googleMapId: { type: 'String', required: true },
   location: {
-    type: { type: String, default: 'Point' },
-    coordinates: { type: [Number], default: [0, 0] },
+    type: { type: 'String', default: 'Point' },
+    coordinates: { type: ['Number'], default: [0, 0] },
   },
   since: { type: 'Date', default: Date.now, required: true },
   lastModif: { type: 'Date', default: Date.now, required: true },

@@ -23,11 +23,11 @@ export function getMarks(req, res) {
  */
 
 export function addMark(req, res) {
-  if (!req.body || !req.body.mark || !req.body.mark.marks) {
+  if (!req.body || !req.body.mark || !req.body.mark.markOverall) {
     logger.error('! markController.addMark failed! - missing mandatory fields');
     if (!req.body) logger.error('... no req.body!');
     if (req.body && !req.body.mark) logger.error('... no req.body.mark!');
-    if (req.body && req.body.mark && !req.body.mark.marks) logger.error('... no req.body.mark.marks!');
+    if (req.body && req.body.mark && !req.body.mark.markOverall) logger.error('... no req.body.mark.markOverall!');
     res.status(400).end();
   } else {
     const newMark = new Mark(req.body.mark);
