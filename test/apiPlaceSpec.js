@@ -28,7 +28,7 @@ describe('API Places', () => {
   * Test the /GET route
   */
   describe('Places list', () => {
-    it('it should return an empty list whent no place', (done) => {
+    it('it should return an empty list when no place', (done) => {
       chai.request(app)
         .get('/api/places')
         .end((err, res) => {
@@ -41,15 +41,15 @@ describe('API Places', () => {
 
     it('it should list all the places', (done) => {
       const placesList = [
-        { name: 'testPlace1', cuid: 'cuidTestPlace1' },
-        { name: 'testPlace2', cuid: 'cuidTestPlace2' },
-        { name: 'testPlace3', cuid: 'cuidTestPlace3' },
-        { name: 'testPlace4', cuid: 'cuidTestPlace4' },
-        { name: 'testPlace5', cuid: 'cuidTestPlace5' },
-        { name: 'testPlace6', cuid: 'cuidTestPlace6' },
-        { name: 'testPlace7', cuid: 'cuidTestPlace7' },
-        { name: 'testPlace8', cuid: 'cuidTestPlace8' },
-        { name: 'testPlace9', cuid: 'cuidTestPlace9' },
+        { name: 'testPlace1', googleMapId: 'googleMapIdTestPlace1' },
+        { name: 'testPlace2', googleMapId: 'googleMapIdTestPlace2' },
+        { name: 'testPlace3', googleMapId: 'googleMapIdTestPlace3' },
+        { name: 'testPlace4', googleMapId: 'googleMapIdTestPlace4' },
+        { name: 'testPlace5', googleMapId: 'googleMapIdTestPlace5' },
+        { name: 'testPlace6', googleMapId: 'googleMapIdTestPlace6' },
+        { name: 'testPlace7', googleMapId: 'googleMapIdTestPlace7' },
+        { name: 'testPlace8', googleMapId: 'googleMapIdTestPlace8' },
+        { name: 'testPlace9', googleMapId: 'googleMapIdTestPlace9' },
       ];
       Place.create(placesList, () => {
         chai.request(app)
@@ -72,15 +72,15 @@ describe('API Places', () => {
     it('it should fail creating an incomplete place', (done) => {
       chai.request(app)
         .post('/api/places')
-        .send({ place: {} })
+        .send({ place: { name: 'testPostIncompletePlace' } })
         .end((err, res) => {
           res.should.have.status(400);
           done();
         });
     });
 
-    it('it should succeed creating a simple place (without id)', (done) => {
-      const placeComplete = { name: 'testPostNameNoId' };
+    it('it should succeed creating a simple place', (done) => {
+      const placeComplete = { name: 'testPostSimplePlace', googleMapId: 'googleMapIdTestPostSimplePlace' };
       chai.request(app)
         .post('/api/places')
         .send({ place: placeComplete })
@@ -90,13 +90,14 @@ describe('API Places', () => {
           res.body.should.have.property('place');
           res.body.place.should.be.a('object');
           res.body.place.should.have.property('name').eql(placeComplete.name);
-          res.body.place.should.have.property('cuid').and.to.be.a('string');
+          res.body.place.should.have.property('googleMapId').and.to.be.a('string');
+          res.body.place.should.have.property('googleMapId').eql(placeComplete.googleMapId);
           done();
         });
     });
 
-    it('it should succeed creating a simple place (with id)', (done) => {
-      const placeComplete = { name: 'testPostNameWithId', cuid: 'cuidTestPostNameWithId' };
+    it('it should succeed creating a complete place (with coordinates)', (done) => {
+      const placeComplete = { name: 'testPostCompletePlace', googleMapId: 'googleMapIdTestPostCompletePlace', location: { type: 'Point', coordinates: [40.73061, -73.935242] } };
       chai.request(app)
         .post('/api/places')
         .send({ place: placeComplete })
@@ -106,23 +107,8 @@ describe('API Places', () => {
           res.body.should.have.property('place');
           res.body.place.should.be.a('object');
           res.body.place.should.have.property('name').eql(placeComplete.name);
-          res.body.place.should.have.property('cuid').eql(placeComplete.cuid);
-          done();
-        });
-    });
-
-    it('it should succeed creating a place with coordinates', (done) => {
-      const placeComplete = { name: 'testPostNameNoId', location: { type: 'Point', coordinates: [40.73061, -73.935242] } };
-      chai.request(app)
-        .post('/api/places')
-        .send({ place: placeComplete })
-        .end((err, res) => {
-          res.should.have.status(200);
-          res.body.should.be.a('object');
-          res.body.should.have.property('place');
-          res.body.place.should.be.a('object');
-          res.body.place.should.have.property('name').eql(placeComplete.name);
-          res.body.place.should.have.property('cuid').and.to.be.a('string');
+          res.body.place.should.have.property('googleMapId').and.to.be.a('string');
+          res.body.place.should.have.property('googleMapId').eql(placeComplete.googleMapId);
           res.body.place.should.have.property('location').and.to.be.an('object');
           res.body.place.location.should.have.property('type').eql('Point');
           res.body.place.location.should.have.property('coordinates').eql([40.73061, -73.935242]);
@@ -131,7 +117,7 @@ describe('API Places', () => {
     });
 
     it('it should fail creating an existing place', (done) => {
-      const place = new Place({ cuid: 'cuidTestPost2times', name: 'testPostname2times' });
+      const place = new Place({ googleMapId: 'googleMapIdTestPost2times', name: 'testPostname2times' });
       place.save((err, placeSaved) => {
         chai.request(app)
           .post('/api/places')
@@ -146,7 +132,7 @@ describe('API Places', () => {
     it('it should fail creating with wrong place info', (done) => {
       chai.request(app)
         .post('/api/places')
-        .send({ WRONG_place: { name: 'testPostname' } })
+        .send({ WRONG_place: { googleMapId: 'googleMapIdTestPostWrongInfo', name: 'testPostname' } })
         .end((err, res) => {
           res.should.have.status(400);
           done();
@@ -157,23 +143,23 @@ describe('API Places', () => {
 
 
   /*
-  * Test the /POST addOrUpdatePlace route
+  * Test the /POST addOrUpdatePlaceByGoogleMapId route
   */
   describe('Place Add Or Update', () => {
     it('it should fail creating an incomplete place', (done) => {
       chai.request(app)
-        .post('/api/places/addOrUpdatePlace')
-        .send({ place: {} })
+        .post('/api/places/addOrUpdatePlaceByGoogleMapId')
+        .send({ place: { name: 'testPostIncompletePlace' } })
         .end((err, res) => {
           res.should.have.status(400);
           done();
         });
     });
 
-    it('it should succeed creating a complete place (without id)', (done) => {
-      const placeComplete = { name: 'testAddOrUpdtNameNoId' };
+    it('it should succeed creating a simple place', (done) => {
+      const placeComplete = { name: 'testPostSimplePlace', googleMapId: 'googleMapIdTestPostSimplePlace' };
       chai.request(app)
-        .post('/api/places/addOrUpdatePlace')
+        .post('/api/places/addOrUpdatePlaceByGoogleMapId')
         .send({ place: placeComplete })
         .end((err, res) => {
           res.should.have.status(200);
@@ -181,15 +167,16 @@ describe('API Places', () => {
           res.body.should.have.property('place');
           res.body.place.should.be.a('object');
           res.body.place.should.have.property('name').eql(placeComplete.name);
-          res.body.place.should.have.property('cuid').and.to.be.a('string');
+          res.body.place.should.have.property('googleMapId').and.to.be.a('string');
+          res.body.place.should.have.property('googleMapId').eql(placeComplete.googleMapId);
           done();
         });
     });
 
-    it('it should succeed creating a complete place (with id)', (done) => {
-      const placeComplete = { name: 'testAddOrUpdtNameWithId', cuid: 'cuidtestAddOrUpdtNameWithId' };
+    it('it should succeed creating a complete place (with coordinates)', (done) => {
+      const placeComplete = { name: 'testPostCompletePlace', googleMapId: 'googleMapIdTestPostCompletePlace', location: { type: 'Point', coordinates: [40.73061, -73.935242] } };
       chai.request(app)
-        .post('/api/places/addOrUpdatePlace')
+        .post('/api/places/addOrUpdatePlaceByGoogleMapId')
         .send({ place: placeComplete })
         .end((err, res) => {
           res.should.have.status(200);
@@ -197,17 +184,21 @@ describe('API Places', () => {
           res.body.should.have.property('place');
           res.body.place.should.be.a('object');
           res.body.place.should.have.property('name').eql(placeComplete.name);
-          res.body.place.should.have.property('cuid').eql(placeComplete.cuid);
+          res.body.place.should.have.property('googleMapId').and.to.be.a('string');
+          res.body.place.should.have.property('googleMapId').eql(placeComplete.googleMapId);
+          res.body.place.should.have.property('location').and.to.be.an('object');
+          res.body.place.location.should.have.property('type').eql('Point');
+          res.body.place.location.should.have.property('coordinates').eql([40.73061, -73.935242]);
           done();
         });
     });
 
     it('it should succeed creating an existing place', (done) => {
-      const place = new Place({ cuid: 'cuidTestAddOrUpdt2times', name: 'testAddOrUpdtname2times' });
-      const placeUpdt = { cuid: 'cuidTestAddOrUpdt2times', name: 'testAddOrUpdtname2times.2' };
+      const place = new Place({ googleMapId: 'googleMapIdTestAddOrUpdt2times', name: 'testAddOrUpdtname2times' });
+      const placeUpdt = { googleMapId: 'googleMapIdTestAddOrUpdt2times', name: 'testAddOrUpdtname2times.2' };
       place.save(() => {
         chai.request(app)
-          .post('/api/places/addOrUpdatePlace')
+          .post('/api/places/addOrUpdatePlaceByGoogleMapId')
           .send({ place: placeUpdt })
           .end((err2, res) => {
             res.should.have.status(200);
@@ -215,7 +206,7 @@ describe('API Places', () => {
             res.body.should.have.property('place');
             res.body.place.should.be.a('object');
             res.body.place.should.have.property('name').eql(placeUpdt.name);
-            res.body.place.should.have.property('cuid').eql(placeUpdt.cuid);
+            res.body.place.should.have.property('googleMapId').eql(placeUpdt.googleMapId);
             done();
           });
       });
@@ -223,27 +214,27 @@ describe('API Places', () => {
 
     it('it should fail creating with wrong place info', (done) => {
       chai.request(app)
-        .post('/api/places/addOrUpdatePlace')
-        .send({ WRONG_place: { name: 'testAddOrUpdtname' } })
+        .post('/api/places/addOrUpdatePlaceByGoogleMapId')
+        .send({ WRONG_place: { googleMapId: 'googleMapIdTestAddOrUpdtWrong', name: 'testAddOrUpdtWrong' } })
         .end((err, res) => {
           res.should.have.status(400);
           done();
         });
     });
-  });  /* End test the /POST addOrUpdatePlace route */
+  });  /* End test the /POST addOrUpdatePlaceByGoogleMapId route */
 
 
 
   /*
-  * Test the /POST/:cuid route
+  * Test the /POST/:googleMapId route
   */
   describe('Place Update', () => {
     it('it should succeed updating a complete place', (done) => {
-      const placeOrig = new Place({ cuid: 'cuidUpdate1', name: 'testnameUpdate1' });
+      const placeOrig = new Place({ googleMapId: 'googleMapIdUpdate1', name: 'testnameUpdate1' });
       const placeUpdt = { name: 'testnameUpdate1.2' };
-      placeOrig.save(() => {
+      placeOrig.save((errSaving, placeSaved) => {
         chai.request(app)
-          .post('/api/places/cuidUpdate1')
+          .post(`/api/places/id/${placeSaved._id}`)
           .send({ place: placeUpdt })
           .end((err, res) => {
             res.should.have.status(200);
@@ -256,12 +247,12 @@ describe('API Places', () => {
       });
     });
 
-    it('it should fail updating the cuid', (done) => {
-      const placeOrig = new Place({ cuid: 'cuidUpdateCuid', name: 'testnameUpdateCuid' });
-      placeOrig.save(() => {
+    it('it should fail updating the _id', (done) => {
+      const placeOrig = new Place({ googleMapId: 'cuidUpdateCuid', name: 'testnameUpdateCuid' });
+      placeOrig.save((errSaving, placeSaved) => {
         chai.request(app)
-          .post('/api/places/cuidUpdateCuid')
-          .send({ place: { cuid: 'cuidUpdateCuid2' } })
+          .post(`/api/places/id/${placeSaved._id}`)
+          .send({ place: { _id: 'cuidUpdateId2' } })
           .end((err, res) => {
             res.should.have.status(400);
             done();
@@ -271,7 +262,7 @@ describe('API Places', () => {
 
     it('it should fail updating an unknown place (default behavior)', (done) => {
       chai.request(app)
-        .post('/api/places/cuidUpdateUnknownPlace')
+        .post('/api/places/id/58aaa000888555aaabdafda2')
         .send({ place: { name: 'newname' } })
         .end((err, res) => {
           res.should.have.status(500);
@@ -280,10 +271,10 @@ describe('API Places', () => {
     });
 
     it('it should fail updating with wrong place info', (done) => {
-      const placeOrig = new Place({ cuid: 'cuidUpdateIncomplete', name: 'testNameUpdateIncomplete' });
-      placeOrig.save(() => {
+      const placeOrig = new Place({ googleMapId: 'cuidUpdateIncomplete', name: 'testNameUpdateIncomplete' });
+      placeOrig.save((errSaving, placeSaved) => {
         chai.request(app)
-          .post('/api/places/cuidUpdateIncomplete')
+          .post(`/api/places/id/${placeSaved._id}`)
           .send({ WRONG_place: { name: 'newName' } })
           .end((err, res) => {
             res.should.have.status(400);
@@ -291,7 +282,7 @@ describe('API Places', () => {
           });
       });
     });
-  });  /* End test the /POST/:cuid route */
+  });  /* End test the /POST/:googleMapId route */
 
 
   /*
@@ -300,7 +291,7 @@ describe('API Places', () => {
   describe('Place Retrieval', () => {
     it('it should fail finding an unknown place', (done) => {
       chai.request(app)
-        .get('/api/places/cuidTestUnknownPlace')
+        .get('/api/places/id/58aaa000888555aaabdafda9')
         .send({})
         .end((err, res) => {
           res.should.have.status(500);
@@ -309,22 +300,24 @@ describe('API Places', () => {
     });
 
     it('it should find an existing place', (done) => {
-      const place = new Place({ cuid: 'cuidTestRetreive', name: 'testRetreiveName' });
+      const place = new Place({ googleMapId: 'googleMapIdTestRetreive', name: 'testRetreiveName' });
       place.save((err, placeSaved) => {
         chai.request(app)
-          .get('/api/places/cuidTestRetreive')
+          .get(`/api/places/id/${placeSaved._id}`)
           .send({})
           .end((err2, res) => {
             res.should.have.status(200);
             res.body.should.be.a('object');
             res.body.should.have.property('place');
             res.body.place.should.be.a('object');
-            res.body.place.should.have.property('name').eql(placeSaved.name);
+            res.body.place.should.have.property('googleMapId').eql(place.googleMapId);
+            res.body.place.should.have.property('name').eql(place.name);
             done();
           });
       });
     });
-  });
+  });  /* End test the /GET/:cuid route */
+
 
   /*
   * Test the /DELETE/:cuid route
@@ -332,7 +325,7 @@ describe('API Places', () => {
   describe('Place Deletion', () => {
     it('it should fail deleting an unknown place', (done) => {
       chai.request(app)
-        .delete('/api/places/cuidTestDeleteUnknown')
+        .delete('/api/places/id/58aaa000888555aaabdafda9')
         .send({})
         .end((err, res) => {
           res.should.have.status(500);
@@ -341,10 +334,10 @@ describe('API Places', () => {
     });
 
     it('it should delete an existing place', (done) => {
-      const place = new Place({ cuid: 'cuidTestDelete', name: 'testDeleteName' });
-      place.save(() => {
+      const place = new Place({ googleMapId: 'googleMapIdTestDelete', name: 'testDeleteName' });
+      place.save((errSaving, placeSaved) => {
         chai.request(app)
-          .delete('/api/places/cuidTestDelete')
+          .delete(`/api/places/id/${placeSaved._id}`)
           .send({})
           .end((err, res) => {
             res.should.have.status(200);

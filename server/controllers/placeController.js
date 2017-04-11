@@ -1,5 +1,4 @@
 import * as logger from 'winston';
-import cuid from 'cuid';
 import sanitizeHtml from 'sanitize-html';
 import Place from '../models/place';
 
@@ -25,11 +24,12 @@ export function getPlaces(req, res) {
  */
 
 export function addPlace(req, res) {
-  if (!req.body || !req.body.place || !req.body.place.name) {
+  if (!req.body || !req.body.place || !req.body.place.name || !req.body.place.googleMapId) {
     logger.error('! placeController.addPlace failed! - missing mandatory fields');
     if (!req.body) logger.error('... no req.body!');
     if (req.body && !req.body.place) logger.error('... no req.body.place!');
     if (req.body && req.body.place && !req.body.place.name) logger.error('... no req.body.place.name!');
+    if (req.body && req.body.place && !req.body.place.googleMapId) logger.error('... no req.body.place.googleMapId!');
     res.status(400).end();
   } else {
     const newPlace = new Place(req.body.place);
@@ -37,17 +37,13 @@ export function addPlace(req, res) {
     // Let's sanitize inputs
     newPlace.name = sanitizeHtml(newPlace.name);
 
-    // If no id provided, generate one
-    // Note: normally, a google map id should be provided
-    if (!newPlace.cuid) newPlace.cuid = cuid();
-
     newPlace.save((err, saved) => {
       if (err) {
-        logger.error(`! placeController.addPlace ${newPlace.name} failed! - err = `, err);
+        logger.error(`! placeController.addPlace ${newPlace.name} (googleMapId=${newPlace.googleMapId}) failed! - err = `, err);
         res.status(500).send(err);
       } else {
         res.json({ place: saved });
-        logger.info(`placeController.addPlace ${newPlace.name} (cuid=${newPlace.cuid})`);
+        logger.info(`placeController.addPlace ${newPlace.name} (googleMapId=${saved.googleMapId}) (_id=${saved._id})`);
       }
     });
   }
@@ -59,12 +55,13 @@ export function addPlace(req, res) {
  * Add a place (or update if already exists)
  */
 
-export function addOrUpdatePlace(req, res) {
-  if (!req.body || !req.body.place || !req.body.place.name) {
-    logger.error('! placeController.addOrUpdatePlace failed! - missing mandatory fields');
+export function addOrUpdatePlaceByGoogleMapId(req, res) {
+  if (!req.body || !req.body.place || !req.body.place.name || !req.body.place.googleMapId) {
+    logger.error('! placeController.addOrUpdatePlaceByGoogleMapId failed! - missing mandatory fields');
     if (!req.body) logger.error('... no req.body!');
     if (req.body && !req.body.place) logger.error('... no req.body.place!');
     if (req.body && req.body.place && !req.body.place.name) logger.error('... no req.body.place.name!');
+    if (req.body && req.body.place && !req.body.place.googleMapId) logger.error('... no req.body.place.googleMapId!');
     res.status(400).end();
   } else {
     const newPlace = Object.assign({}, req.body.place, { lastModif: new Date() });
@@ -72,17 +69,13 @@ export function addOrUpdatePlace(req, res) {
     // Let's sanitize inputs
     newPlace.name = sanitizeHtml(newPlace.name);
 
-    // If no id provided, generate one
-    // Note: normally, a google map id should be provided
-    if (!newPlace.cuid) newPlace.cuid = cuid();
-
-    Place.findOneAndUpdate({ cuid: newPlace.cuid }, newPlace, { new: true, upsert: true }, (err, place) => {
+    Place.findOneAndUpdate({ googleMapId: newPlace.googleMapId }, newPlace, { new: true, upsert: true }, (err, place) => {
       if (err || !place) {
-        logger.error(`! placeController.addOrUpdatePlace ${newPlace.cuid} failed to update! - err = `, err);
+        logger.error(`! placeController.addOrUpdatePlaceByGoogleMapId ${newPlace.name} (googleMapId=${newPlace.googleMapId}) failed to update! - err = `, err);
         res.status(500).send(err);
       } else {
         res.json({ place });
-        logger.info(`placeController.addOrUpdatePlace ${newPlace.cuid}`);
+        logger.info(`placeController.addOrUpdatePlaceByGoogleMapId ${place.name} (googleMapId=${place.googleMapId}) (_id=${place._id})`);
       }
     });
   }
@@ -93,13 +86,28 @@ export function addOrUpdatePlace(req, res) {
  * Get a single place
  */
 export function getPlace(req, res) {
-  Place.findOne({ cuid: req.params.cuid }).exec((err, place) => {
+  Place.findById(req.params._id).exec((err, place) => {
     if (err || !place) {
-      logger.error(`! placeController.getPlace ${req.params.cuid} failed to find! - err = `, err);
+      logger.error(`! placeController.getPlace ${req.params._id} failed to find! - err = `, err);
       res.status(500).send(err);
     } else {
       res.json({ place });
-      logger.info(`placeController.getPlace ${req.params.cuid}`);
+      logger.info(`placeController.getPlace ${place.name} (_id=${req.params._id})`);
+    }
+  });
+}
+
+/**
+ * Get a single place by Google Map Id
+ */
+export function getPlaceByGoogleMapId(req, res) {
+  Place.findOne({ googleMapId: req.params.googleMapId }).exec((err, place) => {
+    if (err || !place) {
+      logger.error(`! placeController.getPlaceByGoogleMapId ${req.params.googleMapId} failed to find! - err = `, err);
+      res.status(500).send(err);
+    } else {
+      res.json({ place });
+      logger.info(`placeController.getPlaceByGoogleMapId ${req.params.googleMapId}`);
     }
   });
 }
@@ -114,21 +122,21 @@ export function updatePlace(req, res) {
     if (!req.body) error.message += '... no req.body!';
     if (req.body && !req.body.place) error.message += '... no req.body.place!';
     res.status(400).json(error);
-  } else if (req.body && req.body.place && req.body.place.cuid) {
-    res.status(400).json({ status: 'error', message: '! placeController.updatePlace failed! - cuid cannot be changed' });
+  } else if (req.body && req.body.place && req.body.place._id) {
+    res.status(400).json({ status: 'error', message: '! placeController.updatePlace failed! - _id cannot be changed' });
   } else {
     const placeUpdate = Object.assign({}, req.body.place, { lastModif: new Date() });
 
     // Let's sanitize inputs
     if (placeUpdate.name) placeUpdate.name = sanitizeHtml(placeUpdate.name);
 
-    Place.findOneAndUpdate({ cuid: req.params.cuid }, placeUpdate, { new: true }, (err, place) => {
+    Place.findOneAndUpdate({ _id: req.params._id }, placeUpdate, { new: true }, (err, place) => {
       if (err || !place) {
-        logger.error(`! placeController.updatePlace ${req.params.cuid} failed to update! - err = `, err);
+        logger.error(`! placeController.updatePlace ${req.params._id} failed to update! - err = `, err);
         res.status(500).send(err);
       } else {
         res.json({ place });
-        logger.info(`placeController.updatePlace ${req.params.cuid}`);
+        logger.info(`placeController.updatePlace ${req.params._id}`);
       }
     });
   }
@@ -140,18 +148,18 @@ export function updatePlace(req, res) {
  * Delete a place
  */
 export function deletePlace(req, res) {
-  Place.findOne({ cuid: req.params.cuid }).exec((err, place) => {
+  Place.findOne({ _id: req.params._id }).exec((err, place) => {
     if (err || !place) {
-      logger.error(`! placeController.deletePlace ${req.params.cuid} failed to find! - err = `, err);
+      logger.error(`! placeController.deletePlace ${req.params._id} failed to find! - err = `, err);
       res.status(500).send(err);
     } else {
       place.remove(() => {
         if (err) {
-          logger.error(`! placeController.deletePlace ${req.params.cuid} failed to remove! - err = `, err);
+          logger.error(`! placeController.deletePlace ${req.params._id} failed to remove! - err = `, err);
           res.status(500).send(err);
         } else {
           res.status(200).end();
-          logger.info(`placeController.deletePlace ${req.params.cuid}`);
+          logger.info(`placeController.deletePlace ${req.params._id}`);
         }
       });
     }

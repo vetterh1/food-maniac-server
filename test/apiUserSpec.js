@@ -27,7 +27,7 @@ describe('API Users', () => {
   * Test the /GET route
   */
   describe('Users list', () => {
-    it('it should return an empty list whent no user', (done) => {
+    it('it should return an empty list when no user', (done) => {
       chai.request(app)
         .get('/api/users')
         .end((err, res) => {
@@ -40,11 +40,11 @@ describe('API Users', () => {
 
     it('it should list all the users', (done) => {
       const usersList = [
-        { cuid: 'cuid1', login: 'testLogin1', first: 'testFirst1', last: 'testLast1' },
-        { cuid: 'cuid2', login: 'testLogin2', first: 'testFirst2', last: 'testLast2' },
-        { cuid: 'cuid3', login: 'testLogin3', first: 'testFirst3', last: 'testLast3' },
-        { cuid: 'cuid4', login: 'testLogin4', first: 'testFirst4', last: 'testLast4' },
-        { cuid: 'cuid5', login: 'testLogin5', first: 'testFirst5', last: 'testLast5' },
+        { login: 'testLogin1', first: 'testFirst1', last: 'testLast1' },
+        { login: 'testLogin2', first: 'testFirst2', last: 'testLast2' },
+        { login: 'testLogin3', first: 'testFirst3', last: 'testLast3' },
+        { login: 'testLogin4', first: 'testFirst4', last: 'testLast4' },
+        { login: 'testLogin5', first: 'testFirst5', last: 'testLast5' },
       ];
       User.create(usersList, () => {
         chai.request(app)
@@ -92,11 +92,11 @@ describe('API Users', () => {
     });
 
     it('it should fail creating an existing user', (done) => {
-      const user = new User({ cuid: 'cuidTestPost2times', login: 'testPostLogin2times', first: 'testPostFirst2times', last: 'testPostLast2times' });
-      user.save((err, user2) => {
+      const user = new User({ login: 'testPostLogin2times', first: 'testPostFirst2times', last: 'testPostLast2times' });
+      user.save((err, userSaved) => {
         chai.request(app)
           .post('/api/users')
-          .send({ user: user2 })
+          .send({ user: userSaved })
           .end((err2, res) => {
             res.should.have.status(500);
             done();
@@ -121,11 +121,11 @@ describe('API Users', () => {
   */
   describe('User Update', () => {
     it('it should succeed updating a complete user', (done) => {
-      const userOrig = new User({ cuid: 'cuidUpdate1', login: 'testLoginUpdate1', first: 'testFirstUpdate1', last: 'testLastUpdate1' });
+      const userOrig = new User({ login: 'testLoginUpdate1', first: 'testFirstUpdate1', last: 'testLastUpdate1' });
       const userUpdt = { login: 'testLoginUpdate1.2', first: 'testFirstUpdate1.2', last: 'testLastUpdate1.2' };
-      userOrig.save(() => {
+      userOrig.save((errSaving, userSaved) => {
         chai.request(app)
-          .post('/api/users/cuidUpdate1')
+          .post(`/api/users/id/${userSaved._id}`)
           .send({ user: userUpdt })
           .end((err, res) => {
             res.should.have.status(200);
@@ -140,12 +140,12 @@ describe('API Users', () => {
       });
     });
 
-    it('it should fail updating the cuid', (done) => {
-      const userOrig = new User({ cuid: 'cuidUpdateCuid', login: 'testLoginUpdateCuid', first: 'testFirstUpdateCuid', last: 'testLastUpdateCuid' });
-      userOrig.save(() => {
+    it('it should fail updating _id', (done) => {
+      const userOrig = new User({ login: 'testLoginUpdateCuid', first: 'testFirstUpdateCuid', last: 'testLastUpdateCuid' });
+      userOrig.save((errSaving, userSaved) => {
         chai.request(app)
-          .post('/api/users/cuidUpdateCuid')
-          .send({ user: { cuid: 'cuidUpdateCuid2' } })
+          .post(`/api/users/id/${userSaved._id}`)
+          .send({ user: { _id: '58aaa000888555aaabdaf444' } })
           .end((err, res) => {
             res.should.have.status(400);
             done();
@@ -155,7 +155,7 @@ describe('API Users', () => {
 
     it('it should fail updating an unknown user', (done) => {
       chai.request(app)
-        .post('/api/users/cuidUpdateUnknownUser')
+        .post('/api/users/id/58aaa000888555aaabdafddd')
         .send({ user: { login: 'newLogin' } })
         .end((err, res) => {
           res.should.have.status(500);
@@ -167,7 +167,7 @@ describe('API Users', () => {
       const userOrig = new User({ cuid: 'cuidUpdateIncomplete', login: 'testLoginUpdateIncomplete', first: 'testFirstUpdateIncomplete', last: 'testLastUpdateIncomplete' });
       userOrig.save(() => {
         chai.request(app)
-          .post('/api/users/cuidUpdateIncomplete')
+          .post('/api/users/id/58aaa000888555aaabdafddd')
           .send({ WRONG_user: { login: 'newLogin' } })
           .end((err, res) => {
             res.should.have.status(400);
@@ -184,7 +184,7 @@ describe('API Users', () => {
   describe('User Retrieval', () => {
     it('it should fail finding an unknown user', (done) => {
       chai.request(app)
-        .get('/api/users/cuidTestUnknownUser')
+        .get('/api/users/id/58aaa000888555aaabdaf666')
         .send({})
         .end((err, res) => {
           res.should.have.status(500);
@@ -196,15 +196,15 @@ describe('API Users', () => {
       const user = new User({ cuid: 'cuidTestRetreive', login: 'testRetreiveLogin', first: 'testRetreiveFirst', last: 'testRetreiveLast' });
       user.save((err, userSaved) => {
         chai.request(app)
-          .get('/api/users/cuidTestRetreive')
+          .get(`/api/users/id/${userSaved._id}`)
           .end((err2, res) => {
             res.should.have.status(200);
             res.body.should.be.a('object');
             res.body.should.have.property('user');
             res.body.user.should.be.a('object');
-            res.body.user.should.have.property('login').eql(userSaved.login);
-            res.body.user.should.have.property('first').eql(userSaved.first);
-            res.body.user.should.have.property('last').eql(userSaved.last);
+            res.body.user.should.have.property('login').eql(user.login);
+            res.body.user.should.have.property('first').eql(user.first);
+            res.body.user.should.have.property('last').eql(user.last);
             done();
           });
       });
@@ -217,7 +217,7 @@ describe('API Users', () => {
   describe('User Deletion', () => {
     it('it should fail deleteing an unknown user', (done) => {
       chai.request(app)
-        .delete('/api/users/cuidTestDeleteUnknown')
+        .delete('/api/users/id/58aaa000888555aaabdafff9')
         .end((err, res) => {
           res.should.have.status(500);
           done();
@@ -226,9 +226,9 @@ describe('API Users', () => {
 
     it('it should delete an existing user', (done) => {
       const user = new User({ cuid: 'cuidTestDelete', login: 'testDeleteLogin', first: 'testDeleteFirst', last: 'testDeleteLast' });
-      user.save(() => {
+      user.save((errSaving, userSaved) => {
         chai.request(app)
-          .delete('/api/users/cuidTestDelete')
+          .delete(`/api/users/id/${userSaved._id}`)
           .end((err, res) => {
             res.should.have.status(200);
             done();

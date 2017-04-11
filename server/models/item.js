@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-var mongoosePaginate = require('mongoose-paginate');
+
+const mongoosePaginate = require('mongoose-paginate');
 
 const Schema = mongoose.Schema;
 
@@ -10,7 +11,6 @@ const itemSchema = new Schema({
   picture: { type: 'String' }, // just an id here. the pic is stored externally in a folder (ex: storage/picture/items)
   since: { type: 'Date', default: Date.now, required: true },
   lastModif: { type: 'Date', default: Date.now, required: true },
-  cuid: { type: 'String', required: true },
 });
 itemSchema.plugin(mongoosePaginate);
 

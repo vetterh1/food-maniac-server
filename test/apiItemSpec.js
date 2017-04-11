@@ -41,9 +41,9 @@ describe('API Items', () => {
 
     it('it should count the items', (done) => {
       const itemsList = [
-        { category: 'testCat1', kind: 'testKind1', name: 'testItem1', cuid: 'cuidTestItem1' },
-        { category: 'testCat1', kind: 'testKind1', name: 'testItem2', cuid: 'cuidTestItem2' },
-        { category: 'testCat1', kind: 'testKind2', name: 'testItem3', cuid: 'cuidTestItem3' },
+        { category: 'testCat1', kind: 'testKind1', name: 'testItem1' },
+        { category: 'testCat1', kind: 'testKind1', name: 'testItem2' },
+        { category: 'testCat1', kind: 'testKind2', name: 'testItem3' },
       ];
       Item.create(itemsList, () => {
         chai.request(app)
@@ -76,19 +76,19 @@ describe('API Items', () => {
     it('it should list all the items', (done) => {
       const itemsList = [
         // Index 11 (last) in results as it's order by most recent
-        { category: 'testCat1', kind: 'testKind1', name: 'testItem1', cuid: 'cuidTestItem1', since: '2017-01-01T00:00:01' },
-        { category: 'testCat1', kind: 'testKind1', name: 'testItem2', cuid: 'cuidTestItem2', since: '2017-01-01T00:00:02' },
-        { category: 'testCat1', kind: 'testKind2', name: 'testItem3', cuid: 'cuidTestItem3', since: '2017-01-01T00:00:03' },
-        { category: 'testCat1', kind: 'testKind2', name: 'testItem4', cuid: 'cuidTestItem4', since: '2017-01-01T00:00:04' },
-        { category: 'testCat1', kind: 'testKind3', name: 'testItem5', cuid: 'cuidTestItem5', since: '2017-01-01T00:00:05' },
-        { category: 'testCat1', kind: 'testKind3', name: 'testItem6', cuid: 'cuidTestItem6', since: '2017-01-01T00:00:06' },
-        { category: 'testCat2', kind: 'testKind1', name: 'testItem7', cuid: 'cuidTestItem7', since: '2017-01-01T00:00:07' },
-        { category: 'testCat2', kind: 'testKind1', name: 'testItem8', cuid: 'cuidTestItem8', since: '2017-01-01T00:00:08' },
-        { category: 'testCat2', kind: 'testKind2', name: 'testItem9', cuid: 'cuidTestItem9', since: '2017-01-01T00:00:09' },
-        { category: 'testCat2', kind: 'testKind2', name: 'testItem10', cuid: 'cuidTestItem10', since: '2017-01-01T00:00:10' },
-        { category: 'testCat2', kind: 'testKind3', name: 'testItem11', cuid: 'cuidTestItem11', since: '2017-01-01T00:00:11' },
+        { category: 'testCat1', kind: 'testKind1', name: 'testItem1', since: '2017-01-01T00:00:01' },
+        { category: 'testCat1', kind: 'testKind1', name: 'testItem2', since: '2017-01-01T00:00:02' },
+        { category: 'testCat1', kind: 'testKind2', name: 'testItem3', since: '2017-01-01T00:00:03' },
+        { category: 'testCat1', kind: 'testKind2', name: 'testItem4', since: '2017-01-01T00:00:04' },
+        { category: 'testCat1', kind: 'testKind3', name: 'testItem5', since: '2017-01-01T00:00:05' },
+        { category: 'testCat1', kind: 'testKind3', name: 'testItem6', since: '2017-01-01T00:00:06' },
+        { category: 'testCat2', kind: 'testKind1', name: 'testItem7', since: '2017-01-01T00:00:07' },
+        { category: 'testCat2', kind: 'testKind1', name: 'testItem8', since: '2017-01-01T00:00:08' },
+        { category: 'testCat2', kind: 'testKind2', name: 'testItem9', since: '2017-01-01T00:00:09' },
+        { category: 'testCat2', kind: 'testKind2', name: 'testItem10', since: '2017-01-01T00:00:10' },
+        { category: 'testCat2', kind: 'testKind3', name: 'testItem11', since: '2017-01-01T00:00:11' },
         // Index 0 (first) in results as it's order by most recent
-        { category: 'testCat2', kind: 'testKind3', name: 'testItem12', cuid: 'cuidTestItem12', since: '2017-01-01T00:00:12' },
+        { category: 'testCat2', kind: 'testKind3', name: 'testItem12', since: '2017-01-01T00:00:12' },
       ];
       Item.create(itemsList, () => {
         chai.request(app)
@@ -105,19 +105,19 @@ describe('API Items', () => {
 
     it('it should return paginated items', (done) => {
       const itemsList = [
-        { category: 'testCat1', kind: 'testKind1', name: 'testItem1', cuid: 'cuidTestItem1', since: '2017-01-01T00:00:01' },
-        { category: 'testCat1', kind: 'testKind1', name: 'testItem2', cuid: 'cuidTestItem2', since: '2017-01-01T00:00:02' },
-        { category: 'testCat1', kind: 'testKind2', name: 'testItem3', cuid: 'cuidTestItem3', since: '2017-01-01T00:00:03' },
-        { category: 'testCat1', kind: 'testKind2', name: 'testItem4', cuid: 'cuidTestItem4', since: '2017-01-01T00:00:04' },
-        { category: 'testCat1', kind: 'testKind3', name: 'testItem5', cuid: 'cuidTestItem5', since: '2017-01-01T00:00:05' },
-        { category: 'testCat1', kind: 'testKind3', name: 'testItem6', cuid: 'cuidTestItem6', since: '2017-01-01T00:00:06' },
-        { category: 'testCat2', kind: 'testKind1', name: 'testItem7', cuid: 'cuidTestItem7', since: '2017-01-01T00:00:07' },
-        { category: 'testCat2', kind: 'testKind1', name: 'testItem8', cuid: 'cuidTestItem8', since: '2017-01-01T00:00:08' },
-        { category: 'testCat2', kind: 'testKind2', name: 'testItem9', cuid: 'cuidTestItem9', since: '2017-01-01T00:00:09' },
-        { category: 'testCat2', kind: 'testKind2', name: 'testItem10', cuid: 'cuidTestItem10', since: '2017-01-01T00:00:10' },
+        { category: 'testCat1', kind: 'testKind1', name: 'testItem1', since: '2017-01-01T00:00:01' },
+        { category: 'testCat1', kind: 'testKind1', name: 'testItem2', since: '2017-01-01T00:00:02' },
+        { category: 'testCat1', kind: 'testKind2', name: 'testItem3', since: '2017-01-01T00:00:03' },
+        { category: 'testCat1', kind: 'testKind2', name: 'testItem4', since: '2017-01-01T00:00:04' },
+        { category: 'testCat1', kind: 'testKind3', name: 'testItem5', since: '2017-01-01T00:00:05' },
+        { category: 'testCat1', kind: 'testKind3', name: 'testItem6', since: '2017-01-01T00:00:06' },
+        { category: 'testCat2', kind: 'testKind1', name: 'testItem7', since: '2017-01-01T00:00:07' },
+        { category: 'testCat2', kind: 'testKind1', name: 'testItem8', since: '2017-01-01T00:00:08' },
+        { category: 'testCat2', kind: 'testKind2', name: 'testItem9', since: '2017-01-01T00:00:09' },
+        { category: 'testCat2', kind: 'testKind2', name: 'testItem10', since: '2017-01-01T00:00:10' },
         // /api/items/2/3 : Pagination starts at here and goes 'up' as it's order by most recent (and only for 3 items)
-        { category: 'testCat2', kind: 'testKind3', name: 'testItem11', cuid: 'cuidTestItem11', since: '2017-01-01T00:00:11' },
-        { category: 'testCat2', kind: 'testKind3', name: 'testItem12', cuid: 'cuidTestItem12', since: '2017-01-01T00:00:12' },
+        { category: 'testCat2', kind: 'testKind3', name: 'testItem11', since: '2017-01-01T00:00:11' },
+        { category: 'testCat2', kind: 'testKind3', name: 'testItem12', since: '2017-01-01T00:00:12' },
       ];
       Item.create(itemsList, () => {
         chai.request(app)
@@ -164,11 +164,11 @@ describe('API Items', () => {
     });
 
     it('it should fail creating an existing item', (done) => {
-      const item = new Item({ cuid: 'cuidTestPost2times', category: 'testCat1', kind: 'testKind1', name: 'testPostname2times' });
-      item.save((err, item2) => {
+      const item = new Item({ category: 'testCat1', kind: 'testKind1', name: 'testPostname2times' });
+      item.save((err, itemSaved) => {
         chai.request(app)
           .post('/api/items')
-          .send({ item: item2 })
+          .send({ item: itemSaved })
           .end((err2, res) => {
             res.should.have.status(500);
             done();
@@ -193,11 +193,11 @@ describe('API Items', () => {
   */
   describe('Item Update', () => {
     it('it should succeed updating a complete item', (done) => {
-      const itemOrig = new Item({ cuid: 'cuidUpdate1', category: 'testCat1', kind: 'testKind1', name: 'testnameUpdate1' });
+      const itemOrig = new Item({ category: 'testCat1', kind: 'testKind1', name: 'testnameUpdate1' });
       const itemUpdt = { name: 'testnameUpdate1.2' };
-      itemOrig.save(() => {
+      itemOrig.save((errSaving, itemSaved) => {
         chai.request(app)
-          .post('/api/items/cuidUpdate1')
+          .post(`/api/items/id/${itemSaved._id}`)
           .send({ item: itemUpdt })
           .end((err, res) => {
             res.should.have.status(200);
@@ -210,12 +210,12 @@ describe('API Items', () => {
       });
     });
 
-    it('it should fail updating the cuid', (done) => {
-      const itemOrig = new Item({ cuid: 'cuidUpdateCuid', name: 'testnameUpdateCuid' });
-      itemOrig.save(() => {
+    it('it should fail updating the _id', (done) => {
+      const itemOrig = new Item({ category: 'testCat1', kind: 'testKind1', name: 'testnameUpdateId' });
+      itemOrig.save((errSaving, itemSaved) => {
         chai.request(app)
-          .post('/api/items/cuidUpdateCuid')
-          .send({ item: { cuid: 'cuidUpdateCuid2' } })
+          .post(`/api/items/id/${itemSaved._id}`)
+          .send({ item: { _id: '58aaa000888555aaabdaf777' } })
           .end((err, res) => {
             res.should.have.status(400);
             done();
@@ -225,7 +225,7 @@ describe('API Items', () => {
 
     it('it should fail updating an unknown item', (done) => {
       chai.request(app)
-        .post('/api/items/cuidUpdateUnknownItem')
+        .post('/api/items/id/58aaa000888555aaabdaf888')
         .send({ item: { name: 'newname' } })
         .end((err, res) => {
           res.should.have.status(500);
@@ -234,10 +234,10 @@ describe('API Items', () => {
     });
 
     it('it should fail updating with wrong item info', (done) => {
-      const itemOrig = new Item({ cuid: 'cuidUpdateincomplete', name: 'testNameUpdateincomplete' });
-      itemOrig.save(() => {
+      const itemOrig = new Item({ category: 'testCat1', kind: 'testKind1', name: 'testNameUpdateincomplete' });
+      itemOrig.save((errSaving, itemSaved) => {
         chai.request(app)
-          .post('/api/items/cuidUpdateincomplete')
+          .post(`/api/items/id/${itemSaved._id}`)
           .send({ WRONG_item: { name: 'newName' } })
           .end((err, res) => {
             res.should.have.status(400);
@@ -254,32 +254,33 @@ describe('API Items', () => {
   describe('Item Retrieval', () => {
     it('it should fail finding an unknown item', (done) => {
       chai.request(app)
-        .get('/api/items/cuidTestUnknownItem')
+        .get('/api/items/id/58aaa000888555aaabdafda0')
         .send({})
         .end((err, res) => {
-          res.should.have.status(200);
-          res.body.items.should.be.a('array');
-          res.body.items.length.should.be.eql(0);
+          res.should.have.status(500);
           done();
         });
     });
 
     it('it should find an existing item', (done) => {
-      const item = new Item({ cuid: 'cuidTestRetreive', category: 'testCat1', kind: 'testKind1', name: 'testRetreiveName' });
-      item.save(() => {
+      const item = new Item({ category: 'testCat1', kind: 'testKind1', name: 'testRetreiveName' });
+      item.save((errSaving, itemSaved) => {
         chai.request(app)
-          .get('/api/items/cuidTestRetreive')
+          .get(`/api/items/id/${itemSaved._id}`)
           .send({})
-          .end((err2, res2) => {
-            res2.should.have.status(200);
-            res2.body.items.should.be.a('array');
-            res2.body.items.length.should.be.eql(1);
+          .end((err2, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.should.have.property('item');
+            res.body.item.should.be.a('object');
+            res.body.item.should.have.property('category').eql(item.category);
+            res.body.item.should.have.property('kind').eql(item.kind);
+            res.body.item.should.have.property('name').eql(item.name);
             done();
           });
       });
     });
-  });
-
+  });  /* End test the /GET/:cuid route */
 
 
   /*
@@ -288,7 +289,7 @@ describe('API Items', () => {
   describe('Item Deletion', () => {
     it('it should fail deleting an unknown item', (done) => {
       chai.request(app)
-        .delete('/api/items/cuidTestDeleteUnknown')
+        .delete('/api/items/id/58aaa000888555aaabdafda0')
         .send({})
         .end((err, res) => {
           res.should.have.status(500);
@@ -297,10 +298,10 @@ describe('API Items', () => {
     });
 
     it('it should delete an existing item', (done) => {
-      const item = new Item({ cuid: 'cuidTestDelete', category: 'testCat1', kind: 'testKind1', name: 'testDeleteName' });
-      item.save(() => {
+      const item = new Item({ category: 'testCat1', kind: 'testKind1', name: 'testDeleteName' });
+      item.save((errSaving, itemSaved) => {
         chai.request(app)
-          .delete('/api/items/cuidTestDelete')
+          .delete(`/api/items/id/${itemSaved._id}`)
           .send({})
           .end((err, res) => {
             res.should.have.status(200);
@@ -310,3 +311,4 @@ describe('API Items', () => {
     });
   });
 });   /* Items */
+

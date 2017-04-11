@@ -15,7 +15,6 @@ const markSchema = new Schema({
     name: { type: 'String', required: true },
     value: { type: 'Number', required: true },
   }],
-  cuid: { type: 'String', required: true },
 });
 
 // on every save, add the date

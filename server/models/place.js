@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const placeSchema = new Schema({
   name: { type: 'String', required: true },
+  googleMapId: { type: 'String', required: true },
   location: {
     type: { type: String, default: 'Point' },
     coordinates: { type: [Number], default: [0, 0] },
@@ -13,7 +14,6 @@ const placeSchema = new Schema({
   items: [
     { type: Schema.Types.ObjectId, ref: 'Item' },
   ],
-  cuid: { type: 'String', required: true }, // google id!
 });
 
 // on every save, add the date

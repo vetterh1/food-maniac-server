@@ -81,7 +81,6 @@ export function addItem(req, res) {
     newItem.kind = sanitizeHtml(newItem.kind).toLowerCase();
     newItem.name = sanitizeHtml(newItem.name);
     newItem.picture = cuid(); // generate a random number for the file name
-    newItem.cuid = cuid();
     newItem.save((err, saved) => {
       if (err) {
         logger.error(`! itemController.addItem ${newItem.name} failed - _id: ${newItem._id} - name: ${newItem.name} - category: ${newItem.category} - kind: ${newItem.kind} - err:`, err);
@@ -128,13 +127,13 @@ export function addItem(req, res) {
  * Get a single item
  */
 export function getItem(req, res) {
-  Item.findOne({ cuid: req.params.cuid }).exec((err, item) => {
+  Item.findById(req.params._id).exec((err, item) => {
     if (err || !item) {
-      logger.error(`! itemController.getItem ${req.params.cuid} failed to find! - err = `, err);
+      logger.error(`! itemController.getItem ${req.params._id} failed to find! - err = `, err);
       res.status(500).send(err);
     } else {
       res.json({ item });
-      logger.info(`itemController.getItem ${req.params.cuid}`);
+      logger.info(`itemController.getItem ${item.name} (_id=${req.params._id})`);
     }
   });
 }
@@ -149,16 +148,16 @@ export function updateItem(req, res) {
     if (!req.body) error.message += '... no req.body!';
     if (req.body && !req.body.item) error.message += '... no req.body.item!';
     res.status(400).json(error);
-  } else if (req.body && req.body.item && req.body.item.cuid) {
-    res.status(400).json({ status: 'error', message: '! itemController.updateItem failed! - cuid cannot be changed' });
+  } else if (req.body && req.body.item && req.body.item._id) {
+    res.status(400).json({ status: 'error', message: '! itemController.updateItem failed! - _id cannot be changed' });
   } else {
-    Item.findOneAndUpdate({ cuid: req.params.cuid }, req.body.item, { new: true }, (err, item) => {
+    Item.findOneAndUpdate({ _id: req.params._id }, req.body.item, { new: true }, (err, item) => {
       if (err || !item) {
-        logger.error(`! itemController.updateItem ${req.params.cuid} failed to update! - err = `, err);
+        logger.error(`! itemController.updateItem ${req.params._id} failed to update! - err = `, err);
         res.status(500).send(err);
       } else {
         res.json({ item });
-        logger.info(`itemController.updateItem ${req.params.cuid}`);
+        logger.info(`itemController.updateItem ${req.params._id}`);
       }
     });
   }
@@ -169,21 +168,18 @@ export function updateItem(req, res) {
  * Delete a item
  */
 export function deleteItem(req, res) {
-  Item.findOne({ cuid: req.params.cuid }).exec((err, item) => {
+  Item.findOne({ _id: req.params._id }).exec((err, item) => {
     if (err || !item) {
-      logger.error(`! placeController.deleteItem ${req.params.cuid} failed to find! - err = `, err);
+      logger.error(`! placeController.deleteItem ${req.params._id} failed to find! - err = `, err);
       res.status(500).send(err);
-    }
-    else
-    {
+    } else {
       item.remove(() => {
         if (err) {
-          logger.error(`! placeController.deleteItem ${req.params.cuid} failed to remove! - err = `, err);
+          logger.error(`! placeController.deleteItem ${req.params._id} failed to remove! - err = `, err);
           res.status(500).send(err);
-        }
-        else {
+        } else {
           res.status(200).end();
-          logger.info(`placeController.deleteItem ${req.params.cuid}`);
+          logger.info(`placeController.deleteItem ${req.params._id}`);
         }
       });
     }

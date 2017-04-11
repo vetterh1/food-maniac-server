@@ -1,5 +1,4 @@
 import * as logger from 'winston';
-import cuid from 'cuid';
 import Mark from '../models/mark';
 
 
@@ -33,14 +32,13 @@ export function addMark(req, res) {
   } else {
     const newMark = new Mark(req.body.mark);
 
-    newMark.cuid = cuid();
     newMark.save((err, saved) => {
       if (err) {
         logger.error(`! markController.addMark ${newMark.mark} failed! - err = `, err);
         res.status(500).send(err);
       } else {
         res.json({ mark: saved });
-        logger.info(`markController.addMark cuid=${saved.cuid}`);
+        logger.info(`markController.addMark (_id=${saved._id})`);
       }
     });
   }
@@ -51,13 +49,13 @@ export function addMark(req, res) {
  * Get a single mark
  */
 export function getMark(req, res) {
-  Mark.findOne({ cuid: req.params.cuid }).exec((err, mark) => {
+  Mark.findById(req.params._id).exec((err, mark) => {
     if (err || !mark) {
-      logger.error(`! markController.getMark ${req.params.cuid} failed to find! - err = `, err);
+      logger.error(`! markController.getMark ${req.params._id} failed to find! - err = `, err);
       res.status(500).send(err);
     } else {
       res.json({ mark });
-      logger.info(`markController.getMark ${req.params.cuid}`);
+      logger.info(`markController.getMark (_id=${req.params._id})`);
     }
   });
 }
@@ -72,16 +70,16 @@ export function updateMark(req, res) {
     if (!req.body) error.message += '... no req.body!';
     if (req.body && !req.body.mark) error.message += '... no req.body.mark!';
     res.status(400).json(error);
-  } else if (req.body && req.body.mark && req.body.mark.cuid) {
-    res.status(400).json({ status: 'error', message: '! markController.updateMark failed! - cuid cannot be changed' });
+  } else if (req.body && req.body.mark && req.body.mark._id) {
+    res.status(400).json({ status: 'error', message: '! markController.updateMark failed! - _id cannot be changed' });
   } else {
-    Mark.findOneAndUpdate({ cuid: req.params.cuid }, req.body.mark, { new: true }, (err, mark) => {
+    Mark.findOneAndUpdate({ _id: req.params._id }, req.body.mark, { new: true }, (err, mark) => {
       if (err || !mark) {
-        logger.error(`! markController.updateMark ${req.params.cuid} failed to update! - err = `, err);
+        logger.error(`! markController.updateMark ${req.params._id} failed to update! - err = `, err);
         res.status(500).send(err);
       } else {
         res.json({ mark });
-        logger.info(`markController.updateMark ${req.params.cuid}`);
+        logger.info(`markController.updateMark ${req.params._id}`);
       }
     });
   }
@@ -92,18 +90,18 @@ export function updateMark(req, res) {
  * Delete a mark
  */
 export function deleteMark(req, res) {
-  Mark.findOne({ cuid: req.params.cuid }).exec((err, mark) => {
+  Mark.findOne({ _id: req.params._id }).exec((err, mark) => {
     if (err || !mark) {
-      logger.error(`! placeController.deleteMark ${req.params.cuid} failed to find! - err = `, err);
+      logger.error(`! placeController.deleteMark ${req.params._id} failed to find! - err = `, err);
       res.status(500).send(err);
     } else {
       mark.remove(() => {
         if (err) {
-          logger.error(`! placeController.deleteMark ${req.params.cuid} failed to remove! - err = `, err);
+          logger.error(`! placeController.deleteMark ${req.params._id} failed to remove! - err = `, err);
           res.status(500).send(err);
         } else {
           res.status(200).end();
-          logger.info(`placeController.deleteMark ${req.params.cuid}`);
+          logger.info(`placeController.deleteMark ${req.params._id}`);
         }
       });
     }

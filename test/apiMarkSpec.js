@@ -22,9 +22,9 @@ describe('API Marks', () => {
     Mark.remove({})
     .then(() => { return Item.remove({}); }, () => { console.log('error on removing marks'); })
     .then(() => { return Place.remove({}); }, () => { console.log('error on removing items'); })
-    .then(() => { return Item.create({ category: 'testCat1', kind: 'testKind1', name: 'globalItem1', cuid: 'cuidGlobalItem1' }); },
+    .then(() => { return Item.create({ category: 'testCat1', kind: 'testKind1', name: 'globalItem1' }); },
       () => { console.log('error on removing places'); })
-    .then((item1) => { global.item1 = item1; return Place.create({ name: 'globalPlace1', cuid: 'cuidGlobalPlace1' }); },
+    .then((item1) => { global.item1 = item1; return Place.create({ name: 'globalPlace1', googleMapId: 'googleMapIdGlobalPlace1' }); },
       () => { console.log('error on creating global item'); })
     .then((place1) => {
       global.place1 = place1;
@@ -99,7 +99,7 @@ describe('API Marks', () => {
           res.body.mark.should.be.a('object');
           res.body.mark.should.have.property('marks');
           res.body.mark.marks.should.be.a('array');
-          res.body.mark.marks.length.should.be.eql(markComplete.marks.length);          
+          res.body.mark.marks.length.should.be.eql(markComplete.marks.length);
           res.body.mark.marks[0].should.have.property('name').eql(markComplete.marks[0].name);
           done();
         });
@@ -135,11 +135,11 @@ describe('API Marks', () => {
   */
   describe('Mark Update', () => {
     it('it should succeed updating a complete mark', (done) => {
-      const markOrig = new Mark({ cuid: 'cuidUpdate1', item: global.item1._id, place: global.place1._id, marks: [{ name: 'markOverall', value: 3 }] });
+      const markOrig = new Mark({ item: global.item1._id, place: global.place1._id, marks: [{ name: 'markOverall', value: 3 }] });
       const markUpdt = { marks: [{ name: 'markOverall', value: 1 }] };
-      markOrig.save(() => {
+      markOrig.save((errSaving, markSaved) => {
         chai.request(app)
-          .post('/api/marks/cuidUpdate1')
+          .post(`/api/marks/id/${markSaved._id}`)
           .send({ mark: markUpdt })
           .end((err, res) => {
             res.should.have.status(200);
@@ -154,12 +154,12 @@ describe('API Marks', () => {
       });
     });
 
-    it('it should fail updating the cuid', (done) => {
-      const markOrig = new Mark({ cuid: 'cuidUpdateCuid', marks: [{ name: 'markOverall', value: 1 }] });
-      markOrig.save(() => {
+    it('it should fail updating the _id', (done) => {
+      const markOrig = new Mark({ item: global.item1._id, place: global.place1._id, marks: [{ name: 'markOverall', value: 3 }] });
+      markOrig.save((errSaving, markSaved) => {
         chai.request(app)
-          .post('/api/marks/cuidUpdateCuid')
-          .send({ mark: { cuid: 'cuidUpdateCuid2' } })
+          .post(`/api/marks/id/${markSaved._id}`)
+          .send({ mark: { _id: '58aaa000888555aaabda2227' } })
           .end((err, res) => {
             res.should.have.status(400);
             done();
@@ -169,7 +169,7 @@ describe('API Marks', () => {
 
     it('it should fail updating an unknown mark', (done) => {
       chai.request(app)
-        .post('/api/marks/cuidUpdateUnknownMark')
+        .post('/api/marks/id/58aaa000888555aaabda2221')
         .send({ mark: { marks: [{ name: 'markOverall', value: 1 }] } })
         .end((err, res) => {
           res.should.have.status(500);
@@ -178,10 +178,10 @@ describe('API Marks', () => {
     });
 
     it('it should fail updating with wrong mark info', (done) => {
-      const markOrig = new Mark({ cuid: 'cuidUpdateIncomplete', item: global.item1._id, place: global.place1._id, marks: [{ name: 'markOverall', value: 3 }] });
-      markOrig.save(() => {
+      const markOrig = new Mark({ item: global.item1._id, place: global.place1._id, marks: [{ name: 'markOverall', value: 3 }] });
+      markOrig.save((errSaving, itemSaved) => {
         chai.request(app)
-          .post('/api/marks/cuidUpdateIncomplete')
+          .post(`/api/items/id/${itemSaved._id}`)
           .send({ WRONG_mark: { marks: [{ name: 'markOverall', value: 1 }] } })
           .end((err, res) => {
             res.should.have.status(400);
@@ -198,7 +198,7 @@ describe('API Marks', () => {
   describe('Mark Retrieval', () => {
     it('it should fail finding an unknown mark', (done) => {
       chai.request(app)
-        .get('/api/marks/cuidTestUnknownMark')
+        .get('/api/marks/id/58aaa000888555aaabdafbbb')
         .send({})
         .end((err, res) => {
           res.should.have.status(500);
@@ -207,10 +207,10 @@ describe('API Marks', () => {
     });
 
     it('it should find an existing mark', (done) => {
-      const mark = new Mark({ cuid: 'cuidTestRetreive', item: global.item1._id, place: global.place1._id, marks: [{ name: 'markOverall', value: 3 }] });
+      const mark = new Mark({ item: global.item1._id, place: global.place1._id, marks: [{ name: 'markOverall', value: 3 }] });
       mark.save((err, markSaved) => {
         chai.request(app)
-          .get('/api/marks/cuidTestRetreive')
+          .get(`/api/marks/id/${markSaved._id}`)
           .send({})
           .end((err2, res) => {
             res.should.have.status(200);
@@ -219,7 +219,7 @@ describe('API Marks', () => {
             res.body.mark.should.be.a('object');
             res.body.mark.should.have.property('marks');
             res.body.mark.marks[0].should.have.property('name').eql(markSaved.marks[0].name);
-            res.body.mark.marks.length.should.be.eql(markSaved.marks.length);            
+            res.body.mark.marks.length.should.be.eql(markSaved.marks.length);
             done();
           });
       });
@@ -233,7 +233,7 @@ describe('API Marks', () => {
   describe('Mark Deletion', () => {
     it('it should fail deleting an unknown mark', (done) => {
       chai.request(app)
-        .delete('/api/marks/cuidTestDeleteUnknown')
+        .delete('/api/marks/id/58aaa000888555aaabdaf555')
         .send({})
         .end((err, res) => {
           res.should.have.status(500);
@@ -242,10 +242,10 @@ describe('API Marks', () => {
     });
 
     it('it should delete an existing mark', (done) => {
-      const mark = new Mark({ cuid: 'cuidTestDelete', item: global.item1._id, place: global.place1._id, marks: [{ name: 'markOverall', value: 3 }] });
-      mark.save(() => {
+      const mark = new Mark({ item: global.item1._id, place: global.place1._id, marks: [{ name: 'markOverall', value: 3 }] });
+      mark.save((errSaving, markSaved) => {
         chai.request(app)
-          .delete('/api/marks/cuidTestDelete')
+          .delete(`/api/marks/id/${markSaved._id}`)
           .send({})
           .end((err, res) => {
             res.should.have.status(200);
