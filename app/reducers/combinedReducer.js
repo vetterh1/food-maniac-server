@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
-import coordinates from './coordinatesReducer';
-// import forms from './formsReducer';
+import coordinatesReducer from './coordinatesReducer';
+import placesReducer from './placesReducer';
 
 const combinedReducer = combineReducers({
-  coordinates,
-  // forms,
+  coordinates: coordinatesReducer,
+  places: placesReducer,
   form: formReducer,
 });
 

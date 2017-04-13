@@ -1,9 +1,9 @@
 import * as log from 'loglevel';
 import * as c from '../utils/constants';
 
-const logCoordinateReducer = log.getLogger('logCoordinateReducer');
-logCoordinateReducer.setLevel('warn');
-logCoordinateReducer.debug('--> entering coordinatesReducer.js');
+const logCoordinatesReducer = log.getLogger('logCoordinatesReducer');
+logCoordinatesReducer.setLevel('warn');
+logCoordinatesReducer.debug('--> entering coordinatesReducer.js');
 
 const initialState = { // define initial state - an empty location
   real: false,
@@ -16,8 +16,9 @@ const initialState = { // define initial state - an empty location
 
 const coordinatesReducer = (state = initialState, action) => {
   switch (action.type) {
+
   case c.SET_CURRENT_LOCATION: {
-    logCoordinateReducer.debug('{   coordinatesReducer.SET_CURRENT_LOCATION (rsl)');
+    logCoordinatesReducer.debug('{   coordinatesReducer.SET_CURRENT_LOCATION (rsl)');
 
     const roundedStateLatitude = Math.round(parseFloat(state.latitude) * 1000) / 1000;
     const roundedStateLongitude = Math.round(parseFloat(state.longitude) * 1000) / 1000;
@@ -33,12 +34,12 @@ const coordinatesReducer = (state = initialState, action) => {
     const nbEstimated = action.real ? state.nbEstimated : state.nbEstimated + 1;
     const nbClose = changedReal && !changed ? state.nbClose + 1 : state.nbClose;
 
-    logCoordinateReducer.debug('       (rsl) previous state:', state);
-    logCoordinateReducer.debug('       (rsl) action:', action);
+    logCoordinatesReducer.debug('       (rsl) previous state:', state);
+    logCoordinatesReducer.debug('       (rsl) action:', action);
 
     if (!changedReal) {
-      logCoordinateReducer.debug('       (rsl) === no real change in state');
-      logCoordinateReducer.debug('}   coordinatesReducer.SET_CURRENT_LOCATION');
+      logCoordinatesReducer.debug('       (rsl) === no real change in state');
+      logCoordinatesReducer.debug('}   coordinatesReducer.SET_CURRENT_LOCATION');
       return state;
     }
 
@@ -55,15 +56,17 @@ const coordinatesReducer = (state = initialState, action) => {
       nbClose,
     };
 
-    logCoordinateReducer.debug('       (rsl) newState:', newState);
-    logCoordinateReducer.debug('}   coordinatesReducer.SET_CURRENT_LOCATION');
+    logCoordinatesReducer.debug('       (rsl) newState:', newState);
+    logCoordinatesReducer.debug('}   coordinatesReducer.SET_CURRENT_LOCATION');
 
     return newState;
   }
+
+
   default: {
-    // logCoordinateReducer.debug('{   coordinatesReducer.default (rde)');
-    // logCoordinateReducer.debug('       (rde) state:', state);
-    // logCoordinateReducer.debug('}   coordinatesReducer.default');
+    // logCoordinatesReducer.debug('{   coordinatesReducer.default (rde)');
+    // logCoordinatesReducer.debug('       (rde) state:', state);
+    // logCoordinatesReducer.debug('}   coordinatesReducer.default');
 
     return state;
   }

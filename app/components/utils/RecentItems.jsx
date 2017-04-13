@@ -1,13 +1,8 @@
 /* eslint-disable react/no-multi-comp */
 /* eslint-disable react/prop-types */
 
-import React, { Component } from 'react';
-// import { bindActionCreators } from 'redux';
+import React from 'react';
 import { connect } from 'react-redux';
-// import * as LocationActions from '../../actions/LocationActions';
-// import { GridList, GridTile } from 'material-ui/GridList';
-// import IconButton from 'material-ui/IconButton';
-// import IconStarBorder from 'material-ui/svg-icons/toggle/star-border';
 import ListItemsContainer from '../pages/ListItemsContainer';
 
 require('es6-promise').polyfill();
@@ -89,17 +84,11 @@ class RecentItemsContainer extends React.Component {
     };
   }
 
-
   componentDidMount() {
     this.load();
   }
 
   load() {
-    // this._RecentItemsComponent.onStartLoading();
-
-
-
-
     fetch('/api/items')
       .then((response) => {
         console.log('fetch operation OK', response.statusText);
@@ -113,7 +102,6 @@ class RecentItemsContainer extends React.Component {
         // this._RecentItemsComponent.onEndLoadingFailed();
       });
   }
-
 
   render() {
     return (<RecentItems ref={(r) => { this._RecentItemsComponent = r; }} items={this.state.items} />);

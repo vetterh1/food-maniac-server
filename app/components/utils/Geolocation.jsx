@@ -2,15 +2,11 @@
 /* eslint-disable react/prop-types */
 
 import React, { Component } from 'react';
-// import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import * as LocationActions from '../../actions/LocationActions';
-// import IconLocation from 'material-ui/svg-icons/communication/location-on';
-// import Popover from 'material-ui/Popover';
-import TestDisplayPositionFromStore from './TestDisplayPositionFromStore';
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import MdLocationOn from 'react-icons/lib/md/location-on';
-
+import { connect } from 'react-redux';
+import * as CoordinatesActions from '../../actions/CoordinatesActions';
+import TestDisplayPositionFromStore from './TestDisplayPositionFromStore';
 
 
 const styles = {
@@ -109,7 +105,7 @@ GeolocationDisplay = connect(mapStateToProps)(GeolocationDisplay); // eslint-dis
 
 function getPosition(position) {
   const { dispatch } = this.props;  // Injected by react-redux
-  const action = LocationActions.setCurrentLocation(position.coords.latitude, position.coords.longitude, true);
+  const action = CoordinatesActions.setCurrentLocation(position.coords.latitude, position.coords.longitude, true);
   dispatch(action);
 }
 

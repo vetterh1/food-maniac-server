@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as LocationActions from '../../actions/LocationActions';
 import { Button } from 'reactstrap';
+import * as CoordinatesActions from '../../actions/CoordinatesActions';
 
 class TestDisplayPositionFromStore extends React.Component {
   static propTypes = {
@@ -9,7 +9,7 @@ class TestDisplayPositionFromStore extends React.Component {
   }
   dispatchAction = (latitude, longitude) => {
     const { dispatch } = this.props;  // Injected by react-redux
-    const action = LocationActions.setCurrentLocation(latitude, longitude, false);
+    const action = CoordinatesActions.setCurrentLocation(latitude, longitude, false);
     dispatch(action);
   };
 

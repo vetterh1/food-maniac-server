@@ -1,6 +1,4 @@
-// Coordinate actions
+// Loacation actions
 export const SET_CURRENT_LOCATION = 'SET_CURRENT_LOCATION';
+export const SET_CURRENT_PLACES = 'SET_CURRENT_PLACES';
 
-// Form actions
-export const FORM_ITEM_UPDATE_VALUE = 'FORM_ITEM_UPDATE_VALUE';
-export const FORM_ITEM_RESET = 'FORM_ITEM_RESET';

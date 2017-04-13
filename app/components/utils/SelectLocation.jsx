@@ -7,6 +7,7 @@ import { Col, FormGroup } from 'reactstrap';
 import * as log from 'loglevel';
 import Geolocation from '../utils/Geolocation';
 import ReactFormInput from '../utils/ReactFormInput';
+import * as PlacesActions from '../../actions/PlacesActions';
 
 const logSelectLocation = log.getLogger('logSelectLocation');
 logSelectLocation.setLevel('warn');
@@ -40,6 +41,7 @@ const SelectLocation = React.createClass({
       nbRenders: 0,
     };
   },
+
 
 
   // 2nd to receive store changes
@@ -97,6 +99,11 @@ const SelectLocation = React.createClass({
           hasNextPage: pagination.hasNextPage,
           currentLatLng,
         });
+
+        // Save places in redux store
+        const { dispatch } = this.props;  // Injected by react-redux
+        const action = PlacesActions.setCurrentPlaces(results);
+        dispatch(action);
       } else {
         logSelectLocation.debug('          (sl-cwrp) nearby search error : ', status);
       }
@@ -104,6 +111,8 @@ const SelectLocation = React.createClass({
 
     logSelectLocation.debug('}   SelectLocation.componentWillReceiveProps');
   },
+
+
 
 
   render: function render() {
