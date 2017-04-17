@@ -1,5 +1,6 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
 import { Container } from 'reactstrap';
 import RateForm from './RateForm';
 import stringifyOnce from '../../utils/stringifyOnce';
@@ -9,14 +10,15 @@ require('isomorphic-fetch');
 
 class RateContainer extends React.Component {
   static propTypes = {
+    places: React.PropTypes.array.isRequired,
   }
-
 
   constructor(props) {
     super(props);
     this.values = null;
     this.submitForm = this.submitForm.bind(this);
   }
+
 
   submitForm(values) {
     this.values = values;
@@ -38,8 +40,21 @@ class RateContainer extends React.Component {
     // Return a new promise.
     return new Promise((resolve, reject) => {
       console.log('{ RateContainer.saveLocation');
+      // console.log(`RateContainer.saveLocation - this.props:\n\n${stringifyOnce(this.props, null, 2)}`);
 
-      const place = { googleMapId: this.values.location, name: `name-${this.values.location}` };
+      const placeSelected = this.props.places.find((place) => { return place.id === this.values.location; });
+      if (!placeSelected) throw new Error('saveLocation - Could not resolve location');
+      console.log(`RateContainer.saveLocation - placeSelected:\n\n${stringifyOnce(placeSelected, null, 2)}`);
+      console.log('placeSelected.geometry: ', placeSelected.geometry);
+      console.log('placeSelected.geometry.location.lat(): ', placeSelected.geometry.location.lat());
+      console.log(`RateContainer.saveLocation - placeSelected.geometry.location:\n\n${stringifyOnce(placeSelected.geometry.location, null, 2)}`);
+      const place = {
+        name: placeSelected.name,
+        googleMapId: this.values.location,
+        location: {
+          coordinates: [placeSelected.geometry.location.lat(), placeSelected.geometry.location.lng()],
+        },
+      };
 
       fetch('/api/places/addOrUpdatePlaceByGoogleMapId', {
         method: 'POST',
@@ -64,6 +79,9 @@ class RateContainer extends React.Component {
     });
   }
 
+
+
+
   saveMarks(savedLocation) {
     const idLocation = savedLocation.place._id;
 
@@ -71,7 +89,7 @@ class RateContainer extends React.Component {
     return new Promise((resolve, reject) => {
       console.log('{ RateContainer.saveMarks');
 
-      const mark = { 
+      const mark = {
         item: this.values.item,
         place: idLocation,
         markOverall: this.values.markOverall,
@@ -109,6 +127,8 @@ class RateContainer extends React.Component {
     console.log(`saveDone - mark saved: ${stringifyOnce(savedMark, null, 2)}`);
   }
 
+
+
 //         {this.state.alertStatus !== 0 && <Alert color={this.state.alertColor}>{this.state.alertMessage}</Alert>}
 
 
@@ -123,7 +143,10 @@ class RateContainer extends React.Component {
 }
 
 
-// Decorate the form component
-export default reduxForm({
-  form: 'rate',
-})(RateContainer);
+
+
+const mapStateToProps = (state) => { return { places: state.places }; };
+
+RateContainer = reduxForm({ form: 'rate' })(RateContainer); // Decorate the form component
+RateContainer = connect(mapStateToProps)(RateContainer);
+export default RateContainer;
