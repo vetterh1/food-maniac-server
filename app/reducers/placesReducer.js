@@ -23,12 +23,10 @@ const placesReducer = (state = initialState, action) => {
       return Object.assign({}, place);
     });
 
-    const test = [{ name: 'a' }, { name: 'b' }, { name: 'c' }];
-    // logPlacesReducer.debug(`       (rsl) newState: ${stringifyOnce(newState, null, 2)}`);
     logPlacesReducer.debug('       (rsl) newState:', newState);
     logPlacesReducer.debug('}   placesReducer.SET_CURRENT_PLACES');
 
-    return newState;
+    return { places: newState };
   }
 
 

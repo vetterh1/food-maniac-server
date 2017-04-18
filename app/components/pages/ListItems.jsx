@@ -4,6 +4,7 @@ import Slider from 'react-slick';
 import * as log from 'loglevel';
 import MdLocalRestaurant from 'react-icons/lib/md/local-restaurant';
 import ReactFormInput from '../utils/ReactFormInput';
+import ItemImage from '../utils/ItemImage';
 
 // import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // import Snackbar from 'material-ui/Snackbar';
@@ -24,20 +25,6 @@ const styles = {
     color: 'red',
   },
 };
-
-
-class ItemImage extends React.Component {
-
-  static propTypes = {
-    id: React.PropTypes.string,
-  }
-
-  render() {
-    if (!this.props.id) return null;
-    return (<object data={`/static/thumbnails/${this.props.id}.jpg`} type="image/jpg"><MdLocalRestaurant size={96} /></object>);
-  }
-}
-
 
 
 class ListOneItem extends React.Component {

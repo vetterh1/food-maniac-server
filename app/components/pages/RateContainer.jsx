@@ -10,7 +10,9 @@ require('isomorphic-fetch');
 
 class RateContainer extends React.Component {
   static propTypes = {
-    places: React.PropTypes.array.isRequired,
+    places: React.PropTypes.shape({
+      places: React.PropTypes.array.isRequired,
+    }).isRequired,
   }
 
   constructor(props) {
@@ -42,12 +44,12 @@ class RateContainer extends React.Component {
       console.log('{ RateContainer.saveLocation');
       // console.log(`RateContainer.saveLocation - this.props:\n\n${stringifyOnce(this.props, null, 2)}`);
 
-      const placeSelected = this.props.places.find((place) => { return place.id === this.values.location; });
+      const placeSelected = this.props.places.places.find((place) => { return place.id === this.values.location; });
       if (!placeSelected) throw new Error('saveLocation - Could not resolve location');
-      console.log(`RateContainer.saveLocation - placeSelected:\n\n${stringifyOnce(placeSelected, null, 2)}`);
-      console.log('placeSelected.geometry: ', placeSelected.geometry);
-      console.log('placeSelected.geometry.location.lat(): ', placeSelected.geometry.location.lat());
-      console.log(`RateContainer.saveLocation - placeSelected.geometry.location:\n\n${stringifyOnce(placeSelected.geometry.location, null, 2)}`);
+      // console.log(`RateContainer.saveLocation - placeSelected:\n\n${stringifyOnce(placeSelected, null, 2)}`);
+      // console.log('placeSelected.geometry: ', placeSelected.geometry);
+      // console.log('placeSelected.geometry.location.lat(): ', placeSelected.geometry.location.lat());
+      // console.log(`RateContainer.saveLocation - placeSelected.geometry.location:\n\n${stringifyOnce(placeSelected.geometry.location, null, 2)}`);
       const place = {
         name: placeSelected.name,
         googleMapId: this.values.location,

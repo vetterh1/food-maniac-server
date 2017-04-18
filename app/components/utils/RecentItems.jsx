@@ -10,7 +10,7 @@ require('isomorphic-fetch');
 
 class RecentItems extends React.Component {
   static propTypes = {
-    items: React.PropTypes.array.isRequired,
+    // items: React.PropTypes.array.isRequired,
   }
 
   constructor() {
@@ -104,8 +104,9 @@ class RecentItemsContainer extends React.Component {
   }
 
   render() {
-    return (<RecentItems ref={(r) => { this._RecentItemsComponent = r; }} items={this.state.items} />);
+    return (<RecentItems ref={(r) => { this._RecentItemsComponent = r; }} />);
   }
+//     return (<RecentItems ref={(r) => { this._RecentItemsComponent = r; }} items={this.state.items} />);
 
 }
 
