@@ -56,7 +56,7 @@ const accessLogStream = FileStreamRotator.getStream({
 // ---------------------  INIT DB  ---------------------
 //
 
-import insertTestData from './testData';
+import insertInitialData from './testData';
 
 // Set native promises as mongoose promise
 mongoose.Promise = global.Promise;
@@ -77,7 +77,7 @@ mongoose.connect(databaseURL, options, (error) => {
   }
 
   // feed some dummy data in DB if empty
-  if (process.env.NODE_ENV !== 'test') insertTestData();
+  if (process.env.NODE_ENV !== 'test') insertInitialData();
 });
 const db = mongoose.connection;
 db.on('error', logger.error.bind(console, '!Mongoose connection error!'));

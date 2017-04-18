@@ -67,6 +67,17 @@ c:\mongodb\bin\mongo
 show dbs
 use food_maniac_dev
 
+------ Rename db: ------ 
+db.copyDatabase("food_maniac_dev","food_maniac_dev_save","localhost")
+use food_maniac_dev
+db.dropDatabase();
+use food_maniac_dev_save
+
+------ Create db: ------ 
+--> use creates if it does not exist!
+use xxxx
+
+
 -------------  List collections & content ---------------
 show collections
 db.items.find()
