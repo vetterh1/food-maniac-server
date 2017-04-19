@@ -1,6 +1,7 @@
 /* eslint-disable react/forbid-prop-types */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import io from 'socket.io-client';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import * as log from 'loglevel';
@@ -17,7 +18,7 @@ require('isomorphic-fetch');
 
 class StatisticsProcessing extends React.Component {
   static propTypes = {
-    stats: React.PropTypes.object.isRequired,
+    stats: PropTypes.object.isRequired,
   }
 
   render() {
@@ -40,12 +41,12 @@ class StatisticsProcessing extends React.Component {
 
 class FullPagination extends React.Component {
   static propTypes = {
-    onPrevious: React.PropTypes.func.isRequired,
-    onNext: React.PropTypes.func.isRequired,
-    onNumber: React.PropTypes.func.isRequired,
-    count: React.PropTypes.number.isRequired,
-    itemsPerPage: React.PropTypes.number.isRequired,
-    indexPagination: React.PropTypes.number.isRequired,
+    onPrevious: PropTypes.func.isRequired,
+    onNext: PropTypes.func.isRequired,
+    onNumber: PropTypes.func.isRequired,
+    count: PropTypes.number.isRequired,
+    itemsPerPage: PropTypes.number.isRequired,
+    indexPagination: PropTypes.number.isRequired,
   }
 
   render() {
@@ -79,10 +80,10 @@ class FullPagination extends React.Component {
 
 class BbPagination extends React.Component {
   static propTypes = {
-    onNumber: React.PropTypes.func.isRequired,
-    count: React.PropTypes.number.isRequired,
-    itemsPerPage: React.PropTypes.number.isRequired,
-    indexPagination: React.PropTypes.number.isRequired,
+    onNumber: PropTypes.func.isRequired,
+    count: PropTypes.number.isRequired,
+    itemsPerPage: PropTypes.number.isRequired,
+    indexPagination: PropTypes.number.isRequired,
   }
 
   render() {
@@ -129,17 +130,17 @@ class BbPagination extends React.Component {
 class ListItemsContainer extends React.Component {
   static propTypes = {
     // URL that provides the items list. Possible values: ["/api/items", "/util/regenerateAllThumbnails"]
-    URL: React.PropTypes.string.isRequired,
+    URL: PropTypes.string.isRequired,
     // Socket name (socket.io-client) that will provide additional items after loading. Possible values: ["/util/regenerateAllThumbnails"]
-    socketName: React.PropTypes.string,
+    socketName: PropTypes.string,
     // Index of the item to fetch. Ex: 5 -> will omit to display the 1st 5 items to start at the 6th
-    initialIndexPagination: React.PropTypes.number,
+    initialIndexPagination: PropTypes.number,
     // Display a carrousel instead of a list. In this case, the itemsPerPage is NOT used
-    carrousel: React.PropTypes.bool,
+    carrousel: PropTypes.bool,
     // Display a simple dropdown instead of a list. In this case, the itemsPerPage is NOT used
-    dropdown: React.PropTypes.bool,
+    dropdown: PropTypes.bool,
     // Nb max of item to fetch. Ex: 10 -> will retreive max 10 items
-    itemsPerPage: React.PropTypes.number,
+    itemsPerPage: PropTypes.number,
   };
 
   static defaultProps = { socketName: null, initialIndexPagination: 0, carrousel: false, dropdown: true, itemsPerPage: 7 };

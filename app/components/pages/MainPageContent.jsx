@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const styles = {
   divStyle: {
@@ -9,7 +10,7 @@ const styles = {
 
 class MainPageContent extends React.Component {
   static propTypes = {
-    children: React.PropTypes.node,
+    children: PropTypes.node,
   }
 
   render() {

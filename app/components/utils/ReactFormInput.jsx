@@ -1,19 +1,20 @@
 /* eslint-disable react/forbid-prop-types */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FormGroup, Input, FormFeedback } from 'reactstrap';
 
 class reactFormInput extends React.PureComponent {
   static propTypes = {
-    input: React.PropTypes.object,
-    placeholder: React.PropTypes.string,
-    type: React.PropTypes.string.isRequired,
-    meta: React.PropTypes.shape({
-      touched: React.PropTypes.bool,
-      error: React.PropTypes.any,
+    input: PropTypes.object,
+    placeholder: PropTypes.string,
+    type: PropTypes.string.isRequired,
+    meta: PropTypes.shape({
+      touched: PropTypes.bool,
+      error: PropTypes.any,
     }),
-    children: React.PropTypes.array,
+    children: PropTypes.array,
   };
 
   static defaultProps = { input: null, placeholder: null, meta: null, children: null };

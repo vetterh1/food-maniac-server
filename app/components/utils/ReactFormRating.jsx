@@ -1,6 +1,7 @@
 /* eslint-disable react/forbid-prop-types */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FormGroup, FormFeedback } from 'reactstrap';
 import Rating from 'react-rating';
@@ -9,14 +10,14 @@ import MdStarOutline from 'react-icons/lib/md/star-outline';
 
 class ReactFormRating extends React.PureComponent {
   static propTypes = {
-    input: React.PropTypes.object,
-    meta: React.PropTypes.shape({
-      touched: React.PropTypes.bool,
-      error: React.PropTypes.any,
+    input: PropTypes.object,
+    meta: PropTypes.shape({
+      touched: PropTypes.bool,
+      error: PropTypes.any,
     }),
-    stop: React.PropTypes.number,
-    size: React.PropTypes.number,
-    style: React.PropTypes.object,
+    stop: PropTypes.number,
+    size: PropTypes.number,
+    style: PropTypes.object,
   };
 
   static defaultProps = { input: null, meta: null, stop: 5, size: 26, style: null };

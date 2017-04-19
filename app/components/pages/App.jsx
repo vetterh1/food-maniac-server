@@ -2,6 +2,7 @@
 /* eslint-disable react/prop-types */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MainAppBar from '../navigation/MainAppBar';
 import Version from '../utils/Version';
@@ -19,7 +20,7 @@ injectTapEventPlugin();
 
 class App extends React.Component {
   static propTypes = {
-    children: React.PropTypes.node,
+    children: PropTypes.node,
   }
 
   render() {

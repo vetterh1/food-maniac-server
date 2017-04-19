@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import Slider from 'react-slick';
 import * as log from 'loglevel';
@@ -30,8 +31,8 @@ const styles = {
 class ListOneItem extends React.Component {
 
   static propTypes = {
-    index: React.PropTypes.number.isRequired,
-    item: React.PropTypes.object.isRequired,
+    index: PropTypes.number.isRequired,
+    item: PropTypes.object.isRequired,
   }
 
   render() {
@@ -46,8 +47,8 @@ class ListOneItem extends React.Component {
 class CarrouselOneItem extends React.Component {
 
   static propTypes = {
-    index: React.PropTypes.number.isRequired,
-    item: React.PropTypes.object.isRequired,
+    index: PropTypes.number.isRequired,
+    item: PropTypes.object.isRequired,
   }
 
   render() {
@@ -68,9 +69,9 @@ class CarrouselOneItem extends React.Component {
 
 class ListItems extends React.Component {
   static propTypes = {
-    carrousel: React.PropTypes.bool.isRequired,
-    dropdown: React.PropTypes.bool.isRequired,
-    items: React.PropTypes.array.isRequired,
+    carrousel: PropTypes.bool.isRequired,
+    dropdown: PropTypes.bool.isRequired,
+    items: PropTypes.array.isRequired,
   }
 
   constructor(props) {

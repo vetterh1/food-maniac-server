@@ -2,6 +2,7 @@
 /* eslint-disable react/prop-types */
 
 import React from 'react';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ListItemsContainer from '../pages/ListItemsContainer';
 
@@ -10,7 +11,7 @@ require('isomorphic-fetch');
 
 class RecentItems extends React.Component {
   static propTypes = {
-    // items: React.PropTypes.array.isRequired,
+    // items: PropTypes.array.isRequired,
   }
 
   constructor() {

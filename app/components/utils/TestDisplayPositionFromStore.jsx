@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from 'reactstrap';
 import * as CoordinatesActions from '../../actions/CoordinatesActions';
 
 class TestDisplayPositionFromStore extends React.Component {
   static propTypes = {
-    onClick: React.PropTypes.func.isRequired,
+    onClick: PropTypes.func.isRequired,
   }
   dispatchAction = (latitude, longitude) => {
     const { dispatch } = this.props;  // Injected by react-redux

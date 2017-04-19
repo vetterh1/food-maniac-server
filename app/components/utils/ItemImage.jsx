@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import MdLocalRestaurant from 'react-icons/lib/md/local-restaurant';
 
 const ItemImage = props => {
@@ -8,7 +9,7 @@ const ItemImage = props => {
 
 
 ItemImage.propTypes = {
-  id: React.PropTypes.string,
+  id: PropTypes.string,
 };
 
 export default ItemImage;

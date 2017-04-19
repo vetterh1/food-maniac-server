@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Row, Col, Button } from 'reactstrap';
 import MdAddAPhoto from 'react-icons/lib/md/add-a-photo';
 import MdDelete from 'react-icons/lib/md/delete';
@@ -45,10 +46,10 @@ const styles = {
 
 export default class CameraSnapshotContainer extends React.Component {
   static propTypes = {
-    onSnapshotStartProcessing: React.PropTypes.func.isRequired,
-    onSnapshotReady: React.PropTypes.func.isRequired,
-    onDeleteSnapshot: React.PropTypes.func.isRequired,
-    onError: React.PropTypes.func.isRequired,
+    onSnapshotStartProcessing: PropTypes.func.isRequired,
+    onSnapshotReady: PropTypes.func.isRequired,
+    onDeleteSnapshot: PropTypes.func.isRequired,
+    onError: PropTypes.func.isRequired,
   }
 
   constructor() {

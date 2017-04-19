@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { browserHistory } from 'react-router';
 // import { Card, CardMedia, CardTitle } from 'material-ui/Card';
 // import Radium from 'radium';
@@ -27,11 +28,11 @@ const styles = {
 // @Radium
 class CardButton extends React.Component {
   static propTypes = {
-    title: React.PropTypes.string.isRequired,
-    subtitle: React.PropTypes.string.isRequired,
-    image: React.PropTypes.string.isRequired,
-    url: React.PropTypes.string.isRequired,
-    onClick: React.PropTypes.func,
+    title: PropTypes.string.isRequired,
+    subtitle: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+    onClick: PropTypes.func,
   }
 
   constructor() {

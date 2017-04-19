@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { Container } from 'reactstrap';
@@ -10,8 +11,8 @@ require('isomorphic-fetch');
 
 class RateContainer extends React.Component {
   static propTypes = {
-    places: React.PropTypes.shape({
-      places: React.PropTypes.array.isRequired,
+    places: PropTypes.shape({
+      places: PropTypes.array.isRequired,
     }).isRequired,
   }
 

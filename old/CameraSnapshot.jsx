@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import IconButton from 'material-ui/IconButton';
 import IconCamera from 'material-ui/svg-icons/image/photo-camera';
 import IconCameraSwitch from 'material-ui/svg-icons/image/switch-camera';
@@ -27,7 +28,7 @@ const styles = {
 
 export default class CameraSnaphotContainer extends React.Component {
   static propTypes = {
-    onSnapshot: React.PropTypes.func.isRequired,
+    onSnapshot: PropTypes.func.isRequired,
   }
 
   constructor() {

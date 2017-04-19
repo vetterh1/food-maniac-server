@@ -1,13 +1,14 @@
 /* eslint-disable react/prefer-stateless-function */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 
 
 class MainAppBar extends React.Component {
   static propTypes = {
-    location: React.PropTypes.object,
+    location: PropTypes.object,
   }
 
   constructor() {

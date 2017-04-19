@@ -1,6 +1,7 @@
 /* eslint-disable react/forbid-prop-types */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import { Col, Label, FormGroup } from 'reactstrap';
 import ReactFormRating from '../utils/ReactFormRating';
@@ -14,9 +15,9 @@ const styles = {
 
 class ReactFormRatingContainer extends React.PureComponent {
   static propTypes = {
-    name: React.PropTypes.string.isRequired,
-    label: React.PropTypes.string.isRequired,
-    size: React.PropTypes.number,
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    size: PropTypes.number,
   };
 
   static defaultProps = { size: 26 };
