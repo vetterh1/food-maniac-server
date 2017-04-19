@@ -30,6 +30,7 @@ export const initialPlaces = [
   new Place( { _id:'58f62aa95a333aff739c0004', googleMapId:'36b6fd3a391c414efd0b62a9919e4b945d7f8d7b', name: 'Via Istanbul', items:[], lastModif:'2017-04-18T15:03:05.969Z', since:'1968-12-21T00:00:00.000Z', location: { coordinates: [50.5507048,3.028566299999966],type: 'Point' }}),
 ];
 
+
 export default function insertInitialData() {
   console.log('{   insertInitialData()');
 
