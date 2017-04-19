@@ -1,6 +1,7 @@
 /* global google */
 
 import React, { /* Component */ } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Field } from 'redux-form';
 import { Col, FormGroup } from 'reactstrap';
@@ -31,21 +32,22 @@ const Listing = ({ places }) => {
 };
 
 
-// @connect(mapStateToProps, mapDispatchToProps)
 
-const SelectLocation = React.createClass({
+class SelectLocation extends React.Component {
 
-  getInitialState: () => {
-    return {
+  constructor() {
+    super();
+
+    this.state = {
       places: [],
       nbRenders: 0,
     };
-  },
+  }
 
 
 
   // 2nd to receive store changes
-  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps) {
     logSelectLocation.debug('{   SelectLocation.componentWillReceiveProps (sl-cwrp)');
     logSelectLocation.debug('       (sl-cwrp) nextProps: ', nextProps);
 
@@ -110,12 +112,12 @@ const SelectLocation = React.createClass({
     });
 
     logSelectLocation.debug('}   SelectLocation.componentWillReceiveProps');
-  },
+  }
 
 
 
 
-  render: function render() {
+  render() {
     logSelectLocation.debug('{   SelectLocation.render (slr)');
     logSelectLocation.debug('       (slr) state:', this.state);
     logSelectLocation.debug('       (slr) props:', this.props);
@@ -137,9 +139,26 @@ const SelectLocation = React.createClass({
     );
     logSelectLocation.debug('}   SelectLocation.render');
     return result;
-  },
+  }
+}
 
-});
+
+
+SelectLocation.propTypes = {
+  coordinates: PropTypes.shape({
+      latitude: PropTypes.number,
+      longitude: PropTypes.number,
+      real: PropTypes.boolean,
+      changed: PropTypes.boolean,
+      changedReal: PropTypes.boolean,
+      nbRefreshes: PropTypes.number,
+      nbDiffs: PropTypes.number,
+      nbReal: PropTypes.number,
+      nbEstimated: PropTypes.number,
+      nbClose: PropTypes.number,
+    }).isRequired,
+};
+
 
 const mapStateToProps = (state) => { return { coordinates: state.coordinates }; };
 

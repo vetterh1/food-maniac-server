@@ -25,6 +25,8 @@
     "FoServer:build:cp_images": "if-env OS=Windows_NT && copy .\\app\\images\\*.* distFoServer\\images || cp ./app/images/*.* distFoServer/images",
     "FoServer:build:cp_css": "if-env OS=Windows_NT && copy .\\app\\index.css distFoServer || cp ./app/index.css distFoServer",
     "FoServer:test": "jest",
+    "FoServer:test:watch": "jest --watch",
+    "FoServer:test:coverage": "jest --watch --coverage",
     "lint": "eslint client server"
   },
   "dependencies": {

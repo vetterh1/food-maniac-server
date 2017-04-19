@@ -4,10 +4,8 @@ import { connect } from 'react-redux';
 import { Button } from 'reactstrap';
 import * as CoordinatesActions from '../../actions/CoordinatesActions';
 
-class TestDisplayPositionFromStore extends React.Component {
-  static propTypes = {
-    onClick: PropTypes.func.isRequired,
-  }
+export class TestDisplayPositionFromStore extends React.Component {
+  // Save in Redux store the fake locations
   dispatchAction = (latitude, longitude) => {
     const { dispatch } = this.props;  // Injected by react-redux
     const action = CoordinatesActions.setCurrentLocation(latitude, longitude, false);
@@ -44,5 +42,10 @@ class TestDisplayPositionFromStore extends React.Component {
     );
   }
 }
+
+TestDisplayPositionFromStore.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
 
 export default connect()(TestDisplayPositionFromStore);

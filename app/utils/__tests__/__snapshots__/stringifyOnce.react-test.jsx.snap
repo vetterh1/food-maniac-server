@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`stringifyOnce should match its empty snapshot 1`] = `"{\\"obj\\":{},\\"replacer\\":null,\\"indent\\":2}"`;
+
+exports[`stringifyOnce should match its regular snapshot 1`] = `"{\\"obj\\":{\\"one\\":1,\\"two\\":2},\\"replacer\\":null,\\"indent\\":2}"`;
