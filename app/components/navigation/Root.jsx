@@ -23,8 +23,8 @@ const Root = ({ store }) => (
         <Route path="/searchItem" component={SearchItemContainer} />
         <Route path="/addItem" component={AddItemContainer} />
         <Route path="/login" component={Login} />
-        <Route path="/listItems" component={() => (<ListItemsContainer URL="/api/items" />)} />
-        <Route path="/generateThumbnails" component={() => (<ListItemsContainer URL="/util/regenerateAllThumbnails" socketName="regenerateAllThumbnails" />)} />
+        <Route path="/listItems" component={() => (<ListItemsContainer URL="/api/items" dropdown={false} />)} />
+        <Route path="/generateThumbnails" component={() => (<ListItemsContainer URL="/util/regenerateAllThumbnails" socketName="regenerateAllThumbnails" dropdown={false}  />)} />
         <Route path="*" component={NotFound} />
       </Route>
     </Router>

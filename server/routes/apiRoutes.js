@@ -76,6 +76,9 @@ router.route('/places/id/:_id').delete(PlaceController.deletePlace);
 // Get all marks
 router.route('/marks').get(MarkController.getMarks);
 
+// Get all marks for one item
+router.route('/marks/itemId/:_itemId').get(MarkController.getMarksByItemId);
+
 // Get one mark by _id
 router.route('/marks/id/:_id').get(MarkController.getMark);
 

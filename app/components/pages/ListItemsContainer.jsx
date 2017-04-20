@@ -8,7 +8,7 @@ import * as log from 'loglevel';
 import ListItems from './ListItems';
 
 const logListItemsContainer = log.getLogger('logListItemsContainer');
-logListItemsContainer.setLevel('warn');
+logListItemsContainer.setLevel('debug');
 logListItemsContainer.debug('--> entering ListItemsContainer.jsx');
 
 require('es6-promise').polyfill();

@@ -17,6 +17,21 @@ export function getMarks(req, res) {
   });
 }
 
+/**
+ * Get all marks for one item
+ */
+export function getMarksByItemId(req, res) {
+  Mark.find({ item: req.params._itemId }).sort('-since').exec((err, marks) => {
+    if (err) {
+      logger.error('markController.getMarksByItemId returns err: ', err);
+      res.status(500).send(err);
+    } else {
+      res.json({ marks });
+      logger.info(`markController.getMarksByItemId length=${marks.length}`);
+    }
+  });
+}
+
 
 /**
  * Add a mark
