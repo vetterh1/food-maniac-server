@@ -8,6 +8,7 @@ import App from '../pages/App';
 import MainPageContent from '../pages/MainPageContent';
 import RateContainer from '../pages/RateContainer';
 import AddItemContainer from '../pages/AddItemContainer';
+import SearchItemContainer from '../pages/SearchItemContainer';
 import ListItemsContainer from '../pages/ListItemsContainer';
 import Login from '../pages/Login';
 
@@ -19,7 +20,7 @@ const Root = ({ store }) => (
       <Route path="/" component={App}>
         <IndexRoute component={MainPageContent} />
         <Route path="/rate" component={RateContainer} />
-        <Route path="/search" component={AddItemContainer} />
+        <Route path="/searchItem" component={SearchItemContainer} />
         <Route path="/addItem" component={AddItemContainer} />
         <Route path="/login" component={Login} />
         <Route path="/listItems" component={() => (<ListItemsContainer URL="/api/items" />)} />

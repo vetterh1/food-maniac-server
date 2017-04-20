@@ -45,13 +45,13 @@ class MainAppBar extends React.Component {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink tag={Link} to="/rate" onClick={this.resetOpenState}>&gt; Rate</NavLink>
+              <NavLink tag={Link} to="/rate" onClick={this.resetOpenState}>&gt; Rate item</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={Link} to="/search" onClick={this.resetOpenState}>&gt; Search</NavLink>
+              <NavLink tag={Link} to="/searchItem" onClick={this.resetOpenState}>&gt; Search item</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={Link} to="/addItem" onClick={this.resetOpenState}>&gt; Add item</NavLink>
+              <NavLink tag={Link} to="/addItem" onClick={this.resetOpenState}>&gt; Add new item</NavLink>
             </NavItem>
           </Nav>
         </Collapse>

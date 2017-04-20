@@ -1,8 +1,8 @@
+import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import Slider from 'react-slick';
-import * as log from 'loglevel';
 import MdLocalRestaurant from 'react-icons/lib/md/local-restaurant';
 import ReactFormInput from '../utils/ReactFormInput';
 import ItemImage from '../utils/ItemImage';

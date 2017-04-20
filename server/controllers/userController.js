@@ -9,7 +9,7 @@ import User from '../models/user';
 export function getUsers(req, res) {
   User.find().sort('-since').exec((err, users) => {
     if (err) {
-      logger.error('! userController.getUsers returns err: ', err);
+      logger.error('userController.getUsers returns err: ', err);
       res.status(500).send(err);
     } else {
       res.json({ users });
@@ -25,7 +25,7 @@ export function getUsers(req, res) {
 
 export function addUser(req, res) {
   if (!req.body || !req.body.user || !req.body.user.login || !req.body.user.first || !req.body.user.last) {
-    logger.error('! userController.addUser failed! - missing mandatory fields');
+    logger.error('userController.addUser failed - missing mandatory fields');
     if (!req.body) logger.error('... no req.body!');
     if (req.body && !req.body.user) logger.error('... no req.body.user!');
     if (req.body && req.body.user && !req.body.user.login) logger.error('... no req.body.user.login!');
@@ -41,7 +41,7 @@ export function addUser(req, res) {
     newUser.last = sanitizeHtml(newUser.last);
     newUser.save((err, saved) => {
       if (err) {
-        logger.error(`! userController.addUser ${newUser.login} failed! - err = `, err);
+        logger.error(`userController.addUser ${newUser.login} failed - err = `, err);
         res.status(500).send(err);
       } else {
         res.json({ user: saved });
@@ -58,7 +58,7 @@ export function addUser(req, res) {
 export function getUser(req, res) {
   User.findById(req.params._id).exec((err, user) => {
     if (err || !user) {
-      logger.error(`! userController.getUser ${req.params._id} failed to find! - err = `, err);
+      logger.error(`userController.getUser ${req.params._id} failed to find - err = `, err);
       res.status(500).send(err);
     } else {
       res.json({ user });
@@ -73,16 +73,16 @@ export function getUser(req, res) {
  */
 export function updateUser(req, res) {
   if (!req.body || !req.body.user) {
-    const error = { status: 'error', message: '! userController.updateUser failed! - no body or user' };
+    const error = { status: 'error', message: 'userController.updateUser failed - no body or user' };
     if (!req.body) error.message += '... no req.body!';
     if (req.body && !req.body.user) error.message += '... no req.body.user!';
     res.status(400).json(error);
   } else if (req.body && req.body.user && req.body.user._id) {
-    res.status(400).json({ status: 'error', message: '! userController.updateUser failed! - _id cannot be changed' });
+    res.status(400).json({ status: 'error', message: 'userController.updateUser failed - _id cannot be changed' });
   } else {
     User.findOneAndUpdate({ _id: req.params._id }, req.body.user, { new: true }, (err, user) => {
       if (err || !user) {
-        logger.error(`! userController.updateUser ${req.params._id} failed to update! - err = `, err);
+        logger.error(`userController.updateUser ${req.params._id} failed to update - err = `, err);
         res.status(500).send(err);
       } else {
         res.json({ user });
@@ -100,14 +100,14 @@ export function updateUser(req, res) {
 export function deleteUser(req, res) {
   User.findOne({ _id: req.params._id }).exec((err, user) => {
     if (err || !user) {
-      logger.error(`! userController.deleteUser ${req.params._id} failed to find! - err = `, err);
+      logger.error(`userController.deleteUser ${req.params._id} failed to find - err = `, err);
       res.status(500).send(err);
     }
     else
     {
       user.remove(() => {
         if (err) {
-          logger.error(`! userController.deleteUser ${req.params._id} failed to remove! - err = `, err);
+          logger.error(`userController.deleteUser ${req.params._id} failed to remove - err = `, err);
           res.status(500).send(err);
         }
         else {

@@ -1,3 +1,4 @@
+import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
@@ -8,6 +9,10 @@ import stringifyOnce from '../../utils/stringifyOnce';
 
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
+
+const logRateContainer = log.getLogger('logRateContainer');
+logRateContainer.setLevel('warn');
+logRateContainer.debug('--> entering RateContainer.jsx');
 
 class RateContainer extends React.Component {
   static propTypes = {
@@ -30,27 +35,27 @@ class RateContainer extends React.Component {
 
 
   save() {
-    console.log(`RateContainer.save - values:\n\n${stringifyOnce(this.values, null, 2)}`);
+    logRateContainer.debug(`RateContainer.save - values:\n\n${stringifyOnce(this.values, null, 2)}`);
     this.saveLocation()
     .then(this.saveMarks.bind(this))
     .then(this.saveDone.bind(this))
     .catch((error) => {
-      console.log('RateContainer.save : error catched=', error);
+      logRateContainer.error('RateContainer.save failed: ', error);
     });
   }
 
   saveLocation() {
     // Return a new promise.
     return new Promise((resolve, reject) => {
-      console.log('{ RateContainer.saveLocation');
-      // console.log(`RateContainer.saveLocation - this.props:\n\n${stringifyOnce(this.props, null, 2)}`);
+      logRateContainer.debug('{ RateContainer.saveLocation');
+      // logRateContainer.debug(`RateContainer.saveLocation - this.props:\n\n${stringifyOnce(this.props, null, 2)}`);
 
       const placeSelected = this.props.places.places.find((place) => { return place.id === this.values.location; });
       if (!placeSelected) throw new Error('saveLocation - Could not resolve location');
-      // console.log(`RateContainer.saveLocation - placeSelected:\n\n${stringifyOnce(placeSelected, null, 2)}`);
-      // console.log('placeSelected.geometry: ', placeSelected.geometry);
-      // console.log('placeSelected.geometry.location.lat(): ', placeSelected.geometry.location.lat());
-      // console.log(`RateContainer.saveLocation - placeSelected.geometry.location:\n\n${stringifyOnce(placeSelected.geometry.location, null, 2)}`);
+      // logRateContainer.debug(`RateContainer.saveLocation - placeSelected:\n\n${stringifyOnce(placeSelected, null, 2)}`);
+      // logRateContainer.debug('placeSelected.geometry: ', placeSelected.geometry);
+      // logRateContainer.debug('placeSelected.geometry.location.lat(): ', placeSelected.geometry.location.lat());
+      // logRateContainer.debug(`RateContainer.saveLocation - placeSelected.geometry.location:\n\n${stringifyOnce(placeSelected.geometry.location, null, 2)}`);
       const place = {
         name: placeSelected.name,
         googleMapId: this.values.location,
@@ -67,18 +72,21 @@ class RateContainer extends React.Component {
         body: JSON.stringify({ place }),
       })
       .then((response) => {
-        console.log('   fetch result: ', response);
+        logRateContainer.debug('   fetch result: ', response);
         if (response.ok) {
-          console.log('   fetch operation OK');
-          // returns the response from server: the saved location (with _id)
+          logRateContainer.debug('   fetch operation OK');
+          // returns the (async) response from server: the saved location (with _id)
           resolve(response.json());
-        } else throw new Error('saveLocation - Response was not ok.');
+        } else {
+          // returns the error given by the server (async)
+          return response.json()
+          .then((error) => { throw new Error(error.message); });
+        }
       })
       .catch((error) => {
-        console.error(`saveLocation - There has been a problem with your fetch operation: ${error.message}`);
         reject(Error(error.message));
       });
-      console.log('} RateContainer.saveLocation');
+      logRateContainer.debug('} RateContainer.saveLocation');
     });
   }
 
@@ -90,7 +98,7 @@ class RateContainer extends React.Component {
 
     // Return a new promise.
     return new Promise((resolve, reject) => {
-      console.log('{ RateContainer.saveMarks');
+      logRateContainer.debug('{ RateContainer.saveMarks');
 
       const mark = {
         item: this.values.item,
@@ -100,7 +108,7 @@ class RateContainer extends React.Component {
         markPlace: this.values.markPlace,
         markStaff: this.values.markStaff,
       };
-      console.log('   mark: ', mark);
+      logRateContainer.debug('   mark: ', mark);
 
       fetch('/api/marks', {
         method: 'POST',
@@ -110,24 +118,27 @@ class RateContainer extends React.Component {
         body: JSON.stringify({ mark }),
       })
       .then((response) => {
-        console.log('   fetch result: ', response);
+        logRateContainer.debug('   fetch result: ', response);
         if (response.ok) {
-          console.log('   fetch operation OK');
-          // returns the response from server: the saved location (with _id)
+          logRateContainer.debug('   fetch operation OK');
+          // returns the (async) response from server: the saved mark (with _id)
           resolve(response.json());
-        } else throw new Error('saveMarks - Response was not ok.');
+        } else {
+          // returns the error given by the server (async)
+          return response.json()
+          .then((error) => { throw new Error(error.message); });
+        }
       })
       .catch((error) => {
-        console.error(`saveMarks - There has been a problem with your fetch operation: ${error.message}`);
         reject(Error(error.message));
       });
-      console.log('} RateContainer.saveMarks');
+      logRateContainer.debug('} RateContainer.saveMarks');
     });
   }
 
 
   saveDone(savedMark) {
-    console.log(`saveDone - mark saved: ${stringifyOnce(savedMark, null, 2)}`);
+    logRateContainer.debug(`saveDone - mark saved: ${stringifyOnce(savedMark, null, 2)}`);
   }
 
 

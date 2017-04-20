@@ -16,7 +16,7 @@ export function getItemsCount(req, res) {
   const query = {};
   Item.count(query, (err, count) => {
     if (err) {
-      logger.error('! itemController.getItemsCount returns err: ', err);
+      logger.error('itemController.getItemsCount returns err: ', err);
       res.status(500).send(err);
     } else {
       res.json({ count });
@@ -46,7 +46,7 @@ export function getItems(req, res) {
 
   Item.paginate(query, options, (err, items) => {
     if (err) {
-      logger.error('! itemController.getItems returns err: ', err);
+      logger.error('itemController.getItems returns err: ', err);
       res.status(500).send(err);
     } else {
       res.json({ items: items.docs });
@@ -63,7 +63,7 @@ export function getItems(req, res) {
 
 export function addItem(req, res) {
   if (!req.body || !req.body.item || !req.body.item.name || !req.body.item.category || !req.body.item.kind) {
-    logger.error('! itemController.addItem failed! - missing mandatory fields');
+    logger.error('itemController.addItem failed - missing mandatory fields');
     if (!req.body) logger.error('... no req.body!');
     if (req.body && !req.body.item) logger.error('... no req.body.item!');
     if (req.body && req.body.item && !req.body.item.name) logger.error('... no req.body.item.name!');
@@ -83,7 +83,7 @@ export function addItem(req, res) {
     newItem.picture = cuid(); // generate a random number for the file name
     newItem.save((err, saved) => {
       if (err) {
-        logger.error(`! itemController.addItem ${newItem.name} failed - _id: ${newItem._id} - name: ${newItem.name} - category: ${newItem.category} - kind: ${newItem.kind} - err:`, err);
+        logger.error(`itemController.addItem ${newItem.name} failed - _id: ${newItem._id} - name: ${newItem.name} - category: ${newItem.category} - kind: ${newItem.kind} - err:`, err);
         res.status(500).send(err);
       } else {
         res.json({ item: saved });
@@ -108,7 +108,7 @@ export function addItem(req, res) {
         data, { encoding: 'base64' },
         (err) => {
           if (err) {
-            logger.error(`! itemController.addItem ${newItem.name} - saving image FAILED - _id: ${newItem._id} - Picture id: ${newItem.picture} (path: ${filePath}) !`);
+            logger.error(`itemController.addItem ${newItem.name} - saving image FAILED - _id: ${newItem._id} - Picture id: ${newItem.picture} (path: ${filePath}) !`);
           } else {
             logger.info(`itemController.addItem ${newItem.name} - saved image OK - _id: ${newItem._id} - Picture id: ${newItem.picture} (path: ${filePath})`);
             // const folderStatic = config.get('storage.static');
@@ -129,7 +129,7 @@ export function addItem(req, res) {
 export function getItem(req, res) {
   Item.findById(req.params._id).exec((err, item) => {
     if (err || !item) {
-      logger.error(`! itemController.getItem ${req.params._id} failed to find! - err = `, err);
+      logger.error(`itemController.getItem ${req.params._id} failed to find - err = `, err);
       res.status(500).send(err);
     } else {
       res.json({ item });
@@ -144,16 +144,16 @@ export function getItem(req, res) {
  */
 export function updateItem(req, res) {
   if (!req.body || !req.body.item) {
-    const error = { status: 'error', message: '! itemController.updateItem failed! - no body or item' };
+    const error = { status: 'error', message: 'itemController.updateItem failed - no body or item' };
     if (!req.body) error.message += '... no req.body!';
     if (req.body && !req.body.item) error.message += '... no req.body.item!';
     res.status(400).json(error);
   } else if (req.body && req.body.item && req.body.item._id) {
-    res.status(400).json({ status: 'error', message: '! itemController.updateItem failed! - _id cannot be changed' });
+    res.status(400).json({ status: 'error', message: 'itemController.updateItem failed - _id cannot be changed' });
   } else {
     Item.findOneAndUpdate({ _id: req.params._id }, req.body.item, { new: true }, (err, item) => {
       if (err || !item) {
-        logger.error(`! itemController.updateItem ${req.params._id} failed to update! - err = `, err);
+        logger.error(`itemController.updateItem ${req.params._id} failed to update - err = `, err);
         res.status(500).send(err);
       } else {
         res.json({ item });
@@ -170,12 +170,12 @@ export function updateItem(req, res) {
 export function deleteItem(req, res) {
   Item.findOne({ _id: req.params._id }).exec((err, item) => {
     if (err || !item) {
-      logger.error(`! placeController.deleteItem ${req.params._id} failed to find! - err = `, err);
+      logger.error(`placeController.deleteItem ${req.params._id} failed to find - err = `, err);
       res.status(500).send(err);
     } else {
       item.remove(() => {
         if (err) {
-          logger.error(`! placeController.deleteItem ${req.params._id} failed to remove! - err = `, err);
+          logger.error(`placeController.deleteItem ${req.params._id} failed to remove - err = `, err);
           res.status(500).send(err);
         } else {
           res.status(200).end();
