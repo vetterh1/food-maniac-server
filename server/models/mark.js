@@ -15,6 +15,10 @@ const markSchema = new Schema({
   markFood: { type: 'Number' },
   markPlace: { type: 'Number' },
   markStaff: { type: 'Number' },
+  location: {
+    type: { type: 'String', default: 'Point' },
+    coordinates: { type: ['Number'], default: [0, 0] },
+  },
 });
 
 // on every save, add the date
@@ -23,6 +27,8 @@ markSchema.pre('save', function (next) {
   next();
 });
 
+markSchema.index({ location: '2dsphere' });
+
 export default mongoose.model('Mark', markSchema);
 
 // OLD: Version with marks in array (slower and more cumbersome...)
@@ -30,3 +36,5 @@ export default mongoose.model('Mark', markSchema);
 //   name: { type: 'String', required: true },
 //   value: { type: 'Number', required: true },
 // }],
+
+

@@ -51,7 +51,7 @@ class RateContainer extends React.Component {
       // logRateContainer.debug(`RateContainer.saveLocation - this.props:\n\n${stringifyOnce(this.props, null, 2)}`);
 
       const placeSelected = this.props.places.places.find((place) => { return place.id === this.values.location; });
-      if (!placeSelected) throw new Error('saveLocation - Could not resolve location');
+      if (!placeSelected) throw new Error(`saveLocation - Could not resolve location - props.places.places:\n\n${stringifyOnce(props.places.places, null, 2)}`);
       // logRateContainer.debug(`RateContainer.saveLocation - placeSelected:\n\n${stringifyOnce(placeSelected, null, 2)}`);
       // logRateContainer.debug('placeSelected.geometry: ', placeSelected.geometry);
       // logRateContainer.debug('placeSelected.geometry.location.lat(): ', placeSelected.geometry.location.lat());
@@ -94,7 +94,11 @@ class RateContainer extends React.Component {
 
 
   saveMarks(savedLocation) {
+    logRateContainer.debug(`RateContainer.saveMarks - savedLocation:\n\n${stringifyOnce(savedLocation, null, 2)}`);
+
     const idLocation = savedLocation.place._id;
+    const lat = savedLocation.place.location.coordinates[0];
+    const lng = savedLocation.place.location.coordinates[1];
 
     // Return a new promise.
     return new Promise((resolve, reject) => {
@@ -107,6 +111,9 @@ class RateContainer extends React.Component {
         markFood: this.values.markFood,
         markPlace: this.values.markPlace,
         markStaff: this.values.markStaff,
+        location: {
+          coordinates: [lat, lng],
+        },
       };
       logRateContainer.debug('   mark: ', mark);
 

@@ -2,10 +2,10 @@ import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
 // import { reduxForm } from 'redux-form';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { Container } from 'reactstrap';
 import SearchItemForm from './SearchItemForm';
-// import stringifyOnce from '../../utils/stringifyOnce';
+import stringifyOnce from '../../utils/stringifyOnce';
 
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
@@ -19,7 +19,7 @@ logSearchItemContainer.debug('--> entering SearchItemContainer.jsx');
 const ListOneMark = (props) => {
   const { mark } = props;
   return (
-    <li>{mark.markOverall}</li>
+    <li>{mark.place.name}: {mark.markOverall}</li>
   );
 };
 
@@ -33,6 +33,7 @@ ListOneMark.propTypes = {
 
 class SearchItemContainer extends React.Component {
   static propTypes = {
+    coordinates: PropTypes.object.isRequired,
   }
 
   constructor(props) {
@@ -56,8 +57,10 @@ class SearchItemContainer extends React.Component {
     // Return a new promise.
     return new Promise((resolve, reject) => {
       logSearchItemContainer.debug('{ SearchItemContainer.FindMarks');
+      logSearchItemContainer.debug(`SearchItemContainer.FindMarks - this.props.coordinates:\n\n${stringifyOnce(this.props.coordinates, null, 2)}`);
+      logSearchItemContainer.debug(`SearchItemContainer.FindMarks - this.props.coordinates.latitude:\n\n${stringifyOnce(this.props.coordinates.latitude, null, 2)}`);
 
-      fetch(`/api/marks/itemId/${this.values.item}`)
+      fetch(`/api/marks/itemId/${this.values.item}/maxDistance/${this.values.searchDistance}/lat/${this.props.coordinates.latitude}/lng/${this.props.coordinates.longitude}`)
       .then((response) => {
         logSearchItemContainer.debug('   SearchItemContainer - fetch operation OK');
         return response.json();
@@ -86,7 +89,7 @@ class SearchItemContainer extends React.Component {
         </Container>
 
         <div>
-          {this.state.marks && this.state.marks.map((mark, index) => { return (<ListOneMark mark={mark} index={index} />); })}
+          {this.state.marks && this.state.marks.map((mark, index) => { return (<ListOneMark mark={mark} index={index} key={mark._id} />); })}
         </div>
       </div>
     );
@@ -96,8 +99,8 @@ class SearchItemContainer extends React.Component {
 
 
 
-// const mapStateToProps = (state) => { return { places: state.places }; };
+const mapStateToProps = (state) => { return { coordinates: state.coordinates }; };
 
 // SearchItemContainer = reduxForm({ form: 'SearchItem' })(SearchItemContainer); // DecoSearchItem the form component
-// SearchItemContainer = connect(mapStateToProps)(SearchItemContainer);
+SearchItemContainer = connect(mapStateToProps)(SearchItemContainer);
 export default SearchItemContainer;

@@ -22,5 +22,7 @@ placeSchema.pre('save', function (next) {
   next();
 });
 
+placeSchema.index({ location: '2dsphere' });
+
 export default mongoose.model('Place', placeSchema);
 

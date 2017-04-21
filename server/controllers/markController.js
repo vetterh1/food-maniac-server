@@ -20,16 +20,39 @@ export function getMarks(req, res) {
 /**
  * Get all marks for one item
  */
-export function getMarksByItemId(req, res) {
-  Mark.find({ item: req.params._itemId }).sort('-since').exec((err, marks) => {
-    if (err) {
-      logger.error('markController.getMarksByItemId returns err: ', err);
-      res.status(500).send(err);
-    } else {
-      res.json({ marks });
-      logger.info(`markController.getMarksByItemId length=${marks.length}`);
-    }
-  });
+
+// TODO: add unit tests
+// TODO: restrict by location
+
+export function getMarksByItemIdAndDistance(req, res) {
+  const query = Mark
+    .find({ item: req.params._itemId }) // find all the marks for one item
+    .populate('place', 'name') // add the place information (available with place.xxx)
+    .sort({ markOverall: -1 }); // sort by rating (from best to worst)
+
+  if (req.params._maxDistance && req.params._maxDistance > 0 && req.params._lat && req.params._lng) {
+    query
+      .where('location')
+      .near({
+        center: {
+          coordinates: [req.params._lat, req.params._lng],
+          type: 'Point',
+        },
+        maxDistance: req.params._maxDistance,
+        spherical: true,
+      });
+  }
+
+  query
+    .exec((err, marks) => {
+      if (err) {
+        logger.error('markController.getMarksByItemId returns err: ', err);
+        res.status(500).send(err);
+      } else {
+        res.json({ marks });
+        logger.info(`markController.getMarksByItemId length=${marks.length}`);
+      }
+    });
 }
 
 
