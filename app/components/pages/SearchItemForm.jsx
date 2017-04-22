@@ -1,8 +1,9 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
-import { Button, FormGroup } from 'reactstrap';
+import { Button, Col, FormGroup } from 'reactstrap';
 import ListItemsContainer from '../pages/ListItemsContainer';
 import SelectSearchDistance from '../utils/SelectSearchDistance';
+import Geolocation from '../utils/Geolocation';
 
 const FindItemsForm = (props) => {
   const { handleSubmit, pristine, reset, submitting } = props;
@@ -14,7 +15,14 @@ const FindItemsForm = (props) => {
       </FormGroup>
       <FormGroup>
         <h4 className="mb-4">Max distance?</h4>
-        <SelectSearchDistance />
+        <FormGroup row className="no-gutters">
+          <Col xs={11}>
+            <SelectSearchDistance />
+          </Col>
+          <Col xs={1}>
+            <Geolocation />
+          </Col>
+        </FormGroup>
       </FormGroup>
       <Button type="submit" disabled={pristine || submitting} size="md">Find</Button>
     </form>

@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { Container } from 'reactstrap';
+import { Container, Row, Table } from 'reactstrap';
 import SearchItemForm from './SearchItemForm';
 import stringifyOnce from '../../utils/stringifyOnce';
 
@@ -19,7 +19,13 @@ logSearchItemContainer.debug('--> entering SearchItemContainer.jsx');
 const ListOneMark = (props) => {
   const { mark } = props;
   return (
-    <li>{mark.place.name}: {mark.markOverall}</li>
+    <tr>
+      <th scope="row">{mark.place.name}</th>
+      <td>{mark.markOverall}</td>
+      <td>{mark.markFood}</td>
+      <td>{mark.markPlace}</td>
+      <td>{mark.markStaff}</td>
+    </tr>
   );
 };
 
@@ -86,11 +92,24 @@ class SearchItemContainer extends React.Component {
       <div>
         <Container fluid>
           <SearchItemForm onSubmit={this.submitForm} />
-        </Container>
 
-        <div>
-          {this.state.marks && this.state.marks.map((mark, index) => { return (<ListOneMark mark={mark} index={index} key={mark._id} />); })}
-        </div>
+          <Row>
+            <Table responsive striped>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Overall</th>
+                  <th>Food</th>
+                  <th>Place</th>
+                  <th>Staff</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.marks && this.state.marks.map((mark, index) => { return (<ListOneMark mark={mark} index={index} key={mark._id} />); })}
+              </tbody>
+            </Table>
+          </Row>
+        </Container>
       </div>
     );
   }
