@@ -15,6 +15,7 @@ const markSchema = new Schema({
   markFood: { type: 'Number' },
   markPlace: { type: 'Number' },
   markStaff: { type: 'Number' },
+  comment: { type: 'String' },
   location: {
     type: { type: 'String', default: 'Point' },
     coordinates: { type: ['Number'], default: [0, 0] },

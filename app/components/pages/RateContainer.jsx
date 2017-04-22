@@ -111,6 +111,7 @@ class RateContainer extends React.Component {
         markFood: this.values.markFood,
         markPlace: this.values.markPlace,
         markStaff: this.values.markStaff,
+        comment: this.values.comment,
         location: {
           coordinates: [lat, lng],
         },
