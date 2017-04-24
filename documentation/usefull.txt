@@ -77,6 +77,12 @@ use food_maniac_dev_save
 --> use creates if it does not exist!
 use xxxx
 
+------ Reset dev db: ------ 
+c:\mongodb\bin\mongo
+use food_maniac_dev;
+db.dropDatabase();
+use food_maniac_dev;
+exit;
 
 -------------  List collections & content ---------------
 show collections

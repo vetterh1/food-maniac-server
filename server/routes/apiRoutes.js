@@ -76,8 +76,8 @@ router.route('/places/id/:_id').delete(PlaceController.deletePlace);
 // Get all marks
 router.route('/marks').get(MarkController.getMarks);
 
-// Get all marks for one item
-router.route('/marks/itemId/:_itemId/maxDistance/:_maxDistance/lat/:_lat/lng/:_lng').get(MarkController.getMarksByItemIdAndDistance);
+// Get all AGGREGATE marks for one item
+router.route('/marks/itemId/:_itemId/maxDistance/:_maxDistance/lat/:_lat/lng/:_lng').get(MarkController.getAggregatedMarksByItemIdAndDistance);
 
 // Get one mark by _id
 router.route('/marks/id/:_id').get(MarkController.getMark);
