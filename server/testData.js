@@ -6,7 +6,8 @@ import mongoose from 'mongoose';
 import Item from './models/item';
 import Place from './models/place';
 import User from './models/user';
-import Mark from './models/mark';
+import MarkIndividual from './models/markIndividual';
+import MarkAggregate from './models/markAggregate';
 
 export const initialUsers = [
   new User({ _id: '58f4dfff45dab98a840a0000', login: 'laurent', first: 'Laurent', last: 'Vetterhoeffer', mark: 0, since: '1968-12-21T00:00:00.000Z' }),
@@ -34,29 +35,37 @@ export const initialPlaces = [
   new Place({ _id: '58f62aa95a333aff739c0005', googleMapId: '3f9cee9e4cb5e07f12dc2cdf3369356f368cfcec', name: 'Les Rois Fainéants', items: [], lastModif: '2017-04-18T15:03:05.969Z', since: '1968-12-21T00:00:00.000Z', location: { coordinates: [50.5750322, 3.0177912000000333], type: 'Point' } }),
 ];
 
-export const initialMarks = [
-  // Pizza from Papà Raffaele (4 marks)
-  new Mark({ _id: '58f4dfff45dab98a840d0000', place: '58f4dfff45dab98a840c0000', item: '58f4dfff45dab98a840b0000', aggregatedMark: true, nbAggregatedMarksOverall: 4, nbAggregatedMarksFood: 3, nbAggregatedMarksPlace: 2, nbAggregatedMarksStaff: 1, markOverall: 5, markFood: 5, markPlace: 5, markStaff: 5, lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z', location: { coordinates: [50.6403954, 3.0651635000000397], type: 'Point' } }),
-  new Mark({ _id: '58f4dfff45dab98a840d00a0', place: '58f4dfff45dab98a840c0000', item: '58f4dfff45dab98a840b0000', user: '58f4dfff45dab98a840a0000', markOverall: 5, comment: 'Papà Raffaele pizzas are so good! (1)', lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z' }),
-  new Mark({ _id: '58f4dfff45dab98a840d00b0', place: '58f4dfff45dab98a840c0000', item: '58f4dfff45dab98a840b0000', user: '58f4dfff45dab98a840a0001', markOverall: 4, markFood: 5, comment: 'Papà Raffaele pizzas are so good! (2)', lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z' }),
-  new Mark({ _id: '58f4dfff45dab98a840d00c0', place: '58f4dfff45dab98a840c0000', item: '58f4dfff45dab98a840b0000', user: '58f4dfff45dab98a840a0002', markOverall: 5, markFood: 4, markPlace: 5, comment: 'Papà Raffaele pizzas are so good! (3)', lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z' }),
-  new Mark({ _id: '58f4dfff45dab98a840d00d0', place: '58f4dfff45dab98a840c0000', item: '58f4dfff45dab98a840b0000', user: '58f4dfff45dab98a840a0003', markOverall: 5, markFood: 4, markPlace: 5, markStaff: 5, comment: 'Papà Raffaele pizzas are so good! (4)', lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z' }),
-  // Pasta from Papà Raffaele (3 marks)
-  new Mark({ _id: '58f4dfff45dab98a840d0001', place: '58f4dfff45dab98a840c0000', item: '58f4dfff45dab98a840b0001', aggregatedMark: true, nbAggregatedMarksOverall: 3, nbAggregatedMarksFood: 3, nbAggregatedMarksPlace: 1, markOverall: 4, markFood: 4, markPlace: 5, lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z', location: { coordinates: [50.6403954, 3.0651635000000397], type: 'Point' } }),
-  new Mark({ _id: '58f4dfff45dab98a840d00a1', place: '58f4dfff45dab98a840c0000', item: '58f4dfff45dab98a840b0001', user: '58f4dfff45dab98a840a0000', markOverall: 3, markFood: 4, markPlace: 5, comment: 'Papà Raffaele pastas are good! (1)', lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z' }),
-  new Mark({ _id: '58f4dfff45dab98a840d00b1', place: '58f4dfff45dab98a840c0000', item: '58f4dfff45dab98a840b0001', user: '58f4dfff45dab98a840a0001', markOverall: 4, markFood: 3, comment: 'Papà Raffaele pastas are good! (2)', lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z' }),
-  new Mark({ _id: '58f4dfff45dab98a840d00c1', place: '58f4dfff45dab98a840c0000', item: '58f4dfff45dab98a840b0001', user: '58f4dfff45dab98a840a0003', markOverall: 4, markFood: 4, comment: 'Papà Raffaele pastas are good! (3)', lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z' }),
-  // Burgers from Le Lion Bossu (2 marks)
-  new Mark({ _id: '58f4dfff45dab98a840d0002', place: '58f4e17c45dab98a840c0001', item: '58f4dfff45dab98a840b0002', aggregatedMark: true, nbAggregatedMarksOverall: 2, nbAggregatedMarksFood: 2, nbAggregatedMarksPlace: 2, nbAggregatedMarksStaff: 2, markOverall: 4, markFood: 4, markPlace: 4, markStaff: 4, lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z', location: { coordinates: [50.64030820000001, 3.06502839999996], type: 'Point' } }),
-  new Mark({ _id: '58f4dfff45dab98a840d00a2', place: '58f4e17c45dab98a840c0001', item: '58f4dfff45dab98a840b0002', user: '58f4dfff45dab98a840a0000', markOverall: 4, markFood: 3, markPlace: 4, markStaff: 3, comment: 'Le Lion Bossu burgers are good! (1)', lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z' }),
-  new Mark({ _id: '58f4dfff45dab98a840d00b2', place: '58f4e17c45dab98a840c0001', item: '58f4dfff45dab98a840b0002', user: '58f4dfff45dab98a840a0000', markOverall: 3, markFood: 4, markPlace: 3, markStaff: 4, comment: 'Le Lion Bossu burgers are good! (2)', lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z' }),
-  // Pizza from Via Istanbul (2 marks)
-  new Mark({ _id: '58f4dfff45dab98a840d0003', place: '58f62aa95a333aff739c0004', item: '58f4dfff45dab98a840b0000', aggregatedMark: true, nbAggregatedMarksOverall: 2, nbAggregatedMarksFood: 2, nbAggregatedMarksPlace: 2, nbAggregatedMarksStaff: 2, markOverall: 3, markFood: 3, markPlace: 2, markStaff: 4, lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z', location: { coordinates: [50.5507048, 3.028566299999966], type: 'Point' } }),
-  new Mark({ _id: '58f4dfff45dab98a840d00a3', place: '58f62aa95a333aff739c0004', item: '58f4dfff45dab98a840b0000', user: '58f4dfff45dab98a840a0000', markOverall: 3, markFood: 2, markPlace: 3, markStaff: 2, comment: 'Via Istanbul pizzas are so so :-S (1)', lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z' }),
-  new Mark({ _id: '58f4dfff45dab98a840d00b3', place: '58f62aa95a333aff739c0004', item: '58f4dfff45dab98a840b0000', user: '58f4dfff45dab98a840a0000', markOverall: 2, markFood: 3, markPlace: 2, markStaff: 4, comment: 'Via Istanbul pizzas are so so :-S (1)', lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z' }),
-  // Burger from Les Rois Fainéants (1 mark)
-  new Mark({ _id: '58f4dfff45dab98a840d0004', place: '58f62aa95a333aff739c0005', item: '58f4dfff45dab98a840b0002', aggregatedMark: true, nbAggregatedMarksOverall: 1, markOverall: 2, lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z', location: { coordinates: [50.5750322, 3.0177912000000333], type: 'Point' } }),
-  new Mark({ _id: '58f4dfff45dab98a840d00a4', place: '58f62aa95a333aff739c0005', item: '58f4dfff45dab98a840b0002', user: '58f4dfff45dab98a840a0000', markOverall: 2, comment: 'Les Rois Fainéants burgers are not good!', lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z' }),
+export const initialMarkAggregates = [
+  // Pizza from Papà Raffaele (4 individual marks)
+  new MarkAggregate({ _id: '58f4dfff45dab98a840d0000', place: '58f4dfff45dab98a840c0000', item: '58f4dfff45dab98a840b0000', nbMarksOverall: 4, nbMarksFood: 3, nbMarksPlace: 2, nbMarksStaff: 1, markOverall: 5, markFood: 5, markPlace: 5, markStaff: 5, lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z', location: { coordinates: [50.6403954, 3.0651635000000397], type: 'Point' } }),
+  // Pasta from Papà Raffaele (3 individual marks)
+  new MarkAggregate({ _id: '58f4dfff45dab98a840d0001', place: '58f4dfff45dab98a840c0000', item: '58f4dfff45dab98a840b0001', nbMarksOverall: 3, nbMarksFood: 3, nbMarksPlace: 1, markOverall: 4, markFood: 4, markPlace: 5, lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z', location: { coordinates: [50.6403954, 3.0651635000000397], type: 'Point' } }),
+  // Burgers from Le Lion Bossu (2 individual marks)
+  new MarkAggregate({ _id: '58f4dfff45dab98a840d0002', place: '58f4e17c45dab98a840c0001', item: '58f4dfff45dab98a840b0002', nbMarksOverall: 2, nbMarksFood: 2, nbMarksPlace: 2, nbMarksStaff: 2, markOverall: 4, markFood: 4, markPlace: 4, markStaff: 4, lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z', location: { coordinates: [50.64030820000001, 3.06502839999996], type: 'Point' } }),
+  // Pizza from Via Istanbul (2 individual marks)
+  new MarkAggregate({ _id: '58f4dfff45dab98a840d0003', place: '58f62aa95a333aff739c0004', item: '58f4dfff45dab98a840b0000', nbMarksOverall: 2, nbMarksFood: 2, nbMarksPlace: 2, nbMarksStaff: 2, markOverall: 3, markFood: 3, markPlace: 2, markStaff: 4, lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z', location: { coordinates: [50.5507048, 3.028566299999966], type: 'Point' } }),
+  // Burger from Les Rois Fainéants (1 individual mark)
+  new MarkAggregate({ _id: '58f4dfff45dab98a840d0004', place: '58f62aa95a333aff739c0005', item: '58f4dfff45dab98a840b0002', nbMarksOverall: 1, markOverall: 2, lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z', location: { coordinates: [50.5750322, 3.0177912000000333], type: 'Point' } }),
+];
+
+export const initialMarkIndividuals = [
+  // Pizza from Papà Raffaele (4 individual marks)
+  new MarkIndividual({ _id: '58f4dfff45dab98a840d00a0', markAggregate: '58f4dfff45dab98a840d0000', user: '58f4dfff45dab98a840a0000', markOverall: 5, comment: 'Papà Raffaele pizzas are so good! (1)', lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z' }),
+  new MarkIndividual({ _id: '58f4dfff45dab98a840d00b0', markAggregate: '58f4dfff45dab98a840d0000', user: '58f4dfff45dab98a840a0001', markOverall: 4, markFood: 5, comment: 'Papà Raffaele pizzas are so good! (2)', lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z' }),
+  new MarkIndividual({ _id: '58f4dfff45dab98a840d00c0', markAggregate: '58f4dfff45dab98a840d0000', user: '58f4dfff45dab98a840a0002', markOverall: 5, markFood: 4, markPlace: 5, comment: 'Papà Raffaele pizzas are so good! (3)', lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z' }),
+  new MarkIndividual({ _id: '58f4dfff45dab98a840d00d0', markAggregate: '58f4dfff45dab98a840d0000', user: '58f4dfff45dab98a840a0003', markOverall: 5, markFood: 4, markPlace: 5, markStaff: 5, comment: 'Papà Raffaele pizzas are so good! (4)', lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z' }),
+  // Pasta from Papà Raffaele (3 individual marks)
+  new MarkIndividual({ _id: '58f4dfff45dab98a840d00a1', markAggregate: '58f4dfff45dab98a840d0001', user: '58f4dfff45dab98a840a0000', markOverall: 3, markFood: 4, markPlace: 5, comment: 'Papà Raffaele pastas are good! (1)', lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z' }),
+  new MarkIndividual({ _id: '58f4dfff45dab98a840d00b1', markAggregate: '58f4dfff45dab98a840d0001', user: '58f4dfff45dab98a840a0001', markOverall: 4, markFood: 3, comment: 'Papà Raffaele pastas are good! (2)', lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z' }),
+  new MarkIndividual({ _id: '58f4dfff45dab98a840d00c1', markAggregate: '58f4dfff45dab98a840d0001', user: '58f4dfff45dab98a840a0003', markOverall: 4, markFood: 4, comment: 'Papà Raffaele pastas are good! (3)', lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z' }),
+  // Burgers from Le Lion Bossu (2 individual marks)
+  new MarkIndividual({ _id: '58f4dfff45dab98a840d00a2', markAggregate: '58f4dfff45dab98a840d0002', user: '58f4dfff45dab98a840a0000', markOverall: 4, markFood: 3, markPlace: 4, markStaff: 3, comment: 'Le Lion Bossu burgers are good! (1)', lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z' }),
+  new MarkIndividual({ _id: '58f4dfff45dab98a840d00b2', markAggregate: '58f4dfff45dab98a840d0002', user: '58f4dfff45dab98a840a0000', markOverall: 3, markFood: 4, markPlace: 3, markStaff: 4, comment: 'Le Lion Bossu burgers are good! (2)', lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z' }),
+  // Pizza from Via Istanbul (2 individual marks)
+  new MarkIndividual({ _id: '58f4dfff45dab98a840d00a3', markAggregate: '58f4dfff45dab98a840d0003', user: '58f4dfff45dab98a840a0000', markOverall: 3, markFood: 2, markPlace: 3, markStaff: 2, comment: 'Via Istanbul pizzas are so so :-S (1)', lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z' }),
+  new MarkIndividual({ _id: '58f4dfff45dab98a840d00b3', markAggregate: '58f4dfff45dab98a840d0003', user: '58f4dfff45dab98a840a0000', markOverall: 2, markFood: 3, markPlace: 2, markStaff: 4, comment: 'Via Istanbul pizzas are so so :-S (1)', lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z' }),
+  // Burger from Les Rois Fainéants (1 individual mark)
+  new MarkIndividual({ _id: '58f4dfff45dab98a840d00a4', markAggregate: '58f4dfff45dab98a840d0004', user: '58f4dfff45dab98a840a0000', markOverall: 2, comment: 'Les Rois Fainéants burgers are not good!', lastModif: '2017-04-17T17:04:05.950Z', since: '1968-12-21T00:00:00.000Z' }),
 ];
 
 
@@ -83,31 +92,47 @@ export default function insertInitialData() {
     }))
 
   // Create new test marks after removing any existing one
-    .then(Mark.find({ since: '1968-12-21T00:00:00.000Z' }).remove().exec())
-    .then(Mark.create(initialMarks, (err4) => {
-      if (err4) console.log('    Mark.create err=', err4);
+    .then(MarkAggregate.find({ since: '1968-12-21T00:00:00.000Z' }).remove().exec())
+    .then(MarkAggregate.create(initialMarkAggregates, (err5) => {
+      if (err5) console.log('    MarkAggregate.create err=', err5);
+    }))
+
+  // Create new test marks after removing any existing one
+    .then(MarkIndividual.find({ since: '1968-12-21T00:00:00.000Z' }).remove().exec())
+    .then(MarkIndividual.create(initialMarkIndividuals, (err6) => {
+      if (err6) console.log('    MarkIndividual.create err=', err6);
     }))
 
   // Display collection counts
     .then(() => {
       User.find().count((err5, results) => {
         if (err5) return console.error(err5);
-        console.log('# Users: ', results);
+        const test = results === initialUsers.length ? 'OK' : 'KO';
+        console.log(`# Users: ${results} ${test}`);
         return results;
       });
       Item.find().count((err6, results) => {
         if (err6) return console.error(err6);
-        console.log('# Items: ', results);
+        const test = results === initialItems.length ? 'OK' : 'KO';
+        console.log(`# Items: ${results} ${test}`);
         return results;
       });
       Place.find().count((err7, results) => {
         if (err7) return console.error(err7);
-        console.log('# Places: ', results);
+        const test = results === initialPlaces.length ? 'OK' : 'KO';
+        console.log(`# Places: ${results} ${test}`);
         return results;
       });
-      Mark.find().count((err8, results) => {
+      MarkAggregate.find().count((err8, results) => {
         if (err8) return console.error(err8);
-        console.log('# Marks: ', results);
+        const test = results === initialMarkAggregates.length ? 'OK' : 'KO';
+        console.log(`# MarkAggregate: ${results} ${test}`);
+        return results;
+      });
+      MarkIndividual.find().count((err8, results) => {
+        if (err8) return console.error(err8);
+        const test = results === initialMarkIndividuals.length ? 'OK' : 'KO';
+        console.log(`# MarkIndividual: ${results} ${test}`);
         return results;
       });
     });

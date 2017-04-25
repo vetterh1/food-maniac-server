@@ -2,7 +2,8 @@ import { Router } from 'express';
 import * as UserController from '../controllers/userController';
 import * as ItemController from '../controllers/itemController';
 import * as PlaceController from '../controllers/placeController';
-import * as MarkController from '../controllers/markController';
+import * as MarkAggregateController from '../controllers/markAggregateController';
+import * as MarkIndividualController from '../controllers/markIndividualController';
 
 const router = new Router();
 
@@ -71,25 +72,43 @@ router.route('/places/id/:_id').post(PlaceController.updatePlace);
 router.route('/places/id/:_id').delete(PlaceController.deletePlace);
 
 
-// ----------------  MARKS ----------------
+// ----------------  markAggregates ----------------
 
-// Get all marks
-router.route('/marks').get(MarkController.getMarks);
+// Get all markAggregates
+router.route('/markAggregates').get(MarkAggregateController.getMarkAggregates);
 
-// Get all AGGREGATE marks for one item
-router.route('/marks/itemId/:_itemId/maxDistance/:_maxDistance/lat/:_lat/lng/:_lng').get(MarkController.getAggregatedMarksByItemIdAndDistance);
+// Get all markAggregates for one item
+router.route('/markAggregates/itemId/:_itemId/maxDistance/:_maxDistance/lat/:_lat/lng/:_lng').get(MarkAggregateController.getMarkAggregatesByItemIdAndDistance);
 
-// Get one mark by _id
-router.route('/marks/id/:_id').get(MarkController.getMark);
+// Get one markAggregates by _id
+router.route('/markAggregates/id/:_id').get(MarkAggregateController.getMarkAggregate);
 
-// Add a new mark
-router.route('/marks').post(MarkController.addMark);
+// Update a markAggregates by _id
+router.route('/markAggregates/id/:_id').post(MarkAggregateController.updateMarkAggregate);
 
-// Update a user by _id
-router.route('/marks/id/:_id').post(MarkController.updateMark);
+// Delete a markAggregates by _id
+router.route('/markAggregates/id/:_id').delete(MarkAggregateController.deleteMarkAggregate);
 
-// Delete a mark by _id
-router.route('/marks/id/:_id').delete(MarkController.deleteMark);
+
+// ----------------  markIndividuals ----------------
+
+// Get all markIndividuals
+router.route('/markIndividuals').get(MarkIndividualController.getMarkIndividuals);
+
+// Get all markIndividuals for one aggregate
+router.route('/markIndividuals/markAggregateId/:_markAggregatesId').get(MarkIndividualController.getMarkIndividualsByMarkAggregateId);
+
+// Get one markIndividuals by _id
+router.route('/markIndividuals/id/:_id').get(MarkIndividualController.getMarkIndividual);
+
+// Add a new markIndividuals
+router.route('/markIndividuals').post(MarkIndividualController.addMarkIndividual);
+
+// Update a markIndividuals by _id
+router.route('/markIndividuals/id/:_id').post(MarkIndividualController.updateMarkIndividual);
+
+// Delete a markIndividuals by _id
+router.route('/markIndividuals/id/:_id').delete(MarkIndividualController.deleteMarkIndividual);
 
 
 
