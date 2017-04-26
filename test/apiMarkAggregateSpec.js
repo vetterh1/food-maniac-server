@@ -17,7 +17,7 @@ chai.use(chaiHttp);
 global.items = [];
 global.places = [];
 
-describe('API MarkAggregates', () => {
+describe('API MarkAggregate', () => {
   // Before each test we empty the database
   beforeEach((done) => {
     MarkAggregate.remove({})

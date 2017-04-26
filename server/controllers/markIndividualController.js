@@ -152,6 +152,7 @@ function addOrUpdateAggregatedMark({ req, res }) {
           .findOneAndUpdate(
           { _id: foundMarkAggregate._id },
           { $set: updates },
+          { new: true },
           (errUpd, markAggregate) => {
             if (errUpd) {
               logger.error(`markIndividualController.addOrUpdateAggregatedMark updating existing aggregated mark failed - err = ${errUpd}`);
