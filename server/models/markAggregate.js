@@ -6,8 +6,6 @@ const markAggregateSchema = new Schema({
   // marks are about an item found in one place
   item: { type: Schema.Types.ObjectId, ref: 'Item', required: true },
   place: { type: Schema.Types.ObjectId, ref: 'Place', required: true },
-  // and given by a user (empty if it's an aggregate)
-  user: { type: Schema.Types.ObjectId, ref: 'User', required: false },
   // There are 4 different marks, only 1st one is mandatory
   markOverall: { type: 'Number', required: true },
   markFood: { type: 'Number', required: false },

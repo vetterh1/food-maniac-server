@@ -107,31 +107,36 @@ export default function insertInitialData() {
     .then(() => {
       User.find().count((err5, results) => {
         if (err5) return console.error(err5);
-        const test = results === initialUsers.length ? 'OK' : 'KO';
+        const expectedCount = initialUsers.length;
+        const test = results === expectedCount ? 'OK' : `KO (should be ${expectedCount.length})`;
         console.log(`# Users: ${results} ${test}`);
         return results;
       });
       Item.find().count((err6, results) => {
         if (err6) return console.error(err6);
-        const test = results === initialItems.length ? 'OK' : 'KO';
+        const expectedCount = initialItems.length;
+        const test = results === expectedCount ? 'OK' : `KO (should be ${expectedCount.length})`;
         console.log(`# Items: ${results} ${test}`);
         return results;
       });
       Place.find().count((err7, results) => {
         if (err7) return console.error(err7);
-        const test = results === initialPlaces.length ? 'OK' : 'KO';
+        const expectedCount = initialPlaces.length;
+        const test = results === expectedCount ? 'OK' : `KO (should be ${expectedCount.length})`;
         console.log(`# Places: ${results} ${test}`);
         return results;
       });
       MarkAggregate.find().count((err8, results) => {
         if (err8) return console.error(err8);
-        const test = results === initialMarkAggregates.length ? 'OK' : 'KO';
+        const expectedCount = initialMarkAggregates.length;
+        const test = results === expectedCount ? 'OK' : `KO (should be ${expectedCount.length})`;
         console.log(`# MarkAggregate: ${results} ${test}`);
         return results;
       });
       MarkIndividual.find().count((err8, results) => {
         if (err8) return console.error(err8);
-        const test = results === initialMarkIndividuals.length ? 'OK' : 'KO';
+        const expectedCount = initialMarkIndividuals.length;
+        const test = results === expectedCount ? 'OK' : `KO (should be ${expectedCount.length})`;
         console.log(`# MarkIndividual: ${results} ${test}`);
         return results;
       });

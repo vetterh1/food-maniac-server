@@ -1,9 +1,15 @@
 import * as logger from 'winston';
 import MarkIndividual from '../models/markIndividual';
+import MarkAggregate from '../models/markAggregate';
 
 
 /**
  * Get all markIndividuals
+ *
+ * Returns code 500 on network error (NOT empty list)
+ * Returns code 200 otherwise + { markIndividuals }
+ * Note: markIndividuals is an array that can be empty
+ *
  */
 export function getMarkIndividuals(req, res) {
   MarkIndividual.find().sort('-since').exec((err, markIndividuals) => {
@@ -19,6 +25,11 @@ export function getMarkIndividuals(req, res) {
 
 /**
  * Get all markIndividuals for one item
+ *
+ * Returns code 500 on network error (NOT empty list)
+ * Returns code 200 otherwise + { markIndividuals }
+ * Note: markIndividuals is an array that can be empty
+ *
  */
 
 
@@ -46,97 +57,108 @@ export function getMarkIndividualsByMarkAggregateId(req, res) {
 
 
 
-function addRegularMark({ req, res }) {
+function addRegularMark({ req, res, markAggregate }) {
  // Return a new promise.
   return new Promise((resolve, reject) => {
-    logger.info(`{ markIndividualController.addRegularMark (item: ${req.body.markIndividual.item}; item: ${req.body.markIndividual.place})`);
+    logger.info(`{ markIndividualController.addRegularMark (markAggregate: ${markAggregate._id})`);
 
-    const newMarkIndividual = new MarkIndividual(req.body.markIndividual);
-    newMarkIndividual.save((err, saved) => {
+    const newMarkIndividual = new MarkIndividual({
+      markAggregate: markAggregate._id,
+      user: req.body.markIndividual.user,
+      markOverall: req.body.markIndividual.markOverall,
+      markFood: req.body.markIndividual.markFood,
+      markPlace: req.body.markIndividual.markPlace,
+      markStaff: req.body.markIndividual.markStaff,
+      comment: req.body.markIndividual.comment,
+    });
+    newMarkIndividual.save((err, markIndividual) => {
       if (err) {
         logger.error(`markIndividualController.addRegularMark ${newMarkIndividual.markIndividual} failed - err = `, err);
         // res.status(500).send(err);
         reject(Error(err.message));
       } else {
-        // res.json({ mark: saved });
-        logger.info(`} markIndividualController.addRegularMark (_id=${saved._id})`);
-        resolve({ req, res, individualMark: saved });
+        // res.json({ mark: markIndividual });
+        logger.info(`} markIndividualController.addRegularMark (_id=${markIndividual._id})`);
+        resolve({ req, res, markIndividual, markAggregate });
       }
     });
   });
 }
 
-function addOrUpdateAggregatedMark({ req, res, individualMark }) {
+function addOrUpdateAggregatedMark({ req, res }) {
  // Return a new promise.
   return new Promise((resolve, reject) => {
     logger.info(`{ markIndividualController.addOrUpdateAggregatedMark (item: ${req.body.markIndividual.item}; item: ${req.body.markIndividual.place})`);
 
     // Search if an aggregate mark already exists for this item+place
-    MarkIndividual.findOne({ item: req.body.markIndividual.item, place: req.body.markIndividual.place, aggregatedMark: true }).exec((err, foundAggregatedMark) => {
-      if (err || !foundAggregatedMark) {
+    MarkAggregate.findOne({ item: req.body.markIndividual.item, place: req.body.markIndividual.place }).exec((err, foundMarkAggregate) => {
+      if (err || !foundMarkAggregate) {
         // NO aggreagated mark found, need to create a new one:
         logger.info('markIndividualController.addOrUpdateAggregatedMark did not find an existing aggregate mark');
 
-        const newAggregatedMark = new MarkIndividual(req.body.markIndividual);
-        newAggregatedMarkIndividual.aggregatedMark = true;
-        newAggregatedMarkIndividual.nbAggregatedMarksOverall = 1;
-        newAggregatedMarkIndividual.nbAggregatedMarksFood = req.body.markIndividual.markFood ? 1 : null;
-        newAggregatedMarkIndividual.nbAggregatedMarksPlace = req.body.markIndividual.markPlace ? 1 : null;
-        newAggregatedMarkIndividual.nbAggregatedMarksStaff = req.body.markIndividual.markStaff ? 1 : null;
-        newAggregatedMarkIndividual.save((errNew, aggregatedMark) => {
+        const newMarkAggregate = new MarkAggregate({
+          item: req.body.markIndividual.item,
+          place: req.body.markIndividual.place,
+          markOverall: req.body.markIndividual.markOverall,
+          markFood: req.body.markIndividual.markFood,
+          markPlace: req.body.markIndividual.markPlace,
+          markStaff: req.body.markIndividual.nbMarksPlace,
+          nbMarksOverall: 1,
+          nbMarksFood: req.body.markIndividual.markFood ? 1 : null,
+          nbMarksPlace: req.body.markIndividual.markPlace ? 1 : null,
+          nbMarksStaff: req.body.markIndividual.markStaff ? 1 : null,
+          location: req.body.markIndividual.location,
+        });
+        newMarkAggregate.save((errNew, markAggregate) => {
           if (errNew) {
-            logger.error(`markIndividualController.addOrUpdateAggregatedMark creating new aggreagated mark failed - err = ${errNew}`);
-            // res.status(500).send(errNew);
+            logger.error(`markIndividualController.addOrUpdateAggregatedMark creating new aggregated mark failed - err = ${errNew}`);
             reject(Error(errNew.message));
           } else {
-            // res.json({ aggregatedMark: aggregatedMark });
-            logger.info(`} markIndividualController.addOrUpdateAggregatedMark  creating new aggreagated mark (_id=${aggregatedMarkIndividual._id})`);
-            resolve({ req, res, individualMark, aggregatedMark });
+            logger.info(`} markIndividualController.addOrUpdateAggregatedMark  creating new aggregated mark (_id=${markAggregate._id})`);
+            resolve({ req, res, markAggregate });
           }
         });
       } else {
         // Aggregated mark already exists: update it!
-        logger.info('markIndividualController.addOrUpdateAggregatedMark found an existing aggregate mark - foundAggregatedMarkIndividual._id: ', foundAggregatedMarkIndividual._id);
+        logger.info(`markIndividualController.addOrUpdateAggregatedMark found an existing aggregate mark - foundMarkAggregate._id: ${foundMarkAggregate._id}`);
 
-        const newNbAggregatedMarksOverall = foundAggregatedMarkIndividual.nbAggregatedMarksOverall + 1;
-        const newMarkOverall = ((foundAggregatedMarkIndividual.markOverall * foundAggregatedMarkIndividual.nbAggregatedMarksOverall) + req.body.markIndividual.markOverall) / newNbAggregatedMarksOverall;
+        const newNbMarksOverall = foundMarkAggregate.nbMarksOverall + 1;
+        const newMarkOverall = ((foundMarkAggregate.markOverall * foundMarkAggregate.nbMarksOverall) + req.body.markIndividual.markOverall) / newNbMarksOverall;
 
         const updates = {
-            nbAggregatedMarksOverall: newNbAggregatedMarksOverall,
-            markOverall: newMarkOverall,
+          nbMarksOverall: newNbMarksOverall,
+          markOverall: newMarkOverall,
         };
 
         // update food marking...
         if (req.body.markIndividual.markFood) {
-          updates.nbAggregatedMarksFood = foundAggregatedMarkIndividual.nbAggregatedMarksFood ? foundAggregatedMarkIndividual.nbAggregatedMarksFood + 1 : 1;
-          updates.markFood = foundAggregatedMarkIndividual.markFood ? foundAggregatedMarkIndividual.markFood + ((req.body.markIndividual.markFood - foundAggregatedMarkIndividual.markFood) / updates.nbAggregatedMarksFood) : req.body.markIndividual.markFood;
+          updates.nbMarksFood = foundMarkAggregate.nbMarksFood ? foundMarkAggregate.nbMarksFood + 1 : 1;
+          updates.markFood = foundMarkAggregate.markFood ? foundMarkAggregate.markFood + ((req.body.markIndividual.markFood - foundMarkAggregate.markFood) / updates.nbMarksFood) : req.body.markIndividual.markFood;
         }
         // update Place marking...
         if (req.body.markIndividual.markPlace) {
-          updates.nbAggregatedMarksPlace = foundAggregatedMarkIndividual.nbAggregatedMarksPlace ? foundAggregatedMarkIndividual.nbAggregatedMarksPlace + 1 : 1;
-          updates.markPlace = foundAggregatedMarkIndividual.markPlace ? foundAggregatedMarkIndividual.markPlace + ((req.body.markIndividual.markPlace - foundAggregatedMarkIndividual.markPlace) / updates.nbAggregatedMarksPlace) : req.body.markIndividual.markPlace;
+          updates.nbMarksPlace = foundMarkAggregate.nbMarksPlace ? foundMarkAggregate.nbMarksPlace + 1 : 1;
+          updates.markPlace = foundMarkAggregate.markPlace ? foundMarkAggregate.markPlace + ((req.body.markIndividual.markPlace - foundMarkAggregate.markPlace) / updates.nbMarksPlace) : req.body.markIndividual.markPlace;
         }
         // update Staff marking...
         if (req.body.markIndividual.markStaff) {
-          updates.nbAggregatedMarksStaff = foundAggregatedMarkIndividual.nbAggregatedMarksStaff ? foundAggregatedMarkIndividual.nbAggregatedMarksStaff + 1 : 1;
-          updates.markStaff = foundAggregatedMarkIndividual.markStaff ? foundAggregatedMarkIndividual.markStaff + ((req.body.markIndividual.markStaff - foundAggregatedMarkIndividual.markStaff) / updates.nbAggregatedMarksStaff) : req.body.markIndividual.markStaff;
+          updates.nbMarksStaff = foundMarkAggregate.nbMarksStaff ? foundMarkAggregate.nbMarksStaff + 1 : 1;
+          updates.markStaff = foundMarkAggregate.markStaff ? foundMarkAggregate.markStaff + ((req.body.markIndividual.markStaff - foundMarkAggregate.markStaff) / updates.nbMarksStaff) : req.body.markIndividual.markStaff;
         }
 
         logger.info('markIndividualController.addOrUpdateAggregatedMark updates: ', updates);
 
-        MarkIndividual
+        MarkAggregate
           .findOneAndUpdate(
-          { _id: foundAggregatedMarkIndividual._id },
+          { _id: foundMarkAggregate._id },
           { $set: updates },
-          (errUpd, aggregatedMark) => {
+          (errUpd, markAggregate) => {
             if (errUpd) {
               logger.error(`markIndividualController.addOrUpdateAggregatedMark updating existing aggregated mark failed - err = ${errUpd}`);
-              // res.status(500).send(errUpd);
               reject(Error(errUpd.message));
             } else {
-              // res.json({ aggregatedMark: raw });
-              logger.info(`} markIndividualController.addOrUpdateAggregatedMark updating existing aggreagated mark (_id=${aggregatedMarkIndividual._id})`);
-              resolve({ req, res, individualMark, aggregatedMark });
+              logger.info(`} markIndividualController.addOrUpdateAggregatedMark updating existing aggregated mark (_id=${markAggregate._id})`);
+              resolve({ req, res, markAggregate });
             }
           }
         );
@@ -146,15 +168,20 @@ function addOrUpdateAggregatedMark({ req, res, individualMark }) {
 }
 
 
-function sendResponseToBrowser({ req, res, aggregatedMark, individualMark }) {
-  logger.info(`markIndividualController.sendResponseToBrowser (item: ${req.body.markIndividual.item}; item: ${req.body.markIndividual.place}; aggregatedMark: ${aggregatedMarkIndividual._id}; individualMark: ${individualMarkIndividual._id})`);
-  res.json({ individualMark, aggregatedMark });
+function sendResponseToBrowser({ req, res, markIndividual, markAggregate }) {
+  logger.info(`markIndividualController.sendResponseToBrowser (item: ${req.body.markIndividual.item}; item: ${req.body.markIndividual.place}; markAggregate: ${markAggregate._id}; markIndividual: ${markIndividual._id})`);
+  res.json({ markIndividual, markAggregate });
 }
 
 
 
 /**
  * Add a MarkIndividual
+ *
+ * Returns code 400 on input parameters error
+ * Returns code 500 on saving & network error
+ * Returns code 200 otherwise + { markIndividual, markAggregate }
+ *
  */
 
 
@@ -169,11 +196,11 @@ export function addMarkIndividual(req, res) {
     logger.error(error);
     res.status(400).json(error);
   } else {
-    addRegularMark({ req, res })
-    .then(addOrUpdateAggregatedMark)
+    addOrUpdateAggregatedMark({ req, res })
+    .then(addRegularMark)
     .then(sendResponseToBrowser)
     .catch((error) => {
-      logger.error(`markIndividualController.addMarkIndividual (item: ${req.body.markIndividual.item}; item: ${req.body.markIndividual.place}) failed - error = `, error);
+      logger.error(`markIndividualController.addMarkIndividual (item: ${req.body.markIndividual.item}; place: ${req.body.markIndividual.place}) failed - error = `, error);
       res.status(500).send(error);
     });
   }
