@@ -52,6 +52,7 @@ describe('API MarkIndividual', () => {
   });
 
 
+
   /*
   * Test the /GET route
   */
@@ -88,6 +89,8 @@ describe('API MarkIndividual', () => {
   });
 
 
+
+
   /*
   * Test the /POST route
   */
@@ -108,20 +111,20 @@ describe('API MarkIndividual', () => {
           .post('/api/markIndividuals')
           .send({ markIndividual: markIndividualTest })
           .end((err, res) => {
-          // console.log('res.body.mark=', res.body.mark);
-          // console.log('res.body.mark.marks[0]=', res.body.mark.marks[0]);
-          res.should.have.status(200);
-          res.body.should.be.a('object');
-          res.body.should.have.property('markIndividual');
-          res.body.should.have.property('markAggregate');
-          res.body.markIndividual.should.be.a('object');
-          res.body.markIndividual.should.have.property('markOverall').eql(markIndividualTest.markOverall);
-          res.body.markIndividual.markOverall.should.be.a('number');
-          res.body.markAggregate.should.be.a('object');
-          res.body.markAggregate.should.have.property('markOverall').eql(markIndividualTest.markOverall);
-          res.body.markAggregate.markOverall.should.be.a('number');
-          done();
-        });
+            // console.log('res.body.mark=', res.body.mark);
+            // console.log('res.body.mark.marks[0]=', res.body.mark.marks[0]);
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.should.have.property('markIndividual');
+            res.body.should.have.property('markAggregate');
+            res.body.markIndividual.should.be.a('object');
+            res.body.markIndividual.should.have.property('markOverall').eql(markIndividualTest.markOverall);
+            res.body.markIndividual.markOverall.should.be.a('number');
+            res.body.markAggregate.should.be.a('object');
+            res.body.markAggregate.should.have.property('markOverall').eql(markIndividualTest.markOverall);
+            res.body.markAggregate.markOverall.should.be.a('number');
+            done();
+          });
     });
 
     it('should not fail creating a mark twice, aggregate should have nbMarksOverall = 2', (done) => {
@@ -129,7 +132,7 @@ describe('API MarkIndividual', () => {
       chai.request(app)
           .post('/api/markIndividuals')
           .send({ markIndividual })
-          .end((err, res1) => {
+          .end(() => {
             chai.request(app)
                 .post('/api/markIndividuals')
                 .send({ markIndividual })
@@ -159,5 +162,100 @@ describe('API MarkIndividual', () => {
         });
     });
   });  /* End test the /POST route */
+
+
+
+
+
+  /*
+  * Test the /POST/:_id route
+  */
+
+  describe('Mark Update', () => {
+    it('should succeed updating a complete mark', (done) => {
+      const markOrig = new MarkIndividual({ markAggregate: '58aaa000888555aaabd00000', user: '58aaa000888555aaabd00001', markOverall: 3 });
+      const markUpdt = { markOverall: 1 };
+      markOrig.save((errSaving, markSaved) => {
+        chai.request(app)
+          .post(`/api/markIndividuals/id/${markSaved._id}`)
+          .send({ markIndividual: markUpdt })
+          .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.should.have.property('markIndividual');
+            res.body.markIndividual.should.be.a('object');
+            res.body.markIndividual.should.have.property('markOverall').eql(markUpdt.markOverall);
+            res.body.markIndividual.markOverall.should.be.a('number');
+            done();
+          });
+      });
+    });
+
+    it('should fail updating the _id', (done) => {
+      const markOrig = new MarkIndividual({ markAggregate: '58aaa000888555aaabd00000', user: '58aaa000888555aaabd00001', markOverall: 3 });
+      markOrig.save((errSaving, markSaved) => {
+        chai.request(app)
+          .post(`/api/markIndividuals/id/${markSaved._id}`)
+          .send({ markIndividual: { _id: '58aaa000888555aaabda2227' } })
+          .end((err, res) => {
+            res.should.have.status(400);
+            done();
+          });
+      });
+    });
+
+    it('should fail updating an unknown mark', (done) => {
+      chai.request(app)
+        .post('/api/markIndividuals/id/58aaa000888555aaabda2221')
+        .send({ markIndividual: { markOverall: 1 } })
+        .end((err, res) => {
+          res.should.have.status(500);
+          done();
+        });
+    });
+
+    it('should fail updating with wrong mark info', (done) => {
+      const markOrig = new MarkIndividual({ markAggregate: '58aaa000888555aaabd00000', user: '58aaa000888555aaabd00001', markOverall: 3 });
+      markOrig.save((errSaving, itemSaved) => {
+        chai.request(app)
+          .post(`/api/markIndividuals/id/${itemSaved._id}`)
+          .send({ WRONG_mark: { markOverall: 1 } })
+          .end((err, res) => {
+            res.should.have.status(400);
+            done();
+          });
+      });
+    });
+  });  /* End test the /POST/:_id route */
+
+
+  /*
+  * Test the /DELETE/:_id route
+  */
+  describe('Mark Deletion', () => {
+    it('should fail deleting an unknown mark', (done) => {
+      chai.request(app)
+        .delete('/api/markIndividuals/id/58aaa000888555aaabdaf555')
+        .send({})
+        .end((err, res) => {
+          res.should.have.status(500);
+          done();
+        });
+    });
+
+    it('should delete an existing mark', (done) => {
+      const mark = new MarkIndividual({ markAggregate: '58aaa000888555aaabd00000', user: '58aaa000888555aaabd00001', markOverall: 3 });
+      mark.save((errSaving, markSaved) => {
+        chai.request(app)
+          .delete(`/api/markIndividuals/id/${markSaved._id}`)
+          .send({})
+          .end((err, res) => {
+            res.should.have.status(200);
+            done();
+          });
+      });
+    });
+  });
+
 
 });   /* MarkIndividual */

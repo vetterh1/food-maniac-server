@@ -2,9 +2,11 @@ import * as logger from 'winston';
 import MarkAggregate from '../models/markAggregate';
 
 
-/**
- * Get all markAggregates
- */
+// /GET route - Get all markAggregates
+// Returns code 500 on network error (NOT empty list)
+// Returns code 200 otherwise + { markAggregates }
+// Note: markAggregates is an array that can be empty
+
 export function getMarkAggregates(req, res) {
   MarkAggregate.find().sort('-since').exec((err, markAggregates) => {
     if (err) {
@@ -17,10 +19,11 @@ export function getMarkAggregates(req, res) {
   });
 }
 
-/**
- * Get all markAggregates for one item
- */
 
+// /GET /itemId/... route - Get all markAggregates for one item
+// Returns code 500 on network error (NOT empty list)
+// Returns code 200 otherwise + { markAggregates }
+// Note: markAggregates is an array that can be empty
 
 export function getMarkAggregatesByItemIdAndDistance(req, res) {
   const query = MarkAggregate
@@ -57,9 +60,10 @@ export function getMarkAggregatesByItemIdAndDistance(req, res) {
 
 
 
-/**
- * Get a single markAggregate
- */
+// /GET/:_id route - Get one markAggregate by _id
+// Returns code 500 on network error or not found
+// Returns code 200 + { markAggregate } if found
+
 export function getMarkAggregate(req, res) {
   MarkAggregate.findById(req.params._id).exec((err, markAggregate) => {
     if (err || !markAggregate) {
@@ -73,9 +77,12 @@ export function getMarkAggregate(req, res) {
 }
 
 
-/*
- * Update an existing markAggregate
- */
+// /POST/:_id route - Update a markAggregates by _id
+// Returns code 400 on input parameters error (missing or update _id)
+// Returns code 500 on network error or not found
+// Returns code 200 + { markAggregate } if found
+// Note: markAggregate is the updated mark
+
 export function updateMarkAggregate(req, res) {
   if (!req.body || !req.body.markAggregate) {
     const error = { status: 'error', message: 'markAggregateController.updateMarkAggregate failed - missing mandatory fields: ' };
@@ -98,9 +105,10 @@ export function updateMarkAggregate(req, res) {
 }
 
 
-/**
- * Delete a markAggregate
- */
+// /DELETE/:_id route - Delete a markAggregates by _id
+// Returns code 500 on network error, delete error or not found
+// Returns code 200 on success (no value returned)
+
 export function deleteMarkAggregate(req, res) {
   MarkAggregate.findOne({ _id: req.params._id }).exec((err, markAggregate) => {
     if (err || !markAggregate) {

@@ -185,7 +185,7 @@ describe('API MarkAggregate', () => {
 
 
   /*
-  * Test the /GET /itemId/:_itemId/maxDistance/:_maxDistance/lat/:_lat/lng/:_lng route
+  * Test the /GET /itemId/... route
   */
   describe('MarkAggregate Retrieval by Item and Distance', () => {
     it('should fail finding markAggregate for an unknown item (no distance check)', (done) => {

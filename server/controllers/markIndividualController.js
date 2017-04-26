@@ -3,14 +3,11 @@ import MarkIndividual from '../models/markIndividual';
 import MarkAggregate from '../models/markAggregate';
 
 
-/**
- * Get all markIndividuals
- *
- * Returns code 500 on network error (NOT empty list)
- * Returns code 200 otherwise + { markIndividuals }
- * Note: markIndividuals is an array that can be empty
- *
- */
+// /GET route - Get all markIndividuals
+// Returns code 500 on network error (NOT empty list)
+// Returns code 200 otherwise + { markIndividuals }
+// Note: markIndividuals is an array that can be empty
+
 export function getMarkIndividuals(req, res) {
   MarkIndividual.find().sort('-since').exec((err, markIndividuals) => {
     if (err) {
@@ -23,15 +20,11 @@ export function getMarkIndividuals(req, res) {
   });
 }
 
-/**
- * Get all markIndividuals for one item
- *
- * Returns code 500 on network error (NOT empty list)
- * Returns code 200 otherwise + { markIndividuals }
- * Note: markIndividuals is an array that can be empty
- *
- */
 
+// /GET route - Get all markIndividuals for one aggregate
+// Returns code 500 on network error (NOT empty list)
+// Returns code 200 otherwise + { markIndividuals }
+// Note: markIndividuals is an array that can be empty
 
 export function getMarkIndividualsByMarkAggregateId(req, res) {
   const query = MarkIndividual
@@ -176,15 +169,11 @@ function sendResponseToBrowser({ req, res, markIndividual, markAggregate }) {
 
 
 
-/**
- * Add a MarkIndividual
- *
- * Returns code 400 on input parameters error
- * Returns code 500 on saving & network error
- * Returns code 200 otherwise + { markIndividual, markAggregate }
- *
- */
-
+ 
+// /POST route - Add a new markIndividuals (and update/create corresponding aggregate)
+// Returns code 400 on input parameters error
+// Returns code 500 on saving error
+// Returns code 200 otherwise + { markIndividual, markAggregate }
 
 export function addMarkIndividual(req, res) {
   if (!req.body || !req.body.markIndividual || !req.body.markIndividual.markOverall || !req.body.markIndividual.item || !req.body.markIndividual.place) {
@@ -208,10 +197,10 @@ export function addMarkIndividual(req, res) {
 }
 
 
+// /GET/:_id route - Get one markIndividual by _id
+// Returns code 500 on network error or not found
+// Returns code 200 + { markIndividual } if found
 
-/**
- * Get a single markIndividual
- */
 export function getMarkIndividual(req, res) {
   MarkIndividual.findById(req.params._id).exec((err, markIndividual) => {
     if (err || !markIndividual) {
@@ -225,9 +214,13 @@ export function getMarkIndividual(req, res) {
 }
 
 
-/*
- * Update an existing markIndividual
- */
+// Update a markIndividuals by _id
+// Returns code 400 on input parameters error
+// Returns code 500 on network error or not found
+// Returns code 200 + { markIndividual } if found
+// Note: markIndividual is the updated mark
+// Note: NO update of corresponding aggregate
+
 export function updateMarkIndividual(req, res) {
   if (!req.body || !req.body.markIndividual) {
     const error = { status: 'error', message: 'markIndividualController.updateMarkIndividual failed - missing mandatory fields: ' };
@@ -250,9 +243,11 @@ export function updateMarkIndividual(req, res) {
 }
 
 
-/**
- * Delete a markIndividual
- */
+// /DELETE/:_id route - Delete a markIndividuals by _id
+// Returns code 500 on network error, delete error or not found
+// Returns code 200 on success (no value returned)
+// Note: NO update of corresponding aggregate
+
 export function deleteMarkIndividual(req, res) {
   MarkIndividual.findOne({ _id: req.params._id }).exec((err, markIndividual) => {
     if (err || !markIndividual) {
