@@ -70,6 +70,8 @@ export const initialMarkIndividuals = [
 
 
 
+
+
 export default function insertInitialData() {
   console.log('{   insertInitialData()');
 
@@ -105,35 +107,35 @@ export default function insertInitialData() {
 
   // Display collection counts
     .then(() => {
-      User.find().count((err5, results) => {
+      User.find({ since: '1968-12-21T00:00:00.000Z' }).count((err5, results) => {
         if (err5) return console.error(err5);
         const expectedCount = initialUsers.length;
         const test = results === expectedCount ? 'OK' : `KO (should be ${expectedCount.length})`;
         console.log(`# Users: ${results} ${test}`);
         return results;
       });
-      Item.find().count((err6, results) => {
+      Item.find({ since: '1968-12-21T00:00:00.000Z' }).count((err6, results) => {
         if (err6) return console.error(err6);
         const expectedCount = initialItems.length;
         const test = results === expectedCount ? 'OK' : `KO (should be ${expectedCount.length})`;
         console.log(`# Items: ${results} ${test}`);
         return results;
       });
-      Place.find().count((err7, results) => {
+      Place.find({ since: '1968-12-21T00:00:00.000Z' }).count((err7, results) => {
         if (err7) return console.error(err7);
         const expectedCount = initialPlaces.length;
         const test = results === expectedCount ? 'OK' : `KO (should be ${expectedCount.length})`;
         console.log(`# Places: ${results} ${test}`);
         return results;
       });
-      MarkAggregate.find().count((err8, results) => {
+      MarkAggregate.find({ since: '1968-12-21T00:00:00.000Z' }).count((err8, results) => {
         if (err8) return console.error(err8);
         const expectedCount = initialMarkAggregates.length;
         const test = results === expectedCount ? 'OK' : `KO (should be ${expectedCount.length})`;
         console.log(`# MarkAggregate: ${results} ${test}`);
         return results;
       });
-      MarkIndividual.find().count((err8, results) => {
+      MarkIndividual.find({ since: '1968-12-21T00:00:00.000Z' }).count((err8, results) => {
         if (err8) return console.error(err8);
         const expectedCount = initialMarkIndividuals.length;
         const test = results === expectedCount ? 'OK' : `KO (should be ${expectedCount.length})`;

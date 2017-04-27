@@ -84,6 +84,13 @@ db.dropDatabase();
 use food_maniac_dev;
 exit;
 
+------ Reset prod db: ------ 
+mongo
+use food_maniac;
+db.dropDatabase();
+use food_maniac;
+exit;
+
 -------------  List collections & content ---------------
 show collections
 db.items.find()
