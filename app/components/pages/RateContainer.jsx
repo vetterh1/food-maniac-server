@@ -51,7 +51,7 @@ class RateContainer extends React.Component {
       // logRateContainer.debug(`RateContainer.saveLocation - this.props:\n\n${stringifyOnce(this.props, null, 2)}`);
 
       const placeSelected = this.props.places.places.find((place) => { return place.id === this.values.location; });
-      if (!placeSelected) throw new Error(`saveLocation - Could not resolve location - props.places.places:\n\n${stringifyOnce(props.places.places, null, 2)}`);
+      if (!placeSelected) throw new Error(`saveLocation - Could not resolve location - props.places.places:\n\n${stringifyOnce(this.props.places.places, null, 2)}`);
       // logRateContainer.debug(`RateContainer.saveLocation - placeSelected:\n\n${stringifyOnce(placeSelected, null, 2)}`);
       // logRateContainer.debug('placeSelected.geometry: ', placeSelected.geometry);
       // logRateContainer.debug('placeSelected.geometry.location.lat(): ', placeSelected.geometry.location.lat());
@@ -60,7 +60,8 @@ class RateContainer extends React.Component {
         name: placeSelected.name,
         googleMapId: this.values.location,
         location: {
-          coordinates: [placeSelected.geometry.location.lat(), placeSelected.geometry.location.lng()],
+          type: 'Point',
+          coordinates: [placeSelected.geometry.location.lng(), placeSelected.geometry.location.lat()],
         },
       };
 
@@ -79,7 +80,7 @@ class RateContainer extends React.Component {
           resolve(response.json());
         } else {
           // returns the error given by the server (async)
-          return response.json()
+          response.json()
           .then((error) => { throw new Error(error.message); });
         }
       })
@@ -104,7 +105,7 @@ class RateContainer extends React.Component {
     return new Promise((resolve, reject) => {
       logRateContainer.debug('{ RateContainer.saveMarks');
 
-      const mark = {
+      const markIndividual = {
         item: this.values.item,
         place: idLocation,
         markOverall: this.values.markOverall,
@@ -113,27 +114,28 @@ class RateContainer extends React.Component {
         markStaff: this.values.markStaff,
         comment: this.values.comment,
         location: {
+          type: 'Point',
           coordinates: [lat, lng],
         },
       };
-      logRateContainer.debug('   mark: ', mark);
+      logRateContainer.debug('   markIndividual: ', markIndividual);
 
-      fetch('/api/marks', {
+      fetch('/api/markIndividuals', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ mark }),
+        body: JSON.stringify({ markIndividual }),
       })
       .then((response) => {
         logRateContainer.debug('   fetch result: ', response);
         if (response.ok) {
           logRateContainer.debug('   fetch operation OK');
-          // returns the (async) response from server: the saved mark (with _id)
+          // returns the (async) response from server: the saved markIndividual (with _id)
           resolve(response.json());
         } else {
           // returns the error given by the server (async)
-          return response.json()
+          response.json()
           .then((error) => { throw new Error(error.message); });
         }
       })
@@ -146,7 +148,7 @@ class RateContainer extends React.Component {
 
 
   saveDone(savedMark) {
-    logRateContainer.debug(`saveDone - mark saved: ${stringifyOnce(savedMark, null, 2)}`);
+    logRateContainer.debug(`saveDone - markIndividual saved: ${stringifyOnce(savedMark, null, 2)}`);
   }
 
 

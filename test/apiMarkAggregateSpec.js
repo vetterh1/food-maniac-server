@@ -27,8 +27,8 @@ describe('API MarkAggregate', () => {
       // Create fake items for use in marks
       () => {
         return Item.create([
-          { category: 'testCat1', kind: 'testKind1', name: 'item1 location is FR seclin atos', location: { type: 'Point', coordinates: [50.5679449, 3.0237092999999997] } },
-          { category: 'testCat1', kind: 'testKind1', name: 'item2 location is FR lille home', location: { type: 'Point', coordinates: [50.6403954, 3.0651635000000397] } },
+          { category: 'testCat1', kind: 'testKind1', name: 'item1 location is FR seclin atos', location: { type: 'Point', coordinates: [3.0237092999999997, 50.5679449 ] } },
+          { category: 'testCat1', kind: 'testKind1', name: 'item2 location is FR lille home', location: { type: 'Point', coordinates: [3.0651635000000397, 50.6403954] } },
         ]);
       },
       () => { console.log('error on removing places'); }
@@ -276,8 +276,8 @@ describe('API MarkAggregate', () => {
 
     it('should find only close restaurants (one out of two - range: 10m)', (done) => {
       const markIndividualTests = [
-        { item: global.items[0]._id, place: global.places[0]._id, markOverall: 5, location: { type: 'Point', coordinates: [50.6403954, 3.0651635000000397] } }, // restaurant Papa Raffaele
-        { item: global.items[0]._id, place: global.places[1]._id, markOverall: 3, location: { type: 'Point', coordinates: [50.6402057, 3.0653016999999636] } }, // restaurant Douss Creolin
+        { item: global.items[0]._id, place: global.places[0]._id, markOverall: 5, location: { type: 'Point', coordinates: [3.0651635000000397, 50.6403954] } }, // restaurant Papa Raffaele
+        { item: global.items[0]._id, place: global.places[1]._id, markOverall: 3, location: { type: 'Point', coordinates: [3.0653016999999636, 50.6402057] } }, // restaurant Douss Creolin
       ];
       chai.request(app)
         .post('/api/markIndividuals')
@@ -306,26 +306,26 @@ describe('API MarkAggregate', () => {
         });
     });
 
-    it('should find no result if too far and max distance too short (1000m)', (done) => {
+    it('should find no result if too far and max distance too short (800m)', (done) => {
       const markIndividualTests = [
-        { item: global.items[0]._id, place: global.places[0]._id, markOverall: 3, location: { type: 'Point', coordinates: [50.5750322, 3.0177912000000333] } }, // restaurant Les Rois Fainéants
-        { item: global.items[1]._id, place: global.places[0]._id, markOverall: 5, location: { type: 'Point', coordinates: [50.5577246, 3.0326840000000175] } }, // restaurant l'Expresso
-        { item: global.items[0]._id, place: global.places[1]._id, markOverall: 5, location: { type: 'Point', coordinates: [50.6402057, 3.0653016999999636] } }, // restaurant Douss Creolin
+        { item: global.items[0]._id, place: global.places[0]._id, markOverall: 3, location: { type: 'Point', coordinates: [3.0177912000000333, 50.5750322] } }, // restaurant Les Rois Fainéants
+        { item: global.items[1]._id, place: global.places[0]._id, markOverall: 5, location: { type: 'Point', coordinates: [3.0326840000000175, 50.5577246] } }, // restaurant l'Expresso
+        { item: global.items[0]._id, place: global.places[1]._id, markOverall: 5, location: { type: 'Point', coordinates: [3.0653016999999636, 50.6402057] } }, // restaurant Douss Creolin
       ];
       chai.request(app)
         .post('/api/markIndividuals')
         .send({ markIndividual: markIndividualTests[0] })
-        .end((err, resMarkAggregate1) => {
+        .end(() => {
           chai.request(app)
             .post('/api/markIndividuals')
             .send({ markIndividual: markIndividualTests[1] })
-            .end((err2, resMarkAggregate2) => {
+            .end(() => {
               chai.request(app)
                 .post('/api/markIndividuals')
                 .send({ markIndividual: markIndividualTests[2] })
-                .end((err3, resMarkAggregate3) => {
+                .end(() => {
                   chai.request(app)
-                    .get(`/api/markAggregates/itemId/${global.items[0]._id}/maxDistance/1000/lat/50.5679449/lng/3.0237092999999997`) // Worldline LP3 (btw the 2 first restaurants)
+                    .get(`/api/markAggregates/itemId/${global.items[0]._id}/maxDistance/800/lat/50.5679449/lng/3.0237092999999997`) // Worldline LP3 (btw the 2 first restaurants)
                     .send({})
                     .end((err4, res) => {
                       // console.log('res.body=', res.body);
@@ -343,9 +343,9 @@ describe('API MarkAggregate', () => {
 
     it('should now find 2 markAggregates when max distance increased (7000m)', (done) => {
       const markIndividualTests = [
-        { item: global.items[0]._id, place: global.places[0]._id, markOverall: 3, location: { type: 'Point', coordinates: [50.5750322, 3.0177912000000333] } }, // restaurant Les Rois Fainéants
-        { item: global.items[0]._id, place: global.places[1]._id, markOverall: 5, location: { type: 'Point', coordinates: [50.5577246, 3.0326840000000175] } }, // restaurant l'Expresso
-        { item: global.items[0]._id, place: global.places[2]._id, markOverall: 5, location: { type: 'Point', coordinates: [50.6402057, 3.0653016999999636] } }, // restaurant Douss Creolin
+        { item: global.items[0]._id, place: global.places[0]._id, markOverall: 3, location: { type: 'Point', coordinates: [3.0177912000000333, 50.5750322] } }, // restaurant Les Rois Fainéants
+        { item: global.items[0]._id, place: global.places[1]._id, markOverall: 5, location: { type: 'Point', coordinates: [3.0326840000000175, 50.5577246] } }, // restaurant l'Expresso
+        { item: global.items[0]._id, place: global.places[2]._id, markOverall: 5, location: { type: 'Point', coordinates: [3.0653016999999636, 50.6402057] } }, // restaurant Douss Creolin
       ];
       chai.request(app)
         .post('/api/markIndividuals')
@@ -374,9 +374,9 @@ describe('API MarkAggregate', () => {
 
     it('should find all (3) markAggregates if max distance increased (10000m)', (done) => {
       const markIndividualTests = [
-        { item: global.items[0]._id, place: global.places[0]._id, markOverall: 3, location: { type: 'Point', coordinates: [50.5750322, 3.0177912000000333] } }, // restaurant Les Rois Fainéants
-        { item: global.items[0]._id, place: global.places[1]._id, markOverall: 5, location: { type: 'Point', coordinates: [50.5577246, 3.0326840000000175] } }, // restaurant l'Expresso
-        { item: global.items[0]._id, place: global.places[2]._id, markOverall: 5, location: { type: 'Point', coordinates: [50.6402057, 3.0653016999999636] } }, // restaurant Douss Creolin
+        { item: global.items[0]._id, place: global.places[0]._id, markOverall: 3, location: { type: 'Point', coordinates: [3.0177912000000333, 50.5750322] } }, // restaurant Les Rois Fainéants
+        { item: global.items[0]._id, place: global.places[1]._id, markOverall: 5, location: { type: 'Point', coordinates: [3.0326840000000175, 50.5577246] } }, // restaurant l'Expresso
+        { item: global.items[0]._id, place: global.places[2]._id, markOverall: 5, location: { type: 'Point', coordinates: [3.0653016999999636, 50.6402057] } }, // restaurant Douss Creolin
       ];
       chai.request(app)
         .post('/api/markIndividuals')

@@ -17,21 +17,22 @@ logSearchItemContainer.debug('--> entering SearchItemContainer.jsx');
 
 
 const ListOneMark = (props) => {
-  const { mark } = props;
+  const { markAggregate } = props;
   return (
     <tr>
-      <th scope="row">{mark.place.name}</th>
-      <td>{mark.markOverall}</td>
-      <td>{mark.markFood}</td>
-      <td>{mark.markPlace}</td>
-      <td>{mark.markStaff}</td>
+      <th scope="row">{markAggregate.place.name}</th>
+      <td>{markAggregate.markOverall}</td>
+      <td>{markAggregate.markFood}</td>
+      <td>{markAggregate.markPlace}</td>
+      <td>{markAggregate.markStaff}</td>
+      <td>{markAggregate.nbMarksOverall}</td>
     </tr>
   );
 };
 
 ListOneMark.propTypes = {
   index: PropTypes.number.isRequired,
-  mark: PropTypes.object.isRequired,
+  markAggregate: PropTypes.object.isRequired,
 };
 
 
@@ -48,7 +49,7 @@ class SearchItemContainer extends React.Component {
     this.submitForm = this.submitForm.bind(this);
 
     this.state = {
-      marks: [],
+      markAggregates: [],
     };
   }
 
@@ -66,13 +67,13 @@ class SearchItemContainer extends React.Component {
       logSearchItemContainer.debug(`SearchItemContainer.FindMarks - this.props.coordinates:\n\n${stringifyOnce(this.props.coordinates, null, 2)}`);
       logSearchItemContainer.debug(`SearchItemContainer.FindMarks - this.props.coordinates.latitude:\n\n${stringifyOnce(this.props.coordinates.latitude, null, 2)}`);
 
-      fetch(`/api/marks/itemId/${this.values.item}/maxDistance/${this.values.searchDistance}/lat/${this.props.coordinates.latitude}/lng/${this.props.coordinates.longitude}`)
+      fetch(`/api/markAggregates/itemId/${this.values.item}/maxDistance/${this.values.searchDistance}/lat/${this.props.coordinates.latitude}/lng/${this.props.coordinates.longitude}`)
       .then((response) => {
         logSearchItemContainer.debug('   SearchItemContainer - fetch operation OK');
         return response.json();
       }).then((jsonMarks) => {
-        if (jsonMarks && jsonMarks.marks && jsonMarks.marks.length >= 0) {
-          this.setState({ marks: jsonMarks.marks });
+        if (jsonMarks && jsonMarks.markAggregates && jsonMarks.markAggregates.length >= 0) {
+          this.setState({ markAggregates: jsonMarks.markAggregates });
         }
         if (jsonMarks && jsonMarks.error) {
           logSearchItemContainer.debug('   SearchItemContainer - fetch OK but returned an error');
@@ -102,10 +103,11 @@ class SearchItemContainer extends React.Component {
                   <th>Food</th>
                   <th>Place</th>
                   <th>Staff</th>
+                  <th># Reviews</th>
                 </tr>
               </thead>
               <tbody>
-                {this.state.marks && this.state.marks.map((mark, index) => { return (<ListOneMark mark={mark} index={index} key={mark._id} />); })}
+                {this.state.markAggregates && this.state.markAggregates.map((markAggregate, index) => { return (<ListOneMark markAggregate={markAggregate} index={index} key={markAggregate._id} />); })}
               </tbody>
             </Table>
           </Row>

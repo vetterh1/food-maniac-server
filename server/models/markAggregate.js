@@ -22,6 +22,7 @@ const markAggregateSchema = new Schema({
   // but ONLY for AGGREGATE marks. Individual marks don't need this information
   location: {
     type: { type: 'String', default: 'Point', required: false },
+    // coordinates are LONGITUDE then latitude, NOT the opposite!
     coordinates: { type: ['Number'], default: [0, 0], required: false },
   },
   // Timestamps

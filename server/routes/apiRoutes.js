@@ -80,13 +80,15 @@ router.route('/places/id/:_id').delete(PlaceController.deletePlace);
 // Note: markAggregates is an array that can be empty
 router.route('/markAggregates').get(MarkAggregateController.getMarkAggregates);
 
-// /GET /itemId/... route - Get all markAggregates for one item
+// /GET /itemId/... route - Get all markAggregates for one item (option: by distance)
+// Returns code 400 on missing parameter
 // Returns code 500 on network error (NOT empty list)
 // Returns code 200 otherwise + { markAggregates }
 // Note: markAggregates is an array that can be empty
 router.route('/markAggregates/itemId/:_itemId/maxDistance/:_maxDistance/lat/:_lat/lng/:_lng').get(MarkAggregateController.getMarkAggregatesByItemIdAndDistance);
 
 // /GET/:_id route - Get one markAggregate by _id
+// Returns code 400 on missing parameter
 // Returns code 500 on network error or not found
 // Returns code 200 + { markAggregate } if found
 router.route('/markAggregates/id/:_id').get(MarkAggregateController.getMarkAggregate);
@@ -99,6 +101,7 @@ router.route('/markAggregates/id/:_id').get(MarkAggregateController.getMarkAggre
 router.route('/markAggregates/id/:_id').post(MarkAggregateController.updateMarkAggregate);
 
 // /DELETE/:_id route - Delete a markAggregates by _id
+// Returns code 400 on missing parameter
 // Returns code 500 on network error, delete error or not found
 // Returns code 200 on success (no value returned)
 router.route('/markAggregates/id/:_id').delete(MarkAggregateController.deleteMarkAggregate);
@@ -113,12 +116,14 @@ router.route('/markAggregates/id/:_id').delete(MarkAggregateController.deleteMar
 router.route('/markIndividuals').get(MarkIndividualController.getMarkIndividuals);
 
 // /GET route - Get all markIndividuals for one aggregate
+// Returns code 400 on missing parameter
 // Returns code 500 on network error (NOT empty list)
 // Returns code 200 otherwise + { markIndividuals }
 // Note: markIndividuals is an array that can be empty
 router.route('/markIndividuals/markAggregateId/:_markAggregatesId').get(MarkIndividualController.getMarkIndividualsByMarkAggregateId);
 
 // /GET/:_id route - Get one markIndividual by _id
+// Returns code 400 on missing parameter
 // Returns code 500 on network error or not found
 // Returns code 200 + { markIndividual } if found
 router.route('/markIndividuals/id/:_id').get(MarkIndividualController.getMarkIndividual);
@@ -129,8 +134,8 @@ router.route('/markIndividuals/id/:_id').get(MarkIndividualController.getMarkInd
 // Returns code 200 otherwise + { markIndividual, markAggregate }
 router.route('/markIndividuals').post(MarkIndividualController.addMarkIndividual);
 
-// Update a markIndividuals by _id
-// Returns code 400 on input parameters error
+// /POST/:_id route - Update a markIndividuals by _id
+// Returns code 400 on input parameters error (missing or update _id)
 // Returns code 500 on network error or not found
 // Returns code 200 + { markIndividual } if found
 // Note: markIndividual is the updated mark
@@ -138,6 +143,7 @@ router.route('/markIndividuals').post(MarkIndividualController.addMarkIndividual
 router.route('/markIndividuals/id/:_id').post(MarkIndividualController.updateMarkIndividual);
 
 // /DELETE/:_id route - Delete a markIndividuals by _id
+// Returns code 400 on missing parameter
 // Returns code 500 on network error, delete error or not found
 // Returns code 200 on success (no value returned)
 // Note: NO update of corresponding aggregate

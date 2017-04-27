@@ -22,33 +22,38 @@ export function getMarkIndividuals(req, res) {
 
 
 // /GET route - Get all markIndividuals for one aggregate
+// Returns code 400 on missing parameter
 // Returns code 500 on network error (NOT empty list)
 // Returns code 200 otherwise + { markIndividuals }
 // Note: markIndividuals is an array that can be empty
 
 export function getMarkIndividualsByMarkAggregateId(req, res) {
-  const query = MarkIndividual
-    .find({ markAggregate: req.params._markAggregatesId }) // find all the individual markIndividuals links to an aggregate
-    .sort({ markOverall: -1 }); // sort by rating (from best to worst)
+  if (!req.params._markAggregatesId) {
+    const error = { status: 'error', message: 'markIndividualController.getMarkIndividualsByMarkAggregateId failed - missing mandatory parameter: _markAggregatesId' };
+    logger.error(error);
+    res.status(400).json(error);
+  } else {
+    const query = MarkIndividual
+      .find({ markAggregate: req.params._markAggregatesId }) // find all the individual markIndividuals links to an aggregate
+      .sort({ markOverall: -1 }); // sort by rating (from best to worst)
 
-  query
-    .exec((err, markIndividuals) => {
-      if (err) {
-        logger.error('markIndividualController.getMarkIndividualsByMarkAggregateId returns err: ', err);
-        res.status(500).send(err);
-      } else {
-        res.json({ markIndividuals });
-        logger.info(`markIndividualController.getMarkIndividualsByMarkAggregateId length=${markIndividuals.length}`);
-      }
-    });
+    query
+      .exec((err, markIndividuals) => {
+        if (err) {
+          logger.error('markIndividualController.getMarkIndividualsByMarkAggregateId returns err: ', err);
+          res.status(500).send(err);
+        } else {
+          res.json({ markIndividuals });
+          logger.info(`markIndividualController.getMarkIndividualsByMarkAggregateId length=${markIndividuals.length}`);
+        }
+      });
+  }
 }
 
 
-/**
- * Helper functions for addMarkIndividual
- */
-
-
+//
+// Helper functions for addMarkIndividual
+//
 
 function addRegularMark({ req, res, markAggregate }) {
  // Return a new promise.
@@ -102,6 +107,7 @@ function addOrUpdateAggregatedMark({ req, res }) {
           nbMarksStaff: req.body.markIndividual.markStaff ? 1 : null,
           location: req.body.markIndividual.location,
         });
+
         newMarkAggregate.save((errNew, markAggregate) => {
           if (errNew) {
             logger.error(`markIndividualController.addOrUpdateAggregatedMark creating new aggregated mark failed - err = ${errNew}`);
@@ -169,7 +175,6 @@ function sendResponseToBrowser({ req, res, markIndividual, markAggregate }) {
 
 
 
- 
 // /POST route - Add a new markIndividuals (and update/create corresponding aggregate)
 // Returns code 400 on input parameters error
 // Returns code 500 on saving error
@@ -198,37 +203,48 @@ export function addMarkIndividual(req, res) {
 
 
 // /GET/:_id route - Get one markIndividual by _id
+// Returns code 400 on missing parameter
 // Returns code 500 on network error or not found
 // Returns code 200 + { markIndividual } if found
 
 export function getMarkIndividual(req, res) {
-  MarkIndividual.findById(req.params._id).exec((err, markIndividual) => {
-    if (err || !markIndividual) {
-      logger.error(`markIndividualController.getMarkIndividual ${req.params._id} failed to find - err = `, err);
-      res.status(500).send(err);
-    } else {
-      res.json({ markIndividual });
-      logger.info(`markIndividualController.getMarkIndividual (_id=${req.params._id})`);
-    }
-  });
+  if (!req.params._id) {
+    const error = { status: 'error', message: 'markIndividualController.getMarkIndividual failed - missing mandatory parameter: _id' };
+    logger.error(error);
+    res.status(400).json(error);
+  } else {
+    MarkIndividual.findById(req.params._id).exec((err, markIndividual) => {
+      if (err || !markIndividual) {
+        logger.error(`markIndividualController.getMarkIndividual ${req.params._id} failed to find - err = `, err);
+        res.status(500).send(err);
+      } else {
+        res.json({ markIndividual });
+        logger.info(`markIndividualController.getMarkIndividual (_id=${req.params._id})`);
+      }
+    });
+  }
 }
 
 
-// Update a markIndividuals by _id
-// Returns code 400 on input parameters error
+// /POST/:_id route - Update a markIndividuals by _id
+// Returns code 400 on input parameters error (missing or update _id)
 // Returns code 500 on network error or not found
 // Returns code 200 + { markIndividual } if found
 // Note: markIndividual is the updated mark
 // Note: NO update of corresponding aggregate
 
 export function updateMarkIndividual(req, res) {
-  if (!req.body || !req.body.markIndividual) {
-    const error = { status: 'error', message: 'markIndividualController.updateMarkIndividual failed - missing mandatory fields: ' };
+  if (!req.params._id || !req.body || !req.body.markIndividual) {
+    const error = { status: 'error', message: 'markIndividualController.updateMarkIndividual failed - missing mandatory fields/params: ' };
+    if (!req.params._id) error.message += 'params._id ';
     if (!req.body) error.message += 'body ';
     if (req.body && !req.body.markIndividual) error.message += 'body.markIndividual ';
+    logger.error(error);
     res.status(400).json(error);
   } else if (req.body && req.body.markIndividual && req.body.markIndividual._id) {
-    res.status(400).json({ status: 'error', message: 'markIndividualController.updateMarkIndividual failed - _id cannot be changed' });
+    const message = 'markIndividualController.updateMarkIndividual failed - _id cannot be changed';
+    logger.error(message);
+    res.status(400).json({ status: 'error', message });
   } else {
     MarkIndividual.findOneAndUpdate({ _id: req.params._id }, req.body.markIndividual, { new: true }, (err, markIndividual) => {
       if (err || !markIndividual) {
@@ -244,25 +260,32 @@ export function updateMarkIndividual(req, res) {
 
 
 // /DELETE/:_id route - Delete a markIndividuals by _id
+// Returns code 400 on missing parameter
 // Returns code 500 on network error, delete error or not found
 // Returns code 200 on success (no value returned)
 // Note: NO update of corresponding aggregate
 
 export function deleteMarkIndividual(req, res) {
-  MarkIndividual.findOne({ _id: req.params._id }).exec((err, markIndividual) => {
-    if (err || !markIndividual) {
-      logger.error(`placeController.deleteMark ${req.params._id} failed to find - err = `, err);
-      res.status(500).send(err);
-    } else {
-      markIndividual.remove(() => {
-        if (err) {
-          logger.error(`placeController.deleteMark ${req.params._id} failed to remove - err = `, err);
-          res.status(500).send(err);
-        } else {
-          res.status(200).end();
-          logger.info(`placeController.deleteMark ${req.params._id}`);
-        }
-      });
-    }
-  });
+  if (!req.params._id) {
+    const error = { status: 'error', message: 'markIndividualController.deleteMarkIndividual failed - missing mandatory parameter: _id' };
+    logger.error(error);
+    res.status(400).json(error);
+  } else {
+    MarkIndividual.findOne({ _id: req.params._id }).exec((err, markIndividual) => {
+      if (err || !markIndividual) {
+        logger.error(`placeController.deleteMark ${req.params._id} failed to find - err = `, err);
+        res.status(500).send(err);
+      } else {
+        markIndividual.remove(() => {
+          if (err) {
+            logger.error(`placeController.deleteMark ${req.params._id} failed to remove - err = `, err);
+            res.status(500).send(err);
+          } else {
+            res.status(200).end();
+            logger.info(`placeController.deleteMark ${req.params._id}`);
+          }
+        });
+      }
+    });
+  }
 }

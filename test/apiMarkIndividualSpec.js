@@ -27,8 +27,8 @@ describe('API MarkIndividual', () => {
       // Create fake items for use in marks
       () => {
         return Item.create([
-          { category: 'testCat1', kind: 'testKind1', name: 'item1 location is FR seclin atos', location: { type: 'Point', coordinates: [50.5679449, 3.0237092999999997] } },
-          { category: 'testCat1', kind: 'testKind1', name: 'item2 location is FR lille home', location: { type: 'Point', coordinates: [50.6403954, 3.0651635000000397] } },
+          { category: 'testCat1', kind: 'testKind1', name: 'item1 location is FR seclin atos', location: { type: 'Point', coordinates: [3.0237092999999997, 50.5679449] } },
+          { category: 'testCat1', kind: 'testKind1', name: 'item2 location is FR lille home', location: { type: 'Point', coordinates: [3.0651635000000397, 50.6403954] } },
         ]);
       },
       () => { console.log('error on removing places'); }
@@ -70,10 +70,10 @@ describe('API MarkIndividual', () => {
 
     it('should list all the markIndividuals', (done) => {
       const marksList = [
-        { markAggregate: '58aaa000888555aaabd00000', user: '58aaa000888555aaabd00001', markOverall: 3 },
-        { markAggregate: '58aaa000888555aaabd00000', user: '58aaa000888555aaabd00001', markOverall: 3 },
-        { markAggregate: '58aaa000888555aaabd00000', user: '58aaa000888555aaabd00001', markOverall: 3 },
-        { markAggregate: '58aaa000888555aaabd00000', user: '58aaa000888555aaabd00001', markOverall: 3 },
+        { markAggregate: '58aaa000888555aaabd00000', user: '58aaa000888555aaabd00001', markOverall: 3, location: { type: 'Point', coordinates: [40.73061, -73.935242] } },
+        { markAggregate: '58aaa000888555aaabd00000', user: '58aaa000888555aaabd00001', markOverall: 3, location: { type: 'Point', coordinates: [40.73061, -73.935242] } },
+        { markAggregate: '58aaa000888555aaabd00000', user: '58aaa000888555aaabd00001', markOverall: 3, location: { type: 'Point', coordinates: [40.73061, -73.935242] } },
+        { markAggregate: '58aaa000888555aaabd00000', user: '58aaa000888555aaabd00001', markOverall: 3, location: { type: 'Point', coordinates: [40.73061, -73.935242] } },
       ];
       MarkIndividual.create(marksList, () => {
         chai.request(app)
@@ -106,13 +106,13 @@ describe('API MarkIndividual', () => {
     });
 
     it('should succeed creating an individual mark (no test on aggregate)', (done) => {
-      const markIndividualTest = { item: global.items[0]._id, place: global.places[0]._id, markOverall: 3, markFood: 2 };
+      const markIndividualTest = { item: global.items[0]._id, place: global.places[0]._id, markOverall: 3, markFood: 2, location: { type: 'Point', coordinates: [40.73061, -73.935242] } };
       chai.request(app)
           .post('/api/markIndividuals')
           .send({ markIndividual: markIndividualTest })
           .end((err, res) => {
-            // console.log('res.body.mark=', res.body.mark);
-            // console.log('res.body.mark.marks[0]=', res.body.mark.marks[0]);
+            // console.log('res.body.markIndividual=', res.body.markIndividual);
+            // console.log('res.body.markAggregate=', res.body.markAggregate);
             res.should.have.status(200);
             res.body.should.be.a('object');
             res.body.should.have.property('markIndividual');
@@ -122,6 +122,7 @@ describe('API MarkIndividual', () => {
             res.body.markIndividual.markOverall.should.be.a('number');
             res.body.markAggregate.should.be.a('object');
             res.body.markAggregate.should.have.property('markOverall').eql(markIndividualTest.markOverall);
+            res.body.markAggregate.should.have.property('location');
             res.body.markAggregate.markOverall.should.be.a('number');
             done();
           });
@@ -173,7 +174,7 @@ describe('API MarkIndividual', () => {
 
   describe('Mark Update', () => {
     it('should succeed updating a complete mark', (done) => {
-      const markOrig = new MarkIndividual({ markAggregate: '58aaa000888555aaabd00000', user: '58aaa000888555aaabd00001', markOverall: 3 });
+      const markOrig = new MarkIndividual({ markAggregate: '58aaa000888555aaabd00000', user: '58aaa000888555aaabd00001', markOverall: 3, location: { type: 'Point', coordinates: [40.73061, -73.935242] } });
       const markUpdt = { markOverall: 1 };
       markOrig.save((errSaving, markSaved) => {
         chai.request(app)
@@ -192,7 +193,7 @@ describe('API MarkIndividual', () => {
     });
 
     it('should fail updating the _id', (done) => {
-      const markOrig = new MarkIndividual({ markAggregate: '58aaa000888555aaabd00000', user: '58aaa000888555aaabd00001', markOverall: 3 });
+      const markOrig = new MarkIndividual({ markAggregate: '58aaa000888555aaabd00000', user: '58aaa000888555aaabd00001', markOverall: 3, location: { type: 'Point', coordinates: [40.73061, -73.935242] } });
       markOrig.save((errSaving, markSaved) => {
         chai.request(app)
           .post(`/api/markIndividuals/id/${markSaved._id}`)
@@ -215,7 +216,7 @@ describe('API MarkIndividual', () => {
     });
 
     it('should fail updating with wrong mark info', (done) => {
-      const markOrig = new MarkIndividual({ markAggregate: '58aaa000888555aaabd00000', user: '58aaa000888555aaabd00001', markOverall: 3 });
+      const markOrig = new MarkIndividual({ markAggregate: '58aaa000888555aaabd00000', user: '58aaa000888555aaabd00001', markOverall: 3, location: { type: 'Point', coordinates: [40.73061, -73.935242] } });
       markOrig.save((errSaving, itemSaved) => {
         chai.request(app)
           .post(`/api/markIndividuals/id/${itemSaved._id}`)
@@ -244,7 +245,7 @@ describe('API MarkIndividual', () => {
     });
 
     it('should delete an existing mark', (done) => {
-      const mark = new MarkIndividual({ markAggregate: '58aaa000888555aaabd00000', user: '58aaa000888555aaabd00001', markOverall: 3 });
+      const mark = new MarkIndividual({ markAggregate: '58aaa000888555aaabd00000', user: '58aaa000888555aaabd00001', markOverall: 3, location: { type: 'Point', coordinates: [40.73061, -73.935242] } });
       mark.save((errSaving, markSaved) => {
         chai.request(app)
           .delete(`/api/markIndividuals/id/${markSaved._id}`)

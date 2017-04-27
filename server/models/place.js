@@ -7,6 +7,7 @@ const placeSchema = new Schema({
   googleMapId: { type: 'String', required: true },
   location: {
     type: { type: 'String', default: 'Point' },
+    // coordinates are LONGITUDE then latitude, NOT the opposite!
     coordinates: { type: ['Number'], default: [0, 0] },
   },
   since: { type: 'Date', default: Date.now, required: true },
