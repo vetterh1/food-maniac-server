@@ -28,7 +28,7 @@ export function getMarkIndividuals(req, res) {
 // Note: markIndividuals is an array that can be empty
 
 export function getMarkIndividualsByMarkAggregateId(req, res) {
-  if (!req.params._markAggregatesId) {
+  if (!req.params._markAggregatesId || req.params._markAggregatesId === 'undefined' || req.params._markAggregatesId === 'null') {
     const error = { status: 'error', message: 'markIndividualController.getMarkIndividualsByMarkAggregateId failed - missing mandatory parameter: _markAggregatesId' };
     logger.error(error);
     res.status(400).json(error);

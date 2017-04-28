@@ -27,7 +27,7 @@ export function getMarkAggregates(req, res) {
 // Note: markAggregates is an array that can be empty
 
 export function getMarkAggregatesByItemIdAndDistance(req, res) {
-  if (!req.params._itemId) {
+  if (!req.params._itemId || req.params._itemId === 'undefined' || req.params._itemId === 'null') {
     const error = { status: 'error', message: 'markAggregateController.getMarkAggregatesByItemIdAndDistance failed - missing mandatory parameter: _itemId' };
     logger.error(error);
     res.status(400).json(error);
@@ -57,7 +57,11 @@ export function getMarkAggregatesByItemIdAndDistance(req, res) {
           logger.error('markAggregateController.getMarkAggregatesByItemIdAndDistance returns err: ', err);
           res.status(500).send(err);
         } else {
-          res.json({ markAggregates });
+          // Simulate json errors :) :
+          // res.status(200).type('json').send('{"valid":"valid json but not what expected!"}'); // Should display error=03
+          // res.status(200).type('json').send('{"invalid"}'); // Should display error=04
+          res.status(500).send('{"error": "message from server"}'); // Should display error=500
+          // res.json({ markAggregates });
           logger.info(`markAggregateController.getMarkAggregatesByItemIdAndDistance length=${markAggregates.length}`);
         }
       });

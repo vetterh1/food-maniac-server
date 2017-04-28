@@ -28,14 +28,29 @@ router.route('/users/id/:_id').delete(UserController.deleteUser);
 
 // ----------------  ITEMS ----------------
 
-// Get items count
-router.route('/items/count').get(ItemController.getItemsCount);
+// /GET /count - Get items count
+// Input: 'query' can filter the results (optional, default = no filter)
+// Returns code 500 on network error
+// Returns code 200 otherwise + { count: nnnn }
+router.route('/items/count/:query?').get(ItemController.getItemsCount);
 
 // Get one item by _id
 router.route('/items/id/:_id').get(ItemController.getItem);
 
-// Get all Items
-router.route('/items/:offset?/:limit?').get(ItemController.getItems);
+// /GET route - Get all items with optional pagination, sorting & filters
+// Optional inputs use Query parameters (?key1=value1&key2=value2)
+// Input: 'offset' in the results (optional, default = 0)
+// Input: 'limit' number of returned results (optional, default = 100)
+// Input: 'sort' the results (optional, default = creation date, most recent 1st)
+// Input: 'query' can filter the results (optional, default = no filter)
+// Returns code 500 on network error (NOT empty list)
+// Returns code 200 otherwise + { items }
+// Note: items is an array that can be empty
+// Ex 1: http://localhost:8080/api/items?offset=1&limit=3
+// Ex 2: http://localhost:8080/api/items?offset=1&limit=3&sort={"name":1}&query={"category":"dish"}
+// Ex 2: http://localhost:8080/api/items?query={"category":"dish"}
+router.route('/items').get(ItemController.getItems);
+//router.route('/items/:offset?/:limit?/:sort?/:query?').get(ItemController.getItems);
 
 // Add a new Item
 router.route('/items').post(ItemController.addItem);

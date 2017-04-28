@@ -103,30 +103,33 @@ describe('API Items', () => {
       });
     });
 
-    it('it should return paginated items', (done) => {
+    it('it should return paginated items with sort and filter', (done) => {
       const itemsList = [
-        { category: 'testCat1', kind: 'testKind1', name: 'testItem1', since: '2017-01-01T00:00:01' },
-        { category: 'testCat1', kind: 'testKind1', name: 'testItem2', since: '2017-01-01T00:00:02' },
-        { category: 'testCat1', kind: 'testKind2', name: 'testItem3', since: '2017-01-01T00:00:03' },
-        { category: 'testCat1', kind: 'testKind2', name: 'testItem4', since: '2017-01-01T00:00:04' },
-        { category: 'testCat1', kind: 'testKind3', name: 'testItem5', since: '2017-01-01T00:00:05' },
-        { category: 'testCat1', kind: 'testKind3', name: 'testItem6', since: '2017-01-01T00:00:06' },
-        { category: 'testCat2', kind: 'testKind1', name: 'testItem7', since: '2017-01-01T00:00:07' },
-        { category: 'testCat2', kind: 'testKind1', name: 'testItem8', since: '2017-01-01T00:00:08' },
-        { category: 'testCat2', kind: 'testKind2', name: 'testItem9', since: '2017-01-01T00:00:09' },
+        { category: 'testCat1', kind: 'testKind1', name: 'testItem01', since: '2017-01-01T00:00:01' },
+        { category: 'testCat1', kind: 'testKind1', name: 'testItem02', since: '2017-01-01T00:00:02' },
+        { category: 'testCat1', kind: 'testKind2', name: 'testItem03', since: '2017-01-01T00:00:03' },
+        { category: 'testCat1', kind: 'testKind2', name: 'testItem04', since: '2017-01-01T00:00:04' },
+        { category: 'testCat1', kind: 'testKind3', name: 'testItem05', since: '2017-01-01T00:00:05' },
+        { category: 'testCat1', kind: 'testKind3', name: 'testItem06', since: '2017-01-01T00:00:06' },
+        { category: 'testCat2', kind: 'testKind1', name: 'testItem07', since: '2017-01-01T00:00:07' },
+        { category: 'testCat2', kind: 'testKind1', name: 'testItem08', since: '2017-01-01T00:00:08' },
+        { category: 'testCat1', kind: 'testKind2', name: 'testItem09', since: '2017-01-01T00:00:09' },
         { category: 'testCat2', kind: 'testKind2', name: 'testItem10', since: '2017-01-01T00:00:10' },
-        // /api/items/2/3 : Pagination starts at here and goes 'up' as it's order by most recent (and only for 3 items)
+        // /api/items/2/3 : Results start here and goes 'up' for 3 items
         { category: 'testCat2', kind: 'testKind3', name: 'testItem11', since: '2017-01-01T00:00:11' },
         { category: 'testCat2', kind: 'testKind3', name: 'testItem12', since: '2017-01-01T00:00:12' },
       ];
       Item.create(itemsList, () => {
         chai.request(app)
-          .get('/api/items/2/3')
+          .get('/api/items?offset=2&limit=3&sort={"name":-1}&query={"category":"testCat2"}')
           .end((err, res) => {
             res.should.have.status(200);
             res.body.items.should.be.a('array');
             res.body.items.length.should.be.eql(3);
             res.body.items[0].name.should.be.eql('testItem10');
+            // NOT testItem8 as its category is testCat1
+            res.body.items[1].name.should.be.eql('testItem08');
+            res.body.items[2].name.should.be.eql('testItem07');
             done();
           });
       });

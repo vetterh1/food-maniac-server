@@ -141,9 +141,13 @@ class ListItemsContainer extends React.Component {
     dropdown: PropTypes.bool,
     // Nb max of item to fetch. Ex: 10 -> will retreive max 10 items
     itemsPerPage: PropTypes.number,
+    // Query filter as a json formated string. Ex: '{"category":"dish"}'
+    filter: PropTypes.string,
+    // Callback function to display errors
+    onSearchItemError: PropTypes.func,
   };
 
-  static defaultProps = { socketName: null, initialIndexPagination: 0, carrousel: false, dropdown: true, itemsPerPage: 7 };
+  static defaultProps = { socketName: null, initialIndexPagination: 0, carrousel: false, dropdown: true, itemsPerPage: 7, filter: '{}' };
 
   constructor(props) {
     super(props);
@@ -245,17 +249,24 @@ class ListItemsContainer extends React.Component {
     const urlCount = this.props.URL.concat('/count');
     fetch(urlCount)
       .then((response) => {
-        logListItemsContainer.debug('ListItemsContainer - fetch count OK');
+        if (response.status >= 400) {
+          this.props.onSearchItemError(response.status);
+          const error = new Error(`Bad response from server: ${response.status} (request: ${urlCount})`);
+          error.name = 'ErrorCaught';
+          throw error;
+        }
+        logListItemsContainer.debug('ListItemsContainer.load - fetch count OK');
         return response.json();
       }).then((jsonCount) => {
-        if (jsonCount && jsonCount.count) {
-          this.setState({ count: jsonCount.count });
-        }
-      }).catch((ex) => {
-        logListItemsContainer.debug('count parsing failed', ex);
+        if (jsonCount && jsonCount.count) this.setState({ count: jsonCount.count });
+        else this.props.onSearchItemError('01');
+      }).catch((error) => {
+        if (error.name === 'ErrorCaught') return;
+        logListItemsContainer.debug('count parsing failed', error);
+        this.props.onSearchItemError('02');
       });
 
-    const urlWithParams = this.props.URL.concat('/', this.indexPagination, '/', this.props.itemsPerPage);
+    const urlWithParams = this.props.URL.concat('?offset=', this.indexPagination, '&limit=', this.props.itemsPerPage, '&sort={"name":1}&query=', this.props.filter);
     // Add pagination if only if not carrousel
     // let urlWithParams = this.props.URL.concat('/', this.indexPagination);
     // if (!this.props.carrousel) urlWithParams = this.props.URL.concat('/', this.indexPagination, '/', this.props.itemsPerPage);

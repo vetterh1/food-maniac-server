@@ -8,17 +8,23 @@ import Item from '../models/item';
 import * as GenerateThumbnails from '../util/generateThumbnails';
 
 
-/**
- * Get nb items
- */
+// /GET /count - Get items count
+// Input: 'query' can filter the results (optional, default = no filter)
+// Returns code 500 on network error
+// Returns code 200 otherwise + { count: nnnn }
+
 export function getItemsCount(req, res) {
   // TODO: query should return items of current user.
-  const query = {};
+  const query = req.params.query ? JSON.parse(req.params.query) : {};
   Item.count(query, (err, count) => {
     if (err) {
       logger.error('itemController.getItemsCount returns err: ', err);
       res.status(500).send(err);
     } else {
+      // Simulate json errors :) :
+      // res.status(200).type('json').send('{"valid":"valid json but not what expected!"}'); // Should display error=01
+      // res.status(200).type('json').send('{"invalid"}'); // Should display error=02
+      // res.status(500).type('json').send('{"error": "message from server"}'); // Should display error=500
       res.json({ count });
       logger.info(`itemController.getItemsCount returns ${count}`);
     }
@@ -26,18 +32,35 @@ export function getItemsCount(req, res) {
 }
 
 
-/**
- * Get all items
- */
+// /GET route - Get all items with optional pagination, sorting & filters
+// Optional inputs use Query parameters (?key1=value1&key2=value2)
+// Input: 'offset' in the results (optional, default = 0)
+// Input: 'limit' number of returned results (optional, default = 100)
+// Input: 'sort' the results (optional, default = creation date, most recent 1st)
+// Input: 'query' can filter the results (optional, default = no filter)
+// Returns code 500 on network error (NOT empty list)
+// Returns code 200 otherwise + { items }
+// Note: items is an array that can be empty
+// Ex 1: http://localhost:8080/api/items?offset=1&limit=3
+// Ex 2: http://localhost:8080/api/items?offset=1&limit=3&sort={"name":1}&query={"category":"dish"}
+// Ex 2: http://localhost:8080/api/items?query={"category":"dish"}
+
 export function getItems(req, res) {
-  const offset = req.params.offset ? Number(req.params.offset) : 0;
-  const limit = req.params.limit ? Number(req.params.limit) : 100;
+
+  logger.info(`itemController.getItems raw params: offset=${req.query.offset} - limit=${req.query.limit} - query=${req.query.query} - sort=${req.query.sort}`);
+
+  const offset = req.query.offset ? Number(req.query.offset) : 0;
+  const limit = req.query.limit ? Number(req.query.limit) : 100;
+  const query = req.query.query ? JSON.parse(req.query.query) : {};
+  const sort = req.query.sort ? JSON.parse(req.query.sort) : { since: -1 };
+
+  logger.info(`itemController.getItems computed params: offset=${offset} - limit=${limit} - query=${JSON.stringify(query)} - sort=${JSON.stringify(sort)}`);
 
   // TODO: query should return items of current user.
-  const query = {};
+
   const options = {
     // select: 'title date author',
-    sort: { since: -1 },
+    sort,
     // populate: 'author',
     lean: true,
     offset,

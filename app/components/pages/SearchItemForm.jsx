@@ -5,13 +5,13 @@ import ListItemsContainer from '../pages/ListItemsContainer';
 import SelectSearchDistance from '../utils/SelectSearchDistance';
 import Geolocation from '../utils/Geolocation';
 
-const FindItemsForm = (props) => {
-  const { handleSubmit, pristine, reset, submitting } = props;
+const SearchItemForm = (props) => {
+  const { handleSubmit, pristine, reset, submitting, onSearchItemError } = props;
   return (
     <form onSubmit={handleSubmit}>
       <FormGroup>
         <h4 className="mb-4">What?</h4>
-        <ListItemsContainer URL="/api/items" itemsPerPage={10} carrousel={false} />
+        <ListItemsContainer URL="/api/items" itemsPerPage={10} carrousel={false} onSearchItemError={onSearchItemError}/>
       </FormGroup>
       <FormGroup>
         <h4 className="mb-4">Max distance?</h4>
@@ -30,5 +30,5 @@ const FindItemsForm = (props) => {
 };
 
 export default reduxForm({
-  form: 'FindItemsForm',
-})(FindItemsForm);
+  form: 'SearchItemForm',
+})(SearchItemForm);

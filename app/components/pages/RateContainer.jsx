@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { Container } from 'reactstrap';
+import { Alert, Container } from 'reactstrap';
 import RateForm from './RateForm';
 import stringifyOnce from '../../utils/stringifyOnce';
 
@@ -25,10 +25,42 @@ class RateContainer extends React.Component {
     super(props);
     this.values = null;
     this.submitForm = this.submitForm.bind(this);
+    this._childComponent = null;
+
+    this.state = {
+      // alertStatus possible values:
+      // -  0: no alerts
+      //  - saving alerts:  1: saving, 2: saving OK, -1: saving KO
+      alertStatus: 0,
+      alertMessage: '',
+    };
   }
 
 
+  onStartSaving = () => {
+    this._nowStartSaving = new Date().getTime();
+    this.setState({ alertStatus: 1, alertColor: 'info', alertMessage: 'Saving...' });
+    window.scrollTo(0, 0);
+  }
+
+  onEndSavingOK = () => {
+    const durationSaving = new Date().getTime() - this._nowStartSaving;
+    this.setState({ alertStatus: 2, alertColor: 'success', alertMessage: `Saved! (duration=${durationSaving}ms)` });
+    setTimeout(() => { this.setState({ alertStatus: 0 }); }, 3000);
+
+    // Tell the child to reset
+    if (this._childComponent) this._childComponent.resetForm();
+  }
+
+  onEndSavingFailed = (errorMessage) => {
+    const durationSaving = new Date().getTime() - this._nowStartSaving;
+    this.setState({ alertStatus: -1, alertColor: 'danger', alertMessage: `Error while saving (error=${errorMessage}, duration=${durationSaving}ms)` });
+  }
+
+
+
   submitForm(values) {
+    this.onStartSaving();
     this.values = values;
     this.save();
   }
@@ -41,6 +73,7 @@ class RateContainer extends React.Component {
     .then(this.saveDone.bind(this))
     .catch((error) => {
       logRateContainer.error('RateContainer.save failed: ', error);
+      this.onEndSavingFailed('01');
     });
   }
 
@@ -149,6 +182,7 @@ class RateContainer extends React.Component {
 
   saveDone(savedMark) {
     logRateContainer.debug(`saveDone - markIndividual saved: ${stringifyOnce(savedMark, null, 2)}`);
+    this.onEndSavingOK();
   }
 
 
@@ -159,7 +193,8 @@ class RateContainer extends React.Component {
   render() {
     return (
       <Container fluid>
-        <RateForm onSubmit={this.submitForm} />
+        {this.state.alertStatus !== 0 && <Alert color={this.state.alertColor}>{this.state.alertMessage}</Alert>}
+        <RateForm ref={(r) => { this._childComponent = r; }} onSubmit={this.submitForm} />
       </Container>
 
     );
