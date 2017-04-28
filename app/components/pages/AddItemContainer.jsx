@@ -19,6 +19,7 @@ class AddItemContainer extends React.Component {
     this.onSnapshotError = this.onSnapshotError.bind(this);
     this.onSnapshotReady = this.onSnapshotReady.bind(this);
     this.submitForm = this.submitForm.bind(this);
+    this._addItemComponent = null;
 
     this.state = {
       // alertStatus possible values:
@@ -42,8 +43,8 @@ class AddItemContainer extends React.Component {
     this.setState({ alertStatus: 2, alertColor: 'success', alertMessage: `Item saved! (duration=${durationSaving}ms)` });
     setTimeout(() => { this.setState({ alertStatus: 0 }); }, 3000);
 
-// TODO: tell the form to reset... maybe by a props resetAsked
-//    this.resetForm();
+    // Tell the form to reset
+    if (this._addItemComponent) this._addItemComponent.resetForm();
   }
 
   onEndSavingFailed = (errorMessage) => {
@@ -107,7 +108,7 @@ class AddItemContainer extends React.Component {
     return (
       <div>
         {this.state.alertStatus !== 0 && <Alert color={this.state.alertColor}>{this.state.alertMessage}</Alert>}
-        <AddItem onSubmit={this.submitForm} onSnapshotStartProcessing={this.onSnapshotStartProcessing} onSnapshotError={this.onSnapshotError} onSnapshotReady={this.onSnapshotReady} />
+        <AddItem ref={(r) => { this._addItemComponent = r; }} onSubmit={this.submitForm} onSnapshotStartProcessing={this.onSnapshotStartProcessing} onSnapshotError={this.onSnapshotError} onSnapshotReady={this.onSnapshotReady} />
       </div>
     );
   }
