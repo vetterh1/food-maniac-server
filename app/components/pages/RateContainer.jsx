@@ -25,12 +25,15 @@ class RateContainer extends React.Component {
     super(props);
     this.values = null;
     this.submitForm = this.submitForm.bind(this);
+    this.onSearchItemError = this.onSearchItemError.bind(this);
+    this.onSelectLocationError = this.onSelectLocationError.bind(this);
     this._childComponent = null;
 
     this.state = {
       // alertStatus possible values:
       // -  0: no alerts
-      //  - saving alerts:  1: saving, 2: saving OK, -1: saving KO
+      //  - saving alerts:  1: saving, 2: saving OK
+      //                   -1: saving KO, -2: SearchItem error; -3: Search places error
       alertStatus: 0,
       alertMessage: '',
     };
@@ -55,6 +58,14 @@ class RateContainer extends React.Component {
   onEndSavingFailed = (errorMessage) => {
     const durationSaving = new Date().getTime() - this._nowStartSaving;
     this.setState({ alertStatus: -1, alertColor: 'danger', alertMessage: `Error while saving (error=${errorMessage}, duration=${durationSaving}ms)` });
+  }
+
+  onSearchItemError = (errorMessage) => {
+    this.setState({ alertStatus: -2, alertColor: 'danger', alertMessage: `Error while constructing items list (error=${errorMessage})` });
+  }
+
+  onSelectLocationError = (errorMessage) => {
+    this.setState({ alertStatus: -2, alertColor: 'danger', alertMessage: `Error while constructing places list (error=${errorMessage})` });
   }
 
 
@@ -194,7 +205,7 @@ class RateContainer extends React.Component {
     return (
       <Container fluid>
         {this.state.alertStatus !== 0 && <Alert color={this.state.alertColor}>{this.state.alertMessage}</Alert>}
-        <RateForm ref={(r) => { this._childComponent = r; }} onSubmit={this.submitForm} />
+        <RateForm ref={(r) => { this._childComponent = r; }} onSubmit={this.submitForm} onSearchItemError={this.onSearchItemError} onSelectLocationError={this.onSelectLocationError} />
       </Container>
 
     );

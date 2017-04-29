@@ -7,17 +7,17 @@ import ReactFormInput from '../utils/ReactFormInput';
 import ListItemsContainer from '../pages/ListItemsContainer';
 
 const RateForm = (props) => {
-  const { handleSubmit, pristine, reset, submitting } = props;
+  const { handleSubmit, pristine, reset, submitting, onSearchItemError, onSelectLocationError } = props;
   return (
     <form onSubmit={handleSubmit}>
       <FormGroup>
         <h4 className="mb-4">What?</h4>
-        <ListItemsContainer URL="/api/items" itemsPerPage={10} carrousel={false} />
+        <ListItemsContainer URL="/api/items" itemsPerPage={50} carrousel={false} onSearchItemError={onSearchItemError} />
       </FormGroup>
 
       <FormGroup>
         <h4 className="mb-4">Where?</h4>
-        <SelectLocation />
+        <SelectLocation onSelectLocationError={onSelectLocationError} />
       </FormGroup>
 
       <FormGroup>

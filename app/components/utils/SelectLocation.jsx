@@ -11,7 +11,7 @@ import ReactFormInput from '../utils/ReactFormInput';
 import * as PlacesActions from '../../actions/PlacesActions';
 
 const logSelectLocation = log.getLogger('logSelectLocation');
-logSelectLocation.setLevel('warn');
+logSelectLocation.setLevel('debug');
 logSelectLocation.debug('--> entering SelectLocation.jsx');
 
 const Listing = ({ places }) => {

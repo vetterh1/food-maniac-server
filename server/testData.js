@@ -23,7 +23,14 @@ export const initialItems = [
   new Item({ _id: '58f4dfff45dab98a840b0003', category: 'dish', kind: 'mexican', name: 'Burrito', since: '1968-12-21T00:00:00.000Z', lastModif: '2015-02-21T09:01:42.206Z' }),
   new Item({ _id: '58f4dfff45dab98a840b0004', category: 'dish', kind: 'mexican', name: 'Taco', since: '1968-12-21T00:00:00.000Z', lastModif: '2015-02-21T09:01:42.206Z' }),
   new Item({ _id: '58f4dfff45dab98a840b0005', category: 'dish', kind: 'belgium', name: 'Shrimp Croquettes', since: '1968-12-21T00:00:00.000Z', lastModif: '2015-02-21T09:01:42.206Z' }),
+  new Item({ _id: '58f4dfff45dab98a840b0007', category: 'dish', kind: 'belgium', name: 'Steak Tartare / Americain', since: '1968-12-21T00:00:00.000Z', lastModif: '2015-02-21T09:01:42.206Z' }),
   new Item({ _id: '58f4dfff45dab98a840b0006', category: 'dish', kind: 'indian', name: 'Palak Paneer', since: '1968-12-21T00:00:00.000Z', lastModif: '2015-02-21T09:01:42.206Z' }),
+  new Item({ _id: '58f4dfff45dab98a840b0100', category: 'dessert', kind: 'belgium', name: 'Chocolate mousse', since: '1968-12-21T00:00:00.000Z', lastModif: '2015-02-21T09:01:42.206Z' }),
+  new Item({ _id: '58f4dfff45dab98a840b0101', category: 'dessert', kind: 'french', name: 'Tarte Tatin', since: '1968-12-21T00:00:00.000Z', lastModif: '2015-02-21T09:01:42.206Z' }),
+  new Item({ _id: '58f4dfff45dab98a840b0200', category: 'drink', kind: 'belgium', name: 'Beer', since: '1968-12-21T00:00:00.000Z', lastModif: '2015-02-21T09:01:42.206Z' }),
+  new Item({ _id: '58f4dfff45dab98a840b0201', category: 'drink', kind: 'french', name: 'Wine', since: '1968-12-21T00:00:00.000Z', lastModif: '2015-02-21T09:01:42.206Z' }),
+  new Item({ _id: '58f4dfff45dab98a840b0202', category: 'drink', kind: 'mexican', name: 'Tequila', since: '1968-12-21T00:00:00.000Z', lastModif: '2015-02-21T09:01:42.206Z' }),
+  new Item({ _id: '58f4dfff45dab98a840b0203', category: 'drink', kind: 'mexican', name: 'Margarita', since: '1968-12-21T00:00:00.000Z', lastModif: '2015-02-21T09:01:42.206Z' }),
 ];
 
 export const initialPlaces = [
