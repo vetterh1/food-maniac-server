@@ -1,9 +1,14 @@
+import * as log from 'loglevel';
 import React from 'react';
 import { Alert } from 'reactstrap';
 import AddItem from './AddItem';
 
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
+
+const logAddItemContainer = log.getLogger('logAddItemContainer');
+logAddItemContainer.setLevel('debug');
+logAddItemContainer.warn('--> entering AddItemContainer.jsx');
 
 class AddItemContainer extends React.Component {
   static propTypes = {
@@ -87,20 +92,21 @@ class AddItemContainer extends React.Component {
       body: JSON.stringify({ item: data }, null, 4),
     })
     .then((response) => {
-      console.log('fetch result: ', response);
-      if (response.ok) {
+      // console.log('fetch result: ', response);
+      if (response && response.ok) {
         this.onEndSavingOK();
-        console.log('fetch operation OK');
-        return response.blob();
+        // return response.blob();
+        return;
       }
       this.onEndSavingFailed('01');
-      throw new Error('Network response was not ok.');
+      const error = new Error('fetch OK but returned nothing or an error (request: post /api/items');
+      error.name = 'ErrorCaught';
+      throw (error);
     })
     .catch((error) => {
-      this.onEndSavingFailed('02');
-      console.error(`There has been a problem with your fetch operation: ${error.message}`);
+      if (error.name !== 'ErrorCaught') this.onEndSavingFailed('02');
+      logAddItemContainer.error(error.message);
     });
-    console.log('AddItemContainer.submitForm - 2');
   }
 
 

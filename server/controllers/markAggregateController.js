@@ -58,10 +58,10 @@ export function getMarkAggregatesByItemIdAndDistance(req, res) {
           res.status(500).send(err);
         } else {
           // Simulate json errors :) :
-          // res.status(200).type('json').send('{"valid":"valid json but not what expected!"}'); // Should display error=03
-          // res.status(200).type('json').send('{"invalid"}'); // Should display error=04
-          res.status(500).send('{"error": "message from server"}'); // Should display error=500
-          // res.json({ markAggregates });
+          // res.status(200).type('json').send('{"valid":"valid json but not what expected!"}'); // Should display error=03 (ok)
+          // res.status(200).type('json').send('{"invalid"}'); // Should display error=04 (ok)
+          // res.status(500).send('{"error": "message from server"}'); // Should display error=500 (ok)
+          res.json({ markAggregates });
           logger.info(`markAggregateController.getMarkAggregatesByItemIdAndDistance length=${markAggregates.length}`);
         }
       });

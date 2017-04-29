@@ -98,7 +98,8 @@ class SearchItemContainer extends React.Component {
   submitForm(values) {
     this.onStartSearching();
     this.values = values;
-    this.FindMarks();
+    this.FindMarks()
+    .catch((error) => { logSearchItemContainer.error('submitForm caught exception: ', error.message); });
   }
 
 
@@ -112,42 +113,33 @@ class SearchItemContainer extends React.Component {
       .then((response) => {
         if (response.status >= 400) {
           this.onEndSearchingFailed(response.status);
-          reject(`Bad response from server: ${response.status} (request: /api/markAggregates/itemId/...)`);
- 
-
-TODO: all the reject arrive in the CATCH !!!!!
-must create new Error as in ListItemsContainer.load
-
-
+          const error = new Error(`Bad response from server: ${response.status} (request: /api/markAggregates/itemId/...)`);
+          error.name = 'ErrorCaught';
+          throw (error);
         } else {
-          logSearchItemContainer.debug('SearchItemContainer.FindMarks - fetch operation OK');
           return response.json();
         }
-      }).then((jsonMarks) => {
-        if (!jsonMarks) {
-          this.onEndSearchingFailed('01');
-          reject('jsonMarks undefined (request: /api/markAggregates/itemId/...)');
-        }
-        if (jsonMarks.error) {
+      }).then((jsonResponse) => {
+        if (!jsonResponse || jsonResponse.error) {
           this.onEndSearchingFailed('02');
-          reject('fetch OK but returned an error (request: /api/markAggregates/itemId/...)');
-          // logSearchItemContainer.warn('SearchItemContainer.FindMarks - fetch OK but returned an error - jsonMarks.error: ', jsonMarks.error);
-          // this._ListItemsComponent.onEndLoadingFailed(jsonMarks.error);
+          const error = new Error('fetch OK but returned nothing or an error (request: /api/markAggregates/itemId/...)');
+          error.name = 'ErrorCaught';
+          throw (error);
         }
-        if (!jsonMarks.markAggregates) {
+        if (!jsonResponse.markAggregates) {
           this.onEndSearchingFailed('03');
-          reject('jsonMarks.markAggregates undefined (request: /api/markAggregates/itemId/...)');
+          const error = new Error('jsonResponse.markAggregates undefined (request: /api/markAggregates/itemId/...)');
+          error.name = 'ErrorCaught';
+          throw (error);
         }
-
-        if (jsonMarks.markAggregates.length >= 0) {
-          this.setState({ markAggregates: jsonMarks.markAggregates });
-          if (jsonMarks.markAggregates.length > 0) this.onEndSearchingOK();
+        if (jsonResponse.markAggregates.length >= 0) {
+          this.setState({ markAggregates: jsonResponse.markAggregates });
+          if (jsonResponse.markAggregates.length > 0) this.onEndSearchingOK();
           else this.onEndSearchingNoResults();
         }
       }).catch((error) => {
-        logSearchItemContainer.error('parsing failed', error);
-        // this.onEndSearchingFailed('04');
-        reject(Error(error.message));
+        if (error.name !== 'ErrorCaught') this.onEndSearchingFailed('04');
+        reject(error);
       });
       logSearchItemContainer.warn('} SearchItemContainer.FindMarks');
     });

@@ -273,19 +273,19 @@ class ListItemsContainer extends React.Component {
     logListItemsContainer.debug('ListItemsContainer - fetch:', urlWithParams);
     fetch(urlWithParams)
       .then((response) => {
-        logListItemsContainer.debug('ListItemsContainer - fetch operation OK');
+        if (response.status >= 400) {
+          this.props.onSearchItemError(response.status);
+          const error = new Error(`Bad response from server: ${response.status} (request: ${urlWithParams})`);
+          error.name = 'ErrorCaught';
+          throw error;
+        }
         return response.json();
       }).then((jsonItems) => {
-        if (jsonItems && jsonItems.items && jsonItems.items.length > 0) {
-          this.setState({ items: jsonItems.items });
-          // this._ListItemsComponent.onEndLoadingOK();
-        }
-        if (jsonItems && jsonItems.error) {
-          // this._ListItemsComponent.onEndLoadingFailed(jsonItems.error);
-        }
-      }).catch((ex) => {
-        logListItemsContainer.debug('parsing failed', ex);
-        // this._ListItemsComponent.onEndLoadingFailed(ex);
+        if (jsonItems && jsonItems.items && jsonItems.items.length >= 0) this.setState({ items: jsonItems.items });
+        else this.props.onSearchItemError('10');
+      }).catch((error) => {
+        if (error.name !== 'ErrorCaught') this.props.onSearchItemError('14');
+        logListItemsContainer.error(error.message);
       });
   }
 

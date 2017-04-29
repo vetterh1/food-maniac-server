@@ -72,6 +72,10 @@ export function getItems(req, res) {
       logger.error('itemController.getItems returns err: ', err);
       res.status(500).send(err);
     } else {
+      // Simulate json errors :) :
+      // res.status(200).type('json').send('{"valid":"valid json but not what expected!"}'); // Should display error=10 (ok)
+      // res.status(200).type('json').send('{"invalid"}'); // Should display error=14 (ok)
+      // res.status(500).type('json').send('{"error": "message from server"}'); // Should display error=500 (ok)
       res.json({ items: items.docs });
       logger.info(`itemController.getItems length=${items.docs.length}`);
       // logger.info(JSON.stringify(items.docs));
@@ -85,6 +89,10 @@ export function getItems(req, res) {
  */
 
 export function addItem(req, res) {
+  // Simulate json errors :) :
+  // res.status(400).end(); // Should display error=01 (ok)
+  // res.status(500).type('json').send('{"error": "message from server"}'); // Should display error=01 (ok)
+
   if (!req.body || !req.body.item || !req.body.item.name || !req.body.item.category || !req.body.item.kind) {
     logger.error('itemController.addItem failed - missing mandatory fields');
     if (!req.body) logger.error('... no req.body!');

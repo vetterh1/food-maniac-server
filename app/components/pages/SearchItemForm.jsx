@@ -11,7 +11,7 @@ const SearchItemForm = (props) => {
     <form onSubmit={handleSubmit}>
       <FormGroup>
         <h4 className="mb-4">What?</h4>
-        <ListItemsContainer URL="/api/items" itemsPerPage={10} carrousel={false} onSearchItemError={onSearchItemError}/>
+        <ListItemsContainer URL="/api/items" itemsPerPage={50} carrousel={false} onSearchItemError={onSearchItemError} />
       </FormGroup>
       <FormGroup>
         <h4 className="mb-4">Max distance?</h4>
