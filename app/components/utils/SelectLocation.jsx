@@ -10,14 +10,14 @@ import Geolocation from '../utils/Geolocation';
 import ReactFormInput from '../utils/ReactFormInput';
 import * as PlacesActions from '../../actions/PlacesActions';
 
-const logSelectLocation = log.getLogger('logSelectLocation');
-logSelectLocation.setLevel('debug');
-logSelectLocation.debug('--> entering SelectLocation.jsx');
+const logSelectLocation = log.getLogger('loggerSelectLocation');
+logSelectLocation.setLevel('trace');
+logSelectLocation.error('--> entering SelectLocation.jsx');
 
 const Listing = ({ places }) => {
-  logSelectLocation.debug('   {   Listing.render (lr)');
-  logSelectLocation.debug('          (lr) nb places: ', places.length);
-  if (places.length > 0) logSelectLocation.debug('          (lr) 1st places: ', places[0].name);
+  logSelectLocation.error('   {   Listing.render (lr)');
+  logSelectLocation.error('          (lr) nb places: ', places.length);
+  if (places.length > 0) logSelectLocation.error('          (lr) 1st places: ', places[0].name);
 
 //  <AvField type="select" name="category" label="Category" size="lg">
 
@@ -27,7 +27,7 @@ const Listing = ({ places }) => {
     </Field>
   );
 
-  logSelectLocation.debug('   }   Listing.render');
+  logSelectLocation.error('   }   Listing.render');
   return result;
 };
 
@@ -48,26 +48,26 @@ class SelectLocation extends React.Component {
 
   // 2nd to receive store changes
   componentWillReceiveProps(nextProps) {
-    logSelectLocation.debug('{   SelectLocation.componentWillReceiveProps (sl-cwrp)');
-    logSelectLocation.debug('       (sl-cwrp) nextProps: ', nextProps);
+    logSelectLocation.error('{   SelectLocation.componentWillReceiveProps (sl-cwrp)');
+    logSelectLocation.error('       (sl-cwrp) nextProps: ', nextProps);
 
     if (!nextProps) {
-      logSelectLocation.debug('}   SelectLocation.componentWillReceiveProps: nextProps null !!!');
+      logSelectLocation.error('}   SelectLocation.componentWillReceiveProps: nextProps null !!!');
       return;
     }
 
     if (!nextProps.coordinates) {
-      logSelectLocation.debug('}   SelectLocation.componentWillReceiveProps: coordinates null !!!');
+      logSelectLocation.error('}   SelectLocation.componentWillReceiveProps: coordinates null !!!');
       return;
     }
 
     if (!nextProps.coordinates.latitude || !nextProps.coordinates.longitude) {
-      logSelectLocation.debug('}   SelectLocation.componentWillReceiveProps: lat or long null !!!');
+      logSelectLocation.error('}   SelectLocation.componentWillReceiveProps: lat or long null !!!');
       return;
     }
 
     if (!nextProps.coordinates.changed) {
-      logSelectLocation.debug('}   SelectLocation.componentWillReceiveProps: no change in coordinates');
+      logSelectLocation.error('}   SelectLocation.componentWillReceiveProps: no change in coordinates');
       return;
     }
 
@@ -81,7 +81,7 @@ class SelectLocation extends React.Component {
       zoom: 15,
     });
 
-    logSelectLocation.debug('       (sl-cwrp) currentLatLng : ', currentLatLng);
+    logSelectLocation.error('       (sl-cwrp) currentLatLng : ', currentLatLng);
     const request = {
       location: currentLatLng,
       // radius: '100',
@@ -93,8 +93,8 @@ class SelectLocation extends React.Component {
 
     service.nearbySearch(request, (results, status, pagination) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
-        logSelectLocation.debug('          (sl-cwrp) nearby nb results: ', results.length);
-        if (results.length > 0) logSelectLocation.debug('          (sl-cwrp) nearby 1st results', results[0].name);
+        logSelectLocation.error('          (sl-cwrp) nearby nb results: ', results.length);
+        if (results.length > 0) logSelectLocation.error('          (sl-cwrp) nearby 1st results', results[0].name);
         this.pagination = pagination;
         this.setState({
           places: results,
@@ -107,20 +107,20 @@ class SelectLocation extends React.Component {
         const action = PlacesActions.setCurrentPlaces(results);
         dispatch(action);
       } else {
-        logSelectLocation.debug('          (sl-cwrp) nearby search error : ', status);
+        logSelectLocation.error('          (sl-cwrp) nearby search error : ', status);
       }
     });
 
-    logSelectLocation.debug('}   SelectLocation.componentWillReceiveProps');
+    logSelectLocation.error('}   SelectLocation.componentWillReceiveProps');
   }
 
 
 
 
   render() {
-    logSelectLocation.debug('{   SelectLocation.render (slr)');
-    logSelectLocation.debug('       (slr) state:', this.state);
-    logSelectLocation.debug('       (slr) props:', this.props);
+    logSelectLocation.error('{   SelectLocation.render (slr)');
+    logSelectLocation.error('       (slr) state:', this.state);
+    logSelectLocation.error('       (slr) props:', this.props);
 
     const result = (
       <div>
@@ -137,7 +137,7 @@ class SelectLocation extends React.Component {
         </FormGroup>
       </div>
     );
-    logSelectLocation.debug('}   SelectLocation.render');
+    logSelectLocation.error('}   SelectLocation.render');
     return result;
   }
 }
@@ -160,6 +160,12 @@ SelectLocation.propTypes = {
 };
 
 
-const mapStateToProps = (state) => { return { coordinates: state.coordinates }; };
+// 1st to receive store changes
+// Role of mapStateToProps: transform the "interesting" part of the store state
+// into some props that will be received by componentWillReceiveProps
+const mapStateToProps = (state) => {
+  logSelectLocation.error('mapStateToProps');
+  return { coordinates: state.coordinates };
+};
 
 export default connect(mapStateToProps)(SelectLocation);
