@@ -54,9 +54,11 @@ class MainAppBar extends React.Component {
             <NavItem>
               <NavLink tag={Link} to="/addItem" onClick={this.resetOpenState}>&gt; Add new item</NavLink>
             </NavItem>
+            <NavItem>
+              <RetreiveLocations />
+            </NavItem>
           </Nav>
         </Collapse>
-        <RetreiveLocations />
       </Navbar>
     );
   }
