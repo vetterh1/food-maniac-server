@@ -5,29 +5,44 @@ import ListItemsContainer from '../pages/ListItemsContainer';
 import SelectSearchDistance from '../utils/SelectSearchDistance';
 import Geolocation from '../utils/Geolocation';
 
-const SearchItemForm = (props) => {
-  const { handleSubmit, pristine, reset, submitting, onSearchItemError } = props;
-  return (
-    <form onSubmit={handleSubmit}>
-      <FormGroup>
-        <h4 className="mb-4">What?</h4>
-        <ListItemsContainer URL="/api/items" itemsPerPage={50} carrousel={false} onSearchItemError={onSearchItemError} />
-      </FormGroup>
-      <FormGroup>
-        <h4 className="mb-4">Max distance?</h4>
-        <FormGroup row className="no-gutters">
-          <Col xs={11}>
-            <SelectSearchDistance />
-          </Col>
-          <Col xs={1}>
-            <Geolocation />
-          </Col>
+
+class SearchItemForm extends React.Component {
+
+  constructor() {
+    super();
+    this.resetForm = this.resetForm.bind(this);
+    this.state = {
+      keyForm: Date.now(),  // unique key for the form --> used for reset form
+    };
+  }
+
+  resetForm() {
+    // Reset the form & clear the image
+    this.setState({ keyForm: Date.now() });
+  }
+
+  render() {
+    const { handleSubmit, pristine, reset, submitting, onSearchItemError } = this.props;
+    return (
+      <form onSubmit={handleSubmit}>
+        <FormGroup>
+          <h4 className="mb-4">What?</h4>
+          <ListItemsContainer URL="/api/items" itemsPerPage={50} carrousel={false} onSearchItemError={onSearchItemError} />
         </FormGroup>
-      </FormGroup>
-      <Button type="submit" disabled={pristine || submitting} size="md">Find</Button>
-    </form>
-  );
-};
+        <FormGroup>
+          <h4 className="mb-4">Max distance?</h4>
+          <FormGroup row className="no-gutters">
+            <Col xs={12}>
+              <SelectSearchDistance />
+            </Col>
+          </FormGroup>
+        </FormGroup>
+        <Button type="submit" disabled={pristine || submitting} size="md">Find</Button>
+        <Button color="link" onClick={this.resetForm} size="md">Reset</Button>
+      </form>
+    );
+  }
+}
 
 export default reduxForm({
   form: 'SearchItemForm',

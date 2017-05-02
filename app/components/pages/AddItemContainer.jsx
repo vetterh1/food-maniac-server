@@ -49,6 +49,10 @@ class AddItemContainer extends React.Component {
     setTimeout(() => { this.setState({ alertStatus: 0 }); }, 3000);
 
     // Tell the child to reset
+    // CAUTION! only works because the form is the immediate child
+    // ...because it does NOT use redux not redux-form
+    // if this CHANGES, this should be replaced by a dispatch or a reset action
+    // ex: dispatch(reset('AddItemForm'));
     if (this._childComponent) this._childComponent.resetForm();
   }
 

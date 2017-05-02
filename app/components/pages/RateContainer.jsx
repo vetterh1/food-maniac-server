@@ -1,7 +1,7 @@
 import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { reduxForm } from 'redux-form';
+import { reduxForm, reset } from 'redux-form';
 import { connect } from 'react-redux';
 import { Alert, Container } from 'reactstrap';
 import RateForm from './RateForm';
@@ -19,6 +19,7 @@ class RateContainer extends React.Component {
     places: PropTypes.shape({
       places: PropTypes.array.isRequired,
     }).isRequired,
+    dispatch: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -51,8 +52,9 @@ class RateContainer extends React.Component {
     this.setState({ alertStatus: 2, alertColor: 'success', alertMessage: `Saved! (duration=${durationSaving}ms)` });
     setTimeout(() => { this.setState({ alertStatus: 0 }); }, 3000);
 
-    // Tell the child to reset
-    if (this._childComponent) this._childComponent.resetForm();
+    // Tell the form to reset
+    const { dispatch } = this.props;  // Injected by react-redux
+    dispatch(reset('RateForm'));
   }
 
   onEndSavingFailed = (errorMessage) => {
