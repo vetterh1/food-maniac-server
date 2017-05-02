@@ -4,6 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import RetreiveLocations from '../utils/RetreiveLocations';
 
 
 class MainAppBar extends React.Component {
@@ -55,6 +56,7 @@ class MainAppBar extends React.Component {
             </NavItem>
           </Nav>
         </Collapse>
+        <RetreiveLocations />
       </Navbar>
     );
   }

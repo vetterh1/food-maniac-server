@@ -79,17 +79,17 @@ export class GeolocationDisplay extends React.Component {
 
 GeolocationDisplay.propTypes = {
   coordinates: PropTypes.shape({
-      latitude: PropTypes.number,
-      longitude: PropTypes.number,
-      real: PropTypes.boolean,
-      changed: PropTypes.boolean,
-      changedReal: PropTypes.boolean,
-      nbRefreshes: PropTypes.number,
-      nbDiffs: PropTypes.number,
-      nbReal: PropTypes.number,
-      nbEstimated: PropTypes.number,
-      nbClose: PropTypes.number,
-    }).isRequired,
+    latitude: PropTypes.number,
+    longitude: PropTypes.number,
+    real: PropTypes.boolean,
+    changed: PropTypes.boolean,
+    changedReal: PropTypes.boolean,
+    nbRefreshes: PropTypes.number,
+    nbDiffs: PropTypes.number,
+    nbReal: PropTypes.number,
+    nbEstimated: PropTypes.number,
+    nbClose: PropTypes.number,
+  }).isRequired,
 };
 
 
