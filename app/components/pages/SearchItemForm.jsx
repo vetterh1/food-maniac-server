@@ -32,9 +32,7 @@ class SearchItemForm extends React.Component {
         <FormGroup>
           <h4 className="mb-4">Max distance?</h4>
           <FormGroup row className="no-gutters">
-            <Col xs={12}>
-              <SelectSearchDistance />
-            </Col>
+            <SelectSearchDistance />
           </FormGroup>
         </FormGroup>
         <Button type="submit" disabled={pristine || submitting} size="md">Find</Button>
@@ -47,3 +45,5 @@ class SearchItemForm extends React.Component {
 export default reduxForm({
   form: 'SearchItemForm',
 })(SearchItemForm);
+
+//           <ListItemTypesContainer onSearchItemError={onSearchItemError} />
