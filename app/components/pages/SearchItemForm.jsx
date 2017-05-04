@@ -29,8 +29,8 @@ class SearchItemForm extends React.Component {
       <form onSubmit={handleSubmit}>
         <FormGroup>
           <h4 className="mb-4">What?</h4>
-          <ListCategoriesContainer onListCategoriesError={onSearchItemError} />
-          <ListKindsContainer onListKindsError={onSearchItemError} />
+          <ListCategoriesContainer />
+          <ListKindsContainer />
           <ListItemsContainer URL="/api/items" itemsPerPage={50} carrousel={false} onSearchItemError={onSearchItemError} />
         </FormGroup>
         <FormGroup>

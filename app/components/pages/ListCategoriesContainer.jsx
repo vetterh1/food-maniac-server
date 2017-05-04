@@ -1,78 +1,37 @@
-import * as log from 'loglevel';
+/* eslint-disable react/forbid-prop-types */
+
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import ListCategories from './ListCategories';
-
-const logListCategoriesContainer = log.getLogger('logListCategoriesContainer');
-logListCategoriesContainer.setLevel('debug');
-logListCategoriesContainer.debug('--> entering ListCategoriesContainer.jsx');
-
-require('es6-promise').polyfill();
-require('isomorphic-fetch');
-
 
 
 class ListCategoriesContainer extends React.Component {
   static propTypes = {
     // Display a simple dropdown instead of a list
     dropdown: PropTypes.bool,
-    // Callback function to display errors
-    onListCategoriesError: PropTypes.func,
+    // Injected by redux-store connect:
+    categories: PropTypes.array,
   };
 
   constructor(props) {
     super(props);
-    this.load = this.load.bind(this);
-
-    this.state = {
-      categories: [],
-    };
+    this.state = { categories: props.categories };
   }
 
-  componentDidMount() {
-    this.load();
-  }
-
-  onLocalListCategoriesError(message) {
-    console.error('ListCategoriesContainer error: ', message);
-  }
-
-
-  load() {
-    logListCategoriesContainer.debug('ListCategoriesContainer - load');
-    fetch('/api/categories')
-      .then((response) => {
-        if (response.status >= 400) {
-          this.props.onListCategoriesError(response.status);
-          const error = new Error(`Bad response from server: ${response.status} (request: /api/categories)`);
-          error.name = 'ErrorCaught';
-          throw error;
-        }
-        return response.json();
-      }).then((jsonCategories) => {
-        if (jsonCategories && jsonCategories.categories && jsonCategories.categories.length >= 0) this.setState({ categories: jsonCategories.categories });
-        else this.props.onListCategoriesError('30');
-      }).catch((error) => {
-        if (error.name !== 'ErrorCaught') this.props.onListCategoriesError('34');
-        logListCategoriesContainer.error(error.message);
-      });
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps) return;
+    if (!nextProps.categories) return;
+    this.setState({ categories: nextProps.categories });
   }
 
   render() {
     if (!this.state.categories) return null;
-
-    return (
-      <div>
-        <ListCategories categories={this.state.categories} dropdown={this.props.dropdown} />
-      </div>
-    );
+    return <ListCategories categories={this.state.categories} dropdown={this.props.dropdown} />;
   }
-
 }
 
-ListCategoriesContainer.defaultProps = {
-  dropdown: true,
-  onListCategoriesError: ListCategoriesContainer.prototype.onLocalListCategoriesError,
-};
+ListCategoriesContainer.defaultProps = { dropdown: true, categories: [] };
 
-export default ListCategoriesContainer;
+const mapStateToProps = (state) => { return { categories: state.categories ? state.categories.categories : null }; };
+export default connect(mapStateToProps)(ListCategoriesContainer);

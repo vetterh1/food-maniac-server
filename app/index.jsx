@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 import * as log from 'loglevel';
 import combinedReducer from './reducers/combinedReducer';
 import { fetchKinds } from './actions/kindsActions';
+import { fetchCategories } from './actions/categoriesActions';
 import Root from './components/navigation/Root';
 
 
@@ -21,6 +22,7 @@ const store = createStore(
     reduxMiddleware));
 
 store.dispatch(fetchKinds());
+store.dispatch(fetchCategories());
 
 render(
   <Root store={store} />,
