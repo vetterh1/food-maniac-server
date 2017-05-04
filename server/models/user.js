@@ -14,7 +14,7 @@ const userSchema = new Schema({
 });
 
 // on every save, add the date
-userSchema.pre('save', function(next) {
+userSchema.pre('save', function (next) {
   this.lastModif = new Date();
   next();
 });

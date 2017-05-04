@@ -147,7 +147,7 @@ class ListItemsContainer extends React.Component {
     onSearchItemError: PropTypes.func,
   };
 
-  static defaultProps = { socketName: null, initialIndexPagination: 0, carrousel: false, dropdown: true, itemsPerPage: 7, filter: '{}' };
+  static defaultProps = { socketName: null, initialIndexPagination: 0, carrousel: false, dropdown: true, itemsPerPage: 7, filter: '{}', onSearchItemError: null };
 
   constructor(props) {
     super(props);

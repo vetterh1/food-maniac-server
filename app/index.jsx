@@ -5,6 +5,7 @@ import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 import * as log from 'loglevel';
 import combinedReducer from './reducers/combinedReducer';
+import { fetchKinds } from './actions/kindsActions';
 import Root from './components/navigation/Root';
 
 
@@ -18,6 +19,8 @@ const store = createStore(
   combinedReducer,
   composeEnhancers(
     reduxMiddleware));
+
+store.dispatch(fetchKinds());
 
 render(
   <Root store={store} />,

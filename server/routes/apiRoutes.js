@@ -2,6 +2,8 @@ import { Router } from 'express';
 import * as UserController from '../controllers/userController';
 import * as ItemController from '../controllers/itemController';
 import * as PlaceController from '../controllers/placeController';
+import * as KindController from '../controllers/kindController';
+import * as CategoryController from '../controllers/categoryController';
 import * as MarkAggregateController from '../controllers/markAggregateController';
 import * as MarkIndividualController from '../controllers/markIndividualController';
 
@@ -13,17 +15,56 @@ const router = new Router();
 // Get all Items
 router.route('/users').get(UserController.getUsers);
 
-// Get one user by _id
+// Get one item by _id
 router.route('/users/id/:_id').get(UserController.getUser);
 
 // Add a new Item
 router.route('/users').post(UserController.addUser);
 
-// Update a user by _id
+// Update a item by _id
 router.route('/users/id/:_id').post(UserController.updateUser);
 
-// Delete a user by _id
+// Delete a item by _id
 router.route('/users/id/:_id').delete(UserController.deleteUser);
+
+
+
+
+// ----------------  KINDS ----------------
+
+// Get all kinds
+router.route('/kinds').get(KindController.getKinds);
+
+// Get one kind by _id
+router.route('/kinds/id/:_id').get(KindController.getKind);
+
+// Add a new kind
+router.route('/kinds').post(KindController.addKind);
+
+// Update a kind by _id
+router.route('/kinds/id/:_id').post(KindController.updateKind);
+
+// Delete a kind by _id
+router.route('/kinds/id/:_id').delete(KindController.deleteKind);
+
+
+// ----------------  CATEGORIES ----------------
+
+// Get all categories
+router.route('/categories').get(CategoryController.getCategories);
+
+// Get one category by _id
+router.route('/categories/id/:_id').get(CategoryController.getCategory);
+
+// Add a new category
+router.route('/categories').post(CategoryController.addCategory);
+
+// Update a category by _id
+router.route('/categories/id/:_id').post(CategoryController.updateCategory);
+
+// Delete a category by _id
+router.route('/categories/id/:_id').delete(CategoryController.deleteCategory);
+
 
 
 // ----------------  ITEMS ----------------
@@ -50,7 +91,7 @@ router.route('/items/id/:_id').get(ItemController.getItem);
 // Ex 2: http://localhost:8080/api/items?offset=1&limit=3&sort={"name":1}&query={"category":"dish"}
 // Ex 2: http://localhost:8080/api/items?query={"category":"dish"}
 router.route('/items').get(ItemController.getItems);
-//router.route('/items/:offset?/:limit?/:sort?/:query?').get(ItemController.getItems);
+// router.route('/items/:offset?/:limit?/:sort?/:query?').get(ItemController.getItems);
 
 // Add a new Item
 router.route('/items').post(ItemController.addItem);

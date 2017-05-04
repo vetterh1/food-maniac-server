@@ -10,6 +10,8 @@ import RateContainer from '../pages/RateContainer';
 import AddItemContainer from '../pages/AddItemContainer';
 import SearchItemContainer from '../pages/SearchItemContainer';
 import ListItemsContainer from '../pages/ListItemsContainer';
+import ListCategoriesContainer from '../pages/ListCategoriesContainer';
+import ListKindsContainer from '../pages/ListKindsContainer';
 import Login from '../pages/Login';
 
 const NotFound = () => <h2>404 error - This page is not found!</h2>;
@@ -24,12 +26,16 @@ const Root = ({ store }) => (
         <Route path="/addItem" component={AddItemContainer} />
         <Route path="/login" component={Login} />
         <Route path="/listItems" component={() => (<ListItemsContainer URL="/api/items" dropdown={false} />)} />
-        <Route path="/generateThumbnails" component={() => (<ListItemsContainer URL="/util/regenerateAllThumbnails" socketName="regenerateAllThumbnails" dropdown={false}  />)} />
+        <Route path="/listCategories" component={() => (<ListCategoriesContainer dropdown={false} />)} />
+        <Route path="/listKinds" component={() => (<ListKindsContainer dropdown={false} />)} />
+        <Route path="/generateThumbnails" component={() => (<ListItemsContainer URL="/util/regenerateAllThumbnails" socketName="regenerateAllThumbnails" dropdown={false} />)} />
         <Route path="*" component={NotFound} />
       </Route>
     </Router>
   </Provider>
 );
+
+
 
 Root.propTypes = {
   store: PropTypes.object.isRequired,

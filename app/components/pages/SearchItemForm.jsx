@@ -2,6 +2,8 @@ import React from 'react';
 import { reduxForm } from 'redux-form';
 import { Button, Col, FormGroup } from 'reactstrap';
 import ListItemsContainer from '../pages/ListItemsContainer';
+import ListCategoriesContainer from '../pages/ListCategoriesContainer';
+import ListKindsContainer from '../pages/ListKindsContainer';
 import SelectSearchDistance from '../utils/SelectSearchDistance';
 import Geolocation from '../utils/Geolocation';
 
@@ -27,6 +29,8 @@ class SearchItemForm extends React.Component {
       <form onSubmit={handleSubmit}>
         <FormGroup>
           <h4 className="mb-4">What?</h4>
+          <ListCategoriesContainer onListCategoriesError={onSearchItemError} />
+          <ListKindsContainer onListKindsError={onSearchItemError} />
           <ListItemsContainer URL="/api/items" itemsPerPage={50} carrousel={false} onSearchItemError={onSearchItemError} />
         </FormGroup>
         <FormGroup>
@@ -46,4 +50,3 @@ export default reduxForm({
   form: 'SearchItemForm',
 })(SearchItemForm);
 
-//           <ListItemTypesContainer onSearchItemError={onSearchItemError} />
