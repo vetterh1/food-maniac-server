@@ -54,17 +54,17 @@ SearchItemForm = reduxForm({
 
 
 // Decorate with connect to read form values
-const selector = formValueSelector('SearchItemForm');
-SearchItemForm = connect(
-  (state) => {
-    const { category, kind } = selector(state, 'category', 'kind');
-    const filterSeparator = category && kind ? ',' : '';
-    const filterCategory = category ? `"category":"${category}"` : '';
-    const filterKind = kind ? `"kind":"${kind}"` : '';
-    const filter = `{${filterCategory}${filterSeparator}${filterKind}}`;
-    console.log('filter: ', filter);
-    return { filter };
-  }
-)(SearchItemForm);
+// const selector = formValueSelector('SearchItemForm');
+// SearchItemForm = connect(
+//   (state) => {
+//     const { category, kind } = selector(state, 'category', 'kind');
+//     const filterSeparator = category && kind ? ',' : '';
+//     const filterCategory = category ? `"category":"${category}"` : '';
+//     const filterKind = kind ? `"kind":"${kind}"` : '';
+//     const filter = `{${filterCategory}${filterSeparator}${filterKind}}`;
+//     console.log('filter: ', filter);
+//     return { filter };
+//   }
+// )(SearchItemForm);
 
 export default SearchItemForm;

@@ -33,5 +33,10 @@ class ListKindsContainer extends React.Component {
 
 ListKindsContainer.defaultProps = { dropdown: true, kinds: [] };
 
-const mapStateToProps = (state) => { return { kinds: state.kinds.kinds }; };
+const mapStateToProps = (state) => {
+  // Add the All to the list <-- should NOT be done in all forms :-S
+  const kinds = [{ _id: '--all--', name: 'All' }, ...state.kinds.kinds];
+  return { kinds };
+};
+
 export default connect(mapStateToProps)(ListKindsContainer);
