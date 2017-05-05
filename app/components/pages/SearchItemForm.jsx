@@ -1,6 +1,7 @@
 import React from 'react';
-import { reduxForm } from 'redux-form';
-import { Button, Col, FormGroup } from 'reactstrap';
+import { connect } from 'react-redux';
+import { reduxForm, formValueSelector } from 'redux-form';
+import { Button, FormGroup } from 'reactstrap';
 import ListItemsContainer from '../pages/ListItemsContainer';
 import ListCategoriesContainer from '../pages/ListCategoriesContainer';
 import ListKindsContainer from '../pages/ListKindsContainer';
@@ -24,14 +25,14 @@ class SearchItemForm extends React.Component {
   }
 
   render() {
-    const { handleSubmit, pristine, reset, submitting, onSearchItemError } = this.props;
+    const { filter, handleSubmit, pristine, reset, submitting, onSearchItemError } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         <FormGroup>
           <h4 className="mb-4">What?</h4>
           <ListCategoriesContainer />
           <ListKindsContainer />
-          <ListItemsContainer URL="/api/items" itemsPerPage={50} carrousel={false} onSearchItemError={onSearchItemError} />
+          <ListItemsContainer URL="/api/items" itemsPerPage={50} carrousel={false} filter={filter} onSearchItemError={onSearchItemError} />
         </FormGroup>
         <FormGroup>
           <h4 className="mb-4">Max distance?</h4>
@@ -46,7 +47,24 @@ class SearchItemForm extends React.Component {
   }
 }
 
-export default reduxForm({
+SearchItemForm = reduxForm({
   form: 'SearchItemForm',
 })(SearchItemForm);
 
+
+
+// Decorate with connect to read form values
+const selector = formValueSelector('SearchItemForm');
+SearchItemForm = connect(
+  (state) => {
+    const { category, kind } = selector(state, 'category', 'kind');
+    const filterSeparator = category && kind ? ',' : '';
+    const filterCategory = category ? `"category":"${category}"` : '';
+    const filterKind = kind ? `"kind":"${kind}"` : '';
+    const filter = `{${filterCategory}${filterSeparator}${filterKind}}`;
+    console.log('filter: ', filter);
+    return { filter };
+  }
+)(SearchItemForm);
+
+export default SearchItemForm;

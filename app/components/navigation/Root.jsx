@@ -9,6 +9,7 @@ import MainPageContent from '../pages/MainPageContent';
 import RateContainer from '../pages/RateContainer';
 import AddItemContainer from '../pages/AddItemContainer';
 import SearchItemContainer from '../pages/SearchItemContainer';
+import ListItemsContainerOld from '../pages/ListItemsContainerOld';
 import ListItemsContainer from '../pages/ListItemsContainer';
 import ListCategoriesContainer from '../pages/ListCategoriesContainer';
 import ListKindsContainer from '../pages/ListKindsContainer';
@@ -25,10 +26,11 @@ const Root = ({ store }) => (
         <Route path="/searchItem" component={SearchItemContainer} />
         <Route path="/addItem" component={AddItemContainer} />
         <Route path="/login" component={Login} />
-        <Route path="/listItems" component={() => (<ListItemsContainer URL="/api/items" dropdown={false} />)} />
+        <Route path="/listItems" component={() => (<ListItemsContainer dropdown={false} />)} />
+        <Route path="/listItemsOld" component={() => (<ListItemsContainerOld URL="/api/items" dropdown={false} />)} />
         <Route path="/listCategories" component={() => (<ListCategoriesContainer dropdown={false} />)} />
         <Route path="/listKinds" component={() => (<ListKindsContainer dropdown={false} />)} />
-        <Route path="/generateThumbnails" component={() => (<ListItemsContainer URL="/util/regenerateAllThumbnails" socketName="regenerateAllThumbnails" dropdown={false} />)} />
+        <Route path="/generateThumbnails" component={() => (<ListItemsContainerOld URL="/util/regenerateAllThumbnails" socketName="regenerateAllThumbnails" dropdown={false} />)} />
         <Route path="*" component={NotFound} />
       </Route>
     </Router>
