@@ -1,15 +1,25 @@
+/* eslint-disable react/forbid-prop-types */
+
 import React from 'react';
-import { connect } from 'react-redux';
-import { reduxForm, formValueSelector } from 'redux-form';
-import { Button, FormGroup } from 'reactstrap';
-import ListItemsContainer from '../pages/ListItemsContainer';
-import ListCategoriesContainer from '../pages/ListCategoriesContainer';
-import ListKindsContainer from '../pages/ListKindsContainer';
+import PropTypes from 'prop-types';
+import { Button, Form, FormGroup } from 'reactstrap';
+import ListItems from '../pages/ListItems';
+import ListCategories from '../pages/ListCategories';
+import ListKinds from '../pages/ListKinds';
 import SelectSearchDistance from '../utils/SelectSearchDistance';
-import Geolocation from '../utils/Geolocation';
 
 
 class SearchItemForm extends React.Component {
+  static propTypes = {
+    kinds: PropTypes.array.isRequired,
+    categories: PropTypes.array.isRequired,
+    items: PropTypes.array.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    onChangeKind: PropTypes.func.isRequired,
+    onChangeCategory: PropTypes.func.isRequired,
+    onChangeItem: PropTypes.func.isRequired,
+    onChangeDistance: PropTypes.func.isRequired,
+  }
 
   constructor() {
     super();
@@ -25,46 +35,26 @@ class SearchItemForm extends React.Component {
   }
 
   render() {
-    const { filter, handleSubmit, pristine, reset, submitting, onSearchItemError } = this.props;
+    const { kinds, categories, items, onChangeKind, onChangeCategory, onChangeItem, onChangeDistance, onSubmit } = this.props;
     return (
-      <form onSubmit={handleSubmit}>
+      <Form>
         <FormGroup>
           <h4 className="mb-4">What?</h4>
-          <ListCategoriesContainer />
-          <ListKindsContainer />
-          <ListItemsContainer URL="/api/items" itemsPerPage={50} carrousel={false} filter={filter} onSearchItemError={onSearchItemError} />
+          <ListCategories categories={categories} onChange={onChangeCategory} dropdown />
+          <ListKinds kinds={kinds} onChange={onChangeKind} dropdown />
+          <ListItems items={items} onChange={onChangeItem} dropdown />
         </FormGroup>
         <FormGroup>
           <h4 className="mb-4">Max distance?</h4>
           <FormGroup row className="no-gutters">
-            <SelectSearchDistance />
+            <SelectSearchDistance onChange={onChangeDistance} />
           </FormGroup>
         </FormGroup>
-        <Button type="submit" disabled={pristine || submitting} size="md">Find</Button>
+        <Button type="submit" onClick={onSubmit} size="md">Find</Button>
         <Button color="link" onClick={this.resetForm} size="md">Reset</Button>
-      </form>
+      </Form>
     );
   }
 }
-
-SearchItemForm = reduxForm({
-  form: 'SearchItemForm',
-})(SearchItemForm);
-
-
-
-// Decorate with connect to read form values
-// const selector = formValueSelector('SearchItemForm');
-// SearchItemForm = connect(
-//   (state) => {
-//     const { category, kind } = selector(state, 'category', 'kind');
-//     const filterSeparator = category && kind ? ',' : '';
-//     const filterCategory = category ? `"category":"${category}"` : '';
-//     const filterKind = kind ? `"kind":"${kind}"` : '';
-//     const filter = `{${filterCategory}${filterSeparator}${filterKind}}`;
-//     console.log('filter: ', filter);
-//     return { filter };
-//   }
-// )(SearchItemForm);
 
 export default SearchItemForm;

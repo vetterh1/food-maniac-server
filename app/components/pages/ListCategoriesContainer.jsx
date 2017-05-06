@@ -6,6 +6,10 @@ import { connect } from 'react-redux';
 import ListCategories from './ListCategories';
 
 
+//
+// Display a list of Kinds stored in redux store
+//
+
 class ListCategoriesContainer extends React.Component {
   static propTypes = {
     // Display a simple dropdown instead of a list
@@ -35,8 +39,9 @@ ListCategoriesContainer.defaultProps = { dropdown: true, categories: [] };
 
 const mapStateToProps = (state) => {
   // Add the All to the list <-- should NOT be done in all forms :-S
-  const categories = [{ _id: '--all--', name: 'All' }, ...state.categories.categories];
-  return { categories };
+  // const categories = [{ _id: '--all--', name: 'All' }, ...state.categories.categories];
+  // return { categories };
+  return { categories: state.categories.categories };
 };
 
 export default connect(mapStateToProps)(ListCategoriesContainer);

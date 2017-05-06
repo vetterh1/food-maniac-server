@@ -1,3 +1,5 @@
+/* eslint-disable react/forbid-prop-types */
+
 import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -42,6 +44,10 @@ ListOneMark.propTypes = {
 class SearchItemContainer extends React.Component {
   static propTypes = {
     coordinates: PropTypes.object.isRequired,
+    // Injected by redux-store connect:
+    kinds: PropTypes.array.isRequired,
+    categories: PropTypes.array.isRequired,
+    items: PropTypes.array.isRequired,
   }
 
   constructor(props) {
@@ -49,9 +55,23 @@ class SearchItemContainer extends React.Component {
     this.values = null;
     this.submitForm = this.submitForm.bind(this);
     this.onSearchItemError = this.onSearchItemError.bind(this);
+    this.onChangeKind = this.onChangeKind.bind(this);
+    this.onChangeCategory = this.onChangeCategory.bind(this);
+    this.onChangeItem = this.onChangeItem.bind(this);
+    this.onChangeDistance = this.onChangeDistance.bind(this);
     this._childComponent = null;
 
     this.state = {
+      // Full list of Kinds, Categories & Items:
+      kinds: props.kinds,
+      categories: props.categories,
+      items: props.items,
+      // Selected Kind, Category & Item:
+      kind: null,
+      category: null,
+      item: null,
+      distance: null,
+      // Results:
       markAggregates: [],
       // alertStatus possible values:
       // -  0: no alerts
@@ -61,6 +81,21 @@ class SearchItemContainer extends React.Component {
       alertMessage: '',
     };
   }
+
+
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps) return;
+    if (nextProps.kinds) {
+      this.setState({ kinds: nextProps.kinds });
+    }
+    if (nextProps.categories) {
+      this.setState({ categories: nextProps.categories });
+    }
+    if (nextProps.items) {
+      this.setState({ items: nextProps.items });
+    }
+  }
+
 
   onStartSearching = () => {
     this._nowStartSaving = new Date().getTime();
@@ -93,9 +128,25 @@ class SearchItemContainer extends React.Component {
     this.setState({ alertStatus: -2, alertColor: 'danger', alertMessage: `Error while constructing items list (error=${errorMessage})` });
   }
 
+  onChangeKind(event) {
+    this.setState({ kind: event.target.value });
+  }
+
+  onChangeCategory(event) {
+    this.setState({ category: event.target.value });
+  }
+
+  onChangeItem(event) {
+    this.setState({ item: event.target.value });
+  }
+
+  onChangeDistance(event) {
+    this.setState({ distance: event.target.value });
+  }
 
 
   submitForm(values) {
+    console.log('submitForm:', values);
     this.onStartSearching();
     this.values = values;
     this.FindMarks()
@@ -147,11 +198,23 @@ class SearchItemContainer extends React.Component {
 
 
   render() {
+    console.log('render');
+
     return (
       <div>
         <Container fluid>
           {this.state.alertStatus !== 0 && <Alert color={this.state.alertColor}>{this.state.alertMessage}</Alert>}
-          <SearchItemForm ref={(r) => { this._childComponent = r; }} onSubmit={this.submitForm} onSearchItemError={this.onSearchItemError} />
+          <SearchItemForm
+            ref={(r) => { this._childComponent = r; }}
+            onSubmit={this.submitForm}
+            onChangeKind={this.onChangeKind}
+            onChangeCategory={this.onChangeCategory}
+            onChangeItem={this.onChangeItem}
+            onChangeDistance={this.onChangeDistance}
+            kinds={this.state.kinds}
+            categories={this.state.categories}
+            items={this.state.items}
+          />
 
           <Row>
             <Table responsive striped>
@@ -179,7 +242,17 @@ class SearchItemContainer extends React.Component {
 
 
 
-const mapStateToProps = (state) => { return { coordinates: state.coordinates }; };
+const mapStateToProps = (state) => {
+  // Add the All to the Kind & Category lists
+  const kinds = [{ _id: '--all--', name: 'All' }, ...state.kinds.kinds];
+  const categories = [{ _id: '--all--', name: 'All' }, ...state.categories.categories];
+  return {
+    coordinates: state.coordinates,
+    kinds,
+    categories,
+    items: state.items.items,
+  };
+};
 
 // SearchItemContainer = reduxForm({ form: 'SearchItem' })(SearchItemContainer); // DecoSearchItem the form component
 SearchItemContainer = connect(mapStateToProps)(SearchItemContainer);

@@ -1,8 +1,9 @@
+/* eslint-disable react/forbid-prop-types */
+
 import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
-import ReactFormInput from '../utils/ReactFormInput';
+import ReactStrapInput from '../utils/ReactStrapInput';
 
 const logListKinds = log.getLogger('logListKinds');
 logListKinds.setLevel('warn');
@@ -26,8 +27,9 @@ class ListOneKind extends React.Component {
 
 class ListKinds extends React.Component {
   static propTypes = {
-    dropdown: PropTypes.bool.isRequired,
+    dropdown: PropTypes.bool,
     kinds: PropTypes.array.isRequired,
+    onChange: PropTypes.func,
   }
 
   render() {
@@ -41,9 +43,9 @@ class ListKinds extends React.Component {
           </ul>
         }
         { this.props.dropdown &&
-          <Field name="kind" component={ReactFormInput} type="select" size="md">
+          <ReactStrapInput onChange={this.props.onChange} size="md">
             {this.props.kinds && this.props.kinds.map((kind) => { return (<option key={kind._id} value={kind._id}>{kind.name}</option>); })}
-          </Field>
+          </ReactStrapInput>
         }
       </div>
     );
@@ -51,6 +53,7 @@ class ListKinds extends React.Component {
 
 }
 
+ListKinds.defaultProps = { dropdown: false, onChange: null };
 
 
 export default ListKinds;

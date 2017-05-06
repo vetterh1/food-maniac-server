@@ -1,9 +1,8 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
-import ReactFormInput from '../utils/ReactFormInput';
+import PropTypes from 'prop-types';
+import ReactStrapInput from '../utils/ReactStrapInput';
 
-const SelectSearchDistance = () => {
+const SelectSearchDistance = (props) => {
   const distances = [
     { metres: 200, label: '200 metres' },
     { metres: 500, label: '500 metres' },
@@ -16,17 +15,17 @@ const SelectSearchDistance = () => {
     { metres: 0, label: 'no restriction' },
   ];
   return (
-    <Field name="searchDistance" component={ReactFormInput} type="select" size="md">
+    <ReactStrapInput onChange={props.onChange} size="md">
       {distances && distances.map((d) => { return (<option key={d.metres} value={d.metres}>{d.label}</option>); })}
-    </Field>
+    </ReactStrapInput>
   );
 };
 
 SelectSearchDistance.propTypes = {
+  onChange: PropTypes.func.isRequired,
 };
 
+SelectSearchDistance.defaultProps = { onChange: null };
 
-SelectSearchDistance.defaultProps = {
-};
 
 export default SelectSearchDistance;
