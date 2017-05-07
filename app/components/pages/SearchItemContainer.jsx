@@ -59,6 +59,7 @@ class SearchItemContainer extends React.Component {
     this.onChangeCategory = this.onChangeCategory.bind(this);
     this.onChangeItem = this.onChangeItem.bind(this);
     this.onChangeDistance = this.onChangeDistance.bind(this);
+    this.getVisibleItems = this.getVisibleItems.bind(this);
     this._childComponent = null;
 
     this.state = {
@@ -85,15 +86,12 @@ class SearchItemContainer extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (!nextProps) return;
-    if (nextProps.kinds) {
-      this.setState({ kinds: nextProps.kinds });
-    }
-    if (nextProps.categories) {
-      this.setState({ categories: nextProps.categories });
-    }
-    if (nextProps.items) {
-      this.setState({ items: nextProps.items });
-    }
+    let needUpdate = false;
+    const updState = {};
+    if (nextProps.kinds && nextProps.kinds !== this.state.kinds) { updState.kinds = nextProps.kinds; needUpdate = true; }
+    if (nextProps.categories && nextProps.categories !== this.state.categories) { updState.categories = nextProps.categories; needUpdate = true; }
+    if (nextProps.items && nextProps.items !== this.state.items) { updState.items = nextProps.items; needUpdate = true; }
+    if (needUpdate) { this.setState(updState); }
   }
 
 
@@ -129,21 +127,33 @@ class SearchItemContainer extends React.Component {
   }
 
   onChangeKind(event) {
-    this.setState({ kind: event.target.value });
+    if (this.state.kind === event.target.value) return;
+    this.setState({ kind: event.target.value, items: this.getVisibleItems(event.target.value, this.state.category) });
   }
 
   onChangeCategory(event) {
-    this.setState({ category: event.target.value });
+    if (this.state.category === event.target.value) return;
+    this.setState({ category: event.target.value, items: this.getVisibleItems(this.state.kind, event.target.value) });
   }
 
   onChangeItem(event) {
+    if (this.state.item === event.target.value) return;
     this.setState({ item: event.target.value });
   }
 
   onChangeDistance(event) {
+    if (this.state.distance === event.target.value) return;
     this.setState({ distance: event.target.value });
   }
 
+
+  getVisibleItems(kind, category) {
+    return this.props.items.filter((item) => {
+      const kindCondition = (kind && kind !== undefined && kind !== '--all--' ? item.kind === kind : true);
+      const categoryCondition = (category && category !== undefined && category !== '--all--' ? item.category === category : true);
+      return kindCondition && categoryCondition;
+    });
+  }
 
   submitForm(values) {
     console.log('submitForm:', values);
