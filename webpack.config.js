@@ -198,6 +198,10 @@ module.exports = {
         target: 'http://localhost:8085',
         secure: false,
       },
+      '/logs': {
+        target: 'http://localhost:8085',
+        secure: false,
+      },
     },
   },
 

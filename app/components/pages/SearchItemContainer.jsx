@@ -52,7 +52,6 @@ class SearchItemContainer extends React.Component {
 
   constructor(props) {
     super(props);
-    this.values = null;
     this.submitForm = this.submitForm.bind(this);
     this.onSearchItemError = this.onSearchItemError.bind(this);
     this.onChangeKind = this.onChangeKind.bind(this);
@@ -155,10 +154,10 @@ class SearchItemContainer extends React.Component {
     });
   }
 
-  submitForm(values) {
-    console.log('submitForm:', values);
+  submitForm(event) {
+    event.preventDefault();
+
     this.onStartSearching();
-    this.values = values;
     this.FindMarks()
     .catch((error) => { logSearchItemContainer.error('submitForm caught exception: ', error.message); });
   }
@@ -170,7 +169,7 @@ class SearchItemContainer extends React.Component {
       logSearchItemContainer.warn('{ SearchItemContainer.FindMarks');
       // logSearchItemContainer.warn(`SearchItemContainer.FindMarks - this.props.coordinates:\n\n${stringifyOnce(this.props.coordinates, null, 2)}`);
 
-      fetch(`/api/markAggregates/itemId/${this.values.item}/maxDistance/${this.values.searchDistance}/lat/${this.props.coordinates.latitude}/lng/${this.props.coordinates.longitude}`)
+      fetch(`/api/markAggregates/itemId/${this.state.item}/maxDistance/${this.state.distance}/lat/${this.props.coordinates.latitude}/lng/${this.props.coordinates.longitude}`)
       .then((response) => {
         if (response.status >= 400) {
           this.onEndSearchingFailed(response.status);

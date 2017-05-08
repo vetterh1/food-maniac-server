@@ -37,7 +37,7 @@ class SearchItemForm extends React.Component {
   render() {
     const { kinds, categories, items, onChangeKind, onChangeCategory, onChangeItem, onChangeDistance, onSubmit } = this.props;
     return (
-      <Form>
+      <Form onSubmit={onSubmit}>
         <FormGroup>
           <h4 className="mb-4">What?</h4>
           <ListCategories categories={categories} onChange={onChangeCategory} dropdown />
@@ -50,7 +50,7 @@ class SearchItemForm extends React.Component {
             <SelectSearchDistance onChange={onChangeDistance} />
           </FormGroup>
         </FormGroup>
-        <Button type="submit" onClick={onSubmit} size="md">Find</Button>
+        <Button type="submit" size="md">Find</Button>
         <Button color="link" onClick={this.resetForm} size="md">Reset</Button>
       </Form>
     );

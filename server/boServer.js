@@ -149,7 +149,6 @@ app.set('socketio', io);
 
 
 
-
 //
 // ---------------------  HOT RELOADING  ---------------------
 //
@@ -183,7 +182,7 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(allowCrossDomain);
 
 /*
- *   ------------------ IMPORTANT NOTE ON ADDING PATHES TO THE SERVER ------------------
+ *   ------------------ IMPORTANT NOTE ON ADDING PATHS TO THE SERVER ------------------
  *
  * Whenever ADDING a PATH, server configurations & proxy configuration MUST be UPDATED:
  *
@@ -203,7 +202,10 @@ app.use(allowCrossDomain);
  * - Production environment
  *
  *      - ngInx proxy server:
- *          add a section to the config file & restart
+ *
+ *          Edit usefull.txt file - section: --------- File: ...default ------
+ *          to add a section to the config file
+ *          then restart :
  *            commands:
  *              sudo nano /etc/nginx/sites-available/default
  *              /etc/init.d/nginx restart
@@ -243,6 +245,10 @@ app.use('/util', utilRoutes);
 const folderStaticAbsolute = path.join(__dirname, folderStatic);
 logger.info(`BoServer serves static files from: ${folderStaticAbsolute} to /static.`);
 app.use('/static', express.static(folderStaticAbsolute));
+
+
+// Logs route: are visible here:  http://yourhost:port/logs
+require('winston-logs-display')(app, logger.default);
 
 
 // start app
