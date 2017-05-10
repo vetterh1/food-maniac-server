@@ -248,7 +248,7 @@ app.use('/static', express.static(folderStaticAbsolute));
 
 
 // Logs route: are visible here:  http://yourhost:port/logs
-require('winston-logs-display')(app, logger.default);
+require('./util/winstonDisplay')(app, logger.default);
 
 
 // start app
