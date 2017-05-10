@@ -36,23 +36,36 @@ html(lang="en")
             .mt-3
               .row
                 .col-2
-                  | Usage:
+                  | Usage example:
                 .col-10
                   .row
-                    | /logs?level=1&limit=5000&minutes=5
+                    | /logs?limit=5000&level=1&minutes=5
             .mt-3
               .row
                 .col-2
-                  | Level filter:
+                  | Filter: limit
+                .col-10
+                  .row
+                    | Use the 1st n lines in the log files
+                  .row
+                    | (then apply filters below)
+                  .row
+                    | Default: 500
+            .mt-3
+              .row
+                .col-2
+                  | Filter: level
                 .col-10
                   .row
                     | Displays logs with level equal or more critical than value passed
                   .row
                     | error: 0, warn: 1, info: 2, verbose: 3, debug: 4, silly: 5
+                  .row
+                    | Default: 1 (error + warn)
             .mt-3
               .row
                 .col-2
-                  | Timestamp filter:
+                  | Filter: hours / minutes / seconds
                 .col-10
                   .row
                     | Displays logs more recent than x last hours/minutes/seconds
@@ -62,6 +75,8 @@ html(lang="en")
                     | if the seconds parameter is specified, minutes & hours will be discarded
                   .row
                     | then, if the minutes parameter is specified, hours will be discarded
+                  .row
+                    | Default: no filter
                     
             table(class="table table-sm table-striped mt-5")
                 thead

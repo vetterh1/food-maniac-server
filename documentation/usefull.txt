@@ -244,6 +244,7 @@ Instead:
                             nginx
 ---------------------------------------------------------------
 
+
 cd /etc/nginx/
 more nginx.conf
 
@@ -251,6 +252,15 @@ more nginx.conf
         include /etc/nginx/sites-enabled/*;
 
 IMPORTANT NOTE ON ADDING PATHES TO THE SERVER: look comment in boServer.js
+
+
+---------------------- Logs & debug ---------------
+
+LOG file here: /var/log/nginx
+
+Test BoServer (NOT nginx) accessible locally, from server machine: curl localhost:8085/api
+
+
 
 ------------------  To restart nginx  ------------
 

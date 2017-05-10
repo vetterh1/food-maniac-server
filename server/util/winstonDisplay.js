@@ -41,7 +41,7 @@ module.exports = function(app, logger) {
               .filter((element) => { return oldestDateInMs > 0 ? Date.parse(element.timestamp) >= oldestDateInMs : true; });
           }
 
-          const html = jade.renderFile(`${__dirname}/winstonDisplay.jade`, { lines, logPath });
+          const html = jade.renderFile(`${__dirname}/winstonDisplayJade`, { lines, logPath });
           res.send(html);
         });
       } else {
