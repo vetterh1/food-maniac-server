@@ -257,6 +257,8 @@ IMPORTANT NOTE ON ADDING PATHES TO THE SERVER: look comment in boServer.js
 ---------------------- Logs & debug ---------------
 
 LOG file here: /var/log/nginx
+sudo less /var/log/nginx/error.log
+
 
 Test BoServer (NOT nginx) accessible locally, from server machine: curl localhost:8085/api
 
