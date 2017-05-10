@@ -2,6 +2,7 @@
 
 const config = require('config');
 const logger = require('winston');
+require('winston-loggly-bulk');
 
 const levelConsole = config.get('log.levelConsole');
 console.warn(`Config for log.levelConsole: ${levelConsole}`);
@@ -26,6 +27,13 @@ logger.addColors({
 logger.remove(logger.transports.Console);
 logger.add(logger.transports.Console, { level: levelConsole, colorize: true });
 logger.add(logger.transports.File, { level: levelFile, filename: pathFile });
+logger.add(logger.transports.Loggly, {
+  token: 'ae377f20-4014-44ed-b6b8-7c69c9c4baa5',
+  subdomain: 'lve',
+  tags: ['Winston-NodeJS'],
+  json: true,
+});
+
 
 logger.warn('------------------------------------------------------------------------');
 logger.warn(`                    FOOD-MANIAC  START  (${process.env.SERVER_NAME})`);

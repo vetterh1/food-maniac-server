@@ -83,6 +83,7 @@
     "socket.io": "^1.7.2",
     "socket.io-client": "^1.7.2",
     "winston": "^2.2.0",
+    "winston-loggly-bulk": "^1.4.2",
     "winston-logs-display": "^0.1.1"
   },
   "devDependencies": {
