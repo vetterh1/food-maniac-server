@@ -11,6 +11,8 @@ const itemSchema = new Schema({
   picture: { type: 'String' }, // just an id here. the pic is stored externally in a folder (ex: storage/picture/items)
   since: { type: 'Date', default: Date.now, required: true },
   lastModif: { type: 'Date', default: Date.now, required: true },
+
+  testMode: { type: 'Boolean', required: false, default: false },
 });
 itemSchema.plugin(mongoosePaginate);
 

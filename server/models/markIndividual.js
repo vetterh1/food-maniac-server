@@ -17,6 +17,8 @@ const markIndividualSchema = new Schema({
   // Timestamps
   since: { type: 'Date', default: Date.now, required: true },
   lastModif: { type: 'Date', default: Date.now, required: true },
+
+  testMode: { type: 'Boolean', required: false, default: false },
 });
 
 // on every save, add the date

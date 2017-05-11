@@ -66,6 +66,7 @@ function addRegularMark({ req, res, markAggregate }) {
       markOverall: req.body.markIndividual.markOverall,
       markFood: req.body.markIndividual.markFood,
       markPlace: req.body.markIndividual.markPlace,
+      markValue: req.body.markIndividual.markValue,
       markStaff: req.body.markIndividual.markStaff,
       comment: req.body.markIndividual.comment,
     });
@@ -100,10 +101,12 @@ function addOrUpdateAggregatedMark({ req, res }) {
           markOverall: req.body.markIndividual.markOverall,
           markFood: req.body.markIndividual.markFood,
           markPlace: req.body.markIndividual.markPlace,
-          markStaff: req.body.markIndividual.nbMarksPlace,
+          markValue: req.body.markIndividual.markValue,
+          markStaff: req.body.markIndividual.nbMarksStaff,
           nbMarksOverall: 1,
           nbMarksFood: req.body.markIndividual.markFood ? 1 : null,
           nbMarksPlace: req.body.markIndividual.markPlace ? 1 : null,
+          nbMarksValue: req.body.markIndividual.markValue ? 1 : null,
           nbMarksStaff: req.body.markIndividual.markStaff ? 1 : null,
           location: req.body.markIndividual.location,
         });
@@ -138,6 +141,11 @@ function addOrUpdateAggregatedMark({ req, res }) {
         if (req.body.markIndividual.markPlace) {
           updates.nbMarksPlace = foundMarkAggregate.nbMarksPlace ? foundMarkAggregate.nbMarksPlace + 1 : 1;
           updates.markPlace = foundMarkAggregate.markPlace ? foundMarkAggregate.markPlace + ((req.body.markIndividual.markPlace - foundMarkAggregate.markPlace) / updates.nbMarksPlace) : req.body.markIndividual.markPlace;
+        }
+        // update Value marking...
+        if (req.body.markIndividual.markValue) {
+          updates.nbMarksValue = foundMarkAggregate.nbMarksValue ? foundMarkAggregate.nbMarksValue + 1 : 1;
+          updates.markValue = foundMarkAggregate.markValue ? foundMarkAggregate.markValue + ((req.body.markIndividual.markValue - foundMarkAggregate.markValue) / updates.nbMarksValue) : req.body.markIndividual.markValue;
         }
         // update Staff marking...
         if (req.body.markIndividual.markStaff) {

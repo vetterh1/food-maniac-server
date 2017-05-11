@@ -35,7 +35,7 @@ class SearchItemForm extends React.Component {
   }
 
   render() {
-    const { kinds, categories, items, onChangeKind, onChangeCategory, onChangeItem, onChangeDistance, onSubmit } = this.props;
+    const { kinds, categories, items, onSubmit, onChangeKind, onChangeCategory, onChangeItem, onChangeDistance } = this.props;
     return (
       <Form onSubmit={onSubmit}>
         <FormGroup>

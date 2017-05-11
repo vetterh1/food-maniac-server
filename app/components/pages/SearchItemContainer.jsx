@@ -27,6 +27,7 @@ const ListOneMark = (props) => {
       <td>{roundTo0dot5(markAggregate.markOverall)}</td>
       <td>{roundTo0dot5(markAggregate.markFood)}</td>
       <td>{roundTo0dot5(markAggregate.markPlace)}</td>
+      <td>{roundTo0dot5(markAggregate.markValue)}</td>
       <td>{roundTo0dot5(markAggregate.markStaff)}</td>
       <td>{markAggregate.nbMarksOverall}</td>
     </tr>

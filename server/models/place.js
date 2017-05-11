@@ -15,6 +15,8 @@ const placeSchema = new Schema({
   items: [
     { type: Schema.Types.ObjectId, ref: 'Item' },
   ],
+
+  testMode: { type: 'Boolean', required: false, default: false },
 });
 
 // on every save, add the date
