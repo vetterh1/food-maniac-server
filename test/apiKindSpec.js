@@ -1,6 +1,3 @@
-// During the test the env variable is set to test
-process.env.NODE_ENV = 'test';
-
 /* global describe it beforeEach */
 /* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
 /* eslint no-unused-vars: ["error", { "varsIgnorePattern": "should" }] */
@@ -9,6 +6,10 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../server/boServer';
 import Kind from '../server/models/kind';
+import * as td from './testData';
+
+// During the test the env variable is set to test
+process.env.NODE_ENV = 'test';
 
 const should = chai.should();
 chai.use(chaiHttp);
@@ -39,20 +40,13 @@ describe('API Kinds', () => {
     });
 
     it('it should list all the kinds', (done) => {
-      const kindsList = [
-        { name: 'testName1' },
-        { name: 'testName2' },
-        { name: 'testName3' },
-        { name: 'testName4' },
-        { name: 'testName5' },
-      ];
-      Kind.create(kindsList, () => {
+      Kind.create(td.testKinds, () => {
         chai.request(app)
           .get('/api/kinds')
           .end((err, res) => {
             res.should.have.status(200);
             res.body.kinds.should.be.a('array');
-            res.body.kinds.length.should.be.eql(kindsList.length);
+            res.body.kinds.length.should.be.eql(td.testKinds.length);
             done();
           });
       });
@@ -75,7 +69,7 @@ describe('API Kinds', () => {
     });
 
     it('it should succeed creating a complete kind', (done) => {
-      const kindComplete = { name: 'testPostName' };
+      const kindComplete = td.testKinds[0];
       chai.request(app)
         .post('/api/kinds')
         .send({ kind: kindComplete })
@@ -90,11 +84,11 @@ describe('API Kinds', () => {
     });
 
     it('it should fail creating an existing kind', (done) => {
-      const kind = new Kind({ name: 'testPostName2times' });
-      kind.save((err, kindSaved) => {
+      const kind = new Kind(td.testKinds[0]);
+      kind.save(() => {
         chai.request(app)
           .post('/api/kinds')
-          .send({ kind: kindSaved })
+          .send({ kind: td.testKinds[0] })
           .end((err2, res) => {
             res.should.have.status(500);
             done();
@@ -105,7 +99,7 @@ describe('API Kinds', () => {
     it('it should fail creating with wrong kind info', (done) => {
       chai.request(app)
         .post('/api/kinds')
-        .send({ WRONG_kind: { name: 'testPostName' } })
+        .send({ WRONG_kind: td.testKinds[0] })
         .end((err, res) => {
           res.should.have.status(400);
           done();
@@ -119,7 +113,7 @@ describe('API Kinds', () => {
   */
   describe('Kind Update', () => {
     it('it should succeed updating a complete kind', (done) => {
-      const kindOrig = new Kind({ name: 'testNameUpdate1' });
+      const kindOrig = new Kind(td.testKinds[0]);
       const kindUpdt = { name: 'testNameUpdate1.2' };
       kindOrig.save((errSaving, kindSaved) => {
         chai.request(app)
@@ -137,7 +131,7 @@ describe('API Kinds', () => {
     });
 
     it('it should fail updating _id', (done) => {
-      const kindOrig = new Kind({ name: 'testNameUpdateCuid' });
+      const kindOrig = new Kind(td.testKinds[0]);
       kindOrig.save((errSaving, kindSaved) => {
         chai.request(app)
           .post(`/api/kinds/id/${kindSaved._id}`)
@@ -160,7 +154,7 @@ describe('API Kinds', () => {
     });
 
     it('it should fail updating with wrong kind info', (done) => {
-      const kindOrig = new Kind({ cuid: 'cuidUpdateIncomplete', name: 'testNameUpdateIncomplete' });
+      const kindOrig = new Kind(td.testKinds[0]);
       kindOrig.save(() => {
         chai.request(app)
           .post('/api/kinds/id/58aaa000888555aaabdafddd')
@@ -189,7 +183,7 @@ describe('API Kinds', () => {
     });
 
     it('it should find an existing kind', (done) => {
-      const kind = new Kind({ name: 'testRetreiveName' });
+      const kind = new Kind(td.testKinds[0]);
       kind.save((err, kindSaved) => {
         chai.request(app)
           .get(`/api/kinds/id/${kindSaved._id}`)
@@ -219,7 +213,7 @@ describe('API Kinds', () => {
     });
 
     it('it should delete an existing kind', (done) => {
-      const kind = new Kind({ name: 'testDeleteName' });
+      const kind = new Kind(td.testKinds[0]);
       kind.save((errSaving, kindSaved) => {
         chai.request(app)
           .delete(`/api/kinds/id/${kindSaved._id}`)

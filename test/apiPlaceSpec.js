@@ -1,6 +1,3 @@
-// During the test the env variable is set to test
-process.env.NODE_ENV = 'test';
-
 /* global describe it beforeEach */
 /* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
 /* eslint no-unused-vars: ["error", { "varsIgnorePattern": "should" }] */
@@ -9,6 +6,10 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../server/boServer';
 import Place from '../server/models/place';
+import * as td from './testData';
+
+// During the test the env variable is set to test
+process.env.NODE_ENV = 'test';
 
 const should = chai.should();
 chai.use(chaiHttp);
@@ -40,24 +41,13 @@ describe('API Places', () => {
     });
 
     it('it should list all the places', (done) => {
-      const placesList = [
-        { name: 'testPlace1', googleMapId: 'googleMapIdTestPlace1' },
-        { name: 'testPlace2', googleMapId: 'googleMapIdTestPlace2' },
-        { name: 'testPlace3', googleMapId: 'googleMapIdTestPlace3' },
-        { name: 'testPlace4', googleMapId: 'googleMapIdTestPlace4' },
-        { name: 'testPlace5', googleMapId: 'googleMapIdTestPlace5' },
-        { name: 'testPlace6', googleMapId: 'googleMapIdTestPlace6' },
-        { name: 'testPlace7', googleMapId: 'googleMapIdTestPlace7' },
-        { name: 'testPlace8', googleMapId: 'googleMapIdTestPlace8' },
-        { name: 'testPlace9', googleMapId: 'googleMapIdTestPlace9' },
-      ];
-      Place.create(placesList, () => {
+      Place.create(td.testPlaces, () => {
         chai.request(app)
           .get('/api/places')
           .end((err, res) => {
             res.should.have.status(200);
             res.body.places.should.be.a('array');
-            res.body.places.length.should.be.eql(placesList.length);
+            res.body.places.length.should.be.eql(td.testPlaces.length);
             done();
           });
       });
@@ -80,7 +70,7 @@ describe('API Places', () => {
     });
 
     it('it should succeed creating a simple place', (done) => {
-      const placeComplete = { name: 'testPostSimplePlace', googleMapId: 'googleMapIdTestPostSimplePlace' };
+      const placeComplete = td.testPlaces[0];
       chai.request(app)
         .post('/api/places')
         .send({ place: placeComplete })
@@ -97,7 +87,7 @@ describe('API Places', () => {
     });
 
     it('it should succeed creating a complete place (with coordinates)', (done) => {
-      const placeComplete = { name: 'testPostCompletePlace', googleMapId: 'googleMapIdTestPostCompletePlace', location: { type: 'Point', coordinates: [40.73061, -73.935242] } };
+      const placeComplete = td.testPlaces[0];
       chai.request(app)
         .post('/api/places')
         .send({ place: placeComplete })
@@ -111,17 +101,17 @@ describe('API Places', () => {
           res.body.place.should.have.property('googleMapId').eql(placeComplete.googleMapId);
           res.body.place.should.have.property('location').and.to.be.an('object');
           res.body.place.location.should.have.property('type').eql('Point');
-          res.body.place.location.should.have.property('coordinates').eql([40.73061, -73.935242]);
+          res.body.place.location.should.have.property('coordinates').eql([placeComplete.location.coordinates[0], placeComplete.location.coordinates[1]]);
           done();
         });
     });
 
     it('it should fail creating an existing place', (done) => {
-      const place = new Place({ googleMapId: 'googleMapIdTestPost2times', name: 'testPostname2times' });
-      place.save((err, placeSaved) => {
+      const place = new Place(td.testPlaces[0]);
+      place.save(() => {
         chai.request(app)
           .post('/api/places')
-          .send({ place: placeSaved })
+          .send({ place: td.testPlaces[0] })
           .end((err2, res) => {
             res.should.have.status(500);
             done();
@@ -132,7 +122,7 @@ describe('API Places', () => {
     it('it should fail creating with wrong place info', (done) => {
       chai.request(app)
         .post('/api/places')
-        .send({ WRONG_place: { googleMapId: 'googleMapIdTestPostWrongInfo', name: 'testPostname' } })
+        .send({ WRONG_place: td.testPlaces[0] })
         .end((err, res) => {
           res.should.have.status(400);
           done();
@@ -156,7 +146,7 @@ describe('API Places', () => {
         });
     });
 
-    it('it should succeed creating a simple place', (done) => {
+    it('it should succeed creating a simple place (no coordinates)', (done) => {
       const placeComplete = { name: 'testPostSimplePlace', googleMapId: 'googleMapIdTestPostSimplePlace' };
       chai.request(app)
         .post('/api/places/addOrUpdatePlaceByGoogleMapId')
@@ -174,7 +164,7 @@ describe('API Places', () => {
     });
 
     it('it should succeed creating a complete place (with coordinates)', (done) => {
-      const placeComplete = { name: 'testPostCompletePlace', googleMapId: 'googleMapIdTestPostCompletePlace', location: { type: 'Point', coordinates: [40.73061, -73.935242] } };
+      const placeComplete = td.testPlaces[0];
       chai.request(app)
         .post('/api/places/addOrUpdatePlaceByGoogleMapId')
         .send({ place: placeComplete })
@@ -188,7 +178,7 @@ describe('API Places', () => {
           res.body.place.should.have.property('googleMapId').eql(placeComplete.googleMapId);
           res.body.place.should.have.property('location').and.to.be.an('object');
           res.body.place.location.should.have.property('type').eql('Point');
-          res.body.place.location.should.have.property('coordinates').eql([40.73061, -73.935242]);
+          res.body.place.location.should.have.property('coordinates').eql([placeComplete.location.coordinates[0], placeComplete.location.coordinates[1]]);
           done();
         });
     });
@@ -215,7 +205,7 @@ describe('API Places', () => {
     it('it should fail creating with wrong place info', (done) => {
       chai.request(app)
         .post('/api/places/addOrUpdatePlaceByGoogleMapId')
-        .send({ WRONG_place: { googleMapId: 'googleMapIdTestAddOrUpdtWrong', name: 'testAddOrUpdtWrong' } })
+        .send({ WRONG_place: td.testPlaces[0] })
         .end((err, res) => {
           res.should.have.status(400);
           done();
@@ -230,7 +220,7 @@ describe('API Places', () => {
   */
   describe('Place Update', () => {
     it('it should succeed updating a complete place', (done) => {
-      const placeOrig = new Place({ googleMapId: 'googleMapIdUpdate1', name: 'testnameUpdate1' });
+      const placeOrig = new Place(td.testPlaces[0]);
       const placeUpdt = { name: 'testnameUpdate1.2' };
       placeOrig.save((errSaving, placeSaved) => {
         chai.request(app)
@@ -248,7 +238,7 @@ describe('API Places', () => {
     });
 
     it('it should fail updating the _id', (done) => {
-      const placeOrig = new Place({ googleMapId: 'cuidUpdateCuid', name: 'testnameUpdateCuid' });
+      const placeOrig = new Place(td.testPlaces[0]);
       placeOrig.save((errSaving, placeSaved) => {
         chai.request(app)
           .post(`/api/places/id/${placeSaved._id}`)
@@ -271,7 +261,7 @@ describe('API Places', () => {
     });
 
     it('it should fail updating with wrong place info', (done) => {
-      const placeOrig = new Place({ googleMapId: 'cuidUpdateIncomplete', name: 'testNameUpdateIncomplete' });
+      const placeOrig = new Place(td.testPlaces[0]);
       placeOrig.save((errSaving, placeSaved) => {
         chai.request(app)
           .post(`/api/places/id/${placeSaved._id}`)
@@ -300,7 +290,7 @@ describe('API Places', () => {
     });
 
     it('it should find an existing place', (done) => {
-      const place = new Place({ googleMapId: 'googleMapIdTestRetreive', name: 'testRetreiveName' });
+      const place = new Place(td.testPlaces[0]);
       place.save((err, placeSaved) => {
         chai.request(app)
           .get(`/api/places/id/${placeSaved._id}`)
@@ -334,7 +324,7 @@ describe('API Places', () => {
     });
 
     it('it should delete an existing place', (done) => {
-      const place = new Place({ googleMapId: 'googleMapIdTestDelete', name: 'testDeleteName' });
+      const place = new Place(td.testPlaces[0]);
       place.save((errSaving, placeSaved) => {
         chai.request(app)
           .delete(`/api/places/id/${placeSaved._id}`)

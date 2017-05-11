@@ -1,6 +1,3 @@
-// During the test the env variable is set to test
-process.env.NODE_ENV = 'test';
-
 /* global describe it beforeEach */
 /* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
 /* eslint no-unused-vars: ["error", { "varsIgnorePattern": "should" }] */
@@ -9,6 +6,10 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../server/boServer';
 import Category from '../server/models/category';
+import * as td from './testData';
+
+// During the test the env variable is set to test
+process.env.NODE_ENV = 'test';
 
 const should = chai.should();
 chai.use(chaiHttp);
@@ -39,20 +40,13 @@ describe('API Categories', () => {
     });
 
     it('it should list all the categories', (done) => {
-      const categoriesList = [
-        { name: 'testName1' },
-        { name: 'testName2' },
-        { name: 'testName3' },
-        { name: 'testName4' },
-        { name: 'testName5' },
-      ];
-      Category.create(categoriesList, () => {
+      Category.create(td.testCategories, () => {
         chai.request(app)
           .get('/api/categories')
           .end((err, res) => {
             res.should.have.status(200);
             res.body.categories.should.be.a('array');
-            res.body.categories.length.should.be.eql(categoriesList.length);
+            res.body.categories.length.should.be.eql(td.testCategories.length);
             done();
           });
       });
@@ -75,7 +69,7 @@ describe('API Categories', () => {
     });
 
     it('it should succeed creating a complete category', (done) => {
-      const categoryComplete = { name: 'testPostName' };
+      const categoryComplete = td.testCategories[0];
       chai.request(app)
         .post('/api/categories')
         .send({ category: categoryComplete })
@@ -90,11 +84,11 @@ describe('API Categories', () => {
     });
 
     it('it should fail creating an existing category', (done) => {
-      const category = new Category({ name: 'testPostName2times' });
-      category.save((err, categorySaved) => {
+      const category = new Category(td.testCategories[0]);
+      category.save(() => {
         chai.request(app)
           .post('/api/categories')
-          .send({ category: categorySaved })
+          .send({ category: td.testCategories[0] })
           .end((err2, res) => {
             res.should.have.status(500);
             done();
@@ -105,7 +99,7 @@ describe('API Categories', () => {
     it('it should fail creating with wrong category info', (done) => {
       chai.request(app)
         .post('/api/categories')
-        .send({ WRONG_category: { name: 'testPostName' } })
+        .send({ WRONG_category: td.testCategories[0] })
         .end((err, res) => {
           res.should.have.status(400);
           done();
@@ -119,7 +113,7 @@ describe('API Categories', () => {
   */
   describe('Category Update', () => {
     it('it should succeed updating a complete category', (done) => {
-      const categoryOrig = new Category({ name: 'testNameUpdate1' });
+      const categoryOrig = new Category(td.testCategories[0]);
       const categoryUpdt = { name: 'testNameUpdate1.2' };
       categoryOrig.save((errSaving, categorySaved) => {
         chai.request(app)
@@ -137,7 +131,7 @@ describe('API Categories', () => {
     });
 
     it('it should fail updating _id', (done) => {
-      const categoryOrig = new Category({ name: 'testNameUpdateCuid' });
+      const categoryOrig = new Category(td.testCategories[0]);
       categoryOrig.save((errSaving, categorySaved) => {
         chai.request(app)
           .post(`/api/categories/id/${categorySaved._id}`)
@@ -160,7 +154,7 @@ describe('API Categories', () => {
     });
 
     it('it should fail updating with wrong category info', (done) => {
-      const categoryOrig = new Category({ cuid: 'cuidUpdateIncomplete', name: 'testNameUpdateIncomplete' });
+      const categoryOrig = new Category(td.testCategories[0]);
       categoryOrig.save(() => {
         chai.request(app)
           .post('/api/categories/id/58aaa000888555aaabdafddd')
@@ -189,7 +183,7 @@ describe('API Categories', () => {
     });
 
     it('it should find an existing category', (done) => {
-      const category = new Category({ name: 'testRetreiveName' });
+      const category = new Category(td.testCategories[0]);
       category.save((err, categorySaved) => {
         chai.request(app)
           .get(`/api/categories/id/${categorySaved._id}`)
@@ -219,7 +213,7 @@ describe('API Categories', () => {
     });
 
     it('it should delete an existing category', (done) => {
-      const category = new Category({ name: 'testDeleteName' });
+      const category = new Category(td.testCategories[0]);
       category.save((errSaving, categorySaved) => {
         chai.request(app)
           .delete(`/api/categories/id/${categorySaved._id}`)

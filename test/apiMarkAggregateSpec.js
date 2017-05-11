@@ -6,8 +6,9 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../server/boServer';
 import MarkAggregate from '../server/models/markAggregate';
-import Item from '../server/models/item';
-import Place from '../server/models/place';
+// import Item from '../server/models/item';
+// import Place from '../server/models/place';
+import * as td from './testData';
 
 // During the test the env variable is set to test
 process.env.NODE_ENV = 'test';
@@ -18,38 +19,8 @@ global.items = [];
 global.places = [];
 
 describe('API MarkAggregate', () => {
-  // Before each test we empty the database
-  beforeEach((done) => {
-    MarkAggregate.remove({})
-    .then(() => { return Item.remove({}); }, () => { console.log('error on removing marks'); })
-    .then(() => { return Place.remove({}); }, () => { console.log('error on removing items'); })
-    .then(
-      // Create fake items for use in marks
-      () => {
-        return Item.create([
-          { category: 'testCat1', kind: 'testKind1', name: 'item1 location is FR seclin atos', location: { type: 'Point', coordinates: [3.0237092999999997, 50.5679449 ] } },
-          { category: 'testCat1', kind: 'testKind1', name: 'item2 location is FR lille home', location: { type: 'Point', coordinates: [3.0651635000000397, 50.6403954] } },
-        ]);
-      },
-      () => { console.log('error on removing places'); }
-    )
-    .then(
-      // Create fake places for use in marks
-      (items) => {
-        global.items = items; // save created items in global variable for access in tests
-        return Place.create([
-          { name: 'globalPlace1', googleMapId: 'googleMapIdGlobalPlace1', location: { type: 'Point', coordinates: [40.73061, -73.935242] } },
-          { name: 'globalPlace2', googleMapId: 'googleMapIdGlobalPlace2', location: { type: 'Point', coordinates: [38.73061, -73.935242] } },
-          { name: 'globalPlace3', googleMapId: 'googleMapIdGlobalPlace3', location: { type: 'Point', coordinates: [36.73061, -73.935242] } },
-        ]);
-      },
-      () => { console.log('error on creating global item'); }
-    )
-    .then((places) => {
-      global.places = places; // save created places in global variable for access in tests
-      return done();
-    }, () => { console.log('error on creating global places'); });
-  });
+  // Before each test we empty the database & fill it with test data
+  beforeEach((done) => { td.loadTestData(done); });
 
 
   /*
@@ -68,19 +39,13 @@ describe('API MarkAggregate', () => {
     });
 
     it('should list all the markAggregates', (done) => {
-      const marksList = [
-        { item: global.items[0]._id, place: global.places[0]._id, nbMarksOverall: 1, markOverall: 3 },
-        { item: global.items[0]._id, place: global.places[0]._id, nbMarksOverall: 1, markOverall: 3 },
-        { item: global.items[0]._id, place: global.places[0]._id, nbMarksOverall: 1, markOverall: 3 },
-        { item: global.items[0]._id, place: global.places[0]._id, nbMarksOverall: 1, markOverall: 3 },
-      ];
-      MarkAggregate.create(marksList, () => {
+      MarkAggregate.create(td.testMarkAggregates, () => {
         chai.request(app)
           .get('/api/markAggregates')
           .end((err, res) => {
             res.should.have.status(200);
             res.body.markAggregates.should.be.a('array');
-            res.body.markAggregates.length.should.be.eql(marksList.length);
+            res.body.markAggregates.length.should.be.eql(td.testMarkAggregates.length);
             done();
           });
       });
@@ -94,7 +59,7 @@ describe('API MarkAggregate', () => {
   */
   describe('MarkAggregate Update', () => {
     it('should succeed updating a complete markAggregate', (done) => {
-      const markOrig = new MarkAggregate({ item: global.items[0]._id, place: global.places[0]._id, nbMarksOverall: 1, markOverall: 3 });
+      const markOrig = new MarkAggregate(td.testMarkAggregates[0]);
       const markUpdt = { markOverall: 1 };
       markOrig.save((errSaving, markSaved) => {
         chai.request(app)
@@ -113,7 +78,7 @@ describe('API MarkAggregate', () => {
     });
 
     it('should fail updating the _id', (done) => {
-      const markOrig = new MarkAggregate({ item: global.items[0]._id, place: global.places[0]._id, nbMarksOverall: 1, markOverall: 3 });
+      const markOrig = new MarkAggregate(td.testMarkAggregates[0]);
       markOrig.save((errSaving, markSaved) => {
         chai.request(app)
           .post(`/api/markAggregates/id/${markSaved._id}`)
@@ -136,11 +101,11 @@ describe('API MarkAggregate', () => {
     });
 
     it('should fail updating with wrong markAggregate info', (done) => {
-      const markOrig = new MarkAggregate({ item: global.items[0]._id, place: global.places[0]._id, nbMarksOverall: 1, markOverall: 3 });
+      const markOrig = new MarkAggregate(td.testMarkAggregates[0]);
       markOrig.save((errSaving, itemSaved) => {
         chai.request(app)
           .post(`/api/markAggregates/id/${itemSaved._id}`)
-          .send({ WRONG_mark: { markOverall: 1 } })
+          .send({ WRONG_mark: td.testMarkAggregates[0] })
           .end((err, res) => {
             res.should.have.status(400);
             done();
@@ -165,7 +130,7 @@ describe('API MarkAggregate', () => {
     });
 
     it('should find an existing markAggregate', (done) => {
-      const mark = new MarkAggregate({ item: global.items[0]._id, place: global.places[0]._id, nbMarksOverall: 1, markOverall: 3 });
+      const mark = new MarkAggregate(td.testMarkAggregates[0]);
       mark.save((err, markSaved) => {
         chai.request(app)
           .get(`/api/markAggregates/id/${markSaved._id}`)
@@ -420,7 +385,7 @@ describe('API MarkAggregate', () => {
     });
 
     it('should delete an existing mark', (done) => {
-      const mark = new MarkAggregate({ item: global.items[0]._id, place: global.places[0]._id, nbMarksOverall: 1, markOverall: 3 });
+      const mark = new MarkAggregate(td.testMarkAggregates[0]);
       mark.save((errSaving, markSaved) => {
         chai.request(app)
           .delete(`/api/markAggregates/id/${markSaved._id}`)
