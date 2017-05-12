@@ -1,3 +1,6 @@
+/* eslint-disable no-class-assign */
+/* eslint-disable react/forbid-prop-types */
+
 import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -20,9 +23,7 @@ class RateContainer extends React.Component {
     kinds: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
     items: PropTypes.array.isRequired,
-    places: PropTypes.shape({
-      places: PropTypes.array.isRequired,
-    }).isRequired,
+    places: PropTypes.array.isRequired,
     dispatch: PropTypes.func.isRequired,
   }
 
@@ -32,28 +33,10 @@ class RateContainer extends React.Component {
     this.submitForm = this.submitForm.bind(this);
     this.onSearchItemError = this.onSearchItemError.bind(this);
     this.onSelectLocationError = this.onSelectLocationError.bind(this);
-    this.onChangeKind = this.onChangeKind.bind(this);
-    this.onChangeCategory = this.onChangeCategory.bind(this);
-    this.onChangeItem = this.onChangeItem.bind(this);
-    this.onChangeLocation = this.onChangeLocation.bind(this);
-    this.onChangeMarkOverall = this.onChangeMarkOverall.bind(this);
-    this.onChangeMarkFood = this.onChangeMarkFood.bind(this);
-    this.onChangeMarkValue = this.onChangeMarkValue.bind(this);
-    this.onChangeMarkPlace = this.onChangeMarkPlace.bind(this);
-    this.onChangeMarkStaff = this.onChangeMarkStaff.bind(this);
-    this.onChangeComment = this.onChangeComment.bind(this);
-    this.getVisibleItems = this.getVisibleItems.bind(this);
+
     this._childComponent = null;
 
     this.state = {
-      // Full list of Kinds, Categories & Items:
-      kinds: props.kinds,
-      categories: props.categories,
-      items: props.items,
-      // Selected Kind, Category & Item:
-      kind: null,
-      category: null,
-      item: null,
       // alertStatus possible values:
       // -  0: no alerts
       //  - saving alerts:  1: saving, 2: saving OK
@@ -64,16 +47,6 @@ class RateContainer extends React.Component {
   }
 
 
-
-  componentWillReceiveProps(nextProps) {
-    if (!nextProps) return;
-    let needUpdate = false;
-    const updState = {};
-    if (nextProps.kinds && nextProps.kinds !== this.state.kinds) { updState.kinds = nextProps.kinds; needUpdate = true; }
-    if (nextProps.categories && nextProps.categories !== this.state.categories) { updState.categories = nextProps.categories; needUpdate = true; }
-    if (nextProps.items && nextProps.items !== this.state.items) { updState.items = nextProps.items; needUpdate = true; }
-    if (needUpdate) { this.setState(updState); }
-  }
 
 
   onStartSaving = () => {
@@ -104,56 +77,6 @@ class RateContainer extends React.Component {
   onSelectLocationError = (errorMessage) => {
     this.setState({ alertStatus: -2, alertColor: 'danger', alertMessage: `Error while constructing places list (error=${errorMessage})` });
   }
-
-  onChangeKind(event) {
-    if (this.state.kind === event.target.value) return;
-    this.setState({ kind: event.target.value, items: this.getVisibleItems(event.target.value, this.state.category) });
-  }
-
-  onChangeCategory(event) {
-    if (this.state.category === event.target.value) return;
-    this.setState({ category: event.target.value, items: this.getVisibleItems(this.state.kind, event.target.value) });
-  }
-
-  onChangeItem(event) {
-    if (this.state.item === event.target.value) return;
-    this.setState({ item: event.target.value });
-  }
-
-
-  getVisibleItems(kind, category) {
-    return this.props.items.filter((item) => {
-      const kindCondition = (kind && kind !== undefined && kind !== '--all--' ? item.kind === kind : true);
-      const categoryCondition = (category && category !== undefined && category !== '--all--' ? item.category === category : true);
-      return kindCondition && categoryCondition;
-    });
-  }
-
-          
-  onChangeLocation(event) {
-    // if (this.state.category === event.target.value) return;
-    // this.setState({ category: event.target.value, items: this.getVisibleItems(this.state.kind, event.target.value) });
-  }
-
-
-  onChangeMarkOverall(event) {
-  }
-
-  onChangeMarkFood(event) {
-  }
-
-  onChangeMarkPlace(event) {
-  }
-
-  onChangeMarkValue(event) {
-  }
-
-  onChangeMarkStaff(event) {
-  }
-
-  onChangeComment(event) {
-  }
-
 
   onSubmit(event) {
     event.preventDefault();
@@ -293,29 +216,17 @@ class RateContainer extends React.Component {
 
 
 
-//         {this.state.alertStatus !== 0 && <Alert color={this.state.alertColor}>{this.state.alertMessage}</Alert>}
-
-
   render() {
-     return (
+    return (
       <Container fluid>
         {this.state.alertStatus !== 0 && <Alert color={this.state.alertColor}>{this.state.alertMessage}</Alert>}
         <RateForm
           ref={(r) => { this._childComponent = r; }}
-          kinds={this.state.kinds}
-          categories={this.state.categories}
-          items={this.state.items}
+          kinds={this.props.kinds}
+          categories={this.props.categories}
+          items={this.props.items}
+          places={this.props.places}
           onSubmit={this.onSubmit}
-          onChangeKind={this.onChangeKind}
-          onChangeCategory={this.onChangeCategory}
-          onChangeItem={this.onChangeItem}
-          onChangeLocation={this.onChangeLocation}
-          onChangeMarkOverall={this.onChangeMarkOverall}
-          onChangeMarkFood={this.onChangeMarkFood}
-          onChangeMarkValue={this.onChangeMarkValue}
-          onChangeMarkPlace={this.onChangeMarkPlace}
-          onChangeMarkStaff={this.onChangeMarkStaff}
-          onChangeComment={this.onChangeComment}
         />
       </Container>
 
@@ -332,7 +243,7 @@ const mapStateToProps = (state) => {
   const kinds = [{ _id: '--all--', name: 'All' }, ...state.kinds.kinds];
   const categories = [{ _id: '--all--', name: 'All' }, ...state.categories.categories];
   return {
-    places: state.places,
+    places: state.places.places,
     kinds,
     categories,
     items: state.items.items,
