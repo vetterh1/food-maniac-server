@@ -11,18 +11,18 @@ class RatingStarsRow extends React.PureComponent {
   static propTypes = {
     name: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
-    initialValue: PropTypes.number,
+    initialRate: PropTypes.number,
     size: PropTypes.number,
     onChange: PropTypes.func.isRequired,
   };
 
-  static defaultProps = { size: 26 };
+  static defaultProps = { initialRate: null, size: 26 };
 
   render() {
     const {
       name,
       label,
-      initialValue,
+      initialRate,
       size,
       style,
       onChange,
@@ -36,7 +36,7 @@ class RatingStarsRow extends React.PureComponent {
         <Col xs={9} lg={10} >
           <RatingStars
             name={name}
-            initialValue={initialValue}
+            initialRate={initialRate}
             size={size}
             style={style}
             onChange={onChange}

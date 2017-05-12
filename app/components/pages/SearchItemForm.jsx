@@ -3,9 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Form, FormGroup } from 'reactstrap';
-import ListItems from '../pages/ListItems';
-import ListCategories from '../pages/ListCategories';
-import ListKinds from '../pages/ListKinds';
+import SimpleListOrDropdown from '../pages/SimpleListOrDropdown';
 import SelectSearchDistance from '../utils/SelectSearchDistance';
 
 
@@ -40,9 +38,9 @@ class SearchItemForm extends React.Component {
       <Form onSubmit={onSubmit}>
         <FormGroup>
           <h4 className="mb-4">What?</h4>
-          <ListCategories categories={categories} onChange={onChangeCategory} dropdown />
-          <ListKinds kinds={kinds} onChange={onChangeKind} dropdown />
-          <ListItems items={items} onChange={onChangeItem} dropdown />
+          <SimpleListOrDropdown items={categories} onChange={onChangeCategory} dropdown />
+          <SimpleListOrDropdown items={kinds} onChange={onChangeKind} dropdown />
+          <SimpleListOrDropdown items={items} onChange={onChangeItem} dropdown />
         </FormGroup>
         <FormGroup>
           <h4 className="mb-4">Max distance?</h4>

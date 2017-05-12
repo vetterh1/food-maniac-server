@@ -9,28 +9,28 @@ import MdStarOutline from 'react-icons/lib/md/star-outline';
 
 class RatingStars extends React.PureComponent {
   static propTypes = {
-    initialValue: PropTypes.number,
+    initialRate: PropTypes.number,
     stop: PropTypes.number,
     size: PropTypes.number,
     style: PropTypes.object,
-    onChange: PropTypes.func,
+    onChange: PropTypes.func.isRequired,
   };
 
-  static defaultProps = { initialValue: null, stop: 5, size: 26, style: null };
+  static defaultProps = { initialRate: null, stop: 5, size: 26, style: null };
 
   render() {
     const {
-      initialValue,
+      initialRate,
       stop,
       size,
       style,
-      onChange
+      onChange,
     } = this.props;
 
     return (
       <FormGroup>
         <Rating
-          initialRate={initialValue ? parseInt(initialValue, 10) : null}
+          initialRate={initialRate}
           onChange={rate => onChange(rate)}
           stop={stop}
           full={<MdStar size={size} />}

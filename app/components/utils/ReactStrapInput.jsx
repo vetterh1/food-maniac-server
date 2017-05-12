@@ -2,29 +2,25 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormGroup, Input, FormFeedback } from 'reactstrap';
+import { FormGroup, Input } from 'reactstrap';
 
-class ReactStrapInput extends React.PureComponent {
-  static propTypes = {
-    onChange: PropTypes.func.isRequired,
-    children: PropTypes.array,
-  };
+const ReactStrapInput = props => (
+  <FormGroup>
+    <Input type="select" name="select" id="exampleSelect" value={props.selectedOption} onChange={props.onChange} >
+      {props.children}
+    </Input>
+  </FormGroup>
+);
 
-  static defaultProps = { children: null };
+ReactStrapInput.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  selectedOption: React.PropTypes.string,
+  children: PropTypes.array,
+};
 
-  render() {
-    const {
-      children,
-    } = this.props;
-
-    return (
-      <FormGroup>
-        <Input type="select" name="select" id="exampleSelect" onChange={this.props.onChange} >
-          {children}
-        </Input>
-      </FormGroup>
-    );
-  }
-}
+ReactStrapInput.defaultProps = {
+  selectedOption: null,
+  children: null,
+};
 
 export default ReactStrapInput;

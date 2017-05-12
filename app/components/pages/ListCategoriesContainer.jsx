@@ -3,7 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ListCategories from './ListCategories';
+import SimpleListOrDropdown from './SimpleListOrDropdown';
 
 
 //
@@ -31,7 +31,7 @@ class ListCategoriesContainer extends React.Component {
 
   render() {
     if (!this.state.categories) return null;
-    return <ListCategories categories={this.state.categories} dropdown={this.props.dropdown} />;
+    return <SimpleListOrDropdown items={this.state.categories} dropdown={this.props.dropdown} />;
   }
 }
 

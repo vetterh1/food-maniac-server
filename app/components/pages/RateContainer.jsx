@@ -30,7 +30,6 @@ class RateContainer extends React.Component {
   constructor(props) {
     super(props);
     this.values = null;
-    this.submitForm = this.submitForm.bind(this);
     this.onSearchItemError = this.onSearchItemError.bind(this);
     this.onSelectLocationError = this.onSelectLocationError.bind(this);
 
@@ -60,9 +59,12 @@ class RateContainer extends React.Component {
     this.setState({ alertStatus: 2, alertColor: 'success', alertMessage: `Saved! (duration=${durationSaving}ms)` });
     setTimeout(() => { this.setState({ alertStatus: 0 }); }, 3000);
 
-    // Tell the form to reset
-    const { dispatch } = this.props;  // Injected by react-redux
-    dispatch(reset('RateForm'));
+    // Tell the child to reset
+    // CAUTION! only works because the form is the immediate child
+    // ...because it does NOT use redux not redux-form
+    // if this CHANGES, this should be replaced by a dispatch or a reset action
+    // ex: dispatch(reset('AddItemForm'));
+    if (this._childComponent) this._childComponent.resetForm();
   }
 
   onEndSavingFailed = (errorMessage) => {
@@ -78,16 +80,7 @@ class RateContainer extends React.Component {
     this.setState({ alertStatus: -2, alertColor: 'danger', alertMessage: `Error while constructing places list (error=${errorMessage})` });
   }
 
-  onSubmit(event) {
-    event.preventDefault();
-
-    // this.onStartSearching();
-    // this.FindMarks()
-    // .catch((error) => { logSearchItemContainer.error('submitForm caught exception: ', error.message); });
-  }
-
-
-  submitForm(values) {
+  onSubmit(values) {
     this.onStartSaving();
     this.values = values;
     this.save();
@@ -95,7 +88,8 @@ class RateContainer extends React.Component {
 
 
   save() {
-    logRateContainer.debug(`RateContainer.save - values:\n\n${stringifyOnce(this.values, null, 2)}`);
+    console.log(`RateContainer.save - values:\n\n${stringifyOnce(this.values, null, 2)}`);
+//    logRateContainer.debug(`RateContainer.save - values:\n\n${stringifyOnce(this.values, null, 2)}`);
     this.saveLocation()
     .then(this.saveMarks.bind(this))
     .then(this.saveDone.bind(this))
@@ -111,8 +105,8 @@ class RateContainer extends React.Component {
       logRateContainer.debug('{ RateContainer.saveLocation');
       // logRateContainer.debug(`RateContainer.saveLocation - this.props:\n\n${stringifyOnce(this.props, null, 2)}`);
 
-      const placeSelected = this.props.places.places.find((place) => { return place.id === this.values.location; });
-      if (!placeSelected) throw new Error(`saveLocation - Could not resolve location - props.places.places:\n\n${stringifyOnce(this.props.places.places, null, 2)}`);
+      const placeSelected = this.props.places.find((place) => { return place.id === this.values.location; });
+      if (!placeSelected) throw new Error(`saveLocation - Could not resolve location - props.places:\n\n${stringifyOnce(this.props.places, null, 2)}`);
       // logRateContainer.debug(`RateContainer.saveLocation - placeSelected:\n\n${stringifyOnce(placeSelected, null, 2)}`);
       // logRateContainer.debug('placeSelected.geometry: ', placeSelected.geometry);
       // logRateContainer.debug('placeSelected.geometry.location.lat(): ', placeSelected.geometry.location.lat());
@@ -226,7 +220,7 @@ class RateContainer extends React.Component {
           categories={this.props.categories}
           items={this.props.items}
           places={this.props.places}
-          onSubmit={this.onSubmit}
+          onSubmit={this.onSubmit.bind(this)}
         />
       </Container>
 

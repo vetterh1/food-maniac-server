@@ -4,9 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Form, FormGroup } from 'reactstrap';
 import RatingStarsRow from '../utils/RatingStarsRow';
-import ListItems from '../pages/ListItems';
-import ListCategories from '../pages/ListCategories';
-import ListKinds from '../pages/ListKinds';
+import SimpleListOrDropdown from '../pages/SimpleListOrDropdown';
 import SelectLocation from '../utils/SelectLocation';
 // import ReactFormInput from '../utils/ReactFormInput';
 // import ListItemsContainer from '../pages/ListItemsContainer';
@@ -27,19 +25,34 @@ class RateForm extends React.Component {
     super(props);
     // this.getVisibleItems = this.getVisibleItems.bind(this);
 
-    this.state = {
+    this.defaultState = {
       // unique key for the form --> used for reset form
-      keyForm: Date.now(),  
+      keyForm: Date.now(),
 
+      // Selected Kind, Category & Item:
+      kind: '--all--',
+      category: '--all--',
+      item: '',
+
+      location: null,
+
+      markOverall: null,
+      markFood: null,
+      markPlace: null,
+      markValue: null,
+      markStaff: null,
+
+      comment: null,
+    };
+
+    this.state = {
       // Full list of Kinds, Categories & Items:
       kinds: props.kinds,
       categories: props.categories,
       items: props.items,
 
-      // Selected Kind, Category & Item:
-      kind: null,
-      category: null,
-      item: null,
+      // Empty marks, kind, categories & items:
+      ...this.defaultState,
     };
   }
 
@@ -53,6 +66,22 @@ class RateForm extends React.Component {
     if (needUpdate) { this.setState(updState); }
   }
 
+
+  onSubmit(event) {
+    event.preventDefault();
+
+    const returnValue = {
+      item: this.state.item,
+      location: this.state.location,
+      markOverall: this.state.markOverall,
+      markFood: this.state.markFood,
+      markValue: this.state.markValue,
+      markPlace: this.state.markPlace,
+      markStaff: this.state.markStaff,
+      comment: this.state.comment,
+    };
+    this.props.onSubmit(returnValue);
+  }
 
   onChangeKind(event) {
     if (this.state.kind === event.target.value) return;
@@ -71,27 +100,39 @@ class RateForm extends React.Component {
 
 
   onChangeLocation(event) {
-    // if (this.state.category === event.target.value) return;
-    // this.setState({ category: event.target.value, items: this.getVisibleItems(this.state.kind, event.target.value) });
+    console.log('onChangeLocation:', event);
+    if (this.state.location === event.target.value) return;
+    this.setState({ location: event.target.value });
   }
 
 
-  onChangeMarkOverall(event) {
+  onChangeMarkOverall(mark) {
+    if (!mark || this.state.markOverall === mark) return;
+    this.setState({ markOverall: parseInt(mark, 10) });
   }
 
-  onChangeMarkFood(event) {
+  onChangeMarkFood(mark) {
+    if (!mark || this.state.markFood === mark) return;
+    this.setState({ markFood: parseInt(mark, 10) });
   }
 
-  onChangeMarkPlace(event) {
+  onChangeMarkValue(mark) {
+    if (!mark || this.state.markValue === mark) return;
+    this.setState({ markValue: parseInt(mark, 10) });
   }
 
-  onChangeMarkValue(event) {
+  onChangeMarkPlace(mark) {
+    if (!mark || this.state.markPlace === mark) return;
+    this.setState({ markPlace: parseInt(mark, 10) });
   }
 
-  onChangeMarkStaff(event) {
+  onChangeMarkStaff(mark) {
+    if (!mark || this.state.markStaff === mark) return;
+    this.setState({ markStaff: parseInt(mark, 10) });
   }
 
   onChangeComment(event) {
+    console.log('onChangeLocation:', event);
   }
 
   getVisibleItems(kind, category) {
@@ -105,18 +146,26 @@ class RateForm extends React.Component {
 
   resetForm() {
     // Reset the form & clear the image
-    this.setState({ keyForm: Date.now() });
+    this.setState({
+      // Full list of Kinds, Categories & Items:
+      // received from redux-store
+      kinds: this.props.kinds,
+      categories: this.props.categories,
+      items: this.props.items,
+
+      // Empty marks, kind, categories & items:
+      ...this.defaultState,
+    });
   }
 
   render() {
-    console.log('render RateForm');
     return (
-      <Form onSubmit={this.props.onSubmit}>
+      <Form onSubmit={this.onSubmit.bind(this)}>
         <FormGroup>
           <h4 className="mb-4">What?</h4>
-          <ListCategories categories={this.state.categories} onChange={this.onChangeCategory.bind(this)} dropdown />
-          <ListKinds kinds={this.state.kinds} onChange={this.onChangeKind.bind(this)} dropdown />
-          <ListItems items={this.state.items} onChange={this.onChangeItem.bind(this)} dropdown />
+          <SimpleListOrDropdown items={this.state.categories} selectedOption={this.state.category} onChange={this.onChangeCategory.bind(this)} dropdown />
+          <SimpleListOrDropdown items={this.state.kinds} selectedOption={this.state.kind} onChange={this.onChangeKind.bind(this)} dropdown />
+          <SimpleListOrDropdown items={this.state.items} selectedOption={this.state.item} onChange={this.onChangeItem.bind(this)} dropdown />
         </FormGroup>
 
         <FormGroup>
@@ -127,11 +176,11 @@ class RateForm extends React.Component {
         <FormGroup>
           <h4 className="mb-4">Marks</h4>
           <div>
-            <RatingStarsRow name="markOverall" label="Overall" onChange={this.onChangeMarkOverall.bind(this)} size={30} />
-            <RatingStarsRow name="markFood" label="Food" onChange={this.onChangeMarkFood.bind(this)} />
-            <RatingStarsRow name="markValue" label="Value" onChange={this.onChangeMarkValue.bind(this)} />
-            <RatingStarsRow name="markPlace" label="Place" onChange={this.onChangeMarkPlace.bind(this)} />
-            <RatingStarsRow name="markStaff" label="Staff" onChange={this.onChangeMarkStaff.bind(this)} />
+            <RatingStarsRow name="markOverall" label="Overall" initialRate={this.state.markOverall} onChange={this.onChangeMarkOverall.bind(this)} size={30} />
+            <RatingStarsRow name="markFood" label="Food" initialRate={this.state.markFood} onChange={this.onChangeMarkFood.bind(this)} />
+            <RatingStarsRow name="markValue" label="Value" initialRate={this.state.markValue} onChange={this.onChangeMarkValue.bind(this)} />
+            <RatingStarsRow name="markPlace" label="Place" initialRate={this.state.markPlace} onChange={this.onChangeMarkPlace.bind(this)} />
+            <RatingStarsRow name="markStaff" label="Staff" initialRate={this.state.markStaff} onChange={this.onChangeMarkStaff.bind(this)} />
           </div>
         </FormGroup>
 
@@ -146,14 +195,4 @@ class RateForm extends React.Component {
   }
 }
 
-// export default reduxForm({ form: 'RateForm', })(RateForm);
-
 export default RateForm;
-
-
-/*
-          <SelectLocation onSelectLocationError={onSelectLocationError} />
-
-          <Field name="comment" component={ReactFormInput} type="edit" size="md" />
-
-*/
