@@ -23,7 +23,6 @@ class RateForm extends React.Component {
 
   constructor(props) {
     super(props);
-    // this.getVisibleItems = this.getVisibleItems.bind(this);
 
     this.defaultState = {
       // unique key for the form --> used for reset form
@@ -32,7 +31,6 @@ class RateForm extends React.Component {
       // Selected Kind, Category & Item:
       kind: '--all--',
       category: '--all--',
-      item: '',
 
       location: null,
 
@@ -60,9 +58,19 @@ class RateForm extends React.Component {
     if (!nextProps) return;
     let needUpdate = false;
     const updState = {};
+
+    // Prepare the lists updates if necessary
     if (nextProps.kinds && nextProps.kinds !== this.state.kinds) { updState.kinds = nextProps.kinds; needUpdate = true; }
     if (nextProps.categories && nextProps.categories !== this.state.categories) { updState.categories = nextProps.categories; needUpdate = true; }
     if (nextProps.items && nextProps.items !== this.state.items) { updState.items = nextProps.items; needUpdate = true; }
+
+    // Prepare the default item selection if necessary
+    if (nextProps.items && nextProps.items !== this.state.items) {
+      console.log('componentWillReceiveProps (length & 1st): ', nextProps.items.length, nextProps.items[0]);
+      if (!this.state.item || this.state.item === '') updState.item = nextProps.items[0].id;
+    }
+
+    // Launch the state update
     if (needUpdate) { this.setState(updState); }
   }
 
@@ -85,12 +93,12 @@ class RateForm extends React.Component {
 
   onChangeKind(event) {
     if (this.state.kind === event.target.value) return;
-    this.setState({ kind: event.target.value, items: this.getVisibleItems(event.target.value, this.state.category) });
+    this.setState(Object.assign({ kind: event.target.value }, this.getVisibleItems(event.target.value, this.state.category)));
   }
 
   onChangeCategory(event) {
     if (this.state.category === event.target.value) return;
-    this.setState({ category: event.target.value, items: this.getVisibleItems(this.state.kind, event.target.value) });
+    this.setState(Object.assign({ category: event.target.value }, this.getVisibleItems(this.state.kind, event.target.value)));
   }
 
   onChangeItem(event) {
@@ -135,27 +143,42 @@ class RateForm extends React.Component {
     console.log('onChangeLocation:', event);
   }
 
+  // return an object of this kind: {items: xxxx, item: id_of_1st_item}
   getVisibleItems(kind, category) {
-    return this.props.items.filter((item) => {
+    const items = this.props.items.filter((item) => {
       const kindCondition = (kind && kind !== undefined && kind !== '--all--' ? item.kind === kind : true);
       const categoryCondition = (category && category !== undefined && category !== '--all--' ? item.category === category : true);
       return kindCondition && categoryCondition;
     });
+    const item = items.length > 0 ? items[0]._id : null;
+    return { items, item };
   }
 
 
   resetForm() {
     // Reset the form & clear the image
-    this.setState({
+    // this.setState({
+    //   // Full list of Kinds, Categories & Items:
+    //   // received from redux-store
+    //   kinds: this.props.kinds,
+    //   categories: this.props.categories,
+    //   items: this.props.items,
+
+    //   // Empty marks, kind, categories & items:
+    //   ...this.defaultState,
+    // });
+    this.setState(Object.assign({
       // Full list of Kinds, Categories & Items:
       // received from redux-store
       kinds: this.props.kinds,
       categories: this.props.categories,
       items: this.props.items,
-
-      // Empty marks, kind, categories & items:
-      ...this.defaultState,
-    });
+    },
+    // Empty marks, kind, categories & items:
+    this.defaultState,
+    // Select the 1st item
+    this.getVisibleItems(null, null)
+    ));
   }
 
   render() {
