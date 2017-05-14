@@ -65,9 +65,15 @@ class RateForm extends React.Component {
     if (nextProps.items && nextProps.items !== this.state.items) { updState.items = nextProps.items; needUpdate = true; }
 
     // Prepare the default item selection if necessary
-    if (nextProps.items && nextProps.items !== this.state.items) {
-      console.log('componentWillReceiveProps (length & 1st): ', nextProps.items.length, nextProps.items[0]);
+    if (nextProps.items && nextProps.items.length > 0 && nextProps.items !== this.state.items) {
+      console.log('componentWillReceiveProps items (length & 1st): ', nextProps.items.length, nextProps.items[0]);
       if (!this.state.item || this.state.item === '') updState.item = nextProps.items[0].id;
+    }
+
+    // Prepare the default location selection if necessary
+    if (nextProps.places && nextProps.places.length > 0 && nextProps.places !== this.state.places) {
+      console.log('componentWillReceiveProps places (length & 1st): ', nextProps.places.length, nextProps.places[0]);
+      if (!this.state.location || this.state.location === '') updState.location = nextProps.places[0].id;
     }
 
     // Launch the state update
@@ -193,7 +199,7 @@ class RateForm extends React.Component {
 
         <FormGroup>
           <h4 className="mb-4">Where?</h4>
-          <SelectLocation places={this.props.places} onChange={this.onChangeLocation.bind(this)} />
+          <SimpleListOrDropdown items={this.props.places} selectedOption={this.state.location} onChange={this.onChangeLocation.bind(this)} dropdown />
         </FormGroup>
 
         <FormGroup>
