@@ -41,6 +41,9 @@ markAggregateSchema.pre('save', function (next) {
   next();
 });
 
+// Add id field in query answers (not only _id)
+markAggregateSchema.set('toJSON', { virtuals: true, });
+
 markAggregateSchema.index({ location: '2dsphere' });
 
 export default mongoose.model('MarkAggregate', markAggregateSchema);

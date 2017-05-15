@@ -39,7 +39,7 @@ describe('API Categories', () => {
         });
     });
 
-    it('it should list all the categories', (done) => {
+    it('it should list all the categories & output should include virtuals like id', (done) => {
       Category.create(td.testCategories, () => {
         chai.request(app)
           .get('/api/categories')
@@ -47,6 +47,8 @@ describe('API Categories', () => {
             res.should.have.status(200);
             res.body.categories.should.be.a('array');
             res.body.categories.length.should.be.eql(td.testCategories.length);
+            // Verify that the virtuals are added to this schema (the_schema.set('toJSON', { virtuals: true, });)
+            res.body.categories[0].id.should.be.eql(res.body.categories[0]._id);
             done();
           });
       });

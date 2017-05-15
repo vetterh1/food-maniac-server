@@ -46,6 +46,8 @@ describe('API MarkAggregate', () => {
             res.should.have.status(200);
             res.body.markAggregates.should.be.a('array');
             res.body.markAggregates.length.should.be.eql(td.testMarkAggregates.length);
+            // Verify that the virtuals are added to this schema (the_schema.set('toJSON', { virtuals: true, });)
+            res.body.markAggregates[0].id.should.be.eql(res.body.markAggregates[0]._id);
             done();
           });
       });

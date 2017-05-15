@@ -17,7 +17,7 @@ class RateForm extends React.Component {
     kinds: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
     items: PropTypes.array.isRequired,
-    places: PropTypes.array.isRequired,
+    places: PropTypes.object.isRequired,
     onSubmit: PropTypes.func.isRequired,
   }
 
@@ -28,11 +28,10 @@ class RateForm extends React.Component {
       // unique key for the form --> used for reset form
       keyForm: Date.now(),
 
-      // Selected Kind, Category & Item:
+      // Selected Kind & Category:
       kind: '--all--',
       category: '--all--',
-
-      location: null,
+      // default item is defined by getVisibleItems
 
       markOverall: null,
       markFood: null,
@@ -44,10 +43,10 @@ class RateForm extends React.Component {
     };
 
     this.state = {
-      // Full list of Kinds, Categories & Items:
-      kinds: props.kinds,
-      categories: props.categories,
+      // Items received from redux-store
+      // and stored in state as it's altered by kind & category filters
       items: props.items,
+      item: undefined,
 
       // Empty marks, kind, categories & items:
       ...this.defaultState,
@@ -59,21 +58,30 @@ class RateForm extends React.Component {
     let needUpdate = false;
     const updState = {};
 
-    // Prepare the lists updates if necessary
-    if (nextProps.kinds && nextProps.kinds !== this.state.kinds) { updState.kinds = nextProps.kinds; needUpdate = true; }
-    if (nextProps.categories && nextProps.categories !== this.state.categories) { updState.categories = nextProps.categories; needUpdate = true; }
-    if (nextProps.items && nextProps.items !== this.state.items) { updState.items = nextProps.items; needUpdate = true; }
+    console.log('componentWillReceiveProps items (length & 1st) crt --> : ',
+      !this.state.items || this.state.items.length <= 0 ? 'null or empty' : this.state.items.length, this.state.items[0]);
 
-    // Prepare the default item selection if necessary
+    console.log('componentWillReceiveProps items (length & 1st) --> next: ',
+      !nextProps.items || nextProps.items.length <= 0 ? 'null or empty' : nextProps.items.length, nextProps.items[0]);
+
+    // Items list copy from redux --> state as the items list changes (with kind & category filters)
     if (nextProps.items && nextProps.items.length > 0 && nextProps.items !== this.state.items) {
-      console.log('componentWillReceiveProps items (length & 1st): ', nextProps.items.length, nextProps.items[0]);
-      if (!this.state.item || this.state.item === '') updState.item = nextProps.items[0].id;
-    }
+      console.log('...update items!');
+      updState.items = nextProps.items;
+      needUpdate = true;
+
+      // Select the 1st item in the list if none yet selected
+      if (!this.state.item || this.state.item === '') {
+        console.log('...and update default selected item!');
+        updState.item = nextProps.items[0].id;
+      }
+    } else console.log('...NO update items!');
 
     // Prepare the default location selection if necessary
-    if (nextProps.places && nextProps.places.length > 0 && nextProps.places !== this.state.places) {
-      console.log('componentWillReceiveProps places (length & 1st): ', nextProps.places.length, nextProps.places[0]);
-      if (!this.state.location || this.state.location === '') updState.location = nextProps.places[0].id;
+    if (nextProps.places && nextProps.places.places.length > 0 && (!this.state.location || this.state.location === '')) {
+      console.log(`componentWillReceiveProps update default place to ${nextProps.places.places[0].id}`);
+      updState.location = nextProps.places.places[0].id;
+      needUpdate = true;
     }
 
     // Launch the state update
@@ -163,43 +171,33 @@ class RateForm extends React.Component {
 
   resetForm() {
     // Reset the form & clear the image
-    // this.setState({
-    //   // Full list of Kinds, Categories & Items:
-    //   // received from redux-store
-    //   kinds: this.props.kinds,
-    //   categories: this.props.categories,
-    //   items: this.props.items,
-
-    //   // Empty marks, kind, categories & items:
-    //   ...this.defaultState,
-    // });
     this.setState(Object.assign({
-      // Full list of Kinds, Categories & Items:
-      // received from redux-store
-      kinds: this.props.kinds,
-      categories: this.props.categories,
+      // Reset with full list of items,
       items: this.props.items,
+      // Select the 1st item
+      item: this.props.items.length > 0 ? this.props.items[0]._id : null,
+      // Reset default location to the 1st one in the list
+      location: this.props.places && this.props.places.places && this.props.places.places.length > 0 ? this.props.places.places[0].id : null,
     },
-    // Empty marks, kind, categories & items:
+    // Erase marks & reset kind, categories & items:
     this.defaultState,
-    // Select the 1st item
-    this.getVisibleItems(null, null)
     ));
   }
 
   render() {
+    console.log('render: (category, kind, item)=', this.state.category, this.state.kind, this.state.item);
     return (
       <Form onSubmit={this.onSubmit.bind(this)}>
         <FormGroup>
           <h4 className="mb-4">What?</h4>
-          <SimpleListOrDropdown items={this.state.categories} selectedOption={this.state.category} onChange={this.onChangeCategory.bind(this)} dropdown />
-          <SimpleListOrDropdown items={this.state.kinds} selectedOption={this.state.kind} onChange={this.onChangeKind.bind(this)} dropdown />
+          <SimpleListOrDropdown items={this.props.categories} selectedOption={this.state.category} onChange={this.onChangeCategory.bind(this)} dropdown />
+          <SimpleListOrDropdown items={this.props.kinds} selectedOption={this.state.kind} onChange={this.onChangeKind.bind(this)} dropdown />
           <SimpleListOrDropdown items={this.state.items} selectedOption={this.state.item} onChange={this.onChangeItem.bind(this)} dropdown />
         </FormGroup>
 
         <FormGroup>
           <h4 className="mb-4">Where?</h4>
-          <SimpleListOrDropdown items={this.props.places} selectedOption={this.state.location} onChange={this.onChangeLocation.bind(this)} dropdown />
+          <SimpleListOrDropdown items={this.props.places.places} selectedOption={this.state.location} onChange={this.onChangeLocation.bind(this)} dropdown />
         </FormGroup>
 
         <FormGroup>

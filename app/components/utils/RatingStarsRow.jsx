@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Col, Label, FormGroup } from 'reactstrap';
+import { Col, Label, FormFeedback, FormGroup, FormText } from 'reactstrap';
 import RatingStars from '../utils/RatingStars';
 
 
@@ -42,6 +42,8 @@ class RatingStarsRow extends React.PureComponent {
             onChange={onChange}
           />
         </Col>
+          <FormFeedback>Success! You did it!</FormFeedback>
+          <FormText color="muted">Example help text that remains unchanged.</FormText>
       </FormGroup>
     );
   }

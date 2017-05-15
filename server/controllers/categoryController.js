@@ -14,6 +14,7 @@ export function getCategories(req, res) {
     } else {
       res.json({ categories });
       logger.info(`categoryController.getCategories length=${categories.length}`);
+      logger.info('getCategories:', JSON.stringify(categories));
     }
   });
 }

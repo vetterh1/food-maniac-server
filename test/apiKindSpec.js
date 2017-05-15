@@ -47,6 +47,8 @@ describe('API Kinds', () => {
             res.should.have.status(200);
             res.body.kinds.should.be.a('array');
             res.body.kinds.length.should.be.eql(td.testKinds.length);
+            // Verify that the virtuals are added to this schema (the_schema.set('toJSON', { virtuals: true, });)
+            res.body.kinds[0].id.should.be.eql(res.body.kinds[0]._id);
             done();
           });
       });

@@ -46,6 +46,8 @@ describe('API MarkIndividual', () => {
             res.should.have.status(200);
             res.body.markIndividuals.should.be.a('array');
             res.body.markIndividuals.length.should.be.eql(td.testMarkIndividuals.length);
+            // Verify that the virtuals are added to this schema (the_schema.set('toJSON', { virtuals: true, });)
+            res.body.markIndividuals[0].id.should.be.eql(res.body.markIndividuals[0]._id);
             done();
           });
       });

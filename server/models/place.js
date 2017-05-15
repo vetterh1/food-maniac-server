@@ -25,6 +25,9 @@ placeSchema.pre('save', function (next) {
   next();
 });
 
+// Add id field in query answers (not only _id)
+placeSchema.set('toJSON', { virtuals: true, });
+
 placeSchema.index({ location: '2dsphere' });
 
 export default mongoose.model('Place', placeSchema);

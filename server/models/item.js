@@ -22,4 +22,7 @@ itemSchema.pre('save', function (next) {
   next();
 });
 
+// Add id field in query answers (not only _id)
+itemSchema.set('toJSON', { virtuals: true, });
+
 export default mongoose.model('Item', itemSchema);

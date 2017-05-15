@@ -14,4 +14,7 @@ kindSchema.pre('save', function (next) {
   next();
 });
 
+// Add id field in query answers (not only _id)
+kindSchema.set('toJSON', { virtuals: true, });
+
 export default mongoose.model('Kind', kindSchema);

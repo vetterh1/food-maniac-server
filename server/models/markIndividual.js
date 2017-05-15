@@ -28,4 +28,7 @@ markIndividualSchema.pre('save', function (next) {
   next();
 });
 
+// Add id field in query answers (not only _id)
+markIndividualSchema.set('toJSON', { virtuals: true, });
+
 export default mongoose.model('MarkIndividual', markIndividualSchema);

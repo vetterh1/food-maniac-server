@@ -20,13 +20,13 @@ const SimpleListOrDropdown = props => (
     { !props.dropdown &&
       <ul>
         {props.items.map((item, index) => (
-          <ListOneItem index={index} item={item} key={item._id} />
+          <ListOneItem index={index} item={item} key={item.id} />
         ))}
       </ul>
     }
     { props.dropdown &&
       <ReactStrapInput selectedOption={props.selectedOption} onChange={props.onChange} size="md">
-        {props.items && props.items.map((item) => { return (<option key={item._id} value={item._id}>{item.name}</option>); })}
+        {props.items && props.items.map((item) => { return (<option key={item.id} value={item.id}>{item.name}</option>); })}
       </ReactStrapInput>
     }
   </div>
@@ -41,7 +41,7 @@ SimpleListOrDropdown.propTypes = {
 
 SimpleListOrDropdown.defaultProps = {
   dropdown: false,
-  selectedOption: null,
+  selectedOption: '',
   onChange: null,
 };
 

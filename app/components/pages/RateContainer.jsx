@@ -23,8 +23,7 @@ class RateContainer extends React.Component {
     kinds: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
     items: PropTypes.array.isRequired,
-    places: PropTypes.array.isRequired,
-    dispatch: PropTypes.func.isRequired,
+    places: PropTypes.object.isRequired,
   }
 
   constructor(props) {
@@ -105,8 +104,8 @@ class RateContainer extends React.Component {
       logRateContainer.debug('{ RateContainer.saveLocation');
       // logRateContainer.debug(`RateContainer.saveLocation - this.props:\n\n${stringifyOnce(this.props, null, 2)}`);
 
-      const placeSelected = this.props.places.find((place) => { return place.id === this.values.location; });
-      if (!placeSelected) throw new Error(`saveLocation - Could not resolve location - props.places:\n\n${stringifyOnce(this.props.places, null, 2)}`);
+      const placeSelected = this.props.places.places.find((place) => { return place.id === this.values.location; });
+      if (!placeSelected) throw new Error(`saveLocation - Could not find this location: ${this.values.location}`);
       // logRateContainer.debug(`RateContainer.saveLocation - placeSelected:\n\n${stringifyOnce(placeSelected, null, 2)}`);
       // logRateContainer.debug('placeSelected.geometry: ', placeSelected.geometry);
       // logRateContainer.debug('placeSelected.geometry.location.lat(): ', placeSelected.geometry.location.lat());
@@ -131,7 +130,7 @@ class RateContainer extends React.Component {
         logRateContainer.debug('   fetch result: ', response);
         if (response.ok) {
           logRateContainer.debug('   fetch operation OK');
-          // returns the (async) response from server: the saved location (with _id)
+          // returns the (async) response from server: the saved location (with id)
           resolve(response.json());
         } else {
           // returns the error given by the server (async)
@@ -152,7 +151,7 @@ class RateContainer extends React.Component {
   saveMarks(savedLocation) {
     logRateContainer.debug(`RateContainer.saveMarks - savedLocation:\n\n${stringifyOnce(savedLocation, null, 2)}`);
 
-    const idLocation = savedLocation.place._id;
+    const idLocation = savedLocation.place.id;
     const lat = savedLocation.place.location.coordinates[0];
     const lng = savedLocation.place.location.coordinates[1];
 
@@ -187,7 +186,7 @@ class RateContainer extends React.Component {
         logRateContainer.debug('   fetch result: ', response);
         if (response.ok) {
           logRateContainer.debug('   fetch operation OK');
-          // returns the (async) response from server: the saved markIndividual (with _id)
+          // returns the (async) response from server: the saved markIndividual (with id)
           resolve(response.json());
         } else {
           // returns the error given by the server (async)
@@ -231,13 +230,12 @@ class RateContainer extends React.Component {
 
 
 
-// const mapStateToProps = (state) => { return { places: state.places }; };
 const mapStateToProps = (state) => {
   // Add the All to the Kind & Category lists
-  const kinds = [{ _id: '--all--', name: 'All' }, ...state.kinds.kinds];
-  const categories = [{ _id: '--all--', name: 'All' }, ...state.categories.categories];
+  const kinds = [{ id: '--all--', name: 'All' }, ...state.kinds.kinds];
+  const categories = [{ id: '--all--', name: 'All' }, ...state.categories.categories];
   return {
-    places: state.places.places,
+    places: state.places,
     kinds,
     categories,
     items: state.items.items,

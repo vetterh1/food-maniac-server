@@ -48,6 +48,8 @@ describe('API Places', () => {
             res.should.have.status(200);
             res.body.places.should.be.a('array');
             res.body.places.length.should.be.eql(td.testPlaces.length);
+            // Verify that the virtuals are added to this schema (the_schema.set('toJSON', { virtuals: true, });)
+            res.body.places[0].id.should.be.eql(res.body.places[0]._id);
             done();
           });
       });

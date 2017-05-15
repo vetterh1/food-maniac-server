@@ -71,7 +71,7 @@ describe('API Items', () => {
         });
     });
 
-    it('it should list all the items', (done) => {
+    it('it should list all the items & output should include virtuals like id', (done) => {
       Item.create(td.testItems, () => {
         chai.request(app)
           .get('/api/items')
@@ -80,6 +80,8 @@ describe('API Items', () => {
             res.body.items.should.be.a('array');
             res.body.items.length.should.be.eql(td.testItems.length);
             res.body.items[0].name.should.be.eql('Margarita');
+            // Verify that the virtuals are added to this schema (the_schema.set('toJSON', { virtuals: true, });)
+            res.body.items[0].id.should.be.eql(res.body.items[0]._id);
             done();
           });
       });

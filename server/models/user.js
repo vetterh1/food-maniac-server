@@ -21,4 +21,7 @@ userSchema.pre('save', function (next) {
   next();
 });
 
+// Add id field in query answers (not only _id)
+userSchema.set('toJSON', { virtuals: true, });
+
 export default mongoose.model('User', userSchema);

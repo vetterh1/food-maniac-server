@@ -47,6 +47,8 @@ describe('API Users', () => {
             res.should.have.status(200);
             res.body.users.should.be.a('array');
             res.body.users.length.should.be.eql(td.testUsers.length);
+            // Verify that the virtuals are added to this schema (the_schema.set('toJSON', { virtuals: true, });)
+            res.body.users[0].id.should.be.eql(res.body.users[0]._id);
             done();
           });
       });
