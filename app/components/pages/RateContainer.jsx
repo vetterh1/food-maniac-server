@@ -4,7 +4,6 @@
 import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { reduxForm, reset } from 'redux-form';
 import { connect } from 'react-redux';
 import { Alert, Container } from 'reactstrap';
 import RateForm from './RateForm';
@@ -29,8 +28,6 @@ class RateContainer extends React.Component {
   constructor(props) {
     super(props);
     this.values = null;
-    this.onSearchItemError = this.onSearchItemError.bind(this);
-    this.onSelectLocationError = this.onSelectLocationError.bind(this);
 
     this._childComponent = null;
 
@@ -69,14 +66,6 @@ class RateContainer extends React.Component {
   onEndSavingFailed = (errorMessage) => {
     const durationSaving = new Date().getTime() - this._nowStartSaving;
     this.setState({ alertStatus: -1, alertColor: 'danger', alertMessage: `Error while saving (error=${errorMessage}, duration=${durationSaving}ms)` });
-  }
-
-  onSearchItemError = (errorMessage) => {
-    this.setState({ alertStatus: -2, alertColor: 'danger', alertMessage: `Error while constructing items list (error=${errorMessage})` });
-  }
-
-  onSelectLocationError = (errorMessage) => {
-    this.setState({ alertStatus: -2, alertColor: 'danger', alertMessage: `Error while constructing places list (error=${errorMessage})` });
   }
 
   onSubmit(values) {
@@ -242,6 +231,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-// RateContainer = reduxForm({ form: 'rate' })(RateContainer); // Decorate the form component
 RateContainer = connect(mapStateToProps)(RateContainer);
 export default RateContainer;

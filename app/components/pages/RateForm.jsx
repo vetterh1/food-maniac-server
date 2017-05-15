@@ -5,11 +5,6 @@ import PropTypes from 'prop-types';
 import { Button, Form, FormGroup } from 'reactstrap';
 import RatingStarsRow from '../utils/RatingStarsRow';
 import SimpleListOrDropdown from '../pages/SimpleListOrDropdown';
-import SelectLocation from '../utils/SelectLocation';
-// import ReactFormInput from '../utils/ReactFormInput';
-// import ListItemsContainer from '../pages/ListItemsContainer';
-
-        // onSearchItemError={this.onSearchItemError} onSelectLocationError={this.onSelectLocationError} />
 
 
 class RateForm extends React.Component {
@@ -46,11 +41,14 @@ class RateForm extends React.Component {
       // Items received from redux-store
       // and stored in state as it's altered by kind & category filters
       items: props.items,
-      item: undefined,
+      item: props.items.length > 0 ? this.props.items[0].id : undefined,
+
+      location: props.places && props.places.places.length > 0 ? props.places.places[0].id : undefined,
 
       // Empty marks, kind, categories & items:
       ...this.defaultState,
     };
+    console.log('RateForm constructor (props, initial state): ', props, this.state);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -58,31 +56,31 @@ class RateForm extends React.Component {
     let needUpdate = false;
     const updState = {};
 
-    // console.log('componentWillReceiveProps items (length & 1st) crt --> : ',
-    // !this.state.items || this.state.items.length <= 0 ? 'null or empty' : this.state.items.length, this.state.items[0]);
+    console.log('componentWillReceiveProps items (length & 1st) crt --> : ',
+     !this.state.items || this.state.items.length <= 0 ? 'null or empty' : this.state.items.length, this.state.items[0]);
 
-    // console.log('componentWillReceiveProps items (length & 1st) --> next: ',
-    // !nextProps.items || nextProps.items.length <= 0 ? 'null or empty' : nextProps.items.length, nextProps.items[0]);
+    console.log('componentWillReceiveProps items (length & 1st) --> next: ',
+     !nextProps.items || nextProps.items.length <= 0 ? 'null or empty' : nextProps.items.length, nextProps.items[0]);
 
     // Items list copy from redux --> state as the items list changes (with kind & category filters)
     if (nextProps.items && nextProps.items.length > 0 && nextProps.items !== this.state.items) {
-      // console.log('...update items!');
+      console.log('...update items!');
       updState.items = nextProps.items;
       needUpdate = true;
 
       // Select the 1st item in the list if none yet selected
       if (!this.state.item || this.state.item === '') {
-        // console.log('...and update default selected item!');
+        console.log('...and update default item!');
         updState.item = nextProps.items[0].id;
-      }
-    } else // console.log('...NO update items!');
+      } else console.log('componentWillReceiveProps NO update default item');
+    } else console.log('...NO update items!');
 
     // Prepare the default location selection if necessary
     if (nextProps.places && nextProps.places.places.length > 0 && (!this.state.location || this.state.location === '')) {
-      // console.log(`componentWillReceiveProps update default place to ${nextProps.places.places[0].id}`);
+      console.log(`componentWillReceiveProps update default place to ${nextProps.places.places[0].id}`);
       updState.location = nextProps.places.places[0].id;
       needUpdate = true;
-    }
+    } else console.log('componentWillReceiveProps NO update default place');
 
     // Launch the state update
     if (needUpdate) { this.setState(updState); }
@@ -122,7 +120,7 @@ class RateForm extends React.Component {
 
 
   onChangeLocation(event) {
-    // console.log('onChangeLocation:', event);
+    console.log('onChangeLocation:', event);
     if (this.state.location === event.target.value) return;
     this.setState({ location: event.target.value });
   }
@@ -154,7 +152,7 @@ class RateForm extends React.Component {
   }
 
   onChangeComment(event) {
-    // console.log('onChangeLocation:', event);
+    console.log('onChangeLocation:', event);
   }
 
   // return an object of this kind: {items: xxxx, item: id_of_1st_item}
@@ -164,7 +162,7 @@ class RateForm extends React.Component {
       const categoryCondition = (category && category !== undefined && category !== '--all--' ? item.category === category : true);
       return kindCondition && categoryCondition;
     });
-    const item = items.length > 0 ? items[0]._id : null;
+    const item = items.length > 0 ? items[0].id : null;
     return { items, item };
   }
 
@@ -175,7 +173,7 @@ class RateForm extends React.Component {
       // Reset with full list of items,
       items: this.props.items,
       // Select the 1st item
-      item: this.props.items.length > 0 ? this.props.items[0]._id : null,
+      item: this.props.items.length > 0 ? this.props.items[0].id : null,
       // Reset default location to the 1st one in the list
       location: this.props.places && this.props.places.places && this.props.places.places.length > 0 ? this.props.places.places[0].id : null,
     },
@@ -185,7 +183,7 @@ class RateForm extends React.Component {
   }
 
   render() {
-    // console.log('render: (category, kind, item)=', this.state.category, this.state.kind, this.state.item);
+    console.log('render: (category, kind, item, location)=', this.state.category, this.state.kind, this.state.item, this.state.location);
     const formReadyForSubmit = this.state.item && this.state.location && this.state.markOverall;
     return (
       <Form onSubmit={this.onSubmit.bind(this)}>
