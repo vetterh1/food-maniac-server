@@ -6,6 +6,14 @@ Base: MERN-STARTER
 
 -------------  Additional modules ---------------
 
+// For upgrading npm packages:
+install npm-check-update, then run:
+ncu -u
+
+// List npm packages (global & project)
+npm list -g --depth=0
+npm list --depth=0
+
 // For managing multiple config files (per env) (default file: config/default.json) :
 npm install config --save
 
@@ -20,7 +28,6 @@ npm install file-stream-rotator --save
 npm install google-maps-react --save
 
 // For UI compornents:
-npm install material-ui --save
 npm install react-tap-event-plugin --save
 
 npm install react-fontawesome --save
