@@ -58,28 +58,28 @@ class RateForm extends React.Component {
     let needUpdate = false;
     const updState = {};
 
-    console.log('componentWillReceiveProps items (length & 1st) crt --> : ',
-      !this.state.items || this.state.items.length <= 0 ? 'null or empty' : this.state.items.length, this.state.items[0]);
+    // console.log('componentWillReceiveProps items (length & 1st) crt --> : ',
+    // !this.state.items || this.state.items.length <= 0 ? 'null or empty' : this.state.items.length, this.state.items[0]);
 
-    console.log('componentWillReceiveProps items (length & 1st) --> next: ',
-      !nextProps.items || nextProps.items.length <= 0 ? 'null or empty' : nextProps.items.length, nextProps.items[0]);
+    // console.log('componentWillReceiveProps items (length & 1st) --> next: ',
+    // !nextProps.items || nextProps.items.length <= 0 ? 'null or empty' : nextProps.items.length, nextProps.items[0]);
 
     // Items list copy from redux --> state as the items list changes (with kind & category filters)
     if (nextProps.items && nextProps.items.length > 0 && nextProps.items !== this.state.items) {
-      console.log('...update items!');
+      // console.log('...update items!');
       updState.items = nextProps.items;
       needUpdate = true;
 
       // Select the 1st item in the list if none yet selected
       if (!this.state.item || this.state.item === '') {
-        console.log('...and update default selected item!');
+        // console.log('...and update default selected item!');
         updState.item = nextProps.items[0].id;
       }
-    } else console.log('...NO update items!');
+    } else // console.log('...NO update items!');
 
     // Prepare the default location selection if necessary
     if (nextProps.places && nextProps.places.places.length > 0 && (!this.state.location || this.state.location === '')) {
-      console.log(`componentWillReceiveProps update default place to ${nextProps.places.places[0].id}`);
+      // console.log(`componentWillReceiveProps update default place to ${nextProps.places.places[0].id}`);
       updState.location = nextProps.places.places[0].id;
       needUpdate = true;
     }
@@ -122,7 +122,7 @@ class RateForm extends React.Component {
 
 
   onChangeLocation(event) {
-    console.log('onChangeLocation:', event);
+    // console.log('onChangeLocation:', event);
     if (this.state.location === event.target.value) return;
     this.setState({ location: event.target.value });
   }
@@ -154,7 +154,7 @@ class RateForm extends React.Component {
   }
 
   onChangeComment(event) {
-    console.log('onChangeLocation:', event);
+    // console.log('onChangeLocation:', event);
   }
 
   // return an object of this kind: {items: xxxx, item: id_of_1st_item}
@@ -185,7 +185,8 @@ class RateForm extends React.Component {
   }
 
   render() {
-    console.log('render: (category, kind, item)=', this.state.category, this.state.kind, this.state.item);
+    // console.log('render: (category, kind, item)=', this.state.category, this.state.kind, this.state.item);
+    const formReadyForSubmit = this.state.item && this.state.location && this.state.markOverall;
     return (
       <Form onSubmit={this.onSubmit.bind(this)}>
         <FormGroup>
@@ -203,7 +204,7 @@ class RateForm extends React.Component {
         <FormGroup>
           <h4 className="mb-4">Marks</h4>
           <div>
-            <RatingStarsRow name="markOverall" label="Overall" initialRate={this.state.markOverall} onChange={this.onChangeMarkOverall.bind(this)} size={30} />
+            <RatingStarsRow name="markOverall" label="Overall" initialRate={this.state.markOverall} onChange={this.onChangeMarkOverall.bind(this)}  mandatoryWarning size={30} />
             <RatingStarsRow name="markFood" label="Food" initialRate={this.state.markFood} onChange={this.onChangeMarkFood.bind(this)} />
             <RatingStarsRow name="markValue" label="Value" initialRate={this.state.markValue} onChange={this.onChangeMarkValue.bind(this)} />
             <RatingStarsRow name="markPlace" label="Place" initialRate={this.state.markPlace} onChange={this.onChangeMarkPlace.bind(this)} />
@@ -215,7 +216,7 @@ class RateForm extends React.Component {
           <h4 className="mb-4">Comment?</h4>
         </FormGroup>
 
-        <Button type="submit" size="md">Add</Button>
+        <Button type="submit" size="md" disabled={!formReadyForSubmit}>Add</Button>
         <Button color="link" onClick={this.resetForm.bind(this)} size="md">Reset</Button>
       </Form>
     );
