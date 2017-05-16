@@ -79,7 +79,7 @@ export function getItems(req, res) {
       // res.status(500).type('json').send('{"error": "message from server"}'); // Should display error=500 (ok)
       res.json({ items: items.docs });
       logger.info(`itemController.getItems length=${items.docs.length}`);
-      logger.info('getItems:', JSON.stringify(items.docs));
+      // logger.info('getItems:', JSON.stringify(items.docs));
     }
   });
 }

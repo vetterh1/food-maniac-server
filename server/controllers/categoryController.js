@@ -7,14 +7,14 @@ import Category from '../models/category';
  * Get all categories
  */
 export function getCategories(req, res) {
-  Category.find().sort('-since').exec((err, categories) => {
+  Category.find().sort('_id').exec((err, categories) => {
     if (err) {
       logger.error('categoryController.getCategories returns err: ', err);
       res.status(500).send(err);
     } else {
       res.json({ categories });
       logger.info(`categoryController.getCategories length=${categories.length}`);
-      logger.info('getCategories:', JSON.stringify(categories));
+      // logger.info('getCategories:', JSON.stringify(categories));
     }
   });
 }

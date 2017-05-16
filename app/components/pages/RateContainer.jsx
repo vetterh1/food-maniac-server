@@ -211,7 +211,6 @@ class RateContainer extends React.Component {
           onSubmit={this.onSubmit.bind(this)}
         />
       </Container>
-
     );
   }
 }

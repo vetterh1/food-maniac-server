@@ -7,7 +7,7 @@ import Kind from '../models/kind';
  * Get all kinds
  */
 export function getKinds(req, res) {
-  Kind.find().sort('-since').exec((err, kinds) => {
+  Kind.find().sort('name').exec((err, kinds) => {
     if (err) {
       logger.error('kindController.getKinds returns err: ', err);
       res.status(500).send(err);

@@ -1,7 +1,13 @@
+/* eslint-disable no-class-assign */
+/* eslint-disable react/forbid-prop-types */
+
 import * as log from 'loglevel';
 import React from 'react';
-import { Alert } from 'reactstrap';
-import AddItem from './AddItem';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Alert, Container } from 'reactstrap';
+import AddItemForm from './AddItemForm';
+import stringifyOnce from '../../utils/stringifyOnce';
 
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
@@ -12,18 +18,16 @@ logAddItemContainer.warn('--> entering AddItemContainer.jsx');
 
 class AddItemContainer extends React.Component {
   static propTypes = {
+    // Injected by redux-store connect:
+    kinds: PropTypes.array.isRequired,
+    categories: PropTypes.array.isRequired,
+    items: PropTypes.array.isRequired,
   }
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.values = null;
 
-    this.onStartSaving = this.onStartSaving.bind(this);
-    this.onEndSavingOK = this.onEndSavingOK.bind(this);
-    this.onEndSavingFailed = this.onEndSavingFailed.bind(this);
-    this.onSnapshotStartProcessing = this.onSnapshotStartProcessing.bind(this);
-    this.onSnapshotError = this.onSnapshotError.bind(this);
-    this.onSnapshotReady = this.onSnapshotReady.bind(this);
-    this.submitForm = this.submitForm.bind(this);
     this._childComponent = null;
 
     this.state = {
@@ -84,10 +88,10 @@ class AddItemContainer extends React.Component {
 
 
 
-  submitForm(data) {
+  onSubmit(data) {
     this.onStartSaving();
 
-    console.log('AddItemContainer.submitForm - 1', data);
+    console.log('AddItemContainer.onSubmit - 1', data);
     fetch('/api/items', {
       method: 'POST',
       headers: {
@@ -116,13 +120,33 @@ class AddItemContainer extends React.Component {
 
   render() {
     return (
-      <div>
+      <Container fluid>
         {this.state.alertStatus !== 0 && <Alert color={this.state.alertColor}>{this.state.alertMessage}</Alert>}
-        <AddItem ref={(r) => { this._childComponent = r; }} onSubmit={this.submitForm} onSnapshotStartProcessing={this.onSnapshotStartProcessing} onSnapshotError={this.onSnapshotError} onSnapshotReady={this.onSnapshotReady} />
-      </div>
+        <AddItemForm
+          ref={(r) => { this._childComponent = r; }}
+          kinds={this.props.kinds}
+          categories={this.props.categories}
+          items={this.props.items}
+          onSubmit={this.onSubmit.bind(this)}
+          onSnapshotStartProcessing={this.onSnapshotStartProcessing}
+          onSnapshotError={this.onSnapshotError}
+          onSnapshotReady={this.onSnapshotReady}
+        />
+      </Container>
     );
   }
 
 }
 
+
+const mapStateToProps = (state) => {
+  // Add the All to the Kind & Category lists
+  return {
+    kinds: state.kinds.kinds,
+    categories: state.categories.categories,
+    items: state.items.items,
+  };
+};
+
+AddItemContainer = connect(mapStateToProps)(AddItemContainer);
 export default AddItemContainer;
