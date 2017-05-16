@@ -1,10 +1,9 @@
 import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
 import Slider from 'react-slick';
 import MdLocalRestaurant from 'react-icons/lib/md/local-restaurant';
-import ReactFormInput from '../utils/ReactFormInput';
+import SimpleListOrDropdown from '../pages/SimpleListOrDropdown';
 import ItemImage from '../utils/ItemImage';
 
 // import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -175,9 +174,7 @@ class ListItems extends React.Component {
           </ul>
         }
         { !this.props.carrousel && this.props.dropdown &&
-          <Field name="item" component={ReactFormInput} type="select" size="md">
-            {this.props.items && this.props.items.map((item, index) => { return (<option key={item._id} value={item._id}>{item.name}</option>); })}
-          </Field>
+          <SimpleListOrDropdown items={this.props.items} dropdown />
         }
         { this.props.carrousel &&
           <div style={styles.carrousel} className="carrousel">

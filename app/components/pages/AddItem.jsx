@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Label, FormGroup } from 'reactstrap';
-import { AvForm, AvField, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
+import { Button, Form, FormFeedback, FormGroup, Input, Label } from 'reactstrap';
+import SimpleListOrDropdown from '../pages/SimpleListOrDropdown';
+// import { AvForm, AvField, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
 import CameraSnapshotContainer from './CameraSnapshotContainer';
 // import LogOnDisplay from '../utils/LogOnDisplay';
 
@@ -89,38 +90,18 @@ class AddItem extends React.Component {
       <div style={styles.form}>
 
         <h2>Add new dish...</h2>
-        <AvForm
-          key={this.state.keyForm}  // unique key that let reset the form by changing the state keyForm
-          // onValid={this.enableButton}
-          // onInvalid={this.disableButton}
-          onValidSubmit={this.submitForm}
-          // onInvalidSubmit={this.notifyFormError}
-          model={defaultValues}
-        >
+        <Form onSubmit={this.submitForm} >
           <FormGroup>
-            <AvField type="select" name="category" label="Category" size="lg">
-              <option value={'dish'}>Dish</option>
-              <option value={'dessert'}>Dessert</option>
-              <option value={'drink'}>Drink</option>
-            </AvField>
+            <h4 className="mb-4">Category / Kind</h4>
+            <SimpleListOrDropdown items={this.props.categories} selectedOption={this.state.category} onChange={this.onChangeCategory.bind(this)} dropdown />
+            <SimpleListOrDropdown items={this.props.kinds} selectedOption={this.state.kind} onChange={this.onChangeKind.bind(this)} dropdown />
           </FormGroup>
 
           <FormGroup>
-            <AvField type="select" name="kind" label="Kind" size="lg">
-              <option value={'italian'}>Italian</option>
-              <option value={'french'}>French</option>
-              <option value={'mexican'}>Mexican</option>
-              <option value={'indian'}>Indian</option>
-              <option value={'american'}>American</option>
-              <option value={'other'}>Other</option>
-            </AvField>
-          </FormGroup>
-
-          <AvGroup>
             <Label for="inputName" size="lg">Name</Label>
-            <AvInput name="name" id="inputName" placeholder="..." required size="lg" />
-            <AvFeedback>This field is mandatory!</AvFeedback>
-          </AvGroup>
+            <Input name="name" id="inputName" placeholder="..." required size="lg" />
+            <FormFeedback>This field is mandatory!</FormFeedback>
+          </FormGroup>
 
           <div>
             <Label size="lg">Picture</Label>
@@ -130,7 +111,7 @@ class AddItem extends React.Component {
 
           <Button type="submit" size="lg">Add</Button>
           <Button color="link" onClick={this.resetForm} size="lg">Reset</Button>
-        </AvForm>
+        </Form>
       </div>
     );
   }
