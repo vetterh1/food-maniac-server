@@ -222,8 +222,9 @@ const mapStateToProps = (state) => {
   // Add the All to the Kind & Category lists
   const kinds = [{ id: '--all--', name: 'All' }, ...state.kinds.kinds];
   const categories = [{ id: '--all--', name: 'All' }, ...state.categories.categories];
+  const placesWithDistance = state.places.places.map((place) => { return { ...place, name: `${place.name} (${place.distanceFormated})` }; });
   return {
-    places: state.places,
+    places: { places: placesWithDistance },
     kinds,
     categories,
     items: state.items.items,

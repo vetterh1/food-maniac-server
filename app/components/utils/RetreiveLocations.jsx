@@ -11,6 +11,23 @@ logRetreiveLocations.setLevel('trace');
 logRetreiveLocations.debug('--> entering RetreiveLocations.jsx');
 
 
+
+function distanceInKm(lat1, lon1, lat2, lon2) {
+  const p = 0.017453292519943295;    // Math.PI / 180
+  const c = Math.cos;
+  const a = (0.5 - (c((lat2 - lat1) * p) / 2)) + (c(lat1 * p) * c(lat2 * p) * ((1 - c((lon2 - lon1) * p)) / 2));
+  return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
+}
+
+
+function formatDistance(distance) {
+  if (distance >= 1) {
+    return `${Math.round(distance * 10) / 10}km`; // rounded to nearest km
+  }
+  return `${Math.round(distance * 10) * 100}m`;  // rounded to nearest hundred of m
+}
+
+
 class RetreiveLocations extends React.Component {
 
   constructor() {
@@ -50,8 +67,6 @@ class RetreiveLocations extends React.Component {
     }
 
     const nbRenders = this.state.nbRenders + 1;
-    this.setState({ nbRenders });
-
     const currentLatLng = new google.maps.LatLng(nextProps.coordinates.latitude, nextProps.coordinates.longitude);
 
     const map = new google.maps.Map(document.getElementById('map'), {
@@ -73,16 +88,24 @@ class RetreiveLocations extends React.Component {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         logRetreiveLocations.debug('          (rl-cwrp) nearby nb results: ', results.length);
         if (results.length > 0) logRetreiveLocations.debug('          (rl-cwrp) nearby 1st results', results[0].name);
+
+        // Add distance from current location to every place
+        const resultsWithDistance = results.map((place) => {
+          const distance = distanceInKm(place.geometry.location.lat(), place.geometry.location.lng(), currentLatLng.lat(), currentLatLng.lng());
+          const distanceFormated = formatDistance(distance);
+          return { ...place, distance, distanceFormated };
+        });
+
         this.pagination = pagination;
         this.setState({
-          places: results,
+          places: resultsWithDistance,
           hasNextPage: pagination.hasNextPage,
           currentLatLng,
         });
 
         // Save places in redux store
         const { dispatch } = this.props;  // Injected by react-redux
-        const action = PlacesActions.setCurrentPlaces(results);
+        const action = PlacesActions.setCurrentPlaces(resultsWithDistance);
         dispatch(action);
       } else {
         logRetreiveLocations.error('          (rl-cwrp) nearby search error : ', status);
