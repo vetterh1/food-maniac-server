@@ -100,7 +100,7 @@ class RateContainer extends React.Component {
       // logRateContainer.debug('placeSelected.geometry.location.lat(): ', placeSelected.geometry.location.lat());
       // logRateContainer.debug(`RateContainer.saveLocation - placeSelected.geometry.location:\n\n${stringifyOnce(placeSelected.geometry.location, null, 2)}`);
       const place = {
-        name: placeSelected.name,
+        name: placeSelected.nameWithoutDistance,
         googleMapId: this.values.location,
         location: {
           type: 'Point',
@@ -222,7 +222,7 @@ const mapStateToProps = (state) => {
   // Add the All to the Kind & Category lists
   const kinds = [{ id: '--all--', name: 'All' }, ...state.kinds.kinds];
   const categories = [{ id: '--all--', name: 'All' }, ...state.categories.categories];
-  const placesWithDistance = state.places.places.map((place) => { return { ...place, name: `${place.name} (${place.distanceFormated})` }; });
+  const placesWithDistance = state.places.places.map((place) => { return { ...place, nameWithoutDistance: place.name, name: `${place.name} (${place.distanceFormated})` }; });
   return {
     places: { places: placesWithDistance },
     kinds,
