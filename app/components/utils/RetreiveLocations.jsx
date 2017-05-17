@@ -3,6 +3,7 @@ import * as log from 'loglevel';
 import React, { /* Component */ } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { distanceInKm, formatDistance } from '../../utils/mapUtils';
 import Geolocation from '../utils/Geolocation';
 import * as PlacesActions from '../../actions/PlacesActions';
 
@@ -10,22 +11,6 @@ const logRetreiveLocations = log.getLogger('loggerRetreiveLocation');
 logRetreiveLocations.setLevel('trace');
 logRetreiveLocations.debug('--> entering RetreiveLocations.jsx');
 
-
-
-function distanceInKm(lat1, lon1, lat2, lon2) {
-  const p = 0.017453292519943295;    // Math.PI / 180
-  const c = Math.cos;
-  const a = (0.5 - (c((lat2 - lat1) * p) / 2)) + (c(lat1 * p) * c(lat2 * p) * ((1 - c((lon2 - lon1) * p)) / 2));
-  return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
-}
-
-
-function formatDistance(distance) {
-  if (distance >= 1) {
-    return `${Math.round(distance * 10) / 10}km`; // rounded to nearest km
-  }
-  return `${Math.round(distance * 10) * 100}m`;  // rounded to nearest hundred of m
-}
 
 
 class RetreiveLocations extends React.Component {

@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Alert, Container } from 'reactstrap';
 import AddItemForm from './AddItemForm';
-import stringifyOnce from '../../utils/stringifyOnce';
+// import stringifyOnce from '../../utils/stringifyOnce';
 
 require('es6-promise').polyfill();
 require('isomorphic-fetch');

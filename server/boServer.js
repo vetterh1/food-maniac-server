@@ -77,7 +77,10 @@ mongoose.connect(databaseURL, options, (error) => {
   }
 
   // feed some dummy data in DB if empty
-  if (process.env.NODE_ENV !== 'test') insertInitialData();
+  if (process.env.NODE_ENV !== 'test' && process.env.INSERT_INITIAL_DATA) {
+    logger.warn('Insert initial data requested');
+    insertInitialData();
+  }
 });
 const db = mongoose.connection;
 db.on('error', logger.error.bind(console, '!Mongoose connection error!'));

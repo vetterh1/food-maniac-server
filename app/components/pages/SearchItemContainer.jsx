@@ -25,10 +25,11 @@ const ListOneMark = (props) => {
       <th scope="row">{markAggregate.place.name}</th>
       <td>{roundTo0dot5(markAggregate.markOverall)}</td>
       <td>{roundTo0dot5(markAggregate.markFood)}</td>
-      <td>{roundTo0dot5(markAggregate.markPlace)}</td>
       <td>{roundTo0dot5(markAggregate.markValue)}</td>
+      <td>{roundTo0dot5(markAggregate.markPlace)}</td>
       <td>{roundTo0dot5(markAggregate.markStaff)}</td>
       <td>{markAggregate.nbMarksOverall}</td>
+      <td>{markAggregate.distanceFormated}</td>
     </tr>
   );
 };
@@ -167,9 +168,11 @@ class SearchItemContainer extends React.Component {
                     <th>Name</th>
                     <th>Overall</th>
                     <th>Food</th>
+                    <th>Value</th>
                     <th>Place</th>
                     <th>Staff</th>
                     <th># Reviews</th>
+                    <th>Distance</th>
                   </tr>
                 </thead>
                 <tbody>

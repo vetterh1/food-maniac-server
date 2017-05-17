@@ -1,5 +1,7 @@
 import * as logger from 'winston';
 import MarkAggregate from '../models/markAggregate';
+import { distanceInKm, formatDistance } from '../util/mapUtils';
+// import stringifyOnce from '../util/stringifyOnce';
 
 
 // /GET route - Get all markAggregates
@@ -61,8 +63,21 @@ export function getMarkAggregatesByItemIdAndDistance(req, res) {
           // res.status(200).type('json').send('{"valid":"valid json but not what expected!"}'); // Should display error=03 (ok)
           // res.status(200).type('json').send('{"invalid"}'); // Should display error=04 (ok)
           // res.status(500).send('{"error": "message from server"}'); // Should display error=500 (ok)
-          res.json({ markAggregates });
-          logger.info(`markAggregateController.getMarkAggregatesByItemIdAndDistance length=${markAggregates.length}`);
+
+          if (req.params._lat && req.params._lng) {
+            const markAggregatesWithDistance = markAggregates.map((mark) => {
+              const distance = distanceInKm(mark.location.coordinates[1], mark.location.coordinates[0], req.params._lat, req.params._lng);
+              const distanceFormated = formatDistance(distance);
+              const jsonMark = JSON.parse(JSON.stringify(mark));
+              return Object.assign({}, jsonMark, { distance, distanceFormated });
+            });
+
+            res.json({ markAggregates: markAggregatesWithDistance });
+            logger.info(`markAggregateController.getMarkAggregatesByItemIdAndDistance length=${markAggregatesWithDistance.length}`);
+          } else {
+            res.json({ markAggregates });
+            logger.info(`markAggregateController.getMarkAggregatesByItemIdAndDistance length=${markAggregates.length}`);
+          }
         }
       });
   }
@@ -82,7 +97,7 @@ export function getMarkAggregate(req, res) {
     logger.error(error);
     res.status(400).json(error);
   } else {
-    MarkAggregate.findById(req.params._id).exec((err, markAggregate) => {
+    MarkAggregate.findById(req.params._id).lean().exec((err, markAggregate) => {
       if (err || !markAggregate) {
         logger.error(`markAggregateController.getMarkAggregate ${req.params._id} failed to find - err = `, err);
         res.status(500).send(err);
