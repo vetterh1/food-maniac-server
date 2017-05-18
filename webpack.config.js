@@ -88,7 +88,8 @@ plugins.push(
 //   }),
 // );
 
-/*
+
+// Explanation here: https://webpack.js.org/guides/code-splitting-libraries/#commonschunkplugin
 plugins.push(
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
@@ -99,10 +100,10 @@ plugins.push(
   }),
   // CommonChunksPlugin will now extract all the common modules from vendor and main bundles
   new webpack.optimize.CommonsChunkPlugin({
-    name: 'manifest' // But since there are no more common modules between them we end up with just the runtime code included in the manifest file
+    name: 'manifest', // But since there are no more common modules between them we end up with just the runtime code included in the manifest file
   })
 );
-*/
+
 
 // PRODUCTION OPTIMIZATIONS
 if (process.env.NODE_ENV === 'production') {
@@ -158,8 +159,8 @@ module.exports = {
   },
 
   output: {
-    filename: 'bundle.js',
-//    filename: '[name].[chunkhash].js',
+    // filename: 'bundle.js',
+    filename: '[name].[chunkhash].js',
     path: distPath,
     // chunkFilename: '[name].[hash].bundle.js',
   },

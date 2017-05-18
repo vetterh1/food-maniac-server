@@ -5,6 +5,14 @@ import PropTypes from 'prop-types';
 import { Button, Form, FormGroup } from 'reactstrap';
 import SimpleListOrDropdown from '../pages/SimpleListOrDropdown';
 
+const styles = {
+  form: {
+    // width: 300,
+    // margin: '20 auto',
+    padding: 20,
+  },
+};
+
 class SearchItemForm extends React.Component {
   static propTypes = {
     kinds: PropTypes.array.isRequired,
@@ -146,24 +154,27 @@ class SearchItemForm extends React.Component {
     console.log('render: (category, kind, item)=', this.state.category, this.state.kind, this.state.item);
     const formReadyForSubmit = this.state.item && this.state.distance;
     return (
-      <Form onSubmit={this.onSubmit.bind(this)}>
-        <FormGroup>
-          <h4 className="mb-4">What?</h4>
-          <SimpleListOrDropdown items={this.props.categories} selectedOption={this.state.category} onChange={this.onChangeCategory.bind(this)} dropdown />
-          <SimpleListOrDropdown items={this.props.kinds} selectedOption={this.state.kind} onChange={this.onChangeKind.bind(this)} dropdown />
-          <SimpleListOrDropdown items={this.state.items} selectedOption={this.state.item} onChange={this.onChangeItem.bind(this)} dropdown />
-        </FormGroup>
-
-        <FormGroup>
-          <h4 className="mb-4">Max distance?</h4>
-          <FormGroup row className="no-gutters">
-            <SimpleListOrDropdown items={this.getPredifinedDistances()} selectedOption={this.state.distance} onChange={this.onChangeDistance.bind(this)} dropdown />
+      <div style={styles.form}>
+        <h3 className="mb-4">Search dish...</h3>
+        <Form onSubmit={this.onSubmit.bind(this)}>
+          <FormGroup>
+            <h4 className="mb-4">What?</h4>
+            <SimpleListOrDropdown items={this.props.categories} selectedOption={this.state.category} onChange={this.onChangeCategory.bind(this)} dropdown />
+            <SimpleListOrDropdown items={this.props.kinds} selectedOption={this.state.kind} onChange={this.onChangeKind.bind(this)} dropdown />
+            <SimpleListOrDropdown items={this.state.items} selectedOption={this.state.item} onChange={this.onChangeItem.bind(this)} dropdown />
           </FormGroup>
-        </FormGroup>
 
-        <Button type="submit" size="md" disabled={!formReadyForSubmit}>Find</Button>
-        <Button color="link" onClick={this.resetForm.bind(this)} size="md">Reset</Button>
-      </Form>
+          <FormGroup>
+            <h4 className="mb-4">Max distance?</h4>
+            <FormGroup row className="no-gutters">
+              <SimpleListOrDropdown items={this.getPredifinedDistances()} selectedOption={this.state.distance} onChange={this.onChangeDistance.bind(this)} dropdown />
+            </FormGroup>
+          </FormGroup>
+
+          <Button type="submit" size="md" disabled={!formReadyForSubmit}>Find</Button>
+          <Button color="link" onClick={this.resetForm.bind(this)} size="md">Reset</Button>
+        </Form>
+      </div>
     );
   }
 }

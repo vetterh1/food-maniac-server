@@ -6,6 +6,13 @@ import { Button, Form, FormGroup } from 'reactstrap';
 import RatingStarsRow from '../utils/RatingStarsRow';
 import SimpleListOrDropdown from '../pages/SimpleListOrDropdown';
 
+const styles = {
+  form: {
+    // width: 300,
+    // margin: '20 auto',
+    padding: 20,
+  },
+};
 
 class RateForm extends React.Component {
   static propTypes = {
@@ -186,37 +193,40 @@ class RateForm extends React.Component {
     console.log('render: (category, kind, item, location)=', this.state.category, this.state.kind, this.state.item, this.state.location);
     const formReadyForSubmit = this.state.item && this.state.location && this.state.markOverall;
     return (
-      <Form onSubmit={this.onSubmit.bind(this)}>
-        <FormGroup>
-          <h4 className="mb-4">What?</h4>
-          <SimpleListOrDropdown items={this.props.categories} selectedOption={this.state.category} onChange={this.onChangeCategory.bind(this)} dropdown />
-          <SimpleListOrDropdown items={this.props.kinds} selectedOption={this.state.kind} onChange={this.onChangeKind.bind(this)} dropdown />
-          <SimpleListOrDropdown items={this.state.items} selectedOption={this.state.item} onChange={this.onChangeItem.bind(this)} dropdown />
-        </FormGroup>
+      <div style={styles.form}>
+        <h3 className="mb-4">Rate dish...</h3>
+        <Form onSubmit={this.onSubmit.bind(this)}>
+          <FormGroup>
+            <h4 className="mb-4">What?</h4>
+            <SimpleListOrDropdown items={this.props.categories} selectedOption={this.state.category} onChange={this.onChangeCategory.bind(this)} dropdown />
+            <SimpleListOrDropdown items={this.props.kinds} selectedOption={this.state.kind} onChange={this.onChangeKind.bind(this)} dropdown />
+            <SimpleListOrDropdown items={this.state.items} selectedOption={this.state.item} onChange={this.onChangeItem.bind(this)} dropdown />
+          </FormGroup>
 
-        <FormGroup>
-          <h4 className="mb-4">Where?</h4>
-          <SimpleListOrDropdown items={this.props.places.places} selectedOption={this.state.location} onChange={this.onChangeLocation.bind(this)} dropdown />
-        </FormGroup>
+          <FormGroup>
+            <h4 className="mb-4">Where?</h4>
+            <SimpleListOrDropdown items={this.props.places.places} selectedOption={this.state.location} onChange={this.onChangeLocation.bind(this)} dropdown />
+          </FormGroup>
 
-        <FormGroup>
-          <h4 className="mb-4">Marks</h4>
-          <div>
-            <RatingStarsRow name="markOverall" label="Overall" initialRate={this.state.markOverall} onChange={this.onChangeMarkOverall.bind(this)}  mandatoryWarning size={30} />
-            <RatingStarsRow name="markFood" label="Food" initialRate={this.state.markFood} onChange={this.onChangeMarkFood.bind(this)} />
-            <RatingStarsRow name="markValue" label="Value" initialRate={this.state.markValue} onChange={this.onChangeMarkValue.bind(this)} />
-            <RatingStarsRow name="markPlace" label="Place" initialRate={this.state.markPlace} onChange={this.onChangeMarkPlace.bind(this)} />
-            <RatingStarsRow name="markStaff" label="Staff" initialRate={this.state.markStaff} onChange={this.onChangeMarkStaff.bind(this)} />
-          </div>
-        </FormGroup>
+          <FormGroup>
+            <h4 className="mb-4">Marks</h4>
+            <div>
+              <RatingStarsRow name="markOverall" label="Overall" initialRate={this.state.markOverall} onChange={this.onChangeMarkOverall.bind(this)}  mandatoryWarning size={30} />
+              <RatingStarsRow name="markFood" label="Food" initialRate={this.state.markFood} onChange={this.onChangeMarkFood.bind(this)} />
+              <RatingStarsRow name="markValue" label="Value" initialRate={this.state.markValue} onChange={this.onChangeMarkValue.bind(this)} />
+              <RatingStarsRow name="markPlace" label="Place" initialRate={this.state.markPlace} onChange={this.onChangeMarkPlace.bind(this)} />
+              <RatingStarsRow name="markStaff" label="Staff" initialRate={this.state.markStaff} onChange={this.onChangeMarkStaff.bind(this)} />
+            </div>
+          </FormGroup>
 
-        <FormGroup>
-          <h4 className="mb-4">Comment?</h4>
-        </FormGroup>
+          <FormGroup>
+            <h4 className="mb-4">Comment?</h4>
+          </FormGroup>
 
-        <Button type="submit" size="md" disabled={!formReadyForSubmit}>Add</Button>
-        <Button color="link" onClick={this.resetForm.bind(this)} size="md">Reset</Button>
-      </Form>
+          <Button type="submit" size="md" disabled={!formReadyForSubmit}>Add</Button>
+          <Button color="link" onClick={this.resetForm.bind(this)} size="md">Reset</Button>
+        </Form>
+      </div>
     );
   }
 }
