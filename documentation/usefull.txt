@@ -73,6 +73,7 @@ c:\mongodb\bin\mongo
 -------------  List dbs & use ---------------
 show dbs
 use food_maniac_dev
+db.markindividuals.find({_id:ObjectId("591d8dd6d3cc262690469486")})
 
 ------ Rename db: ------ 
 db.copyDatabase("food_maniac_dev","food_maniac_dev_save","localhost")

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Form, FormGroup } from 'reactstrap';
+import { Button, Form, FormGroup, Label } from 'reactstrap';
 import SimpleListOrDropdown from '../pages/SimpleListOrDropdown';
 
 const styles = {
@@ -158,14 +158,17 @@ class SearchItemForm extends React.Component {
         <h3 className="mb-4">Search dish...</h3>
         <Form onSubmit={this.onSubmit.bind(this)}>
           <FormGroup>
-            <h4 className="mb-4">What?</h4>
+            <h5 className="mb-4">What?</h5>
+            <Label size="md">Category</Label>
             <SimpleListOrDropdown items={this.props.categories} selectedOption={this.state.category} onChange={this.onChangeCategory.bind(this)} dropdown />
+            <Label size="md">Kind</Label>
             <SimpleListOrDropdown items={this.props.kinds} selectedOption={this.state.kind} onChange={this.onChangeKind.bind(this)} dropdown />
+            <Label size="md">Item</Label>
             <SimpleListOrDropdown items={this.state.items} selectedOption={this.state.item} onChange={this.onChangeItem.bind(this)} dropdown />
           </FormGroup>
 
           <FormGroup>
-            <h4 className="mb-4">Max distance?</h4>
+            <h5 className="mb-4">Max distance?</h5>
             <FormGroup row className="no-gutters">
               <SimpleListOrDropdown items={this.getPredifinedDistances()} selectedOption={this.state.distance} onChange={this.onChangeDistance.bind(this)} dropdown />
             </FormGroup>

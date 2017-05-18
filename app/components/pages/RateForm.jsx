@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Form, FormGroup } from 'reactstrap';
+import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import RatingStarsRow from '../utils/RatingStarsRow';
 import SimpleListOrDropdown from '../pages/SimpleListOrDropdown';
 
@@ -41,7 +41,7 @@ class RateForm extends React.Component {
       markValue: null,
       markStaff: null,
 
-      comment: null,
+      comment: '',
     };
 
     this.state = {
@@ -127,7 +127,6 @@ class RateForm extends React.Component {
 
 
   onChangeLocation(event) {
-    console.log('onChangeLocation:', event);
     if (this.state.location === event.target.value) return;
     this.setState({ location: event.target.value });
   }
@@ -159,7 +158,8 @@ class RateForm extends React.Component {
   }
 
   onChangeComment(event) {
-    console.log('onChangeLocation:', event);
+    if (this.state.comment === event.target.value) return;
+    this.setState({ comment: event.target.value });
   }
 
   // return an object of this kind: {items: xxxx, item: id_of_1st_item}
@@ -194,24 +194,27 @@ class RateForm extends React.Component {
     const formReadyForSubmit = this.state.item && this.state.location && this.state.markOverall;
     return (
       <div style={styles.form}>
-        <h3 className="mb-4">Rate dish...</h3>
+        <h3 className="mb-4">Rate your plate!</h3>
         <Form onSubmit={this.onSubmit.bind(this)}>
           <FormGroup>
-            <h4 className="mb-4">What?</h4>
+            <h5 className="mb-4">What?</h5>
+            <Label size="md">Category</Label>
             <SimpleListOrDropdown items={this.props.categories} selectedOption={this.state.category} onChange={this.onChangeCategory.bind(this)} dropdown />
+            <Label size="md">Kind</Label>
             <SimpleListOrDropdown items={this.props.kinds} selectedOption={this.state.kind} onChange={this.onChangeKind.bind(this)} dropdown />
+            <Label size="md">Item</Label>
             <SimpleListOrDropdown items={this.state.items} selectedOption={this.state.item} onChange={this.onChangeItem.bind(this)} dropdown />
           </FormGroup>
 
           <FormGroup>
-            <h4 className="mb-4">Where?</h4>
+            <h5 className="mb-4">Where?</h5>
             <SimpleListOrDropdown items={this.props.places.places} selectedOption={this.state.location} onChange={this.onChangeLocation.bind(this)} dropdown />
           </FormGroup>
 
           <FormGroup>
-            <h4 className="mb-4">Marks</h4>
+            <h5 className="mb-4">Marks</h5>
             <div>
-              <RatingStarsRow name="markOverall" label="Overall" initialRate={this.state.markOverall} onChange={this.onChangeMarkOverall.bind(this)}  mandatoryWarning size={30} />
+              <RatingStarsRow name="markOverall" label="Overall" initialRate={this.state.markOverall} onChange={this.onChangeMarkOverall.bind(this)} mandatoryWarning size={30} />
               <RatingStarsRow name="markFood" label="Food" initialRate={this.state.markFood} onChange={this.onChangeMarkFood.bind(this)} />
               <RatingStarsRow name="markValue" label="Value" initialRate={this.state.markValue} onChange={this.onChangeMarkValue.bind(this)} />
               <RatingStarsRow name="markPlace" label="Place" initialRate={this.state.markPlace} onChange={this.onChangeMarkPlace.bind(this)} />
@@ -220,7 +223,8 @@ class RateForm extends React.Component {
           </FormGroup>
 
           <FormGroup>
-            <h4 className="mb-4">Comment?</h4>
+            <h5 className="mb-4">Comment?</h5>
+            <Input type="textarea" value={this.state.comment} onChange={this.onChangeComment.bind(this)} />
           </FormGroup>
 
           <Button type="submit" size="md" disabled={!formReadyForSubmit}>Add</Button>
