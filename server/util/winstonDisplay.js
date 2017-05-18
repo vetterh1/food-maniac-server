@@ -38,7 +38,8 @@ module.exports = function(app, logger) {
               .splice(1, limit)
               .map((line) => { return JSON.parse(line); })
               .filter((element) => { return levels[element.level] <= level; })
-              .filter((element) => { return oldestDateInMs > 0 ? Date.parse(element.timestamp) >= oldestDateInMs : true; });
+              .filter((element) => { return oldestDateInMs > 0 ? Date.parse(element.timestamp) >= oldestDateInMs : true; })
+              .reverse();
           }
 
           const html = jade.renderFile(`${__dirname}/winstonDisplay.jade`, { lines, logPath });

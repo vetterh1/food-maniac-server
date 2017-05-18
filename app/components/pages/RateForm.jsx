@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
+import { Button, Col, Form, FormGroup, Input, Label, Row } from 'reactstrap';
 import RatingStarsRow from '../utils/RatingStarsRow';
 import SimpleListOrDropdown from '../pages/SimpleListOrDropdown';
 
@@ -10,7 +10,7 @@ const styles = {
   form: {
     // width: 300,
     // margin: '20 auto',
-    padding: 20,
+    // padding: 20,
   },
 };
 
@@ -197,38 +197,60 @@ class RateForm extends React.Component {
         <h3 className="mb-4">Rate your plate!</h3>
         <Form onSubmit={this.onSubmit.bind(this)}>
           <FormGroup>
-            <h5 className="mb-4">What?</h5>
-            <Label size="md">Category</Label>
-            <SimpleListOrDropdown items={this.props.categories} selectedOption={this.state.category} onChange={this.onChangeCategory.bind(this)} dropdown />
-            <Label size="md">Kind</Label>
-            <SimpleListOrDropdown items={this.props.kinds} selectedOption={this.state.kind} onChange={this.onChangeKind.bind(this)} dropdown />
-            <Label size="md">Item</Label>
-            <SimpleListOrDropdown items={this.state.items} selectedOption={this.state.item} onChange={this.onChangeItem.bind(this)} dropdown />
+            <h5 className="mb-3">What?</h5>
+            <FormGroup row>
+              <Col xs={3} lg={2} >
+                <Label size="md">Category</Label>
+              </Col>
+              <Col xs={9} lg={10} >
+                <SimpleListOrDropdown items={this.props.categories} selectedOption={this.state.category} onChange={this.onChangeCategory.bind(this)} dropdown />
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Col xs={3} lg={2} >
+                <Label size="md">Kind</Label>
+              </Col>
+              <Col xs={9} lg={10} >
+                <SimpleListOrDropdown items={this.props.kinds} selectedOption={this.state.kind} onChange={this.onChangeKind.bind(this)} dropdown />
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Col xs={3} lg={2} >
+                <Label size="md">Item</Label>
+              </Col>
+              <Col xs={9} lg={10} >
+                <SimpleListOrDropdown items={this.state.items} selectedOption={this.state.item} onChange={this.onChangeItem.bind(this)} dropdown />
+              </Col>
+            </FormGroup>
           </FormGroup>
 
           <FormGroup>
-            <h5 className="mb-4">Where?</h5>
-            <SimpleListOrDropdown items={this.props.places.places} selectedOption={this.state.location} onChange={this.onChangeLocation.bind(this)} dropdown />
+            <h5 className="mt-2 mb-3">Where?</h5>
+            <FormGroup row>
+              <Col xs={12} lg={12} >
+                <SimpleListOrDropdown items={this.props.places.places} selectedOption={this.state.location} onChange={this.onChangeLocation.bind(this)} dropdown />
+              </Col>
+            </FormGroup>
           </FormGroup>
 
           <FormGroup>
-            <h5 className="mb-4">Marks</h5>
-            <div>
+            <h5 className="mt-2 mb-3">Marks</h5>
               <RatingStarsRow name="markOverall" label="Overall" initialRate={this.state.markOverall} onChange={this.onChangeMarkOverall.bind(this)} mandatoryWarning size={30} />
               <RatingStarsRow name="markFood" label="Food" initialRate={this.state.markFood} onChange={this.onChangeMarkFood.bind(this)} />
               <RatingStarsRow name="markValue" label="Value" initialRate={this.state.markValue} onChange={this.onChangeMarkValue.bind(this)} />
               <RatingStarsRow name="markPlace" label="Place" initialRate={this.state.markPlace} onChange={this.onChangeMarkPlace.bind(this)} />
               <RatingStarsRow name="markStaff" label="Staff" initialRate={this.state.markStaff} onChange={this.onChangeMarkStaff.bind(this)} />
-            </div>
           </FormGroup>
 
           <FormGroup>
-            <h5 className="mb-4">Comment?</h5>
+            <h5 className="mt-2 mb-3">Comment?</h5>
             <Input type="textarea" value={this.state.comment} onChange={this.onChangeComment.bind(this)} />
           </FormGroup>
 
-          <Button type="submit" size="md" disabled={!formReadyForSubmit}>Add</Button>
-          <Button color="link" onClick={this.resetForm.bind(this)} size="md">Reset</Button>
+          <FormGroup className="mt-2">
+            <Button type="submit" size="md" disabled={!formReadyForSubmit}>Add</Button>
+            <Button color="link" onClick={this.resetForm.bind(this)} size="md">Reset</Button>
+          </FormGroup>
         </Form>
       </div>
     );

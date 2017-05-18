@@ -97,7 +97,7 @@ function mkdirReccursive(completePath) {
   completePath.split(separator).forEach((dir, index, splits) => {
     const parent = splits.slice(0, index).join('/');
     const dirPath = path.resolve(parent, dir);
-    logger.debug(`mkdirReccursive: ${dirPath}`);
+    // logger.debug(`mkdirReccursive: ${dirPath}`);
     if (!fs.existsSync(dirPath)) {
       fs.mkdirSync(dirPath);
     }

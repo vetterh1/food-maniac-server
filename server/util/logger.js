@@ -25,8 +25,9 @@ logger.addColors({
 });
 
 logger.remove(logger.transports.Console);
-logger.add(logger.transports.Console, { level: levelConsole, colorize: true });
-logger.add(logger.transports.File, { level: levelFile, filename: pathFile });
+logger.add(logger.transports.Console, { timestamp: () => { return (new Date()).toLocaleString(); }, level: levelConsole, colorize: true });
+logger.add(logger.transports.File, { timestamp: () => { return (new Date()).toLocaleString(); }, level: levelFile, filename: pathFile });
+
 
 // To use Loggly:
 // logger.add(logger.transports.Loggly, {
