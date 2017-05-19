@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Form, FormGroup, Label } from 'reactstrap';
+import { Button, Col, Form, FormGroup, Label } from 'reactstrap';
 import SimpleListOrDropdown from '../pages/SimpleListOrDropdown';
 
 const styles = {
@@ -64,15 +64,25 @@ class SearchItemForm extends React.Component {
 
     // Items list copy from redux --> state as the items list changes (with kind & category filters)
     if (nextProps.items && nextProps.items.length > 0 && nextProps.items !== this.state.items) {
-      console.log('...update items!');
-      updState.items = nextProps.items;
-      needUpdate = true;
+      // Filter the new list with kind & category
+      const { items: visibleItemsAndDefaultItem, item: visibleDefaultItem } = this.getVisibleItems(this.state.kind, this.state.category, nextProps.items);
 
-      // Select the 1st item in the list if none yet selected
-      if (!this.state.item || this.state.item === '') {
-        console.log('...and update default selected item!');
-        updState.item = nextProps.items[0].id;
-      } else console.log('componentWillReceiveProps NO update default item');
+      console.log('componentWillReceiveProps visibleItemsAndDefaultItem (length & 1st): ',
+       !visibleItemsAndDefaultItem || visibleItemsAndDefaultItem.length <= 0 ? 'null or empty' : visibleItemsAndDefaultItem.length,
+       !visibleItemsAndDefaultItem || visibleItemsAndDefaultItem.length <= 0 ? 'N/A' : visibleItemsAndDefaultItem[0],
+       visibleDefaultItem);
+
+      if (visibleItemsAndDefaultItem !== this.state.items) {
+        console.log('...update items!');
+        updState.items = visibleItemsAndDefaultItem;
+        needUpdate = true;
+
+        // Select the 1st item in the list if none yet selected
+        if (!this.state.item || this.state.item === '') {
+          console.log('...and update default selected item!');
+          updState.item = visibleDefaultItem;
+        } else console.log('componentWillReceiveProps NO update default item');
+      } else console.log('...NO update items (after getVisibleItems check)!');
     } else console.log('...NO update items!');
 
     // Launch the state update
@@ -126,13 +136,15 @@ class SearchItemForm extends React.Component {
   }
 
   // return an object of this kind: {items: xxxx, item: id_of_1st_item}
-  getVisibleItems(kind, category) {
-    const items = this.props.items.filter((item) => {
+  getVisibleItems(kind, category, itemsOriginal = this.props.items) {
+    // console.log('getVisibleItems: (kind, category, itemsOriginal): ', kind, category, itemsOriginal);
+    const items = itemsOriginal.filter((item) => {
       const kindCondition = (kind && kind !== undefined && kind !== '--all--' ? item.kind === kind : true);
       const categoryCondition = (category && category !== undefined && category !== '--all--' ? item.category === category : true);
       return kindCondition && categoryCondition;
     });
     const item = items.length > 0 ? items[0]._id : null;
+    console.log('getVisibleItems returns: (items, item): ', items, item);
     return { items, item };
   }
 
@@ -158,13 +170,31 @@ class SearchItemForm extends React.Component {
         <h3 className="mb-4">Search dish...</h3>
         <Form onSubmit={this.onSubmit.bind(this)}>
           <FormGroup>
-            <h5 className="mb-4">What?</h5>
-            <Label size="md">Category</Label>
-            <SimpleListOrDropdown items={this.props.categories} selectedOption={this.state.category} onChange={this.onChangeCategory.bind(this)} dropdown />
-            <Label size="md">Kind</Label>
-            <SimpleListOrDropdown items={this.props.kinds} selectedOption={this.state.kind} onChange={this.onChangeKind.bind(this)} dropdown />
-            <Label size="md">Item</Label>
-            <SimpleListOrDropdown items={this.state.items} selectedOption={this.state.item} onChange={this.onChangeItem.bind(this)} dropdown />
+            <h5 className="mb-3">What?</h5>
+            <FormGroup row>
+              <Col xs={3} lg={2} >
+                <Label size="md">Category</Label>
+              </Col>
+              <Col xs={9} lg={10} >
+                <SimpleListOrDropdown items={this.props.categories} selectedOption={this.state.category} onChange={this.onChangeCategory.bind(this)} dropdown />
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Col xs={3} lg={2} >
+                <Label size="md">Kind</Label>
+              </Col>
+              <Col xs={9} lg={10} >
+                <SimpleListOrDropdown items={this.props.kinds} selectedOption={this.state.kind} onChange={this.onChangeKind.bind(this)} dropdown />
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Col xs={3} lg={2} >
+                <Label size="md">Item</Label>
+              </Col>
+              <Col xs={9} lg={10} >
+                <SimpleListOrDropdown items={this.state.items} selectedOption={this.state.item} onChange={this.onChangeItem.bind(this)} dropdown />
+              </Col>
+            </FormGroup>
           </FormGroup>
 
           <FormGroup>
