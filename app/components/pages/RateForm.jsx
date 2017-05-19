@@ -55,7 +55,7 @@ class RateForm extends React.Component {
       // Empty marks, kind, categories & items:
       ...this.defaultState,
     };
-    console.log('RateForm constructor (props, initial state): ', props, this.state);
+    // console.log('RateForm constructor (props, initial state): ', props, this.state);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -63,31 +63,31 @@ class RateForm extends React.Component {
     let needUpdate = false;
     const updState = {};
 
-    console.log('componentWillReceiveProps items (length & 1st) crt --> : ',
-     !this.state.items || this.state.items.length <= 0 ? 'null or empty' : this.state.items.length, this.state.items[0]);
+    // console.log('componentWillReceiveProps items (length & 1st) crt --> : ',
+    //  !this.state.items || this.state.items.length <= 0 ? 'null or empty' : this.state.items.length, this.state.items[0]);
 
-    console.log('componentWillReceiveProps items (length & 1st) --> next: ',
-     !nextProps.items || nextProps.items.length <= 0 ? 'null or empty' : nextProps.items.length, nextProps.items[0]);
+    // console.log('componentWillReceiveProps items (length & 1st) --> next: ',
+    //  !nextProps.items || nextProps.items.length <= 0 ? 'null or empty' : nextProps.items.length, nextProps.items[0]);
 
     // Items list copy from redux --> state as the items list changes (with kind & category filters)
     if (nextProps.items && nextProps.items.length > 0 && nextProps.items !== this.state.items) {
-      console.log('...update items!');
+      // console.log('...update items!');
       updState.items = nextProps.items;
       needUpdate = true;
 
       // Select the 1st item in the list if none yet selected
       if (!this.state.item || this.state.item === '') {
-        console.log('...and update default item!');
+        // console.log('...and update default item!');
         updState.item = nextProps.items[0].id;
-      } else console.log('componentWillReceiveProps NO update default item');
-    } else console.log('...NO update items!');
+      } // else console.log('componentWillReceiveProps NO update default item');
+    } // else console.log('...NO update items!');
 
     // Prepare the default location selection if necessary
     if (nextProps.places && nextProps.places.places.length > 0 && (!this.state.location || this.state.location === '')) {
-      console.log(`componentWillReceiveProps update default place to ${nextProps.places.places[0].id}`);
+      // console.log(`componentWillReceiveProps update default place to ${nextProps.places.places[0].id}`);
       updState.location = nextProps.places.places[0].id;
       needUpdate = true;
-    } else console.log('componentWillReceiveProps NO update default place');
+    } // else console.log('componentWillReceiveProps NO update default place');
 
     // Launch the state update
     if (needUpdate) { this.setState(updState); }
