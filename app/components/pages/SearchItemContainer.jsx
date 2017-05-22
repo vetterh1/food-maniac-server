@@ -5,7 +5,8 @@ import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Alert, Container, Row, Table } from 'reactstrap';
+import { Container, Row, Table } from 'reactstrap';
+import Alert from 'react-s-alert';
 import SearchItemForm from './SearchItemForm';
 
 require('es6-promise').polyfill();
@@ -67,31 +68,41 @@ class SearchItemContainer extends React.Component {
       alertStatus: 0,
       alertMessage: '',
     };
+
+    this.alert = null;
+
   }
 
 
 
   onStartSearching = () => {
     this._nowStartSaving = new Date().getTime();
-    this.setState({ alertStatus: 1, alertColor: 'info', alertMessage: 'Searching...' });
+    // this.setState({ alertStatus: 1, alertColor: 'info', alertMessage: 'Searching...' });
+    this.alert = Alert.info('Searching...');
     window.scrollTo(0, 0);
   }
 
-  onEndSearchingOK = () => {
+  onEndSearchingOK = (nbItems) => {
     const durationSaving = new Date().getTime() - this._nowStartSaving;
-    this.setState({ alertStatus: 2, alertColor: 'success', alertMessage: `Searching done! (duration=${durationSaving}ms)` });
-    setTimeout(() => { this.setState({ alertStatus: 0 }); }, 3000);
+    // this.setState({ alertStatus: 2, alertColor: 'success', alertMessage: `Searching done! (duration=${durationSaving}ms)` });
+    // setTimeout(() => { this.setState({ alertStatus: 0 }); }, 3000);
+    // if (this.alert) Alert.close(this.alert);
+    this.alert = Alert.success(`${nbItems} items found! (duration=${durationSaving}ms)`);
   }
 
   onEndSearchingNoResults = () => {
     const durationSaving = new Date().getTime() - this._nowStartSaving;
-    this.setState({ alertStatus: 3, alertColor: 'warning', alertMessage: `No results found (duration=${durationSaving}ms)` });
+    // this.setState({ alertStatus: 3, alertColor: 'warning', alertMessage: `No results found (duration=${durationSaving}ms)` });
+    // if (this.alert) Alert.close(this.alert);
+    this.alert = Alert.warning(`No results found (duration=${durationSaving}ms)`);
   }
 
 
   onEndSearchingFailed = (errorMessage) => {
     const durationSaving = new Date().getTime() - this._nowStartSaving;
-    this.setState({ alertStatus: -1, alertColor: 'danger', alertMessage: `Error while searching (error=${errorMessage}, duration=${durationSaving}ms)` });
+    // this.setState({ alertStatus: -1, alertColor: 'danger', alertMessage: `Error while searching (error=${errorMessage}, duration=${durationSaving}ms)` });
+    // if (this.alert) Alert.close(this.alert);
+    this.alert = Alert.error(`Error while searching (error=${errorMessage}, duration=${durationSaving}ms)`);
   }
 
 
@@ -133,7 +144,7 @@ class SearchItemContainer extends React.Component {
         }
         if (jsonResponse.markAggregates.length >= 0) {
           this.setState({ markAggregates: jsonResponse.markAggregates });
-          if (jsonResponse.markAggregates.length > 0) this.onEndSearchingOK();
+          if (jsonResponse.markAggregates.length > 0) this.onEndSearchingOK(jsonResponse.markAggregates.length);
           else this.onEndSearchingNoResults();
         }
       }).catch((error) => {

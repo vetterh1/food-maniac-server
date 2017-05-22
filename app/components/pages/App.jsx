@@ -4,6 +4,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import Alert from 'react-s-alert';
+import 'react-s-alert/dist/s-alert-default.css';
+import 'react-s-alert/dist/s-alert-css-effects/stackslide.css';
 import MainAppBar from '../navigation/MainAppBar';
 import Version from '../utils/Version';
 
@@ -29,6 +32,7 @@ class App extends React.Component {
         <MainAppBar location={this.props.location} router={this.props.router} route={this.props.route} />
         {this.props.children}
         <Version />
+        <Alert stack={{ limit: 3 }} position="top" timeout={3000} effect="stackslide" />
       </div>
     );
   }
