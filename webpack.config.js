@@ -38,6 +38,7 @@ const logger = require('winston');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 // const WebpackShellPlugin = require('webpack-shell-plugin');
 // const GenerateJsonPlugin = require('generate-json-webpack-plugin');
 
@@ -101,7 +102,8 @@ plugins.push(
   // CommonChunksPlugin will now extract all the common modules from vendor and main bundles
   new webpack.optimize.CommonsChunkPlugin({
     name: 'manifest', // But since there are no more common modules between them we end up with just the runtime code included in the manifest file
-  })
+  }),
+  new BundleAnalyzerPlugin()
 );
 
 
