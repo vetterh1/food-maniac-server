@@ -46,15 +46,11 @@ class AddItemForm extends React.Component {
 
       // Selected Kind & Category:
       name: '',
-      category: 'dish',
-      kind: 'other',
+      category: '',
+      kind: '',
     };
 
     this.state = {
-      // Items received from redux-store
-      // and stored in state as it's altered by kind & category filters
-      items: props.items,
-
       // Empty marks, kind, categories & items:
       ...this.defaultState,
     };
@@ -67,18 +63,23 @@ class AddItemForm extends React.Component {
     let needUpdate = false;
     const updState = {};
 
-    console.log('componentWillReceiveProps items (length & 1st) crt --> : ',
-     !this.state.items || this.state.items.length <= 0 ? 'null or empty' : this.state.items.length, this.state.items[0]);
+    // Kinds list update: select default category if not set yet!
+    if (nextProps.categories && nextProps.categories.length > 0 && nextProps.categories !== this.props.categories) {
+      if (!this.state.category || this.state.category === '') {
+        updState.category = nextProps.categories[0].id;
+        needUpdate = true;
+        console.log('category updated:', updState.category);
+      } else console.log('...NO update category! (2)');
+    } else console.log('...NO update category!');
 
-    console.log('componentWillReceiveProps items (length & 1st) --> next: ',
-     !nextProps.items || nextProps.items.length <= 0 ? 'null or empty' : nextProps.items.length, nextProps.items[0]);
-
-    // Items list copy from redux --> state as the items list changes (with kind & category filters)
-    if (nextProps.items && nextProps.items.length > 0 && nextProps.items !== this.state.items) {
-      console.log('...update items!');
-      updState.items = nextProps.items;
-      needUpdate = true;
-    } else console.log('...NO update items!');
+    // Kinds list update: select default kind if not set yet!
+    if (nextProps.kinds && nextProps.kinds.length > 0 && nextProps.kinds !== this.props.kinds) {
+      if (!this.state.kind || this.state.kind === '') {
+        updState.kind = nextProps.kinds[0].id;
+        needUpdate = true;
+        console.log('kind updated:', updState.kind);
+      } else console.log('...NO update kind! (2)');
+    } else console.log('...NO update kind!');
 
     // Launch the state update
     if (needUpdate) { this.setState(updState); }
@@ -108,6 +109,8 @@ class AddItemForm extends React.Component {
       name: this.state.name,
       picture: this.state.picture,
     };
+    window.scrollTo(0, 0);
+    this.refSubmit.blur();
     this.props.onSubmit(returnValue);
   }
 
@@ -140,6 +143,8 @@ class AddItemForm extends React.Component {
       // Erase marks & reset kind, categories & items:
       this.defaultState,
     ));
+    this.refReset.blur();
+    window.scrollTo(0, 0);
   }
 
 
@@ -170,8 +175,8 @@ class AddItemForm extends React.Component {
             <img ref={(r) => { this._imageCameraSnapshot = r; }} style={styles.imageCameraSnapshot} alt="" />
           </div>
 
-          <Button type="submit" size="md" disabled={!formReadyForSubmit}>Add</Button>
-          <Button color="link" onClick={this.resetForm.bind(this)} size="md">Reset</Button>
+          <Button type="submit" size="md" disabled={!formReadyForSubmit} getRef={(ref) => { this.refSubmit = ref; }} >Add</Button>
+          <Button color="link" onClick={this.resetForm.bind(this)} size="md" getRef={(ref) => { this.refReset = ref; }}>Reset</Button>
         </Form>
       </div>
     );

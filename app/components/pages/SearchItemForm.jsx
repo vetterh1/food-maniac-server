@@ -19,6 +19,7 @@ class SearchItemForm extends React.Component {
     categories: PropTypes.array.isRequired,
     items: PropTypes.array.isRequired,
     onSubmit: PropTypes.func.isRequired,
+    resetForm: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -97,6 +98,7 @@ class SearchItemForm extends React.Component {
       item: this.state.item,
       distance: this.state.distance,
     };
+    this.refSubmit.blur();
     this.props.onSubmit(returnValue);
   }
 
@@ -160,10 +162,13 @@ class SearchItemForm extends React.Component {
     // Reset distance:
     this.defaultState,
     ));
+    this.refReset.blur();
+    window.scrollTo(0, 0);
+    this.props.resetForm();
   }
 
   render() {
-    console.log('render: (category, kind, item)=', this.state.category, this.state.kind, this.state.item);
+    console.log('render SearchItemForm: (category, kind, item)=', this.state.category, this.state.kind, this.state.item);
     const formReadyForSubmit = this.state.item && this.state.distance;
     return (
       <div style={styles.form}>
@@ -204,8 +209,8 @@ class SearchItemForm extends React.Component {
             </FormGroup>
           </FormGroup>
 
-          <Button type="submit" size="md" disabled={!formReadyForSubmit}>Find</Button>
-          <Button color="link" onClick={this.resetForm.bind(this)} size="md">Reset</Button>
+          <Button type="submit" size="md" disabled={!formReadyForSubmit} getRef={(ref) => { this.refSubmit = ref; }} >Find</Button>
+          <Button color="link" onClick={this.resetForm.bind(this)} size="md" getRef={(ref) => { this.refReset = ref; }}>Reset</Button>
         </Form>
       </div>
     );

@@ -107,6 +107,7 @@ class RateForm extends React.Component {
       markStaff: this.state.markStaff,
       comment: this.state.comment,
     };
+    window.scrollTo(0, 0);
     this.props.onSubmit(returnValue);
   }
 
@@ -187,10 +188,12 @@ class RateForm extends React.Component {
     // Erase marks & reset kind, categories & items:
     this.defaultState,
     ));
+    this.refReset.blur();
+    window.scrollTo(0, 0);
   }
 
   render() {
-    console.log('render: (category, kind, item, location)=', this.state.category, this.state.kind, this.state.item, this.state.location);
+    console.log('render RateForm: (category, kind, item, location)=', this.state.category, this.state.kind, this.state.item, this.state.location);
     const formReadyForSubmit = this.state.item && this.state.location && this.state.markOverall;
     return (
       <div style={styles.form}>
@@ -249,7 +252,7 @@ class RateForm extends React.Component {
 
           <FormGroup className="mt-2">
             <Button type="submit" size="md" disabled={!formReadyForSubmit}>Add</Button>
-            <Button color="link" onClick={this.resetForm.bind(this)} size="md">Reset</Button>
+            <Button color="link" onClick={this.resetForm.bind(this)} size="md" getRef={(ref) => { this.refReset = ref; }}>Reset</Button>
           </FormGroup>
         </Form>
       </div>

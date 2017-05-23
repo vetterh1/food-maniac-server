@@ -61,48 +61,32 @@ class SearchItemContainer extends React.Component {
     this.state = {
       // Results:
       markAggregates: null,
-      // alertStatus possible values:
-      // -  0: no alerts
-      //  - searching alerts:  1: searching, 2: searching OK, 3: no results,
-      //                      -1: searching KO, -2: SearchItem error
-      alertStatus: 0,
-      alertMessage: '',
     };
 
     this.alert = null;
-
   }
 
 
 
   onStartSearching = () => {
     this._nowStartSaving = new Date().getTime();
-    // this.setState({ alertStatus: 1, alertColor: 'info', alertMessage: 'Searching...' });
     this.alert = Alert.info('Searching...');
-    window.scrollTo(0, 0);
   }
 
   onEndSearchingOK = (nbItems) => {
-    const durationSaving = new Date().getTime() - this._nowStartSaving;
-    // this.setState({ alertStatus: 2, alertColor: 'success', alertMessage: `Searching done! (duration=${durationSaving}ms)` });
-    // setTimeout(() => { this.setState({ alertStatus: 0 }); }, 3000);
-    // if (this.alert) Alert.close(this.alert);
-    this.alert = Alert.success(`${nbItems} items found! (duration=${durationSaving}ms)`);
+    const durationSearching = new Date().getTime() - this._nowStartSaving;
+    this.alert = Alert.success(`${nbItems} item(s) found! (duration=${durationSearching}ms)`);
   }
 
   onEndSearchingNoResults = () => {
-    const durationSaving = new Date().getTime() - this._nowStartSaving;
-    // this.setState({ alertStatus: 3, alertColor: 'warning', alertMessage: `No results found (duration=${durationSaving}ms)` });
-    // if (this.alert) Alert.close(this.alert);
-    this.alert = Alert.warning(`No results found (duration=${durationSaving}ms)`);
+    const durationSearching = new Date().getTime() - this._nowStartSaving;
+    this.alert = Alert.warning(`No results found (duration=${durationSearching}ms)`);
   }
 
 
   onEndSearchingFailed = (errorMessage) => {
-    const durationSaving = new Date().getTime() - this._nowStartSaving;
-    // this.setState({ alertStatus: -1, alertColor: 'danger', alertMessage: `Error while searching (error=${errorMessage}, duration=${durationSaving}ms)` });
-    // if (this.alert) Alert.close(this.alert);
-    this.alert = Alert.error(`Error while searching (error=${errorMessage}, duration=${durationSaving}ms)`);
+    const durationSearching = new Date().getTime() - this._nowStartSaving;
+    this.alert = Alert.error(`Error while searching (error=${errorMessage}, duration=${durationSearching}ms)`);
   }
 
 
@@ -111,6 +95,11 @@ class SearchItemContainer extends React.Component {
     this.values = values;
     this.FindMarks()
     .catch((error) => { logSearchItemContainer.error('submitForm caught exception: ', error.message); });
+  }
+
+  resetForm() {
+    // Clear the results list
+    this.setState({ markAggregates: null });
   }
 
   FindMarks() {
@@ -157,22 +146,22 @@ class SearchItemContainer extends React.Component {
 
 
   render() {
-    console.log('render');
+    console.log('Render SearchItemContainer');
 
     return (
       <div>
         <Container fluid>
-          {this.state.alertStatus !== 0 && <Alert color={this.state.alertColor}>{this.state.alertMessage}</Alert>}
           <SearchItemForm
             ref={(r) => { this._childComponent = r; }}
             kinds={this.props.kinds}
             categories={this.props.categories}
             items={this.props.items}
             onSubmit={this.onSubmit.bind(this)}
+            resetForm={this.resetForm.bind(this)}
           />
 
           {this.state.markAggregates &&
-            <Row className="mt-5">
+            <Row className="mt-1">
               <Table responsive striped>
                 <thead>
                   <tr>
@@ -199,6 +188,42 @@ class SearchItemContainer extends React.Component {
 }
 
 
+/* Old alert system: 
+
+  import { Alert } from 'reactstrap';
+  
+  in constructor:
+
+    this.state = {
+      // alertStatus possible values:
+      // -  0: no alerts
+      //  - searching alerts:  1: searching, 2: searching OK, 3: no results,
+      //                      -1: searching KO, -2: SearchItem error
+      alertStatus: 0,
+      alertMessage: '',
+
+  onStartSearching = () => {
+    this.setState({ alertStatus: 1, alertColor: 'info', alertMessage: 'Searching...' });
+    window.scrollTo(0, 0);
+
+  onEndSearchingOK = (nbItems) => {
+    const durationSearching = new Date().getTime() - this._nowStartSaving;
+    this.setState({ alertStatus: 2, alertColor: 'success', alertMessage: `Searching done! (duration=${durationSearching}ms)` });
+    setTimeout(() => { this.setState({ alertStatus: 0 }); }, 3000);
+
+  onEndSearchingNoResults = () => {
+    const durationSearching = new Date().getTime() - this._nowStartSaving;
+    this.setState({ alertStatus: 3, alertColor: 'warning', alertMessage: `No results found (duration=${durationSearching}ms)` });
+  }
+
+
+  onEndSearchingFailed = (errorMessage) => {
+    const durationSearching = new Date().getTime() - this._nowStartSaving;
+    this.setState({ alertStatus: -1, alertColor: 'danger', alertMessage: `Error while searching (error=${errorMessage}, duration=${durationSearching}ms)` });
+
+  in Render:
+    {this.state.alertStatus !== 0 && <Alert color={this.state.alertColor}>{this.state.alertMessage}</Alert>}
+*/
 
 
 const mapStateToProps = (state) => {
