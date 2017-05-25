@@ -15,4 +15,10 @@ export const REQUEST_ITEMS = 'REQUEST_ITEMS';
 export const RECEIVE_ITEMS = 'RECEIVE_ITEMS';
 export const ERROR_REQUESTING_ITEMS = 'ERROR_REQUESTING_ITEMS';
 
+export const REQUEST_SAVE_ITEM = 'REQUEST_SAVE_ITEM';
+export const SAVE_ITEM_OK = 'SAVE_ITEM_OK';
+export const SAVE_ITEM_KO = 'SAVE_ITEM_KO';
+
+
+
 

@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { Container } from 'reactstrap';
 import Alert from 'react-s-alert';
 import AddItemForm from './AddItemForm';
+import * as itemsActions from '../../actions/itemsActions';
 // import stringifyOnce from '../../utils/stringifyOnce';
 
 require('es6-promise').polyfill();
@@ -22,7 +23,7 @@ class AddItemContainer extends React.Component {
     // Injected by redux-store connect:
     kinds: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
-    items: PropTypes.array.isRequired,
+    items: PropTypes.object.isRequired,
   }
 
   constructor(props) {
@@ -75,8 +76,12 @@ class AddItemContainer extends React.Component {
 
 
   onSubmit(data) {
-    this.onStartSaving();
 
+    this.onStartSaving();
+    const { dispatch } = this.props;  // Injected by react-redux
+    const action = itemsActions.saveItem(data);
+    dispatch(action);
+/*
     console.log('AddItemContainer.onSubmit - 1', data);
     fetch('/api/items', {
       method: 'POST',
@@ -101,7 +106,30 @@ class AddItemContainer extends React.Component {
       if (error.name !== 'ErrorCaught') this.onEndSavingFailed('02');
       logAddItemContainer.error(error.message);
     });
+*/    
   }
+
+
+
+  componentWillReceiveProps(nextProps) {
+
+    console.log('AddItemContainer.componentWillReceiveProps - (nextProps, crtProps): ', nextProps, this.props);
+
+    // Only consider the end of loading:
+    // previous isSaving = true and
+    // new isSaving = false
+    if (!nextProps ||
+      !nextProps.items ||
+      !this.props.items ||
+      this.props.items.isSaving !== true ||
+      nextProps.items.isSaving !== false) return;
+
+    if(nextProps.items.error === null)
+        this.onEndSavingOK();
+    else
+        this.onEndSavingFailed(nextProps.items.error);
+  }
+
 
 
   render() {
@@ -111,7 +139,7 @@ class AddItemContainer extends React.Component {
           ref={(r) => { this._childComponent = r; }}
           kinds={this.props.kinds}
           categories={this.props.categories}
-          items={this.props.items}
+          items={this.props.items.items}
           onSubmit={this.onSubmit.bind(this)}
           onSnapshotStartProcessing={this.onSnapshotStartProcessing}
           onSnapshotError={this.onSnapshotError}
@@ -125,11 +153,13 @@ class AddItemContainer extends React.Component {
 
 
 const mapStateToProps = (state) => {
+    console.log('AddItemContainer.mapStateToProps - (state): ', state);
+
   // Add the All to the Kind & Category lists
   return {
     kinds: state.kinds.kinds,
     categories: state.categories.categories,
-    items: state.items.items,
+    items: state.items,
   };
 };
 
