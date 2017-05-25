@@ -44,10 +44,11 @@ class AddItemForm extends React.Component {
 
       canSubmit: false,
 
-      // Selected Kind & Category:
       name: '',
-      category: '',
-      kind: '',
+      // Selected Kind & Category:
+      // (also updated in componentWillReceiveProps when receiving lists)
+      category: this.props.categories.length > 0 ? this.props.categories[0].id : '',
+      kind: this.props.kinds.length > 0 ? this.props.kinds[0].id : '',
     };
 
     this.state = {
@@ -67,6 +68,7 @@ class AddItemForm extends React.Component {
     if (nextProps.categories && nextProps.categories.length > 0 && nextProps.categories !== this.props.categories) {
       if (!this.state.category || this.state.category === '') {
         updState.category = nextProps.categories[0].id;
+        this.defaultState.category = updState.category;
         needUpdate = true;
         console.log('category updated:', updState.category);
       } else console.log('...NO update category! (2)');
@@ -76,6 +78,7 @@ class AddItemForm extends React.Component {
     if (nextProps.kinds && nextProps.kinds.length > 0 && nextProps.kinds !== this.props.kinds) {
       if (!this.state.kind || this.state.kind === '') {
         updState.kind = nextProps.kinds[0].id;
+        this.defaultState.kind = updState.kind;
         needUpdate = true;
         console.log('kind updated:', updState.kind);
       } else console.log('...NO update kind! (2)');
@@ -149,7 +152,7 @@ class AddItemForm extends React.Component {
 
 
   render() {
-    console.log('render: (category, kind, name, picture)=', this.state.category, this.state.kind, this.state.name, this.state.picture ? this.state.picture.length : 'null');
+    console.log('AddItemForm render: (category, kind, name, picture)=', this.state.category, this.state.kind, this.state.name, this.state.picture ? this.state.picture.length : 'null');
     const formReadyForSubmit = this.state.name && this.state.kind && this.state.category;
     return (
       <div style={styles.form}>

@@ -32,7 +32,9 @@ export function saveItem(item) { // eslint-disable-line import/prefer-default-ex
       .then((response) => {
         console.log('fetch result: ', response);
         if (response && response.ok) {
-          dispatch(_successSavingItem(item));
+          // returns the item given by the server (async)
+          response.json()
+          .then((json) => { dispatch(_successSavingItem(json.item)); });
           return;
         }
         // this.onEndSavingFailed('01');
