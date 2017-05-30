@@ -250,8 +250,11 @@ logger.info(`BoServer serves static files from: ${folderStaticAbsolute} to /stat
 app.use('/static', express.static(folderStaticAbsolute));
 
 
-// Logs route: are visible here:  http://yourhost:port/logs
+// Logs route: are visible here:  http://yourhost:port/logs/show
 require('./util/winstonDisplay')(app, logger.default);
+
+// Save logs comming from here:  http://yourhost:port/logs/save
+require('./util/logsFromBrowser')(app);
 
 
 // start app

@@ -13,8 +13,8 @@ require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
 const logSearchItemContainer = log.getLogger('logSearchItemContainer');
-logSearchItemContainer.setLevel('debug');
-logSearchItemContainer.warn('--> entering SearchItemContainer.jsx');
+logSearchItemContainer.setLevel('warn');
+logSearchItemContainer.debug('--> entering SearchItemContainer.jsx');
 
 // To round to the next 0.5: (Math.round(rating * 2) / 2).toFixed(1)
 function roundTo0dot5(n) { return n ? (Math.round(n * 2) / 2).toFixed(1) : null; }

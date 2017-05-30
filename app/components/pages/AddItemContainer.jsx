@@ -15,8 +15,8 @@ require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
 const logAddItemContainer = log.getLogger('logAddItemContainer');
-logAddItemContainer.setLevel('debug');
-logAddItemContainer.warn('--> entering AddItemContainer.jsx');
+logAddItemContainer.setLevel('warn');
+logAddItemContainer.debug('--> entering AddItemContainer.jsx');
 
 class AddItemContainer extends React.Component {
   static propTypes = {

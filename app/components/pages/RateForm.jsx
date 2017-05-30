@@ -1,10 +1,16 @@
 /* eslint-disable react/forbid-prop-types */
 
+import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Col, Form, FormGroup, Input, Label } from 'reactstrap';
 import RatingStarsRow from '../utils/RatingStarsRow';
 import SimpleListOrDropdown from '../pages/SimpleListOrDropdown';
+import loglevelServerSend from '../../utils/loglevel-serverSend';
+
+const logRateForm = log.getLogger('logRateForm');
+loglevelServerSend(logRateForm); // a setLevel() MUST be run AFTER this!
+logRateForm.setLevel('debug');
 
 const styles = {
   form: {
@@ -193,7 +199,7 @@ class RateForm extends React.Component {
   }
 
   render() {
-    console.log('render RateForm: (category, kind, item, location)=', this.state.category, this.state.kind, this.state.item, this.state.location);
+    logRateForm.debug(`render RateForm: (category=${this.state.category}, kind=${this.state.kind}, item=${this.state.item}, location=${this.state.location})`);
     const formReadyForSubmit = this.state.item && this.state.location && this.state.markOverall;
     return (
       <div style={styles.form}>

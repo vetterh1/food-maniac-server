@@ -9,12 +9,14 @@ import { Container } from 'reactstrap';
 import Alert from 'react-s-alert';
 import RateForm from './RateForm';
 import stringifyOnce from '../../utils/stringifyOnce';
+import loglevelServerSend from '../../utils/loglevel-serverSend';
 
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
 const logRateContainer = log.getLogger('logRateContainer');
-logRateContainer.setLevel('warn');
+loglevelServerSend(logRateContainer); // a setLevel() MUST be run AFTER this!
+logRateContainer.setLevel('debug');
 logRateContainer.debug('--> entering RateContainer.jsx');
 
 class RateContainer extends React.Component {
@@ -68,8 +70,7 @@ class RateContainer extends React.Component {
 
 
   save() {
-    console.log(`RateContainer.save - values:\n\n${stringifyOnce(this.values, null, 2)}`);
-//    logRateContainer.debug(`RateContainer.save - values:\n\n${stringifyOnce(this.values, null, 2)}`);
+    logRateContainer.debug(`RateContainer.save - values:\n\n${stringifyOnce(this.values, null, 2)}`);
     this.saveLocation()
     .then(this.saveMarks.bind(this))
     .then(this.saveDone.bind(this))
@@ -154,7 +155,7 @@ class RateContainer extends React.Component {
           coordinates: [lat, lng],
         },
       };
-      console.log('   markIndividual: ', markIndividual);
+      logRateContainer.debug('   markIndividual: ', markIndividual);
 
       fetch('/api/markIndividuals', {
         method: 'POST',

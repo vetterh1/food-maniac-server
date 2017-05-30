@@ -81,6 +81,8 @@ html(lang="en")
             table(class="table table-sm table-striped mt-5")
                 thead
                     tr
+                        if browserContent == true
+                            th= "Origin"
                         th= "Level"
                         th= "Message"
                         th= "Timestamp"
@@ -97,6 +99,8 @@ html(lang="en")
                     when "info"
                       - var klass='table-info'
                   tr(class=klass)
+                    if browserContent == true
+                        td= log.origin
                     td= log.level
                     td= log.message
                     td= log.timestamp

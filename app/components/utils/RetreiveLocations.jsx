@@ -8,7 +8,7 @@ import Geolocation from '../utils/Geolocation';
 import * as PlacesActions from '../../actions/PlacesActions';
 
 const logRetreiveLocations = log.getLogger('loggerRetreiveLocation');
-logRetreiveLocations.setLevel('trace');
+logRetreiveLocations.setLevel('warn');
 logRetreiveLocations.debug('--> entering RetreiveLocations.jsx');
 
 
