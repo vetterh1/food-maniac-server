@@ -22,8 +22,8 @@
 
 	"log":
 	{
-		"levelConsole": "info",
-		"levelFile": "info",
+		"levelConsole": "debug",
+		"levelFile": "debug",
     "BoServer":
     {
       "pathFile" : "./distBoServer/log/winston.log"
