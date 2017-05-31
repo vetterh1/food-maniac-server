@@ -177,6 +177,9 @@ if (process.env.NODE_ENV === 'development') {
 import apiRoutes from './routes/apiRoutes';
 import utilRoutes from './routes/utilRoutes';
 
+// app.enable('trust proxy');  // used to get callers IP address (use req.ip)
+app.set('trust proxy', '127.0.0.1');
+
 app.use(compression());
 app.use(morgan('combined', { stream: accessLogStream })); // for logging
 app.use(bodyParser.json({ limit: '5mb' })); // Mandatory to get body in post requests!

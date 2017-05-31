@@ -1,37 +1,4 @@
-//
-//   /!\   a logger.setLevel(...) MUST be present AFTER this call in caller method
-//
-
-const loglevelServerSend = (logger, options) => {
-  if (!logger || !logger.methodFactory) throw new Error('loglevel instance has to be specified in order to be extended');
-  const _logger          = logger, 
-        _url             = options && options.url || '/logs/save',
-        _callOriginal    = options && options.callOriginal || true,
-        _prefix          = options && options.prefix || ((logSev, message) => { return `${new Date().toLocaleString()} - ${logSev}: ${message}\n`; }),
-        _level          = options && options.level,
-        _originalFactory = _logger.methodFactory;
-    
-  _logger.methodFactory = function (methodName, logLevel, loggerName) {
-    var rawMethod = _originalFactory(methodName, logLevel)
-
-    return (message) => {
-      const originalMessage = message;
-      if (typeof _prefix === 'string')
-        message = _prefix + message;
-      else if (typeof _prefix === 'function')
-        message = _prefix(methodName,message);
-      else
-        message = methodName + ': ' + message
-                  
-      if (_callOriginal);
-        rawMethod(message);
-
-      _sendNextMessage({ message: originalMessage, methodName, logLevel, _level, loggerName });
-    }
-  }
-  // !!! _logger.setLevel(_level);  --> disable here --> MUST be present AFTER this call in caller !!!
-  
-  const _sendNextMessage = (jsonMessage) => {
+  const _sendNextMessage = (jsonMessage, _url) => {
     fetch(_url, {
       method: 'POST',
       headers: {
@@ -49,6 +16,38 @@ const loglevelServerSend = (logger, options) => {
       console.error(error.message);
     });
   };
+
+
+//
+//   /!\   a logger.setLevel(...) MUST be present AFTER this call in caller method
+//
+
+const loglevelServerSend = (logger, options) => {
+  if (!logger || !logger.methodFactory) throw new Error('loglevel instance has to be specified in order to be extended');
+  const _logger = logger;
+  const _url = (options && options.url) || '/logs/save';
+  const _callOriginal = (options && options.callOriginal) || true;
+  const _prefix = (options && options.prefix) || ((logSev, message) => { return `${new Date().toLocaleString()} - ${logSev}: ${message}\n`; });
+  const _level = options && options.level;
+  const _originalFactory = _logger.methodFactory;
+
+  _logger.methodFactory = (methodName, logLevel, loggerName) => {
+    const rawMethod = _originalFactory(methodName, logLevel);
+
+    return (message) => {
+      const originalMessage = message;
+      let modifiedMessage = message;
+      if (typeof _prefix === 'string') modifiedMessage = _prefix + message;
+      else if (typeof _prefix === 'function') modifiedMessage = _prefix(methodName, message);
+      else modifiedMessage = `${methodName}: ${message}`;
+
+      if (_callOriginal);
+        rawMethod(modifiedMessage);
+
+      _sendNextMessage({ message: originalMessage, methodName, logLevel, _level, loggerName }, _url);
+    };
+  };
+  // !!! _logger.setLevel(_level);  --> disable here --> MUST be present AFTER this call in caller !!!
 };
 
 export default loglevelServerSend;

@@ -1,9 +1,10 @@
-module.exports = function(app, logger) {
-  const jade = require('pug');
-  const fs = require('fs');
-  const logPath = logger.transports.file.dirname + '/' + logger.transports.file.filename;
+const jade = require('pug');
+const fs = require('fs');
 
-  app.get('/logs/show', function(req, res, next) {
+module.exports = function(app, logger) {
+  const logPath = `${logger.transports.file.dirname}/${logger.transports.file.filename}`;
+
+  app.get('/logs/show', (req, res) => {
     const limit = req.query.limit ? Number(req.query.limit) : 500;
     const level = req.query.level ? Number(req.query.level) : 1; // Warns 0 & 1 (error & warn)
     const levels = { error: 0, warn: 1, info: 2, verbose: 3, debug: 4, silly: 5 };
@@ -42,7 +43,7 @@ module.exports = function(app, logger) {
               .filter((element) => { return oldestDateInMs > 0 ? Date.parse(element.timestamp) >= oldestDateInMs : true; })
               .reverse();
 
-            browserContent = lines.some((element) => { return element.origin && element.origin === 'BROWSER'})
+            browserContent = lines.some((element) => { return element.origin && element.origin === 'BROWSER' });
           }
 
           const html = jade.renderFile(`${__dirname}/winstonDisplay.jade`, { lines, logPath, browserContent });
@@ -53,6 +54,5 @@ module.exports = function(app, logger) {
         res.send(html);
       }
     });
-
   });
 };
