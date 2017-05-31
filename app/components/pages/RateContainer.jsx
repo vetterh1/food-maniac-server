@@ -9,7 +9,7 @@ import { Container } from 'reactstrap';
 import Alert from 'react-s-alert';
 import RateForm from './RateForm';
 import stringifyOnce from '../../utils/stringifyOnce';
-import loglevelServerSend from '../../utils/loglevel-serverSend';
+import { loglevelServerSend } from '../../utils/loglevel-serverSend';
 
 require('es6-promise').polyfill();
 require('isomorphic-fetch');

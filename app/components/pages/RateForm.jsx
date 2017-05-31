@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { Button, Col, Form, FormGroup, Input, Label } from 'reactstrap';
 import RatingStarsRow from '../utils/RatingStarsRow';
 import SimpleListOrDropdown from '../pages/SimpleListOrDropdown';
-import loglevelServerSend from '../../utils/loglevel-serverSend';
+import { loglevelServerSend } from '../../utils/loglevel-serverSend';
 
 const logRateForm = log.getLogger('logRateForm');
 loglevelServerSend(logRateForm); // a setLevel() MUST be run AFTER this!

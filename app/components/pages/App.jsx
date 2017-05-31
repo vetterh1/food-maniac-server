@@ -8,7 +8,7 @@ import Alert from 'react-s-alert';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/stackslide.css';
 import MainAppBar from '../navigation/MainAppBar';
-import Version from '../utils/Version';
+import Footer from '../utils/Footer';
 
 const styles = {
   pageContainer: {
@@ -31,7 +31,7 @@ class App extends React.Component {
       <div style={styles.pageContainer}>
         <MainAppBar location={this.props.location} router={this.props.router} route={this.props.route} />
         {this.props.children}
-        <Version />
+        <Footer />
         <Alert stack={{ limit: 3 }} position="top" timeout={3000} effect="stackslide" />
       </div>
     );
@@ -55,6 +55,6 @@ export default App;
         >
           {this.props.children}
         </RouteTransition>
-        <Version />
+        <Footer />
     </div>
 */
