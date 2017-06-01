@@ -13,6 +13,7 @@ import ListItemsContainerOld from '../pages/ListItemsContainerOld';
 import ListItemsContainer from '../pages/ListItemsContainer';
 import ListCategoriesContainer from '../pages/ListCategoriesContainer';
 import ListKindsContainer from '../pages/ListKindsContainer';
+import AdminItemsContainer from '../pages/AdminItemsContainer';
 import Login from '../pages/Login';
 
 const NotFound = () => <h2>404 error - This page is not found!</h2>;
@@ -30,6 +31,7 @@ const Root = ({ store }) => (
         <Route path="/listItemsOld" component={() => (<ListItemsContainerOld URL="/api/items" dropdown={false} />)} />
         <Route path="/listCategories" component={() => (<ListCategoriesContainer dropdown={false} />)} />
         <Route path="/listKinds" component={() => (<ListKindsContainer dropdown={false} />)} />
+        <Route path="/adminItems" component={AdminItemsContainer} />
         <Route path="/generateThumbnails" component={() => (<ListItemsContainerOld URL="/util/regenerateAllThumbnails" socketName="regenerateAllThumbnails" dropdown={false} />)} />
         <Route path="*" component={NotFound} />
       </Route>
