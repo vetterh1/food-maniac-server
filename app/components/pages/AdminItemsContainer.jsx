@@ -36,8 +36,9 @@ class AdminItemsContainer extends React.Component {
   }
 
 
-  onUpdateModal() {
+  onUpdateModal(newState) {
     this.setState({ modalEditItemOpened: false });
+    console.log('AdminItemsContainer.onUpdateModal - newState =', newState);
   }
 
   onCancelModal() {
