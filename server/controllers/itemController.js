@@ -9,14 +9,16 @@ import * as GenerateThumbnails from '../util/generateThumbnails';
 
 
 // /GET /count - Get items count
-// Input: 'query' can filter the results (optional, default = no filter)
+// Input conditions: json object with a filter condition (optional, default = no filter)
 // Returns code 500 on network error
 // Returns code 200 otherwise + { count: nnnn }
+// Ex 1: http://localhost:8080/api/items/count
+// Ex 2: http://localhost:8080/api/items/count?conditions={"category":"58f4dfff45dab98a840aa000"}
 
 export function getItemsCount(req, res) {
   // TODO: query should return items of current user.
-  const query = req.params.query ? JSON.parse(req.params.query) : {};
-  Item.count(query, (err, count) => {
+  const conditions = req.query.conditions ? JSON.parse(req.query.conditions) : {};
+  Item.count(conditions, (err, count) => {
     if (err) {
       logger.error('itemController.getItemsCount returns err: ', err);
       res.status(500).send(err);
@@ -26,7 +28,7 @@ export function getItemsCount(req, res) {
       // res.status(200).type('json').send('{"invalid"}'); // Should display error=02
       // res.status(500).type('json').send('{"error": "message from server"}'); // Should display error=500
       res.json({ count });
-      logger.info(`itemController.getItemsCount returns ${count}`);
+      logger.info(`itemController.getItemsCount returns ${count} with conditions ${req.query.conditions}`);
     }
   });
 }

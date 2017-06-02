@@ -6,6 +6,7 @@ const initialState = { // define initial state - an empty items list
   isSaving: false,
   isUpdating: false,
   isDeleting: false,
+  isBackupingOrphans: false,
   isValid: true,
   error: null,
 };
@@ -54,6 +55,8 @@ const itemsReducer = (state = initialState, action) => {
 
   //
   // Delete item on Server (in Action) and update Redux store by deleting the item (in Reducer)
+  // Then update all the marks previously attached the removed item
+  // and attach them to a backup item
   //
 
   case c.REQUEST_DELETE_ITEM: return Object.assign({}, state, { isDeleting: true, error: null });
@@ -65,6 +68,9 @@ const itemsReducer = (state = initialState, action) => {
     return newState;
   }
   case c.DELETE_ITEM_KO: return Object.assign({}, state, { isDeleting: false, error: action.error });
+  case c.REQUEST_BACKUP_ORPHANS: return Object.assign({}, state, { isBackupingOrphans: true, error: null });
+  case c.BACKUP_ORPHANS_OK: return Object.assign({}, state, { isBackupingOrphans: false, error: null });
+  case c.BACKUP_ORPHANS_KO: return Object.assign({}, state, { isBackupingOrphans: false, error: action.error });
 
   default: return state;
   }

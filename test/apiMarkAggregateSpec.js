@@ -23,6 +23,52 @@ describe('API MarkAggregate', () => {
   beforeEach((done) => { td.loadTestData(done); });
 
 
+
+  /*
+  * Test the /GET/COUNT route
+  */
+  describe('Counts', () => {
+    it('it should return a 0 count at start', (done) => {
+      chai.request(app)
+        .get('/api/markAggregates/count')
+        .end((err, res) => {
+          should.not.exist(err);
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('count').eql(0);
+          done();
+        });
+    });
+
+    it('it should count the markAggregates', (done) => {
+      MarkAggregate.create(td.testMarkAggregates, () => {
+        chai.request(app)
+          .get('/api/markAggregates/count')
+          .end((err, res) => {
+            should.not.exist(err);
+            res.body.should.be.a('object');
+            res.body.should.have.property('count').eql(td.testMarkAggregates.length);
+            done();
+          });
+      });
+    });
+
+    it('it should count with filter', (done) => {
+      MarkAggregate.create(td.testMarkAggregates, () => {
+        const markOverall = 5;
+        chai.request(app)
+          .get(`/api/markAggregates/count?conditions={"markOverall":"${markOverall}"}`)
+          .end((err, res) => {
+            should.not.exist(err);
+            res.body.should.be.a('object');
+            res.body.should.have.property('count').eql(td.testMarkAggregates.filter(mark => mark.markOverall === markOverall).length);
+            done();
+          });
+      });
+    });
+  });  /* End test the /GET/COUNT route */
+
+
   /*
   * Test the /GET route
   */
@@ -43,6 +89,7 @@ describe('API MarkAggregate', () => {
         chai.request(app)
           .get('/api/markAggregates')
           .end((err, res) => {
+            should.not.exist(err);
             res.should.have.status(200);
             res.body.markAggregates.should.be.a('array');
             res.body.markAggregates.length.should.be.eql(td.testMarkAggregates.length);
@@ -68,6 +115,7 @@ describe('API MarkAggregate', () => {
           .post(`/api/markAggregates/id/${markSaved._id}`)
           .send({ markAggregate: markUpdt })
           .end((err, res) => {
+            should.not.exist(err);
             res.should.have.status(200);
             res.body.should.be.a('object');
             res.body.should.have.property('markAggregate');
@@ -117,6 +165,74 @@ describe('API MarkAggregate', () => {
   });  /* End test the /POST/:_id route */
 
 
+
+
+
+  /*
+  * Test the /POST/bulkUpdates
+  */
+  describe('MarkAggregate Bulk Update', () => {
+    it('should succeed updating in bulk', (done) => {
+      // Add all the marks
+      MarkAggregate.create(td.testMarkAggregates, () => {
+        //
+        // Count the number of marks 5, 4 & 3
+        //
+        let countPizza = 0;
+        let countBurger = 0;
+        let countPasta = 0;
+        chai.request(app)
+          .get('/api/markAggregates/count?conditions={"item":"58f4dfff45dab98a840b0000"}')
+          .end((err, res) => {
+            countPizza = parseInt(res.body.count, 10);
+            console.log('countPizza = ', countPizza);
+            chai.request(app)
+              .get('/api/markAggregates/count?conditions={"item":"58f4dfff45dab98a840b0002"}')
+              .end((err2, res2) => {
+                countBurger = parseInt(res2.body.count, 10);
+                console.log('countBurger = ', countBurger);
+                chai.request(app)
+                  .get('/api/markAggregates/count?conditions={"item":"58f4dfff45dab98a840b0001"}')
+                  .end((err3, res3) => {
+                    countPasta = parseInt(res3.body.count, 10);
+                    console.log('countPasta = ', countPasta);
+
+                    //
+                    // 
+
+                    // to change:  find per item
+
+                    done();
+                  });
+              });
+          });
+      });
+
+
+/*
+      const markOrig = new MarkAggregate(td.testMarkAggregates[0]);
+      const markUpdt = { markOverall: 1 };
+      markOrig.save((errSaving, markSaved) => {
+        chai.request(app)
+          .post(`/api/markAggregates/id/${markSaved._id}`)
+          .send({ markAggregate: markUpdt })
+          .end((err, res) => {
+            should.not.exist(err);
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.should.have.property('markAggregate');
+            res.body.markAggregate.should.be.a('object');
+            res.body.markAggregate.should.have.property('markOverall').eql(markUpdt.markOverall);
+            res.body.markAggregate.markOverall.should.be.a('number');
+            done();
+          });
+      });
+*/    
+    });
+  });  /* End test the /POST/bulkUpdates route */
+
+
+
   /*
   * Test the /GET/:_id route
   */
@@ -134,10 +250,12 @@ describe('API MarkAggregate', () => {
     it('should find an existing markAggregate', (done) => {
       const mark = new MarkAggregate(td.testMarkAggregates[0]);
       mark.save((err, markSaved) => {
+        should.not.exist(err);
         chai.request(app)
           .get(`/api/markAggregates/id/${markSaved._id}`)
           .send({})
           .end((err2, res) => {
+            should.not.exist(err2);
             res.should.have.status(200);
             res.body.should.be.a('object');
             res.body.should.have.property('markAggregate');
@@ -160,6 +278,7 @@ describe('API MarkAggregate', () => {
         .get('/api/markAggregates/itemId/59004d52def0000000000000/maxDistance/0/lat/0/lng/0')
         .send({})
         .end((err, res) => {
+          should.not.exist(err);
           res.should.have.status(200);
           res.body.should.be.a('object');
           res.body.should.have.property('markAggregates');
@@ -178,6 +297,7 @@ describe('API MarkAggregate', () => {
         .post('/api/markIndividuals')
         .send({ markIndividual: markIndividualTests[0] })
         .end((err, savedMarkIndividual1) => {
+          should.not.exist(err);
           // console.log('savedMarkIndividual1 err: ', err);
           // console.log('savedMarkIndividual1.body: ', savedMarkIndividual1.body);
           markIndividualTests[0].aggregatedId = savedMarkIndividual1.body.markAggregate._id;
@@ -185,11 +305,13 @@ describe('API MarkAggregate', () => {
             .post('/api/markIndividuals')
             .send({ markIndividual: markIndividualTests[1] })
             .end((er2, savedMarkIndividual2) => {
+              should.not.exist(er2);
               markIndividualTests[1].aggregatedId = savedMarkIndividual2.body.markAggregate._id;
               chai.request(app)
                 .get(`/api/markAggregates/itemId/${global.items[0]._id}/maxDistance/0/lat/0/lng/0`)
                 .send({})
                 .end((err3, res) => {
+                  should.not.exist(err3);
                   markIndividualTests[0].aggregatedId.should.not.be.equal(markIndividualTests[1].aggregatedId);
                   res.should.have.status(200);
                   res.body.should.be.a('object');
@@ -215,18 +337,21 @@ describe('API MarkAggregate', () => {
         .post('/api/markIndividuals')
         .send({ markIndividual: markIndividualTests[0] })
         .end((err, savedMarkIndividual1) => {
+          should.not.exist(err);
           // console.log('savedMarkIndividual1.body=', savedMarkIndividual1.body);
           markIndividualTests[0].aggregatedId = savedMarkIndividual1.body.markAggregate._id;
           chai.request(app)
             .post('/api/markIndividuals')
             .send({ markIndividual: markIndividualTests[1] })
             .end((err2, savedMarkIndividual2) => {
+              should.not.exist(err2);
               // console.log('savedMarkIndividual1.body=', savedMarkIndividual2.body);
               markIndividualTests[1].aggregatedId = savedMarkIndividual2.body.markAggregate._id;
               chai.request(app)
                 .get(`/api/markAggregates/itemId/${global.items[0]._id}/maxDistance/0/lat/0/lng/0`)
                 .send({})
                 .end((err3, res) => {
+                  should.not.exist(err3);
                   // console.log('res.body=', res.body);
                   markIndividualTests[0].aggregatedId.should.be.equal(markIndividualTests[1].aggregatedId);
                   res.should.have.status(200);
@@ -250,18 +375,21 @@ describe('API MarkAggregate', () => {
         .post('/api/markIndividuals')
         .send({ markIndividual: markIndividualTests[0] })
         .end((err, resMarkAggregate1) => {
+          should.not.exist(err);
           // console.log('resMarkAggregate1.body=', resMarkAggregate1.body);
           markIndividualTests[0].aggregatedId = resMarkAggregate1.body.markAggregate._id;
           chai.request(app)
             .post('/api/markIndividuals')
             .send({ markIndividual: markIndividualTests[1] })
             .end((err2, resMarkAggregate2) => {
+              should.not.exist(err2);
               // console.log('resMarkAggregate2.body=', resMarkAggregate2.body);
               markIndividualTests[1].aggregatedId = resMarkAggregate2.body.markAggregate._id;
               chai.request(app)
                 .get(`/api/markAggregates/itemId/${global.items[0]._id}/maxDistance/10/lat/50.6403954/lng/3.0651635000000397`) // at Papa Raffaele
                 .send({})
                 .end((err3, res) => {
+                  should.not.exist(err3);
                   // console.log('res.body=', res.body);
                   res.should.have.status(200);
                   res.body.markAggregates.length.should.be.eql(1);
@@ -295,6 +423,7 @@ describe('API MarkAggregate', () => {
                     .get(`/api/markAggregates/itemId/${global.items[0]._id}/maxDistance/800/lat/50.5679449/lng/3.0237092999999997`) // Worldline LP3 (btw the 2 first restaurants)
                     .send({})
                     .end((err4, res) => {
+                      should.not.exist(err4);
                       // console.log('res.body=', res.body);
                       res.should.have.status(200);
                       res.body.should.be.a('object');
@@ -330,6 +459,7 @@ describe('API MarkAggregate', () => {
                     .get(`/api/markAggregates/itemId/${global.items[0]._id}/maxDistance/7000/lat/50.5679449/lng/3.0237092999999997`) // Worldline LP3 (btw the 2 first restaurants)
                     .send({})
                     .end((err4, res) => {
+                      should.not.exist(err4);
                       res.should.have.status(200);
                       res.body.markAggregates.length.should.be.eql(2);
                       done();
@@ -361,6 +491,7 @@ describe('API MarkAggregate', () => {
                     .get(`/api/markAggregates/itemId/${global.items[0]._id}/maxDistance/10000/lat/50.5679449/lng/3.0237092999999997`) // Worldline LP3 (btw the 2 first restaurants)
                     .send({})
                     .end((err4, res) => {
+                      should.not.exist(err4);
                       res.should.have.status(200);
                       res.body.markAggregates.length.should.be.eql(3);
                       done();
@@ -393,6 +524,7 @@ describe('API MarkAggregate', () => {
           .delete(`/api/markAggregates/id/${markSaved._id}`)
           .send({})
           .end((err, res) => {
+            should.not.exist(err);
             res.should.have.status(200);
             done();
           });

@@ -35,6 +35,7 @@ describe('API Items', () => {
       chai.request(app)
         .get('/api/items/count')
         .end((err, res) => {
+          should.not.exist(err);
           res.should.have.status(200);
           res.body.should.be.a('object');
           res.body.should.have.property('count').eql(0);
@@ -47,8 +48,24 @@ describe('API Items', () => {
         chai.request(app)
           .get('/api/items/count')
           .end((err, res) => {
+            should.not.exist(err);
             res.body.should.be.a('object');
             res.body.should.have.property('count').eql(td.testItems.length);
+            done();
+          });
+      });
+    });
+
+    it('it should count with filter', (done) => {
+      Item.create(td.testItems, () => {
+        const category = '58f4dfff45dab98a840aa002';
+        const kind = '58f4dfff45dab98a840ab001';
+        chai.request(app)
+          .get(`/api/items/count?conditions={"category":"${category}","kind": "${kind}"}`)
+          .end((err, res) => {
+            should.not.exist(err);
+            res.body.should.be.a('object');
+            res.body.should.have.property('count').eql(td.testItems.filter(item => item.category === category && item.kind === kind).length);
             done();
           });
       });
@@ -64,6 +81,7 @@ describe('API Items', () => {
       chai.request(app)
         .get('/api/items')
         .end((err, res) => {
+          should.not.exist(err);
           res.should.have.status(200);
           res.body.items.should.be.a('array');
           res.body.items.length.should.be.eql(0);
@@ -76,6 +94,7 @@ describe('API Items', () => {
         chai.request(app)
           .get('/api/items')
           .end((err, res) => {
+            should.not.exist(err);
             res.should.have.status(200);
             res.body.items.should.be.a('array');
             res.body.items.length.should.be.eql(td.testItems.length);
@@ -92,6 +111,7 @@ describe('API Items', () => {
         chai.request(app)
           .get('/api/items?offset=2&limit=3&sort={"since":-1}&query={"category":"58f4dfff45dab98a840aa000"}')
           .end((err, res) => {
+            should.not.exist(err);
             res.should.have.status(200);
             res.body.items.should.be.a('array');
             res.body.items.length.should.be.eql(3);
@@ -125,6 +145,7 @@ describe('API Items', () => {
         .post('/api/items')
         .send({ item: itemcomplete })
         .end((err, res) => {
+          should.not.exist(err);
           res.should.have.status(200);
           res.body.should.be.a('object');
           res.body.should.have.property('item');
@@ -171,6 +192,7 @@ describe('API Items', () => {
           .post(`/api/items/id/${itemSaved._id}`)
           .send({ item: itemUpdt })
           .end((err, res) => {
+            should.not.exist(err);
             res.should.have.status(200);
             res.body.should.be.a('object');
             res.body.should.have.property('item');
@@ -240,6 +262,7 @@ describe('API Items', () => {
           .get(`/api/items/id/${itemSaved._id}`)
           .send({})
           .end((err2, res) => {
+            should.not.exist(err2);
             res.should.have.status(200);
             res.body.should.be.a('object');
             res.body.should.have.property('item');
@@ -273,6 +296,7 @@ describe('API Items', () => {
           .delete(`/api/items/id/${itemSaved._id}`)
           .send({})
           .end((err, res) => {
+            should.not.exist(err);
             res.should.have.status(200);
             done();
           });

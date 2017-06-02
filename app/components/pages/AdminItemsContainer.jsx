@@ -58,13 +58,28 @@ class AdminItemsContainer extends React.Component {
   }
 
   onEndDeletingOK = () => {
-    const durationDeleting = new Date().getTime() - this._nowStartDeleting;
-    this.alert = Alert.success(`Deleted! (duration=${durationDeleting}ms)`);
+    const duration = new Date().getTime() - this._nowStartDeleting;
+    this.alert = Alert.success(`Item deleted! (duration=${duration}ms)`);
   }
 
   onEndDeletingFailed = (errorMessage) => {
-    const durationDeleting = new Date().getTime() - this._nowStartDeleting;
-    this.alert = Alert.error(`Error while deleting (error=${errorMessage}, duration=${durationDeleting}ms)`);
+    const duration = new Date().getTime() - this._nowStartDeleting;
+    this.alert = Alert.error(`Error while deleting (error=${errorMessage}, duration=${duration}ms)`);
+  }
+
+  onStartBackupingOrphans = () => {
+    this._nowStartackupingOrphans = new Date().getTime();
+    this.alert = Alert.info('Updating orphan marks...');
+  }
+
+  onEndBackupingOrphansOK = () => {
+    const duration = new Date().getTime() - this._nowStartackupingOrphans;
+    this.alert = Alert.success(`Orphan marks are now linked to new item! (duration=${duration}ms)`);
+  }
+
+  onEndBackupingOrphansFailed = (errorMessage) => {
+    const duration = new Date().getTime() - this._nowStartackupingOrphans;
+    this.alert = Alert.error(`Error while relinking orphan marks (error=${errorMessage}, duration=${duration}ms)`);
   }
 
 
@@ -90,6 +105,11 @@ class AdminItemsContainer extends React.Component {
       if (nextProps.items.error === null) this.onEndDeletingOK();
       else this.onEndDeletingFailed(nextProps.items.error);
     }
+    // End of backuping orphans? (status delete switches from true to false)
+    if (this.props.items.isBackupingOrphans === true && nextProps.items.isBackupingOrphans === false) {
+      if (nextProps.items.error === null) this.onEndBackupingOrphansOK();
+      else this.onEndBackupingOrphansFailed(nextProps.items.error);
+    }
 
   }
 
@@ -110,6 +130,7 @@ class AdminItemsContainer extends React.Component {
   onUpdateModal(newState) {
     this.setState({ modalEditItemOpened: false });
     console.log('AdminItemsContainer.onUpdateModal - newState =', newState);
+    if(!Object.keys(newState).length) this.alert = Alert.info('nothing to update...');
     this.onStartUpdating();
     const { dispatch } = this.props;  // Injected by react-redux
     const action = itemsActions.updateItem(this.state.currentItem.id, newState);
@@ -121,8 +142,11 @@ class AdminItemsContainer extends React.Component {
     console.log('AdminItemsContainer.onDeleteModal - backupItemId =', backupItemId);
     this.onStartDeleting();
     const { dispatch } = this.props;  // Injected by react-redux
-    const action = itemsActions.deleteItem(this.state.currentItem.id, backupItemId);
-    dispatch(action);
+    dispatch(itemsActions.deleteItem(this.state.currentItem.id, backupItemId))
+    .then(() => {
+      this.onStartBackupingOrphans();
+      return dispatch(itemsActions.backupOrphans(this.state.currentItem.id, backupItemId));
+    });
   }
 
   onCancelModal() {

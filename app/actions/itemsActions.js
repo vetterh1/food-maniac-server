@@ -107,11 +107,48 @@ export function updateItem(id, updates) { // eslint-disable-line import/prefer-d
 
 //
 // Delete item on Server (in Action) and update Redux store by deleting the item (in Reducer)
+// Then update all the marks previously attached the removed item
+// and attach them to a backup item
 //
 
 function _requestDeleteItem() { return { type: c.REQUEST_DELETE_ITEM }; }
 function _successDeletingItem(id) { return { type: c.DELETE_ITEM_OK, id }; }
 function _errorDeletingItem(message) { return { type: c.DELETE_ITEM_KO, error: message }; }
+function _requestBackupingOrphans() { return { type: c.REQUEST_BACKUP_ORPHANS }; }
+function _successBackupingOrphans() { return { type: c.BACKUP_ORPHANS_OK }; }
+function _errorBackupingOrphans(message) { return { type: c.BACKUP_ORPHANS_OK, error: message }; }
+
+// Once the item is deleted,
+// we can updating all the marks that were previously attached to this item
+// and changed their items to the backupItemId
+export function backupOrphans(id, backupItemId) { // eslint-disable-line import/prefer-default-export
+  return (dispatch) => {
+    dispatch(_requestBackupingOrphans()); // advertise we are starting a server request
+    console.log('Action backupOrphans() - id, backupItemId:', id, backupItemId);
+    return fetch(`/api/markAggregates/bulkUpdates?conditions={"item": "${id}"}&changes={"$set":{"item":"${backupItemId}"}}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
+        console.log('bulkUpdates result: ', response);
+        if (response && response.ok) {
+          dispatch(_successBackupingOrphans());
+          return;
+        }
+        // this.onEndSavingFailed('01');
+        const error = new Error('fetch OK but returned nothing or an error (request: post /api/markAggregates/bulkUpdates');
+        error.name = 'ErrorCaught';
+        throw (error);
+      })
+      .catch((error) => {
+        // if (error.name !== 'ErrorCaught') this.onEndSavingFailed('02');
+        // logAddItemContainer.error(error.message);
+        dispatch(_errorBackupingOrphans(error.message));
+      });
+  };
+}
 
 export function deleteItem(id, backupItemId) { // eslint-disable-line import/prefer-default-export
   return (dispatch) => {
@@ -124,11 +161,10 @@ export function deleteItem(id, backupItemId) { // eslint-disable-line import/pre
       },
     })
       .then((response) => {
-        console.log('fetch result: ', response);
+        console.log('delete result: ', response);
         if (response && response.ok) {
           // returns the item given by the server (async)
           dispatch(_successDeletingItem(id));
-          return;
         }
         // this.onEndSavingFailed('01');
         const error = new Error('fetch OK but returned nothing or an error (request: delete /api/items/id/id');

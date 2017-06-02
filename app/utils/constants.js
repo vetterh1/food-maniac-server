@@ -39,11 +39,16 @@ export const UPDATE_ITEM_KO = 'UPDATE_ITEM_KO';
 
 //
 // Delete item on Server (in Action) and update Redux store by deleting the item (in Reducer)
+// Then update all the marks previously attached the removed item
+// and attach them to a backup item
 //
 
 export const REQUEST_DELETE_ITEM = 'REQUEST_DELETE_ITEM';
 export const DELETE_ITEM_OK = 'DELETE_ITEM_OK';
 export const DELETE_ITEM_KO = 'DELETE_ITEM_KO';
 
+export const REQUEST_BACKUP_ORPHANS = 'REQUEST_BACKUP_ORPHANS';
+export const BACKUP_ORPHANS_OK = 'BACKUP_ORPHANS_OK';
+export const BACKUP_ORPHANS_KO = 'BACKUP_ORPHANS_KO';
 
 

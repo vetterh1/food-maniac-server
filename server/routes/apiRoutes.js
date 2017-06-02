@@ -69,11 +69,13 @@ router.route('/categories/id/:_id').delete(CategoryController.deleteCategory);
 
 // ----------------  ITEMS ----------------
 
-// /GET /count - Get items count
-// Input: 'query' can filter the results (optional, default = no filter)
+// /GET /count - Get markAggregates count
+// Input: conditions: json object with a filter condition (optional, default = no filter)
 // Returns code 500 on network error
 // Returns code 200 otherwise + { count: nnnn }
-router.route('/items/count/:query?').get(ItemController.getItemsCount);
+// Ex 1: http://localhost:8080/api/markAggregates/count
+// Ex 2: http://localhost:8080/api/markAggregates/count?conditions={"markOverall":"5"}
+router.route('/items/count').get(ItemController.getItemsCount);
 
 // Get one item by _id
 router.route('/items/id/:_id').get(ItemController.getItem);
@@ -130,6 +132,14 @@ router.route('/places/id/:_id').delete(PlaceController.deletePlace);
 
 // ----------------  markAggregates ----------------
 
+// /GET /count - Get markAggregates count
+// Input: conditions: json object with a filter condition (optional, default = no filter)
+// Returns code 500 on network error
+// Returns code 200 otherwise + { count: nnnn }
+// Ex 1: http://localhost:8080/api/markAggregates/count
+// Ex 2: http://localhost:8080/api/markAggregates/count?condition={"markOverall":"5"}
+router.route('/markAggregates/count').get(MarkAggregateController.getMarkAggregatesCount);
+
 // /GET route - Get all markAggregates
 // Returns code 500 on network error (NOT empty list)
 // Returns code 200 otherwise + { markAggregates }
@@ -147,6 +157,7 @@ router.route('/markAggregates/itemId/:_itemId/maxDistance/:_maxDistance/lat/:_la
 // Returns code 400 on missing parameter
 // Returns code 500 on network error or not found
 // Returns code 200 + { markAggregate } if found
+// ex: http://localhost:8080/api/markAggregates/id/592d74e8761d1229e05078ef
 router.route('/markAggregates/id/:_id').get(MarkAggregateController.getMarkAggregate);
 
 // /POST/:_id route - Update a markAggregates by _id
@@ -155,6 +166,15 @@ router.route('/markAggregates/id/:_id').get(MarkAggregateController.getMarkAggre
 // Returns code 200 + { markAggregate } if found
 // Note: markAggregate is the updated mark
 router.route('/markAggregates/id/:_id').post(MarkAggregateController.updateMarkAggregate);
+
+// /POST/bulkUpdates route - Bulk update of markAggregates by _conditions
+// Input conditions: json object with the condition (mandatory, {} will update all marks!)
+// Input changes: json object with the changes to perform (mandatory)
+// Returns code 400 on input parameters error (missing)
+// Returns code 500 on network error or not found
+// Returns code 200 and no body if OK
+// Ex 1: http://localhost:8080/api/markAggregates/bulkUpdates?conditions={"item": "592467e29148172dac4125a9"}&changes={"$set":{"markOverall":"4" }}
+router.route('/markAggregates/bulkUpdates').post(MarkAggregateController.bulkUpdateMarkAggregate);
 
 // /DELETE/:_id route - Delete a markAggregates by _id
 // Returns code 400 on missing parameter

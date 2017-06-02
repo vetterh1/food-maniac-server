@@ -4,6 +4,34 @@ import { distanceInKm, formatDistance } from '../util/mapUtils';
 // import stringifyOnce from '../util/stringifyOnce';
 
 
+
+// /GET /count - Get markAggregates count
+// Input: conditions: json object with a filter condition (optional, default = no filter)
+// Returns code 500 on network error
+// Returns code 200 otherwise + { count: nnnn }
+// Ex 1: http://localhost:8080/api/markAggregates/count
+// Ex 2: http://localhost:8080/api/markAggregates/count?conditions={"markOverall":"5"}
+
+export function getMarkAggregatesCount(req, res) {
+  // TODO: query should return MarkAggregates of current user.
+  const conditions = req.query.conditions ? JSON.parse(req.query.conditions) : {};
+  MarkAggregate.count(conditions, (err, count) => {
+    if (err) {
+      logger.error('itemController.getMarkAggregatesCount returns err: ', err);
+      res.status(500).send(err);
+    } else {
+      // Simulate json errors :) :
+      // res.status(200).type('json').send('{"valid":"valid json but not what expected!"}'); // Should display error=01
+      // res.status(200).type('json').send('{"invalid"}'); // Should display error=02
+      // res.status(500).type('json').send('{"error": "message from server"}'); // Should display error=500
+      res.json({ count });
+      logger.info(`itemController.getMarkAggregatesCount returns ${count} with conditions ${req.query.conditions}`);
+    }
+  });
+}
+
+
+
 // /GET route - Get all markAggregates
 // Returns code 500 on network error (NOT empty list)
 // Returns code 200 otherwise + { markAggregates }
@@ -140,6 +168,38 @@ export function updateMarkAggregate(req, res) {
     });
   }
 }
+
+
+
+// /POST/bulkUpdates route - Bulk update of markAggregates by _conditions
+// Input: conditions: json object with the condition (mandatory, {} will update all marks!)
+// Input: changes: json object with the changes to perform (mandatory)
+// Returns code 400 on input parameters error (missing)
+// Returns code 500 on network error or not found
+// Returns code 200 and no body if OK
+// Ex 1: http://localhost:8080/api/markAggregates/bulkUpdates?conditions={"item": "592467e29148172dac4125a9"}&changes={"$set":{"markOverall":"4" }}
+export function bulkUpdateMarkAggregate(req, res) {
+  if (!req.query.conditions || !req.query.changes) {
+    const error = { status: 'error', message: 'markAggregateController.bulkUpdateMarkAggregate failed - missing mandatory params: ' };
+    if (!req.query.conditions) error.message += 'query.conditions ';
+    if (!req.query.changes) error.message += 'query.changes ';
+    logger.error(error);
+    res.status(400).json(error);
+  } else {
+    const conditions = req.query.conditions ? JSON.parse(req.query.conditions) : {};
+    const changes = req.query.changes ? JSON.parse(req.query.changes) : {};
+    MarkAggregate.update(conditions, changes, { multi: true }, (err, raw) => {
+      if (err) {
+        logger.error(`markAggregateController.bulkUpdateMarkAggregate ${req.query.conditions} - ${req.query.changes} failed to update - err = `, err);
+        res.status(500).send(err);
+      } else {
+        logger.info(`markAggregateController.bulkUpdateMarkAggregate: ${req.query.conditions} - ${req.query.changes} - ${JSON.stringify(raw)}`);
+        res.status(200).end();
+      }
+    });
+  }
+}
+
 
 
 // /DELETE/:_id route - Delete a markAggregates by _id
