@@ -26,6 +26,7 @@ const SimpleListOrDropdown = props => (
     }
     { props.dropdown &&
       <ReactStrapInput selectedOption={props.selectedOption} onChange={props.onChange} size="md">
+        {props.dropdownPlaceholder && <option key={''} value={''}>{props.dropdownPlaceholder}</option>}
         {props.items && props.items.map((item) => { return (<option key={item.id} value={item.id}>{item.name}</option>); })}
       </ReactStrapInput>
     }
@@ -34,6 +35,7 @@ const SimpleListOrDropdown = props => (
 
 SimpleListOrDropdown.propTypes = {
   dropdown: PropTypes.bool.isRequired,
+  dropdownPlaceholder: React.PropTypes.string,
   items: PropTypes.array.isRequired,
   selectedOption: React.PropTypes.string,
   onChange: PropTypes.func,
@@ -41,6 +43,7 @@ SimpleListOrDropdown.propTypes = {
 
 SimpleListOrDropdown.defaultProps = {
   dropdown: false,
+  dropdownPlaceholder: null,
   selectedOption: '',
   onChange: null,
 };

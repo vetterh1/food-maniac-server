@@ -32,6 +32,9 @@ class AdminItemsContainer extends React.Component {
   }
 
 
+  //
+  // Alerting (for various actions: update, delete,...)
+  //
 
   onStartUpdating = () => {
     this._nowStartUpdating = new Date().getTime();
@@ -40,14 +43,7 @@ class AdminItemsContainer extends React.Component {
 
   onEndUpdatingOK = () => {
     const durationUpdating = new Date().getTime() - this._nowStartUpdating;
-    this.alert = Alert.success(`Saved! (duration=${durationUpdating}ms)`);
-
-    // Tell the child to reset
-    // CAUTION! only works because the form is the immediate child
-    // ...because it does NOT use redux not redux-form
-    // if this CHANGES, this should be replaced by a dispatch or a reset action
-    // ex: dispatch(reset('AddItemForm'));
-    if (this._childComponent) this._childComponent.resetForm();
+    this.alert = Alert.success(`Updated! (duration=${durationUpdating}ms)`);
   }
 
   onEndUpdatingFailed = (errorMessage) => {
@@ -55,21 +51,52 @@ class AdminItemsContainer extends React.Component {
     this.alert = Alert.error(`Error while updating (error=${errorMessage}, duration=${durationUpdating}ms)`);
   }
 
+
+  onStartDeleting = () => {
+    this._nowStartDeleting = new Date().getTime();
+    this.alert = Alert.info('Deleting...');
+  }
+
+  onEndDeletingOK = () => {
+    const durationDeleting = new Date().getTime() - this._nowStartDeleting;
+    this.alert = Alert.success(`Deleted! (duration=${durationDeleting}ms)`);
+  }
+
+  onEndDeletingFailed = (errorMessage) => {
+    const durationDeleting = new Date().getTime() - this._nowStartDeleting;
+    this.alert = Alert.error(`Error while deleting (error=${errorMessage}, duration=${durationDeleting}ms)`);
+  }
+
+
+
+
+  //
+  // Props update, here just for Alerting changes (from redux actions)
+  //
+
   componentWillReceiveProps(nextProps) {
     console.log('AdminItemsContainer.componentWillReceiveProps - (nextProps, crtProps): ', nextProps, this.props);
 
-    // Only consider the end of loading:
-    // previous isUpdating = true and
-    // new isUpdating = false
-    if (!nextProps ||
-      !nextProps.items ||
-      !this.props.items ||
-      this.props.items.isUpdating !== true ||
-      nextProps.items.isUpdating !== false) return;
+    if (!nextProps || !nextProps.items || !this.props.items ) return;
 
-    if (nextProps.items.error === null) this.onEndUpdatingOK();
-    else this.onEndUpdatingFailed(nextProps.items.error);
+    // End of updating? (status update switches from true to false)
+    if (this.props.items.isUpdating === true && nextProps.items.isUpdating === false) {
+      if (nextProps.items.error === null) this.onEndUpdatingOK();
+      else this.onEndUpdatingFailed(nextProps.items.error);
+    }
+
+    // End of deleting? (status delete switches from true to false)
+    if (this.props.items.isDeleting === true && nextProps.items.isDeleting === false) {
+      if (nextProps.items.error === null) this.onEndDeletingOK();
+      else this.onEndDeletingFailed(nextProps.items.error);
+    }
+
   }
+
+
+
+
+
 
   onItemClick(item, kind, category) {
     const currentItem = Object.assign({}, item);
@@ -86,6 +113,15 @@ class AdminItemsContainer extends React.Component {
     this.onStartUpdating();
     const { dispatch } = this.props;  // Injected by react-redux
     const action = itemsActions.updateItem(this.state.currentItem.id, newState);
+    dispatch(action);
+  }
+
+  onDeleteModal(backupItemId) {
+    this.setState({ modalEditItemOpened: false });
+    console.log('AdminItemsContainer.onDeleteModal - backupItemId =', backupItemId);
+    this.onStartDeleting();
+    const { dispatch } = this.props;  // Injected by react-redux
+    const action = itemsActions.deleteItem(this.state.currentItem.id, backupItemId);
     dispatch(action);
   }
 
@@ -127,9 +163,11 @@ class AdminItemsContainer extends React.Component {
             item={this.state.currentItem}
             kind={this.state.currentKind}
             category={this.state.currentCategory}
+            items={this.props.items.items}
             kinds={this.props.kinds}
             categories={this.props.categories}
             onUpdate={this.onUpdateModal.bind(this)}
+            onDelete={this.onDeleteModal.bind(this)}
             onCancel={this.onCancelModal.bind(this)}
           />
         }

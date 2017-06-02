@@ -5,6 +5,7 @@ const initialState = { // define initial state - an empty items list
   isFetching: false,
   isSaving: false,
   isUpdating: false,
+  isDeleting: false,
   isValid: true,
   error: null,
 };
@@ -49,6 +50,21 @@ const itemsReducer = (state = initialState, action) => {
     return newState;
   }
   case c.UPDATE_ITEM_KO: return Object.assign({}, state, { isUpdating: false, error: action.error });
+
+
+  //
+  // Delete item on Server (in Action) and update Redux store by deleting the item (in Reducer)
+  //
+
+  case c.REQUEST_DELETE_ITEM: return Object.assign({}, state, { isDeleting: true, error: null });
+  case c.DELETE_ITEM_OK: {
+    // Deletes the item in the redux store so we don't need to reload from server to have a list without it
+    const newItems = state.items.filter((item) => { return item.id !== action.id; });
+    const newState = { ...state, isDeleting: false, error: null, items: newItems };
+    console.log('itemsReducer (DELETE_ITEM_OK) - newState=', newState);
+    return newState;
+  }
+  case c.DELETE_ITEM_KO: return Object.assign({}, state, { isDeleting: false, error: action.error });
 
   default: return state;
   }

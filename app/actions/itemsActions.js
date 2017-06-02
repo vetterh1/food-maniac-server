@@ -91,7 +91,7 @@ export function updateItem(id, updates) { // eslint-disable-line import/prefer-d
           return;
         }
         // this.onEndSavingFailed('01');
-        const error = new Error('fetch OK but returned nothing or an error (request: post /api/items/id');
+        const error = new Error('fetch OK but returned nothing or an error (request: post /api/items/id/id');
         error.name = 'ErrorCaught';
         throw (error);
       })
@@ -99,6 +99,46 @@ export function updateItem(id, updates) { // eslint-disable-line import/prefer-d
         // if (error.name !== 'ErrorCaught') this.onEndSavingFailed('02');
         // logAddItemContainer.error(error.message);
         dispatch(_errorUpdatingItem(error.message));
+      });
+  };
+}
+
+
+
+//
+// Delete item on Server (in Action) and update Redux store by deleting the item (in Reducer)
+//
+
+function _requestDeleteItem() { return { type: c.REQUEST_DELETE_ITEM }; }
+function _successDeletingItem(item) { return { type: c.DELETE_ITEM_OK, item }; }
+function _errorDeletingItem(message) { return { type: c.DELETE_ITEM_KO, error: message }; }
+
+export function deleteItem(id, backupItemId) { // eslint-disable-line import/prefer-default-export
+  return (dispatch) => {
+    dispatch(_requestDeleteItem()); // advertise we are starting a server request
+    console.log('Action deleteItem() - item, backupItemId:', id, backupItemId);
+    return fetch(`/api/items/id/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
+        console.log('fetch result: ', response);
+        if (response && response.ok) {
+          // returns the item given by the server (async)
+          dispatch(_successDeletingItem(id));
+          return;
+        }
+        // this.onEndSavingFailed('01');
+        const error = new Error('fetch OK but returned nothing or an error (request: delete /api/items/id/id');
+        error.name = 'ErrorCaught';
+        throw (error);
+      })
+      .catch((error) => {
+        // if (error.name !== 'ErrorCaught') this.onEndSavingFailed('02');
+        // logAddItemContainer.error(error.message);
+        dispatch(_errorDeletingItem(error.message));
       });
   };
 }

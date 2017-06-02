@@ -2,9 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Button, Container, Input, Modal, ModalHeader, ModalBody, ModalFooter, Row, Table } from 'reactstrap';
-import AdminOneItem from './AdminOneItem';
+import { Button, Col, Input, Modal, ModalHeader, ModalBody, ModalFooter, Row, Table } from 'reactstrap';
 import SimpleListOrDropdown from '../pages/SimpleListOrDropdown';
 
 
@@ -14,9 +12,11 @@ class AdminItemModal extends React.Component {
     item: PropTypes.object.isRequired,
     kind: PropTypes.object.isRequired,
     category: PropTypes.object.isRequired,
+    items: PropTypes.array.isRequired,
     kinds: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
     onUpdate: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
   };
 
@@ -27,6 +27,7 @@ class AdminItemModal extends React.Component {
       currentName: props.item.name,
       currentKind: props.kind.id,
       currentCategory: props.category.id,
+      backupItemId: '',
     };
   }
 
@@ -36,6 +37,7 @@ class AdminItemModal extends React.Component {
       currentName: nextProps.item.name,
       currentKind: nextProps.kind.id,
       currentCategory: nextProps.category.id,
+      backupItemId: '',
     });
   }
 
@@ -54,6 +56,10 @@ class AdminItemModal extends React.Component {
     this.setState({ currentName: event.target.value });
   }
 
+  onChangeBackupItem(event) {
+    if (this.state.backupItemId === event.target.value) return;
+    this.setState({ backupItemId: event.target.value });
+  }
 
   onUpdate() {
     const updates = {};
@@ -63,23 +69,31 @@ class AdminItemModal extends React.Component {
     this.props.onUpdate(updates);
   }
 
+  onDelete() {
+    this.props.onDelete(this.state.backupItemId);
+  }
+
 
   onCancel() {
     this.props.onCancel();
   }
 
-/*
-          <Row className="mt-1">
-          Delete {this.props.item.name}?
-          </Row>
-*/
+
   render() {
+    console.log('AdminItemModal.render - backupItemId = ', this.state.backupItemId);
     return (
       <Modal isOpen={this.props.open}>
         <ModalHeader>Edit Item</ModalHeader>
         <ModalBody>
-
           <Row className="mt-1">
+            <Col xs={12} md={3} >
+              <Button className="mb-3" color="danger" disabled={!this.state.backupItemId || this.state.backupItemId === ''} onClick={this.onDelete.bind(this)}>Delete!</Button>{' '}
+            </Col>
+            <Col xs={12} md={9} >
+              <SimpleListOrDropdown items={this.props.items} dropdownPlaceholder="Orphan rates will be attached to:" selectedOption={this.state.backupItemId} onChange={this.onChangeBackupItem.bind(this)} dropdown />
+            </Col>
+          </Row>
+          <Row className="mt-3">
             <Table responsive striped hover>
               <thead>
                 <tr>
