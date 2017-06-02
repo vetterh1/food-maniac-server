@@ -198,36 +198,45 @@ describe('API MarkAggregate', () => {
                     console.log('countPasta = ', countPasta);
 
                     //
-                    // 
+                    // Move Pizza marks to Pasta :
+                    //
 
-                    // to change:  find per item
+                    chai.request(app)
+                      .post('/api/markAggregates/bulkUpdates?conditions={"item": "58f4dfff45dab98a840b0000"}&changes={"$set":{"item":"58f4dfff45dab98a840b0001" }}')
+                      .send({})
+                      .end((errBulk, resBulk) => {
+                        should.not.exist(errBulk);
+                        resBulk.should.have.status(200);
 
-                    done();
+                        //
+                        // Verify no more pizza marks and more pastas!
+
+                        chai.request(app)
+                          .get('/api/markAggregates/count?conditions={"item":"58f4dfff45dab98a840b0000"}')
+                          .end((err10, res10) => {
+                            const countPizzaFinal = parseInt(res10.body.count, 10);
+                            console.log('countPizzaFinal = ', countPizzaFinal);
+//                            expect(countPizzaFinal).to.be.eql(0);
+                            chai.request(app)
+                              .get('/api/markAggregates/count?conditions={"item":"58f4dfff45dab98a840b0002"}')
+                              .end((err11, res11) => {
+                                const countBurgerFinal = parseInt(res11.body.count, 10);
+                                console.log('countBurgerFinal = ', countBurgerFinal);
+                                chai.request(app)
+                                  .get('/api/markAggregates/count?conditions={"item":"58f4dfff45dab98a840b0001"}')
+                                  .end((err12, res12) => {
+                                    const countPastaFinal = parseInt(res12.body.count, 10);
+                                    console.log('countPastaFinal = ', countPastaFinal);
+
+                                    done();
+                                  });
+                              });
+                          });
+                      });
                   });
               });
           });
       });
-
-
-/*
-      const markOrig = new MarkAggregate(td.testMarkAggregates[0]);
-      const markUpdt = { markOverall: 1 };
-      markOrig.save((errSaving, markSaved) => {
-        chai.request(app)
-          .post(`/api/markAggregates/id/${markSaved._id}`)
-          .send({ markAggregate: markUpdt })
-          .end((err, res) => {
-            should.not.exist(err);
-            res.should.have.status(200);
-            res.body.should.be.a('object');
-            res.body.should.have.property('markAggregate');
-            res.body.markAggregate.should.be.a('object');
-            res.body.markAggregate.should.have.property('markOverall').eql(markUpdt.markOverall);
-            res.body.markAggregate.markOverall.should.be.a('number');
-            done();
-          });
-      });
-*/    
     });
   });  /* End test the /POST/bulkUpdates route */
 
