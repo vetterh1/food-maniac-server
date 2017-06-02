@@ -13,7 +13,7 @@ import * as itemsActions from '../../actions/itemsActions';
 class AdminItemsContainer extends React.Component {
   static propTypes = {
     // Injected by redux-store connect:
-    items: PropTypes.array.isRequired,
+    items: PropTypes.object.isRequired, // load the object and not just the array (in the object) to get redux info (isSaving...)
     kinds: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
   };
@@ -30,6 +30,8 @@ class AdminItemsContainer extends React.Component {
       modalEditItemOpened: false,
     };
   }
+
+
 
   onStartUpdating = () => {
     this._nowStartUpdating = new Date().getTime();
@@ -51,6 +53,22 @@ class AdminItemsContainer extends React.Component {
   onEndUpdatingFailed = (errorMessage) => {
     const durationUpdating = new Date().getTime() - this._nowStartUpdating;
     this.alert = Alert.error(`Error while updating (error=${errorMessage}, duration=${durationUpdating}ms)`);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('AdminItemsContainer.componentWillReceiveProps - (nextProps, crtProps): ', nextProps, this.props);
+
+    // Only consider the end of loading:
+    // previous isUpdating = true and
+    // new isUpdating = false
+    if (!nextProps ||
+      !nextProps.items ||
+      !this.props.items ||
+      this.props.items.isUpdating !== true ||
+      nextProps.items.isUpdating !== false) return;
+
+    if (nextProps.items.error === null) this.onEndUpdatingOK();
+    else this.onEndUpdatingFailed(nextProps.items.error);
   }
 
   onItemClick(item, kind, category) {
@@ -78,7 +96,7 @@ class AdminItemsContainer extends React.Component {
 
   render() {
     console.log('AdminItemsContainer.render - currentItem, currentKind, currentCategory = ', this.state.currentItem, this.state.currentKind, this.state.currentCategory);
-    if (!this.props.items || !this.props.kinds || !this.props.categories) return null;
+    if (!this.props.items.items || !this.props.kinds || !this.props.categories) return null;
 
     return (
       <div>
@@ -94,7 +112,7 @@ class AdminItemsContainer extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                {this.props.items.map((item, index) => {
+                {this.props.items.items.map((item, index) => {
                   const kind = this.props.kinds.find((oneKind) => { return oneKind.id === item.kind; });
                   const category = this.props.categories.find((oneCategory) => { return oneCategory.id === item.category; });
                   return (<AdminOneItem item={item} index={index} key={item._id} kind={kind} category={category} onClick={this.onItemClick.bind(this)} />);
@@ -124,7 +142,7 @@ const mapStateToProps = (state) => {
   return {
     kinds: state.kinds.kinds,
     categories: state.categories.categories,
-    items: state.items.items,
+    items: state.items, // load the object and not just the array (in the object) to get redux info (isSaving...)
   };
 };
 

@@ -59,7 +59,7 @@ class AdminItemModal extends React.Component {
     const updates = {};
     if (this.state.currentName !== this.props.item.name) updates.name = this.state.currentName;
     if (this.state.currentKind !== this.props.kind.id) updates.kind = this.state.currentKind;
-    if (this.state.currentCategory !== this.props.category.id) updates.name = this.state.currentCategory;
+    if (this.state.currentCategory !== this.props.category.id) updates.category = this.state.currentCategory;
     this.props.onUpdate(updates);
   }
 
@@ -68,15 +68,17 @@ class AdminItemModal extends React.Component {
     this.props.onCancel();
   }
 
-
+/*
+          <Row className="mt-1">
+          Delete {this.props.item.name}?
+          </Row>
+*/
   render() {
     return (
       <Modal isOpen={this.props.open}>
         <ModalHeader>Edit Item</ModalHeader>
         <ModalBody>
-          <Row className="mt-1">
-          Delete {this.props.item.name}?
-          </Row>
+
           <Row className="mt-1">
             <Table responsive striped hover>
               <thead>

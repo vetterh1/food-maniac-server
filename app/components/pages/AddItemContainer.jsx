@@ -23,7 +23,7 @@ class AddItemContainer extends React.Component {
     // Injected by redux-store connect:
     kinds: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
-    items: PropTypes.object.isRequired,
+    items: PropTypes.object.isRequired, // load the object and not just the array (in the object) to get redux info (isSaving...)
   }
 
   constructor(props) {
@@ -112,7 +112,6 @@ class AddItemContainer extends React.Component {
 
 
   componentWillReceiveProps(nextProps) {
-
     console.log('AddItemContainer.componentWillReceiveProps - (nextProps, crtProps): ', nextProps, this.props);
 
     // Only consider the end of loading:
@@ -124,10 +123,8 @@ class AddItemContainer extends React.Component {
       this.props.items.isSaving !== true ||
       nextProps.items.isSaving !== false) return;
 
-    if(nextProps.items.error === null)
-        this.onEndSavingOK();
-    else
-        this.onEndSavingFailed(nextProps.items.error);
+    if (nextProps.items.error === null) this.onEndSavingOK();
+    else this.onEndSavingFailed(nextProps.items.error);
   }
 
 
@@ -159,7 +156,7 @@ const mapStateToProps = (state) => {
   return {
     kinds: state.kinds.kinds,
     categories: state.categories.categories,
-    items: state.items,
+    items: state.items, // load the object and not just the array (in the object) to get redux info (isSaving...)
   };
 };
 

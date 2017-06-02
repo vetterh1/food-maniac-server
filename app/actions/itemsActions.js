@@ -1,17 +1,14 @@
 import * as c from '../utils/constants';
 
+
+//
+// Fetch items from Server to Redux store (in Action)
+//
+
 // "private" actions, meaning called by other actions below
 function _requestItems() { return { type: c.REQUEST_ITEMS }; }
 function _receiveItems(json) { return { type: c.RECEIVE_ITEMS, items: json.items }; }
 function _errorRequestingItems(message) { return { type: c.ERROR_REQUESTING_ITEMS, error: message }; }
-
-function _requestSaveItem() { return { type: c.REQUEST_SAVE_ITEM }; }
-function _successSavingItem(item) { return { type: c.SAVE_ITEM_OK, item }; }
-function _errorSavingItem(message) { return { type: c.SAVE_ITEM_KO, error: message }; }
-
-function _requestUpdateItem() { return { type: c.REQUEST_UPDATE_ITEM }; }
-function _successUpdatingItem(item) { return { type: c.SAVE_UPDATE_OK, item }; }
-function _errorUpdatingItem(message) { return { type: c.SAVE_UPDATE_KO, error: message }; }
 
 export function fetchItems() { // eslint-disable-line import/prefer-default-export
   return (dispatch) => {
@@ -22,6 +19,15 @@ export function fetchItems() { // eslint-disable-line import/prefer-default-expo
       .catch(error => dispatch(_errorRequestingItems(error.message)));
   };
 }
+
+
+//
+// Save item to Server (in Action) and update Redux store with new item (in Reducer)
+//
+
+function _requestSaveItem() { return { type: c.REQUEST_SAVE_ITEM }; }
+function _successSavingItem(item) { return { type: c.SAVE_ITEM_OK, item }; }
+function _errorSavingItem(message) { return { type: c.SAVE_ITEM_KO, error: message }; }
 
 export function saveItem(item) { // eslint-disable-line import/prefer-default-export
   return (dispatch) => {
@@ -56,11 +62,20 @@ export function saveItem(item) { // eslint-disable-line import/prefer-default-ex
 }
 
 
+
+//
+// Update item to Server (in Action) and update Redux store with updated item (in Reducer)
+//
+
+function _requestUpdateItem() { return { type: c.REQUEST_UPDATE_ITEM }; }
+function _successUpdatingItem(item) { return { type: c.UPDATE_ITEM_OK, item }; }
+function _errorUpdatingItem(message) { return { type: c.UPDATE_ITEM_KO, error: message }; }
+
 export function updateItem(id, updates) { // eslint-disable-line import/prefer-default-export
   return (dispatch) => {
     dispatch(_requestUpdateItem()); // advertise we are starting a server request
-    console.log('Action updateItem() - item:', id);
-    return fetch(`/api/items/${id}`, {
+    console.log('Action updateItem() - item:', id, JSON.stringify({ item: updates }, null, 4));
+    return fetch(`/api/items/id/${id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
