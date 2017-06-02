@@ -59,9 +59,9 @@ const itemsReducer = (state = initialState, action) => {
   case c.REQUEST_DELETE_ITEM: return Object.assign({}, state, { isDeleting: true, error: null });
   case c.DELETE_ITEM_OK: {
     // Deletes the item in the redux store so we don't need to reload from server to have a list without it
-    const newItems = state.items.filter((item) => { return item.id !== action.id; });
+    const newItems = state.items.filter((item) => { /* console.log('map:', item.id, action.id); */ return item.id !== action.id; });
     const newState = { ...state, isDeleting: false, error: null, items: newItems };
-    console.log('itemsReducer (DELETE_ITEM_OK) - newState=', newState);
+    console.log('itemsReducer (DELETE_ITEM_OK) - id, newState=', action.id, newState);
     return newState;
   }
   case c.DELETE_ITEM_KO: return Object.assign({}, state, { isDeleting: false, error: action.error });

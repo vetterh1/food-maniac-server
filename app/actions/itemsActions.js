@@ -110,7 +110,7 @@ export function updateItem(id, updates) { // eslint-disable-line import/prefer-d
 //
 
 function _requestDeleteItem() { return { type: c.REQUEST_DELETE_ITEM }; }
-function _successDeletingItem(item) { return { type: c.DELETE_ITEM_OK, item }; }
+function _successDeletingItem(id) { return { type: c.DELETE_ITEM_OK, id }; }
 function _errorDeletingItem(message) { return { type: c.DELETE_ITEM_KO, error: message }; }
 
 export function deleteItem(id, backupItemId) { // eslint-disable-line import/prefer-default-export

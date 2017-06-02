@@ -80,17 +80,18 @@ class AdminItemModal extends React.Component {
 
 
   render() {
+    const possibleBackupItems = this.props.items.filter((item) => {return item.id !== this.props.item.id})
     console.log('AdminItemModal.render - backupItemId = ', this.state.backupItemId);
     return (
       <Modal isOpen={this.props.open}>
-        <ModalHeader>Edit Item</ModalHeader>
+        <ModalHeader>Edit item {this.props.item.name}</ModalHeader>
         <ModalBody>
           <Row className="mt-1">
             <Col xs={12} md={3} >
               <Button className="mb-3" color="danger" disabled={!this.state.backupItemId || this.state.backupItemId === ''} onClick={this.onDelete.bind(this)}>Delete!</Button>{' '}
             </Col>
             <Col xs={12} md={9} >
-              <SimpleListOrDropdown items={this.props.items} dropdownPlaceholder="Orphan rates will be attached to:" selectedOption={this.state.backupItemId} onChange={this.onChangeBackupItem.bind(this)} dropdown />
+              <SimpleListOrDropdown items={possibleBackupItems} dropdownPlaceholder="Orphan rates will be attached to:" selectedOption={this.state.backupItemId} onChange={this.onChangeBackupItem.bind(this)} dropdown />
             </Col>
           </Row>
           <Row className="mt-3">
