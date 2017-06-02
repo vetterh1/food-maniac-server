@@ -32,6 +32,8 @@ class AdminOneItem extends React.Component {
 
   render() {
     const { item, kind, category } = this.props;
+    if(!item || !kind || !category) return null;
+
     return (
       <tr onClick={this.onClick.bind(this)}>
         <th scope="row">{item.name}</th>

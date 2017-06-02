@@ -4,9 +4,14 @@ import * as c from '../utils/constants';
 function _requestItems() { return { type: c.REQUEST_ITEMS }; }
 function _receiveItems(json) { return { type: c.RECEIVE_ITEMS, items: json.items }; }
 function _errorRequestingItems(message) { return { type: c.ERROR_REQUESTING_ITEMS, error: message }; }
+
 function _requestSaveItem() { return { type: c.REQUEST_SAVE_ITEM }; }
 function _successSavingItem(item) { return { type: c.SAVE_ITEM_OK, item }; }
 function _errorSavingItem(message) { return { type: c.SAVE_ITEM_KO, error: message }; }
+
+function _requestUpdateItem() { return { type: c.REQUEST_UPDATE_ITEM }; }
+function _successUpdatingItem(item) { return { type: c.SAVE_UPDATE_OK, item }; }
+function _errorUpdatingItem(message) { return { type: c.SAVE_UPDATE_KO, error: message }; }
 
 export function fetchItems() { // eslint-disable-line import/prefer-default-export
   return (dispatch) => {
@@ -46,6 +51,39 @@ export function saveItem(item) { // eslint-disable-line import/prefer-default-ex
         // if (error.name !== 'ErrorCaught') this.onEndSavingFailed('02');
         // logAddItemContainer.error(error.message);
         dispatch(_errorSavingItem(error.message));
+      });
+  };
+}
+
+
+export function updateItem(id, updates) { // eslint-disable-line import/prefer-default-export
+  return (dispatch) => {
+    dispatch(_requestUpdateItem()); // advertise we are starting a server request
+    console.log('Action updateItem() - item:', id);
+    return fetch(`/api/items/${id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ item: updates }, null, 4),
+    })
+      .then((response) => {
+        console.log('fetch result: ', response);
+        if (response && response.ok) {
+          // returns the item given by the server (async)
+          response.json()
+          .then((json) => { dispatch(_successUpdatingItem(json.item)); });
+          return;
+        }
+        // this.onEndSavingFailed('01');
+        const error = new Error('fetch OK but returned nothing or an error (request: post /api/items/id');
+        error.name = 'ErrorCaught';
+        throw (error);
+      })
+      .catch((error) => {
+        // if (error.name !== 'ErrorCaught') this.onEndSavingFailed('02');
+        // logAddItemContainer.error(error.message);
+        dispatch(_errorUpdatingItem(error.message));
       });
   };
 }

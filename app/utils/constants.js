@@ -19,6 +19,10 @@ export const REQUEST_SAVE_ITEM = 'REQUEST_SAVE_ITEM';
 export const SAVE_ITEM_OK = 'SAVE_ITEM_OK';
 export const SAVE_ITEM_KO = 'SAVE_ITEM_KO';
 
+export const REQUEST_UPDATE_ITEM = 'REQUEST_UPDATE_ITEM';
+export const UPDATE_ITEM_OK = 'UPDATE_ITEM_OK';
+export const UPDATE_ITEM_KO = 'UPDATE_ITEM_KO';
+
 
 
 

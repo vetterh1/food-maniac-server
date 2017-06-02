@@ -4,8 +4,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Container, Row, Table } from 'reactstrap';
+import Alert from 'react-s-alert';
 import AdminOneItem from './AdminOneItem';
 import AdminItemModal from './AdminItemModal';
+import * as itemsActions from '../../actions/itemsActions';
 
 
 class AdminItemsContainer extends React.Component {
@@ -19,12 +21,36 @@ class AdminItemsContainer extends React.Component {
   constructor(props) {
     super(props);
 
+    this.alert = null;
+
     this.state = {
       currentItem: null,
       currentKind: null,
       currentCategory: null,
       modalEditItemOpened: false,
     };
+  }
+
+  onStartUpdating = () => {
+    this._nowStartUpdating = new Date().getTime();
+    this.alert = Alert.info('Updating...');
+  }
+
+  onEndUpdatingOK = () => {
+    const durationUpdating = new Date().getTime() - this._nowStartUpdating;
+    this.alert = Alert.success(`Saved! (duration=${durationUpdating}ms)`);
+
+    // Tell the child to reset
+    // CAUTION! only works because the form is the immediate child
+    // ...because it does NOT use redux not redux-form
+    // if this CHANGES, this should be replaced by a dispatch or a reset action
+    // ex: dispatch(reset('AddItemForm'));
+    if (this._childComponent) this._childComponent.resetForm();
+  }
+
+  onEndUpdatingFailed = (errorMessage) => {
+    const durationUpdating = new Date().getTime() - this._nowStartUpdating;
+    this.alert = Alert.error(`Error while updating (error=${errorMessage}, duration=${durationUpdating}ms)`);
   }
 
   onItemClick(item, kind, category) {
@@ -39,6 +65,10 @@ class AdminItemsContainer extends React.Component {
   onUpdateModal(newState) {
     this.setState({ modalEditItemOpened: false });
     console.log('AdminItemsContainer.onUpdateModal - newState =', newState);
+    this.onStartUpdating();
+    const { dispatch } = this.props;  // Injected by react-redux
+    const action = itemsActions.updateItem(this.state.currentItem.id, newState);
+    dispatch(action);
   }
 
   onCancelModal() {
@@ -48,6 +78,8 @@ class AdminItemsContainer extends React.Component {
 
   render() {
     console.log('AdminItemsContainer.render - currentItem, currentKind, currentCategory = ', this.state.currentItem, this.state.currentKind, this.state.currentCategory);
+    if (!this.props.items || !this.props.kinds || !this.props.categories) return null;
+
     return (
       <div>
         <Container fluid>
