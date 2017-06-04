@@ -58,12 +58,12 @@ class SelectItemPlus extends React.Component {
 
   onChangeKind(event) {
     if (this.state.kind === event.target.value) return;
-    this.setState(Object.assign({ kind: event.target.value }, this.getVisibleItems(event.target.value, this.state.category)));
+    this.setState({ kind: event.target.value, filteredItemsList: this.getVisibleItems(event.target.value, this.state.category) });
   }
 
   onChangeCategory(event) {
     if (this.state.category === event.target.value) return;
-    this.setState(Object.assign({ category: event.target.value }, this.getVisibleItems(this.state.kind, event.target.value)));
+    this.setState({ category: event.target.value, filteredItemsList: this.getVisibleItems(this.state.kind, event.target.value) });
   }
 
   onChangeItem(event) {
@@ -72,16 +72,13 @@ class SelectItemPlus extends React.Component {
     this.props.onChange(event.target.value);
   }
 
-  // return an object of this kind: {items: xxxx, item: id_of_1st_item}
-  // if filtered: item is the 1st one of this filtered list
+  // return the filtered list
   getVisibleItems(kind, category) {
-    const filteredItemsList = this.state.fullItemsList.filter((item) => {
+    return this.state.fullItemsList.filter((item) => {
       const kindCondition = (kind && kind !== undefined && kind !== '' ? item.kind === kind : true);
       const categoryCondition = (category && category !== undefined && category !== '' ? item.category === category : true);
       return kindCondition && categoryCondition;
     });
-    const item = filteredItemsList.length > 0 ? filteredItemsList[0].id : null;
-    return { filteredItemsList, item };
   }
 
   // Reset the 3 dropdowns:
