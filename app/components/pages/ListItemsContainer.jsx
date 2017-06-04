@@ -3,7 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import SimpleListOrDropdown from './SimpleListOrDropdown';
+import SimpleListOrDropdown from '../utils/SimpleListOrDropdown';
 
 
 class ListItemsContainer extends React.Component {

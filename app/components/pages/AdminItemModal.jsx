@@ -3,7 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Container, Col, Input, Modal, ModalHeader, ModalBody, ModalFooter, Row, Table } from 'reactstrap';
-import SimpleListOrDropdown from '../pages/SimpleListOrDropdown';
+import SimpleListOrDropdown from '../utils/SimpleListOrDropdown';
 
 
 class AdminItemModal extends React.Component {

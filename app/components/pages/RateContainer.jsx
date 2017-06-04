@@ -22,9 +22,9 @@ logRateContainer.debug('--> entering RateContainer.jsx');
 class RateContainer extends React.Component {
   static propTypes = {
     // Injected by redux-store connect:
-    kinds: PropTypes.array.isRequired,
-    categories: PropTypes.array.isRequired,
-    items: PropTypes.array.isRequired,
+    kinds: PropTypes.object.isRequired,
+    categories: PropTypes.object.isRequired,
+    items: PropTypes.object.isRequired,
     places: PropTypes.object.isRequired,
   }
 
@@ -212,14 +212,12 @@ class RateContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   // Add the All to the Kind & Category lists
-  const kinds = [{ id: '--all--', name: 'All' }, ...state.kinds.kinds];
-  const categories = [{ id: '--all--', name: 'All' }, ...state.categories.categories];
   const placesWithDistance = state.places.places.map((place) => { return { ...place, nameWithoutDistance: place.name, name: `${place.name} (${place.distanceFormated})` }; });
   return {
     places: { places: placesWithDistance },
-    kinds,
-    categories,
-    items: state.items.items,
+    kinds: state.kinds,
+    categories: state.categories,
+    items: state.items,
   };
 };
 

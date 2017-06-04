@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import MdLocalRestaurant from 'react-icons/lib/md/local-restaurant';
-import SimpleListOrDropdown from '../pages/SimpleListOrDropdown';
+import SimpleListOrDropdown from '../utils/SimpleListOrDropdown';
 import ItemImage from '../utils/ItemImage';
 
 // import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';

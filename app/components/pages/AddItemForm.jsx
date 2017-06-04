@@ -3,7 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Form, FormFeedback, FormGroup, Input, Label } from 'reactstrap';
-import SimpleListOrDropdown from '../pages/SimpleListOrDropdown';
+import SimpleListOrDropdown from '../utils/SimpleListOrDropdown';
 // import { AvForm, AvField, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
 import CameraSnapshotContainer from './CameraSnapshotContainer';
 // import LogOnDisplay from '../utils/LogOnDisplay';

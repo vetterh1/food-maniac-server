@@ -3,7 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Col, Form, FormGroup, Label } from 'reactstrap';
-import SimpleListOrDropdown from '../pages/SimpleListOrDropdown';
+import SimpleListOrDropdown from '../utils/SimpleListOrDropdown';
 
 const styles = {
   form: {
