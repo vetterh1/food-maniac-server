@@ -208,27 +208,44 @@ describe('API MarkAggregate', () => {
                         should.not.exist(errBulk);
                         resBulk.should.have.status(200);
 
+
                         //
-                        // Verify no more pizza marks and more pastas!
+                        // Move Pasto marks to Burger :
+                        //
 
                         chai.request(app)
-                          .get('/api/markAggregates/count?conditions={"item":"58f4dfff45dab98a840b0000"}')
-                          .end((err10, res10) => {
-                            const countPizzaFinal = parseInt(res10.body.count, 10);
-                            console.log('countPizzaFinal = ', countPizzaFinal);
-//                            expect(countPizzaFinal).to.be.eql(0);
-                            chai.request(app)
-                              .get('/api/markAggregates/count?conditions={"item":"58f4dfff45dab98a840b0002"}')
-                              .end((err11, res11) => {
-                                const countBurgerFinal = parseInt(res11.body.count, 10);
-                                console.log('countBurgerFinal = ', countBurgerFinal);
-                                chai.request(app)
-                                  .get('/api/markAggregates/count?conditions={"item":"58f4dfff45dab98a840b0001"}')
-                                  .end((err12, res12) => {
-                                    const countPastaFinal = parseInt(res12.body.count, 10);
-                                    console.log('countPastaFinal = ', countPastaFinal);
+                          .post('/api/markAggregates/bulkUpdates?conditions={"item": "58f4dfff45dab98a840b0001"}&changes={"$set":{"item":"58f4dfff45dab98a840b0002" }}')
+                          .send({})
+                          .end((errBulk, resBulk) => {
+                            should.not.exist(errBulk);
+                            resBulk.should.have.status(200);
 
-                                    done();
+                            //
+                            // Verify no more pizza & pasta marks and all in burgers!
+                            //
+
+                            chai.request(app)
+                              .get('/api/markAggregates/count?conditions={"item":"58f4dfff45dab98a840b0000"}')
+                              .end((err10, res10) => {
+                                const countPizzaFinal = parseInt(res10.body.count, 10);
+                                console.log('countPizzaFinal = ', countPizzaFinal);
+                                chai.request(app)
+                                  .get('/api/markAggregates/count?conditions={"item":"58f4dfff45dab98a840b0002"}')
+                                  .end((err11, res11) => {
+                                    const countBurgerFinal = parseInt(res11.body.count, 10);
+                                    console.log('countBurgerFinal = ', countBurgerFinal);
+                                    chai.request(app)
+                                      .get('/api/markAggregates/count?conditions={"item":"58f4dfff45dab98a840b0001"}')
+                                      .end((err12, res12) => {
+                                        const countPastaFinal = parseInt(res12.body.count, 10);
+                                        console.log('countPastaFinal = ', countPastaFinal);
+
+                                        countPizzaFinal.should.be.eql(0);
+                                        countPastaFinal.should.be.eql(0);
+                                        countBurgerFinal.should.be.eql(countPizza + countPasta + countBurger);
+
+                                        done();
+                                      });
                                   });
                               });
                           });

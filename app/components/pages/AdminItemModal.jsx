@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Col, Input, Modal, ModalHeader, ModalBody, ModalFooter, Row, Table } from 'reactstrap';
+import { Button, Container, Col, Input, Modal, ModalHeader, ModalBody, ModalFooter, Row, Table } from 'reactstrap';
 import SimpleListOrDropdown from '../pages/SimpleListOrDropdown';
 
 
@@ -14,6 +14,7 @@ class AdminItemModal extends React.Component {
     category: PropTypes.object.isRequired,
     items: PropTypes.array.isRequired,
     kinds: PropTypes.array.isRequired,
+    nbAggregateMarks: PropTypes.number.isRequired,
     categories: PropTypes.array.isRequired,
     onUpdate: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
@@ -84,44 +85,58 @@ class AdminItemModal extends React.Component {
     console.log('AdminItemModal.render - backupItemId = ', this.state.backupItemId);
     return (
       <Modal isOpen={this.props.open}>
-        <ModalHeader>Edit item {this.props.item.name}</ModalHeader>
+        <ModalHeader>Edit item</ModalHeader>
         <ModalBody>
-          <Row className="mt-1">
-            <Col xs={12} md={3} >
-              <Button className="mb-3" color="danger" disabled={!this.state.backupItemId || this.state.backupItemId === ''} onClick={this.onDelete.bind(this)}>Delete!</Button>{' '}
-            </Col>
-            <Col xs={12} md={9} >
-              <SimpleListOrDropdown items={possibleBackupItems} dropdownPlaceholder="Orphan rates will be attached to:" selectedOption={this.state.backupItemId} onChange={this.onChangeBackupItem.bind(this)} dropdown />
-            </Col>
-          </Row>
-          <Row className="mt-3">
-            <Table responsive striped hover>
-              <thead>
-                <tr>
-                  <th>Field</th>
-                  <th>Current value</th>
-                  <th>New value</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">Name</th>
-                  <td>{this.props.item.name}</td>
-                  <td><Input name="name" id="inputName" onChange={this.onChangeName.bind(this)} value={this.state.currentName} placeholder="..." required size="md" /></td>
-                </tr>
-                <tr>
-                  <th scope="row">Kind</th>
-                  <td>{this.props.kind.name}</td>
-                  <td><SimpleListOrDropdown items={this.props.kinds} selectedOption={this.state.currentKind} onChange={this.onChangeKind.bind(this)} dropdown /></td>
-                </tr>
-                <tr>
-                  <th scope="row">Category</th>
-                  <td>{this.props.category.name}</td>
-                  <td><SimpleListOrDropdown items={this.props.categories} selectedOption={this.state.currentCategory} onChange={this.onChangeCategory.bind(this)} dropdown /></td>
-                </tr>
-              </tbody>
-            </Table>
-          </Row>
+          <Container fluid>
+            <Row className="mt-2"><h5>Information:</h5></Row>
+            <Row className="mt-3">
+              <Col xs={12} md={6} >Item name:</Col>
+              <Col xs={12} md={6} ><em>{this.props.item.name}</em></Col>
+            </Row>
+            <Row className="mt-2">
+              <Col xs={12} md={6} >Nb aggr. marks linked:</Col>
+              <Col xs={12} md={6} ><em>{this.props.nbAggregateMarks}</em></Col>
+            </Row>
+
+            <Row className="mt-5"><h5>Delete:</h5></Row>
+            <Row className="mt-3">
+              <Col xs={12} md={9} >
+                <SimpleListOrDropdown items={possibleBackupItems} dropdownPlaceholder="Orphan rates will be attached to:" selectedOption={this.state.backupItemId} onChange={this.onChangeBackupItem.bind(this)} dropdown />
+              </Col>
+              <Col xs={12} md={3} >
+                <Button className="mb-3" color="danger" disabled={!this.state.backupItemId || this.state.backupItemId === ''} onClick={this.onDelete.bind(this)}>Delete!</Button>{' '}
+              </Col>
+            </Row>
+            <Row className="mt-5"><h5>Update:</h5></Row>
+            <Row className="mt-3">
+              <Table responsive>
+                <thead>
+                  <tr>
+                    <th>&nbsp;</th>
+                    <th>Current value</th>
+                    <th>New value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Name</td>
+                    <td><em>{this.props.item.name}</em></td>
+                    <td><Input name="name" id="inputName" onChange={this.onChangeName.bind(this)} value={this.state.currentName} placeholder="..." required size="md" /></td>
+                  </tr>
+                  <tr>
+                    <td>Kind</td>
+                    <td><em>{this.props.kind.name}</em></td>
+                    <td><SimpleListOrDropdown items={this.props.kinds} selectedOption={this.state.currentKind} onChange={this.onChangeKind.bind(this)} dropdown /></td>
+                  </tr>
+                  <tr>
+                    <td>Category</td>
+                    <td><em>{this.props.category.name}</em></td>
+                    <td><SimpleListOrDropdown items={this.props.categories} selectedOption={this.state.currentCategory} onChange={this.onChangeCategory.bind(this)} dropdown /></td>
+                  </tr>
+                </tbody>
+              </Table>
+            </Row>
+          </Container>
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={this.onUpdate.bind(this)}>Update!</Button>{' '}

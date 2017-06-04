@@ -115,7 +115,7 @@ function _requestDeleteItem() { return { type: c.REQUEST_DELETE_ITEM }; }
 function _successDeletingItem(id) { return { type: c.DELETE_ITEM_OK, id }; }
 function _errorDeletingItem(message) { return { type: c.DELETE_ITEM_KO, error: message }; }
 function _requestBackupingOrphans() { return { type: c.REQUEST_BACKUP_ORPHANS }; }
-function _successBackupingOrphans() { return { type: c.BACKUP_ORPHANS_OK }; }
+function _successBackupingOrphans(nbOrphansBackedUp) { return { type: c.BACKUP_ORPHANS_OK, nbOrphansBackedUp }; }
 function _errorBackupingOrphans(message) { return { type: c.BACKUP_ORPHANS_OK, error: message }; }
 
 // Once the item is deleted,
@@ -134,7 +134,9 @@ export function backupOrphans(id, backupItemId) { // eslint-disable-line import/
       .then((response) => {
         console.log('bulkUpdates result: ', response);
         if (response && response.ok) {
-          dispatch(_successBackupingOrphans());
+          // returns the item given by the server (async)
+          response.json()
+          .then((json) => { dispatch(_successBackupingOrphans(json.nbOrphansBackedUp)); });
           return;
         }
         // this.onEndSavingFailed('01');

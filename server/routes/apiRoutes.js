@@ -69,12 +69,12 @@ router.route('/categories/id/:_id').delete(CategoryController.deleteCategory);
 
 // ----------------  ITEMS ----------------
 
-// /GET /count - Get markAggregates count
-// Input: conditions: json object with a filter condition (optional, default = no filter)
+// /GET /count - Get items count
+// Input conditions: json object with a filter condition (optional, default = no filter)
 // Returns code 500 on network error
 // Returns code 200 otherwise + { count: nnnn }
-// Ex 1: http://localhost:8080/api/markAggregates/count
-// Ex 2: http://localhost:8080/api/markAggregates/count?conditions={"markOverall":"5"}
+// Ex 1: http://localhost:8080/api/items/count
+// Ex 2: http://localhost:8080/api/items/count?conditions={"category":"58f4dfff45dab98a840aa000"}
 router.route('/items/count').get(ItemController.getItemsCount);
 
 // Get one item by _id

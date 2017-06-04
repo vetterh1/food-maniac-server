@@ -69,7 +69,7 @@ const itemsReducer = (state = initialState, action) => {
   }
   case c.DELETE_ITEM_KO: return Object.assign({}, state, { isDeleting: false, error: action.error });
   case c.REQUEST_BACKUP_ORPHANS: return Object.assign({}, state, { isBackupingOrphans: true, error: null });
-  case c.BACKUP_ORPHANS_OK: return Object.assign({}, state, { isBackupingOrphans: false, error: null });
+  case c.BACKUP_ORPHANS_OK: return Object.assign({}, state, { isBackupingOrphans: false, nbOrphansBackedUp: action.nbOrphansBackedUp, error: null });
   case c.BACKUP_ORPHANS_KO: return Object.assign({}, state, { isBackupingOrphans: false, error: action.error });
 
   default: return state;

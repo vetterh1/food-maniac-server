@@ -193,8 +193,10 @@ export function bulkUpdateMarkAggregate(req, res) {
         logger.error(`markAggregateController.bulkUpdateMarkAggregate ${req.query.conditions} - ${req.query.changes} failed to update - err = `, err);
         res.status(500).send(err);
       } else {
-        logger.info(`markAggregateController.bulkUpdateMarkAggregate: ${req.query.conditions} - ${req.query.changes} - ${JSON.stringify(raw)}`);
-        res.status(200).end();
+        const nbOrphansBackedUp = raw.nModified;
+        logger.info(`markAggregateController.bulkUpdateMarkAggregate: ${req.query.conditions} - ${req.query.changes} - nbOrphansBackedUp: ${nbOrphansBackedUp} - raw: ${JSON.stringify(raw)}`);
+        res.status(200);
+        res.json({ nbOrphansBackedUp });
       }
     });
   }

@@ -27,6 +27,7 @@ class AdminItemsContainer extends React.Component {
       currentItem: null,
       currentKind: null,
       currentCategory: null,
+      currentNbAggregateMarks: null,
       modalEditItemOpened: false,
     };
   }
@@ -72,9 +73,9 @@ class AdminItemsContainer extends React.Component {
     this.alert = Alert.info('Updating orphan marks...');
   }
 
-  onEndBackupingOrphansOK = () => {
+  onEndBackupingOrphansOK = (nbOrphans) => {
     const duration = new Date().getTime() - this._nowStartackupingOrphans;
-    this.alert = Alert.success(`Orphan marks are now linked to new item! (duration=${duration}ms)`);
+    this.alert = Alert.success(`Orphan marks are now linked to new item! (nb orphans: ${nbOrphans} - duration=${duration}ms)`);
   }
 
   onEndBackupingOrphansFailed = (errorMessage) => {
@@ -107,10 +108,9 @@ class AdminItemsContainer extends React.Component {
     }
     // End of backuping orphans? (status delete switches from true to false)
     if (this.props.items.isBackupingOrphans === true && nextProps.items.isBackupingOrphans === false) {
-      if (nextProps.items.error === null) this.onEndBackupingOrphansOK();
+      if (nextProps.items.error === null) this.onEndBackupingOrphansOK(nextProps.items.nbOrphansBackedUp);
       else this.onEndBackupingOrphansFailed(nextProps.items.error);
     }
-
   }
 
 
@@ -123,14 +123,21 @@ class AdminItemsContainer extends React.Component {
     const currentKind = Object.assign({}, kind);
     const currentCategory = Object.assign({}, category);
     console.log('AdminItemsContainer.onItemClick - currentItem, currentKind, currentCategory =', currentItem, currentKind, currentCategory);
-    this.setState({ modalEditItemOpened: true, currentItem, currentKind, currentCategory });
+
+    // Retreive the number of aggregate marks associated with this item
+    // async method --> change the state only when answer received
+    // (that state change will display the modal)
+    fetch(`/api/markAggregates/count?conditions={"item":"${currentItem.id}"}`)
+      .then(response => response.json())
+      .then(json => this.setState({ modalEditItemOpened: true, currentItem, currentKind, currentCategory, currentNbAggregateMarks: json.count }))
+      .catch(() => this.setState({ modalEditItemOpened: true, currentItem, currentKind, currentCategory, currentNbAggregateMarks: -1 }));
   }
 
 
   onUpdateModal(newState) {
     this.setState({ modalEditItemOpened: false });
     console.log('AdminItemsContainer.onUpdateModal - newState =', newState);
-    if(!Object.keys(newState).length) this.alert = Alert.info('nothing to update...');
+    if (!Object.keys(newState).length) this.alert = Alert.info('nothing to update...');
     this.onStartUpdating();
     const { dispatch } = this.props;  // Injected by react-redux
     const action = itemsActions.updateItem(this.state.currentItem.id, newState);
@@ -189,6 +196,7 @@ class AdminItemsContainer extends React.Component {
             category={this.state.currentCategory}
             items={this.props.items.items}
             kinds={this.props.kinds}
+            nbAggregateMarks={this.state.currentNbAggregateMarks}
             categories={this.props.categories}
             onUpdate={this.onUpdateModal.bind(this)}
             onDelete={this.onDeleteModal.bind(this)}
