@@ -33,7 +33,7 @@ class RateForm extends React.Component {
   constructor(props) {
     super(props);
 
-    this._refSelectItemPlus = null;
+    this._refSelectItemPlus = null; // used to reset the 3 dropdowns
 
     this.defaultState = {
       // unique key for the form --> used for reset form
@@ -51,8 +51,6 @@ class RateForm extends React.Component {
 
     this.state = {
       location: props.places && props.places.places.length > 0 ? props.places.places[0].id : undefined,
-
-      // Empty marks, kind, categories & items:
       ...this.defaultState,
     };
     // console.log('RateForm constructor (props, initial state): ', props, this.state);
@@ -60,24 +58,11 @@ class RateForm extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (!nextProps) return;
-    let needUpdate = false;
-    const updState = {};
-
-    // console.log('componentWillReceiveProps items (length & 1st) crt --> : ',
-    //  !this.state.items || this.state.items.length <= 0 ? 'null or empty' : this.state.items.length, this.state.items[0]);
-
-    // console.log('componentWillReceiveProps items (length & 1st) --> next: ',
-    //  !nextProps.items || nextProps.items.length <= 0 ? 'null or empty' : nextProps.items.length, nextProps.items[0]);
 
     // Prepare the default location selection if necessary
     if (nextProps.places && nextProps.places.places.length > 0 && (!this.state.location || this.state.location === '')) {
-      // console.log(`componentWillReceiveProps update default place to ${nextProps.places.places[0].id}`);
-      updState.location = nextProps.places.places[0].id;
-      needUpdate = true;
-    } // else console.log('componentWillReceiveProps NO update default place');
-
-    // Launch the state update
-    if (needUpdate) { this.setState(updState); }
+      this.setState({ location: nextProps.places.places[0].id });
+    }
   }
 
 
