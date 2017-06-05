@@ -90,20 +90,20 @@ class AdminItemModal extends React.Component {
           <Container fluid>
             <Row className="mt-2"><h5>Information:</h5></Row>
             <Row className="mt-3">
-              <Col xs={12} md={6} >Item name:</Col>
-              <Col xs={12} md={6} ><em>{this.props.item.name}</em></Col>
+              <Col xs={12} sm={6} >Item name:</Col>
+              <Col xs={12} sm={6} ><em>{this.props.item.name}</em></Col>
             </Row>
             <Row className="mt-2">
-              <Col xs={12} md={6} >Nb aggr. marks linked:</Col>
-              <Col xs={12} md={6} ><em>{this.props.nbAggregateMarks}</em></Col>
+              <Col xs={12} sm={6} >Nb aggr. marks linked:</Col>
+              <Col xs={12} sm={6} ><em>{this.props.nbAggregateMarks}</em></Col>
             </Row>
 
             <Row className="mt-5"><h5>Delete:</h5></Row>
             <Row className="mt-3">
-              <Col xs={12} md={9} >
+              <Col xs={12} sm={9} >
                 <SimpleListOrDropdown items={possibleBackupItems} dropdownPlaceholder="Orphan rates will be attached to:" selectedOption={this.state.backupItemId} onChange={this.onChangeBackupItem.bind(this)} dropdown />
               </Col>
-              <Col xs={12} md={3} >
+              <Col xs={12} sm={3} >
                 <Button className="mb-3" color="danger" disabled={!this.state.backupItemId || this.state.backupItemId === ''} onClick={this.onDelete.bind(this)}>Delete!</Button>{' '}
               </Col>
             </Row>
