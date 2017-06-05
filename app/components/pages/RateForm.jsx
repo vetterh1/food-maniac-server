@@ -17,7 +17,7 @@ const styles = {
   form: {
     // width: 300,
     // margin: '20 auto',
-    // padding: 20,
+    padding: 20,
   },
 };
 
@@ -151,7 +151,7 @@ class RateForm extends React.Component {
             kinds={this.props.kinds.kinds}
             categories={this.props.categories.categories}
             items={this.props.items.items}
-            onChange={this.onChangeItem.bind(this)}
+            onChangeItem={this.onChangeItem.bind(this)}
             ref={(r) => { this._refSelectItemPlus = r; }} // used to reset the 3 dropdowns
           />
           <FormGroup>
@@ -177,7 +177,7 @@ class RateForm extends React.Component {
             <Input type="textarea" value={this.state.comment} onChange={this.onChangeComment.bind(this)} />
           </FormGroup>
 
-          <FormGroup className="mt-2">
+          <FormGroup row className="mt-4">
             <Button type="submit" size="md" disabled={!formReadyForSubmit}>Add</Button>
             <Button color="link" onClick={this.resetForm.bind(this)} size="md" getRef={(ref) => { this.refReset = ref; }}>Reset</Button>
           </FormGroup>

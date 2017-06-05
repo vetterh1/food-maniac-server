@@ -32,7 +32,7 @@ class App extends React.Component {
         <MainAppBar location={this.props.location} router={this.props.router} route={this.props.route} />
         {this.props.children}
         <Footer />
-        <Alert stack={{ limit: 6 }} position="top" timeout={5000} effect="stackslide" />
+        <Alert stack={{ limit: 6 }} position="top" timeout={3000} effect="stackslide" />
       </div>
     );
   }

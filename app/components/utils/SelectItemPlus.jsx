@@ -15,10 +15,16 @@ logSelectItemPlus.setLevel('debug');
 class SelectItemPlus extends React.Component {
   static propTypes = {
     title: PropTypes.string,
+    hideItem: PropTypes.bool,
     kinds: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
-    items: PropTypes.array.isRequired,
-    onChange: PropTypes.func.isRequired,
+    items: PropTypes.array,
+    onChangeKind: PropTypes.func,
+    onChangeCategory: PropTypes.func,
+    onChangeItem: PropTypes.func,
+    categoryPlaceHolder: PropTypes.string,
+    kindPlaceHolder: PropTypes.string,
+    itemPlaceHolder: PropTypes.string,
   }
 
   constructor(props) {
@@ -59,17 +65,19 @@ class SelectItemPlus extends React.Component {
   onChangeKind(event) {
     if (this.state.kind === event.target.value) return;
     this.setState({ kind: event.target.value, filteredItemsList: this.getVisibleItems(event.target.value, this.state.category) });
+    if (this.props.onChangeKind) this.props.onChangeKind(event.target.value);
   }
 
   onChangeCategory(event) {
     if (this.state.category === event.target.value) return;
     this.setState({ category: event.target.value, filteredItemsList: this.getVisibleItems(this.state.kind, event.target.value) });
+    if (this.props.onChangeCategory) this.props.onChangeCategory(event.target.value);
   }
 
   onChangeItem(event) {
-    if (this.state.kind === event.target.value) return;
+    if (this.state.item === event.target.value) return;
     this.setState({ item: event.target.value });
-    this.props.onChange(event.target.value);
+    if (this.props.onChangeItem) this.props.onChangeItem(event.target.value);
   }
 
   // return the filtered list
@@ -100,52 +108,65 @@ class SelectItemPlus extends React.Component {
       <FormGroup>
         {this.props.title && <h5 className="mb-3">{this.props.title}</h5>}
         <FormGroup row>
-          <Col xs={3} lg={2} >
+          <Col xs={12} sm={2} >
             <Label size="md">Category</Label>
           </Col>
-          <Col xs={9} lg={10} >
+          <Col xs={12} sm={10} >
             <SimpleListOrDropdown
               items={this.props.categories}
-              dropdownPlaceholder="All"
+              dropdownPlaceholder={this.props.categoryPlaceHolder}
               selectedOption={this.state.category}
-              onChange={this.onChangeCategory.bind(this)} dropdown
+              onChange={this.onChangeCategory.bind(this)}
+              dropdown
             />
           </Col>
         </FormGroup>
         <FormGroup row>
-          <Col xs={3} lg={2} >
+          <Col xs={12} sm={2} >
             <Label size="md">Kind</Label>
           </Col>
-          <Col xs={9} lg={10} >
+          <Col xs={12} sm={10} >
             <SimpleListOrDropdown
               items={this.props.kinds}
-              dropdownPlaceholder="All"
+              dropdownPlaceholder={this.props.kindPlaceHolder}
               selectedOption={this.state.kind}
               onChange={this.onChangeKind.bind(this)}
               dropdown
             />
           </Col>
         </FormGroup>
-        <FormGroup row>
-          <Col xs={3} lg={2} >
-            <Label size="md">Item</Label>
-          </Col>
-          <Col xs={9} lg={10} >
-            <SimpleListOrDropdown
-              items={this.state.filteredItemsList}
-              dropdownPlaceholder="Select an item..."
-              selectedOption={this.state.item}
-              onChange={this.onChangeItem.bind(this)}
-              dropdown
-            />
-          </Col>
-        </FormGroup>
+        {!this.props.hideItem &&
+          <FormGroup row>
+            <Col xs={12} sm={2} >
+              <Label size="md">Item</Label>
+            </Col>
+            <Col xs={12} sm={10} >
+              <SimpleListOrDropdown
+                items={this.state.filteredItemsList}
+                dropdownPlaceholder={this.props.itemPlaceHolder}
+                selectedOption={this.state.item}
+                onChange={this.onChangeItem.bind(this)}
+                dropdown
+              />
+            </Col>
+          </FormGroup>
+        }
       </FormGroup>
     );
   }
 }
 
-SelectItemPlus.defaultProps = { title: null };
+SelectItemPlus.defaultProps = {
+  title: null,
+  hideItem: false,
+  onChangeKind: null,
+  onChangeCategory: null,
+  onChangeItem: null,
+  items: [],
+  categoryPlaceHolder: 'All',
+  kindPlaceHolder: 'All',
+  itemPlaceHolder: 'Select an item...',
+};
 
 
 export default SelectItemPlus;

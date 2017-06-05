@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Form, FormGroup } from 'reactstrap';
+import { Button, Col, Form, FormFeedback, FormGroup, Label } from 'reactstrap';
 import SimpleListOrDropdown from '../utils/SimpleListOrDropdown';
 import SelectItemPlus from '../utils/SelectItemPlus';
 
@@ -101,18 +101,27 @@ class SearchItemForm extends React.Component {
             kinds={this.props.kinds}
             categories={this.props.categories}
             items={this.props.items}
-            onChange={this.onChangeItem.bind(this)}
+            onChangeItem={this.onChangeItem.bind(this)}
             ref={(r) => { this._refSelectItemPlus = r; }} // used to reset the 3 dropdowns
           />
+
           <FormGroup>
-            <h5 className="mb-4">Max distance?</h5>
-            <FormGroup row className="no-gutters">
-              <SimpleListOrDropdown items={this.getPredifinedDistances()} selectedOption={this.state.distance} onChange={this.onChangeDistance.bind(this)} dropdown />
+            <h5 className="mb-3">Where?</h5>
+            <FormGroup row>
+              <Col xs={12} sm={2} >
+                <Label size="md">Distance</Label>
+              </Col>
+              <Col xs={12} sm={10} >
+                <SimpleListOrDropdown items={this.getPredifinedDistances()} selectedOption={this.state.distance} onChange={this.onChangeDistance.bind(this)} dropdown />
+                <FormFeedback>Maximal distance from current location</FormFeedback>
+              </Col>
             </FormGroup>
           </FormGroup>
 
-          <Button type="submit" size="md" disabled={!formReadyForSubmit} getRef={(ref) => { this.refSubmit = ref; }} >Find</Button>
-          <Button color="link" onClick={this.resetForm.bind(this)} size="md" getRef={(ref) => { this.refReset = ref; }}>Reset</Button>
+          <FormGroup row className="mt-4">
+            <Button type="submit" size="md" disabled={!formReadyForSubmit} getRef={(ref) => { this.refSubmit = ref; }} >Find</Button>
+            <Button color="link" onClick={this.resetForm.bind(this)} size="md" getRef={(ref) => { this.refReset = ref; }}>Reset</Button>
+          </FormGroup>
         </Form>
       </div>
     );

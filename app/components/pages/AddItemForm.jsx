@@ -2,8 +2,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Form, FormFeedback, FormGroup, Input, Label } from 'reactstrap';
-import SimpleListOrDropdown from '../utils/SimpleListOrDropdown';
+import { Button, Col, Form, FormFeedback, FormGroup, Input, Label } from 'reactstrap';
+import SelectItemPlus from '../utils/SelectItemPlus';
 // import { AvForm, AvField, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
 import CameraSnapshotContainer from './CameraSnapshotContainer';
 // import LogOnDisplay from '../utils/LogOnDisplay';
@@ -24,7 +24,6 @@ class AddItemForm extends React.Component {
   static propTypes = {
     kinds: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
-    items: PropTypes.array.isRequired,
     onSubmit: PropTypes.func.isRequired,
     onSnapshotStartProcessing: PropTypes.func.isRequired,
     onSnapshotError: PropTypes.func.isRequired,
@@ -47,45 +46,14 @@ class AddItemForm extends React.Component {
       name: '',
       // Selected Kind & Category:
       // (also updated in componentWillReceiveProps when receiving lists)
-      category: this.props.categories.length > 0 ? this.props.categories[0].id : '',
-      kind: this.props.kinds.length > 0 ? this.props.kinds[0].id : '',
+      category: '',
+      kind: '',
     };
 
     this.state = {
-      // Empty marks, kind, categories & items:
       ...this.defaultState,
     };
     console.log('AddItemForm constructor (props, initial state): ', props, this.state);
-  }
-
-
-  componentWillReceiveProps(nextProps) {
-    if (!nextProps) return;
-    let needUpdate = false;
-    const updState = {};
-
-    // Kinds list update: select default category if not set yet!
-    if (nextProps.categories && nextProps.categories.length > 0 && nextProps.categories !== this.props.categories) {
-      if (!this.state.category || this.state.category === '') {
-        updState.category = nextProps.categories[0].id;
-        this.defaultState.category = updState.category;
-        needUpdate = true;
-        console.log('category updated:', updState.category);
-      } else console.log('...NO update category! (2)');
-    } else console.log('...NO update category!');
-
-    // Kinds list update: select default kind if not set yet!
-    if (nextProps.kinds && nextProps.kinds.length > 0 && nextProps.kinds !== this.props.kinds) {
-      if (!this.state.kind || this.state.kind === '') {
-        updState.kind = nextProps.kinds[0].id;
-        this.defaultState.kind = updState.kind;
-        needUpdate = true;
-        console.log('kind updated:', updState.kind);
-      } else console.log('...NO update kind! (2)');
-    } else console.log('...NO update kind!');
-
-    // Launch the state update
-    if (needUpdate) { this.setState(updState); }
   }
 
 
@@ -117,14 +85,14 @@ class AddItemForm extends React.Component {
     this.props.onSubmit(returnValue);
   }
 
-  onChangeKind(event) {
-    if (this.state.kind === event.target.value) return;
-    this.setState({ kind: event.target.value });
+  onChangeKind(kind) {
+    if (this.state.kind === kind) return;
+    this.setState({ kind });
   }
 
-  onChangeCategory(event) {
-    if (this.state.category === event.target.value) return;
-    this.setState({ category: event.target.value });
+  onChangeCategory(category) {
+    if (this.state.category === category) return;
+    this.setState({ category });
   }
 
   // TODO : Should verify on server side if name already exists
@@ -146,6 +114,7 @@ class AddItemForm extends React.Component {
       // Erase marks & reset kind, categories & items:
       this.defaultState,
     ));
+    this._refSelectItemPlus.reset();
     this.refReset.blur();
     window.scrollTo(0, 0);
   }
@@ -159,27 +128,41 @@ class AddItemForm extends React.Component {
 
         <h3 className="mb-4">Add new dish...</h3>
         <Form onSubmit={this.onSubmit.bind(this)} >
-          <FormGroup>
-            <Label size="md">Category</Label>
-            <SimpleListOrDropdown items={this.props.categories} selectedOption={this.state.category} onChange={this.onChangeCategory.bind(this)} dropdown />
-            <Label size="md">Kind</Label>
-            <SimpleListOrDropdown items={this.props.kinds} selectedOption={this.state.kind} onChange={this.onChangeKind.bind(this)} dropdown />
+          <SelectItemPlus
+            hideItem
+            kinds={this.props.kinds}
+            categories={this.props.categories}
+            onChangeKind={this.onChangeKind.bind(this)}
+            onChangeCategory={this.onChangeCategory.bind(this)}
+            kindPlaceHolder="Select a kind"
+            categoryPlaceHolder="Select a category"
+            ref={(r) => { this._refSelectItemPlus = r; }} // used to reset the 3 dropdowns
+          />
+
+          <FormGroup row>
+            <Col xs={12} sm={2} >
+              <Label for="inputName" size="md">Name</Label>
+            </Col>
+            <Col xs={12} sm={10} >
+              <Input name="name" id="inputName" onChange={this.onChangeName.bind(this)} value={this.state.name} placeholder="..." required size="md" />
+              <FormFeedback>This field is mandatory!</FormFeedback>
+            </Col>
           </FormGroup>
 
-          <FormGroup>
-            <Label for="inputName" size="md">Name</Label>
-            <Input name="name" id="inputName" onChange={this.onChangeName.bind(this)} value={this.state.name} placeholder="..." required size="md" />
-            <FormFeedback>This field is mandatory!</FormFeedback>
+          <FormGroup row>
+            <Col xs={12} sm={2} >
+              <Label for="inputName" size="md">Picture</Label>
+            </Col>
+            <Col xs={12} sm={10} >
+              <CameraSnapshotContainer onError={this.props.onSnapshotError} onSnapshotStartProcessing={this.props.onSnapshotStartProcessing} onSnapshotReady={this.onSnapshotReady.bind(this)} onDeleteSnapshot={this.onDeleteSnapshot.bind(this)} />
+              <img ref={(r) => { this._imageCameraSnapshot = r; }} style={styles.imageCameraSnapshot} alt="" />
+            </Col>
           </FormGroup>
 
-          <div>
-            <Label size="md">Picture</Label>
-            <CameraSnapshotContainer onError={this.props.onSnapshotError} onSnapshotStartProcessing={this.props.onSnapshotStartProcessing} onSnapshotReady={this.onSnapshotReady.bind(this)} onDeleteSnapshot={this.onDeleteSnapshot.bind(this)} />
-            <img ref={(r) => { this._imageCameraSnapshot = r; }} style={styles.imageCameraSnapshot} alt="" />
-          </div>
-
-          <Button type="submit" size="md" disabled={!formReadyForSubmit} getRef={(ref) => { this.refSubmit = ref; }} >Add</Button>
-          <Button color="link" onClick={this.resetForm.bind(this)} size="md" getRef={(ref) => { this.refReset = ref; }}>Reset</Button>
+          <FormGroup row className="mt-4">
+            <Button type="submit" size="md" disabled={!formReadyForSubmit} getRef={(ref) => { this.refSubmit = ref; }} >Add</Button>
+            <Button color="link" onClick={this.resetForm.bind(this)} size="md" getRef={(ref) => { this.refReset = ref; }}>Reset</Button>
+          </FormGroup>
         </Form>
       </div>
     );
