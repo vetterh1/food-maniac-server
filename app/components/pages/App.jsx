@@ -10,6 +10,7 @@ import 'react-s-alert/dist/s-alert-css-effects/stackslide.css';
 import MainAppBar from '../navigation/MainAppBar';
 import Footer from '../utils/Footer';
 
+
 const styles = {
   pageContainer: {
     // background: 'url("images/pasta_alpha30_qty50.jpg") no-repeat center center fixed',

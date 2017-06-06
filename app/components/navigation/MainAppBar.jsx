@@ -40,10 +40,10 @@ class MainAppBar extends React.Component {
     const isOpen = this.state.isOpen || onMainPage;
     const isToggleable = !onMainPage;
     return (
-      <Navbar color="" light toggleable={!onMainPage}>
-        {isToggleable && <NavbarToggler right onClick={this.toggle} />}
+      <Navbar color="" light toggleable>
+        <NavbarToggler right onClick={this.toggle} />
         <NavbarBrand tag={Link} to="/" onClick={this.resetOpenState}>Food Maniac!</NavbarBrand>
-        <Collapse isOpen={isOpen} navbar>
+        {!onMainPage &&<Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
               <NavLink tag={Link} to="/rate" onClick={this.resetOpenState}>&gt; Rate item</NavLink>
@@ -55,7 +55,7 @@ class MainAppBar extends React.Component {
               <RetreiveLocations />
             </NavItem>
           </Nav>
-        </Collapse>
+        </Collapse>}
       </Navbar>
     );
   }
