@@ -133,6 +133,11 @@ class AdminItemModal extends React.Component {
                     <td><em>{this.props.category.name}</em></td>
                     <td><SimpleListOrDropdown items={this.props.categories} selectedOption={this.state.currentCategory} onChange={this.onChangeCategory.bind(this)} dropdown /></td>
                   </tr>
+                  <tr>
+                    <td>Picture</td>
+                    <td><em>{this.props.item.picture}</em></td>
+                    <td></td>
+                  </tr>
                 </tbody>
               </Table>
             </Row>

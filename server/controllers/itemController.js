@@ -114,7 +114,8 @@ export function addItem(req, res) {
     newItem.category = sanitizeHtml(newItem.category).toLowerCase();
     newItem.kind = sanitizeHtml(newItem.kind).toLowerCase();
     newItem.name = sanitizeHtml(newItem.name);
-    newItem.picture = cuid(); // generate a random number for the file name
+    newItem.picture = null;
+    if (req.body.item.picture) newItem.picture = cuid(); // generate a random number for the file name
     newItem.save((err, saved) => {
       if (err) {
         logger.error(`itemController.addItem ${newItem.name} failed - _id: ${newItem._id} - name: ${newItem.name} - category: ${newItem.category} - kind: ${newItem.kind} - err:`, err);
