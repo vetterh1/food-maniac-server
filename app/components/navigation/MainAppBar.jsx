@@ -52,9 +52,6 @@ class MainAppBar extends React.Component {
               <NavLink tag={Link} to="/searchItem" onClick={this.resetOpenState}>&gt; Search item</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={Link} to="/addItem" onClick={this.resetOpenState}>&gt; Add new item</NavLink>
-            </NavItem>
-            <NavItem>
               <RetreiveLocations />
             </NavItem>
           </Nav>

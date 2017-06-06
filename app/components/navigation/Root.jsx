@@ -7,7 +7,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import App from '../pages/App';
 import MainPageContent from '../pages/MainPageContent';
 import RateContainer from '../pages/RateContainer';
-import AddItemContainer from '../pages/AddItemContainer';
 import SearchItemContainer from '../pages/SearchItemContainer';
 import ListItemsContainerOld from '../pages/ListItemsContainerOld';
 import ListItemsContainer from '../pages/ListItemsContainer';
@@ -25,7 +24,6 @@ const Root = ({ store }) => (
         <IndexRoute component={MainPageContent} />
         <Route path="/rate" component={RateContainer} />
         <Route path="/searchItem" component={SearchItemContainer} />
-        <Route path="/addItem" component={AddItemContainer} />
         <Route path="/login" component={Login} />
         <Route path="/listItems" component={() => (<ListItemsContainer dropdown={false} />)} />
         <Route path="/listItemsOld" component={() => (<ListItemsContainerOld URL="/api/items" dropdown={false} />)} />

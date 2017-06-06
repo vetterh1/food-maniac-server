@@ -3,7 +3,7 @@
 import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Col, Form, FormGroup, Input } from 'reactstrap';
+import { Button, Col, Form, FormFeedback, FormGroup, Input } from 'reactstrap';
 import RatingStarsRow from '../utils/RatingStarsRow';
 import SimpleListOrDropdown from '../utils/SimpleListOrDropdown';
 import SelectItemPlus from '../utils/SelectItemPlus';
@@ -28,6 +28,7 @@ class RateForm extends React.Component {
     items: PropTypes.object.isRequired,
     places: PropTypes.object.isRequired,
     onSubmit: PropTypes.func.isRequired,
+    onRequestAddItem: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -125,6 +126,10 @@ class RateForm extends React.Component {
     this.setState({ comment: event.target.value });
   }
 
+  onOpenAddItem() {
+    this.props.onRequestAddItem();
+  }
+
   resetForm() {
     // Reset the form & clear the image
     this.setState(Object.assign({
@@ -148,12 +153,23 @@ class RateForm extends React.Component {
         <Form onSubmit={this.onSubmit.bind(this)}>
           <SelectItemPlus
             title="What?"
+            addItemLink
             kinds={this.props.kinds.kinds}
             categories={this.props.categories.categories}
             items={this.props.items.items}
             onChangeItem={this.onChangeItem.bind(this)}
             ref={(r) => { this._refSelectItemPlus = r; }} // used to reset the 3 dropdowns
           />
+          <FormGroup row>
+            <Col xs={12} sm={2} >
+            </Col>
+            <Col xs={12} sm={10} >
+              <FormFeedback style={{ marginTop: '-1rem' }}>
+                <Button color="link" onClick={this.onOpenAddItem.bind(this)} size="md">add new item...</Button>
+              </FormFeedback>            
+            </Col>
+          </FormGroup>          
+
           <FormGroup>
             <h5 className="mt-2 mb-3">Where?</h5>
             <FormGroup row>

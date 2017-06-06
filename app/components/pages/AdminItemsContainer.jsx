@@ -3,10 +3,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Container, Row, Table } from 'reactstrap';
+import { Button, Container, Row, Table } from 'reactstrap';
 import Alert from 'react-s-alert';
 import AdminOneItem from './AdminOneItem';
 import AdminItemModal from './AdminItemModal';
+import AddItemContainer from '../pages/AddItemContainer';
 import * as itemsActions from '../../actions/itemsActions';
 
 
@@ -29,6 +30,7 @@ class AdminItemsContainer extends React.Component {
       currentCategory: null,
       currentNbAggregateMarks: null,
       modalEditItemOpened: false,
+      modalAddItemOpened: false,
     };
   }
 
@@ -160,6 +162,14 @@ class AdminItemsContainer extends React.Component {
     this.setState({ modalEditItemOpened: false });
   }
 
+  onRequestAddItem() {
+    this.setState({ modalAddItemOpened: true });
+  }
+
+  onCloseModalAddItem() {
+    this.setState({ modalAddItemOpened: false });
+  }
+
 
   render() {
     console.log('AdminItemsContainer.render - currentItem, currentKind, currentCategory = ', this.state.currentItem, this.state.currentKind, this.state.currentCategory);
@@ -168,7 +178,12 @@ class AdminItemsContainer extends React.Component {
     return (
       <div>
         <Container fluid>
-          <Row className="mt-1">
+
+          <Row className="mt-3">
+            <Button color="link" onClick={this.onRequestAddItem.bind(this)} size="md">Add new item...</Button>
+          </Row>
+
+          <Row className="mt-3">
             <Table responsive striped hover>
               <thead>
                 <tr>
@@ -203,6 +218,10 @@ class AdminItemsContainer extends React.Component {
             onCancel={this.onCancelModal.bind(this)}
           />
         }
+        <AddItemContainer
+          open={this.state.modalAddItemOpened}
+          onClose={this.onCloseModalAddItem.bind(this)}
+        />
       </div>
     );
   }

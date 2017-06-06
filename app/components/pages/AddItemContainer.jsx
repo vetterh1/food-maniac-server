@@ -5,9 +5,8 @@ import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Container } from 'reactstrap';
 import Alert from 'react-s-alert';
-import AddItemForm from './AddItemForm';
+import AddItemModal from './AddItemModal';
 import * as itemsActions from '../../actions/itemsActions';
 // import stringifyOnce from '../../utils/stringifyOnce';
 
@@ -20,6 +19,8 @@ logAddItemContainer.debug('--> entering AddItemContainer.jsx');
 
 class AddItemContainer extends React.Component {
   static propTypes = {
+    open: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
     // Injected by redux-store connect:
     kinds: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
@@ -44,13 +45,6 @@ class AddItemContainer extends React.Component {
   onEndSavingOK = () => {
     const durationSaving = new Date().getTime() - this._nowStartSaving;
     this.alert = Alert.success(`Saved! (duration=${durationSaving}ms)`);
-
-    // Tell the child to reset
-    // CAUTION! only works because the form is the immediate child
-    // ...because it does NOT use redux not redux-form
-    // if this CHANGES, this should be replaced by a dispatch or a reset action
-    // ex: dispatch(reset('AddItemForm'));
-    if (this._childComponent) this._childComponent.resetForm();
   }
 
   onEndSavingFailed = (errorMessage) => {
@@ -74,40 +68,18 @@ class AddItemContainer extends React.Component {
   }
 
 
+  onCancel() {
+    this.props.onClose();
+  }
+
 
   onSubmit(data) {
-
     this.onStartSaving();
     const { dispatch } = this.props;  // Injected by react-redux
     const action = itemsActions.saveItem(data);
     dispatch(action);
-/*
-    console.log('AddItemContainer.onSubmit - 1', data);
-    fetch('/api/items', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ item: data }, null, 4),
-    })
-    .then((response) => {
-      // console.log('fetch result: ', response);
-      if (response && response.ok) {
-        this.onEndSavingOK();
-        // return response.blob();
-        return;
-      }
-      this.onEndSavingFailed('01');
-      const error = new Error('fetch OK but returned nothing or an error (request: post /api/items');
-      error.name = 'ErrorCaught';
-      throw (error);
-    })
-    .catch((error) => {
-      if (error.name !== 'ErrorCaught') this.onEndSavingFailed('02');
-      logAddItemContainer.error(error.message);
-    });
-*/    
-  }
+    this.props.onClose();
+}
 
 
 
@@ -131,18 +103,18 @@ class AddItemContainer extends React.Component {
 
   render() {
     return (
-      <Container fluid>
-        <AddItemForm
-          ref={(r) => { this._childComponent = r; }}
-          kinds={this.props.kinds}
-          categories={this.props.categories}
-          items={this.props.items.items}
-          onSubmit={this.onSubmit.bind(this)}
-          onSnapshotStartProcessing={this.onSnapshotStartProcessing}
-          onSnapshotError={this.onSnapshotError}
-          onSnapshotReady={this.onSnapshotReady}
-        />
-      </Container>
+      <AddItemModal
+        ref={(r) => { this._childComponent = r; }}
+        open={this.props.open}
+        kinds={this.props.kinds}
+        categories={this.props.categories}
+        items={this.props.items.items}
+        onSubmit={this.onSubmit.bind(this)}
+        onCancel={this.onCancel.bind(this)}
+        onSnapshotStartProcessing={this.onSnapshotStartProcessing}
+        onSnapshotError={this.onSnapshotError}
+        onSnapshotReady={this.onSnapshotReady}
+      />
     );
   }
 
