@@ -23,34 +23,43 @@ class MainPageContent extends React.Component {
 
   render() {
     return (
-      <div className="homepage-container">
-        <div className="homepage-feature-items">
-          <div className="homepage-feature-item">
-            <a href="/rate" style={{ textDecoration: 'none' }}>
-              <div className="homepage-feature-icon"><MdStarHalf size={64} /></div>
-              <h5 className="homepage-feature-title">Rate</h5>
-              <div className="homepage-feature-detail">
-                <p>Give stars to the pizza you are currently eating!</p>
-              </div>
-            </a>
+      <div>
+        <div className="jumbotron">
+          <div className="container">
+            <h1 className="display-6">Welcome, food lover!</h1>
+            <p>This site let you share what you feel is best in your favorite restaurants and bars. Food-maniac focuses on the plates and not the place. It's then the best way to discover where to go to eat the best pizza or to dring the most amazing margarita!</p>
+            <p><a className="btn btn-primary btn-md" href="#" role="button">Sign-in &raquo;</a></p>
           </div>
-          <div className="homepage-feature-item">
-            <a href="/searchItem" style={{ textDecoration: 'none' }}>
-              <div className="homepage-feature-icon"><MdLocationSearching size={64} /></div>
-              <h5 className="homepage-feature-title">Search</h5>
-              <div className="homepage-feature-detail">
-                <p>Find the best burger around you...</p>
-              </div>
-            </a>
-          </div>
-          <div className="homepage-feature-item">
-            <a href="/searchItem" style={{ textDecoration: 'none' }}>
-              <div className="homepage-feature-icon"><MdLocalRestaurant size={64} /></div>
-              <h5 className="homepage-feature-title">Check</h5>
-              <div className="homepage-feature-detail">
-                <p>What&apos;s best where you are?</p>
-              </div>
-            </a>
+        </div>
+        <div className="homepage-container">
+          <div className="homepage-feature-items">
+            <div className="homepage-feature-item">
+              <a href="/rate" style={{ textDecoration: 'none' }}>
+                <div className="homepage-feature-icon"><MdStarHalf size={64} /></div>
+                <h5 className="homepage-feature-title">Rate</h5>
+                <div className="homepage-feature-detail">
+                  <p>Give stars to the pizza you are currently eating!</p>
+                </div>
+              </a>
+            </div>
+            <div className="homepage-feature-item">
+              <a href="/searchItem" style={{ textDecoration: 'none' }}>
+                <div className="homepage-feature-icon"><MdLocationSearching size={64} /></div>
+                <h5 className="homepage-feature-title">Search</h5>
+                <div className="homepage-feature-detail">
+                  <p>Find the best burger around you...</p>
+                </div>
+              </a>
+            </div>
+            <div className="homepage-feature-item">
+              <a href="/searchItem" style={{ textDecoration: 'none' }}>
+                <div className="homepage-feature-icon"><MdLocalRestaurant size={64} /></div>
+                <h5 className="homepage-feature-title">Check</h5>
+                <div className="homepage-feature-detail">
+                  <p>What&apos;s best where you are?</p>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
       </div>

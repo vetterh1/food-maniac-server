@@ -39,16 +39,16 @@ class MainAppBar extends React.Component {
     const onMainPage = this.props.location.pathname === '/';
     const isOpen = this.state.isOpen || onMainPage;
     return (
-      <Navbar color="" light toggleable>
+      <Navbar color="inverse" inverse toggleable>
         {!onMainPage && <NavbarToggler right onClick={this.toggle} />}
         <NavbarBrand tag={Link} to="/" onClick={this.resetOpenState}>Food Maniac!</NavbarBrand>
         {!onMainPage && <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink tag={Link} to="/rate" onClick={this.resetOpenState}>&gt; Rate item</NavLink>
+              <NavLink className="navbar-link" tag={Link} to="/rate" onClick={this.resetOpenState}>&gt; Rate item</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={Link} to="/searchItem" onClick={this.resetOpenState}>&gt; Search item</NavLink>
+              <NavLink className="navbar-link" tag={Link} to="/searchItem" onClick={this.resetOpenState}>&gt; Search item</NavLink>
             </NavItem>
             <NavItem>
               <RetreiveLocations />
