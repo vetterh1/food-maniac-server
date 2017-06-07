@@ -165,7 +165,7 @@ class RateForm extends React.Component {
             </Col>
             <Col xs={12} sm={10} >
               <FormFeedback style={{ marginTop: '-1rem' }}>
-                <Button color="link" onClick={this.onOpenAddItem.bind(this)} size="md">add new item...</Button>
+                <Button color="link" onClick={this.onOpenAddItem.bind(this)} size="md">Can&apos;t find your dish? Add it here...</Button>
               </FormFeedback>            
             </Col>
           </FormGroup>          

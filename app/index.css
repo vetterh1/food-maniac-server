@@ -3,6 +3,7 @@ html, body {
     height: 100%;
 }
 
+/*
 h1 {
   font-size: 2rem;
 }
@@ -22,6 +23,7 @@ h4 {
 h5 {
   font-size: 1.15rem;
 }
+*/
 
 .form-group {
     margin-bottom: 0.75rem !important;
@@ -164,4 +166,115 @@ h5 {
 .s-alert-error {
     background: rgba(255, 204, 188, 0.95) !important;
     color: #000 !important;
+}
+
+
+
+
+.homepage-container {
+    max-width: 1040px;
+    min-width: 320px;
+    position: relative;
+    margin: 0 auto;
+    padding: 3.4375rem 1.25rem;
+    text-align: center;
+}
+
+.homepage-container .homepage-feature-items {
+    max-width: 21rem;
+    margin: 3.125rem auto 0;
+    padding: 0;
+}
+
+.homepage-container .homepage-feature-item {
+    position: relative;
+    clear: both;
+    margin-bottom: 2.5rem;
+}
+
+.homepage-container .homepage-feature-icon {
+    width: 3.75rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.homepage-container .homepage-feature-title {
+    /*color: #fff;*/
+    font-size: 1rem;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.homepage-container .homepage-feature-title, .homepage-container .homepage-feature-detail {
+    padding-left: 5.5rem;
+    text-align: left;
+}
+
+.homepage-container .homepage-feature-detail {
+    min-height: 3rem;
+    margin-top: .5rem;
+    line-height: 1.43;
+    /*color: rgba(255,255,255,.85);*/
+}
+
+
+@media only screen and (min-width: 23.4375em) {
+
+  .homepage-container .homepage-feature-items {
+      padding: 0 1rem;
+  }
+
+}
+
+
+
+@media only screen and (min-width: 48.0625em) {
+
+  .homepage-container {
+      padding-top: 5.625rem;
+      padding-bottom: 4.25rem;
+      padding: 6.25rem 1.25rem;
+  }
+
+  .homepage-container .homepage-feature-items {
+    overflow: hidden;
+    max-width: 44.5625rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+ 
+ .homepage-container .homepage-feature-item {
+    float: left;
+    width: 12.5rem;
+    text-align: center;
+    clear: none;
+    margin-bottom: 0;
+  }
+
+  .homepage-container .homepage-feature-item:not(:last-child) {
+    margin-right: calc((44.5625rem - 39.5rem)/2);
+  }
+
+  .homepage-container .homepage-feature-icon {
+      width: 100%;
+      height: 6rem;
+      position: relative;
+  }
+
+  .homepage-container .homepage-feature-title {
+      font-size: 1.125rem;
+      padding-top: .375rem;
+      padding-bottom: 0;
+  }
+
+  .homepage-container .homepage-feature-title, .homepage-container .homepage-feature-detail {
+    padding-left: 0;
+    text-align: center;
+}
+
+  .homepage-container .homepage-feature-detail {
+      min-height: 3rem;
+  }
+
 }
