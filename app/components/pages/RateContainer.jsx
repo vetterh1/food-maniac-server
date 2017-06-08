@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { Container } from 'reactstrap';
 import Alert from 'react-s-alert';
 import RateForm from './RateForm';
+import AddItemContainer from '../pages/AddItemContainer';
 import stringifyOnce from '../../utils/stringifyOnce';
 import { loglevelServerSend } from '../../utils/loglevel-serverSend';
 
@@ -35,6 +36,10 @@ class RateContainer extends React.Component {
     this._childComponent = null;
 
     this.alert = null;
+
+    this.state = {
+      modalAddItemOpened: false,
+    };
   }
 
 
@@ -68,6 +73,13 @@ class RateContainer extends React.Component {
     this.save();
   }
 
+  onRequestAddItem() {
+    this.setState({ modalAddItemOpened: true });
+  }
+
+  onCloseModalAddItem() {
+    this.setState({ modalAddItemOpened: false });
+  }
 
   save() {
     logRateContainer.debug(`RateContainer.save - values:\n\n${stringifyOnce(this.values, null, 2)}`);
@@ -201,6 +213,11 @@ class RateContainer extends React.Component {
           items={this.props.items}
           places={this.props.places}
           onSubmit={this.onSubmit.bind(this)}
+          onRequestAddItem={this.onRequestAddItem.bind(this)}
+        />
+        <AddItemContainer
+          open={this.state.modalAddItemOpened}
+          onClose={this.onCloseModalAddItem.bind(this)}
         />
       </Container>
     );

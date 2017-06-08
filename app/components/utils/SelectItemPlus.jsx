@@ -89,6 +89,7 @@ class SelectItemPlus extends React.Component {
     });
   }
 
+
   // Reset the 3 dropdowns:
   reset() {
     this.setState(Object.assign({
@@ -155,6 +156,9 @@ class SelectItemPlus extends React.Component {
     );
   }
 }
+
+
+
 
 SelectItemPlus.defaultProps = {
   title: null,

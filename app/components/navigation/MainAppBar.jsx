@@ -38,27 +38,23 @@ class MainAppBar extends React.Component {
   render() {
     const onMainPage = this.props.location.pathname === '/';
     const isOpen = this.state.isOpen || onMainPage;
-    const isToggleable = !onMainPage;
     return (
-      <Navbar color="" light toggleable={!onMainPage}>
-        {isToggleable && <NavbarToggler right onClick={this.toggle} />}
+      <Navbar color="inverse" inverse toggleable>
+        {!onMainPage && <NavbarToggler right onClick={this.toggle} />}
         <NavbarBrand tag={Link} to="/" onClick={this.resetOpenState}>Food Maniac!</NavbarBrand>
-        <Collapse isOpen={isOpen} navbar>
+        {!onMainPage && <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink tag={Link} to="/rate" onClick={this.resetOpenState}>&gt; Rate item</NavLink>
+              <NavLink className="navbar-link" tag={Link} to="/rate" onClick={this.resetOpenState}>&gt; Rate item</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={Link} to="/searchItem" onClick={this.resetOpenState}>&gt; Search item</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink tag={Link} to="/addItem" onClick={this.resetOpenState}>&gt; Add new item</NavLink>
+              <NavLink className="navbar-link" tag={Link} to="/searchItem" onClick={this.resetOpenState}>&gt; Search item</NavLink>
             </NavItem>
             <NavItem>
               <RetreiveLocations />
             </NavItem>
           </Nav>
-        </Collapse>
+        </Collapse>}
       </Navbar>
     );
   }

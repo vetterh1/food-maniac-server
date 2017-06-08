@@ -33,10 +33,10 @@ class RatingStarsRow extends React.PureComponent {
 
     return (
       <FormGroup row color="danger" >
-        <Col xs={3} lg={2} >
+        <Col xs={3} sm={2} >
           <Label for={name} className="text-right">{label}</Label>
         </Col>
-        <Col xs={9} lg={10} >
+        <Col xs={9} sm={10} >
           <RatingStars
             name={name}
             initialRate={initialRate}
