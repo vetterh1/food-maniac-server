@@ -84,8 +84,8 @@ class AdminItemModal extends React.Component {
     const possibleBackupItems = this.props.items.filter((item) => {return item.id !== this.props.item.id})
     console.log('AdminItemModal.render - backupItemId = ', this.state.backupItemId);
     return (
-      <Modal isOpen={this.props.open}>
-        <ModalHeader>Edit item</ModalHeader>
+      <Modal isOpen={this.props.open} toggle={this.onCancel.bind(this)}>
+        <ModalHeader toggle={this.onCancel.bind(this)}>Edit item</ModalHeader>
         <ModalBody>
           <Container fluid>
             <Row className="mt-2"><h5>Information:</h5></Row>

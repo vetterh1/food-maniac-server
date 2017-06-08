@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Container, Col, FormFeedback, FormGroup, Input, Label, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Alert, Button, Container, Col, FormFeedback, FormGroup, Input, Label, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import SelectItemPlus from '../utils/SelectItemPlus';
 // import { AvForm, AvField, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
 import CameraSnapshotContainer from './CameraSnapshotContainer';
@@ -123,10 +123,11 @@ class AddItemModal extends React.Component {
     console.log('AddItemModal render: (category, kind, name, picture)=', this.state.category, this.state.kind, this.state.name, this.state.picture ? this.state.picture.length : 'null');
     const formReadyForSubmit = this.state.name && this.state.kind && this.state.category;
     return (
-      <Modal isOpen={this.props.open}>
-        <ModalHeader>Add new dish...</ModalHeader>
+      <Modal isOpen={this.props.open} toggle={this.onCancel.bind(this)}>
+        <ModalHeader toggle={this.onCancel.bind(this)}>Add new dish...</ModalHeader>
         <ModalBody>
           <Container fluid>
+            <Alert color="warning">Please make sure a similar item does not already exist!</Alert>
             <SelectItemPlus
               hideItem
               kinds={this.props.kinds}
