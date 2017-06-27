@@ -9,6 +9,7 @@ import { Container } from 'reactstrap';
 import Alert from 'react-s-alert';
 import RateForm from './RateForm';
 import AddItemContainer from '../pages/AddItemContainer';
+import SimulateLocationContainer from '../pages/SimulateLocationContainer';
 import stringifyOnce from '../../utils/stringifyOnce';
 import { loglevelServerSend } from '../../utils/loglevel-serverSend';
 
@@ -39,6 +40,7 @@ class RateContainer extends React.Component {
 
     this.state = {
       modalAddItemOpened: false,
+      modalSimulateLocation: false,
     };
   }
 
@@ -80,6 +82,15 @@ class RateContainer extends React.Component {
   onCloseModalAddItem() {
     this.setState({ modalAddItemOpened: false });
   }
+
+  onRequestSimulateLocation() {
+    this.setState({ modalSimulateLocation: true });
+  }
+
+  onCloseModalSimulateLocation() {
+    this.setState({ modalSimulateLocation: false });
+  }
+
 
   save() {
     logRateContainer.debug(`RateContainer.save - values:\n\n${stringifyOnce(this.values, null, 2)}`);
@@ -214,10 +225,15 @@ class RateContainer extends React.Component {
           places={this.props.places}
           onSubmit={this.onSubmit.bind(this)}
           onRequestAddItem={this.onRequestAddItem.bind(this)}
+          onRequestSimulateLocation={this.onRequestSimulateLocation.bind(this)}
         />
         <AddItemContainer
           open={this.state.modalAddItemOpened}
           onClose={this.onCloseModalAddItem.bind(this)}
+        />
+        <SimulateLocationContainer
+          open={this.state.modalSimulateLocation}
+          onClose={this.onCloseModalSimulateLocation.bind(this)}
         />
       </Container>
     );

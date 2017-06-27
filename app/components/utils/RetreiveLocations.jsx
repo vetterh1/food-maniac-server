@@ -8,7 +8,7 @@ import Geolocation from '../utils/Geolocation';
 import * as PlacesActions from '../../actions/PlacesActions';
 
 const logRetreiveLocations = log.getLogger('loggerRetreiveLocation');
-logRetreiveLocations.setLevel('warn');
+logRetreiveLocations.setLevel('debug');
 logRetreiveLocations.debug('--> entering RetreiveLocations.jsx');
 
 
@@ -51,7 +51,7 @@ class RetreiveLocations extends React.Component {
       return;
     }
 
-    const nbRenders = this.state.nbRenders + 1;
+    // const nbRenders = this.state.nbRenders + 1;
     const currentLatLng = new google.maps.LatLng(nextProps.coordinates.latitude, nextProps.coordinates.longitude);
 
     const map = new google.maps.Map(document.getElementById('map'), {

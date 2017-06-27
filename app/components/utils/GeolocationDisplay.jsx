@@ -18,7 +18,7 @@ const styles = {
 };
 
 
-export class GeolocationDisplay extends React.Component {
+class GeolocationDisplay extends React.Component {
   constructor() {
     super();
     this.toggle = this.toggle.bind(this);
@@ -43,13 +43,16 @@ export class GeolocationDisplay extends React.Component {
           <ModalHeader toggle={this.toggle}>Geolocation Statistics</ModalHeader>
           <ModalBody>
             <div className="geolocation_statistics">
-              Coordinates:
+              Main info:
               <ul>
+                <li>Mode: {this.props.coordinates.simulated ? 'simulated' : 'normal'}</li>
                 <li>Latitude: {this.props.coordinates.latitude ? Math.round(this.props.coordinates.latitude * 100000) / 100000 : 'unknown'}</li>
                 <li>Longitude: {this.props.coordinates.longitude ? Math.round(this.props.coordinates.longitude * 100000) / 100000 : 'unknown'}</li>
                 <li>Real: {this.props.coordinates.real ? 'true' : 'false'}</li>
                 <li>Changed: {this.props.coordinates.changed ? 'true' : 'false'}</li>
                 <li>Changed (real): {this.props.coordinates.changedReal ? 'true' : 'false'}</li>
+                <li>Latitude saved (sim mode): {this.props.coordinates.latitude_save ? Math.round(this.props.coordinates.latitude_save * 100000) / 100000 : 'unknown'}</li>
+                <li>Longitude saved (sim mode): {this.props.coordinates.longitude_save ? Math.round(this.props.coordinates.longitude_save * 100000) / 100000 : 'unknown'}</li>
               </ul>
             </div>
 
@@ -82,6 +85,7 @@ GeolocationDisplay.propTypes = {
   coordinates: PropTypes.shape({
     latitude: PropTypes.number,
     longitude: PropTypes.number,
+    simulated: PropTypes.boolean,
     real: PropTypes.boolean,
     changed: PropTypes.boolean,
     changedReal: PropTypes.boolean,
@@ -90,6 +94,8 @@ GeolocationDisplay.propTypes = {
     nbReal: PropTypes.number,
     nbEstimated: PropTypes.number,
     nbClose: PropTypes.number,
+    latitude_save: PropTypes.number,
+    longitude_save: PropTypes.number,
   }).isRequired,
 };
 

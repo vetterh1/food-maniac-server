@@ -29,6 +29,7 @@ class RateForm extends React.Component {
     places: PropTypes.object.isRequired,
     onSubmit: PropTypes.func.isRequired,
     onRequestAddItem: PropTypes.func.isRequired,
+    onRequestSimulateLocation: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -130,6 +131,10 @@ class RateForm extends React.Component {
     this.props.onRequestAddItem();
   }
 
+  onOpenSimulateLocation() {
+    this.props.onRequestSimulateLocation();
+  }
+
   resetForm() {
     // Reset the form & clear the image
     this.setState(Object.assign({
@@ -161,20 +166,27 @@ class RateForm extends React.Component {
             ref={(r) => { this._refSelectItemPlus = r; }} // used to reset the 3 dropdowns
           />
           <FormGroup row>
-            <Col xs={12} sm={2} >
-            </Col>
+            <Col xs={12} sm={2} />
             <Col xs={12} sm={10} >
               <FormFeedback style={{ marginTop: '-1rem' }}>
                 <Button color="link" onClick={this.onOpenAddItem.bind(this)} size="md">Can&apos;t find your dish? Add it here...</Button>
-              </FormFeedback>            
+              </FormFeedback>
             </Col>
-          </FormGroup>          
+          </FormGroup>
 
           <FormGroup>
             <h5 className="mt-2 mb-3">Where?</h5>
             <FormGroup row>
               <Col xs={12} lg={12} >
                 <SimpleListOrDropdown items={this.props.places.places} selectedOption={this.state.location} onChange={this.onChangeLocation.bind(this)} dropdown />
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Col xs={12} sm={2} />
+              <Col xs={12} sm={10} >
+                <FormFeedback style={{ marginTop: '-1rem' }}>
+                  <Button color="link" onClick={this.onOpenSimulateLocation.bind(this)} size="md">Select an area on the map...</Button>
+                </FormFeedback>
               </Col>
             </FormGroup>
           </FormGroup>
