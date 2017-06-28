@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { Container, Row, Table } from 'reactstrap';
 import Alert from 'react-s-alert';
 import SearchItemForm from './SearchItemForm';
+import SimulateLocationContainer from '../pages/SimulateLocationContainer';
 
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
@@ -62,8 +63,8 @@ class SearchItemContainer extends React.Component {
     this._childComponent = null;
 
     this.state = {
-      // Results:
-      markAggregates: null,
+      markAggregates: null, // Results
+      modalSimulateLocation: false,
     };
 
     this.alert = null;
@@ -90,6 +91,15 @@ class SearchItemContainer extends React.Component {
   onEndSearchingFailed = (errorMessage) => {
     const durationSearching = new Date().getTime() - this._nowStartSaving;
     this.alert = Alert.error(`Error while searching (error=${errorMessage}, duration=${durationSearching}ms)`);
+  }
+
+
+  onRequestSimulateLocation() {
+    this.setState({ modalSimulateLocation: true });
+  }
+
+  onCloseModalSimulateLocation() {
+    this.setState({ modalSimulateLocation: false });
   }
 
 
@@ -161,6 +171,7 @@ class SearchItemContainer extends React.Component {
             items={this.props.items}
             onSubmit={this.onSubmit.bind(this)}
             resetForm={this.resetForm.bind(this)}
+            onRequestSimulateLocation={this.onRequestSimulateLocation.bind(this)}
           />
 
           {this.state.markAggregates &&
@@ -184,6 +195,10 @@ class SearchItemContainer extends React.Component {
               </Table>
             </Row>
           }
+          <SimulateLocationContainer
+            open={this.state.modalSimulateLocation}
+            onClose={this.onCloseModalSimulateLocation.bind(this)}
+          />
         </Container>
       </div>
     );

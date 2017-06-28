@@ -21,6 +21,7 @@ class SearchItemForm extends React.Component {
     items: PropTypes.array.isRequired,
     onSubmit: PropTypes.func.isRequired,
     resetForm: PropTypes.func.isRequired,
+    onRequestSimulateLocation: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -64,6 +65,10 @@ class SearchItemForm extends React.Component {
   onChangeDistance(event) {
     if (this.state.distance === event.target.value) return;
     this.setState({ distance: event.target.value });
+  }
+
+  onOpenSimulateLocation() {
+    this.props.onRequestSimulateLocation();
   }
 
   getPredifinedDistances() {
@@ -114,6 +119,14 @@ class SearchItemForm extends React.Component {
               <Col xs={12} sm={10} >
                 <SimpleListOrDropdown items={this.getPredifinedDistances()} selectedOption={this.state.distance} onChange={this.onChangeDistance.bind(this)} dropdown />
                 <FormFeedback>Maximal distance from current location</FormFeedback>
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Col xs={12} sm={2} />
+              <Col xs={12} sm={10} >
+                <FormFeedback style={{ marginTop: '-1rem' }}>
+                  <Button style={{ paddingLeft: '0px' }} color="link" onClick={this.onOpenSimulateLocation.bind(this)} size="md">Not here? Select an area on the map</Button>
+                </FormFeedback>
               </Col>
             </FormGroup>
           </FormGroup>

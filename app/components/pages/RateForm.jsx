@@ -169,7 +169,7 @@ class RateForm extends React.Component {
             <Col xs={12} sm={2} />
             <Col xs={12} sm={10} >
               <FormFeedback style={{ marginTop: '-1rem' }}>
-                <Button color="link" onClick={this.onOpenAddItem.bind(this)} size="md">Can&apos;t find your dish? Add it here...</Button>
+                <Button style={{ paddingLeft: '0px' }} color="link" onClick={this.onOpenAddItem.bind(this)} size="md">Can&apos;t find your dish? Add it here...</Button>
               </FormFeedback>
             </Col>
           </FormGroup>
@@ -185,7 +185,7 @@ class RateForm extends React.Component {
               <Col xs={12} sm={2} />
               <Col xs={12} sm={10} >
                 <FormFeedback style={{ marginTop: '-1rem' }}>
-                  <Button color="link" onClick={this.onOpenSimulateLocation.bind(this)} size="md">Select an area on the map...</Button>
+                  <Button style={{ paddingLeft: '0px' }} color="link" onClick={this.onOpenSimulateLocation.bind(this)} size="md">Not here? Select an area on the map</Button>
                 </FormFeedback>
               </Col>
             </FormGroup>
