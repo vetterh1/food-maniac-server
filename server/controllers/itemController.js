@@ -1,6 +1,6 @@
 import * as logger from 'winston';
 import cuid from 'cuid';
-import sanitizeHtml from 'sanitize-html';
+import sanitizeHtml from 'sanitize-html'; // sanitizeHtml escapes &<>" : s.replace(/\&/g, '&amp;').replace(/</g, '&lt;').replace(/\>/g, '&gt;').replace(/\"/g, '&quot;');
 import fs from 'fs';
 import config from 'config';
 import path from 'path';

@@ -111,7 +111,6 @@ class RateContainer extends React.Component {
 
       const placeSelected = this.props.places.places.find((place) => { return place.id === this.values.location; });
       if (!placeSelected) throw new Error(`saveLocation - Could not find this location: ${this.values.location}`);
-      // logRateContainer.debug(`RateContainer.saveLocation - placeSelected:\n\n${stringifyOnce(placeSelected, null, 2)}`);
       // logRateContainer.debug('placeSelected.geometry: ', placeSelected.geometry);
       // logRateContainer.debug('placeSelected.geometry.location.lat(): ', placeSelected.geometry.location.lat());
       // logRateContainer.debug(`RateContainer.saveLocation - placeSelected.geometry.location:\n\n${stringifyOnce(placeSelected.geometry.location, null, 2)}`);
@@ -123,6 +122,7 @@ class RateContainer extends React.Component {
           coordinates: [placeSelected.geometry.location.lng(), placeSelected.geometry.location.lat()],
         },
       };
+      logRateContainer.debug(`RateContainer.saveLocation - place:\n\n${JSON.stringify({ place })}`);
 
       fetch('/api/places/addOrUpdatePlaceByGoogleMapId', {
         method: 'POST',
@@ -132,7 +132,7 @@ class RateContainer extends React.Component {
         body: JSON.stringify({ place }),
       })
       .then((response) => {
-        logRateContainer.debug('   fetch result: ', response);
+        logRateContainer.debug('   fetch result: ', JSON.stringify(response));
         if (response.ok) {
           logRateContainer.debug('   fetch operation OK');
           // returns the (async) response from server: the saved location (with id)

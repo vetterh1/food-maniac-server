@@ -1,5 +1,5 @@
 import * as logger from 'winston';
-import sanitizeHtml from 'sanitize-html';
+import sanitizeHtml from 'sanitize-html'; // sanitizeHtml escapes &<>" : s.replace(/\&/g, '&amp;').replace(/</g, '&lt;').replace(/\>/g, '&gt;').replace(/\"/g, '&quot;');
 import Place from '../models/place';
 
 
@@ -67,7 +67,8 @@ export function addOrUpdatePlaceByGoogleMapId(req, res) {
     const newPlace = Object.assign({}, req.body.place, { lastModif: new Date() });
 
     // Let's sanitize inputs
-    newPlace.name = sanitizeHtml(newPlace.name);
+    // NO!  transforms & in place names into &amp
+    // newPlace.name = sanitizeHtml(newPlace.name);
 
     Place.findOneAndUpdate({ googleMapId: newPlace.googleMapId }, newPlace, { new: true, upsert: true }, (err, place) => {
       if (err || !place) {

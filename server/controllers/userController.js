@@ -1,5 +1,5 @@
 import * as logger from 'winston';
-import sanitizeHtml from 'sanitize-html';
+import sanitizeHtml from 'sanitize-html'; // sanitizeHtml escapes &<>" : s.replace(/\&/g, '&amp;').replace(/</g, '&lt;').replace(/\>/g, '&gt;').replace(/\"/g, '&quot;');
 import User from '../models/user';
 
 

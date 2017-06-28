@@ -1,4 +1,5 @@
 import * as logger from 'winston';
+import sanitizeHtml from 'sanitize-html'; // sanitizeHtml escapes &<>" : s.replace(/\&/g, '&amp;').replace(/</g, '&lt;').replace(/\>/g, '&gt;').replace(/\"/g, '&quot;');
 import MarkIndividual from '../models/markIndividual';
 import MarkAggregate from '../models/markAggregate';
 
@@ -60,6 +61,8 @@ function addRegularMark({ req, res, markAggregate }) {
   return new Promise((resolve, reject) => {
     logger.info(`{ markIndividualController.addRegularMark (markAggregate: ${markAggregate._id})`);
 
+    const comment = sanitizeHtml(req.body.markIndividual.comment);
+
     const newMarkIndividual = new MarkIndividual({
       markAggregate: markAggregate._id,
       user: req.body.markIndividual.user,
@@ -68,7 +71,7 @@ function addRegularMark({ req, res, markAggregate }) {
       markPlace: req.body.markIndividual.markPlace,
       markValue: req.body.markIndividual.markValue,
       markStaff: req.body.markIndividual.markStaff,
-      comment: req.body.markIndividual.comment,
+      comment,
     });
     newMarkIndividual.save((err, markIndividual) => {
       if (err) {

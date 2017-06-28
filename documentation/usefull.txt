@@ -106,11 +106,60 @@ db.items.find()
 -------------  Change field name ---------------
 db.items.update({}, {$rename: {'cuid': 'id'}}, { upsert:false, multi:true } )
 
+-------------  Change field value  ---------------
+// Change geo key coordinates:
+db.markaggregates.update({'_id': ObjectId('58f4dfff45dab98a840d0004')}, {$set: {'location': {'type' : 'Point', 'coordinates': [3.0177912000000333, 50.5750322]} } } )
+
+-------------  Find by geo location  ---------------
+
+db.markaggregates.find(
+   {
+     location:
+       { $near :
+          {
+            $geometry: { type: "Point",  coordinates: [ 3.0177912000000333, 50.5750322 ] },
+            $maxDistance: 50000
+          }
+       }
+   }
+)
+
 -------------  Remove field ---------------
 db.items.update({},{$unset: {cuid:1}}, {multi: true})
 db.users.update({},{$unset: {cuid:1}}, {multi: true})
 db.marks.update({},{$unset: {cuid:1}}, {multi: true})
 db.places.update({},{$unset: {cuid:1}}, {multi: true})
+
+
+-------------  Transfer collection (backup / dump - restore) ---------------
+
+// ------ Backup PROD --------
+// Creates a /dump folder.
+// (to restrict to one collection, use this: --collection places)
+mongodump  --db food_maniac
+// Tar the folder for easy transfer
+tar cvzf food_maniac_prod_db.tar.gz dump/
+// Move archive to place available for Web download
+mv food_maniac_prod_db.tar.gz distFoServer/
+
+// ------ Restore in DEV db--------
+// 1st: save DEV db
+c:\mongodb\bin\mongo
+db.copyDatabase("food_maniac_dev","food_maniac_dev_save","localhost")
+use food_maniac_dev
+db.dropDatabase();
+exit
+// Then download the archive by browsing this url & use 7zip...
+https://food-maniac.com/food_maniac_prod_db.tar.gz
+// Then restores from a /dump folder.
+// (to restrict to one collection, use this: --collection places)
+// (/dump folder must contain the json files dump with mongodump)
+c:\mongodb\bin\mongorestore dump/
+// At last, copy db PROD in DEV:
+c:\mongodb\bin\mongo
+db.copyDatabase("food_maniac","food_maniac_dev","localhost")
+exit
+
 
 ---------------------------------------------------------------
                              BASICS

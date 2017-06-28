@@ -21,9 +21,12 @@ function roundTo0dot5(n) { return n ? (Math.round(n * 2) / 2).toFixed(1) : null;
 
 const ListOneMark = (props) => {
   const { markAggregate } = props;
+  // sanitizeHtml escapes &<>" so we need to invert this for display!
+  const name = markAggregate.place.name.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
+
   return (
     <tr>
-      <th scope="row">{markAggregate.place.name}</th>
+      <th scope="row">{name}</th>
       <td>{roundTo0dot5(markAggregate.markOverall)}</td>
       <td>{roundTo0dot5(markAggregate.markFood)}</td>
       <td>{roundTo0dot5(markAggregate.markValue)}</td>

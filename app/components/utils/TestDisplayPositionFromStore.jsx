@@ -72,7 +72,13 @@ export class TestDisplayPositionFromStore extends React.Component {
     this.props.onClick();
   };
 
+  clickSimulatedSilverthorne = (e) => {
+    e.preventDefault();
+    this.dispatchSetSimulatedAction(39.627313, -106.0495412);
+    this.props.onClick();
+  };
 
+  
   clickStopSimulated = (e) => {
     e.preventDefault();
     this.dispatchStopSimulatedAction();
@@ -92,6 +98,7 @@ export class TestDisplayPositionFromStore extends React.Component {
           <li><Button onClick={this.clickSimulatedLille}>Lille (simulated)</Button></li>
           <li><Button onClick={this.clickSimulatedMoab}>Moab (simulated)</Button></li>
           <li><Button onClick={this.clickSimulatedLasVegas}>LasVegas (simulated)</Button></li>
+          <li><Button onClick={this.clickSimulatedSilverthorne}>Silverthorne (simulated)</Button></li>
           <li><Button onClick={this.clickStopSimulated}>Stop simulated mode)</Button></li>
         </ul>
       </div>
