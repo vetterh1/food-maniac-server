@@ -1,7 +1,7 @@
 import * as log from 'loglevel';
 import * as c from '../utils/constants';
 
-const MIN_SECONDS_BETWEEN_UPDATES = 15;
+const MIN_SECONDS_BETWEEN_UPDATES = 20;
 
 const logCoordinatesReducer = log.getLogger('logCoordinatesReducer');
 logCoordinatesReducer.setLevel('warn');
