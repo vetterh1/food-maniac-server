@@ -9,6 +9,7 @@ import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/stackslide.css';
 import MainAppBar from '../navigation/MainAppBar';
 import Footer from '../utils/Footer';
+import AlertSimulateMode from '../utils/AlertSimulateMode';
 
 
 const styles = {
@@ -31,6 +32,7 @@ class App extends React.Component {
     return (
       <div style={styles.pageContainer}>
         <MainAppBar location={this.props.location} router={this.props.router} route={this.props.route} />
+        <AlertSimulateMode />
         {this.props.children}
         <Footer />
         <Alert stack={{ limit: 6 }} position="top" timeout={3000} effect="stackslide" />
