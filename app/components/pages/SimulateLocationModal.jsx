@@ -87,6 +87,7 @@ class SimulateLocationModal extends React.Component {
       zoom: 15,
       streetViewControl: false,
       mapTypeControl: false,
+      gestureHandling: 'greedy',
     });
     this._mapGoogle.addListener('center_changed', () => { this.setPosition(this._mapGoogle.getCenter()); });
     this._mapGoogle.addListener('click', (event) => { this.setPosition(event.latLng); });
