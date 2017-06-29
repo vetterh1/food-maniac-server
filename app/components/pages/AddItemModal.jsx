@@ -120,6 +120,8 @@ class AddItemModal extends React.Component {
 
 
   render() {
+    if (!this.props.open) return null;
+    
     console.log('AddItemModal render: (category, kind, name, picture)=', this.state.category, this.state.kind, this.state.name, this.state.picture ? this.state.picture.length : 'null');
     const formReadyForSubmit = this.state.name && this.state.kind && this.state.category;
     return (

@@ -37,8 +37,9 @@ const coordinatesReducer = (state = initialState, action) => {
       latitude: action.latitude,
       longitude: action.longitude,
       changed: true,
-      latitude_save: state.latitude,
-      longitude_save: state.longitude,
+      // Backup original location... only if NOT simulated
+      latitude_save: state.simulated ? state.latitude_save : state.latitude,
+      longitude_save: state.simulated ? state.longitude_save : state.longitude,
     };
 
     logCoordinatesReducer.debug('       (rsim) newState:', newState);
