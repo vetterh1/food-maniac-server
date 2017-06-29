@@ -51,8 +51,8 @@ class SearchItemContainer extends React.Component {
   static propTypes = {
     // Injected by redux-store connect:
     coordinates: PropTypes.object.isRequired,
-    kinds: PropTypes.array.isRequired,
-    categories: PropTypes.array.isRequired,
+    kinds: PropTypes.object.isRequired,
+    categories: PropTypes.object.isRequired,
     items: PropTypes.array.isRequired,
   }
 

@@ -49,6 +49,16 @@ export const REQUEST_DELETE_ITEM = 'REQUEST_DELETE_ITEM';
 export const DELETE_ITEM_OK = 'DELETE_ITEM_OK';
 export const DELETE_ITEM_KO = 'DELETE_ITEM_KO';
 
+
+//
+// Set the default item in the dropdown list
+// Used in rating: rated item is set as default
+// (only for current session, so server saving!)
+//
+
+export const REQUEST_SET_DEFAULT_ITEM = 'REQUEST_SET_DEFAULT_ITEM';
+
+
 export const REQUEST_BACKUP_ORPHANS = 'REQUEST_BACKUP_ORPHANS';
 export const BACKUP_ORPHANS_OK = 'BACKUP_ORPHANS_OK';
 export const BACKUP_ORPHANS_KO = 'BACKUP_ORPHANS_KO';

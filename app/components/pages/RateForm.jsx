@@ -158,10 +158,10 @@ class RateForm extends React.Component {
         <Form onSubmit={this.onSubmit.bind(this)}>
           <SelectItemPlus
             title="What?"
-            addItemLink
             kinds={this.props.kinds.kinds}
             categories={this.props.categories.categories}
             items={this.props.items.items}
+            defaultItem={this.props.items.defaultItem}
             onChangeItem={this.onChangeItem.bind(this)}
             ref={(r) => { this._refSelectItemPlus = r; }} // used to reset the 3 dropdowns
           />

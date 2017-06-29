@@ -118,6 +118,20 @@ function _requestBackupingOrphans() { return { type: c.REQUEST_BACKUP_ORPHANS };
 function _successBackupingOrphans(nbOrphansBackedUp) { return { type: c.BACKUP_ORPHANS_OK, nbOrphansBackedUp }; }
 function _errorBackupingOrphans(message) { return { type: c.BACKUP_ORPHANS_OK, error: message }; }
 
+
+
+//
+// Set the default item in the dropdown list
+// Used in rating: rated item is set as default
+// (only for current session, so server saving!)
+//
+
+export function requestSetDefaultItem(id) { return { type: c.REQUEST_SET_DEFAULT_ITEM, id }; }
+
+
+
+
+
 // Once the item is deleted,
 // we can updating all the marks that were previously attached to this item
 // and changed their items to the backupItemId

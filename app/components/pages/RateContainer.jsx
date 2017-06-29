@@ -12,6 +12,7 @@ import AddItemContainer from '../pages/AddItemContainer';
 import SimulateLocationContainer from '../pages/SimulateLocationContainer';
 import stringifyOnce from '../../utils/stringifyOnce';
 import { loglevelServerSend } from '../../utils/loglevel-serverSend';
+import * as itemsActions from '../../actions/itemsActions';
 
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
@@ -209,6 +210,12 @@ class RateContainer extends React.Component {
 
   saveDone(savedMark) {
     logRateContainer.debug(`saveDone - markIndividual saved: ${stringifyOnce(savedMark, null, 2)}`);
+
+    // Remove any default item (set by Add Item)
+    const { dispatch } = this.props;  // Injected by react-redux
+    const action = itemsActions.requestSetDefaultItem(null);
+    dispatch(action);
+
     this.onEndSavingOK();
   }
 

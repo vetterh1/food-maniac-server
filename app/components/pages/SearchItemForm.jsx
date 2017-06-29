@@ -16,8 +16,8 @@ const styles = {
 
 class SearchItemForm extends React.Component {
   static propTypes = {
-    kinds: PropTypes.array.isRequired,
-    categories: PropTypes.array.isRequired,
+    kinds: PropTypes.object.isRequired,
+    categories: PropTypes.object.isRequired,
     items: PropTypes.array.isRequired,
     onSubmit: PropTypes.func.isRequired,
     resetForm: PropTypes.func.isRequired,

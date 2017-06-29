@@ -19,6 +19,7 @@ class SelectItemPlus extends React.Component {
     kinds: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
     items: PropTypes.array,
+    defaultItem: PropTypes.string,
     onChangeKind: PropTypes.func,
     onChangeCategory: PropTypes.func,
     onChangeItem: PropTypes.func,
@@ -34,7 +35,7 @@ class SelectItemPlus extends React.Component {
       // Selected Kind & Category:
       kind: '',
       category: '',
-      item: '',
+      item: this.props.defaultItem || '',
     };
 
     this.state = {
@@ -56,8 +57,12 @@ class SelectItemPlus extends React.Component {
       this.setState({
         fullItemsList: nextProps.items,
         filteredItemsList: nextProps.items,
-        item: '',
+        item: nextProps.defaultItem || '',
       });
+      // If default item, tell parent about it so it can enable the Submit btn
+      if (nextProps.defaultItem) {
+        this.props.onChangeItem(nextProps.defaultItem);
+      }
     }
   }
 
@@ -167,6 +172,7 @@ SelectItemPlus.defaultProps = {
   onChangeCategory: null,
   onChangeItem: null,
   items: [],
+  defaultItem: null,
   categoryPlaceHolder: 'All',
   kindPlaceHolder: 'All',
   itemPlaceHolder: 'Select an item...',

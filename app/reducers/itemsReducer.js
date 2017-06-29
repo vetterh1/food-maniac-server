@@ -30,8 +30,8 @@ const itemsReducer = (state = initialState, action) => {
   case c.REQUEST_SAVE_ITEM: return Object.assign({}, state, { isSaving: true, error: null });
   case c.SAVE_ITEM_OK: {
     // Add the new item to the redux store so we don't need to reload from server to access it
-    const newItems = [action.item, ...state.items]
-    const newState = { ...state, isSaving: false, error: null, items: newItems };
+    const newItems = [action.item, ...state.items];
+    const newState = { ...state, isSaving: false, error: null, items: newItems, defaultItem: action.item.id };
     console.log('itemsReducer (SAVE_ITEM_OK) - newState=', newState);
     return newState;
   }
@@ -68,6 +68,19 @@ const itemsReducer = (state = initialState, action) => {
     return newState;
   }
   case c.DELETE_ITEM_KO: return Object.assign({}, state, { isDeleting: false, error: action.error });
+
+
+  //
+  // Set the default item in the dropdown list
+  // Used in rating: rated item is set as default
+  // (only for current session, so server saving!)
+  //
+
+  case c.REQUEST_SET_DEFAULT_ITEM: return Object.assign({}, state, { defaultItem: action.id });
+
+
+
+
   case c.REQUEST_BACKUP_ORPHANS: return Object.assign({}, state, { isBackupingOrphans: true, error: null });
   case c.BACKUP_ORPHANS_OK: return Object.assign({}, state, { isBackupingOrphans: false, nbOrphansBackedUp: action.nbOrphansBackedUp, error: null });
   case c.BACKUP_ORPHANS_KO: return Object.assign({}, state, { isBackupingOrphans: false, error: action.error });
