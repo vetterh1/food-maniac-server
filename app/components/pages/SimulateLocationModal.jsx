@@ -3,10 +3,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Alert, Button, Container, Col, FormFeedback, FormGroup, Input, Label, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import SelectItemPlus from '../utils/SelectItemPlus';
-// import { AvForm, AvField, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
-import CameraSnapshotContainer from './CameraSnapshotContainer';
-// import LogOnDisplay from '../utils/LogOnDisplay';
 
 const styles = {
   form: {
@@ -14,42 +10,25 @@ const styles = {
     // margin: '20 auto',
     // padding: 20,
   },
-  imageCameraSnapshot: {
-    maxWidth: 300,
-    maxHeight: 200,
-  },
 };
 
 class SimulateLocationModal extends React.Component {
   static propTypes = {
     open: PropTypes.bool.isRequired,
-    kinds: PropTypes.array.isRequired,
-    categories: PropTypes.array.isRequired,
     onSubmit: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
-    onSnapshotStartProcessing: PropTypes.func.isRequired,
-    onSnapshotError: PropTypes.func.isRequired,
-    onSnapshotReady: PropTypes.func.isRequired,
+    coordinates: PropTypes.object.isRequired,
   }
 
   constructor(props) {
     super(props);
-    this.onSnapshotReady = this.onSnapshotReady.bind(this);
-    this._imageCameraSnapshot = null;
-
-    // this._logOnDisplay = null;
 
     this.defaultState = {
       // unique key for the form --> used for reset form
       keyForm: Date.now(),
 
+      coordinates: { latitude: 0, longitude: 0 },
       canSubmit: false,
-
-      name: '',
-      // Selected Kind & Category:
-      // (also updated in componentWillReceiveProps when receiving lists)
-      category: '',
-      kind: '',
     };
 
     this.state = {
@@ -59,57 +38,18 @@ class SimulateLocationModal extends React.Component {
   }
 
 
-  onDeleteSnapshot = () => {
-    this._imageCameraSnapshot.src = '';
-    this.setState({ picture: null });
-  }
-
-  onSnapshotReady = (data /* , nowUpdateParent */) => {
-    this.displaySnapshot(data);
-    console.log('SimulateLocationModal.onSnapshot() snapshot length: ', data ? data.length : 'null');
-    this.setState({ picture: data });
-
-    // Call parent for user feedback (status)
-    this.props.onSnapshotReady();
-  }
 
   onSubmit(event) {
     // event.preventDefault();
 
     const returnValue = {
-      category: this.state.category,
-      kind: this.state.kind,
-      name: this.state.name,
-      picture: this.state.picture,
+      coordinates: this.state.coordinates,
     };
     this.props.onSubmit(returnValue);
 
     // Reset for next time it's displayed
     this.setState(this.defaultState);
   }
-
-  onChangeKind(kind) {
-    if (this.state.kind === kind) return;
-    this.setState({ kind });
-  }
-
-  onChangeCategory(category) {
-    if (this.state.category === category) return;
-    this.setState({ category });
-  }
-
-  // TODO : Should verify on server side if name already exists
-  // and at least not in items list
-  onChangeName(event) {
-    if (this.state.name === event.target.value) return;
-    console.log('SimulateLocationModal.onChangeName value:', event.target.value);
-    this.setState({ name: event.target.value });
-  }
-
-  displaySnapshot = (data) => {
-    this._imageCameraSnapshot.src = data;
-  }
-
 
   onCancel() {
     // Reset for next time it's displayed
@@ -118,50 +58,24 @@ class SimulateLocationModal extends React.Component {
     this.props.onCancel();
   }
 
+  clickSimulatedLasVegas = (e) => {
+    this.setState({ coordinates: { latitude: 36.0839998, longitude: -115.1559276 } });
+  };
 
   render() {
-    console.log('SimulateLocationModal render: (category, kind, name, picture)=', this.state.category, this.state.kind, this.state.name, this.state.picture ? this.state.picture.length : 'null');
-    const formReadyForSubmit = this.state.name && this.state.kind && this.state.category;
+    console.log('SimulateLocationModal render: (coordinates)=', JSON.stringify(this.state.coordinates));
+    const formReadyForSubmit = this.state.coordinates.latitude != 0 && this.state.coordinates.longitude != 0
     return (
       <Modal isOpen={this.props.open} toggle={this.onCancel.bind(this)}>
-        <ModalHeader toggle={this.onCancel.bind(this)}>Add new dish...</ModalHeader>
+        <ModalHeader toggle={this.onCancel.bind(this)}>Select a location...</ModalHeader>
         <ModalBody>
           <Container fluid>
-            <Alert color="warning">Please make sure a similar item does not already exist!</Alert>
-            <SelectItemPlus
-              hideItem
-              kinds={this.props.kinds}
-              categories={this.props.categories}
-              onChangeKind={this.onChangeKind.bind(this)}
-              onChangeCategory={this.onChangeCategory.bind(this)}
-              kindPlaceHolder="Select a kind"
-              categoryPlaceHolder="Select a category"
-              ref={(r) => { this._refSelectItemPlus = r; }} // used to reset the 3 dropdowns
-            />
-
-            <FormGroup row>
-              <Col xs={12} sm={2} >
-                <Label for="inputName" size="md">Name</Label>
-              </Col>
-              <Col xs={12} sm={10} >
-                <Input name="name" id="inputName" onChange={this.onChangeName.bind(this)} value={this.state.name} placeholder="..." required size="md" />
-                <FormFeedback>This field is mandatory!</FormFeedback>
-              </Col>
-            </FormGroup>
-
-            <FormGroup row>
-              <Col xs={12} sm={2} >
-                <Label for="inputName" size="md">Picture</Label>
-              </Col>
-              <Col xs={12} sm={10} >
-                <CameraSnapshotContainer onError={this.props.onSnapshotError} onSnapshotStartProcessing={this.props.onSnapshotStartProcessing} onSnapshotReady={this.onSnapshotReady.bind(this)} onDeleteSnapshot={this.onDeleteSnapshot.bind(this)} />
-                <img ref={(r) => { this._imageCameraSnapshot = r; }} style={styles.imageCameraSnapshot} alt="" />
-              </Col>
-            </FormGroup>
+            <Alert color="warning">....</Alert>
+            <Button onClick={this.clickSimulatedLasVegas}>LasVegas (simulated)</Button>
           </Container>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" type="submit" onClick={this.onSubmit.bind(this)} size="md" disabled={!formReadyForSubmit} getRef={(ref) => { this.refSubmit = ref; }} >Add</Button>
+          <Button color="primary" type="submit" onClick={this.onSubmit.bind(this)} size="md" disabled={!formReadyForSubmit} getRef={(ref) => { this.refSubmit = ref; }} >Go!</Button>
           <Button color="link" onClick={this.onCancel.bind(this)} size="md">Cancel</Button>
         </ModalFooter>
       </Modal>
