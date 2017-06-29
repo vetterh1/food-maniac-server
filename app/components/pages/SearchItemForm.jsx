@@ -103,8 +103,9 @@ class SearchItemForm extends React.Component {
         <Form onSubmit={this.onSubmit.bind(this)}>
           <SelectItemPlus
             title="What?"
-            kinds={this.props.kinds}
-            categories={this.props.categories}
+            addItemLink
+            kinds={this.props.kinds.kinds}
+            categories={this.props.categories.categories}
             items={this.props.items}
             onChangeItem={this.onChangeItem.bind(this)}
             ref={(r) => { this._refSelectItemPlus = r; }} // used to reset the 3 dropdowns

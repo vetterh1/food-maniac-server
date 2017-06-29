@@ -245,13 +245,10 @@ class SearchItemContainer extends React.Component {
 
 
 const mapStateToProps = (state) => {
-  // Add the All to the Kind & Category lists
-  const kinds = [{ id: '--all--', name: 'All' }, ...state.kinds.kinds];
-  const categories = [{ id: '--all--', name: 'All' }, ...state.categories.categories];
   return {
     coordinates: state.coordinates,
-    kinds,
-    categories,
+    kinds: state.kinds,
+    categories: state.categories,
     items: state.items.items,
   };
 };
