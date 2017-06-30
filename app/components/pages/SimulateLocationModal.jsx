@@ -20,9 +20,9 @@ const styles = {
     // maxWidth: '100%',
   },
   modalbody: {
-    display: 'flex',
-    margin: 0,
-    padding: '0px',
+    // display: 'flex',
+    // margin: 0,
+    // padding: '0px',
   },
   container: {
     // margin: '0px',
