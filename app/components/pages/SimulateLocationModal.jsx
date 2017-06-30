@@ -11,17 +11,34 @@ logSimulateLocationModal.debug('--> entering SimulateLocationModal.jsx');
 
 
 const styles = {
-  form: {
-    // width: 300,
-    // margin: '20 auto',
-    // padding: 20,
+  test: {
+
   },
-  container: {
-    margin: '0px',
+  modal: {
+    // margin: '0px',
+    // minWidth: '100%',
+    // maxWidth: '100%',
+  },
+  modalbody: {
+    display: 'flex',
+    margin: 0,
     padding: '0px',
   },
+  container: {
+    // margin: '0px',
+    // position: 'relative',
+    // width: '100%',
+    // height: '100% ',
+    display: 'flex',
+    flex: '1 1 auto',
+    padding: '0px',
+  },
+  btnGo: {
+    // marginLeft: 'auto',
+  },
   map: {
-    height: '400px',
+    // height: '100px',
+    width: '100%',
     // width: '300px',
   },
 };
@@ -136,18 +153,22 @@ class SimulateLocationModal extends React.Component {
     logSimulateLocationModal.debug('SimulateLocationModal render: (coordinates)=', JSON.stringify(this.state.coordinates));
     const formReadyForSubmit = this.state.coordinates.latitude !== 0 && this.state.coordinates.longitude !== 0;
     return (
-      <Modal isOpen={this.props.open} toggle={this.onCancel.bind(this)}>
-        <ModalHeader toggle={this.onCancel.bind(this)}>Select a location...</ModalHeader>
-        <ModalBody>
-          <Container fluid style={styles.container}>
-            <div ref={(r) => { this._mapSimulated = r; }} style={styles.map} />
-          </Container>
-        </ModalBody>
-        <ModalFooter>
-          <Button color="primary" type="submit" onClick={this.onSubmit.bind(this)} size="md" disabled={!formReadyForSubmit} getRef={(ref) => { this.refSubmit = ref; }} >Go!</Button>
-          <Button color="link" onClick={this.onCancel.bind(this)} size="md">Cancel</Button>
-        </ModalFooter>
-      </Modal>
+      <div style={styles.test}>
+        <Modal id="simlocmod" className="sim-loc-mod" style={styles.modal} isOpen={this.props.open} toggle={this.onCancel.bind(this)}>
+          <ModalHeader toggle={this.onCancel.bind(this)}>
+            Select a location...
+          </ModalHeader>
+          <ModalBody style={styles.modalbody}>
+            <Container fluid style={styles.container}>
+              <div ref={(r) => { this._mapSimulated = r; }} style={styles.map} />
+            </Container>
+          </ModalBody>
+          <ModalFooter>
+            <Button style={styles.btnGo} color="primary" type="submit" onClick={this.onSubmit.bind(this)} size="md" disabled={!formReadyForSubmit} getRef={(ref) => { this.refSubmit = ref; }} >Go!</Button>
+            <Button color="link" onClick={this.onCancel.bind(this)} size="md">Cancel</Button>
+          </ModalFooter>
+        </Modal>
+      </div>
     );
   }
 
@@ -156,6 +177,7 @@ class SimulateLocationModal extends React.Component {
 export default SimulateLocationModal;
 
 /*
+            <div>Move to desired place & press Go</div>
 
   // clickSimulatedLasVegas = () => {
   //   this.setState({ coordinates: { latitude: 36.0839998, longitude: -115.1559276 } });
