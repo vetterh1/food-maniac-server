@@ -61,9 +61,15 @@ class RateForm extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (!nextProps) return;
 
+    // Search if crt location still in the new list:
+    const bCrtIndexInStillInNewPlaces = nextProps.places.places.some(place => place.id === this.state.location);
+
     // Prepare the default location selection if necessary
-    if (nextProps.places && nextProps.places.places.length > 0 && (!this.state.location || this.state.location === '')) {
+    if (nextProps.places && nextProps.places.places.length > 0 && (!bCrtIndexInStillInNewPlaces || !this.state.location || this.state.location === '')) {
+      logRateForm.debug(`RateForm.componentWillReceiveProps: new location=${nextProps.places.places[0].id} old=${this.state.location}`);
       this.setState({ location: nextProps.places.places[0].id });
+    } else {
+      logRateForm.debug(`RateForm.componentWillReceiveProps: no new location. crt=${this.state.location}`);
     }
   }
 

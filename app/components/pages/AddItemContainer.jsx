@@ -86,7 +86,7 @@ class AddItemContainer extends React.Component {
   componentWillReceiveProps(nextProps) {
     console.log('AddItemContainer.componentWillReceiveProps - (nextProps, crtProps): ', nextProps, this.props);
 
-    // Only consider the end of loading:
+    // Only consider the end of saving:
     // previous isSaving = true and
     // new isSaving = false
     if (!nextProps ||
@@ -122,8 +122,6 @@ class AddItemContainer extends React.Component {
 
 
 const mapStateToProps = (state) => {
-    console.log('AddItemContainer.mapStateToProps - (state): ', state);
-
   // Add the All to the Kind & Category lists
   return {
     kinds: state.kinds.kinds,
