@@ -4,6 +4,10 @@ import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Col, Form, FormFeedback, FormGroup, Input } from 'reactstrap';
+// import MdLocalCake from 'react-icons/lib/md/local-cake';
+// import MdLocalBar from 'react-icons/lib/md/local-bar';
+// import MdLocalCafe from 'react-icons/lib/md/local-cafe';
+// import MdLocalRestaurant from 'react-icons/lib/md/local-restaurant';
 import RatingStarsRow from '../utils/RatingStarsRow';
 import SimpleListOrDropdown from '../utils/SimpleListOrDropdown';
 import SelectItemPlus from '../utils/SelectItemPlus';
@@ -21,6 +25,16 @@ const styles = {
   },
 };
 
+const LOCATION_TYPES = [
+  { id: 'bakery', name: 'Bakery', icon: 'MdLocalCake' },
+  { id: 'bar', name: 'Bar', icon: 'MdLocalBar' },
+  { id: 'cafe', name: 'Cafe', icon: 'MdLocalCafe' },
+  { id: 'restaurant', name: 'Restaurant', icon: 'MdLocalRestaurant' },
+];
+
+
+
+
 class RateForm extends React.Component {
   static propTypes = {
     kinds: PropTypes.object.isRequired,
@@ -30,6 +44,7 @@ class RateForm extends React.Component {
     onSubmit: PropTypes.func.isRequired,
     onRequestAddItem: PropTypes.func.isRequired,
     onRequestSimulateLocation: PropTypes.func.isRequired,
+    onChangeLocationType: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -49,6 +64,8 @@ class RateForm extends React.Component {
       markStaff: null,
 
       comment: '',
+
+      locationType: 'restaurant',
     };
 
     this.state = {
@@ -100,6 +117,13 @@ class RateForm extends React.Component {
   onChangeLocation(event) {
     if (this.state.location === event.target.value) return;
     this.setState({ location: event.target.value });
+  }
+
+
+  onChangeLocationType(event) {
+    if (this.state.locationType === event.target.value) return;
+    this.setState({ locationType: event.target.value });
+    this.props.onChangeLocationType(event.target.value);
   }
 
 
@@ -185,6 +209,14 @@ class RateForm extends React.Component {
             <FormGroup row>
               <Col xs={12} lg={12} >
                 <SimpleListOrDropdown items={this.props.places.places} selectedOption={this.state.location} onChange={this.onChangeLocation.bind(this)} dropdown />
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Col xs={12} sm={2} />
+              <Col xs={12} sm={10} >
+                <FormFeedback style={{ marginTop: '-1rem' }}>
+                  <SimpleListOrDropdown items={LOCATION_TYPES} selectedOption={this.state.locationType} onChange={this.onChangeLocationType.bind(this)} dropdown />
+                </FormFeedback>
               </Col>
             </FormGroup>
             <FormGroup row>

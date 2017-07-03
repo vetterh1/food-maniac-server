@@ -63,7 +63,7 @@ class RetreiveLocations extends React.Component {
     const request = {
       location: currentLatLng,
       // radius: '100',
-      types: ['restaurant'],
+      types: [nextProps.locationType],
       rankBy: google.maps.places.RankBy.DISTANCE,
     };
 
@@ -134,6 +134,7 @@ RetreiveLocations.propTypes = {
     nbEstimated: PropTypes.number,
     nbClose: PropTypes.number,
   }).isRequired,
+  locationType: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 
@@ -142,8 +143,7 @@ RetreiveLocations.propTypes = {
 // Role of mapStateToProps: transform the "interesting" part of the store state
 // into some props that will be received by componentWillReceiveProps
 const mapStateToProps = (state) => {
-  logRetreiveLocations.debug('mapStateToProps');
-  return { coordinates: state.coordinates };
+  return { coordinates: state.coordinates, locationType: state.places.locationType };
 };
 
 export default connect(mapStateToProps)(RetreiveLocations);

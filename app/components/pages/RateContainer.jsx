@@ -13,6 +13,7 @@ import SimulateLocationContainer from '../pages/SimulateLocationContainer';
 import stringifyOnce from '../../utils/stringifyOnce';
 import { loglevelServerSend } from '../../utils/loglevel-serverSend';
 import * as itemsActions from '../../actions/itemsActions';
+import * as placesActions from '../../actions/PlacesActions';
 
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
@@ -92,6 +93,12 @@ class RateContainer extends React.Component {
     this.setState({ modalSimulateLocation: false });
   }
 
+  onChangeLocationType(locationType) {
+    // Remove any default item (set by Add Item)
+    const { dispatch } = this.props;  // Injected by react-redux
+    const action = placesActions.setLocationType(locationType);
+    dispatch(action);
+  }
 
   save() {
     logRateContainer.debug(`RateContainer.save - values:\n\n${stringifyOnce(this.values, null, 2)}`);
@@ -233,6 +240,7 @@ class RateContainer extends React.Component {
           onSubmit={this.onSubmit.bind(this)}
           onRequestAddItem={this.onRequestAddItem.bind(this)}
           onRequestSimulateLocation={this.onRequestSimulateLocation.bind(this)}
+          onChangeLocationType={this.onChangeLocationType.bind(this)}
         />
         <AddItemContainer
           open={this.state.modalAddItemOpened}
