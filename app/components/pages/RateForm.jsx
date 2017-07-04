@@ -8,6 +8,7 @@ import { Button, Col, Form, FormFeedback, FormGroup, Input } from 'reactstrap';
 // import MdLocalBar from 'react-icons/lib/md/local-bar';
 // import MdLocalCafe from 'react-icons/lib/md/local-cafe';
 // import MdLocalRestaurant from 'react-icons/lib/md/local-restaurant';
+
 import RatingStarsRow from '../utils/RatingStarsRow';
 import SimpleListOrDropdown from '../utils/SimpleListOrDropdown';
 import SelectItemPlus from '../utils/SelectItemPlus';
@@ -193,19 +194,12 @@ class RateForm extends React.Component {
             items={this.props.items.items}
             defaultItem={this.props.items.defaultItem}
             onChangeItem={this.onChangeItem.bind(this)}
+            onAddItem={this.onOpenAddItem.bind(this)}
             ref={(r) => { this._refSelectItemPlus = r; }} // used to reset the 3 dropdowns
           />
-          <FormGroup row>
-            <Col xs={12} sm={2} />
-            <Col xs={12} sm={10} >
-              <FormFeedback style={{ marginTop: '-1rem' }}>
-                <Button style={{ paddingLeft: '0px' }} color="link" onClick={this.onOpenAddItem.bind(this)} size="md">Can&apos;t find your dish? Add it here...</Button>
-              </FormFeedback>
-            </Col>
-          </FormGroup>
 
           <FormGroup>
-            <h5 className="mt-2 mb-3">Where?</h5>
+            <h5 className="mt-4 mb-3">Where?</h5>
             <FormGroup row>
               <Col xs={12} lg={12} >
                 <SimpleListOrDropdown items={this.props.places.places} selectedOption={this.state.location} onChange={this.onChangeLocation.bind(this)} dropdown />

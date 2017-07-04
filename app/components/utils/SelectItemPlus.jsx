@@ -3,7 +3,9 @@
 import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Col, FormGroup, Label } from 'reactstrap';
+import { Button, Card, CardTitle, Col, Collapse, FormGroup, Label } from 'reactstrap';
+import MdFilterList from 'react-icons/lib/md/filter-list';
+import MdPlaylistAdd from 'react-icons/lib/md/playlist-add';
 import SimpleListOrDropdown from '../utils/SimpleListOrDropdown';
 import { loglevelServerSend } from '../../utils/loglevel-serverSend';
 
@@ -16,6 +18,7 @@ class SelectItemPlus extends React.Component {
   static propTypes = {
     title: PropTypes.string,
     hideItem: PropTypes.bool,
+    onAddItem: PropTypes.func,
     kinds: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
     items: PropTypes.array,
@@ -36,6 +39,7 @@ class SelectItemPlus extends React.Component {
       kind: '',
       category: '',
       item: this.props.defaultItem || '',
+      collapseFilters: false,
     };
 
     this.state = {
@@ -85,6 +89,7 @@ class SelectItemPlus extends React.Component {
     if (this.props.onChangeItem) this.props.onChangeItem(event.target.value);
   }
 
+
   // return the filtered list
   getVisibleItems(kind, category) {
     return this.state.fullItemsList.filter((item) => {
@@ -92,6 +97,15 @@ class SelectItemPlus extends React.Component {
       const categoryCondition = (category && category !== undefined && category !== '' ? item.category === category : true);
       return kindCondition && categoryCondition;
     });
+  }
+
+
+  toggleFilters() {
+    this.setState({ collapseFilters: !this.state.collapseFilters });
+  }
+
+  addItem() {
+
   }
 
 
@@ -113,34 +127,7 @@ class SelectItemPlus extends React.Component {
     return (
       <FormGroup>
         {this.props.title && <h5 className="mb-3">{this.props.title}</h5>}
-        <FormGroup row>
-          <Col xs={12} sm={2} >
-            <Label size="md">Category</Label>
-          </Col>
-          <Col xs={12} sm={10} >
-            <SimpleListOrDropdown
-              items={this.props.categories}
-              dropdownPlaceholder={this.props.categoryPlaceHolder}
-              selectedOption={this.state.category}
-              onChange={this.onChangeCategory.bind(this)}
-              dropdown
-            />
-          </Col>
-        </FormGroup>
-        <FormGroup row>
-          <Col xs={12} sm={2} >
-            <Label size="md">Kind</Label>
-          </Col>
-          <Col xs={12} sm={10} >
-            <SimpleListOrDropdown
-              items={this.props.kinds}
-              dropdownPlaceholder={this.props.kindPlaceHolder}
-              selectedOption={this.state.kind}
-              onChange={this.onChangeKind.bind(this)}
-              dropdown
-            />
-          </Col>
-        </FormGroup>
+
         {!this.props.hideItem &&
           <FormGroup row>
             <Col xs={12} sm={2} >
@@ -157,6 +144,53 @@ class SelectItemPlus extends React.Component {
             </Col>
           </FormGroup>
         }
+        {!this.props.hideItem &&
+          <FormGroup row style={{ marginTop: '-1rem' }}>
+            <Col xs={12} sm={2} />
+            <Col xs={6} sm={3} >
+              <Button block color="secondary" size="sm" onClick={this.toggleFilters.bind(this)}><MdFilterList className="mr-2" size={24} /> Filters</Button>
+            </Col>
+            {this.props.onAddItem &&
+              <Col xs={6} sm={3} >
+                <Button block color="secondary" size="sm" onClick={this.props.onAddItem}><MdPlaylistAdd className="mr-2" size={24} /> Add</Button>
+              </Col>
+            }
+          </FormGroup>
+        }
+
+        <Collapse isOpen={this.state.collapseFilters}>
+          <Card block>
+            <CardTitle className="mb-4">Filter items</CardTitle>
+            <FormGroup row>
+              <Col xs={12} sm={2} >
+                <Label size="md">Category</Label>
+              </Col>
+              <Col xs={12} sm={10} >
+                <SimpleListOrDropdown
+                  items={this.props.categories}
+                  dropdownPlaceholder={this.props.categoryPlaceHolder}
+                  selectedOption={this.state.category}
+                  onChange={this.onChangeCategory.bind(this)}
+                  dropdown
+                />
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Col xs={12} sm={2} >
+                <Label size="md">Kind</Label>
+              </Col>
+              <Col xs={12} sm={10} >
+                <SimpleListOrDropdown
+                  items={this.props.kinds}
+                  dropdownPlaceholder={this.props.kindPlaceHolder}
+                  selectedOption={this.state.kind}
+                  onChange={this.onChangeKind.bind(this)}
+                  dropdown
+                />
+              </Col>
+            </FormGroup>
+          </Card>
+        </Collapse>
       </FormGroup>
     );
   }
@@ -168,6 +202,7 @@ class SelectItemPlus extends React.Component {
 SelectItemPlus.defaultProps = {
   title: null,
   hideItem: false,
+  onAddItem: null,
   onChangeKind: null,
   onChangeCategory: null,
   onChangeItem: null,
