@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Alert, Button, Container, Col, FormFeedback, FormGroup, Input, Label, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Alert, Button, Container, Col, FormFeedback, Input, Label, Modal, ModalHeader, ModalBody, ModalFooter, Row } from 'reactstrap';
 import SelectItemPlus from '../utils/SelectItemPlus';
 // import { AvForm, AvField, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
 import CameraSnapshotContainer from './CameraSnapshotContainer';
@@ -125,7 +125,7 @@ class AddItemModal extends React.Component {
     console.log('AddItemModal render: (category, kind, name, picture)=', this.state.category, this.state.kind, this.state.name, this.state.picture ? this.state.picture.length : 'null');
     const formReadyForSubmit = this.state.name && this.state.kind && this.state.category;
     return (
-      <Modal isOpen={this.props.open} toggle={this.onCancel.bind(this)}>
+      <Modal size="lg" isOpen={this.props.open} toggle={this.onCancel.bind(this)}>
         <ModalHeader toggle={this.onCancel.bind(this)}>Add new dish...</ModalHeader>
         <ModalBody>
           <Container fluid>
@@ -141,25 +141,25 @@ class AddItemModal extends React.Component {
               ref={(r) => { this._refSelectItemPlus = r; }} // used to reset the 3 dropdowns
             />
 
-            <FormGroup row>
-              <Col xs={12} sm={2} >
+            <Row>
+              <Col xs={12} sm={3} md={2} >
                 <Label for="inputName" size="md">Name</Label>
               </Col>
-              <Col xs={12} sm={10} >
+              <Col xs={12} sm={9} md={10} >
                 <Input name="name" id="inputName" onChange={this.onChangeName.bind(this)} value={this.state.name} placeholder="..." required size="md" />
                 <FormFeedback>This field is mandatory!</FormFeedback>
               </Col>
-            </FormGroup>
+            </Row>
 
-            <FormGroup row>
-              <Col xs={12} sm={2} >
+            <Row>
+              <Col xs={12} sm={3} md={2} >
                 <Label for="inputName" size="md">Picture</Label>
               </Col>
-              <Col xs={12} sm={10} >
+              <Col xs={12} sm={9} md={10} >
                 <CameraSnapshotContainer onError={this.props.onSnapshotError} onSnapshotStartProcessing={this.props.onSnapshotStartProcessing} onSnapshotReady={this.onSnapshotReady.bind(this)} onDeleteSnapshot={this.onDeleteSnapshot.bind(this)} />
                 <img ref={(r) => { this._imageCameraSnapshot = r; }} style={styles.imageCameraSnapshot} alt="" />
               </Col>
-            </FormGroup>
+            </Row>
           </Container>
         </ModalBody>
         <ModalFooter>

@@ -7,6 +7,8 @@ import { MatchMediaHOC } from 'react-match-media';
 import { Button, Card, CardTitle, Col, Collapse, FormGroup, Label, Modal, ModalHeader, ModalBody, Row } from 'reactstrap';
 import MdFilterList from 'react-icons/lib/md/filter-list';
 import MdPlaylistAdd from 'react-icons/lib/md/playlist-add';
+import MdLocalRestaurant from 'react-icons/lib/md/local-restaurant';
+import MdLocationSearching from 'react-icons/lib/md/location-searching';
 import SimpleListOrDropdown from '../utils/SimpleListOrDropdown';
 import { loglevelServerSend } from '../../utils/loglevel-serverSend';
 
@@ -122,7 +124,7 @@ class SelectItemPlus extends React.Component {
   }
 
 
-  renderFiltersBody() {
+  renderFiltersBody(showCloseButton = true) {
     return (
       <div>
         <Row>
@@ -153,11 +155,13 @@ class SelectItemPlus extends React.Component {
             />
           </Col>
         </Row>
-        <Row>
-          <Col style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button color="primary" size="md" onClick={this.toggleFilters.bind(this)}>Close</Button>
-          </Col>
-        </Row>
+        { showCloseButton &&
+          <Row>
+            <Col style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <Button color="primary" size="md" onClick={this.toggleFilters.bind(this)}>Close</Button>
+            </Col>
+          </Row>
+        }
       </div>
     );
   }
@@ -166,59 +170,69 @@ class SelectItemPlus extends React.Component {
   render() {
     logSelectItemPlus.debug(`render SelectItemPlus: (category=${this.state.category}, kind=${this.state.kind}, item=${this.state.item}`);
     return (
-      <FormGroup>
-        {this.props.title && <h5 className="mb-3">{this.props.title}</h5>}
+      <div>
+        {this.props.title && <h5 className="mb-3"><MdLocalRestaurant size={24} className="mr-2 hidden-sm-up" /> {this.props.title}</h5>}
 
         {!this.props.hideItem &&
-          <FormGroup row>
-            <Col xs={12} sm={2} >
-              <Label size="md">Item</Label>
-            </Col>
-            <Col xs={12} sm={10} >
-              <SimpleListOrDropdown
-                items={this.state.filteredItemsList}
-                dropdownPlaceholder={this.props.itemPlaceHolder}
-                selectedOption={this.state.item}
-                onChange={this.onChangeItem.bind(this)}
-                dropdown
-              />
-            </Col>
-          </FormGroup>
-        }
-        {!this.props.hideItem &&
-          <FormGroup row style={{ marginTop: '-1rem' }}>
-            <Col xs={12} sm={2} />
-            <Col xs={6} sm={3} >
-              <Button block color="secondary" size="sm" onClick={this.toggleFilters.bind(this)}><MdFilterList className="mr-2" size={24} /> Filters</Button>
-            </Col>
-            {this.props.onAddItem &&
-              <Col xs={6} sm={3} >
-                <Button block color="secondary" size="sm" onClick={this.props.onAddItem}><MdPlaylistAdd className="mr-2" size={24} /> Add</Button>
-              </Col>
-            }
-          </FormGroup>
-        }
-
-        <CollapseOnLargeScreens isOpen={this.state.collapseFilters}>
           <Row>
-            <Col xs={12} sm={2} />
-            <Col xs={12} sm={10} >
-              <Card block>
-                <CardTitle className="mb-4">Filter items</CardTitle>
-                {this.renderFiltersBody()}
-              </Card>
+            <Col sm={2}>
+              <Row style={{ display: 'flex', justifyContent: 'center' }}>
+                <div className="homepage-feature-icon hidden-xs-down"><MdLocalRestaurant size={48} /></div>
+              </Row>
+              <Row style={{ display: 'flex', justifyContent: 'center' }}>
+                <Label size="md" className="hidden-xs-down">Item</Label>
+              </Row>
+            </Col>
+            <Col xs={12} sm={10}>
+              <Row>
+                <Col xs={12} className="pl-0">
+                  <SimpleListOrDropdown
+                    items={this.state.filteredItemsList}
+                    dropdownPlaceholder={this.props.itemPlaceHolder}
+                    selectedOption={this.state.item}
+                    onChange={this.onChangeItem.bind(this)}
+                    dropdown
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={6} sm={3} className="pl-0">
+                  <Button block color="secondary" size="sm" onClick={this.toggleFilters.bind(this)}><MdFilterList className="mr-2" size={24} /> Filters</Button>
+                </Col>
+                {this.props.onAddItem &&
+                  <Col xs={6} sm={3} >
+                    <Button block color="secondary" size="sm" onClick={this.props.onAddItem}><MdPlaylistAdd className="mr-2" size={24} /> Add</Button>
+                  </Col>
+                }
+              </Row>
+              <CollapseOnLargeScreens isOpen={this.state.collapseFilters}>
+                <Row>
+                  <Col xs={12} sm={10} className="pl-0 pt-4" >
+                    <Card block>
+                      <CardTitle className="mb-4">Filter items</CardTitle>
+                      {this.renderFiltersBody()}
+                    </Card>
+                  </Col>
+                </Row>
+              </CollapseOnLargeScreens>
+              <ModalOnSmallScreens className="hidden-md-up" isOpen={this.state.collapseFilters} toggle={this.toggleFilters.bind(this)}>
+                <ModalHeader toggle={this.toggleFilters.bind(this)}>Filter items</ModalHeader>
+                <ModalBody>
+                  {this.renderFiltersBody()}
+                </ModalBody>
+              </ModalOnSmallScreens>
             </Col>
           </Row>
-        </CollapseOnLargeScreens>
+        }
 
-        <ModalOnSmallScreens className="hidden-md-up" isOpen={this.state.collapseFilters} toggle={this.toggleFilters.bind(this)}>
-          <ModalHeader toggle={this.toggleFilters.bind(this)}>Filter items</ModalHeader>
-          <ModalBody>
-            {this.renderFiltersBody()}
-          </ModalBody>
-        </ModalOnSmallScreens>
+        {this.props.hideItem &&
+          <div>
+            {this.renderFiltersBody(false)}
+          </div>
+        }
 
-      </FormGroup>
+
+      </div>
     );
   }
 }
