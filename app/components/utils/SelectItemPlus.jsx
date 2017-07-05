@@ -3,7 +3,7 @@
 import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Card, CardTitle, Col, Collapse, FormGroup, Label } from 'reactstrap';
+import { Button, Card, CardTitle, Col, Collapse, FormGroup, Label, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import MdFilterList from 'react-icons/lib/md/filter-list';
 import MdPlaylistAdd from 'react-icons/lib/md/playlist-add';
 import SimpleListOrDropdown from '../utils/SimpleListOrDropdown';
@@ -122,6 +122,42 @@ class SelectItemPlus extends React.Component {
   }
 
 
+  renderFiltersBody() {
+    return (
+      <div>
+        <FormGroup row>
+          <Col xs={12} sm={2} >
+            <Label size="md">Category</Label>
+          </Col>
+          <Col xs={12} sm={10} >
+            <SimpleListOrDropdown
+              items={this.props.categories}
+              dropdownPlaceholder={this.props.categoryPlaceHolder}
+              selectedOption={this.state.category}
+              onChange={this.onChangeCategory.bind(this)}
+              dropdown
+            />
+          </Col>
+        </FormGroup>
+        <FormGroup row>
+          <Col xs={12} sm={2} >
+            <Label size="md">Kind</Label>
+          </Col>
+          <Col xs={12} sm={10} >
+            <SimpleListOrDropdown
+              items={this.props.kinds}
+              dropdownPlaceholder={this.props.kindPlaceHolder}
+              selectedOption={this.state.kind}
+              onChange={this.onChangeKind.bind(this)}
+              dropdown
+            />
+          </Col>
+        </FormGroup>
+      </div>
+    );
+  }
+
+
   render() {
     logSelectItemPlus.debug(`render SelectItemPlus: (category=${this.state.category}, kind=${this.state.kind}, item=${this.state.item}`);
     return (
@@ -158,39 +194,23 @@ class SelectItemPlus extends React.Component {
           </FormGroup>
         }
 
-        <Collapse isOpen={this.state.collapseFilters}>
+        <Collapse className="hidden-sm-down" isOpen={this.state.collapseFilters}>
           <Card block>
             <CardTitle className="mb-4">Filter items</CardTitle>
-            <FormGroup row>
-              <Col xs={12} sm={2} >
-                <Label size="md">Category</Label>
-              </Col>
-              <Col xs={12} sm={10} >
-                <SimpleListOrDropdown
-                  items={this.props.categories}
-                  dropdownPlaceholder={this.props.categoryPlaceHolder}
-                  selectedOption={this.state.category}
-                  onChange={this.onChangeCategory.bind(this)}
-                  dropdown
-                />
-              </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Col xs={12} sm={2} >
-                <Label size="md">Kind</Label>
-              </Col>
-              <Col xs={12} sm={10} >
-                <SimpleListOrDropdown
-                  items={this.props.kinds}
-                  dropdownPlaceholder={this.props.kindPlaceHolder}
-                  selectedOption={this.state.kind}
-                  onChange={this.onChangeKind.bind(this)}
-                  dropdown
-                />
-              </Col>
-            </FormGroup>
+            {this.renderFiltersBody()}
           </Card>
         </Collapse>
+
+        <Modal className="hidden-md-up" isOpen={this.state.collapseFilters} toggle={this.toggleFilters.bind(this)}>
+          <ModalHeader toggle={this.toggleFilters.bind(this)}>Filter items</ModalHeader>
+          <ModalBody>
+            {this.renderFiltersBody()}
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" type="submit" onClick={this.toggleFilters.bind(this)} size="md">Close</Button>
+          </ModalFooter>
+        </Modal>
+
       </FormGroup>
     );
   }
