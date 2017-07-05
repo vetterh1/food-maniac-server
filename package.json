@@ -70,6 +70,7 @@
     "react-dom": "^15.5.4",
     "react-fontawesome": "^1.6.1",
     "react-icons": "^2.2.5",
+    "react-match-media": "^2.0.1",
     "react-rating": "^0.8.0",
     "react-redux": "^5.0.4",
     "react-router": "3.0.5",

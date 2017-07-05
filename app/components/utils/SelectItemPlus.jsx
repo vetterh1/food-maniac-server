@@ -3,7 +3,8 @@
 import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Card, CardTitle, Col, Collapse, FormGroup, Label, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { MatchMediaHOC } from 'react-match-media';
+import { Button, Card, CardTitle, Col, Collapse, FormGroup, Label, Modal, ModalHeader, ModalBody, Row } from 'reactstrap';
 import MdFilterList from 'react-icons/lib/md/filter-list';
 import MdPlaylistAdd from 'react-icons/lib/md/playlist-add';
 import SimpleListOrDropdown from '../utils/SimpleListOrDropdown';
@@ -12,6 +13,9 @@ import { loglevelServerSend } from '../../utils/loglevel-serverSend';
 const logSelectItemPlus = log.getLogger('logSelectItemPlus');
 loglevelServerSend(logSelectItemPlus); // a setLevel() MUST be run AFTER this!
 logSelectItemPlus.setLevel('debug');
+
+const CollapseOnLargeScreens = MatchMediaHOC(Collapse, '(min-width: 576px)');
+const ModalOnSmallScreens = MatchMediaHOC(Modal, '(max-width: 575px)');
 
 
 class SelectItemPlus extends React.Component {
@@ -104,10 +108,6 @@ class SelectItemPlus extends React.Component {
     this.setState({ collapseFilters: !this.state.collapseFilters });
   }
 
-  addItem() {
-
-  }
-
 
   // Reset the 3 dropdowns:
   reset() {
@@ -125,11 +125,11 @@ class SelectItemPlus extends React.Component {
   renderFiltersBody() {
     return (
       <div>
-        <FormGroup row>
-          <Col xs={12} sm={2} >
+        <Row>
+          <Col xs={12} sm={3} md={2} >
             <Label size="md">Category</Label>
           </Col>
-          <Col xs={12} sm={10} >
+          <Col xs={12} sm={9} md={10} >
             <SimpleListOrDropdown
               items={this.props.categories}
               dropdownPlaceholder={this.props.categoryPlaceHolder}
@@ -138,12 +138,12 @@ class SelectItemPlus extends React.Component {
               dropdown
             />
           </Col>
-        </FormGroup>
-        <FormGroup row>
-          <Col xs={12} sm={2} >
+        </Row>
+        <Row>
+          <Col xs={12} sm={3} md={2} >
             <Label size="md">Kind</Label>
           </Col>
-          <Col xs={12} sm={10} >
+          <Col xs={12} sm={9} md={10} >
             <SimpleListOrDropdown
               items={this.props.kinds}
               dropdownPlaceholder={this.props.kindPlaceHolder}
@@ -152,7 +152,12 @@ class SelectItemPlus extends React.Component {
               dropdown
             />
           </Col>
-        </FormGroup>
+        </Row>
+        <Row>
+          <Col style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Button color="primary" size="md" onClick={this.toggleFilters.bind(this)}>Close</Button>
+          </Col>
+        </Row>
       </div>
     );
   }
@@ -194,22 +199,24 @@ class SelectItemPlus extends React.Component {
           </FormGroup>
         }
 
-        <Collapse className="hidden-sm-down" isOpen={this.state.collapseFilters}>
-          <Card block>
-            <CardTitle className="mb-4">Filter items</CardTitle>
-            {this.renderFiltersBody()}
-          </Card>
-        </Collapse>
+        <CollapseOnLargeScreens isOpen={this.state.collapseFilters}>
+          <Row>
+            <Col xs={12} sm={2} />
+            <Col xs={12} sm={10} >
+              <Card block>
+                <CardTitle className="mb-4">Filter items</CardTitle>
+                {this.renderFiltersBody()}
+              </Card>
+            </Col>
+          </Row>
+        </CollapseOnLargeScreens>
 
-        <Modal className="hidden-md-up" isOpen={this.state.collapseFilters} toggle={this.toggleFilters.bind(this)}>
+        <ModalOnSmallScreens className="hidden-md-up" isOpen={this.state.collapseFilters} toggle={this.toggleFilters.bind(this)}>
           <ModalHeader toggle={this.toggleFilters.bind(this)}>Filter items</ModalHeader>
           <ModalBody>
             {this.renderFiltersBody()}
           </ModalBody>
-          <ModalFooter>
-            <Button color="primary" type="submit" onClick={this.toggleFilters.bind(this)} size="md">Close</Button>
-          </ModalFooter>
-        </Modal>
+        </ModalOnSmallScreens>
 
       </FormGroup>
     );
