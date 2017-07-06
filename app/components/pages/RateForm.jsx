@@ -3,11 +3,18 @@
 import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Col, Form, FormFeedback, FormGroup, Input } from 'reactstrap';
+import { MatchMediaHOC } from 'react-match-media';
+import { Button, Card, CardTitle, Col, Collapse, Form, FormFeedback, FormGroup, Input, Label, Modal, ModalHeader, ModalBody, Row } from 'reactstrap';
 // import MdLocalCake from 'react-icons/lib/md/local-cake';
 // import MdLocalBar from 'react-icons/lib/md/local-bar';
 // import MdLocalCafe from 'react-icons/lib/md/local-cafe';
 // import MdLocalRestaurant from 'react-icons/lib/md/local-restaurant';
+// import MdRoomService from 'react-icons/lib/md/room-service';
+import MdStore from 'react-icons/lib/md/store';
+import MdMap from 'react-icons/lib/md/map';
+// import MdLocationOn from 'react-icons/lib/md/location-on';
+// import MdEditLocation from 'react-icons/lib/md/edit-location';
+import MdLocationSearching from 'react-icons/lib/md/location-searching';
 
 import RatingStarsRow from '../utils/RatingStarsRow';
 import SimpleListOrDropdown from '../utils/SimpleListOrDropdown';
@@ -17,6 +24,10 @@ import { loglevelServerSend } from '../../utils/loglevel-serverSend';
 const logRateForm = log.getLogger('logRateForm');
 loglevelServerSend(logRateForm); // a setLevel() MUST be run AFTER this!
 logRateForm.setLevel('debug');
+
+const CollapseOnLargeScreens = MatchMediaHOC(Collapse, '(min-width: 576px)');
+const ModalOnSmallScreens = MatchMediaHOC(Modal, '(max-width: 575px)');
+
 
 const styles = {
   form: {
@@ -67,6 +78,8 @@ class RateForm extends React.Component {
       comment: '',
 
       locationType: 'restaurant',
+
+      collapseType: false,
     };
 
     this.state = {
@@ -166,6 +179,13 @@ class RateForm extends React.Component {
     this.props.onRequestSimulateLocation();
   }
 
+
+  toggleType() {
+    this.setState({ collapseType: !this.state.collapseType });
+  }
+
+
+
   resetForm() {
     // Reset the form & clear the image
     this.setState(Object.assign({
@@ -180,12 +200,34 @@ class RateForm extends React.Component {
     window.scrollTo(0, 0);
   }
 
+
+
+  renderTypeBody() {
+    return (
+      <div>
+        <Row>
+          <Col xs={12} sm={3} md={2} >
+            <Label size="md">Type</Label>
+          </Col>
+          <Col xs={12} sm={9} md={10} >
+            <SimpleListOrDropdown items={LOCATION_TYPES} selectedOption={this.state.locationType} onChange={this.onChangeLocationType.bind(this)} dropdown />
+          </Col>
+        </Row>
+        <Row>
+          <Col style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Button color="primary" size="md" onClick={this.toggleType.bind(this)}>Close</Button>
+          </Col>
+        </Row>
+      </div>
+    );
+  }
+
   render() {
     logRateForm.debug(`render RateForm: (item=${this.state.item}, location=${this.state.location})`);
     const formReadyForSubmit = this.state.item && this.state.location && this.state.markOverall;
     return (
       <div style={styles.form}>
-        <h3 className="mb-4">Rate your plate!</h3>
+        <h3 className="mb-5">Rate your plate!</h3>
         <Form onSubmit={this.onSubmit.bind(this)}>
           <SelectItemPlus
             title="What?"
@@ -198,32 +240,55 @@ class RateForm extends React.Component {
             ref={(r) => { this._refSelectItemPlus = r; }} // used to reset the 3 dropdowns
           />
 
-          <FormGroup>
-            <h5 className="mt-4 mb-3">Where?</h5>
-            <FormGroup row>
-              <Col xs={12} lg={12} >
-                <SimpleListOrDropdown items={this.props.places.places} selectedOption={this.state.location} onChange={this.onChangeLocation.bind(this)} dropdown />
+          <div className="mt-5">
+            <h5 className="mb-3"><MdLocationSearching size={24} className="mr-2 hidden-sm-up" /> Where?</h5>
+            <Row>
+              <Col sm={2}>
+                <Row style={{ display: 'flex', justifyContent: 'center' }}>
+                  <div className="homepage-feature-icon hidden-xs-down"><MdLocationSearching size={48} /></div>
+                </Row>
+                <Row style={{ display: 'flex', justifyContent: 'center' }}>
+                  <Label size="md" className="hidden-xs-down">Place</Label>
+                </Row>
               </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Col xs={12} sm={2} />
-              <Col xs={12} sm={10} >
-                <FormFeedback style={{ marginTop: '-1rem' }}>
-                  <SimpleListOrDropdown items={LOCATION_TYPES} selectedOption={this.state.locationType} onChange={this.onChangeLocationType.bind(this)} dropdown />
-                </FormFeedback>
+              <Col xs={12} sm={10}>
+                <Row>
+                  <Col xs={12} className="">
+                    <SimpleListOrDropdown items={this.props.places.places} selectedOption={this.state.location} onChange={this.onChangeLocation.bind(this)} dropdown />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={6} sm={3} >
+                    <Button block color="secondary" size="sm" onClick={this.toggleType.bind(this)}><MdStore className="mr-2" size={24} /> Type</Button>
+                  </Col>
+                  <Col xs={6} sm={3} className="pl-0">
+                    <Button block color="secondary" size="sm" onClick={this.onOpenSimulateLocation.bind(this)}><MdMap className="mr-2" size={24} /> Map</Button>
+                  </Col>
+                </Row>
+                <CollapseOnLargeScreens isOpen={this.state.collapseType}>
+                  <Row>
+                    <Col xs={12} sm={10} className="pl-0 pt-4" >
+                      <Card block>
+                        <CardTitle className="mb-4">Choose place type</CardTitle>
+                        {this.renderTypeBody()}
+                      </Card>
+                    </Col>
+                  </Row>
+                </CollapseOnLargeScreens>
+                <ModalOnSmallScreens className="hidden-md-up" isOpen={this.state.collapseType} toggle={this.toggleType.bind(this)}>
+                  <ModalHeader toggle={this.toggleType.bind(this)}>Choose place type</ModalHeader>
+                  <ModalBody>
+                    {this.renderTypeBody()}
+                  </ModalBody>
+                </ModalOnSmallScreens>
               </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Col xs={12} sm={2} />
-              <Col xs={12} sm={10} >
-                <FormFeedback style={{ marginTop: '-1rem' }}>
-                  <Button style={{ paddingLeft: '0px' }} color="link" onClick={this.onOpenSimulateLocation.bind(this)} size="md">Not here? Select an area on the map</Button>
-                </FormFeedback>
-              </Col>
-            </FormGroup>
-          </FormGroup>
+            </Row>
+          </div>
 
-          <FormGroup>
+
+
+
+          <FormGroup className="mt-5">
             <h5 className="mt-2 mb-3">Marks</h5>
             <RatingStarsRow name="markOverall" label="Overall" initialRate={this.state.markOverall} onChange={this.onChangeMarkOverall.bind(this)} mandatoryWarning size={30} />
             <RatingStarsRow name="markFood" label="Food" initialRate={this.state.markFood} onChange={this.onChangeMarkFood.bind(this)} />

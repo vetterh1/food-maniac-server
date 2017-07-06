@@ -4,11 +4,11 @@ import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { MatchMediaHOC } from 'react-match-media';
-import { Button, Card, CardTitle, Col, Collapse, FormGroup, Label, Modal, ModalHeader, ModalBody, Row } from 'reactstrap';
+import { Button, Card, CardTitle, Col, Collapse, Label, Modal, ModalHeader, ModalBody, Row } from 'reactstrap';
 import MdFilterList from 'react-icons/lib/md/filter-list';
 import MdPlaylistAdd from 'react-icons/lib/md/playlist-add';
-import MdLocalRestaurant from 'react-icons/lib/md/local-restaurant';
-import MdLocationSearching from 'react-icons/lib/md/location-searching';
+// import MdLocalRestaurant from 'react-icons/lib/md/local-restaurant';
+import MdRoomService from 'react-icons/lib/md/room-service';
 import SimpleListOrDropdown from '../utils/SimpleListOrDropdown';
 import { loglevelServerSend } from '../../utils/loglevel-serverSend';
 
@@ -171,13 +171,13 @@ class SelectItemPlus extends React.Component {
     logSelectItemPlus.debug(`render SelectItemPlus: (category=${this.state.category}, kind=${this.state.kind}, item=${this.state.item}`);
     return (
       <div>
-        {this.props.title && <h5 className="mb-3"><MdLocalRestaurant size={24} className="mr-2 hidden-sm-up" /> {this.props.title}</h5>}
+        {this.props.title && <h5 className="mb-3"><MdRoomService size={24} className="mr-2 hidden-sm-up" /> {this.props.title}</h5>}
 
         {!this.props.hideItem &&
           <Row>
             <Col sm={2}>
               <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                <div className="homepage-feature-icon hidden-xs-down"><MdLocalRestaurant size={48} /></div>
+                <div className="homepage-feature-icon hidden-xs-down"><MdRoomService size={48} /></div>
               </Row>
               <Row style={{ display: 'flex', justifyContent: 'center' }}>
                 <Label size="md" className="hidden-xs-down">Item</Label>
@@ -185,7 +185,7 @@ class SelectItemPlus extends React.Component {
             </Col>
             <Col xs={12} sm={10}>
               <Row>
-                <Col xs={12} className="pl-0">
+                <Col xs={12} className="">
                   <SimpleListOrDropdown
                     items={this.state.filteredItemsList}
                     dropdownPlaceholder={this.props.itemPlaceHolder}
@@ -196,7 +196,7 @@ class SelectItemPlus extends React.Component {
                 </Col>
               </Row>
               <Row>
-                <Col xs={6} sm={3} className="pl-0">
+                <Col xs={6} sm={3} className="">
                   <Button block color="secondary" size="sm" onClick={this.toggleFilters.bind(this)}><MdFilterList className="mr-2" size={24} /> Filters</Button>
                 </Col>
                 {this.props.onAddItem &&
