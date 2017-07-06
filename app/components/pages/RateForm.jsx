@@ -15,6 +15,8 @@ import MdMap from 'react-icons/lib/md/map';
 // import MdLocationOn from 'react-icons/lib/md/location-on';
 // import MdEditLocation from 'react-icons/lib/md/edit-location';
 import MdLocationSearching from 'react-icons/lib/md/location-searching';
+import MdStarHalf from 'react-icons/lib/md/star-half';
+import MdEdit from 'react-icons/lib/md/edit';
 
 import RatingStarsRow from '../utils/RatingStarsRow';
 import SimpleListOrDropdown from '../utils/SimpleListOrDropdown';
@@ -33,7 +35,7 @@ const styles = {
   form: {
     // width: 300,
     // margin: '20 auto',
-    padding: 20,
+    // padding: 20,
   },
 };
 
@@ -80,6 +82,7 @@ class RateForm extends React.Component {
       locationType: 'restaurant',
 
       collapseType: false,
+      collapseMarks: false,
     };
 
     this.state = {
@@ -184,6 +187,10 @@ class RateForm extends React.Component {
     this.setState({ collapseType: !this.state.collapseType });
   }
 
+  toggleMarks() {
+    this.setState({ collapseMarks: !this.state.collapseMarks });
+  }
+
 
 
   resetForm() {
@@ -222,12 +229,27 @@ class RateForm extends React.Component {
     );
   }
 
+  renderMarksBody() {
+    return (
+      <div>
+        <Row>
+          <Col xs={12} >
+            <RatingStarsRow name="markFood" label="Food" initialRate={this.state.markFood} onChange={this.onChangeMarkFood.bind(this)} />
+            <RatingStarsRow name="markValue" label="Value" initialRate={this.state.markValue} onChange={this.onChangeMarkValue.bind(this)} />
+            <RatingStarsRow name="markPlace" label="Place" initialRate={this.state.markPlace} onChange={this.onChangeMarkPlace.bind(this)} />
+            <RatingStarsRow name="markStaff" label="Staff" initialRate={this.state.markStaff} onChange={this.onChangeMarkStaff.bind(this)} />
+          </Col>
+        </Row>
+      </div>
+    );
+  }
+
   render() {
     logRateForm.debug(`render RateForm: (item=${this.state.item}, location=${this.state.location})`);
     const formReadyForSubmit = this.state.item && this.state.location && this.state.markOverall;
     return (
-      <div style={styles.form}>
-        <h3 className="mb-5">Rate your plate!</h3>
+      <div className="form-container">
+        <h3 className="mb-4">Rate your plate!</h3>
         <Form onSubmit={this.onSubmit.bind(this)}>
           <SelectItemPlus
             title="What?"
@@ -240,9 +262,9 @@ class RateForm extends React.Component {
             ref={(r) => { this._refSelectItemPlus = r; }} // used to reset the 3 dropdowns
           />
 
-          <div className="mt-5">
+          <div className="mt-4">
             <h5 className="mb-3"><MdLocationSearching size={24} className="mr-2 hidden-sm-up" /> Where?</h5>
-            <Row>
+            <Row className="form-block" noGutters>
               <Col sm={2}>
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
                   <div className="homepage-feature-icon hidden-xs-down"><MdLocationSearching size={48} /></div>
@@ -258,10 +280,10 @@ class RateForm extends React.Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Col xs={6} sm={3} >
+                  <Col xs={6} sm={4} >
                     <Button block color="secondary" size="sm" onClick={this.toggleType.bind(this)}><MdStore className="mr-2" size={24} /> Type</Button>
                   </Col>
-                  <Col xs={6} sm={3} className="pl-0">
+                  <Col xs={6} sm={4} className="pl-0">
                     <Button block color="secondary" size="sm" onClick={this.onOpenSimulateLocation.bind(this)}><MdMap className="mr-2" size={24} /> Map</Button>
                   </Col>
                 </Row>
@@ -286,26 +308,75 @@ class RateForm extends React.Component {
           </div>
 
 
+          <div className="mt-4">
+            <h5 className="mb-3"><MdStarHalf size={24} className="mr-2 hidden-sm-up" /> Marks?</h5>
+            <Row className="form-block" noGutters>
+              <Col sm={2}>
+                <Row style={{ display: 'flex', justifyContent: 'center' }}>
+                  <div className="homepage-feature-icon hidden-xs-down"><MdStarHalf size={48} /></div>
+                </Row>
+                <Row style={{ display: 'flex', justifyContent: 'center' }}>
+                  <Label size="md" className="hidden-xs-down">Marks</Label>
+                </Row>
+              </Col>
+              <Col xs={12} sm={10}>
+                <Row>
+                  <Col xs={12} className="">
+                    <RatingStarsRow name="markOverall" label="Overall" initialRate={this.state.markOverall} onChange={this.onChangeMarkOverall.bind(this)} />
+                  </Col>
+                </Row>              
+                <Row>
+                  <Col xs={6} sm={4} >
+                    <Button block color="secondary" size="sm" onClick={this.toggleMarks.bind(this)}><MdStore className="mr-2" size={24} /> Details</Button>
+                  </Col>
+                </Row>
+                <CollapseOnLargeScreens isOpen={this.state.collapseMarks}>
+                  <Row>
+                    <Col xs={12} sm={10} className="pl-0 pt-4" >
+                      <Card block>
+                        <CardTitle className="mb-4">Mark details</CardTitle>
+                        {this.renderMarksBody()}
+                      </Card>
+                    </Col>
+                  </Row>
+                </CollapseOnLargeScreens>
+                <ModalOnSmallScreens className="hidden-md-up" isOpen={this.state.collapseMarks} toggle={this.toggleMarks.bind(this)}>
+                  <ModalHeader toggle={this.toggleMarks.bind(this)}>Mark details</ModalHeader>
+                  <ModalBody>
+                    {this.renderMarksBody()}
+                  </ModalBody>
+                </ModalOnSmallScreens>
+              </Col>
+            </Row>
+          </div>
 
 
-          <FormGroup className="mt-5">
-            <h5 className="mt-2 mb-3">Marks</h5>
-            <RatingStarsRow name="markOverall" label="Overall" initialRate={this.state.markOverall} onChange={this.onChangeMarkOverall.bind(this)} mandatoryWarning size={30} />
-            <RatingStarsRow name="markFood" label="Food" initialRate={this.state.markFood} onChange={this.onChangeMarkFood.bind(this)} />
-            <RatingStarsRow name="markValue" label="Value" initialRate={this.state.markValue} onChange={this.onChangeMarkValue.bind(this)} />
-            <RatingStarsRow name="markPlace" label="Place" initialRate={this.state.markPlace} onChange={this.onChangeMarkPlace.bind(this)} />
-            <RatingStarsRow name="markStaff" label="Staff" initialRate={this.state.markStaff} onChange={this.onChangeMarkStaff.bind(this)} />
-          </FormGroup>
 
-          <FormGroup>
-            <h5 className="mt-2 mb-3">Comment?</h5>
-            <Input type="textarea" value={this.state.comment} onChange={this.onChangeComment.bind(this)} />
-          </FormGroup>
+          <div className="mt-4">
+            <h5 className="mb-3"><MdEdit size={24} className="mr-2 hidden-sm-up" /> Comment?</h5>
+            <Row className="form-block" noGutters>
+              <Col sm={2}>
+                <Row style={{ display: 'flex', justifyContent: 'center' }}>
+                  <div className="homepage-feature-icon hidden-xs-down"><MdEdit size={48} /></div>
+                </Row>
+                <Row style={{ display: 'flex', justifyContent: 'center' }}>
+                  <Label size="md" className="hidden-xs-down">Comment</Label>
+                </Row>
+              </Col>
+              <Col xs={12} sm={10}>
+                <Row>
+                  <Col xs={12} className="">
+                    <Input type="textarea" value={this.state.comment} onChange={this.onChangeComment.bind(this)} />
+                  </Col>
+                </Row>              
+              </Col>
+            </Row>
+          </div>
 
-          <FormGroup row className="mt-4">
+          <div className="mt-4">
             <Button color="primary" type="submit" size="md" disabled={!formReadyForSubmit}>Add</Button>
             <Button color="link" onClick={this.resetForm.bind(this)} size="md" getRef={(ref) => { this.refReset = ref; }}>Reset</Button>
-          </FormGroup>
+          </div>
         </Form>
       </div>
     );

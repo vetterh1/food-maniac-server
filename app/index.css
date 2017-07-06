@@ -198,7 +198,6 @@ h5 {
 }
 
 
-
 .homepage-container {
     max-width: 1040px;
     min-width: 320px;
@@ -373,4 +372,61 @@ h5 {
     padding: 5px;
   }
 
+}
+
+
+
+
+
+
+/**************************************************************
+
+                    FORMS
+
+    Minimal width asked (if narrower: scrollbars)
+    Maximum width to restrict in full screen
+    But still put some margin on narrower screens
+    (except mobile ones)
+
+**************************************************************/
+
+
+
+
+.form-container {
+    min-width: 260px;
+    margin: 20px 15px;
+}
+
+
+
+@media (min-width: 576px) {
+  .form-container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+
+@media (min-width: 768px) {
+  .form-container {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .form-container {
+    max-width: 992px;
+  }
+}
+
+
+
+
+
+.form-block {
+    padding: 1rem 1rem;
+    margin-bottom: 2rem;
+    background-color: #eceeef;
+    border-radius: 0.3rem;
 }

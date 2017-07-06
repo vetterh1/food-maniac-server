@@ -174,7 +174,7 @@ class SelectItemPlus extends React.Component {
         {this.props.title && <h5 className="mb-3"><MdRoomService size={24} className="mr-2 hidden-sm-up" /> {this.props.title}</h5>}
 
         {!this.props.hideItem &&
-          <Row>
+          <Row className="form-block" noGutters>
             <Col sm={2}>
               <Row style={{ display: 'flex', justifyContent: 'center' }}>
                 <div className="homepage-feature-icon hidden-xs-down"><MdRoomService size={48} /></div>
@@ -196,11 +196,11 @@ class SelectItemPlus extends React.Component {
                 </Col>
               </Row>
               <Row>
-                <Col xs={6} sm={3} className="">
+                <Col xs={6} sm={4} className="">
                   <Button block color="secondary" size="sm" onClick={this.toggleFilters.bind(this)}><MdFilterList className="mr-2" size={24} /> Filters</Button>
                 </Col>
                 {this.props.onAddItem &&
-                  <Col xs={6} sm={3} >
+                  <Col xs={6} sm={4} >
                     <Button block color="secondary" size="sm" onClick={this.props.onAddItem}><MdPlaylistAdd className="mr-2" size={24} /> Add</Button>
                   </Col>
                 }
