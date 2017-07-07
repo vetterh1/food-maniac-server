@@ -240,6 +240,11 @@ class RateForm extends React.Component {
             <RatingStarsRow name="markStaff" label="Staff" initialRate={this.state.markStaff} onChange={this.onChangeMarkStaff.bind(this)} />
           </Col>
         </Row>
+        <Row>
+          <Col style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Button color="primary" size="md" onClick={this.toggleMarks.bind(this)}>Close</Button>
+          </Col>
+        </Row>
       </div>
     );
   }
@@ -252,7 +257,7 @@ class RateForm extends React.Component {
         <h3 className="mb-4">Rate your plate!</h3>
         <Form onSubmit={this.onSubmit.bind(this)}>
           <SelectItemPlus
-            title="What?"
+            title="What"
             kinds={this.props.kinds.kinds}
             categories={this.props.categories.categories}
             items={this.props.items.items}
@@ -263,7 +268,7 @@ class RateForm extends React.Component {
           />
 
           <div className="mt-4">
-            <h5 className="mb-3"><MdLocationSearching size={24} className="mr-2 hidden-sm-up" /> Where?</h5>
+            <h5 className="mb-3"><MdLocationSearching size={24} className="mr-2 hidden-sm-up" /> Where</h5>
             <Row className="form-block" noGutters>
               <Col sm={2}>
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
@@ -309,7 +314,7 @@ class RateForm extends React.Component {
 
 
           <div className="mt-4">
-            <h5 className="mb-3"><MdStarHalf size={24} className="mr-2 hidden-sm-up" /> Marks?</h5>
+            <h5 className="mb-3"><MdStarHalf size={24} className="mr-2 hidden-sm-up" /> Marks</h5>
             <Row className="form-block" noGutters>
               <Col sm={2}>
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
@@ -353,7 +358,7 @@ class RateForm extends React.Component {
 
 
           <div className="mt-4">
-            <h5 className="mb-3"><MdEdit size={24} className="mr-2 hidden-sm-up" /> Comment?</h5>
+            <h5 className="mb-3"><MdEdit size={24} className="mr-2 hidden-sm-up" /> Optional comment</h5>
             <Row className="form-block" noGutters>
               <Col sm={2}>
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>

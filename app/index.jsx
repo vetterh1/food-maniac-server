@@ -10,6 +10,7 @@ import { fetchCategories } from './actions/categoriesActions';
 import { fetchItems } from './actions/itemsActions';
 import Root from './components/navigation/Root';
 
+require('es6-object-assign/auto');
 
 log.setDefaultLevel('warn');
 log.warn('Log default level: warn');
