@@ -324,7 +324,7 @@ class RateForm extends React.Component {
                   <Col xs={12} className="">
                     <RatingStarsRow name="markOverall" label="Overall" initialRate={this.state.markOverall} onChange={this.onChangeMarkOverall.bind(this)} />
                   </Col>
-                </Row>              
+                </Row> 
                 <Row>
                   <Col xs={6} sm={4} >
                     <Button block color="secondary" size="sm" onClick={this.toggleMarks.bind(this)}><MdStore className="mr-2" size={24} /> Details</Button>
