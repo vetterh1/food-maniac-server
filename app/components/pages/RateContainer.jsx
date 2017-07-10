@@ -15,13 +15,14 @@ import { loglevelServerSend } from '../../utils/loglevel-serverSend';
 import * as itemsActions from '../../actions/itemsActions';
 import * as placesActions from '../../actions/PlacesActions';
 
-require('es6-promise').polyfill();
-require('isomorphic-fetch');
+import 'es6-promise/auto';
+import 'isomorphic-fetch';
 
 const logRateContainer = log.getLogger('logRateContainer');
 loglevelServerSend(logRateContainer); // a setLevel() MUST be run AFTER this!
 logRateContainer.setLevel('debug');
 logRateContainer.debug('--> entering RateContainer.jsx');
+
 
 class RateContainer extends React.Component {
   static propTypes = {
@@ -113,18 +114,20 @@ class RateContainer extends React.Component {
 
   saveLocation() {
     // Return a new promise.
+    logRateContainer.debug('this 1:', this);
+    const selfLocal = this;
     return new Promise((resolve, reject) => {
       logRateContainer.debug('{ RateContainer.saveLocation');
       // logRateContainer.debug(`RateContainer.saveLocation - this.props:\n\n${stringifyOnce(this.props, null, 2)}`);
 
-      const placeSelected = this.props.places.places.find((place) => { return place.id === this.values.location; });
-      if (!placeSelected) throw new Error(`saveLocation - Could not find this location: ${this.values.location}`);
+      const placeSelected = selfLocal.props.places.places.find((place) => { return place.id === selfLocal.values.location; });
+      if (!placeSelected) throw new Error(`saveLocation - Could not find this location: ${selfLocal.values.location}`);
       // logRateContainer.debug('placeSelected.geometry: ', placeSelected.geometry);
       // logRateContainer.debug('placeSelected.geometry.location.lat(): ', placeSelected.geometry.location.lat());
       // logRateContainer.debug(`RateContainer.saveLocation - placeSelected.geometry.location:\n\n${stringifyOnce(placeSelected.geometry.location, null, 2)}`);
       const place = {
         name: placeSelected.nameWithoutDistance,
-        googleMapId: this.values.location,
+        googleMapId: selfLocal.values.location,
         location: {
           type: 'Point',
           coordinates: [placeSelected.geometry.location.lng(), placeSelected.geometry.location.lat()],
@@ -167,20 +170,21 @@ class RateContainer extends React.Component {
     const idLocation = savedLocation.place.id;
     const lat = savedLocation.place.location.coordinates[0];
     const lng = savedLocation.place.location.coordinates[1];
+    const selfLocal = this;
 
     // Return a new promise.
     return new Promise((resolve, reject) => {
       logRateContainer.debug('{ RateContainer.saveMarks');
 
       const markIndividual = {
-        item: this.values.item,
+        item: selfLocal.values.item,
         place: idLocation,
-        markOverall: this.values.markOverall,
-        markFood: this.values.markFood,
-        markValue: this.values.markValue,
-        markPlace: this.values.markPlace,
-        markStaff: this.values.markStaff,
-        comment: this.values.comment,
+        markOverall: selfLocal.values.markOverall,
+        markFood: selfLocal.values.markFood,
+        markValue: selfLocal.values.markValue,
+        markPlace: selfLocal.values.markPlace,
+        markStaff: selfLocal.values.markStaff,
+        comment: selfLocal.values.comment,
         location: {
           type: 'Point',
           coordinates: [lat, lng],

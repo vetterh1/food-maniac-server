@@ -39,6 +39,7 @@ const styles = {
   map: {
     // height: '100px',
     width: '100%',
+    minHeight: '150px',
     // width: '300px',
   },
 };

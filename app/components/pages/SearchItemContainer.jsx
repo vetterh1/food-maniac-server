@@ -10,8 +10,11 @@ import Alert from 'react-s-alert';
 import SearchItemForm from './SearchItemForm';
 import SimulateLocationContainer from '../pages/SimulateLocationContainer';
 
-require('es6-promise').polyfill();
-require('isomorphic-fetch');
+// require('es6-promise').polyfill();
+// require('isomorphic-fetch');
+import { polyfill } from 'es6-promise';
+import 'isomorphic-fetch';
+
 
 const logSearchItemContainer = log.getLogger('logSearchItemContainer');
 logSearchItemContainer.setLevel('warn');

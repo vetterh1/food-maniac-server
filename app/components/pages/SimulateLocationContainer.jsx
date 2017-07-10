@@ -8,8 +8,10 @@ import { connect } from 'react-redux';
 import SimulateLocationModal from './SimulateLocationModal';
 import * as CoordinatesActions from '../../actions/CoordinatesActions';
 
-require('es6-promise').polyfill();
-require('isomorphic-fetch');
+// require('es6-promise').polyfill();
+// require('isomorphic-fetch');
+import { polyfill } from 'es6-promise';
+import 'isomorphic-fetch';
 
 const logSimulateLocationContainer = log.getLogger('logSimulateLocationContainer');
 logSimulateLocationContainer.setLevel('warn');

@@ -11,8 +11,10 @@ const logListItemsContainerOld = log.getLogger('logListItemsContainerOld');
 logListItemsContainerOld.setLevel('warn');
 logListItemsContainerOld.debug('--> entering ListItemsContainerOld.jsx');
 
-require('es6-promise').polyfill();
-require('isomorphic-fetch');
+// require('es6-promise').polyfill();
+// require('isomorphic-fetch');
+import { polyfill } from 'es6-promise';
+import 'isomorphic-fetch';
 
 
 

@@ -10,20 +10,20 @@ class SingletonTimer {
   resetTimer(nbMilliseconds = 60000) {
     this.time = Date.now();
     this.nbMilliseconds = nbMilliseconds;
-    console.log('resetTimer:', this.nbMilliseconds);
+    // console.log('resetTimer:', this.nbMilliseconds);
   }
 
   getRemainingTime() {
     const now = Date.now();
     const isTimerStillRunning = (now - this.time) <= this.nbMilliseconds;
-    console.log('getRemainingTime:', isTimerStillRunning, this.nbMilliseconds - (now - this.time) : -1);
+    // console.log('getRemainingTime:', isTimerStillRunning, this.nbMilliseconds - (now - this.time) : -1);
     return isTimerStillRunning ? this.nbMilliseconds - (now - this.time) : -1;
   }
 }
 
 
 const _sendNextMessage = (jsonMessage, _url) => {
-  console.log('logger: send to server');
+  // console.log('logger: send to server');
   fetch(_url, {
     method: 'POST',
     headers: {
@@ -48,7 +48,7 @@ const _sendNextMessage = (jsonMessage, _url) => {
 //
 
 export const loglevelServerSend = (logger, options) => {
-  console.log('loglevelServerSend');
+  // console.log('loglevelServerSend');
   if (!logger || !logger.methodFactory) throw new Error('loglevel instance has to be specified in order to be extended');
   const _logger = logger;
   const _url = (options && options.url) || '/logs/save';
@@ -71,7 +71,7 @@ export const loglevelServerSend = (logger, options) => {
         rawMethod(modifiedMessage);
 
       if ((new SingletonTimer()).getRemainingTime() > 0) _sendNextMessage({ message: originalMessage, methodName, logLevel, _level, loggerName }, _url);
-      else console.log('logger: no server sending');
+      // else console.log('logger: no server sending');
     };
   };
   // !!! _logger.setLevel(_level);  --> disable here --> MUST be present AFTER this call in caller !!!
@@ -79,7 +79,7 @@ export const loglevelServerSend = (logger, options) => {
 
 
 export const loglevelStartServerTimer2 = () => {
-  console.log('loglevelStartServerTimer2');
+  // console.log('loglevelStartServerTimer2');
 };
 
 export const loglevelStartServerTimer = (nbMilliseconds = 60000) => {

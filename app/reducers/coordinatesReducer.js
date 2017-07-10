@@ -1,8 +1,6 @@
 import * as log from 'loglevel';
 import * as c from '../utils/constants';
 
-const MIN_SECONDS_BETWEEN_UPDATES = 20;
-
 const logCoordinatesReducer = log.getLogger('logCoordinatesReducer');
 logCoordinatesReducer.setLevel('warn');
 logCoordinatesReducer.debug('--> entering coordinatesReducer.js');
@@ -17,7 +15,6 @@ const initialState = { // define initial state - an empty location
   nbReal: 0,
   nbEstimated: 0,
   nbClose: 0,
-  timeUpdate: 0,
   latitude_save: 0,
   longitude_save: 0,
 };
@@ -76,16 +73,6 @@ const coordinatesReducer = (state = initialState, action) => {
   case c.SET_CURRENT_LOCATION: {
     logCoordinatesReducer.debug('{   coordinatesReducer.SET_CURRENT_LOCATION (rsl)');
 
-    //
-    // No update if too close from last one...
-    //
-
-    const now = Date.now();
-    const nbSecondsSinceLastUpdate = (now - state.timeUpdate) / 1000;
-    if (nbSecondsSinceLastUpdate < MIN_SECONDS_BETWEEN_UPDATES) {
-      logCoordinatesReducer.debug('}   coordinatesReducer.SET_CURRENT_LOCATION - NO update: not enough time since previous one');
-      return state;
-    }
 
     //
     // No real update if in simulation mode
@@ -130,7 +117,6 @@ const coordinatesReducer = (state = initialState, action) => {
       longitude: action.longitude,
       real: action.real,
       nbRefreshes: state.nbRefreshes + 1,
-      timeUpdate: now,
       nbDiffs,
       nbReal,
       nbEstimated,

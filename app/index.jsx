@@ -11,6 +11,7 @@ import { fetchItems } from './actions/itemsActions';
 import Root from './components/navigation/Root';
 
 require('es6-object-assign/auto');
+require('./utils/array_find_polyfill');
 
 log.setDefaultLevel('warn');
 log.warn('Log default level: warn');

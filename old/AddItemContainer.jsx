@@ -1,8 +1,10 @@
 import React from 'react';
 import AddItem from './AddItem';
 
-require('es6-promise').polyfill();
-require('isomorphic-fetch');
+// require('es6-promise').polyfill();
+// require('isomorphic-fetch');
+import { polyfill } from 'es6-promise';
+import 'isomorphic-fetch';
 
 class AddItemContainer extends React.Component {
   static propTypes = {
