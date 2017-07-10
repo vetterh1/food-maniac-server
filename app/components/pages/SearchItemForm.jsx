@@ -1,18 +1,19 @@
 /* eslint-disable react/forbid-prop-types */
 
+import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Col, Form, FormFeedback, FormGroup, Label } from 'reactstrap';
+import { Button, Card, CardTitle, Col, Collapse, Form, Label, Row } from 'reactstrap';
+import MdMap from 'react-icons/lib/md/map';
+import MdLocationSearching from 'react-icons/lib/md/location-searching';
 import SimpleListOrDropdown from '../utils/SimpleListOrDropdown';
 import SelectItemPlus from '../utils/SelectItemPlus';
+import { loglevelServerSend } from '../../utils/loglevel-serverSend';
 
-const styles = {
-  form: {
-    // width: 300,
-    // margin: '20 auto',
-    padding: 20,
-  },
-};
+const logSearchItemForm = log.getLogger('logSearchItemForm');
+loglevelServerSend(logSearchItemForm); // a setLevel() MUST be run AFTER this!
+logSearchItemForm.setLevel('debug');
+
 
 class SearchItemForm extends React.Component {
   static propTypes = {
@@ -27,7 +28,7 @@ class SearchItemForm extends React.Component {
   constructor(props) {
     super(props);
 
-    console.log('SearchItemForm constructor props: ', props);
+    logSearchItemForm.debug('SearchItemForm constructor props: ', props);
 
     this._refSelectItemPlus = null; // used to reset the 3 dropdowns
 
@@ -95,15 +96,14 @@ class SearchItemForm extends React.Component {
   }
 
   render() {
-    console.log('render SearchItemForm: (category, kind, item)=', this.state.category, this.state.kind, this.state.item);
+    logSearchItemForm.debug('render SearchItemForm: (category, kind, item)=', this.state.category, this.state.kind, this.state.item);
     const formReadyForSubmit = this.state.item && this.state.distance;
     return (
-      <div style={styles.form}>
-        <h3 className="mb-4">Search dish...</h3>
+      <div className="standard-container">
+        <h3 className="mb-4">Seach the best place!</h3>
         <Form onSubmit={this.onSubmit.bind(this)}>
           <SelectItemPlus
             title="What?"
-            addItemLink
             kinds={this.props.kinds.kinds}
             categories={this.props.categories.categories}
             items={this.props.items}
@@ -111,31 +111,36 @@ class SearchItemForm extends React.Component {
             ref={(r) => { this._refSelectItemPlus = r; }} // used to reset the 3 dropdowns
           />
 
-          <FormGroup>
-            <h5 className="mb-3">Where?</h5>
-            <FormGroup row>
-              <Col xs={12} sm={2} >
-                <Label size="md">Distance</Label>
+          <div className="mt-4">
+            <h5 className="mb-3"><MdLocationSearching size={24} className="mr-2 hidden-sm-up" /> Where</h5>
+            <Row className="form-block" noGutters>
+              <Col sm={2}>
+                <Row style={{ display: 'flex', justifyContent: 'center' }}>
+                  <div className="homepage-feature-icon hidden-xs-down"><MdLocationSearching size={48} /></div>
+                </Row>
+                <Row style={{ display: 'flex', justifyContent: 'center' }}>
+                  <Label size="md" className="hidden-xs-down">Max distance</Label>
+                </Row>
               </Col>
-              <Col xs={12} sm={10} >
-                <SimpleListOrDropdown items={this.getPredifinedDistances()} selectedOption={this.state.distance} onChange={this.onChangeDistance.bind(this)} dropdown />
-                <FormFeedback>Maximal distance from current location</FormFeedback>
+              <Col xs={12} sm={10}>
+                <Row>
+                  <Col xs={12} className="">
+                    <SimpleListOrDropdown items={this.getPredifinedDistances()} selectedOption={this.state.distance} onChange={this.onChangeDistance.bind(this)} dropdown />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={6} sm={4}>
+                    <Button block color="secondary" size="sm" onClick={this.onOpenSimulateLocation.bind(this)}><MdMap className="mr-2" size={24} /> Map</Button>
+                  </Col>
+                </Row>
               </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Col xs={12} sm={2} />
-              <Col xs={12} sm={10} >
-                <FormFeedback style={{ marginTop: '-1rem' }}>
-                  <Button style={{ paddingLeft: '0px' }} color="link" onClick={this.onOpenSimulateLocation.bind(this)} size="md">Not here? Select an area on the map</Button>
-                </FormFeedback>
-              </Col>
-            </FormGroup>
-          </FormGroup>
+            </Row>
+          </div>
 
-          <FormGroup row className="mt-4">
+          <div className="mt-4">
             <Button color="primary" type="submit" size="md" disabled={!formReadyForSubmit} getRef={(ref) => { this.refSubmit = ref; }} >Find</Button>
             <Button color="link" onClick={this.resetForm.bind(this)} size="md" getRef={(ref) => { this.refReset = ref; }}>Reset</Button>
-          </FormGroup>
+          </div>
         </Form>
       </div>
     );

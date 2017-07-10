@@ -4,7 +4,7 @@ import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { MatchMediaHOC } from 'react-match-media';
-import { Button, Card, CardTitle, Col, Collapse, Form, FormFeedback, FormGroup, Input, Label, Modal, ModalHeader, ModalBody, Row } from 'reactstrap';
+import { Button, Card, CardTitle, Col, Collapse, Form, Input, Label, Modal, ModalHeader, ModalBody, Row } from 'reactstrap';
 // import MdLocalCake from 'react-icons/lib/md/local-cake';
 // import MdLocalBar from 'react-icons/lib/md/local-bar';
 // import MdLocalCafe from 'react-icons/lib/md/local-cafe';
@@ -30,14 +30,6 @@ logRateForm.setLevel('debug');
 const CollapseOnLargeScreens = MatchMediaHOC(Collapse, '(min-width: 576px)');
 const ModalOnSmallScreens = MatchMediaHOC(Modal, '(max-width: 575px)');
 
-
-const styles = {
-  form: {
-    // width: 300,
-    // margin: '20 auto',
-    // padding: 20,
-  },
-};
 
 const LOCATION_TYPES = [
   { id: 'bakery', name: 'Bakery', icon: 'MdLocalCake' },
@@ -253,7 +245,7 @@ class RateForm extends React.Component {
     logRateForm.debug(`render RateForm: (item=${this.state.item}, location=${this.state.location})`);
     const formReadyForSubmit = this.state.item && this.state.location && this.state.markOverall;
     return (
-      <div className="form-container">
+      <div className="standard-container">
         <h3 className="mb-4">Rate your plate!</h3>
         <Form onSubmit={this.onSubmit.bind(this)}>
           <SelectItemPlus
@@ -329,7 +321,7 @@ class RateForm extends React.Component {
                   <Col xs={12} className="">
                     <RatingStarsRow name="markOverall" label="Overall" initialRate={this.state.markOverall} onChange={this.onChangeMarkOverall.bind(this)} />
                   </Col>
-                </Row> 
+                </Row>
                 <Row>
                   <Col xs={6} sm={4} >
                     <Button block color="secondary" size="sm" onClick={this.toggleMarks.bind(this)}><MdStore className="mr-2" size={24} /> Details</Button>
@@ -373,7 +365,7 @@ class RateForm extends React.Component {
                   <Col xs={12} className="">
                     <Input type="textarea" value={this.state.comment} onChange={this.onChangeComment.bind(this)} />
                   </Col>
-                </Row>              
+                </Row>
               </Col>
             </Row>
           </div>

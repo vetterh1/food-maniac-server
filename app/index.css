@@ -413,7 +413,7 @@ h5 {
 
 
 
-.form-container {
+.standard-container {
     min-width: 260px;
     margin: 15px 0px;
 }
@@ -428,7 +428,7 @@ h5 {
 
 
 @media (min-width: 576px) {
-  .form-container {
+  .standard-container {
     margin: 25px auto;
   }
 
@@ -441,7 +441,7 @@ h5 {
 
 @media (min-width: 768px) {
 
-  .form-container {
+  .standard-container {
     max-width: 720px;
   }
 
@@ -453,7 +453,7 @@ h5 {
 
 @media (min-width: 1200px) {
 
-  .form-container {
+  .standard-container {
     max-width: 992px;
   }
 

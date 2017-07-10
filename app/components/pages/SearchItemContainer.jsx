@@ -178,25 +178,29 @@ class SearchItemContainer extends React.Component {
           />
 
           {this.state.markAggregates &&
-            <Row className="mt-1">
-              <Table responsive striped>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Overall</th>
-                    <th>Food</th>
-                    <th>Value</th>
-                    <th>Place</th>
-                    <th>Staff</th>
-                    <th># Reviews</th>
-                    <th>Distance</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.state.markAggregates.map((markAggregate, index) => { return (<ListOneMark markAggregate={markAggregate} index={index} key={markAggregate._id} />); })}
-                </tbody>
-              </Table>
-            </Row>
+            <div className="standard-container">
+              <h3 className="mb-4">Results:</h3>
+
+              <Row className="mt-1" noGutters>
+                <Table responsive striped>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Overall</th>
+                      <th>Food</th>
+                      <th>Value</th>
+                      <th>Place</th>
+                      <th>Staff</th>
+                      <th># Reviews</th>
+                      <th>Distance</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {this.state.markAggregates.map((markAggregate, index) => { return (<ListOneMark markAggregate={markAggregate} index={index} key={markAggregate._id} />); })}
+                  </tbody>
+                </Table>
+              </Row>
+            </div>
           }
           <SimulateLocationContainer
             open={this.state.modalSimulateLocation}
