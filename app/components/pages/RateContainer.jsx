@@ -128,6 +128,7 @@ class RateContainer extends React.Component {
       const place = {
         name: placeSelected.nameWithoutDistance,
         googleMapId: selfLocal.values.location,
+        googlePhotoUrl: placeSelected.googlePhotoUrl,
         location: {
           type: 'Point',
           coordinates: [placeSelected.geometry.location.lng(), placeSelected.geometry.location.lat()],

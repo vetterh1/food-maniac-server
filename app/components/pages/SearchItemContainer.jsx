@@ -5,7 +5,7 @@ import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Container, Row, Table } from 'reactstrap';
+import { Col, Container, Row } from 'reactstrap';
 import Alert from 'react-s-alert';
 import SearchItemForm from './SearchItemForm';
 import SimulateLocationContainer from '../pages/SimulateLocationContainer';
@@ -29,16 +29,22 @@ const ListOneMark = (props) => {
   const name = markAggregate.place.name.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
 
   return (
-    <tr>
-      <th scope="row">{name}</th>
-      <td>{roundTo0dot5(markAggregate.markOverall)}</td>
-      <td>{roundTo0dot5(markAggregate.markFood)}</td>
-      <td>{roundTo0dot5(markAggregate.markValue)}</td>
-      <td>{roundTo0dot5(markAggregate.markPlace)}</td>
-      <td>{roundTo0dot5(markAggregate.markStaff)}</td>
-      <td>{markAggregate.nbMarksOverall}</td>
-      <td>{markAggregate.distanceFormated}</td>
-    </tr>
+    <Row className="result-item-block py-3" noGutters>
+      <Col xs={8} sm={6}>
+        <Row className="result-item-name" noGutters>
+          <strong>{name}</strong>
+        </Row>
+        <Row className="result-item-rate" noGutters>
+          {roundTo0dot5(markAggregate.markOverall)} ({markAggregate.nbMarksOverall} reviews)
+        </Row>
+        <Row className="result-item-location" noGutters>
+          {markAggregate.distanceFormated}
+        </Row>
+      </Col>
+      <Col xs={4} sm={6}>
+        {markAggregate.place.googlePhotoUrl && <img src={markAggregate.place.googlePhotoUrl} alt="" className="result-item-picture" />}
+      </Col>
+    </Row>
   );
 };
 
@@ -180,8 +186,21 @@ class SearchItemContainer extends React.Component {
           {this.state.markAggregates &&
             <div className="standard-container">
               <h3 className="mb-4">Results:</h3>
+              {this.state.markAggregates.map((markAggregate, index) => { return (<ListOneMark markAggregate={markAggregate} index={index} key={markAggregate._id} />); })}
+            </div>
+          }
+          <SimulateLocationContainer
+            open={this.state.modalSimulateLocation}
+            onClose={this.onCloseModalSimulateLocation.bind(this)}
+          />
+        </Container>
+      </div>
+    );
+  }
+}
 
-              <Row className="mt-1" noGutters>
+/* Old display in table
+
                 <Table responsive striped>
                   <thead>
                     <tr>
@@ -199,18 +218,30 @@ class SearchItemContainer extends React.Component {
                     {this.state.markAggregates.map((markAggregate, index) => { return (<ListOneMark markAggregate={markAggregate} index={index} key={markAggregate._id} />); })}
                   </tbody>
                 </Table>
-              </Row>
-            </div>
-          }
-          <SimulateLocationContainer
-            open={this.state.modalSimulateLocation}
-            onClose={this.onCloseModalSimulateLocation.bind(this)}
-          />
-        </Container>
-      </div>
-    );
-  }
-}
+
+
+
+const ListOneMark = (props) => {
+  const { markAggregate } = props;
+  // sanitizeHtml escapes &<>" so we need to invert this for display!
+  const name = markAggregate.place.name.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
+
+  return (
+    <tr>
+      <th scope="row">{name}</th>
+      <td>{roundTo0dot5(markAggregate.markOverall)}</td>
+      <td>{roundTo0dot5(markAggregate.markFood)}</td>
+      <td>{roundTo0dot5(markAggregate.markValue)}</td>
+      <td>{roundTo0dot5(markAggregate.markPlace)}</td>
+      <td>{roundTo0dot5(markAggregate.markStaff)}</td>
+      <td>{markAggregate.nbMarksOverall}</td>
+      <td>{markAggregate.distanceFormated}</td>
+    </tr>
+  );
+};
+
+*/
+
 
 
 /* Old alert system: 

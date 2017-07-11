@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 const placeSchema = new Schema({
   name: { type: 'String', required: true },
   googleMapId: { type: 'String', required: true },
+  googlePhotoUrl: { type: 'String', required: false },
   location: {
     type: { type: 'String', default: 'Point' },
     // coordinates are LONGITUDE then latitude, NOT the opposite!

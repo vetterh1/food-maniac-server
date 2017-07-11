@@ -466,3 +466,34 @@ h5 {
 
 
 
+/**************************************************************
+
+                    RESULTS
+
+
+**************************************************************/
+
+
+
+.result-item-block {
+  border-bottom: 1px solid #E6E6E6!important;
+}
+
+.result-item-name {
+  color: #333;
+}
+
+.result-item-rate {
+  font-size: 0.7rem;
+  color: #E7711B;
+}
+
+.result-item-location {
+  font-size: 0.7rem;
+  color: #999;
+}
+
+.result-item-picture {
+  width: inherit;
+  height: inherit;
+}
