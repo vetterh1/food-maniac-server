@@ -78,8 +78,9 @@ class RetreiveLocations extends React.Component {
         const resultsWithDistance = results.map((place) => {
           const distance = distanceInKm(place.geometry.location.lat(), place.geometry.location.lng(), currentLatLng.lat(), currentLatLng.lng());
           const distanceFormated = formatDistance(distance);
-          const googlePhotoUrl = place.photos && place.photos[0] ? place.photos[0].getUrl({maxWidth: 1024}) : null;
-          return { ...place, distance, distanceFormated, googlePhotoUrl };
+          const googlePhotoUrl = place.photos && place.photos[0] ? place.photos[0].getUrl({ maxWidth: 1024 }) : null;
+          const id = place.place_id;
+          return { ...place, id, distance, distanceFormated, googlePhotoUrl };
         });
 
         this.pagination = pagination;
