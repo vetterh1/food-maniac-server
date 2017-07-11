@@ -2,7 +2,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormGroup, FormFeedback } from 'reactstrap';
 import Rating from 'react-rating';
 import MdStar from 'react-icons/lib/md/star';
 import MdStarOutline from 'react-icons/lib/md/star-outline';
@@ -13,10 +12,11 @@ class RatingStars extends React.PureComponent {
     stop: PropTypes.number,
     size: PropTypes.number,
     style: PropTypes.object,
-    onChange: PropTypes.func.isRequired,
+    onChange: PropTypes.func,
+    className: PropTypes.string,
   };
 
-  static defaultProps = { initialRate: null, stop: 5, size: 26, style: null };
+  static defaultProps = { initialRate: null, stop: 5, size: 26, style: null, onChange: null, className: '' };
 
   render() {
     const {
@@ -25,19 +25,22 @@ class RatingStars extends React.PureComponent {
       size,
       style,
       onChange,
+      className,
     } = this.props;
 
     return (
-      <FormGroup>
+      <div className={className} >
         <Rating
           initialRate={initialRate}
-          onChange={rate => onChange(rate)}
+          onChange={rate => onChange && onChange(rate)}
           stop={stop}
           full={<MdStar size={size} />}
           empty={<MdStarOutline size={size} />}
           style={style}
+          readonly={!onChange}
+          fractions={onChange ? 1 : 2}
         />
-      </FormGroup>
+      </div>
     );
   }
 }

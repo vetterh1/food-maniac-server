@@ -7,8 +7,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Col, Container, Row } from 'reactstrap';
 import Alert from 'react-s-alert';
+import MdStarHalf from 'react-icons/lib/md/star-half';
 import SearchItemForm from './SearchItemForm';
 import SimulateLocationContainer from '../pages/SimulateLocationContainer';
+import RatingStars from '../utils/RatingStars';
 
 // require('es6-promise').polyfill();
 // require('isomorphic-fetch');
@@ -32,10 +34,13 @@ const ListOneMark = (props) => {
     <Row className="result-item-block py-3" noGutters>
       <Col xs={8} sm={6}>
         <Row className="result-item-name" noGutters>
-          <strong>{name}</strong>
+          <h6>{name}</h6>
         </Row>
         <Row className="result-item-rate" noGutters>
-          {roundTo0dot5(markAggregate.markOverall)} ({markAggregate.nbMarksOverall} reviews)
+          <Col xs={12} sm={6}>
+            <RatingStars initialRate={markAggregate.markOverall} size={20} className="mr-2 mb-1" />
+            {roundTo0dot5(markAggregate.markOverall)} ({markAggregate.nbMarksOverall} reviews)
+        </Col>
         </Row>
         <Row className="result-item-location" noGutters>
           {markAggregate.distanceFormated}
@@ -184,8 +189,8 @@ class SearchItemContainer extends React.Component {
           />
 
           {this.state.markAggregates &&
-            <div className="standard-container">
-              <h3 className="mb-4">Results:</h3>
+            <div className="standard-container mt-5">
+              <h5 className="mb-4"><MdStarHalf size={24} className="mr-2" /> Results:</h5>
               {this.state.markAggregates.map((markAggregate, index) => { return (<ListOneMark markAggregate={markAggregate} index={index} key={markAggregate._id} />); })}
             </div>
           }

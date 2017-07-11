@@ -484,12 +484,12 @@ h5 {
 }
 
 .result-item-rate {
-  font-size: 0.7rem;
-  color: #E7711B;
+  font-size: 0.9rem;
+  color: steelblue;
 }
 
 .result-item-location {
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   color: #999;
 }
 
