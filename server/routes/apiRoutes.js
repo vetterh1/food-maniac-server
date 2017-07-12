@@ -129,9 +129,19 @@ router.route('/places/id/:_id').post(PlaceController.updatePlace);
 // Delete a place by _id
 router.route('/places/id/:_id').delete(PlaceController.deletePlace);
 
+//
 // Various admin batches
-router.route('/places/updateGooglePhoto').get(PlaceController.batchUpdatePlacesWithoutGooglePhoto);
+//
+
+//  Batch update to get the right google id (place_id, not id!)
+//  Should be called for every type of place (restaurant, bakery, bar, cafe)
+//  Ex 1: http://localhost:8080/api/places/updateGoogleId
+//  Ex 2: http://localhost:8080/api/places/updateGoogleId?options={"type":"bakery"}
+//  Ex 3: http://localhost:8080/api/places/updateGoogleId?options={"type":"bakery", "proxy":"http://proxy:3128"}
 router.route('/places/updateGoogleId').get(PlaceController.batchUpdatePlacesWithWrongGoogleId);
+
+router.route('/places/updateGooglePhoto').get(PlaceController.batchUpdatePlacesWithoutGooglePhoto);
+
 
 
 

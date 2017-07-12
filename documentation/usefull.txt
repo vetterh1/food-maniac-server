@@ -1,4 +1,20 @@
 ---------------------------------------------------------------
+                To play in prod next install
+---------------------------------------------------------------
+
+
+mongo:
+
+db.places.update({'_id': ObjectId('5908800450a7934d128ff770')}, {$set: {'name': 'Brasserie RN Louvain-La-Neuve', 'location': {'type' : 'Point', 'coordinates': [4.625232, 50.6682973]} } } )
+
+
+
+
+
+
+
+
+---------------------------------------------------------------
                            INSTALL 
 ---------------------------------------------------------------
 
@@ -109,6 +125,9 @@ db.items.update({}, {$rename: {'cuid': 'id'}}, { upsert:false, multi:true } )
 -------------  Change field value  ---------------
 // Change geo key coordinates:
 db.markaggregates.update({'_id': ObjectId('58f4dfff45dab98a840d0004')}, {$set: {'location': {'type' : 'Point', 'coordinates': [3.0177912000000333, 50.5750322]} } } )
+
+// Change place name & coordinates:
+db.places.update({'_id': ObjectId('5908800450a7934d128ff770')}, {$set: {'name': 'Brasserie RN Louvain-La-Neuve', 'location': {'type' : 'Point', 'coordinates': [4.625232, 50.6682973]} } } )
 
 -------------  Find by geo location  ---------------
 
@@ -422,8 +441,3 @@ server {
                 proxy_redirect off;
         }
 }
-
-
-
-
-

@@ -32,6 +32,8 @@
     "lint": "eslint client server"
   },
   "dependencies": {
+    "async": "^2.5.0",
+    "async-es": "^2.5.0",
     "babel-core": "^6.24.1",
     "babel-eslint": "^7.2.2",
     "babel-plugin-webpack-loaders": "^0.9.0",
