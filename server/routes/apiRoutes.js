@@ -129,8 +129,11 @@ router.route('/places/id/:_id').post(PlaceController.updatePlace);
 // Delete a place by _id
 router.route('/places/id/:_id').delete(PlaceController.deletePlace);
 
-// Delete a place by _id
+// Various admin batches
 router.route('/places/updateGooglePhoto').get(PlaceController.batchUpdatePlacesWithoutGooglePhoto);
+router.route('/places/updateGoogleId').get(PlaceController.batchUpdatePlacesWithWrongGoogleId);
+
+
 
 
 // ----------------  markAggregates ----------------
