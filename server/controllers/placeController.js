@@ -285,37 +285,109 @@ export function batchUpdatePlacesWithWrongGoogleId(req, res) {
  * Batch update to fill the google default photo in every place without it
  */
 export function batchUpdatePlacesWithoutGooglePhoto(req, res) {
-  Place.find({ googlePhotoUrl: null }).exec((err, places) => {
+  const options = req.query.options ? JSON.parse(req.query.options) : {};
+  if (!options.proxy) options.proxy = null;
+
+  Place.find({ googlePhotoUrl: { $exists: false } }).exec((err, places) => {
     if (err) {
       logger.error('placeController.batchUpdatePlacesWithoutGooglePhoto returns err: ', err);
       res.status(500).send(err);
     } else {
       logger.info(`placeController.batchUpdatePlacesWithoutGooglePhoto length=${places.length}`);
-      for (const place of places) {
+
+      const resultsArray = [];
+      let resultsOK = 0;
+      let resultsKO = 0;
+      eachSeries(places, (place, callback) => {
+        // 1) Call the Place details api of this place
+        const placeName = place.name.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
+        const queryDetails = `https://maps.googleapis.com/maps/api/place/details/json?placeid=${place.googleMapId}&key=AIzaSyAPbswfvaojeQVe9eE-0CtZ4iEtWia9KO0`;
+        // Call example for via istambul: https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJi-duuGTTwkcRbDZlCrFuYHA&key=AIzaSyAPbswfvaojeQVe9eE-0CtZ4iEtWia9KO0
+
+        request({ url: queryDetails, proxy: options.proxy },
+          (error, response, body) => {
+          // console.log('response:', response.toJSON());
+          if (error || response.statusCode !== 200) {
+              const msg = `${place._id} (${placeName}) failed to find details for googleMapId=${place.googleMapId} - error = ${error}`;
+              resultsArray.push(msg);
+              resultsKO += 1;
+              logger.error(`placeController.batchUpdatePlacesWithoutGooglePhoto ${msg}`);
+              callback();
+            } else {
+              // 2) Get the photo_reference from the details
+              const jsonBody = JSON.parse(body); // should have a non-empty results array
+              if (!jsonBody) {
+                const msg = `${place._id} (${placeName}) Could not find json details for googleMapId=${place.googleMapId}`;
+                resultsArray.push(msg);
+                resultsKO += 1;
+                logger.error(`placeController.batchUpdatePlacesWithoutGooglePhoto ${msg}`);
+                callback();
+              } else {
+                if (!jsonBody.result.photos || jsonBody.result.photos.length < 1 || !jsonBody.result.photos[0].photo_reference) {
+                  const msg = `${place._id} (${placeName}) No photos in google details for googleMapId=${place.googleMapId}`;
+                  resultsArray.push(msg);
+                  resultsKO += 1;
+                  logger.error(`placeController.batchUpdatePlacesWithoutGooglePhoto ${msg}`);
+                  callback();
+                } else {
+                  const photoReference = jsonBody.result.photos[0].photo_reference;
+
+                  // 3) Call the Photo api with this ref (and size) to get the url in return
+                  const queryPhotoApi = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=${photoReference}&key=AIzaSyAPbswfvaojeQVe9eE-0CtZ4iEtWia9KO0`;
+                  // Call example for via istambul: https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=CmRaAAAA5U6Pz0DeS0xe-x5KqI2YeOj3Ub0M0TyT0oeJd_lUZtcrCieI7d6QSTjRHfgwf1EdhTpPW_X6uKhl5Xr5IuKjFy_TsGthBLwTMAoayc3AZp7v_oBm5w6ZEwe-AoFd_pBmEhBUVcj39_zDWDHcHHSS5VcrGhR3hl4p-JVQ69NoDnI6kOn5FYDW4g&key=AIzaSyAPbswfvaojeQVe9eE-0CtZ4iEtWia9KO0
+                
+                  request({ url: queryPhotoApi, proxy: options.proxy },
+                    (errorQueryPhoto, responseQueryPhoto) => {
+                      if (errorQueryPhoto || responseQueryPhoto.statusCode !== 200) {
+                        const msg = `${place._id} (${placeName}) failed to get photo url for googleMapId=${place.googleMapId} - errorQueryPhoto = ${errorQueryPhoto}`;
+                        resultsArray.push(msg);
+                        resultsKO += 1;
+                        logger.error(`placeController.batchUpdatePlacesWithoutGooglePhoto ${msg}`);
+                        callback();
+                      } else {
+                        const href = responseQueryPhoto.request.uri.href;
+                        // console.log('href:', href);
+
+
+                        // 4) Update the Mongo record with the url
+                        const placeUpdate = Object.assign({}, { googlePhotoUrl: href, lastModif: new Date() });
+                        Place.findOneAndUpdate({ _id: place._id }, placeUpdate, { new: true }, (errUpdt, placeUpdt) => {
+                          if (errUpdt || !placeUpdt) {
+                            const msg = `${place._id} (${placeName}) failed to update googlePhotoUrl to ${href} - err = ${err}`;
+                            resultsArray.push(msg);
+                            resultsKO += 1;
+                            logger.error(`placeController.batchUpdatePlacesWithoutGooglePhoto ${msg}`);
+                            callback();
+                          } else {
+                            const msg = `${place._id} (${placeName}) updated googlePhotoUrl to ${href}`;
+                            resultsArray.push(msg);
+                            resultsOK += 1;
+                            logger.info(`placeController.batchUpdatePlacesWithoutGooglePhoto ${msg}`);
+                            callback();
+                          }
+                        });
+
+                      }
+                    }
+                  );
+                }
+              } /* else !jsonBody */
+            } /* else error || response.statusCode !== 200 */
+          } /* end callback request */
+        ); /* end request */
+      }, (errEachSeries) => {
+        const summary = { type: options.type, statistics: { total: resultsArray.length, ok: resultsOK, ko: resultsKO }, results: resultsArray };
+        logger.info(`placeController.batchUpdatePlacesWithoutGooglePhoto statistics: ${JSON.stringify(summary.statistics)}`);
+        if (errEachSeries) res.status(500).json(summary);
+        res.status(200).json(summary);
+      });
+    }
+  });
+}
+
 // https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4&key=AIzaSyAPbswfvaojeQVe9eE-0CtZ4iEtWia9KO0
 // https://maps.googleapis.com/maps/api/place/details/json?placeid=67463f0c1dba4c2cb784632442a4eb842f83f0d7&key=AIzaSyAPbswfvaojeQVe9eE-0CtZ4iEtWia9KO0
 // KO if taken from result from details query: https://lh3.googleusercontent.com/p/CmRaAAAAuS3s-7tmk3-VryvlTEDXs8j9oC9shWW5qxj6ShQIw0Uyo_RnslOjBj6ZbroK3_-CHaD_VG87TkluLw_pXleOW6b2chk0qlDsbuyfdUa_nStVX42o0h-PmsrAdmFvo9U4EhBE3vsxR9d6_kL9ItAOKE7pGhQTEtKRMt9THmB-fw-HJ2dm1l-HKg
 // OK when generated by Places service... but how??? https://lh3.googleusercontent.com/p/AF1QipMIevEw_klE7idV2Vyw_EEDfs3nxV9GBLntymTV=w1024-k
 // https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CmRaAAAAuS3s-7tmk3-VryvlTEDXs8j9oC9shWW5qxj6ShQIw0Uyo_RnslOjBj6ZbroK3_-CHaD_VG87TkluLw_pXleOW6b2chk0qlDsbuyfdUa_nStVX42o0h-PmsrAdmFvo9U4EhBE3vsxR9d6_kL9ItAOKE7pGhQTEtKRMt9THmB-fw-HJ2dm1l-HKg&key=AIzaSyAPbswfvaojeQVe9eE-0CtZ4iEtWia9KO0
-
-        // 1) Call the Place details api of this place
-        const queryDetails = `https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJjW4Yx3cqw0cRrWPPeXg7iDM&key=AIzaSyAPbswfvaojeQVe9eE-0CtZ4iEtWia9KO0`;
-        console.log ('queryDetails: ', queryDetails);
-        request(queryDetails,
-          (error, response, body) => {
-            if (!error && response.statusCode === 200) {
-              console.log(body); // Print the google web page.
-              res.status(200).end();
-            } else {
-              logger.error('placeController.batchUpdatePlacesWithoutGooglePhoto returns err: ', error);
-              res.status(500).send(error);
-            }
-          }
-        );
-
-        // 2) Get the photo_reference from the details
-        // 3) Call the Photo api with this ref (and size) to get the url in return
-      }
-    }
-  });
-}
+// via istambul: https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJi-duuGTTwkcRbDZlCrFuYHA&key=AIzaSyAPbswfvaojeQVe9eE-0CtZ4iEtWia9KO0

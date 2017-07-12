@@ -140,6 +140,9 @@ router.route('/places/id/:_id').delete(PlaceController.deletePlace);
 //  Ex 3: http://localhost:8080/api/places/updateGoogleId?options={"type":"bakery", "proxy":"http://proxy:3128"}
 router.route('/places/updateGoogleId').get(PlaceController.batchUpdatePlacesWithWrongGoogleId);
 
+//  Batch update to get the right photo id if null
+//  Ex 1: http://localhost:8080/api/places/updateGooglePhoto
+//  Ex 2: http://localhost:8080/api/places/updateGoogleId?options={"proxy":"http://proxy:3128"}
 router.route('/places/updateGooglePhoto').get(PlaceController.batchUpdatePlacesWithoutGooglePhoto);
 
 
