@@ -184,7 +184,7 @@ export function deletePlace(req, res) {
  * Ex 2: http://localhost:8080/api/places/updateGoogleId?options={"type":"bakery"}
  * Ex 3: http://localhost:8080/api/places/updateGoogleId?options={"type":"bakery", "proxy":"http://proxy:3128"}
  */
- 
+
 export function batchUpdatePlacesWithWrongGoogleId(req, res) {
   const options = req.query.options ? JSON.parse(req.query.options) : {};
   if (!options.type) options.type = 'restaurant';
@@ -198,6 +198,8 @@ export function batchUpdatePlacesWithWrongGoogleId(req, res) {
       logger.info(`placeController.batchUpdatePlacesWithWrongGoogleId length=${places.length}`);
 
       const resultsArray = [];
+      let resultsOK = 0;
+      let resultsKO = 0;
 
       eachSeries(places, (place, callback) => {
         // 1) Get the closest locations from google
@@ -210,41 +212,52 @@ export function batchUpdatePlacesWithWrongGoogleId(req, res) {
         // console.log('queryNearbyPlaces: ', queryNearbyPlaces);
         request({ url: queryNearbyPlaces, proxy: options.proxy },
           (error, response, body) => {
-            if (!error && response.statusCode === 200) {
+            if (error || response.statusCode !== 200) {
+              const msg = `${place._id} (${placeName}) failed to update googleMapId from ${oldPlaceId} - error = ${error}`;
+              resultsArray.push(msg);
+              resultsKO += 1;
+              logger.error(`placeController.batchUpdatePlacesWithWrongGoogleId ${msg}`);
+              callback();
+            } else {
               // 2) From these results, find the one with same name
               const jsonBody = JSON.parse(body); // should have a non-empty results array
               if (!jsonBody) {
-                const msg = `${place._id} Could not find place ${placeName}!`;
+                const msg = `${place._id} (${placeName}) Could not find place!`;
                 resultsArray.push(msg);
+                resultsKO += 1;
                 logger.error(`placeController.batchUpdatePlacesWithWrongGoogleId ${msg}`);
                 callback();
               } else {
                 const thePlace = jsonBody.results.find(placeInResults => placeInResults.name === placeName);
                 if (!thePlace) {
                   const googlePlaces = jsonBody.results.reduce((resReduce, crt) => { return resReduce.concat(crt.name, ' - '); }, '');
-                  const msg = `${place._id} Could not find place with same name (${placeName}) in google results (${googlePlaces})`;
+                  const msg = `${place._id} (${placeName}) Could not find place with same name in google results (${googlePlaces})`;
                   resultsArray.push(msg);
+                  resultsKO += 1;
                   logger.error(`placeController.batchUpdatePlacesWithWrongGoogleId ${msg}`);
                   callback();
                 } else {
                   // 3) Retreive his place_id and update the Mongo record with it
                   const placeId = thePlace.place_id;
                   if (!placeId) {
-                    const msg = `${place._id} Could not find place_id in google results`;
+                    const msg = `${place._id} (${placeName}) Could not find place_id in google results`;
                     resultsArray.push(msg);
+                    resultsKO += 1;
                     logger.error(`placeController.batchUpdatePlacesWithWrongGoogleId ${msg}`);
                     callback();
                   } else {
                     const placeUpdate = Object.assign({}, { googleMapId: placeId, lastModif: new Date() });
                     Place.findOneAndUpdate({ _id: place._id }, placeUpdate, { new: true }, (errUpdt, placeUpdt) => {
                       if (errUpdt || !placeUpdt) {
-                        const msg = `${place._id} failed to update googleMapId from ${oldPlaceId} to ${placeId} - err = ${err}`;
+                        const msg = `${place._id} (${placeName}) failed to update googleMapId from ${oldPlaceId} to ${placeId} - err = ${err}`;
                         resultsArray.push(msg);
+                        resultsKO += 1;
                         logger.error(`placeController.batchUpdatePlacesWithWrongGoogleId ${msg}`);
                         callback();
                       } else {
-                        const msg = `${place._id} updated googleMapId from ${oldPlaceId} to ${placeId}`;
+                        const msg = `${place._id} (${placeName}) updated googleMapId from ${oldPlaceId} to ${placeId}`;
                         resultsArray.push(msg);
+                        resultsOK += 1;
                         logger.info(`placeController.batchUpdatePlacesWithWrongGoogleId ${msg}`);
                         callback();
                       }
@@ -252,17 +265,14 @@ export function batchUpdatePlacesWithWrongGoogleId(req, res) {
                   }
                 }
               }
-            } else {
-              const msg = `${place._id} failed to update googleMapId from ${oldPlaceId} - error = ${error}`;
-              resultsArray.push(msg);
-              logger.error(`placeController.batchUpdatePlacesWithWrongGoogleId ${msg}`);
-              callback();
             }
           }
         );
       }, (errEachSeries) => {
-        if (errEachSeries) res.status(500).json({ nbPlaces: resultsArray.length, results: resultsArray });
-        res.status(200).json({ nbPlaces: resultsArray.length, results: resultsArray });
+        const summary = { type: options.type, statistics: { total: resultsArray.length, ok: resultsOK, ko: resultsKO }, results: resultsArray };
+        logger.info(`placeController.batchUpdatePlacesWithWrongGoogleId statistics: ${JSON.stringify(summary.statistics)}`);
+        if (errEachSeries) res.status(500).json(summary);
+        res.status(200).json(summary);
       });
     }
   });
