@@ -78,7 +78,11 @@ class RetreiveLocations extends React.Component {
         const resultsWithDistance = results.map((place) => {
           const distance = distanceInKm(place.geometry.location.lat(), place.geometry.location.lng(), currentLatLng.lat(), currentLatLng.lng());
           const distanceFormated = formatDistance(distance);
-          const googlePhotoUrl = place.photos && place.photos[0] ? place.photos[0].getUrl({ maxWidth: 1024 }) : null;
+          //    Note: If maxWidth changed from 250, please update:
+          //    - placeController.batchUpdatePlacesWithGooglePhoto method (plus apiRoutes) on server side
+          //    - RetreiveLocations.componentWillReceiveProps method on Client side
+          //    - .result-item-picture in index.css on Client side
+          const googlePhotoUrl = place.photos && place.photos[0] ? place.photos[0].getUrl({ maxWidth: 250 }) : null;
           const id = place.place_id;
           return { ...place, id, distance, distanceFormated, googlePhotoUrl };
         });

@@ -134,16 +134,28 @@ router.route('/places/id/:_id').delete(PlaceController.deletePlace);
 //
 
 //  Batch update to get the right google id (place_id, not id!)
-//  Should be called for every type of place (restaurant, bakery, bar, cafe)
+//  Should be called for every type of place (see options)
+//  Options (see ex below):
+//  - proxy: (default=none)
+//  - type: place type. currently supported types are: restaurant, bakery, bar, cafe
 //  Ex 1: http://localhost:8080/api/places/updateGoogleId
 //  Ex 2: http://localhost:8080/api/places/updateGoogleId?options={"type":"bakery"}
 //  Ex 3: http://localhost:8080/api/places/updateGoogleId?options={"type":"bakery", "proxy":"http://proxy:3128"}
 router.route('/places/updateGoogleId').get(PlaceController.batchUpdatePlacesWithWrongGoogleId);
 
 //  Batch update to get the right photo id if null
+//  Options (see ex below):
+//  - proxy: (default=none)
+//  - maxwidth: maximum google image width  (default=250)
+//    Note: if default is changed from 250, please update:
+//    - placeController.batchUpdatePlacesWithGooglePhoto method (plus apiRoutes) on server side
+//    - RetreiveLocations.componentWillReceiveProps method on Client side
+//    - .result-item-picture in index.css on Client side
+//  - forceall: update only places with empty googlePhotoUrl. If set to false, ALL places will be updated (default=false)
 //  Ex 1: http://localhost:8080/api/places/updateGooglePhoto
-//  Ex 2: http://localhost:8080/api/places/updateGoogleId?options={"proxy":"http://proxy:3128"}
-router.route('/places/updateGooglePhoto').get(PlaceController.batchUpdatePlacesWithoutGooglePhoto);
+//  Ex 2: http://localhost:8080/api/places/updateGooglePhoto?options={"proxy":"http://proxy:3128"}
+//  Ex 3: http://localhost:8080/api/places/updateGooglePhoto?options={"maxwidth":"400", "forceall":"true", "proxy":"http://proxy:3128"}
+router.route('/places/updateGooglePhoto').get(PlaceController.batchUpdatePlacesWithGooglePhoto);
 
 
 

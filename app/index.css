@@ -493,7 +493,14 @@ h5 {
   color: #999;
 }
 
+/*
+// Note: If max-width changed from 250, please update:
+//    - placeController.batchUpdatePlacesWithGooglePhoto method (plus apiRoutes) on server side
+//    - RetreiveLocations.componentWillReceiveProps method on Client side
+//    - .result-item-picture in index.css on Client side
+*/
 .result-item-picture {
   width: inherit;
   height: inherit;
+  max-width: 250px;
 }
