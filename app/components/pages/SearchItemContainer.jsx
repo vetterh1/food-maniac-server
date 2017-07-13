@@ -28,16 +28,18 @@ function roundTo0dot5(n) { return n ? (Math.round(n * 2) / 2).toFixed(1) : null;
 
 class ListOneMark extends React.Component {
 
+  static propTypes = {
+    markAggregate: PropTypes.object.isRequired,
+    // index: PropTypes.number.isRequired,
+    // key: PropTypes.string.isRequired,
+    onClickDirections: PropTypes.func.isRequired,
+  };
+
   constructor(props) {
     super(props);
 
     this.state = {
-      showGoogleDirections: false,
     };
-  }
-
-  onClickDirections() {
-    this.setState({ showGoogleDirections: !this.state.showGoogleDirections });
   }
 
 
@@ -58,12 +60,9 @@ class ListOneMark extends React.Component {
               {roundTo0dot5(markAggregate.markOverall)} ({markAggregate.nbMarksOverall} reviews)
           </Col>
           </Row>
-          <Row className="result-item-location" noGutters onClick={() => this.onClickDirections()} >
+          <Row className="result-item-location" noGutters onClick={() => this.props.onClickDirections(markAggregate.place.googleMapId)} >
             {markAggregate.distanceFormated}
           </Row>
-          { this.state.showGoogleDirections && <Row className="result-item-directions my-2" noGutters>
-            <GoogleDirections destination={markAggregate.place.googleMapId} />
-          </Row> }
         </Col>
         <Col xs={4} sm={6}>
           {markAggregate.place.googlePhotoUrl && <img src={markAggregate.place.googlePhotoUrl} alt="" className="result-item-picture" />}
@@ -75,10 +74,6 @@ class ListOneMark extends React.Component {
 
 }
 
-ListOneMark.propTypes = {
-  // index: PropTypes.number.isRequired,
-  markAggregate: PropTypes.object.isRequired,
-};
 
 
 
@@ -101,6 +96,8 @@ class SearchItemContainer extends React.Component {
     this.state = {
       markAggregates: null, // Results
       modalSimulateLocation: false,
+      showGoogleDirections: false,
+      googleMapId: null,
     };
 
     this.alert = null;
@@ -137,6 +134,12 @@ class SearchItemContainer extends React.Component {
   onCloseModalSimulateLocation() {
     this.setState({ modalSimulateLocation: false });
   }
+
+
+  onClickDirections(googleMapId) {
+    this.setState({ showGoogleDirections: !this.state.showGoogleDirections, googleMapId });
+  }
+
 
 
   onSubmit(values) {
@@ -213,13 +216,27 @@ class SearchItemContainer extends React.Component {
           {this.state.markAggregates &&
             <div className="standard-container mt-5">
               <h5 className="mb-4"><MdStarHalf size={24} className="mr-2" /> Results:</h5>
-              {this.state.markAggregates.map((markAggregate, index) => { return (<ListOneMark markAggregate={markAggregate} index={index} key={markAggregate._id} />); })}
+              {this.state.markAggregates.map((markAggregate, index) => {
+                return (<ListOneMark
+                  markAggregate={markAggregate}
+                  // index={index}
+                  key={markAggregate._id}
+                  onClickDirections={googleMapId => this.onClickDirections(googleMapId)}
+                />);
+                })
+              }
             </div>
           }
           <SimulateLocationContainer
             open={this.state.modalSimulateLocation}
             onClose={this.onCloseModalSimulateLocation.bind(this)}
           />
+          { this.state.showGoogleDirections && <Row className="result-item-directions my-2" noGutters>
+            <GoogleDirections
+              origin={{ latitude: this.props.coordinates.latitude, longitude: this.props.coordinates.longitude }}
+              destination={this.state.googleMapId}
+            />
+          </Row> }
         </Container>
       </div>
     );
