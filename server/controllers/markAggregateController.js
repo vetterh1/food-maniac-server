@@ -64,7 +64,7 @@ export function getMarkAggregatesByItemIdAndDistance(req, res) {
   } else {
     const query = MarkAggregate
       .find({ item: req.params._itemId }) // find all the AGGREGATED markAggregates for one item
-      .populate('place', 'name googlePhotoUrl') // add the place & googlePhotoUrl information (available with place.xxx)
+      .populate('place', 'name googleMapId googlePhotoUrl') // add the place & googlePhotoUrl information (available with place.xxx)
       .sort({ markOverall: -1 }); // sort by rating (from best to worst)
 
     if (req.params._maxDistance && req.params._maxDistance > 0 && req.params._lat && req.params._lng) {

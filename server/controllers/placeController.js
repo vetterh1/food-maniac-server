@@ -293,6 +293,7 @@ export function batchUpdatePlacesWithWrongGoogleId(req, res) {
 //  Ex 1: http://localhost:8080/api/places/updateGooglePhoto
 //  Ex 2: http://localhost:8080/api/places/updateGooglePhoto?options={"proxy":"http://proxy:3128"}
 //  Ex 3: http://localhost:8080/api/places/updateGooglePhoto?options={"maxwidth":"400", "forceall":"true", "proxy":"http://proxy:3128"}
+//  Ex PROD: https://food-maniac.com/api/places/updateGooglePhoto?options={"maxwidth":"250","forceall":"true"}
 //
 
 export function batchUpdatePlacesWithGooglePhoto(req, res) {

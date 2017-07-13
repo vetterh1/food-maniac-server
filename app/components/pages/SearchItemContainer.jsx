@@ -1,4 +1,3 @@
-/* eslint-disable no-class-assign */
 /* eslint-disable react/forbid-prop-types */
 
 import * as log from 'loglevel';
@@ -11,6 +10,7 @@ import MdStarHalf from 'react-icons/lib/md/star-half';
 import SearchItemForm from './SearchItemForm';
 import SimulateLocationContainer from '../pages/SimulateLocationContainer';
 import RatingStars from '../utils/RatingStars';
+import GoogleDirections from '../utils/GoogleDirections';
 
 // require('es6-promise').polyfill();
 // require('isomorphic-fetch');
@@ -25,33 +25,55 @@ logSearchItemContainer.debug('--> entering SearchItemContainer.jsx');
 // To round to the next 0.5: (Math.round(rating * 2) / 2).toFixed(1)
 function roundTo0dot5(n) { return n ? (Math.round(n * 2) / 2).toFixed(1) : null; }
 
-const ListOneMark = (props) => {
-  const { markAggregate } = props;
-  // sanitizeHtml escapes &<>" so we need to invert this for display!
-  const name = markAggregate.place.name.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
 
-  return (
-    <Row className="result-item-block py-3" noGutters>
-      <Col xs={8} sm={6}>
-        <Row className="result-item-name" noGutters>
-          <h6>{name}</h6>
-        </Row>
-        <Row className="result-item-rate" noGutters>
-          <Col xs={12} sm={6}>
-            <RatingStars initialRate={markAggregate.markOverall} size={20} className="mr-2 mb-1" />
-            {roundTo0dot5(markAggregate.markOverall)} ({markAggregate.nbMarksOverall} reviews)
+class ListOneMark extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showGoogleDirections: false,
+    };
+  }
+
+  onClickDirections() {
+    this.setState({ showGoogleDirections: !this.state.showGoogleDirections });
+  }
+
+
+  render() {
+    const { markAggregate } = this.props;
+    // sanitizeHtml escapes &<>" so we need to invert this for display!
+    const name = markAggregate.place.name.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
+
+    return (
+      <Row className="result-item-block py-3" noGutters>
+        <Col xs={8} sm={6}>
+          <Row className="result-item-name" noGutters>
+            <h6>{name}</h6>
+          </Row>
+          <Row className="result-item-rate" noGutters>
+            <Col xs={12} sm={6}>
+              <RatingStars initialRate={markAggregate.markOverall} size={20} className="mr-2 mb-1" />
+              {roundTo0dot5(markAggregate.markOverall)} ({markAggregate.nbMarksOverall} reviews)
+          </Col>
+          </Row>
+          <Row className="result-item-location" noGutters onClick={() => this.onClickDirections()} >
+            {markAggregate.distanceFormated}
+          </Row>
+          { this.state.showGoogleDirections && <Row className="result-item-directions my-2" noGutters>
+            <GoogleDirections destination={markAggregate.place.googleMapId} />
+          </Row> }
         </Col>
-        </Row>
-        <Row className="result-item-location" noGutters>
-          {markAggregate.distanceFormated}
-        </Row>
-      </Col>
-      <Col xs={4} sm={6}>
-        {markAggregate.place.googlePhotoUrl && <img src={markAggregate.place.googlePhotoUrl} alt="" className="result-item-picture" />}
-      </Col>
-    </Row>
-  );
-};
+        <Col xs={4} sm={6}>
+          {markAggregate.place.googlePhotoUrl && <img src={markAggregate.place.googlePhotoUrl} alt="" className="result-item-picture" />}
+        </Col>
+      </Row>
+    );
+  }
+
+
+}
 
 ListOneMark.propTypes = {
   // index: PropTypes.number.isRequired,
@@ -296,5 +318,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-SearchItemContainer = connect(mapStateToProps)(SearchItemContainer);
-export default SearchItemContainer;
+export default connect(mapStateToProps)(SearchItemContainer);
