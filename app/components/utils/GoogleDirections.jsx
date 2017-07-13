@@ -3,19 +3,17 @@
 import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Col, Container, Row } from 'reactstrap';
 
 const logGoogleDirections = log.getLogger('logGoogleDirections');
 logGoogleDirections.setLevel('debug');
 logGoogleDirections.debug('--> entering GoogleDirections.jsx');
 
-class GoogleDirections extends React.Component {
+export default class GoogleDirections extends React.Component {
   static propTypes = {
+    origin: PropTypes.object.isRequired,
     destination: PropTypes.string.isRequired,
     travelMode: PropTypes.string,
-    // Injected by redux-store connect:
-    coordinates: PropTypes.object.isRequired,
   };
 
   static defaultProps = { travelMode: 'WALKING' };
@@ -32,13 +30,18 @@ class GoogleDirections extends React.Component {
     this.update();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps) return;
+    this.update();
+  }
+
   componentDidUpdate() {
     this.update();
   }
 
 
   update() {
-    const currentLatLng = new google.maps.LatLng(this.props.coordinates.latitude, this.props.coordinates.longitude);
+    const currentLatLng = new google.maps.LatLng(this.props.origin.latitude, this.props.origin.longitude);
     const directionsDisplay = new google.maps.DirectionsRenderer();
     const directionsService = new google.maps.DirectionsService();
     const map = new google.maps.Map(document.getElementById('map-directions'), {
@@ -71,20 +74,12 @@ class GoogleDirections extends React.Component {
   render() {
     return (
       <div>
-        test!
+        ------- Directions -------
         <div id="map-directions" className="" />
         <div id="text-directions" />
+        --------------------------
       </div>
     );
   }
 
 }
-
-
-const mapStateToProps = (state) => {
-  return {
-    coordinates: state.coordinates,
-  };
-};
-
-export default connect(mapStateToProps)(GoogleDirections);
