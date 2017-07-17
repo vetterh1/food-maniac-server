@@ -511,9 +511,10 @@ h5 {
 
 .highlighted {
   opacity: 1;
-  margin-left: -3px;
-  margin-right: -3px;
+  margin-left: 10px;
+  margin-right: 10px;
   background-color: #ffd6ab;
+  transform: scale(1.15);
 }
 
 .standard {
