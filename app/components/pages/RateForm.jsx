@@ -259,9 +259,9 @@ class RateForm extends React.Component {
             ref={(r) => { this._refSelectItemPlus = r; }} // used to reset the 3 dropdowns
           />
 
-          <div className="mt-4">
+          <div className="mt-4 form-block dimmed">
             <h5 className="mb-3"><MdLocationSearching size={24} className="mr-2 hidden-sm-up" /> Where</h5>
-            <Row className="form-block" noGutters>
+            <Row className="" noGutters>
               <Col sm={2}>
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
                   <div className="homepage-feature-icon hidden-xs-down"><MdLocationSearching size={48} /></div>
@@ -305,9 +305,9 @@ class RateForm extends React.Component {
           </div>
 
 
-          <div className="mt-4">
+          <div className="mt-4 form-block dimmed">
             <h5 className="mb-3"><MdStarHalf size={24} className="mr-2 hidden-sm-up" /> Marks</h5>
-            <Row className="form-block" noGutters>
+            <Row className="" noGutters>
               <Col sm={2}>
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
                   <div className="homepage-feature-icon hidden-xs-down"><MdStarHalf size={48} /></div>
@@ -349,9 +349,9 @@ class RateForm extends React.Component {
 
 
 
-          <div className="mt-4">
+          <div className="mt-4 form-block dimmed">
             <h5 className="mb-3"><MdEdit size={24} className="mr-2 hidden-sm-up" /> Optional comment</h5>
-            <Row className="form-block" noGutters>
+            <Row className="" noGutters>
               <Col sm={2}>
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
                   <div className="homepage-feature-icon hidden-xs-down"><MdEdit size={48} /></div>
@@ -370,10 +370,13 @@ class RateForm extends React.Component {
             </Row>
           </div>
 
-          <div className="mt-4">
+          <div className="mt-4 dimmed">
             <Button color="primary" type="submit" size="md" disabled={!formReadyForSubmit}>Add</Button>
             <Button color="link" onClick={this.resetForm.bind(this)} size="md" getRef={(ref) => { this.refReset = ref; }}>Reset</Button>
           </div>
+
+          <div className="semi-opaque" />
+
         </Form>
       </div>
     );

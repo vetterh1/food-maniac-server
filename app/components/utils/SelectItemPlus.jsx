@@ -170,11 +170,11 @@ class SelectItemPlus extends React.Component {
   render() {
     logSelectItemPlus.debug(`render SelectItemPlus: (category=${this.state.category}, kind=${this.state.kind}, item=${this.state.item}`);
     return (
-      <div>
+      <div className="form-block highlighted">
         {this.props.title && <h5 className="mb-3"><MdRoomService size={24} className="mr-2 hidden-sm-up" /> {this.props.title}</h5>}
 
         {!this.props.hideItem &&
-          <Row className="form-block" noGutters>
+          <Row className="" noGutters>
             <Col sm={2}>
               <Row style={{ display: 'flex', justifyContent: 'center' }}>
                 <div className="homepage-feature-icon hidden-xs-down"><MdRoomService size={48} /></div>
