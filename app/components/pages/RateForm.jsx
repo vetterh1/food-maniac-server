@@ -17,11 +17,17 @@ import MdMap from 'react-icons/lib/md/map';
 import MdLocationSearching from 'react-icons/lib/md/location-searching';
 import MdStarHalf from 'react-icons/lib/md/star-half';
 import MdEdit from 'react-icons/lib/md/edit';
+import Scroll from 'react-scroll';
 
 import RatingStarsRow from '../utils/RatingStarsRow';
 import SimpleListOrDropdown from '../utils/SimpleListOrDropdown';
 import SelectItemPlus from '../utils/SelectItemPlus';
 import { loglevelServerSend } from '../../utils/loglevel-serverSend';
+
+const Element = Scroll.Element;
+const scroller = Scroll.scroller;
+const scroll = Scroll.animateScroll;
+const optionsScroll = { duration: 1000, delay: 500, smooth: true };
 
 const logRateForm = log.getLogger('logRateForm');
 loglevelServerSend(logRateForm); // a setLevel() MUST be run AFTER this!
@@ -73,6 +79,7 @@ class RateForm extends React.Component {
 
       comment: '',
 
+      location: '',
       locationType: 'restaurant',
 
       collapseType: false,
@@ -80,25 +87,18 @@ class RateForm extends React.Component {
     };
 
     this.state = {
-      location: props.places && props.places.places.length > 0 ? props.places.places[0].id : undefined,
+//      location: props.places && props.places.places.length > 0 ? props.places.places[0].id : undefined,
       ...this.defaultState,
     };
     // console.log('RateForm constructor (props, initial state): ', props, this.state);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!nextProps) return;
+    if (!nextProps || !nextProps.places || nextProps.places.places.length <= 0) return;
 
-    // Search if crt location still in the new list:
-    const bCrtIndexInStillInNewPlaces = nextProps.places.places.some(place => place.id === this.state.location);
-
-    // Prepare the default location selection if necessary
-    if (nextProps.places && nextProps.places.places.length > 0 && (!bCrtIndexInStillInNewPlaces || !this.state.location || this.state.location === '')) {
-      logRateForm.debug(`RateForm.componentWillReceiveProps: new location=${nextProps.places.places[0].id} old=${this.state.location}`);
-      this.setState({ location: nextProps.places.places[0].id });
-    } else {
-      logRateForm.debug(`RateForm.componentWillReceiveProps: no new location. crt=${this.state.location}`);
-    }
+    // Search if crt location still in the new list. If not, select the placeholder!
+    if (this.state.location !== '' &&  !nextProps.places.places.some(place => place.id === this.state.location))
+      this.setState({ location: '' });
   }
 
 
@@ -115,19 +115,22 @@ class RateForm extends React.Component {
       markStaff: this.state.markStaff,
       comment: this.state.comment,
     };
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
+    scroll.scrollToTop(optionsScroll);
     this.props.onSubmit(returnValue);
   }
 
   onChangeItem(item) {
     if (this.state.item === item) return;
     this.setState({ item, fillStep: 2 });
+    scroller.scrollTo('scrollElementWhere', optionsScroll);
   }
 
 
   onChangeLocation(event) {
     if (this.state.location === event.target.value) return;
     this.setState({ location: event.target.value, fillStep: 3 });
+    scroller.scrollTo('scrollElementRate', optionsScroll);
   }
 
 
@@ -141,6 +144,7 @@ class RateForm extends React.Component {
   onChangeMarkOverall(mark) {
     if (!mark || this.state.markOverall === mark) return;
     this.setState({ markOverall: parseInt(mark, 10), fillStep: 4 });
+    scroller.scrollTo('scrollElementOptional', optionsScroll);
   }
 
   onChangeMarkFood(mark) {
@@ -198,7 +202,8 @@ class RateForm extends React.Component {
     ));
     this._refSelectItemPlus.reset();
     this.refReset.blur();
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
+    scroll.scrollToTop(optionsScroll);
   }
 
 
@@ -247,15 +252,16 @@ class RateForm extends React.Component {
     const classNameBlockWhat = this.state.fillStep === 1 ? 'highlighted' : 'standard';
     const classNameBlockWhere = this.state.fillStep <= 1 ? 'dimmed' : (this.state.fillStep === 2 ? 'highlighted' : 'standard');
     const classNameBlockRate = this.state.fillStep <= 2 ? 'dimmed' : (this.state.fillStep === 3 ? 'highlighted' : 'standard');
-    const classNameBlockComment = this.state.fillStep <= 3 ? 'dimmed' : 'standard';
-    const classNameBlockActions = this.state.fillStep <= 3 ? 'dimmed' : 'standard';
-    const opaqueOn = this.state.fillStep <= 3;
+    const classNameOptionalElements = this.state.fillStep <= 3 ? 'dimmed' : 'highlighted-option';
+    const classNameBlockActions = this.state.fillStep <= 3 ? 'dimmed' : 'highlighted';
+    // const opaqueOn = this.state.fillStep <= 3;
     logRateForm.debug(`render RateForm: (item=${this.state.item}, location=${this.state.location})`);
     const formReadyForSubmit = this.state.item && this.state.location && this.state.markOverall;
     return (
       <div className="standard-container">
         <h3 className="mb-4">Rate your plate!</h3>
         <Form onSubmit={this.onSubmit.bind(this)}>
+          <Element name="scrollElementWhat" />
           <SelectItemPlus
             title="What"
             kinds={this.props.kinds.kinds}
@@ -264,11 +270,12 @@ class RateForm extends React.Component {
             defaultItem={this.props.items.defaultItem}
             onChangeItem={this.onChangeItem.bind(this)}
             onAddItem={this.onOpenAddItem.bind(this)}
-            className={classNameBlockWhat}
+            className={`element-with-transition ${classNameBlockWhat}`}
             ref={(r) => { this._refSelectItemPlus = r; }} // used to reset the 3 dropdowns
           />
 
-          <div className={`mt-4 form-block ${classNameBlockWhere}`}>
+          <Element name="scrollElementWhere" />
+          <div className={`mt-4 form-block element-with-transition ${classNameBlockWhere}`}>
             <h5 className="mb-3"><MdLocationSearching size={24} className="mr-2 hidden-sm-up" /> Where</h5>
             <Row className="" noGutters>
               <Col sm={2}>
@@ -282,7 +289,13 @@ class RateForm extends React.Component {
               <Col xs={12} sm={10}>
                 <Row>
                   <Col xs={12} className="">
-                    <SimpleListOrDropdown items={this.props.places.places} selectedOption={this.state.location} onChange={this.onChangeLocation.bind(this)} dropdown />
+                    <SimpleListOrDropdown
+                      items={this.props.places.places}
+                      selectedOption={this.state.location}
+                      onChange={this.onChangeLocation.bind(this)}
+                      dropdownPlaceholder="Select a place..."
+                      dropdown
+                    />
                   </Col>
                 </Row>
                 <Row>
@@ -314,7 +327,8 @@ class RateForm extends React.Component {
           </div>
 
 
-          <div className={`mt-4 form-block ${classNameBlockRate}`}>
+          <Element name="scrollElementRate" />
+          <div className={`mt-4 form-block element-with-transition ${classNameBlockRate}`}>
             <h5 className="mb-3"><MdStarHalf size={24} className="mr-2 hidden-sm-up" /> Marks</h5>
             <Row className="" noGutters>
               <Col sm={2}>
@@ -331,9 +345,10 @@ class RateForm extends React.Component {
                     <RatingStarsRow name="markOverall" label="Overall" initialRate={this.state.markOverall} onChange={this.onChangeMarkOverall.bind(this)} />
                   </Col>
                 </Row>
+                <Element name="scrollElementOptional" />
                 <Row>
                   <Col xs={6} sm={4} >
-                    <Button block color="secondary" size="sm" onClick={this.toggleMarks.bind(this)}><MdStore className="mr-2" size={24} /> Details</Button>
+                    <Button block color="secondary" size="sm" className={`element-with-transition ${classNameOptionalElements}`} onClick={this.toggleMarks.bind(this)}><MdStore className="mr-2" size={24} /> Details</Button>
                   </Col>
                 </Row>
                 <CollapseOnLargeScreens isOpen={this.state.collapseMarks}>
@@ -358,7 +373,8 @@ class RateForm extends React.Component {
 
 
 
-          <div className={`mt-4 form-block ${classNameBlockComment}`}>
+          <Element name="scrollElementComment" />
+          <div className={`mt-4 form-block element-with-transition ${classNameOptionalElements}`}>
             <h5 className="mb-3"><MdEdit size={24} className="mr-2 hidden-sm-up" /> Optional comment</h5>
             <Row className="" noGutters>
               <Col sm={2}>
@@ -379,12 +395,11 @@ class RateForm extends React.Component {
             </Row>
           </div>
 
-          <div className={`mt-4 ${classNameBlockActions}`}>
+          <div className={`mt-4 form-block element-with-transition ${classNameBlockActions}`}>
             <Button color="primary" type="submit" size="md" disabled={!formReadyForSubmit}>Add</Button>
             <Button color="link" onClick={this.resetForm.bind(this)} size="md" getRef={(ref) => { this.refReset = ref; }}>Reset</Button>
           </div>
 
-          {opaqueOn && <div className="semi-opaque" />}
 
         </Form>
       </div>
@@ -393,3 +408,9 @@ class RateForm extends React.Component {
 }
 
 export default RateForm;
+
+
+/*
+          {opaqueOn && <div className="semi-opaque" />}
+
+*/

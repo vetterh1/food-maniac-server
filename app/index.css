@@ -509,24 +509,27 @@ h5 {
   
 }
 
+
+.element-with-transition {
+  transition: all 1.0s ease;
+}
+
 .highlighted {
   opacity: 1;
-  margin-left: 10px;
-  margin-right: 10px;
-  background-color: #ffd6ab;
-  transform: scale(1.15);
+  background-color: #ffcdd2;
+}
+
+.highlighted-option {
+  opacity: 1;
+  background-color: #ffebee;
 }
 
 .standard {
-  margin-left: 0px;
-  margin-right: 0px;
-  background-color: eceeef;
+  background-color: #eceeef;
 }
 
 .dimmed {
-  opacity: 0.15;
-  margin-left: 0px;
-  margin-right: 0px;
+  opacity: 0.3;
 }
 
 .semi-opaque {
