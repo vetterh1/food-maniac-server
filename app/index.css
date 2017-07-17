@@ -511,8 +511,15 @@ h5 {
 
 .highlighted {
   opacity: 1;
-  margin-left: -7px;
-  margin-right: -7px;
+  margin-left: -3px;
+  margin-right: -3px;
+  background-color: #ffd6ab;
+}
+
+.standard {
+  margin-left: 0px;
+  margin-right: 0px;
+  background-color: eceeef;
 }
 
 .dimmed {

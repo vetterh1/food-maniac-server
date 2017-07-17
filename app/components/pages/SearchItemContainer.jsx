@@ -98,6 +98,7 @@ class SearchItemContainer extends React.Component {
       modalSimulateLocation: false,
       showGoogleDirections: false,
       googleMapId: null,
+      forceUpdateGoogleDirections: false,
     };
 
     this.alert = null;
@@ -137,7 +138,14 @@ class SearchItemContainer extends React.Component {
 
 
   onClickDirections(googleMapId) {
-    this.setState({ showGoogleDirections: !this.state.showGoogleDirections, googleMapId });
+    this.setState({ 
+      showGoogleDirections: !this.state.showGoogleDirections,
+      googleMapId,
+      forceUpdateGoogleDirections: true });
+  }
+
+  onGoogleDirectionsUpdated() {
+    this.setState({ forceUpdateGoogleDirections: false });
   }
 
 
@@ -235,6 +243,8 @@ class SearchItemContainer extends React.Component {
             <GoogleDirections
               origin={{ latitude: this.props.coordinates.latitude, longitude: this.props.coordinates.longitude }}
               destination={this.state.googleMapId}
+              forceUpdate={this.state.forceUpdateGoogleDirections}
+              onUpdated={() => this.onGoogleDirectionsUpdated()}
             />
           </Row> }
         </Container>

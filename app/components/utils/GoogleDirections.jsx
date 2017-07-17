@@ -13,6 +13,8 @@ export default class GoogleDirections extends React.Component {
   static propTypes = {
     origin: PropTypes.object.isRequired,
     destination: PropTypes.string.isRequired,
+    forceUpdate: PropTypes.bool.isRequired,
+    onUpdated: PropTypes.func.isRequired,
     travelMode: PropTypes.string,
   };
 
@@ -22,33 +24,39 @@ export default class GoogleDirections extends React.Component {
   constructor(props) {
     super(props);
 
+    this._mapGoogle = null;
+
     this.state = {
     };
   }
 
   componentDidMount() {
-    this.update();
+    // this.update();
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!nextProps) return;
+    // Update only when parents tells to!
+    if (!nextProps || !nextProps.forceUpdate) return;
     this.update();
   }
 
   componentDidUpdate() {
-    this.update();
+    // this.update();
   }
 
 
   update() {
+    // Ask parent NOT to turn off the forceUpdate flag
+    this.props.onUpdated();
+
     const currentLatLng = new google.maps.LatLng(this.props.origin.latitude, this.props.origin.longitude);
     const directionsDisplay = new google.maps.DirectionsRenderer();
     const directionsService = new google.maps.DirectionsService();
-    const map = new google.maps.Map(document.getElementById('map-directions'), {
+    this._mapGoogle = new google.maps.Map(document.getElementById('map-directions'), {
       center: currentLatLng,
       zoom: 15,
     });
-    directionsDisplay.setMap(map);
+    directionsDisplay.setMap(this._mapGoogle);
     directionsDisplay.setPanel(document.getElementById('text-directions'));
 
     directionsService.route({

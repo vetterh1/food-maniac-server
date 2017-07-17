@@ -35,6 +35,7 @@ class SelectItemPlus extends React.Component {
     categoryPlaceHolder: PropTypes.string,
     kindPlaceHolder: PropTypes.string,
     itemPlaceHolder: PropTypes.string,
+    className: PropTypes.string,
   }
 
   constructor(props) {
@@ -170,7 +171,7 @@ class SelectItemPlus extends React.Component {
   render() {
     logSelectItemPlus.debug(`render SelectItemPlus: (category=${this.state.category}, kind=${this.state.kind}, item=${this.state.item}`);
     return (
-      <div className="form-block highlighted">
+      <div className={`form-block ${this.props.className}`}>
         {this.props.title && <h5 className="mb-3"><MdRoomService size={24} className="mr-2 hidden-sm-up" /> {this.props.title}</h5>}
 
         {!this.props.hideItem &&
@@ -252,6 +253,7 @@ SelectItemPlus.defaultProps = {
   categoryPlaceHolder: 'All',
   kindPlaceHolder: 'All',
   itemPlaceHolder: 'Select an item...',
+  className: '',
 };
 
 

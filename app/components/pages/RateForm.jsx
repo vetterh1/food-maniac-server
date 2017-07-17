@@ -62,6 +62,8 @@ class RateForm extends React.Component {
       // unique key for the form --> used for reset form
       keyForm: Date.now(),
 
+      fillStep: 1, // 1: what, 2: where, 3: rate, 4: all
+
       item: null,
       markOverall: null,
       markFood: null,
@@ -119,13 +121,13 @@ class RateForm extends React.Component {
 
   onChangeItem(item) {
     if (this.state.item === item) return;
-    this.setState({ item });
+    this.setState({ item, fillStep: 2 });
   }
 
 
   onChangeLocation(event) {
     if (this.state.location === event.target.value) return;
-    this.setState({ location: event.target.value });
+    this.setState({ location: event.target.value, fillStep: 3 });
   }
 
 
@@ -138,7 +140,7 @@ class RateForm extends React.Component {
 
   onChangeMarkOverall(mark) {
     if (!mark || this.state.markOverall === mark) return;
-    this.setState({ markOverall: parseInt(mark, 10) });
+    this.setState({ markOverall: parseInt(mark, 10), fillStep: 4 });
   }
 
   onChangeMarkFood(mark) {
@@ -242,6 +244,12 @@ class RateForm extends React.Component {
   }
 
   render() {
+    const classNameBlockWhat = this.state.fillStep === 1 ? 'highlighted' : 'standard';
+    const classNameBlockWhere = this.state.fillStep <= 1 ? 'dimmed' : (this.state.fillStep === 2 ? 'highlighted' : 'standard');
+    const classNameBlockRate = this.state.fillStep <= 2 ? 'dimmed' : (this.state.fillStep === 3 ? 'highlighted' : 'standard');
+    const classNameBlockComment = this.state.fillStep <= 3 ? 'dimmed' : 'standard';
+    const classNameBlockActions = this.state.fillStep <= 3 ? 'dimmed' : 'standard';
+    const opaqueOn = this.state.fillStep <= 3;
     logRateForm.debug(`render RateForm: (item=${this.state.item}, location=${this.state.location})`);
     const formReadyForSubmit = this.state.item && this.state.location && this.state.markOverall;
     return (
@@ -256,10 +264,11 @@ class RateForm extends React.Component {
             defaultItem={this.props.items.defaultItem}
             onChangeItem={this.onChangeItem.bind(this)}
             onAddItem={this.onOpenAddItem.bind(this)}
+            className={this.state.classNameBlockWhat}
             ref={(r) => { this._refSelectItemPlus = r; }} // used to reset the 3 dropdowns
           />
 
-          <div className="mt-4 form-block dimmed">
+          <div className={`mt-4 form-block ${classNameBlockWhere}`}>
             <h5 className="mb-3"><MdLocationSearching size={24} className="mr-2 hidden-sm-up" /> Where</h5>
             <Row className="" noGutters>
               <Col sm={2}>
@@ -305,7 +314,7 @@ class RateForm extends React.Component {
           </div>
 
 
-          <div className="mt-4 form-block dimmed">
+          <div className={`mt-4 form-block ${classNameBlockRate}`}>
             <h5 className="mb-3"><MdStarHalf size={24} className="mr-2 hidden-sm-up" /> Marks</h5>
             <Row className="" noGutters>
               <Col sm={2}>
@@ -349,7 +358,7 @@ class RateForm extends React.Component {
 
 
 
-          <div className="mt-4 form-block dimmed">
+          <div className={`mt-4 form-block ${classNameBlockComment}`}>
             <h5 className="mb-3"><MdEdit size={24} className="mr-2 hidden-sm-up" /> Optional comment</h5>
             <Row className="" noGutters>
               <Col sm={2}>
@@ -370,12 +379,12 @@ class RateForm extends React.Component {
             </Row>
           </div>
 
-          <div className="mt-4 dimmed">
+          <div className={`mt-4 ${classNameBlockActions}`}>
             <Button color="primary" type="submit" size="md" disabled={!formReadyForSubmit}>Add</Button>
             <Button color="link" onClick={this.resetForm.bind(this)} size="md" getRef={(ref) => { this.refReset = ref; }}>Reset</Button>
           </div>
 
-          <div className="semi-opaque" />
+          {opaqueOn && <div className="semi-opaque" />}
 
         </Form>
       </div>
