@@ -206,6 +206,21 @@ class SelectItemPlus extends React.Component {
                   </Col>
                 }
               </Row>
+              {this.props.className.includes("highlighted") && 
+                <Row className="mt-4 ml-4">
+                  <Col>
+                    <MdFilterList className="mr-2" size={24} /> Filters: Restrict the number of items by selecting types & categories.
+                  </Col>
+                </Row>
+              }
+              {this.props.className.includes("highlighted") && this.props.onAddItem &&
+                <Row className="mt-4 ml-4">
+                  <Col>
+                    <MdPlaylistAdd className="mr-2" size={24} /> Add: Add a new item if you can't find it in the list.
+                  </Col>
+                </Row>
+              }
+
               <CollapseOnLargeScreens isOpen={this.state.collapseFilters}>
                 <Row>
                   <Col xs={12} sm={10} className="pl-0 pt-4" >

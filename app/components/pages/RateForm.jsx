@@ -27,7 +27,7 @@ import { loglevelServerSend } from '../../utils/loglevel-serverSend';
 const Element = Scroll.Element;
 const scroller = Scroll.scroller;
 const scroll = Scroll.animateScroll;
-const optionsScroll = { duration: 1000, delay: 500, smooth: true };
+const optionsScroll = { duration: 750, delay: 300, smooth: true };
 
 const logRateForm = log.getLogger('logRateForm');
 loglevelServerSend(logRateForm); // a setLevel() MUST be run AFTER this!
@@ -299,13 +299,27 @@ class RateForm extends React.Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Col xs={6} sm={4} >
-                    <Button block color="secondary" size="sm" onClick={this.toggleType.bind(this)}><MdStore className="mr-2" size={24} /> Type</Button>
-                  </Col>
-                  <Col xs={6} sm={4} className="pl-0">
+                  <Col xs={6} sm={4}>
                     <Button block color="secondary" size="sm" onClick={this.onOpenSimulateLocation.bind(this)}><MdMap className="mr-2" size={24} /> Map</Button>
                   </Col>
+                  <Col xs={6} sm={4} className="pl-0">
+                    <Button block color="secondary" size="sm" onClick={this.toggleType.bind(this)}><MdStore className="mr-2" size={24} /> Type</Button>
+                  </Col>
                 </Row>
+                {this.state.fillStep === 2 &&
+                  <Row className="mt-4 ml-4">
+                    <Col>
+                      <MdMap className="mr-2" size={24} /> Map: Select the place area on a map.
+                    </Col>
+                  </Row>
+                }
+                {this.state.fillStep === 2 &&
+                  <Row className="mt-4 ml-4">
+                    <Col>
+                      <MdStore className="mr-2" size={24} /> Type: Change the type of location (restaurant, bar,...)
+                    </Col>
+                  </Row>
+                }
                 <CollapseOnLargeScreens isOpen={this.state.collapseType}>
                   <Row>
                     <Col xs={12} sm={10} className="pl-0 pt-4" >
