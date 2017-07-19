@@ -113,18 +113,21 @@ class SearchItemContainer extends React.Component {
 
   onEndSearchingOK = (nbItems) => {
     const durationSearching = new Date().getTime() - this._nowStartSaving;
-    this.alert = Alert.success(`${nbItems} item(s) found! (duration=${durationSearching}ms)`);
+    if (this.alert) Alert.update(this.alert, `${nbItems} item(s) found! (duration=${durationSearching}ms)`, 'success');
+    else this.alert = Alert.success(`${nbItems} item(s) found! (duration=${durationSearching}ms)`);
   }
 
   onEndSearchingNoResults = () => {
     const durationSearching = new Date().getTime() - this._nowStartSaving;
-    this.alert = Alert.warning(`No results found (duration=${durationSearching}ms)`);
+    if (this.alert) Alert.update(this.alert, `No results found (duration=${durationSearching}ms)`, 'warning');
+    else this.alert = Alert.warning(`No results found (duration=${durationSearching}ms)`);
   }
 
 
   onEndSearchingFailed = (errorMessage) => {
     const durationSearching = new Date().getTime() - this._nowStartSaving;
-    this.alert = Alert.error(`Error while searching (error=${errorMessage}, duration=${durationSearching}ms)`);
+    if (this.alert) Alert.update(this.alert, `Error while searching (error=${errorMessage}, duration=${durationSearching}ms)`, 'error');
+    else this.alert = Alert.error(`Error while searching (error=${errorMessage}, duration=${durationSearching}ms)`);
   }
 
 

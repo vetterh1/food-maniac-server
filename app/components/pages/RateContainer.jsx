@@ -57,7 +57,9 @@ class RateContainer extends React.Component {
 
   onEndSavingOK = () => {
     const durationSaving = new Date().getTime() - this._nowStartSaving;
-    this.alert = Alert.success(`Saved! (duration=${durationSaving}ms)`);
+    const msg = `Saved! (duration=${durationSaving}ms)`;
+    if (this.alert) Alert.update(this.alert, msg, 'success');
+    else this.alert = Alert.success(msg);
 
     // Tell the child to reset
     // CAUTION! only works because the form is the immediate child
@@ -69,7 +71,9 @@ class RateContainer extends React.Component {
 
   onEndSavingFailed = (errorMessage) => {
     const durationSaving = new Date().getTime() - this._nowStartSaving;
-    this.alert = Alert.error(`Error while saving (error=${errorMessage}, duration=${durationSaving}ms)`);
+    const msg = `Error while saving (error=${errorMessage}, duration=${durationSaving}ms)`;
+    if (this.alert) Alert.update(this.alert, msg, 'error');
+    else this.alert = Alert.error(msg);
   }
 
   onSubmit(values) {

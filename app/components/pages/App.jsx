@@ -35,7 +35,7 @@ class App extends React.Component {
         <AlertSimulateMode />
         {this.props.children}
         <Footer />
-        <Alert stack={{ limit: 6 }} position="top" timeout={3000} effect="stackslide" />
+        <Alert stack={{ limit: 3, spacing: 8 }} position="bottom" timeout={5000} effect="stackslide" />
       </div>
     );
   }

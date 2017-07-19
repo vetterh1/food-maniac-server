@@ -148,29 +148,6 @@ h5 {
 
 
 
-
-.s-alert-info {
-    /* background: rgba(215, 204, 200, 0.95); */
-    background: rgba(224, 247, 250, 0.95) !important;
-    color: #000 !important;
-}
-.s-alert-success {
-    background: rgba(220, 237, 200, 0.95) !important;
-    color: #000 !important;
-}
-.s-alert-warning {
-    /* background: rgba(255, 152, 0, 0.95); */
-    background: rgba(255, 236, 179, 0.95) !important;
-    color: #000 !important;
-}
-.s-alert-error {
-    background: rgba(255, 204, 188, 0.95) !important;
-    color: #000 !important;
-}
-
-
-
-
 /**************************************************************
 
                     MAIN PAGE items
@@ -544,3 +521,5 @@ h5 {
 .result-item-directions {
   
 }
+
+
