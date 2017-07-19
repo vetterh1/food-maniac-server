@@ -3,6 +3,7 @@
 import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
+import Alert from 'react-s-alert';
 import { MatchMediaHOC } from 'react-match-media';
 import { Button, Card, CardTitle, Col, Collapse, Form, Input, Label, Modal, ModalHeader, ModalBody, Row } from 'reactstrap';
 // import MdLocalCake from 'react-icons/lib/md/local-cake';
@@ -64,6 +65,8 @@ class RateForm extends React.Component {
 
     this._refSelectItemPlus = null; // used to reset the 3 dropdowns
 
+    this.alertHelp = null;
+
     this.defaultState = {
       // unique key for the form --> used for reset form
       keyForm: Date.now(),
@@ -93,12 +96,17 @@ class RateForm extends React.Component {
     // console.log('RateForm constructor (props, initial state): ', props, this.state);
   }
 
+  componentDidMount() {
+    this.resetForm();
+  }
+
   componentWillReceiveProps(nextProps) {
     if (!nextProps || !nextProps.places || nextProps.places.places.length <= 0) return;
 
     // Search if crt location still in the new list. If not, select the placeholder!
-    if (this.state.location !== '' &&  !nextProps.places.places.some(place => place.id === this.state.location))
+    if (this.state.location !== '' && !nextProps.places.places.some(place => place.id === this.state.location)) {
       this.setState({ location: '' });
+    }
   }
 
 
@@ -204,6 +212,10 @@ class RateForm extends React.Component {
     this.refReset.blur();
     // window.scrollTo(0, 0);
     scroll.scrollToTop(optionsScroll);
+
+    const msg = 'Map: Select the place area on a map.';
+    this.alertHelp = Alert.info(msg);
+    // this.alertHelp = Alert.update(this.alertHelp, msg, 'info');
   }
 
 
@@ -306,20 +318,6 @@ class RateForm extends React.Component {
                     <Button block color="secondary" size="sm" onClick={this.toggleType.bind(this)}><MdStore className="mr-2" size={24} /> Type</Button>
                   </Col>
                 </Row>
-                {this.state.fillStep === 2 &&
-                  <Row className="mt-4 ml-4">
-                    <Col>
-                      <MdMap className="mr-2" size={24} /> Map: Select the place area on a map.
-                    </Col>
-                  </Row>
-                }
-                {this.state.fillStep === 2 &&
-                  <Row className="mt-4 ml-4">
-                    <Col>
-                      <MdStore className="mr-2" size={24} /> Type: Change the type of location (restaurant, bar,...)
-                    </Col>
-                  </Row>
-                }
                 <CollapseOnLargeScreens isOpen={this.state.collapseType}>
                   <Row>
                     <Col xs={12} sm={10} className="pl-0 pt-4" >
@@ -426,5 +424,21 @@ export default RateForm;
 
 /*
           {opaqueOn && <div className="semi-opaque" />}
+
+
+                {this.state.fillStep === 2 &&
+                  <Row className="mt-4 ml-4">
+                    <Col>
+                      <MdMap className="mr-2" size={24} /> Map: Select the place area on a map.
+                    </Col>
+                  </Row>
+                }
+                {this.state.fillStep === 2 &&
+                  <Row className="mt-4 ml-4">
+                    <Col>
+                      <MdStore className="mr-2" size={24} /> Type: Change the type of location (restaurant, bar,...)
+                    </Col>
+                  </Row>
+                }
 
 */

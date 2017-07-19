@@ -36,6 +36,7 @@ class SelectItemPlus extends React.Component {
     kindPlaceHolder: PropTypes.string,
     itemPlaceHolder: PropTypes.string,
     className: PropTypes.string,
+    alert: PropTypes.object,
   }
 
   constructor(props) {
@@ -206,20 +207,6 @@ class SelectItemPlus extends React.Component {
                   </Col>
                 }
               </Row>
-              {this.props.className.includes("highlighted") && 
-                <Row className="mt-4 ml-4">
-                  <Col>
-                    <MdFilterList className="mr-2" size={24} /> Filters: Restrict the number of items by selecting types & categories.
-                  </Col>
-                </Row>
-              }
-              {this.props.className.includes("highlighted") && this.props.onAddItem &&
-                <Row className="mt-4 ml-4">
-                  <Col>
-                    <MdPlaylistAdd className="mr-2" size={24} /> Add: Add a new item if you can't find it in the list.
-                  </Col>
-                </Row>
-              }
 
               <CollapseOnLargeScreens isOpen={this.state.collapseFilters}>
                 <Row>
@@ -269,7 +256,27 @@ SelectItemPlus.defaultProps = {
   kindPlaceHolder: 'All',
   itemPlaceHolder: 'Select an item...',
   className: '',
+  alert: null,
 };
 
 
 export default SelectItemPlus;
+
+
+/*
+              {this.props.className.includes("highlighted") && 
+                <Row className="mt-4 ml-4">
+                  <Col>
+                    <MdFilterList className="mr-2" size={24} /> Filters: Restrict the number of items by selecting types & categories.
+                  </Col>
+                </Row>
+              }
+              {this.props.className.includes("highlighted") && this.props.onAddItem &&
+                <Row className="mt-4 ml-4">
+                  <Col>
+                    <MdPlaylistAdd className="mr-2" size={24} /> Add: Add a new item if you can't find it in the list.
+                  </Col>
+                </Row>
+              }
+
+ */
