@@ -3,6 +3,7 @@
 import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
+import Alert from 'react-s-alert';
 import { MatchMediaHOC } from 'react-match-media';
 import { Button, Card, CardTitle, Col, Collapse, Label, Modal, ModalHeader, ModalBody, Row } from 'reactstrap';
 import MdFilterList from 'react-icons/lib/md/filter-list';
@@ -11,6 +12,8 @@ import MdPlaylistAdd from 'react-icons/lib/md/playlist-add';
 import MdRoomService from 'react-icons/lib/md/room-service';
 import SimpleListOrDropdown from '../utils/SimpleListOrDropdown';
 import { loglevelServerSend } from '../../utils/loglevel-serverSend';
+
+const ALERT_HELP_TIMEOUT = 120000;
 
 const logSelectItemPlus = log.getLogger('logSelectItemPlus');
 loglevelServerSend(logSelectItemPlus); // a setLevel() MUST be run AFTER this!
@@ -32,11 +35,11 @@ class SelectItemPlus extends React.Component {
     onChangeKind: PropTypes.func,
     onChangeCategory: PropTypes.func,
     onChangeItem: PropTypes.func,
+    onDislayItemsFilter: PropTypes.func,
     categoryPlaceHolder: PropTypes.string,
     kindPlaceHolder: PropTypes.string,
     itemPlaceHolder: PropTypes.string,
     className: PropTypes.string,
-    alert: PropTypes.object,
   }
 
   constructor(props) {
@@ -73,7 +76,7 @@ class SelectItemPlus extends React.Component {
       });
       // If default item, tell parent about it so it can enable the Submit btn
       if (nextProps.defaultItem) {
-        this.props.onChangeItem(nextProps.defaultItem);
+        this.props.onChangeItem(nextProps.defaultItem, null);
       }
     }
   }
@@ -94,7 +97,10 @@ class SelectItemPlus extends React.Component {
   onChangeItem(event) {
     if (this.state.item === event.target.value) return;
     this.setState({ item: event.target.value });
-    if (this.props.onChangeItem) this.props.onChangeItem(event.target.value);
+    if (this.props.onChangeItem) {
+      const itemObject = this.state.filteredItemsList.find((item) => { return item.id === event.target.value; });
+      this.props.onChangeItem(event.target.value, itemObject ? itemObject.name : null);
+    }
   }
 
 
@@ -109,7 +115,13 @@ class SelectItemPlus extends React.Component {
 
 
   toggleFilters() {
-    this.setState({ collapseFilters: !this.state.collapseFilters });
+    const newState = !this.state.collapseFilters;
+
+    // Ask parent to display special help when opening filters
+    // (or original help msg on close)
+    if (this.props.onDislayItemsFilter) this.props.onDislayItemsFilter(newState);
+
+    this.setState({ collapseFilters: newState });
   }
 
 
@@ -250,33 +262,15 @@ SelectItemPlus.defaultProps = {
   onChangeKind: null,
   onChangeCategory: null,
   onChangeItem: null,
+  onDislayItemsFilter: null,
   items: [],
   defaultItem: null,
   categoryPlaceHolder: 'All',
   kindPlaceHolder: 'All',
   itemPlaceHolder: 'Select an item...',
   className: '',
-  alert: null,
+  alertHelp: null,
 };
 
 
 export default SelectItemPlus;
-
-
-/*
-              {this.props.className.includes("highlighted") && 
-                <Row className="mt-4 ml-4">
-                  <Col>
-                    <MdFilterList className="mr-2" size={24} /> Filters: Restrict the number of items by selecting types & categories.
-                  </Col>
-                </Row>
-              }
-              {this.props.className.includes("highlighted") && this.props.onAddItem &&
-                <Row className="mt-4 ml-4">
-                  <Col>
-                    <MdPlaylistAdd className="mr-2" size={24} /> Add: Add a new item if you can't find it in the list.
-                  </Col>
-                </Row>
-              }
-
- */

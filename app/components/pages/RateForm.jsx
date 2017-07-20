@@ -3,6 +3,7 @@
 import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { browserHistory } from 'react-router';
 import Alert from 'react-s-alert';
 import { MatchMediaHOC } from 'react-match-media';
 import { Button, Card, CardTitle, Col, Collapse, Form, Input, Label, Modal, ModalHeader, ModalBody, Row } from 'reactstrap';
@@ -28,7 +29,7 @@ import { loglevelServerSend } from '../../utils/loglevel-serverSend';
 const Element = Scroll.Element;
 const scroller = Scroll.scroller;
 const scroll = Scroll.animateScroll;
-const optionsScroll = { duration: 750, delay: 300, smooth: true };
+const optionsScroll = { duration: 750, delay: 300, smooth: true, offset: -25 };
 
 const logRateForm = log.getLogger('logRateForm');
 loglevelServerSend(logRateForm); // a setLevel() MUST be run AFTER this!
@@ -37,6 +38,7 @@ logRateForm.setLevel('debug');
 const CollapseOnLargeScreens = MatchMediaHOC(Collapse, '(min-width: 576px)');
 const ModalOnSmallScreens = MatchMediaHOC(Modal, '(max-width: 575px)');
 
+const ALERT_HELP_TIMEOUT = 120000;
 
 const LOCATION_TYPES = [
   { id: 'bakery', name: 'Bakery', icon: 'MdLocalCake' },
@@ -98,6 +100,9 @@ class RateForm extends React.Component {
 
   componentDidMount() {
     this.resetForm();
+
+    // Remove the help alert whenever we leave the page
+    browserHistory.listenBefore(() => { this.closeHelp(); });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -128,10 +133,19 @@ class RateForm extends React.Component {
     this.props.onSubmit(returnValue);
   }
 
-  onChangeItem(item) {
+  onChangeItem(item, itemName) {
     if (this.state.item === item) return;
-    this.setState({ item, fillStep: 2 });
+    this.setState({ item, itemName, fillStep: 2 });
     scroller.scrollTo('scrollElementWhere', optionsScroll);
+    const msg = '<ul><li>The list shows the closest places...</li><li>Map: select an are on a map. The list will update with closest places there.</li><li>Type: Change the type of location (restaurant, bar,...)</li></ul>';
+    this.alertHelp = Alert.update(this.alertHelp, msg, 'info', { html: true, timeout: ALERT_HELP_TIMEOUT });
+  }
+
+  onDislayItemsFilter(opened) {
+    if (opened) {
+      const msg = '<ul><li>Choose a type or a category to restrict visible items.</li><li>The change is instantly reflected in the list.</li></ul>';
+      this.alertHelp = Alert.update(this.alertHelp, msg, 'info', { html: true, timeout: ALERT_HELP_TIMEOUT });
+    } else { this.displayItemHelp(); }
   }
 
 
@@ -139,6 +153,8 @@ class RateForm extends React.Component {
     if (this.state.location === event.target.value) return;
     this.setState({ location: event.target.value, fillStep: 3 });
     scroller.scrollTo('scrollElementRate', optionsScroll);
+    const msg = `How was your ${this.state.itemName}?`;
+    this.alertHelp = Alert.update(this.alertHelp, msg, 'info', { html: true, timeout: ALERT_HELP_TIMEOUT });
   }
 
 
@@ -153,6 +169,8 @@ class RateForm extends React.Component {
     if (!mark || this.state.markOverall === mark) return;
     this.setState({ markOverall: parseInt(mark, 10), fillStep: 4 });
     scroller.scrollTo('scrollElementOptional', optionsScroll);
+    const msg = '<ul><li>Click on details to rate the place, the price...</li><li>Or you could leave a comment.</li><li>Don\'t forget to save!</li></ul>';
+    this.alertHelp = Alert.update(this.alertHelp, msg, 'info', { html: true, timeout: ALERT_HELP_TIMEOUT });
   }
 
   onChangeMarkFood(mark) {
@@ -181,13 +199,29 @@ class RateForm extends React.Component {
   }
 
   onOpenAddItem() {
+    // const msg = '<ul><li>Select a type and category first.</li><li>Please use a simple name!</li><li>Picture is optional.</li></ul>';
+    // this.alertHelp = Alert.update(this.alertHelp, msg, 'info', { html: true, timeout: ALERT_HELP_TIMEOUT });
+    this.closeHelp();
+
     this.props.onRequestAddItem();
   }
 
   onOpenSimulateLocation() {
+    // const msg = '<ul><li>Zoom in/out to select an area.</li><li>No need to be very precise.</li><li>The place list will use the chosen location.</li></ul>';
+    // this.alertHelp = Alert.update(this.alertHelp, msg, 'info', { html: true, timeout: ALERT_HELP_TIMEOUT });
+    this.closeHelp();
+
     this.props.onRequestSimulateLocation();
   }
 
+  displayItemHelp() {
+    const msg = '<ul><li>Select the item you want to rate...</li><li>Filters: Restrict the number of items by selecting types & categories.</li><li>Add: Add a new item if you can\'t find it in the list.</li></ul>';
+    this.alertHelp = Alert.update(this.alertHelp, msg, 'info', { html: true, timeout: ALERT_HELP_TIMEOUT });
+  }
+
+  closeHelp() {
+    if (this.alertHelp) { Alert.close(this.alertHelp); this.alertHelp = null; }
+  }
 
   toggleType() {
     this.setState({ collapseType: !this.state.collapseType });
@@ -213,9 +247,9 @@ class RateForm extends React.Component {
     // window.scrollTo(0, 0);
     scroll.scrollToTop(optionsScroll);
 
-    const msg = 'Map: Select the place area on a map.';
-    this.alertHelp = Alert.info(msg);
-    // this.alertHelp = Alert.update(this.alertHelp, msg, 'info');
+    setTimeout(() => {
+      this.displayItemHelp();
+    }, 2000);
   }
 
 
@@ -282,7 +316,8 @@ class RateForm extends React.Component {
             defaultItem={this.props.items.defaultItem}
             onChangeItem={this.onChangeItem.bind(this)}
             onAddItem={this.onOpenAddItem.bind(this)}
-            className={`element-with-transition ${classNameBlockWhat}`}
+            onDislayItemsFilter={this.onDislayItemsFilter.bind(this)}
+            className={classNameBlockWhat}
             ref={(r) => { this._refSelectItemPlus = r; }} // used to reset the 3 dropdowns
           />
 
@@ -408,7 +443,7 @@ class RateForm extends React.Component {
           </div>
 
           <div className={`mt-4 form-block element-with-transition ${classNameBlockActions}`}>
-            <Button color="primary" type="submit" size="md" disabled={!formReadyForSubmit}>Add</Button>
+            <Button color="primary" type="submit" size="md" disabled={!formReadyForSubmit}>Save</Button>
             <Button color="link" onClick={this.resetForm.bind(this)} size="md" getRef={(ref) => { this.refReset = ref; }}>Reset</Button>
           </div>
 
@@ -420,25 +455,3 @@ class RateForm extends React.Component {
 }
 
 export default RateForm;
-
-
-/*
-          {opaqueOn && <div className="semi-opaque" />}
-
-
-                {this.state.fillStep === 2 &&
-                  <Row className="mt-4 ml-4">
-                    <Col>
-                      <MdMap className="mr-2" size={24} /> Map: Select the place area on a map.
-                    </Col>
-                  </Row>
-                }
-                {this.state.fillStep === 2 &&
-                  <Row className="mt-4 ml-4">
-                    <Col>
-                      <MdStore className="mr-2" size={24} /> Type: Change the type of location (restaurant, bar,...)
-                    </Col>
-                  </Row>
-                }
-
-*/

@@ -125,7 +125,7 @@ class AddItemModal extends React.Component {
     console.log('AddItemModal render: (category, kind, name, picture)=', this.state.category, this.state.kind, this.state.name, this.state.picture ? this.state.picture.length : 'null');
     const formReadyForSubmit = this.state.name && this.state.kind && this.state.category;
     return (
-      <Modal size="lg" isOpen={this.props.open} toggle={this.onCancel.bind(this)}>
+      <Modal className="bottom-space-for-help" size="lg" isOpen={this.props.open} toggle={this.onCancel.bind(this)}>
         <ModalHeader toggle={this.onCancel.bind(this)}>Add new dish...</ModalHeader>
         <ModalBody>
           <Container fluid>
