@@ -19,7 +19,7 @@ import 'isomorphic-fetch';
 
 
 const logSearchItemContainer = log.getLogger('logSearchItemContainer');
-logSearchItemContainer.setLevel('warn');
+logSearchItemContainer.setLevel('debug');
 logSearchItemContainer.debug('--> entering SearchItemContainer.jsx');
 
 // To round to the next 0.5: (Math.round(rating * 2) / 2).toFixed(1)
@@ -141,8 +141,9 @@ class SearchItemContainer extends React.Component {
 
 
   onClickDirections(googleMapId) {
-    this.setState({ 
-      showGoogleDirections: !this.state.showGoogleDirections,
+    logSearchItemContainer.debug(`SearchItemContainer.onClickDirections(${googleMapId})`);
+    this.setState({
+      showGoogleDirections: true,
       googleMapId,
       forceUpdateGoogleDirections: true });
   }
@@ -227,7 +228,7 @@ class SearchItemContainer extends React.Component {
           {this.state.markAggregates &&
             <div className="standard-container mt-5">
               <h5 className="mb-4"><MdStarHalf size={24} className="mr-2" /> Results:</h5>
-              {this.state.markAggregates.map((markAggregate, index) => {
+              {this.state.markAggregates.map((markAggregate) => {
                 return (<ListOneMark
                   markAggregate={markAggregate}
                   // index={index}

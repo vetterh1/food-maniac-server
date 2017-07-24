@@ -31,12 +31,17 @@ export default class GoogleDirections extends React.Component {
   }
 
   componentDidMount() {
-    // this.update();
+    logGoogleDirections.debug('GoogleDirections.componentDidMount: update! - props:', this.props);
+    this.update();
   }
 
   componentWillReceiveProps(nextProps) {
     // Update only when parents tells to!
-    if (!nextProps || !nextProps.forceUpdate) return;
+    if (!nextProps || !nextProps.forceUpdate) {
+      logGoogleDirections.debug('GoogleDirections.componentWillReceiveProps: No update - nextProps:', nextProps);
+      return;
+    }
+    logGoogleDirections.debug('GoogleDirections.componentWillReceiveProps: update! - nextProps:', nextProps);
     this.update();
   }
 
@@ -46,6 +51,8 @@ export default class GoogleDirections extends React.Component {
 
 
   update() {
+    logGoogleDirections.debug('{ GoogleDirections.update (gd-upd)');
+
     // Ask parent NOT to turn off the forceUpdate flag
     this.props.onUpdated();
 
@@ -56,6 +63,9 @@ export default class GoogleDirections extends React.Component {
       center: currentLatLng,
       zoom: 15,
     });
+
+    logGoogleDirections.debug('    gd-upd - currentLatLng, _mapGoogle: ', currentLatLng, this._mapGoogle);
+
     directionsDisplay.setMap(this._mapGoogle);
     directionsDisplay.setPanel(document.getElementById('text-directions'));
 
@@ -80,6 +90,7 @@ export default class GoogleDirections extends React.Component {
 
 
   render() {
+    logGoogleDirections.debug('GoogleDirections.render');
     return (
       <div>
         ------- Directions -------
