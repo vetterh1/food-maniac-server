@@ -506,6 +506,17 @@ h5 {
   color: #999;
 }
 
+.result-item-location a:link, .result-item-location a:visited .result-item-location a:hover, .result-item-location a:active {
+  font-size: 0.9rem;
+  color: #999;
+  text-decoration: none;
+}
+
+{
+    background-color: red;
+}
+
+
 /*
 // Note: If max-width changed from 250, please update:
 //    - placeController.batchUpdatePlacesWithGooglePhoto method (plus apiRoutes) on server side

@@ -4,13 +4,13 @@ import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Col, Container, Row } from 'reactstrap';
+import { Button, Col, Container, Row } from 'reactstrap';
 import Alert from 'react-s-alert';
 import MdStarHalf from 'react-icons/lib/md/star-half';
+import MdDirections from 'react-icons/lib/md/directions';
 import SearchItemForm from './SearchItemForm';
 import SimulateLocationContainer from '../pages/SimulateLocationContainer';
 import RatingStars from '../utils/RatingStars';
-import GoogleDirections from '../utils/GoogleDirections';
 
 // require('es6-promise').polyfill();
 // require('isomorphic-fetch');
@@ -47,6 +47,7 @@ class ListOneMark extends React.Component {
     const { markAggregate } = this.props;
     // sanitizeHtml escapes &<>" so we need to invert this for display!
     const name = markAggregate.place.name.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
+    const googleMapsUrl = `https://www.google.com/maps/dir/Current+Location/${markAggregate.location.coordinates[1]},${markAggregate.location.coordinates[0]}`;
 
     return (
       <Row className="result-item-block py-3" noGutters>
@@ -60,8 +61,13 @@ class ListOneMark extends React.Component {
               {roundTo0dot5(markAggregate.markOverall)} ({markAggregate.nbMarksOverall} reviews)
           </Col>
           </Row>
-          <Row className="result-item-location" noGutters onClick={() => this.props.onClickDirections(markAggregate)} >
-            {markAggregate.distanceFormated}
+          <Row className="result-item-location mt-1" noGutters>
+            <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer">
+              <Button block color="secondary" size="sm" className="result-item-location">
+                <MdDirections className="mr-2" size={18} />
+                {markAggregate.distanceFormated}
+              </Button>
+            </a>
           </Row>
         </Col>
         <Col xs={4} sm={6}>
@@ -96,10 +102,8 @@ class SearchItemContainer extends React.Component {
     this.state = {
       markAggregates: null, // Results
       modalSimulateLocation: false,
-      showGoogleDirections: false,
       googleMapId: null,
       distance: 0,
-      forceUpdateGoogleDirections: false,
     };
 
     this.alert = null;
@@ -138,20 +142,6 @@ class SearchItemContainer extends React.Component {
 
   onCloseModalSimulateLocation() {
     this.setState({ modalSimulateLocation: false });
-  }
-
-
-  onClickDirections(markAggregate) {
-    logSearchItemContainer.debug('SearchItemContainer.onClickDirections - markAggregate:', markAggregate);
-    this.setState({
-      showGoogleDirections: true,
-      googleMapId: markAggregate.place.googleMapId,
-      distance: markAggregate.distance,
-      forceUpdateGoogleDirections: true });
-  }
-
-  onGoogleDirectionsUpdated() {
-    this.setState({ forceUpdateGoogleDirections: false });
   }
 
 
@@ -245,15 +235,6 @@ class SearchItemContainer extends React.Component {
             open={this.state.modalSimulateLocation}
             onClose={this.onCloseModalSimulateLocation.bind(this)}
           />
-          { this.state.showGoogleDirections && <Row className="result-item-directions my-2" noGutters>
-            <GoogleDirections
-              origin={{ latitude: this.props.coordinates.latitude, longitude: this.props.coordinates.longitude }}
-              destination={this.state.googleMapId}
-              distance={this.state.distance}
-              forceUpdate={this.state.forceUpdateGoogleDirections}
-              onUpdated={() => this.onGoogleDirectionsUpdated()}
-            />
-          </Row> }
         </Container>
       </div>
     );
