@@ -13,12 +13,12 @@ export default class GoogleDirections extends React.Component {
   static propTypes = {
     origin: PropTypes.object.isRequired,
     destination: PropTypes.string.isRequired,
+    distance: PropTypes.number.isRequired,
     forceUpdate: PropTypes.bool.isRequired,
     onUpdated: PropTypes.func.isRequired,
-    travelMode: PropTypes.string,
   };
 
-  static defaultProps = { travelMode: 'WALKING' };
+  static defaultProps = {};
 
 
   constructor(props) {
@@ -56,6 +56,16 @@ export default class GoogleDirections extends React.Component {
     // Ask parent NOT to turn off the forceUpdate flag
     this.props.onUpdated();
 
+    let travelMode = null;
+    if (this.props.distance < 1.5) {
+      travelMode = 'WALKING';
+    } else if (this.props.distance < 20) {
+      travelMode = 'DRIVING';
+    }
+
+    // TODO: handle error when too far!
+    if (!travelMode) return;
+
     const currentLatLng = new google.maps.LatLng(this.props.origin.latitude, this.props.origin.longitude);
     const directionsDisplay = new google.maps.DirectionsRenderer();
     const directionsService = new google.maps.DirectionsService();
@@ -72,7 +82,7 @@ export default class GoogleDirections extends React.Component {
     directionsService.route({
       origin: currentLatLng,
       destination: { placeId: this.props.destination },
-      travelMode: this.props.travelMode,
+      travelMode: travelMode,
     }, (response, status) => {
       if (status === 'OK') {
         directionsDisplay.setDirections(response);
