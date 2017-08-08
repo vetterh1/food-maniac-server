@@ -60,7 +60,7 @@ class ListOneMark extends React.Component {
               {roundTo0dot5(markAggregate.markOverall)} ({markAggregate.nbMarksOverall} reviews)
           </Col>
           </Row>
-          <Row className="result-item-location" noGutters onClick={() => this.props.onClickDirections(markAggregate.place.googleMapId)} >
+          <Row className="result-item-location" noGutters onClick={() => this.props.onClickDirections(markAggregate)} >
             {markAggregate.distanceFormated}
           </Row>
         </Col>
@@ -98,6 +98,7 @@ class SearchItemContainer extends React.Component {
       modalSimulateLocation: false,
       showGoogleDirections: false,
       googleMapId: null,
+      distance: 0,
       forceUpdateGoogleDirections: false,
     };
 
@@ -140,11 +141,12 @@ class SearchItemContainer extends React.Component {
   }
 
 
-  onClickDirections(googleMapId) {
-    logSearchItemContainer.debug(`SearchItemContainer.onClickDirections(${googleMapId})`);
+  onClickDirections(markAggregate) {
+    logSearchItemContainer.debug('SearchItemContainer.onClickDirections - markAggregate:', markAggregate);
     this.setState({
       showGoogleDirections: true,
-      googleMapId,
+      googleMapId: markAggregate.place.googleMapId,
+      distance: markAggregate.distance,
       forceUpdateGoogleDirections: true });
   }
 
@@ -247,6 +249,7 @@ class SearchItemContainer extends React.Component {
             <GoogleDirections
               origin={{ latitude: this.props.coordinates.latitude, longitude: this.props.coordinates.longitude }}
               destination={this.state.googleMapId}
+              distance={this.state.distance}
               forceUpdate={this.state.forceUpdateGoogleDirections}
               onUpdated={() => this.onGoogleDirectionsUpdated()}
             />
