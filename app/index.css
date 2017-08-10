@@ -507,14 +507,14 @@ h5 {
 }
 
 .result-item-location a:link, .result-item-location a:visited .result-item-location a:hover, .result-item-location a:active {
-  font-size: 0.9rem;
-  color: #999;
   text-decoration: none;
+  width: 100%;
 }
 
-{
-    background-color: red;
+.result-item-individual-mark {
 }
+
+
 
 
 /*
