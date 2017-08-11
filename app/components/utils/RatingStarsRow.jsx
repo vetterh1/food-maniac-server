@@ -15,10 +15,12 @@ class RatingStarsRow extends React.PureComponent {
     mandatoryWarning: PropTypes.bool,
     size: PropTypes.number,
     style: PropTypes.object,
-    onChange: PropTypes.func.isRequired,
+    onChange: PropTypes.func,
+    quantity: PropTypes.number,
+    hideIfNoQuantity: PropTypes.bool,
   };
 
-  static defaultProps = { initialRate: null, mandatoryWarning: false, size: 26, style: null };
+  static defaultProps = { initialRate: null, mandatoryWarning: false, size: 26, style: null, onChange: null, quantity: 0, hideIfNoQuantity: false };
 
   render() {
     const {
@@ -26,13 +28,17 @@ class RatingStarsRow extends React.PureComponent {
       label,
       initialRate,
       mandatoryWarning,
+      quantity,
+      hideIfNoQuantity,
       size,
       style,
       onChange,
     } = this.props;
 
+    if (hideIfNoQuantity && quantity <= 0) return null;
+
     return (
-      <FormGroup row color="danger" >
+      <FormGroup row color="" >
         <Col xs={3} sm={2} >
           <Label for={name} className="text-right">{label}</Label>
         </Col>
@@ -44,7 +50,8 @@ class RatingStarsRow extends React.PureComponent {
             style={style}
             onChange={onChange}
           />
-          {mandatoryWarning && !initialRate && <FormFeedback style={{marginTop: '-1rem'}} >(mandatory)</FormFeedback>}
+          { quantity > 0 && <Label className="ml-2">({quantity})</Label> }
+          {mandatoryWarning && !initialRate && <FormFeedback style={{ marginTop: '-1rem' }} >(mandatory)</FormFeedback>}
         </Col>
       </FormGroup>
     );

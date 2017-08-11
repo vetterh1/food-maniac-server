@@ -22,13 +22,17 @@ export default class ListOneIndividualMark extends React.Component {
 
 
   render() {
-    if (!this.props.markIndividual) return null;
-
     const { markIndividual } = this.props;
 
+    if (!markIndividual) return null;
+    if (!markIndividual.comment) return null;
+    if (markIndividual.comment === '') return null;
+
+    const arrayDateTime = markIndividual.lastModif.split('T');
+
     return (
-      <Row className="result-item-individual-mark py-0" noGutters>
-        comments: {markIndividual.comment}
+      <Row className="result-item-individual-mark py-1" noGutters>
+        {arrayDateTime[0]}:<br />{markIndividual.comment}
       </Row>
     );
   }

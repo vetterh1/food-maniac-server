@@ -3,11 +3,13 @@
 import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Col, Row } from 'reactstrap';
+import { Button, Col, Label, Row } from 'reactstrap';
 import MdDirections from 'react-icons/lib/md/directions';
 import MdRateReview from 'react-icons/lib/md/rate-review';
+import MdStarHalf from 'react-icons/lib/md/star-half';
 import RatingStars from '../utils/RatingStars';
 import ListOneIndividualMark from './ListOneIndividualMark';
+import RatingStarsRow from '../utils/RatingStarsRow';
 
 
 const logListOneMark = log.getLogger('logListOneMark');
@@ -56,45 +58,60 @@ export default class ListOneMark extends React.Component {
     const googleMapsUrl = `https://www.google.com/maps/dir/Current+Location/${markAggregate.location.coordinates[1]},${markAggregate.location.coordinates[0]}`;
 
     return (
-      <Row className="result-item-block py-3" noGutters>
-        <Col xs={8} sm={6}>
-          <Row className="result-item-name" noGutters>
-            <h6>{name}</h6>
-          </Row>
-          <Row className="result-item-rate" noGutters>
-            <Col xs={12} sm={6}>
-              <RatingStars initialRate={markAggregate.markOverall} size={20} className="mr-2 mb-1" />
-              <Button block color="secondary" size="sm" className="mr-2" onClick={this.toggleIndividualMarks.bind(this)}>
+      <div className="result-item-block py-3" >
+        <Row noGutters>
+          <Col xs={8} sm={6} className="pr-3">
+            <Row className="result-item-name" noGutters>
+              <h6>{name}</h6>
+            </Row>
+            <Row className="result-item-rate" noGutters>
+              <RatingStars initialRate={markAggregate.markOverall} size={20} className="" />
+              <Label className="ml-2">({markAggregate.nbMarksOverall})</Label>
+            </Row>
+            <Row className="result-item-rate mt-2" noGutters>
+              <Button block color="secondary" size="sm" className="" onClick={this.toggleIndividualMarks.bind(this)}>
                 {roundTo0dot5(markAggregate.markOverall)} ({markAggregate.nbMarksOverall} reviews)
               </Button>
+            </Row>
+            <Row className="result-item-location mt-2" noGutters>
+              <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer">
+                <Button block color="secondary" size="sm" className="result-item-location">
+                  <MdDirections className="mr-2" size={18} />
+                  {markAggregate.distanceFormated}
+                </Button>
+              </a>
+            </Row>
+            {this.state.showIndividualMarks &&
+              <Row className="result-item-location mt-4" noGutters>
+                <h6 className="mb-3"><MdStarHalf size={18} className="" /> Individual marks:</h6>
+                <Col xs={12} >
+                  <RatingStarsRow name="markFood" label="Food" initialRate={markAggregate.markFood} quantity={markAggregate.nbMarksFood} hideIfNoQuantity size={18} />
+                  <RatingStarsRow name="markValue" label="Value" initialRate={markAggregate.markValue} quantity={markAggregate.nbMarksValue} hideIfNoQuantity size={18} />
+                  <RatingStarsRow name="markPlace" label="Place" initialRate={markAggregate.markPlace} quantity={markAggregate.nbMarksPlace} hideIfNoQuantity size={18} />
+                  <RatingStarsRow name="markStaff" label="Staff" initialRate={markAggregate.markStaff} quantity={markAggregate.nbMarksStaff} hideIfNoQuantity size={18} />
+                </Col>
+              </Row>
+            }
+          </Col>
+          <Col xs={4} sm={6} className="result-item-image">
+            {markAggregate.place.googlePhotoUrl && <img src={markAggregate.place.googlePhotoUrl} alt="" className="result-item-picture" />}
+          </Col>
+        </Row>
+        {this.state.showIndividualMarks && this.props.markIndividuals.length > 0 &&
+          <Row noGutters className="result-item-location mt-4">
+            <h6 className="mb-3"><MdRateReview size={18} className="" /> Optional Comments:</h6>
+            <Col xs={12} >
+              {this.props.markIndividuals.map((markIndividual) => {
+                return (<ListOneIndividualMark
+                  markIndividual={markIndividual}
+                  key={markIndividual._id}
+                />);
+              })
+              }
             </Col>
           </Row>
-          <Row className="result-item-location mt-1 mr-2" noGutters>
-            <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer">
-              <Button block color="secondary" size="sm" className="result-item-location">
-                <MdDirections className="mr-2" size={18} />
-                {markAggregate.distanceFormated}
-              </Button>
-            </a>
-          </Row>
-          <Row className="result-item-location mt-1" noGutters>
-            {this.state.showIndividualMarks && this.props.markIndividuals.length > 0 &&
-              <div className="mt-0">
-                <h6 className="mb-0"><MdRateReview size={18} className="mr-2" /> Individual marks:</h6>
-                {this.props.markIndividuals.map((markIndividual) => {
-                  return (<ListOneIndividualMark
-                    markIndividual={markIndividual}
-                  />);
-                })
-                }
-              </div>
-            }
-          </Row>
-        </Col>
-        <Col xs={4} sm={6}>
-          {markAggregate.place.googlePhotoUrl && <img src={markAggregate.place.googlePhotoUrl} alt="" className="result-item-picture" />}
-        </Col>
-      </Row>
+        }
+      </div>
     );
   }
 
