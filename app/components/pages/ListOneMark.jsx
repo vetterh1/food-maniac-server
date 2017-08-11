@@ -3,7 +3,7 @@
 import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Col, Label, Row } from 'reactstrap';
+import { Button, Col, Row } from 'reactstrap';
 import MdDirections from 'react-icons/lib/md/directions';
 import MdRateReview from 'react-icons/lib/md/rate-review';
 import MdStarHalf from 'react-icons/lib/md/star-half';
@@ -66,7 +66,6 @@ export default class ListOneMark extends React.Component {
             </Row>
             <Row className="result-item-rate" noGutters>
               <RatingStars initialRate={markAggregate.markOverall} size={20} className="" />
-              <Label className="ml-2">({markAggregate.nbMarksOverall})</Label>
             </Row>
             <Row className="result-item-rate mt-2" noGutters>
               <Button block color="secondary" size="sm" className="" onClick={this.toggleIndividualMarks.bind(this)}>
@@ -75,16 +74,16 @@ export default class ListOneMark extends React.Component {
             </Row>
             <Row className="result-item-location mt-2" noGutters>
               <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer">
-                <Button block color="secondary" size="sm" className="result-item-location">
+                <Button block color="secondary" size="sm" className="">
                   <MdDirections className="mr-2" size={18} />
                   {markAggregate.distanceFormated}
                 </Button>
               </a>
             </Row>
             {this.state.showIndividualMarks &&
-              <Row className="result-item-location mt-4" noGutters>
-                <h6 className="mb-3"><MdStarHalf size={18} className="" /> Individual marks:</h6>
-                <Col xs={12} >
+              <Row className="result-item-location mt-4 bordered-block" noGutters>
+                <h6 className="mb-3"><MdStarHalf size={18} className="mr-2" /> Individual marks:</h6>
+                <Col xs={12} className="pl-3-if-large">
                   <RatingStarsRow name="markFood" label="Food" initialRate={markAggregate.markFood} quantity={markAggregate.nbMarksFood} hideIfNoQuantity size={18} />
                   <RatingStarsRow name="markValue" label="Value" initialRate={markAggregate.markValue} quantity={markAggregate.nbMarksValue} hideIfNoQuantity size={18} />
                   <RatingStarsRow name="markPlace" label="Place" initialRate={markAggregate.markPlace} quantity={markAggregate.nbMarksPlace} hideIfNoQuantity size={18} />
@@ -98,9 +97,9 @@ export default class ListOneMark extends React.Component {
           </Col>
         </Row>
         {this.state.showIndividualMarks && this.props.markIndividuals.length > 0 &&
-          <Row noGutters className="result-item-location mt-4">
-            <h6 className="mb-3"><MdRateReview size={18} className="" /> Optional Comments:</h6>
-            <Col xs={12} >
+          <Row noGutters className="result-item-location mt-4 bordered-block">
+            <h6 className="mb-3"><MdRateReview size={18} className="mr-2" /> Optional Comments:</h6>
+            <Col xs={12} className="pl-3">
               {this.props.markIndividuals.map((markIndividual) => {
                 return (<ListOneIndividualMark
                   markIndividual={markIndividual}

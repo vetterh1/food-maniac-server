@@ -35,7 +35,7 @@ class RatingStarsRow extends React.PureComponent {
       onChange,
     } = this.props;
 
-    if (hideIfNoQuantity && quantity <= 0) return null;
+    if (hideIfNoQuantity && (!quantity || quantity <= 0 || initialRate <= 0)) return null;
 
     return (
       <FormGroup row color="" >

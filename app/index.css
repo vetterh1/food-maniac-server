@@ -489,7 +489,7 @@ h5 {
 
 
 .result-item-block {
-  border-bottom: 1px solid #E6E6E6!important;
+  border-bottom: 1px solid #bbb!important;
 }
 
 .result-item-name {
@@ -503,7 +503,7 @@ h5 {
 
 .result-item-location {
   font-size: 0.9rem;
-  color: #999;
+  color: #666;
 }
 
 .result-item-location a:link, .result-item-location a:visited .result-item-location a:hover, .result-item-location a:active {
@@ -516,6 +516,24 @@ h5 {
 
 .result-item-image {
   text-align: right;
+}
+
+.bordered-block {
+  padding: 5px;
+  border: 1px solid #ddd!important;
+}
+
+
+
+
+.pl-3-if-large {
+    padding-left: 0;
+}
+
+@media (min-width: 375px) {
+  .pl-3-if-large {
+      padding-left: 1rem!important;
+  }
 }
 
 
