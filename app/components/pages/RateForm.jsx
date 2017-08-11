@@ -153,7 +153,7 @@ class RateForm extends React.Component {
     if (this.state.location === event.target.value) return;
     this.setState({ location: event.target.value, fillStep: 3 });
     scroller.scrollTo('scrollElementRate', optionsScroll);
-    const msg = `How was your ${this.state.itemName}?`;
+    const msg = `How was your ${this.state.itemName ? this.state.itemName : 'plate'}?`;
     this.alertHelp = Alert.update(this.alertHelp, msg, 'info', { html: true, timeout: ALERT_HELP_TIMEOUT });
   }
 

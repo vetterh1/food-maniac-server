@@ -29,7 +29,7 @@ class RatingStars extends React.PureComponent {
     } = this.props;
 
     return (
-      <div className={className} >
+      <span className={className} >
         <Rating
           initialRate={initialRate}
           onChange={rate => onChange && onChange(rate)}
@@ -40,7 +40,7 @@ class RatingStars extends React.PureComponent {
           readonly={!onChange}
           fractions={onChange ? 1 : 2}
         />
-      </div>
+      </span>
     );
   }
 }

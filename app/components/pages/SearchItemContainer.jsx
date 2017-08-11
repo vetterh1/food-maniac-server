@@ -4,78 +4,18 @@ import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Col, Container, Row } from 'reactstrap';
+import { Container } from 'reactstrap';
 import Alert from 'react-s-alert';
+import 'isomorphic-fetch';
+import { polyfill } from 'es6-promise';
 import MdStarHalf from 'react-icons/lib/md/star-half';
 import SearchItemForm from './SearchItemForm';
+import ListOneMarkContainer from './ListOneMarkContainer';
 import SimulateLocationContainer from '../pages/SimulateLocationContainer';
-import RatingStars from '../utils/RatingStars';
-import GoogleDirections from '../utils/GoogleDirections';
-
-// require('es6-promise').polyfill();
-// require('isomorphic-fetch');
-import { polyfill } from 'es6-promise';
-import 'isomorphic-fetch';
-
 
 const logSearchItemContainer = log.getLogger('logSearchItemContainer');
-logSearchItemContainer.setLevel('warn');
+logSearchItemContainer.setLevel('debug');
 logSearchItemContainer.debug('--> entering SearchItemContainer.jsx');
-
-// To round to the next 0.5: (Math.round(rating * 2) / 2).toFixed(1)
-function roundTo0dot5(n) { return n ? (Math.round(n * 2) / 2).toFixed(1) : null; }
-
-
-class ListOneMark extends React.Component {
-
-  static propTypes = {
-    markAggregate: PropTypes.object.isRequired,
-    // index: PropTypes.number.isRequired,
-    // key: PropTypes.string.isRequired,
-    onClickDirections: PropTypes.func.isRequired,
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-    };
-  }
-
-
-  render() {
-    const { markAggregate } = this.props;
-    // sanitizeHtml escapes &<>" so we need to invert this for display!
-    const name = markAggregate.place.name.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
-
-    return (
-      <Row className="result-item-block py-3" noGutters>
-        <Col xs={8} sm={6}>
-          <Row className="result-item-name" noGutters>
-            <h6>{name}</h6>
-          </Row>
-          <Row className="result-item-rate" noGutters>
-            <Col xs={12} sm={6}>
-              <RatingStars initialRate={markAggregate.markOverall} size={20} className="mr-2 mb-1" />
-              {roundTo0dot5(markAggregate.markOverall)} ({markAggregate.nbMarksOverall} reviews)
-          </Col>
-          </Row>
-          <Row className="result-item-location" noGutters onClick={() => this.props.onClickDirections(markAggregate.place.googleMapId)} >
-            {markAggregate.distanceFormated}
-          </Row>
-        </Col>
-        <Col xs={4} sm={6}>
-          {markAggregate.place.googlePhotoUrl && <img src={markAggregate.place.googlePhotoUrl} alt="" className="result-item-picture" />}
-        </Col>
-      </Row>
-    );
-  }
-
-
-}
-
-
-
 
 
 class SearchItemContainer extends React.Component {
@@ -96,9 +36,8 @@ class SearchItemContainer extends React.Component {
     this.state = {
       markAggregates: null, // Results
       modalSimulateLocation: false,
-      showGoogleDirections: false,
       googleMapId: null,
-      forceUpdateGoogleDirections: false,
+      distance: 0,
     };
 
     this.alert = null;
@@ -137,18 +76,6 @@ class SearchItemContainer extends React.Component {
 
   onCloseModalSimulateLocation() {
     this.setState({ modalSimulateLocation: false });
-  }
-
-
-  onClickDirections(googleMapId) {
-    this.setState({ 
-      showGoogleDirections: !this.state.showGoogleDirections,
-      googleMapId,
-      forceUpdateGoogleDirections: true });
-  }
-
-  onGoogleDirectionsUpdated() {
-    this.setState({ forceUpdateGoogleDirections: false });
   }
 
 
@@ -227,14 +154,12 @@ class SearchItemContainer extends React.Component {
           {this.state.markAggregates &&
             <div className="standard-container mt-5">
               <h5 className="mb-4"><MdStarHalf size={24} className="mr-2" /> Results:</h5>
-              {this.state.markAggregates.map((markAggregate, index) => {
-                return (<ListOneMark
+              {this.state.markAggregates.map((markAggregate) => {
+                return (<ListOneMarkContainer
                   markAggregate={markAggregate}
-                  // index={index}
                   key={markAggregate._id}
-                  onClickDirections={googleMapId => this.onClickDirections(googleMapId)}
                 />);
-                })
+              })
               }
             </div>
           }
@@ -242,14 +167,6 @@ class SearchItemContainer extends React.Component {
             open={this.state.modalSimulateLocation}
             onClose={this.onCloseModalSimulateLocation.bind(this)}
           />
-          { this.state.showGoogleDirections && <Row className="result-item-directions my-2" noGutters>
-            <GoogleDirections
-              origin={{ latitude: this.props.coordinates.latitude, longitude: this.props.coordinates.longitude }}
-              destination={this.state.googleMapId}
-              forceUpdate={this.state.forceUpdateGoogleDirections}
-              onUpdated={() => this.onGoogleDirectionsUpdated()}
-            />
-          </Row> }
         </Container>
       </div>
     );
