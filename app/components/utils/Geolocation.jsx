@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as CoordinatesActions from '../../actions/CoordinatesActions';
 import GeolocationDisplay from './GeolocationDisplay';
@@ -7,6 +8,10 @@ const MIN_SECONDS_BETWEEN_UPDATES = 8;
 
 
 class Geolocation extends Component {
+  static propTypes = {
+    // Injected by redux-store connect:
+    dispatch: PropTypes.func.isRequired,
+  }
 
   constructor() {
     super();
@@ -42,8 +47,6 @@ class Geolocation extends Component {
     }
     this.setState({ timeUpdate: now });
 
-
-
     const { dispatch } = this.props;  // Injected by react-redux
     const action = CoordinatesActions.setCurrentLocation(position.coords.latitude, position.coords.longitude, true);
     dispatch(action);
@@ -68,7 +71,12 @@ class Geolocation extends Component {
   }
 */
 
-  errorPosition(/* error */) {
+  errorPosition(error) {
+    console.log('Geolocation error: ', error);
+
+    const { dispatch } = this.props;  // Injected by react-redux
+    const action = CoordinatesActions.setErrorLocation(error.code);
+    dispatch(action);
   }
 
 

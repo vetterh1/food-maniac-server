@@ -15,6 +15,10 @@ const styles = {
   locationKO: {
     color: 'red',
   },
+
+  locationSimulated: {
+    color: 'orange',
+  },
 };
 
 
@@ -33,10 +37,20 @@ class GeolocationDisplay extends React.Component {
   }
 
   render = () => {
-    const label = this.props.coordinates.real ? 'Location OK' : 'Simulated location';
+    let label = 'Location OK';
+    let style = styles.locationOK;
+    if (!this.props.coordinates.real) {
+      label = 'Simulated location';
+      style = styles.locationSimulated;
+    }
+    if (this.props.coordinates.error) {
+      label = 'Location KO';
+      style = styles.locationKO;
+    }
+
     return (
       <div>
-        <Button onClick={this.toggle} size="md" color="link" style={this.props.coordinates.real ? styles.locationOK : styles.locationKO}>
+        <Button onClick={this.toggle} size="md" color="link" style={style}>
           {label} <MdLocationOn size={18} />
         </Button>
         <Modal isOpen={this.state.statisticsOpen} toggle={this.toggle}>
@@ -46,6 +60,7 @@ class GeolocationDisplay extends React.Component {
               Main info:
               <ul>
                 <li>Mode: {this.props.coordinates.simulated ? 'simulated' : 'normal'}</li>
+                <li>Error: {this.props.coordinates.error}</li>
                 <li>Latitude: {this.props.coordinates.latitude ? Math.round(this.props.coordinates.latitude * 100000) / 100000 : 'unknown'}</li>
                 <li>Longitude: {this.props.coordinates.longitude ? Math.round(this.props.coordinates.longitude * 100000) / 100000 : 'unknown'}</li>
                 <li>Real: {this.props.coordinates.real ? 'true' : 'false'}</li>
@@ -83,6 +98,7 @@ class GeolocationDisplay extends React.Component {
 
 GeolocationDisplay.propTypes = {
   coordinates: PropTypes.shape({
+    error: PropTypes.string,
     latitude: PropTypes.number,
     longitude: PropTypes.number,
     simulated: PropTypes.boolean,

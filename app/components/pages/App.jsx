@@ -9,7 +9,7 @@ import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/stackslide.css';
 import MainAppBar from '../navigation/MainAppBar';
 import Footer from '../utils/Footer';
-import AlertSimulateMode from '../utils/AlertSimulateMode';
+import AlertGeolocalisation from '../utils/AlertGeolocalisation';
 
 
 const styles = {
@@ -32,7 +32,7 @@ class App extends React.Component {
     return (
       <div style={styles.pageContainer}>
         <MainAppBar location={this.props.location} router={this.props.router} route={this.props.route} />
-        <AlertSimulateMode />
+        <AlertGeolocalisation />
         {this.props.children}
         <Footer />
         <Alert stack={{ limit: 3, spacing: 8 }} position="bottom" timeout={5000} effect="stackslide" />

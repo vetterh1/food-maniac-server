@@ -6,6 +6,7 @@ logCoordinatesReducer.setLevel('warn');
 logCoordinatesReducer.debug('--> entering coordinatesReducer.js');
 
 const initialState = { // define initial state - an empty location
+  error: null,
   latitude: 0,
   longitude: 0,
   simulated: false,
@@ -30,6 +31,7 @@ const coordinatesReducer = (state = initialState, action) => {
     logCoordinatesReducer.debug('{   coordinatesReducer.SET_SIMULATED_LOCATION (rsim)');
 
     const newState = { ...state,
+      error: null,
       simulated: true,
       latitude: action.latitude,
       longitude: action.longitude,
@@ -37,6 +39,7 @@ const coordinatesReducer = (state = initialState, action) => {
       // Backup original location... only if NOT simulated
       latitude_save: state.simulated ? state.latitude_save : state.latitude,
       longitude_save: state.simulated ? state.longitude_save : state.longitude,
+      error_save: state.simulated ? state.error_save : state.error,
     };
 
     logCoordinatesReducer.debug('       (rsim) newState:', newState);
@@ -48,12 +51,13 @@ const coordinatesReducer = (state = initialState, action) => {
   //
   // End simulated mode
   //
-  
+
   case c.STOP_SIMULATED_LOCATION: {
     logCoordinatesReducer.debug('{   coordinatesReducer.STOP_SIMULATED_LOCATION (rstsim)');
 
     const newState = { ...state,
       simulated: false,
+      error: state.error_save,
       latitude: state.latitude_save,
       longitude: state.longitude_save,
       changed: true,
@@ -69,7 +73,25 @@ const coordinatesReducer = (state = initialState, action) => {
   //
   // Update coordinates (normal mode)
   //
-  
+
+  case c.SET_ERROR_LOCATION: {
+    logCoordinatesReducer.debug('{   coordinatesReducer.SET_ERROR_LOCATION (rsl)');
+
+    const newState = { ...state,
+      error: action.error,
+    };
+
+    logCoordinatesReducer.debug('       (rsim) newState:', newState);
+    logCoordinatesReducer.debug('}   coordinatesReducer.SET_ERROR_LOCATION');
+
+    return newState;
+  }
+
+
+  //
+  // Update coordinates (normal mode)
+  //
+
   case c.SET_CURRENT_LOCATION: {
     logCoordinatesReducer.debug('{   coordinatesReducer.SET_CURRENT_LOCATION (rsl)');
 
@@ -113,6 +135,7 @@ const coordinatesReducer = (state = initialState, action) => {
     const newState = { ...state,
       changed,
       changedReal,
+      error: null,
       latitude: action.latitude,
       longitude: action.longitude,
       real: action.real,
