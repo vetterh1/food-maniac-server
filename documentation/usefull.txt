@@ -453,3 +453,23 @@ server {
                 proxy_redirect off;
         }
 }
+
+
+
+
+---------------------------------------------------------------
+          UNIX useful commands
+---------------------------------------------------------------
+
+List files by size (S: size, r:reverse):
+ls -lSr
+
+List files over a certain size:
+find . -size +100M
+
+List & delete files over a certain size:
+find . -size +100M -delete
+
+Disk usage (include folder sizes and grand total. -s: summary for each file, -h: human readable, -c: total)
+du -s -h -c *
+
