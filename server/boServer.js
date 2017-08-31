@@ -67,8 +67,9 @@ logger.warn(`Mongodb: ${databaseURL}`);
 if (!config.has('storage.database.URL')) logger.error(`! No config defined for storage.database.URL for env ${process.env.NODE_ENV} !`);
 
 const options = {
-  server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
-  replset: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
+  useMongoClient: true,
+  keepAlive: 1,
+  connectTimeoutMS: 30000,
 };
 mongoose.connect(databaseURL, options, (error) => {
   if (error) {

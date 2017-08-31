@@ -53,7 +53,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.0.0",
     "express": "^4.15.3",
-    "file-stream-rotator": "0.1.0",
+    "file-stream-rotator": "0.2.0",
     "fs": "0.0.1-security",
     "fs-extra": "^4.0.0",
     "http-server": "^0.10.0",
