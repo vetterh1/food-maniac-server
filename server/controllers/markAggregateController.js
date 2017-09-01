@@ -50,11 +50,12 @@ export function getMarkAggregates(req, res) {
 }
 
 
-// /GET /itemId/... route - Get all markAggregates for one item
+// /GET /itemId/... route - Get all markAggregates for one or all item(s)
 // Returns code 400 on missing parameter
 // Returns code 500 on network error (NOT empty list)
 // Returns code 200 otherwise + { markAggregates }
 // Note: markAggregates is an array that can be empty
+// Note: to retreive all the items per distance, use 'all' for the itemId
 
 export function getMarkAggregatesByItemIdAndDistance(req, res) {
   if (!req.params._itemId || req.params._itemId === 'undefined' || req.params._itemId === 'null') {
@@ -62,10 +63,17 @@ export function getMarkAggregatesByItemIdAndDistance(req, res) {
     logger.error(error);
     res.status(400).json(error);
   } else {
+    const findFilter = req.params._itemId === 'all' ? {} : { item: req.params._itemId };
     const query = MarkAggregate
-      .find({ item: req.params._itemId }) // find all the AGGREGATED markAggregates for one item
+      .find(findFilter) // find all the AGGREGATED markAggregates for one item
       .populate('place', 'name googleMapId googlePhotoUrl') // add the place & googlePhotoUrl information (available with place.xxx)
       .sort({ markOverall: -1 }); // sort by rating (from best to worst)
+
+    // If ask for any item ('all'), add the item name to every result
+    if (req.params._itemId === 'all') {
+      query
+        .populate('item', 'name');
+    }
 
     if (req.params._maxDistance && req.params._maxDistance > 0 && req.params._lat && req.params._lng) {
       query

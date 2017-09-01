@@ -38,6 +38,8 @@ class SelectItemPlus extends React.Component {
     onDislayItemsFilter: PropTypes.func,
     categoryPlaceHolder: PropTypes.string,
     kindPlaceHolder: PropTypes.string,
+    // itemPlaceHolder: Item added to the list (ex: 'All')
+    // when selected, onChangeItem returns null
     itemPlaceHolder: PropTypes.string,
     className: PropTypes.string,
   }
@@ -84,6 +86,7 @@ class SelectItemPlus extends React.Component {
 
   onChangeKind(event) {
     if (this.state.kind === event.target.value) return;
+    // console.log('onChangeKind (value):', event.target.value );
     this.setState({ kind: event.target.value, filteredItemsList: this.getVisibleItems(event.target.value, this.state.category) });
     if (this.props.onChangeKind) this.props.onChangeKind(event.target.value);
   }
@@ -98,7 +101,8 @@ class SelectItemPlus extends React.Component {
     if (this.state.item === event.target.value) return;
     this.setState({ item: event.target.value });
     if (this.props.onChangeItem) {
-      const itemObject = this.state.filteredItemsList.find((item) => { return item.id === event.target.value; });
+      const itemObject = event.target.value ? this.state.filteredItemsList.find((item) => { return item.id === event.target.value; }) : null;
+      // console.log('onChangeItem (value, itemObject):', event.target.value, itemObject );
       this.props.onChangeItem(event.target.value, itemObject ? itemObject.name : null);
     }
   }
@@ -267,7 +271,7 @@ SelectItemPlus.defaultProps = {
   defaultItem: null,
   categoryPlaceHolder: 'All',
   kindPlaceHolder: 'All',
-  itemPlaceHolder: 'Select an item...',
+  itemPlaceHolder: 'All',
   className: '',
   alertHelp: null,
 };

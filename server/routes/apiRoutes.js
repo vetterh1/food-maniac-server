@@ -178,11 +178,12 @@ router.route('/markAggregates/count').get(MarkAggregateController.getMarkAggrega
 // Note: markAggregates is an array that can be empty
 router.route('/markAggregates').get(MarkAggregateController.getMarkAggregates);
 
-// /GET /itemId/... route - Get all markAggregates for one item (option: by distance)
+// /GET /itemId/... route - Get all markAggregates for one or all item(s)
 // Returns code 400 on missing parameter
 // Returns code 500 on network error (NOT empty list)
 // Returns code 200 otherwise + { markAggregates }
 // Note: markAggregates is an array that can be empty
+// Note: to retreive all the items per distance, use 'all' for the itemId
 router.route('/markAggregates/itemId/:_itemId/maxDistance/:_maxDistance/lat/:_lat/lng/:_lng').get(MarkAggregateController.getMarkAggregatesByItemIdAndDistance);
 
 // /GET/:_id route - Get one markAggregate by _id

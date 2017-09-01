@@ -97,7 +97,8 @@ class SearchItemForm extends React.Component {
 
   render() {
     logSearchItemForm.debug('render SearchItemForm: (category, kind, item)=', this.state.category, this.state.kind, this.state.item);
-    const formReadyForSubmit = this.state.item && this.state.distance;
+    const formReadyForSubmit = true; // Always propose submit now that 'All' the default item.
+    // const formReadyForSubmit = this.state.item && this.state.distance;
     return (
       <div className="standard-container">
         <h3 className="mb-4">Seach the best place!</h3>

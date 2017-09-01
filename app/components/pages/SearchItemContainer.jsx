@@ -98,7 +98,7 @@ class SearchItemContainer extends React.Component {
       logSearchItemContainer.warn('{ SearchItemContainer.FindMarks');
       // logSearchItemContainer.warn(`SearchItemContainer.FindMarks - this.props.coordinates:\n\n${stringifyOnce(this.props.coordinates, null, 2)}`);
 
-      fetch(`/api/markAggregates/itemId/${this.values.item}/maxDistance/${this.values.distance}/lat/${this.props.coordinates.latitude}/lng/${this.props.coordinates.longitude}`)
+      fetch(`/api/markAggregates/itemId/${this.values.item ? this.values.item : 'all'}/maxDistance/${this.values.distance}/lat/${this.props.coordinates.latitude}/lng/${this.props.coordinates.longitude}`)
       .then((response) => {
         if (response.status >= 400) {
           this.onEndSearchingFailed(response.status);

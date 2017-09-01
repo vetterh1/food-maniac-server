@@ -57,12 +57,14 @@ export default class ListOneMark extends React.Component {
     const name = markAggregate.place.name.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
     const googleMapsUrl = `https://www.google.com/maps/dir/Current+Location/${markAggregate.location.coordinates[1]},${markAggregate.location.coordinates[0]}`;
 
+    const item = markAggregate.item && typeof markAggregate.item === 'object' ? `${markAggregate.item.name} at ` : '';
+
     return (
       <div className="result-item-block py-3" >
         <Row noGutters>
           <Col xs={8} sm={6} className="pr-3">
             <Row className="result-item-name" noGutters>
-              <h6>{name}</h6>
+              <h6>{item}{name}</h6>
             </Row>
             <Row className="result-item-rate" noGutters>
               <RatingStars initialRate={markAggregate.markOverall} size={20} className="" />

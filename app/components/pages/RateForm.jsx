@@ -317,6 +317,7 @@ class RateForm extends React.Component {
             onChangeItem={this.onChangeItem.bind(this)}
             onAddItem={this.onOpenAddItem.bind(this)}
             onDislayItemsFilter={this.onDislayItemsFilter.bind(this)}
+            itemPlaceHolder="Select an item..."
             className={classNameBlockWhat}
             ref={(r) => { this._refSelectItemPlus = r; }} // used to reset the 3 dropdowns
           />
