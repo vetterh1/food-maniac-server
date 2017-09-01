@@ -84,6 +84,13 @@ npm install --global --production windows-build-tools
 ImageMagik:
 https://www.imagemagick.org/download/binaries/ImageMagick-7.0.4-7-Q16-x64-dll.exe
 
+
+
+
+
+
+
+
 ---------------------------------------------------------------
                              MONGO
 ---------------------------------------------------------------
@@ -192,6 +199,12 @@ db.copyDatabase("food_maniac","food_maniac_dev","localhost")
 exit
 
 
+
+
+
+
+
+
 ---------------------------------------------------------------
                              BASICS
 ---------------------------------------------------------------
@@ -207,12 +220,23 @@ exit
 
 
 
+
+
+
+
+
+
 ---------------------------------------------------------------
                           SUBLIME
 ---------------------------------------------------------------
 
 Find in files:
 C:\workspace\mapTest\, -*/node_modules/*, -*/distBoServer/*, -*/distFoServer/*, -*/server/log*
+
+
+
+
+
 
 
 ---------------------------------------------------------------
@@ -243,6 +267,12 @@ C:\workspace\mapTest\, -*/node_modules/*, -*/distBoServer/*, -*/distFoServer/*, 
 
 
 
+
+
+
+
+
+
 ---------------------------------------------------------------
                             Documentation
 ---------------------------------------------------------------
@@ -264,17 +294,17 @@ C:\workspace\mapTest\, -*/node_modules/*, -*/distBoServer/*, -*/distFoServer/*, 
 
 
 ---------------------------------------------------------------
-                            Tools
+                            NPM
 ---------------------------------------------------------------
 
 
 // Update dependency version:
 
 	npm install -g npm-check-updates
-	ncu -u
+	ncu -a -x react-router,react-router-transition
 	npm update --save
 
-
+  ncu -x react-router,react-router-transition
 
 
 
