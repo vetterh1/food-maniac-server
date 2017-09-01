@@ -3,7 +3,8 @@
 import React, { PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// Import bootstrap directly from cdn in index.html. no need for npm install bootstrap either!
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import App from '../pages/App';
 import MainPageContent from '../pages/MainPageContent';
 import RateContainer from '../pages/RateContainer';
