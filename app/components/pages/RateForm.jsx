@@ -3,6 +3,7 @@
 import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 import { browserHistory } from 'react-router';
 import Alert from 'react-s-alert';
 import { MatchMediaHOC } from 'react-match-media';
@@ -259,7 +260,7 @@ class RateForm extends React.Component {
       <div>
         <Row>
           <Col xs={12} sm={3} md={2} >
-            <Label size="md">Type</Label>
+            <Label size="md"><FormattedMessage id="core.type" /></Label>
           </Col>
           <Col xs={12} sm={9} md={10} >
             <SimpleListOrDropdown items={LOCATION_TYPES} selectedOption={this.state.locationType} onChange={this.onChangeLocationType.bind(this)} dropdown />
@@ -267,7 +268,7 @@ class RateForm extends React.Component {
         </Row>
         <Row>
           <Col style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button color="primary" size="md" onClick={this.toggleType.bind(this)}>Close</Button>
+            <Button color="primary" size="md" onClick={this.toggleType.bind(this)}><FormattedMessage id="core.close" /></Button>
           </Col>
         </Row>
       </div>
@@ -287,7 +288,7 @@ class RateForm extends React.Component {
         </Row>
         <Row>
           <Col style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button color="primary" size="md" onClick={this.toggleMarks.bind(this)}>Close</Button>
+            <Button color="primary" size="md" onClick={this.toggleMarks.bind(this)}><FormattedMessage id="core.close" /></Button>
           </Col>
         </Row>
       </div>
@@ -303,13 +304,18 @@ class RateForm extends React.Component {
     // const opaqueOn = this.state.fillStep <= 3;
     logRateForm.debug(`render RateForm: (item=${this.state.item}, location=${this.state.location})`);
     const formReadyForSubmit = this.state.item && this.state.location && this.state.markOverall;
+
+    // i18n:
+    const what = this.context.intl.formatMessage({ id: 'core.what' });
+    const itemPlaceHolder = `${this.context.intl.formatMessage({ id: 'item.select.long' })}...`;
+
     return (
       <div className="standard-container">
-        <h3 className="mb-4">Rate your plate!</h3>
+        <h3 className="mb-4"><FormattedMessage id="item.rate.long" /></h3>
         <Form onSubmit={this.onSubmit.bind(this)}>
           <Element name="scrollElementWhat" />
           <SelectItemPlus
-            title="What"
+            title={what}
             kinds={this.props.kinds.kinds}
             categories={this.props.categories.categories}
             items={this.props.items.items}
@@ -317,14 +323,14 @@ class RateForm extends React.Component {
             onChangeItem={this.onChangeItem.bind(this)}
             onAddItem={this.onOpenAddItem.bind(this)}
             onDislayItemsFilter={this.onDislayItemsFilter.bind(this)}
-            itemPlaceHolder="Select an item..."
+            itemPlaceHolder={itemPlaceHolder}
             className={classNameBlockWhat}
             ref={(r) => { this._refSelectItemPlus = r; }} // used to reset the 3 dropdowns
           />
 
           <Element name="scrollElementWhere" />
           <div className={`mt-4 form-block element-with-transition ${classNameBlockWhere}`}>
-            <h5 className="mb-3"><MdLocationSearching size={24} className="mr-2 hidden-sm-up" /> Where</h5>
+            <h5 className="mb-3"><MdLocationSearching size={24} className="mr-2 hidden-sm-up" /> <FormattedMessage id="core.where" /></h5>
             <Row className="" noGutters>
               <Col sm={2}>
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
@@ -454,5 +460,7 @@ class RateForm extends React.Component {
     );
   }
 }
+
+RateForm.contextTypes = { intl: React.PropTypes.object.isRequired, };
 
 export default RateForm;

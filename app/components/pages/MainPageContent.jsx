@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { FormattedMessage } from 'react-intl';
 import MdStarHalf from 'react-icons/lib/md/star-half';
 import MdLocalRestaurant from 'react-icons/lib/md/local-restaurant';
 import MdLocationSearching from 'react-icons/lib/md/location-searching';
@@ -8,11 +9,9 @@ const MainPageContent = () => (
   <div>
     <div className="jumbotron">
       <div className="container">
-        <h1 className="display-6">Welcome, food lover!</h1>
-        <p>This site let you share what you feel is best in your favorite restaurants and bars.
-        Food-maniac focuses on the plates and not the place.
-        It&apos;s then the best way to discover where to go to eat the best pizza or to drink the most amazing margarita!</p>
-        <p><Link className="btn btn-primary btn-md" to="/signin">Sign-in &raquo;</Link></p>
+        <h1 className="display-6"><FormattedMessage id="messages.welcome.main" /></h1>
+        <p><FormattedMessage id="messages.welcome.blob" /></p>
+        <p><Link className="btn btn-primary btn-md" to="/signin"><FormattedMessage id="login.sign_in" /> &raquo;</Link></p>
       </div>
     </div>
     <div className="homepage-container">
@@ -20,27 +19,27 @@ const MainPageContent = () => (
         <div className="homepage-feature-item">
           <Link to="/rate" className="" style={{ textDecoration: 'none' }}>
             <div className="homepage-feature-icon"><MdStarHalf size={64} /></div>
-            <h5 className="homepage-feature-title">Rate</h5>
+            <h5 className="homepage-feature-title"><FormattedMessage id="core.rate" /></h5>
             <div className="homepage-feature-detail">
-              <p>Give stars to the pizza you are currently eating!</p>
+              <p><FormattedMessage id="messages.rate.blob" /></p>
             </div>
           </Link>
         </div>
         <div className="homepage-feature-item">
           <Link to="/searchItem" className="" style={{ textDecoration: 'none' }}>
             <div className="homepage-feature-icon"><MdLocationSearching size={64} /></div>
-            <h5 className="homepage-feature-title">Search</h5>
+            <h5 className="homepage-feature-title"><FormattedMessage id="core.search" /></h5>
             <div className="homepage-feature-detail">
-              <p>Find the best burger around you...</p>
+              <p><FormattedMessage id="messages.search.blob" /></p>
             </div>
           </Link>
         </div>
         <div className="homepage-feature-item">
           <Link to="/searchItem" className="" style={{ textDecoration: 'none' }}>
             <div className="homepage-feature-icon"><MdLocalRestaurant size={64} /></div>
-            <h5 className="homepage-feature-title">Check</h5>
+            <h5 className="homepage-feature-title"><FormattedMessage id="core.discover" /></h5>
             <div className="homepage-feature-detail">
-              <p>What&apos;s best where you are?</p>
+              <p><FormattedMessage id="messages.discover.blob" /></p>
             </div>
           </Link>
         </div>

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import RetreiveLocations from '../utils/RetreiveLocations';
@@ -45,10 +46,10 @@ class MainAppBar extends React.Component {
         {!onMainPage && <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink className="navbar-link" tag={Link} to="/rate" onClick={this.resetOpenState}>&gt; Rate item</NavLink>
+              <NavLink className="navbar-link" tag={Link} to="/rate" onClick={this.resetOpenState}>&gt; <FormattedMessage id="item.rate.short" /></NavLink>
             </NavItem>
             <NavItem>
-              <NavLink className="navbar-link" tag={Link} to="/searchItem" onClick={this.resetOpenState}>&gt; Search item</NavLink>
+              <NavLink className="navbar-link" tag={Link} to="/searchItem" onClick={this.resetOpenState}>&gt; <FormattedMessage id="item.search.short" /></NavLink>
             </NavItem>
             <NavItem>
               <RetreiveLocations />

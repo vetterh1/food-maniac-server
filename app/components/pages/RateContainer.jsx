@@ -52,12 +52,13 @@ class RateContainer extends React.Component {
 
   onStartSaving = () => {
     this._nowStartSaving = new Date().getTime();
-    this.alert = Alert.info('Saving...');
+    const msg = this.context.intl.formatMessage({ id: "messages.save.start" });
+    this.alert = Alert.info(msg);
   }
 
   onEndSavingOK = () => {
     const durationSaving = new Date().getTime() - this._nowStartSaving;
-    const msg = `Saved! (duration=${durationSaving}ms)`;
+    const msg = this.context.intl.formatMessage({ id: "messages.save.success" }, { durationSaving });
     if (this.alert) Alert.update(this.alert, msg, 'success');
     else this.alert = Alert.success(msg);
 
@@ -71,7 +72,7 @@ class RateContainer extends React.Component {
 
   onEndSavingFailed = (errorMessage) => {
     const durationSaving = new Date().getTime() - this._nowStartSaving;
-    const msg = `Error while saving (error=${errorMessage}, duration=${durationSaving}ms)`;
+    const msg = this.context.intl.formatMessage({ id: "messages.save.error" }, { errorMessage, durationSaving });
     if (this.alert) Alert.update(this.alert, msg, 'error');
     else this.alert = Alert.error(msg);
   }
@@ -264,7 +265,7 @@ class RateContainer extends React.Component {
   }
 }
 
-
+RateContainer.contextTypes = { intl: React.PropTypes.object.isRequired, };
 
 
 const mapStateToProps = (state) => {

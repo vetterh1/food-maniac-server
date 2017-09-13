@@ -1,0 +1,70 @@
+{
+  "en": {
+
+
+    "core.rate": "Rate",
+    "core.search": "Search",
+    "core.discover": "Discover",
+    "core.type": "Type",
+    "core.close": "Close",
+    "core.where": "Where",
+    "core.what": "What",
+
+
+    "messages.welcome.main": "Welcome, food lover!",
+    "messages.welcome.blob": "Share what you feel is best in your favorite restaurants and bars. Food-maniac focuses on the plates and not the place. It&apos;s then the best way to discover where to go to eat the best pizza or to drink the most amazing margarita!",
+    "messages.rate.blob": "Give stars to the pizza you just ate!",
+    "messages.search.blob": "Where's the best burger around you?",
+    "messages.discover.blob": "What's good in the area?",
+
+    "messages.save.start": "Saving...",
+    "messages.save.success": "Saved! (duration={durationSaving}ms)",
+    "messages.save.error": "Error while saving (error={errorMessage}, duration={durationSaving}ms)",
+
+    "item.rate.short": "Rate item",
+    "item.rate.long": "Rate your plate!",
+    "item.search.short": "Search item",
+    "item.select.long": "Select an item",
+
+
+    "login.sign_in": "Sign-in"
+
+
+  },
+
+
+
+  "fr": {
+
+
+    "core.rate": "Noter",
+    "core.search": "Chercher",
+    "core.discover": "Découvrir",
+    "core.type": "Type",
+    "core.close": "Fermer",
+    "core.where": "Où",
+    "core.what": "Quoi",
+
+
+    "messages.welcome.main": "Bienvenue, food lover!",
+    "messages.welcome.blob": "Partagez vos bons plans resto et bars!",
+    "messages.rate.blob": "Notez la pizza que vous venez de déguster!",
+    "messages.search.blob": "Trouvez les meilleures pâtes autour de vous...",
+    "messages.discover.blob": "Qu'il y a t'il de bon ici ?",
+
+    "messages.save.start": "En cours de sauvegarde...",
+    "messages.save.success": "Sauvé ! (durée={durationSaving}ms)",
+    "messages.save.error": "Erreur de sauvegarde (erreur={errorMessage}, durée={durationSaving}ms)",
+
+
+    "item.rate.short": "Noter un plat",
+    "item.rate.long": "Notez votre plat!",
+    "item.search.short": "Chercher un plat",
+    "item.select.long": "Selectionnez un plat",
+
+
+    "login.sign_in": "S'enregistrer"
+
+
+  }
+}
