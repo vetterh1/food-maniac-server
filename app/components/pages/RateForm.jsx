@@ -308,6 +308,7 @@ class RateForm extends React.Component {
     // i18n:
     const what = this.context.intl.formatMessage({ id: 'core.what' });
     const itemPlaceHolder = `${this.context.intl.formatMessage({ id: 'item.select.long' })}...`;
+    const placePlaceHolder = `${this.context.intl.formatMessage({ id: 'place.select.long' })}...`;
 
     return (
       <div className="standard-container">
@@ -337,7 +338,7 @@ class RateForm extends React.Component {
                   <div className="homepage-feature-icon hidden-xs-down"><MdLocationSearching size={48} /></div>
                 </Row>
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                  <Label size="md" className="hidden-xs-down">Place</Label>
+                  <Label size="md" className="hidden-xs-down"><FormattedMessage id="core.place" /></Label>
                 </Row>
               </Col>
               <Col xs={12} sm={10}>
@@ -347,31 +348,31 @@ class RateForm extends React.Component {
                       items={this.props.places.places}
                       selectedOption={this.state.location}
                       onChange={this.onChangeLocation.bind(this)}
-                      dropdownPlaceholder="Select a place..."
+                      dropdownPlaceholder={placePlaceHolder}
                       dropdown
                     />
                   </Col>
                 </Row>
                 <Row>
                   <Col xs={6} sm={4}>
-                    <Button block color="secondary" size="sm" onClick={this.onOpenSimulateLocation.bind(this)}><MdMap className="mr-2" size={24} /> Map</Button>
+                    <Button block color="secondary" size="sm" onClick={this.onOpenSimulateLocation.bind(this)}><MdMap className="mr-2" size={24} /> <FormattedMessage id="core.map" /></Button>
                   </Col>
                   <Col xs={6} sm={4} className="pl-0">
-                    <Button block color="secondary" size="sm" onClick={this.toggleType.bind(this)}><MdStore className="mr-2" size={24} /> Type</Button>
+                    <Button block color="secondary" size="sm" onClick={this.toggleType.bind(this)}><MdStore className="mr-2" size={24} /> <FormattedMessage id="core.type" /></Button>
                   </Col>
                 </Row>
                 <CollapseOnLargeScreens isOpen={this.state.collapseType}>
                   <Row>
                     <Col xs={12} sm={10} className="pl-0 pt-4" >
                       <Card block>
-                        <CardTitle className="mb-4">Choose place type</CardTitle>
+                        <CardTitle className="mb-4"><FormattedMessage id="place.select.type" /></CardTitle>
                         {this.renderTypeBody()}
                       </Card>
                     </Col>
                   </Row>
                 </CollapseOnLargeScreens>
                 <ModalOnSmallScreens className="hidden-md-up" isOpen={this.state.collapseType} toggle={this.toggleType.bind(this)}>
-                  <ModalHeader toggle={this.toggleType.bind(this)}>Choose place type</ModalHeader>
+                  <ModalHeader toggle={this.toggleType.bind(this)}><FormattedMessage id="place.select.type" /></ModalHeader>
                   <ModalBody>
                     {this.renderTypeBody()}
                   </ModalBody>
@@ -383,14 +384,14 @@ class RateForm extends React.Component {
 
           <Element name="scrollElementRate" />
           <div className={`mt-4 form-block element-with-transition ${classNameBlockRate}`}>
-            <h5 className="mb-3"><MdStarHalf size={24} className="mr-2 hidden-sm-up" /> Marks</h5>
+            <h5 className="mb-3"><MdStarHalf size={24} className="mr-2 hidden-sm-up" /> <FormattedMessage id="core.marks" /></h5>
             <Row className="" noGutters>
               <Col sm={2}>
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
                   <div className="homepage-feature-icon hidden-xs-down"><MdStarHalf size={48} /></div>
                 </Row>
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                  <Label size="md" className="hidden-xs-down">Marks</Label>
+                  <Label size="md" className="hidden-xs-down"><FormattedMessage id="core.marks" /></Label>
                 </Row>
               </Col>
               <Col xs={12} sm={10}>
@@ -402,21 +403,21 @@ class RateForm extends React.Component {
                 <Element name="scrollElementOptional" />
                 <Row>
                   <Col xs={6} sm={4} >
-                    <Button block color="secondary" size="sm" className={`element-with-transition ${classNameOptionalElements}`} onClick={this.toggleMarks.bind(this)}><MdStore className="mr-2" size={24} /> Details</Button>
+                    <Button block color="secondary" size="sm" className={`element-with-transition ${classNameOptionalElements}`} onClick={this.toggleMarks.bind(this)}><MdStore className="mr-2" size={24} /> <FormattedMessage id="core.details" /></Button>
                   </Col>
                 </Row>
                 <CollapseOnLargeScreens isOpen={this.state.collapseMarks}>
                   <Row>
                     <Col xs={12} sm={10} className="pl-0 pt-4" >
                       <Card block>
-                        <CardTitle className="mb-4">Mark details</CardTitle>
+                        <CardTitle className="mb-4"><FormattedMessage id="marks.details" /></CardTitle>
                         {this.renderMarksBody()}
                       </Card>
                     </Col>
                   </Row>
                 </CollapseOnLargeScreens>
                 <ModalOnSmallScreens className="hidden-md-up" isOpen={this.state.collapseMarks} toggle={this.toggleMarks.bind(this)}>
-                  <ModalHeader toggle={this.toggleMarks.bind(this)}>Mark details</ModalHeader>
+                  <ModalHeader toggle={this.toggleMarks.bind(this)}><FormattedMessage id="marks.details" /></ModalHeader>
                   <ModalBody>
                     {this.renderMarksBody()}
                   </ModalBody>
@@ -429,14 +430,14 @@ class RateForm extends React.Component {
 
           <Element name="scrollElementComment" />
           <div className={`mt-4 form-block element-with-transition ${classNameOptionalElements}`}>
-            <h5 className="mb-3"><MdEdit size={24} className="mr-2 hidden-sm-up" /> Optional comment</h5>
+            <h5 className="mb-3"><MdEdit size={24} className="mr-2 hidden-sm-up" /> <FormattedMessage id="comment.optional" /></h5>
             <Row className="" noGutters>
               <Col sm={2}>
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
                   <div className="homepage-feature-icon hidden-xs-down"><MdEdit size={48} /></div>
                 </Row>
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                  <Label size="md" className="hidden-xs-down">Comment</Label>
+                  <Label size="md" className="hidden-xs-down"><FormattedMessage id="core.comment" /></Label>
                 </Row>
               </Col>
               <Col xs={12} sm={10}>
@@ -450,8 +451,8 @@ class RateForm extends React.Component {
           </div>
 
           <div className={`mt-4 form-block element-with-transition ${classNameBlockActions}`}>
-            <Button color="primary" type="submit" size="md" disabled={!formReadyForSubmit}>Save</Button>
-            <Button color="link" onClick={this.resetForm.bind(this)} size="md" getRef={(ref) => { this.refReset = ref; }}>Reset</Button>
+            <Button color="primary" type="submit" size="md" disabled={!formReadyForSubmit}><FormattedMessage id="core.save" /></Button>
+            <Button color="link" onClick={this.resetForm.bind(this)} size="md" getRef={(ref) => { this.refReset = ref; }}><FormattedMessage id="core.reset" /></Button>
           </div>
 
 
@@ -461,6 +462,6 @@ class RateForm extends React.Component {
   }
 }
 
-RateForm.contextTypes = { intl: React.PropTypes.object.isRequired, };
+RateForm.contextTypes = { intl: React.PropTypes.object.isRequired };
 
 export default RateForm;

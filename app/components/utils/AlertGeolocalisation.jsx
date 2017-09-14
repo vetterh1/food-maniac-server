@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button } from 'reactstrap';
 import * as CoordinatesActions from '../../actions/CoordinatesActions';
@@ -35,28 +36,30 @@ class AlertGeolocalisation extends React.Component {
   render() {
     // If geolocalisation error: show a message!
     if (this.props.coordinates.error) {
-      let message;
+      let idError;
       switch (this.props.coordinates.error) {
       case PositionError.PERMISSION_DENIED:
-        message = 'User denied the request for Geolocation.';
+        idError = 'PERMISSION_DENIED';
         break;
       case PositionError.POSITION_UNAVAILABLE:
-        message = 'Location information is unavailable.';
+        idError = 'POSITION_UNAVAILABLE';
         break;
       case PositionError.TIMEOUT:
-        message = 'The request to get user location timed out.';
+        idError = 'TIMEOUT';
         break;
       case PositionError.UNKNOWN_ERROR:
-        message = 'An unknown error occurred.';
+        idError = 'UNKNOWN_ERROR';
         break;
       default:
-        message = 'An unknown error occurred (2)';
+        idError = 'default';
         break;
       }
 
+      const errorLabel = this.context.intl.formatMessage({ id: `messages.geolocalisation.error.${idError}` });
+
       return (
         <div style={divStyle}>
-          Error: {message}
+          Error: {errorLabel}
         </div>
       );
     }
@@ -65,7 +68,7 @@ class AlertGeolocalisation extends React.Component {
     if (this.props.coordinates.simulated) {
       return (
         <div style={divStyle}>
-          <Button style={linkStyle} color="link" onClick={this.dispatchStopSimulatedAction.bind(this)} size="md">Return to real location</Button>
+          <Button style={linkStyle} color="link" onClick={this.dispatchStopSimulatedAction.bind(this)} size="md"><FormattedMessage id="messages.geolocalisation.end.simulated" /></Button>
         </div>
       );
     }
@@ -80,5 +83,7 @@ AlertGeolocalisation.propTypes = {
   coordinates: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
 };
+
+AlertGeolocalisation.contextTypes = { intl: React.PropTypes.object.isRequired };
 
 export default connect(mapStateToProps)(AlertGeolocalisation);

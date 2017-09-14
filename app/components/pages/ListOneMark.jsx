@@ -3,6 +3,7 @@
 import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 import { Button, Col, Row } from 'reactstrap';
 import MdDirections from 'react-icons/lib/md/directions';
 import MdRateReview from 'react-icons/lib/md/rate-review';
@@ -57,7 +58,13 @@ export default class ListOneMark extends React.Component {
     const name = markAggregate.place.name.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
     const googleMapsUrl = `https://www.google.com/maps/dir/Current+Location/${markAggregate.location.coordinates[1]},${markAggregate.location.coordinates[0]}`;
 
-    const item = markAggregate.item && typeof markAggregate.item === 'object' ? `${markAggregate.item.name} at ` : '';
+    const atLabel = `${this.context.intl.formatMessage({ id: 'core.at' })}...`;
+    const item = markAggregate.item && typeof markAggregate.item === 'object' ? `${markAggregate.item.name} ${atLabel} ` : '';
+
+    const foodLabel = this.context.intl.formatMessage({ id: 'core.food' });
+    const valueLabel = this.context.intl.formatMessage({ id: 'core.value' });
+    const placeLabel = this.context.intl.formatMessage({ id: 'core.place' });
+    const staffLabel = this.context.intl.formatMessage({ id: 'core.staff' });
 
     return (
       <div className="result-item-block py-3" >
@@ -71,7 +78,7 @@ export default class ListOneMark extends React.Component {
             </Row>
             <Row className="result-item-rate mt-2" noGutters>
               <Button block color="secondary" size="sm" className="" onClick={this.toggleIndividualMarks.bind(this)}>
-                {roundTo0dot5(markAggregate.markOverall)} ({markAggregate.nbMarksOverall} reviews)
+                {roundTo0dot5(markAggregate.markOverall)} ({markAggregate.nbMarksOverall} <FormattedMessage id="core.reviews" />)
               </Button>
             </Row>
             <Row className="result-item-location mt-2" noGutters>
@@ -84,12 +91,12 @@ export default class ListOneMark extends React.Component {
             </Row>
             {this.state.showIndividualMarks &&
               <Row className="result-item-location mt-4 bordered-block" noGutters>
-                <h6 className="mb-3"><MdStarHalf size={18} className="mr-2" /> Individual marks:</h6>
+                <h6 className="mb-3"><MdStarHalf size={18} className="mr-2" /> <FormattedMessage id="marks.individual" />:</h6>
                 <Col xs={12} className="pl-3-if-large">
-                  <RatingStarsRow name="markFood" label="Food" initialRate={markAggregate.markFood} quantity={markAggregate.nbMarksFood} hideIfNoQuantity size={18} />
-                  <RatingStarsRow name="markValue" label="Value" initialRate={markAggregate.markValue} quantity={markAggregate.nbMarksValue} hideIfNoQuantity size={18} />
-                  <RatingStarsRow name="markPlace" label="Place" initialRate={markAggregate.markPlace} quantity={markAggregate.nbMarksPlace} hideIfNoQuantity size={18} />
-                  <RatingStarsRow name="markStaff" label="Staff" initialRate={markAggregate.markStaff} quantity={markAggregate.nbMarksStaff} hideIfNoQuantity size={18} />
+                  <RatingStarsRow name="markFood" label={foodLabel} initialRate={markAggregate.markFood} quantity={markAggregate.nbMarksFood} hideIfNoQuantity size={18} />
+                  <RatingStarsRow name="markValue" label={valueLabel} initialRate={markAggregate.markValue} quantity={markAggregate.nbMarksValue} hideIfNoQuantity size={18} />
+                  <RatingStarsRow name="markPlace" label={placeLabel} initialRate={markAggregate.markPlace} quantity={markAggregate.nbMarksPlace} hideIfNoQuantity size={18} />
+                  <RatingStarsRow name="markStaff" label={staffLabel} initialRate={markAggregate.markStaff} quantity={markAggregate.nbMarksStaff} hideIfNoQuantity size={18} />
                 </Col>
               </Row>
             }
@@ -117,5 +124,7 @@ export default class ListOneMark extends React.Component {
   }
 
 }
+
+ListOneMark.contextTypes = { intl: React.PropTypes.object.isRequired };
 
 ListOneMark.defaultProps = { markIndividuals: [] };

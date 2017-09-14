@@ -3,6 +3,7 @@
 import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 import { Button, Container, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 const logSimulateLocationModal = log.getLogger('loggerSimulateLocationModal');
@@ -110,10 +111,12 @@ class SimulateLocationModal extends React.Component {
     this._mapGoogle.addListener('center_changed', () => { this.setPosition(this._mapGoogle.getCenter()); });
     this._mapGoogle.addListener('click', (event) => { this.setPosition(event.latLng); });
 
+    const titleLabel = this.context.intl.formatMessage({ id: 'location.move.long' });
+
     this._marker = new google.maps.Marker({
       position: currentLatLng,
       map: this._mapGoogle,
-      title: 'Move to wished area',
+      title: titleLabel,
     });
 
     logSimulateLocationModal.debug('       (slm-cdm) this._mapGoogle : ', this._mapGoogle);
@@ -157,7 +160,7 @@ class SimulateLocationModal extends React.Component {
       <div style={styles.test}>
         <Modal id="simlocmod" className="sim-loc-mod" style={styles.modal} isOpen={this.props.open} toggle={this.onCancel.bind(this)}>
           <ModalHeader toggle={this.onCancel.bind(this)}>
-            Select a location...
+            <FormattedMessage id="location.select.long" />...
           </ModalHeader>
           <ModalBody style={styles.modalbody}>
             <Container fluid style={styles.container}>
@@ -165,8 +168,8 @@ class SimulateLocationModal extends React.Component {
             </Container>
           </ModalBody>
           <ModalFooter>
-            <Button style={styles.btnGo} color="primary" type="submit" onClick={this.onSubmit.bind(this)} size="md" disabled={!formReadyForSubmit} getRef={(ref) => { this.refSubmit = ref; }} >Go!</Button>
-            <Button color="link" onClick={this.onCancel.bind(this)} size="md">Cancel</Button>
+            <Button style={styles.btnGo} color="primary" type="submit" onClick={this.onSubmit.bind(this)} size="md" disabled={!formReadyForSubmit} getRef={(ref) => { this.refSubmit = ref; }} ><FormattedMessage id="core.go" /></Button>
+            <Button color="link" onClick={this.onCancel.bind(this)} size="md"><FormattedMessage id="core.cancel" /></Button>
           </ModalFooter>
         </Modal>
       </div>
@@ -174,6 +177,8 @@ class SimulateLocationModal extends React.Component {
   }
 
 }
+
+SimulateLocationModal.contextTypes = { intl: React.PropTypes.object.isRequired };
 
 export default SimulateLocationModal;
 

@@ -2,13 +2,28 @@
   "en": {
 
 
+    "core.close": "Close",
+    "core.reset": "Reset",
+    "core.save": "Save",
+    "core.cancel": "Cancel",
+    "core.go": "Go!",
+
     "core.rate": "Rate",
     "core.search": "Search",
     "core.discover": "Discover",
     "core.type": "Type",
-    "core.close": "Close",
     "core.where": "Where",
     "core.what": "What",
+    "core.place": "Place",
+    "core.map": "Map",
+    "core.marks": "Marks",
+    "core.details": "Details",
+    "core.comment": "Comment",
+    "core.reviews": "reviews",
+    "core.at": "at",
+    "core.food": "Food",
+    "core.value": "Value",
+    "core.staff": "Staff",
 
 
     "messages.welcome.main": "Welcome, food lover!",
@@ -21,10 +36,31 @@
     "messages.save.success": "Saved! (duration={durationSaving}ms)",
     "messages.save.error": "Error while saving (error={errorMessage}, duration={durationSaving}ms)",
 
+    "messages.geolocalisation.error.PERMISSION_DENIED": "You have denied the request for localization.",
+    "messages.geolocalisation.error.POSITION_UNAVAILABLE": "Cannot pinpoint your location.",
+    "messages.geolocalisation.error.TIMEOUT": "localization took too long.",
+    "messages.geolocalisation.error.UNKNOWN_ERROR": "An unknown error occurred.",
+    "messages.geolocalisation.error.default": "An unknown error occurred (2).",
+    "messages.geolocalisation.end.simulated": "Return to real location",
+
+
     "item.rate.short": "Rate item",
     "item.rate.long": "Rate your plate!",
     "item.search.short": "Search item",
     "item.select.long": "Select an item",
+
+
+    "place.select.long": "Select a place",
+    "place.select.type": "Choose place type",
+    "location.select.long": "Select a location",
+    "location.move.long": "Move to wished area",
+
+
+    "marks.details": "Mark details",
+    "marks.individual": "Individual marks",
+
+
+    "comment.optional": "Optional comment",
 
 
     "login.sign_in": "Sign-in"
@@ -37,13 +73,28 @@
   "fr": {
 
 
+    "core.close": "Fermer",
+    "core.reset": "Réinitialiser",
+    "core.save": "Enregistrer",
+    "core.cancel": "Annuler",
+    "core.go": "Go !",
+
     "core.rate": "Noter",
     "core.search": "Chercher",
     "core.discover": "Découvrir",
     "core.type": "Type",
-    "core.close": "Fermer",
     "core.where": "Où",
     "core.what": "Quoi",
+    "core.place": "Endroit",
+    "core.map": "Carte",
+    "core.marks": "Notes",
+    "core.details": "Détails",
+    "core.comment": "Commentaire",
+    "core.reviews": "critiques",
+    "core.at": "chez",
+    "core.food": "Nourriture",
+    "core.value": "Prix",
+    "core.staff": "Service",
 
 
     "messages.welcome.main": "Bienvenue, food lover!",
@@ -56,11 +107,31 @@
     "messages.save.success": "Sauvé ! (durée={durationSaving}ms)",
     "messages.save.error": "Erreur de sauvegarde (erreur={errorMessage}, durée={durationSaving}ms)",
 
+    "messages.geolocalisation.error.PERMISSION_DENIED": "Vous n'avez pas autorisé la géolocalisation",
+    "messages.geolocalisation.error.POSITION_UNAVAILABLE": "Impossible de vous localiser.",
+    "messages.geolocalisation.error.TIMEOUT": "La géolocalisation a pris trop de temps",
+    "messages.geolocalisation.error.UNKNOWN_ERROR": "Une erreur inconnue est survenue.",
+    "messages.geolocalisation.error.default": "Une erreur inconnue est survenue (2).",
+    "messages.geolocalisation.end.simulated": "Revenir à la position réelle",
+
 
     "item.rate.short": "Noter un plat",
     "item.rate.long": "Notez votre plat!",
     "item.search.short": "Chercher un plat",
-    "item.select.long": "Selectionnez un plat",
+    "item.select.long": "Sélectionnez un plat",
+
+
+    "place.select.long": "Sélectionnez un endroit",
+    "place.select.type": "Choix du type d'endroit",
+    "location.select.long": "Sélectionnez un endroit",
+    "location.move.long": "Trouvez la zone désirée",
+
+
+    "marks.details": "Détail des notes",
+    "marks.individual": "Notes individuelles",
+
+
+    "comment.optional": "Commentaire optionnel",
 
 
     "login.sign_in": "S'enregistrer"
