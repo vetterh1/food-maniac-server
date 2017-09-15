@@ -6,6 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import RetreiveLocations from '../utils/RetreiveLocations';
+import LanguageBar from '../utils/LanguageBar';
 
 
 class MainAppBar extends React.Component {
@@ -53,6 +54,9 @@ class MainAppBar extends React.Component {
             </NavItem>
             <NavItem>
               <RetreiveLocations />
+            </NavItem>
+            <NavItem>
+              <LanguageBar />
             </NavItem>
           </Nav>
         </Collapse>}
