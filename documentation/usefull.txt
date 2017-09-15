@@ -253,6 +253,11 @@ C:\workspace\mapTest\, -*/node_modules/*, -*/distBoServer/*, -*/distFoServer/*, 
 - For gitlab: remove http proxy! 
     [http]
 
+or try: 
+- set: git config --global http.proxy proxy:3128
+- remove: git config --global --unset http.proxy
+- list: git config --global --get http.proxy
+
 ---------- Avoid enteing user password at every push ------
 - configure git gui with user & password
 - type: git config --global credential.helper wincred
