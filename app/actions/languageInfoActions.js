@@ -1,5 +1,5 @@
 import * as c from '../utils/constants';
 
-function requestLanguageInfo() { return { type: c.REQUEST_LANGUAGE_INFO }; }
-
-function changeLanguage(index) { return { type: c.CHANGE_LANGUAGE, index: index }; }
+export function requestLanguageInfo() { return { type: c.REQUEST_LANGUAGE_INFO }; }
+export function requestCurrentLanguage() { return { type: c.REQUEST_CURRENT_LANGUAGE }; }
+export function changeLanguage(codeLanguage) { return { type: c.CHANGE_LANGUAGE, codeLanguage }; }

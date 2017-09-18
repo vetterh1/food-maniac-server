@@ -98,7 +98,7 @@ class GeolocationDisplay extends React.Component {
 
 GeolocationDisplay.propTypes = {
   coordinates: PropTypes.shape({
-    error: PropTypes.string,
+    error: PropTypes.number,
     latitude: PropTypes.number,
     longitude: PropTypes.number,
     simulated: PropTypes.boolean,

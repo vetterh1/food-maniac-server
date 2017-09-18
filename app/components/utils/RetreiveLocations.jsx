@@ -129,8 +129,10 @@ class RetreiveLocations extends React.Component {
 
 RetreiveLocations.propTypes = {
   coordinates: PropTypes.shape({
+    error: PropTypes.number,
     latitude: PropTypes.number,
     longitude: PropTypes.number,
+    simulated: PropTypes.boolean,
     real: PropTypes.boolean,
     changed: PropTypes.boolean,
     changedReal: PropTypes.boolean,
@@ -139,6 +141,8 @@ RetreiveLocations.propTypes = {
     nbReal: PropTypes.number,
     nbEstimated: PropTypes.number,
     nbClose: PropTypes.number,
+    latitude_save: PropTypes.number,
+    longitude_save: PropTypes.number,
   }).isRequired,
   locationType: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,

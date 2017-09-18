@@ -2,22 +2,30 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import RetreiveLocations from '../utils/RetreiveLocations';
-import LanguageBar from '../utils/LanguageBar';
-
+import LanguageChoice from '../utils/LanguageChoice';
+import { changeLanguage } from '../../actions/languageInfoActions';
 
 class MainAppBar extends React.Component {
   static propTypes = {
     location: PropTypes.object,
+    languageInfo: PropTypes.shape({
+      list: PropTypes.array,
+      codeLanguage: PropTypes.string,
+      changed: PropTypes.boolean,
+    }).isRequired,
+    dispatch: PropTypes.func.isRequired,
   }
 
   constructor() {
     super();
     this.toggle = this.toggle.bind(this);
     this.resetOpenState = this.resetOpenState.bind(this);
+    this.handleChangeLanguage = this.handleChangeLanguage.bind(this);
 
     this.state = {
       route: window.location.pathname,
@@ -31,11 +39,21 @@ class MainAppBar extends React.Component {
     });
   }
 
+
+  handleChangeLanguage(codeLanguage) {
+    // Save places in redux store
+    const { dispatch } = this.props;  // Injected by react-redux
+    const action = changeLanguage(codeLanguage);
+    dispatch(action);
+  }
+
+
   resetOpenState() {
     this.setState({
       isOpen: false,
     });
   }
+
 
   render() {
     const onMainPage = this.props.location.pathname === '/';
@@ -55,14 +73,26 @@ class MainAppBar extends React.Component {
             <NavItem>
               <RetreiveLocations />
             </NavItem>
-            <NavItem>
-              <LanguageBar />
-            </NavItem>
           </Nav>
         </Collapse>}
+        <Nav className="ml-auto" navbar>
+          {this.props.languageInfo.list.map((oneLanguage, index) => (
+            <NavItem key={oneLanguage}>
+              <LanguageChoice selected={oneLanguage === this.props.languageInfo.codeLanguage} index={index} codeLanguage={oneLanguage} onClick={this.handleChangeLanguage} />
+            </NavItem>
+          ), this)}
+        </Nav>
       </Navbar>
     );
   }
 }
 
-export default MainAppBar;
+
+// 1st to receive store changes
+// Role of mapStateToProps: transform the "interesting" part of the store state
+// into some props that will be received by componentWillReceiveProps
+const mapStateToProps = (state) => {
+  return { languageInfo: state.languageInfo };
+};
+
+export default connect(mapStateToProps)(MainAppBar);

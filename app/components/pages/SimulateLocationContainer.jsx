@@ -23,7 +23,22 @@ class SimulateLocationContainer extends React.Component {
     onClose: PropTypes.func.isRequired,
     // Injected by redux-store connect:
     dispatch: PropTypes.func.isRequired,
-    coordinates: PropTypes.object.isRequired,
+    coordinates: PropTypes.shape({
+      error: PropTypes.number,
+      latitude: PropTypes.number,
+      longitude: PropTypes.number,
+      simulated: PropTypes.boolean,
+      real: PropTypes.boolean,
+      changed: PropTypes.boolean,
+      changedReal: PropTypes.boolean,
+      nbRefreshes: PropTypes.number,
+      nbDiffs: PropTypes.number,
+      nbReal: PropTypes.number,
+      nbEstimated: PropTypes.number,
+      nbClose: PropTypes.number,
+      latitude_save: PropTypes.number,
+      longitude_save: PropTypes.number,
+    }).isRequired,
   }
 
   onCancel() {

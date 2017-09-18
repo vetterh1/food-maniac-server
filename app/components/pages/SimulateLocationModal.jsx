@@ -50,7 +50,22 @@ class SimulateLocationModal extends React.Component {
     open: PropTypes.bool.isRequired,
     onSubmit: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
-    coordinates: PropTypes.object.isRequired,
+    coordinates: PropTypes.shape({
+      error: PropTypes.number,
+      latitude: PropTypes.number,
+      longitude: PropTypes.number,
+      simulated: PropTypes.boolean,
+      real: PropTypes.boolean,
+      changed: PropTypes.boolean,
+      changedReal: PropTypes.boolean,
+      nbRefreshes: PropTypes.number,
+      nbDiffs: PropTypes.number,
+      nbReal: PropTypes.number,
+      nbEstimated: PropTypes.number,
+      nbClose: PropTypes.number,
+      latitude_save: PropTypes.number,
+      longitude_save: PropTypes.number,
+    }).isRequired,
   }
 
   constructor(props) {

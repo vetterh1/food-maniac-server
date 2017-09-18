@@ -1,3 +1,14 @@
 {
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/old": true,
+    "**/coverage": true,
+    "**/__tests__": true,
+    "**/distBoServer": true,
+    "**/distFoServer": true,
+    "**/server/log": true
+  }  
 }
+
