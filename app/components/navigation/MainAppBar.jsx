@@ -12,7 +12,7 @@ import { changeLanguage } from '../../actions/languageInfoActions';
 
 class MainAppBar extends React.Component {
   static propTypes = {
-    location: PropTypes.object,
+    // location: PropTypes.object,
     languageInfo: PropTypes.shape({
       list: PropTypes.array,
       codeLanguage: PropTypes.string,
@@ -41,7 +41,7 @@ class MainAppBar extends React.Component {
 
 
   handleChangeLanguage(codeLanguage) {
-    // Save places in redux store
+    // Save new language selection in redux store
     const { dispatch } = this.props;  // Injected by react-redux
     const action = changeLanguage(codeLanguage);
     dispatch(action);
@@ -57,31 +57,29 @@ class MainAppBar extends React.Component {
 
   render() {
     const onMainPage = this.props.location.pathname === '/';
-    const isOpen = this.state.isOpen || onMainPage;
+    const isOpen = this.state.isOpen;
     return (
       <Navbar color="inverse" inverse toggleable>
-        {!onMainPage && <NavbarToggler right onClick={this.toggle} />}
+        <NavbarToggler right onClick={this.toggle} />
         <NavbarBrand tag={Link} to="/" onClick={this.resetOpenState}>Food Maniac!</NavbarBrand>
-        {!onMainPage && <Collapse isOpen={isOpen} navbar>
+        <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
-            <NavItem>
+            {!onMainPage && <NavItem>
               <NavLink className="navbar-link" tag={Link} to="/rate" onClick={this.resetOpenState}>&gt; <FormattedMessage id="item.rate.short" /></NavLink>
-            </NavItem>
-            <NavItem>
+            </NavItem>}
+            {!onMainPage && <NavItem>
               <NavLink className="navbar-link" tag={Link} to="/searchItem" onClick={this.resetOpenState}>&gt; <FormattedMessage id="item.search.short" /></NavLink>
-            </NavItem>
+            </NavItem>}
+            {this.props.languageInfo.list.map((oneLanguage, index) => (
+              <NavItem key={oneLanguage}>
+                <LanguageChoice selected={oneLanguage === this.props.languageInfo.codeLanguage} index={index} codeLanguage={oneLanguage} onClick={this.handleChangeLanguage} />
+              </NavItem>
+              ), this)}
             <NavItem>
               <RetreiveLocations />
             </NavItem>
           </Nav>
-        </Collapse>}
-        <Nav className="ml-auto" navbar>
-          {this.props.languageInfo.list.map((oneLanguage, index) => (
-            <NavItem key={oneLanguage}>
-              <LanguageChoice selected={oneLanguage === this.props.languageInfo.codeLanguage} index={index} codeLanguage={oneLanguage} onClick={this.handleChangeLanguage} />
-            </NavItem>
-          ), this)}
-        </Nav>
+        </Collapse>
       </Navbar>
     );
   }

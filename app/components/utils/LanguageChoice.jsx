@@ -7,7 +7,7 @@ class languageChoice extends React.Component {
   _onClick() { this.props.onClick(this.props.codeLanguage); }
   render() {
     return (
-      <div onClick={this._onClick} className={`navbar-link nav-link ${this.props.selected ? 'navbar-brand' : ''}`}>{this.props.codeLanguage}</div>
+      <div onClick={this._onClick} className={`navbar-link text-lowercase font-italic nav-link ${this.props.selected ? 'text-primary font-weight-bold' : 'text-secondary font-italic'}`}>{this.props.codeLanguage}</div>
     );
   }
 }

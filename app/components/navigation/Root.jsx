@@ -5,9 +5,7 @@ import { connect, Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 // Import bootstrap directly from cdn in index.html. no need for npm install bootstrap either!
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import { addLocaleData, IntlProvider } from 'react-intl';
-import en from 'react-intl/locale-data/en';
-import fr from 'react-intl/locale-data/fr';
+import { IntlProvider } from 'react-intl';
 import localeData from '../../locales/data.json';
 import App from '../pages/App';
 import MainPageContent from '../pages/MainPageContent';
@@ -23,23 +21,6 @@ import Login from '../pages/Login';
 const NotFound = () => <h2>404 error - This page is not found!</h2>;
 
 
-
-//
-// -------------------  i18n  ---------------------
-//
-
-addLocaleData([...en, ...fr]);
-
-// Define user's language. Different browsers have the user locale defined
-// on different fields on the `navigator` object, so we make sure to account
-// for these different by checking all of them
-// const language = (navigator.languages && navigator.languages[0]) ||
-//                   navigator.language ||
-//                   navigator.userLanguage;
-
-
-
-
 class Root extends React.Component {
 
   constructor() {
@@ -47,31 +28,43 @@ class Root extends React.Component {
     this.toggle = this.i18nLoad.bind(this);
 
     this.state = {
-      language: 'EN',
+      language: '',
       messages: [],
     };
   }
 
+// -------------------  i18n  ---------------------
 
   componentWillMount() {
-    this.i18nLoad(this.props);
+    // 1st load and data already present in redux store
+    // (loaded in index.jsx)
+    this.i18nLoad(this.props.languageInfo);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.i18nLoad(nextProps);
+    // Change language?
+    if (nextProps &&
+        nextProps.languageInfo &&
+        nextProps.languageInfo.codeLanguage &&
+        nextProps.languageInfo.codeLanguage !==
+          this.props.languageInfo.codeLanguage) {
+      this.i18nLoad(nextProps.languageInfo);
+    }
   }
 
-  i18nLoad(props) {
-    const language = props.languageInfo.codeLanguage;
-    const languageWithoutRegionCode = language.toLowerCase().split(/[_-]+/)[0];
+  // Retrieves messages for the current local (passed in parameters)
+  // Set in the state, available to render(), can be passed to children
+  i18nLoad(languageInfo) {
+    if (!languageInfo) return;
     this.setState({
-      language,
-      messages: localeData[languageWithoutRegionCode] || localeData[language] || localeData.en,
+      language: languageInfo.codeLanguage,
+      messages: localeData[languageInfo.codeLanguage],
     });
   }
 
 
   render() {
+    if (!this.props.languageInfo) return null;
     return (
       <Provider store={this.props.store}>
         <IntlProvider locale={this.state.language} messages={this.state.messages}>

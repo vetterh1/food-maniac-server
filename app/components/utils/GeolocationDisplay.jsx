@@ -37,21 +37,22 @@ class GeolocationDisplay extends React.Component {
   }
 
   render = () => {
-    let label = 'Location OK';
+    const label = '';
+    // let label = 'Location OK ';
     let style = styles.locationOK;
     if (!this.props.coordinates.real) {
-      label = 'Simulated location';
+      // label = 'Simulated location ';
       style = styles.locationSimulated;
     }
     if (this.props.coordinates.error) {
-      label = 'Location KO';
+      // label = 'Location KO ';
       style = styles.locationKO;
     }
 
     return (
       <div>
-        <Button onClick={this.toggle} size="md" color="link" style={style}>
-          {label} <MdLocationOn size={18} />
+        <Button onClick={this.toggle} size="md" color="link" className="mx-0 px-0 border-0" style={style}>
+          {label}<MdLocationOn size={18} />
         </Button>
         <Modal isOpen={this.state.statisticsOpen} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Geolocation Statistics</ModalHeader>
