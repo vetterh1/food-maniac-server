@@ -65,7 +65,7 @@ const languageBrowserWithoutRegionCode =
   languageBrowser.toUpperCase().split(/[_-]+/)[0];
 
 const defaultLanguage =
-  languagesList.includes(languageBrowserWithoutRegionCode) ? languageBrowserWithoutRegionCode : 'EN';
+  languagesList.indexOf(languageBrowserWithoutRegionCode) >= 0 ? languageBrowserWithoutRegionCode : 'EN';
 
 addLocaleData([...en, ...fr]);
 store.dispatch(setupLanguages(languagesList, defaultLanguage));
