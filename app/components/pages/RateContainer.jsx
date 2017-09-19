@@ -7,6 +7,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Container } from 'reactstrap';
 import Alert from 'react-s-alert';
+import 'es6-promise/auto';
+import 'isomorphic-fetch';
 import RateForm from './RateForm';
 import AddItemContainer from '../pages/AddItemContainer';
 import SimulateLocationContainer from '../pages/SimulateLocationContainer';
@@ -15,8 +17,6 @@ import { loglevelServerSend } from '../../utils/loglevel-serverSend';
 import * as itemsActions from '../../actions/itemsActions';
 import * as placesActions from '../../actions/PlacesActions';
 
-import 'es6-promise/auto';
-import 'isomorphic-fetch';
 
 const logRateContainer = log.getLogger('logRateContainer');
 loglevelServerSend(logRateContainer); // a setLevel() MUST be run AFTER this!
@@ -31,6 +31,7 @@ class RateContainer extends React.Component {
     categories: PropTypes.object.isRequired,
     items: PropTypes.object.isRequired,
     places: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -52,13 +53,13 @@ class RateContainer extends React.Component {
 
   onStartSaving = () => {
     this._nowStartSaving = new Date().getTime();
-    const msg = this.context.intl.formatMessage({ id: "messages.save.start" });
+    const msg = this.context.intl.formatMessage({ id: 'messages.save.start' });
     this.alert = Alert.info(msg);
   }
 
   onEndSavingOK = () => {
     const durationSaving = new Date().getTime() - this._nowStartSaving;
-    const msg = this.context.intl.formatMessage({ id: "messages.save.success" }, { durationSaving });
+    const msg = this.context.intl.formatMessage({ id: 'messages.save.success' }, { durationSaving });
     if (this.alert) Alert.update(this.alert, msg, 'success');
     else this.alert = Alert.success(msg);
 
@@ -72,7 +73,7 @@ class RateContainer extends React.Component {
 
   onEndSavingFailed = (errorMessage) => {
     const durationSaving = new Date().getTime() - this._nowStartSaving;
-    const msg = this.context.intl.formatMessage({ id: "messages.save.error" }, { errorMessage, durationSaving });
+    const msg = this.context.intl.formatMessage({ id: 'messages.save.error' }, { errorMessage, durationSaving });
     if (this.alert) Alert.update(this.alert, msg, 'error');
     else this.alert = Alert.error(msg);
   }
@@ -265,7 +266,7 @@ class RateContainer extends React.Component {
   }
 }
 
-RateContainer.contextTypes = { intl: React.PropTypes.object.isRequired, };
+RateContainer.contextTypes = { intl: React.PropTypes.object.isRequired };
 
 
 const mapStateToProps = (state) => {

@@ -1,4 +1,7 @@
 /* eslint-disable react/forbid-prop-types */
+/* eslint-disable no-nested-ternary */
+/* eslint-disable jsx-a11y/href-no-hash */
+/* eslint-disable jsx-a11y/img-has-alt */
 
 import * as log from 'loglevel';
 import React from 'react';
@@ -138,7 +141,7 @@ class RateForm extends React.Component {
     if (this.state.item === item) return;
     this.setState({ item, itemName, fillStep: 2 });
     scroller.scrollTo('scrollElementWhere', optionsScroll);
-    const msg = '<ul><li>The list shows the closest places...</li><li>Map: select an are on a map. The list will update with closest places there.</li><li>Type: Change the type of location (restaurant, bar,...)</li></ul>';
+    const msg = '<ul><li>The list shows the closest places...</li><li>Map: select an are on a map. The list will update with closest places there.</li><li>Type: Change the type of location (restaurant, bar,...)</li></ul>'; // eslint-disable-line max-len
     this.alertHelp = Alert.update(this.alertHelp, msg, 'info', { html: true, timeout: ALERT_HELP_TIMEOUT });
   }
 
@@ -216,7 +219,7 @@ class RateForm extends React.Component {
   }
 
   displayItemHelp() {
-    const msg = '<ul><li>Select the item you want to rate...</li><li>Filters: Restrict the number of items by selecting types & categories.</li><li>Add: Add a new item if you can\'t find it in the list.</li></ul>';
+    const msg = '<ul><li>Select the item you want to rate...</li><li>Filters: Restrict the number of items by selecting types & categories.</li><li>Add: Add a new item if you can\'t find it in the list.</li></ul>'; // eslint-disable-line max-len
     this.alertHelp = Alert.update(this.alertHelp, msg, 'info', { html: true, timeout: ALERT_HELP_TIMEOUT });
   }
 
@@ -260,15 +263,24 @@ class RateForm extends React.Component {
       <div>
         <Row>
           <Col xs={12} sm={3} md={2} >
-            <Label size="md"><FormattedMessage id="core.type" /></Label>
+            <Label size="md">
+              <FormattedMessage id="core.type" />
+            </Label>
           </Col>
           <Col xs={12} sm={9} md={10} >
-            <SimpleListOrDropdown items={LOCATION_TYPES} selectedOption={this.state.locationType} onChange={this.onChangeLocationType.bind(this)} dropdown />
+            <SimpleListOrDropdown
+              items={LOCATION_TYPES}
+              selectedOption={this.state.locationType}
+              onChange={this.onChangeLocationType.bind(this)}
+              dropdown
+            />
           </Col>
         </Row>
         <Row>
           <Col style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button color="primary" size="md" onClick={this.toggleType.bind(this)}><FormattedMessage id="core.close" /></Button>
+            <Button color="primary" size="md" onClick={this.toggleType.bind(this)}>
+              <FormattedMessage id="core.close" />
+            </Button>
           </Col>
         </Row>
       </div>
@@ -276,19 +288,26 @@ class RateForm extends React.Component {
   }
 
   renderMarksBody() {
+    const foodLabel = this.context.intl.formatMessage({ id: 'core.food' });
+    const valueLabel = this.context.intl.formatMessage({ id: 'core.value' });
+    const placeLabel = this.context.intl.formatMessage({ id: 'core.place' });
+    const staffLabel = this.context.intl.formatMessage({ id: 'core.staff' });
+
     return (
       <div>
         <Row>
           <Col xs={12} >
-            <RatingStarsRow name="markFood" label="Food" initialRate={this.state.markFood} onChange={this.onChangeMarkFood.bind(this)} />
-            <RatingStarsRow name="markValue" label="Value" initialRate={this.state.markValue} onChange={this.onChangeMarkValue.bind(this)} />
-            <RatingStarsRow name="markPlace" label="Place" initialRate={this.state.markPlace} onChange={this.onChangeMarkPlace.bind(this)} />
-            <RatingStarsRow name="markStaff" label="Staff" initialRate={this.state.markStaff} onChange={this.onChangeMarkStaff.bind(this)} />
+            <RatingStarsRow name="markFood" label={foodLabel} initialRate={this.state.markFood} onChange={this.onChangeMarkFood.bind(this)} />
+            <RatingStarsRow name="markValue" label={valueLabel} initialRate={this.state.markValue} onChange={this.onChangeMarkValue.bind(this)} />
+            <RatingStarsRow name="markPlace" label={placeLabel} initialRate={this.state.markPlace} onChange={this.onChangeMarkPlace.bind(this)} />
+            <RatingStarsRow name="markStaff" label={staffLabel} initialRate={this.state.markStaff} onChange={this.onChangeMarkStaff.bind(this)} />
           </Col>
         </Row>
         <Row>
           <Col style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button color="primary" size="md" onClick={this.toggleMarks.bind(this)}><FormattedMessage id="core.close" /></Button>
+            <Button color="primary" size="md" onClick={this.toggleMarks.bind(this)}>
+              <FormattedMessage id="core.close" />
+            </Button>
           </Col>
         </Row>
       </div>
@@ -309,6 +328,8 @@ class RateForm extends React.Component {
     const what = this.context.intl.formatMessage({ id: 'core.what' });
     const itemPlaceHolder = `${this.context.intl.formatMessage({ id: 'item.select.long' })}...`;
     const placePlaceHolder = `${this.context.intl.formatMessage({ id: 'place.select.long' })}...`;
+    const overallLabel = this.context.intl.formatMessage({ id: 'core.overall' });
+
 
     return (
       <div className="standard-container">
@@ -331,14 +352,21 @@ class RateForm extends React.Component {
 
           <Element name="scrollElementWhere" />
           <div className={`mt-4 form-block element-with-transition ${classNameBlockWhere}`}>
-            <h5 className="mb-3"><MdLocationSearching size={24} className="mr-2 hidden-sm-up" /> <FormattedMessage id="core.where" /></h5>
+            <h5 className="mb-3">
+              <MdLocationSearching size={24} className="mr-2 hidden-sm-up" />
+              <FormattedMessage id="core.where" />
+            </h5>
             <Row className="" noGutters>
               <Col sm={2}>
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                  <div className="homepage-feature-icon hidden-xs-down"><MdLocationSearching size={48} /></div>
+                  <div className="homepage-feature-icon hidden-xs-down">
+                    <MdLocationSearching size={48} />
+                  </div>
                 </Row>
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                  <Label size="md" className="hidden-xs-down"><FormattedMessage id="core.place" /></Label>
+                  <Label size="md" className="hidden-xs-down">
+                    <FormattedMessage id="core.place" />
+                  </Label>
                 </Row>
               </Col>
               <Col xs={12} sm={10}>
@@ -355,24 +383,48 @@ class RateForm extends React.Component {
                 </Row>
                 <Row>
                   <Col xs={6} sm={4}>
-                    <Button block color="secondary" size="sm" onClick={this.onOpenSimulateLocation.bind(this)}><MdMap className="mr-2" size={24} /> <FormattedMessage id="core.map" /></Button>
+                    <Button
+                      block
+                      color="secondary"
+                      size="sm"
+                      onClick={this.onOpenSimulateLocation.bind(this)}
+                    >
+                      <MdMap className="mr-2" size={24} />
+                      <FormattedMessage id="core.map" />
+                    </Button>
                   </Col>
                   <Col xs={6} sm={4} className="pl-0">
-                    <Button block color="secondary" size="sm" onClick={this.toggleType.bind(this)}><MdStore className="mr-2" size={24} /> <FormattedMessage id="core.type" /></Button>
+                    <Button
+                      block
+                      color="secondary"
+                      size="sm"
+                      onClick={this.toggleType.bind(this)}
+                    >
+                      <MdStore className="mr-2" size={24} />
+                      <FormattedMessage id="core.type" />
+                    </Button>
                   </Col>
                 </Row>
                 <CollapseOnLargeScreens isOpen={this.state.collapseType}>
                   <Row>
                     <Col xs={12} sm={10} className="pl-0 pt-4" >
                       <Card block>
-                        <CardTitle className="mb-4"><FormattedMessage id="place.select.type" /></CardTitle>
+                        <CardTitle className="mb-4">
+                          <FormattedMessage id="place.select.type" />
+                        </CardTitle>
                         {this.renderTypeBody()}
                       </Card>
                     </Col>
                   </Row>
                 </CollapseOnLargeScreens>
-                <ModalOnSmallScreens className="hidden-md-up" isOpen={this.state.collapseType} toggle={this.toggleType.bind(this)}>
-                  <ModalHeader toggle={this.toggleType.bind(this)}><FormattedMessage id="place.select.type" /></ModalHeader>
+                <ModalOnSmallScreens
+                  className="hidden-md-up"
+                  isOpen={this.state.collapseType}
+                  toggle={this.toggleType.bind(this)}
+                >
+                  <ModalHeader toggle={this.toggleType.bind(this)}>
+                    <FormattedMessage id="place.select.type" />
+                  </ModalHeader>
                   <ModalBody>
                     {this.renderTypeBody()}
                   </ModalBody>
@@ -384,40 +436,69 @@ class RateForm extends React.Component {
 
           <Element name="scrollElementRate" />
           <div className={`mt-4 form-block element-with-transition ${classNameBlockRate}`}>
-            <h5 className="mb-3"><MdStarHalf size={24} className="mr-2 hidden-sm-up" /> <FormattedMessage id="core.marks" /></h5>
+            <h5 className="mb-3">
+              <MdStarHalf size={24} className="mr-2 hidden-sm-up" />
+              <FormattedMessage id="core.marks" />
+            </h5>
             <Row className="" noGutters>
               <Col sm={2}>
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                  <div className="homepage-feature-icon hidden-xs-down"><MdStarHalf size={48} /></div>
+                  <div className="homepage-feature-icon hidden-xs-down">
+                    <MdStarHalf size={48} />
+                  </div>
                 </Row>
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                  <Label size="md" className="hidden-xs-down"><FormattedMessage id="core.marks" /></Label>
+                  <Label size="md" className="hidden-xs-down">
+                    <FormattedMessage id="core.marks" />
+                  </Label>
                 </Row>
               </Col>
               <Col xs={12} sm={10}>
                 <Row>
                   <Col xs={12} className="">
-                    <RatingStarsRow name="markOverall" label="Overall" initialRate={this.state.markOverall} onChange={this.onChangeMarkOverall.bind(this)} />
+                    <RatingStarsRow
+                      name="markOverall"
+                      label={overallLabel}
+                      initialRate={this.state.markOverall}
+                      onChange={this.onChangeMarkOverall.bind(this)}
+                    />
                   </Col>
                 </Row>
                 <Element name="scrollElementOptional" />
                 <Row>
                   <Col xs={6} sm={4} >
-                    <Button block color="secondary" size="sm" className={`element-with-transition ${classNameOptionalElements}`} onClick={this.toggleMarks.bind(this)}><MdStore className="mr-2" size={24} /> <FormattedMessage id="core.details" /></Button>
+                    <Button
+                      block
+                      color="secondary"
+                      size="sm"
+                      className={`element-with-transition ${classNameOptionalElements}`}
+                      onClick={this.toggleMarks.bind(this)}
+                    >
+                      <MdStore className="mr-2" size={24} />
+                      <FormattedMessage id="core.details" />
+                    </Button>
                   </Col>
                 </Row>
                 <CollapseOnLargeScreens isOpen={this.state.collapseMarks}>
                   <Row>
                     <Col xs={12} sm={10} className="pl-0 pt-4" >
                       <Card block>
-                        <CardTitle className="mb-4"><FormattedMessage id="marks.details" /></CardTitle>
+                        <CardTitle className="mb-4">
+                          <FormattedMessage id="marks.details" />
+                        </CardTitle>
                         {this.renderMarksBody()}
                       </Card>
                     </Col>
                   </Row>
                 </CollapseOnLargeScreens>
-                <ModalOnSmallScreens className="hidden-md-up" isOpen={this.state.collapseMarks} toggle={this.toggleMarks.bind(this)}>
-                  <ModalHeader toggle={this.toggleMarks.bind(this)}><FormattedMessage id="marks.details" /></ModalHeader>
+                <ModalOnSmallScreens
+                  className="hidden-md-up"
+                  isOpen={this.state.collapseMarks}
+                  toggle={this.toggleMarks.bind(this)}
+                >
+                  <ModalHeader toggle={this.toggleMarks.bind(this)}>
+                    <FormattedMessage id="marks.details" />
+                  </ModalHeader>
                   <ModalBody>
                     {this.renderMarksBody()}
                   </ModalBody>
@@ -430,20 +511,31 @@ class RateForm extends React.Component {
 
           <Element name="scrollElementComment" />
           <div className={`mt-4 form-block element-with-transition ${classNameOptionalElements}`}>
-            <h5 className="mb-3"><MdEdit size={24} className="mr-2 hidden-sm-up" /> <FormattedMessage id="comment.optional" /></h5>
+            <h5 className="mb-3">
+              <MdEdit size={24} className="mr-2 hidden-sm-up" />
+              <FormattedMessage id="comment.optional" />
+            </h5>
             <Row className="" noGutters>
               <Col sm={2}>
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                  <div className="homepage-feature-icon hidden-xs-down"><MdEdit size={48} /></div>
+                  <div className="homepage-feature-icon hidden-xs-down">
+                    <MdEdit size={48} />
+                  </div>
                 </Row>
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                  <Label size="md" className="hidden-xs-down"><FormattedMessage id="core.comment" /></Label>
+                  <Label size="md" className="hidden-xs-down">
+                    <FormattedMessage id="core.comment" />
+                  </Label>
                 </Row>
               </Col>
               <Col xs={12} sm={10}>
                 <Row>
                   <Col xs={12} className="">
-                    <Input type="textarea" value={this.state.comment} onChange={this.onChangeComment.bind(this)} />
+                    <Input
+                      type="textarea"
+                      value={this.state.comment}
+                      onChange={this.onChangeComment.bind(this)}
+                    />
                   </Col>
                 </Row>
               </Col>
@@ -451,8 +543,22 @@ class RateForm extends React.Component {
           </div>
 
           <div className={`mt-4 form-block element-with-transition ${classNameBlockActions}`}>
-            <Button color="primary" type="submit" size="md" disabled={!formReadyForSubmit}><FormattedMessage id="core.save" /></Button>
-            <Button color="link" onClick={this.resetForm.bind(this)} size="md" getRef={(ref) => { this.refReset = ref; }}><FormattedMessage id="core.reset" /></Button>
+            <Button
+              color="primary"
+              type="submit"
+              size="md"
+              disabled={!formReadyForSubmit}
+            >
+              <FormattedMessage id="core.save" />
+            </Button>
+            <Button
+              color="link"
+              onClick={this.resetForm.bind(this)}
+              size="md"
+              getRef={(ref) => { this.refReset = ref; }}
+            >
+              <FormattedMessage id="core.reset" />
+            </Button>
           </div>
 
 

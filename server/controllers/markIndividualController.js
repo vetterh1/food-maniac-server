@@ -105,7 +105,7 @@ function addOrUpdateAggregatedMark({ req, res }) {
           markFood: req.body.markIndividual.markFood,
           markPlace: req.body.markIndividual.markPlace,
           markValue: req.body.markIndividual.markValue,
-          markStaff: req.body.markIndividual.nbMarksStaff,
+          markStaff: req.body.markIndividual.markStaff,
           nbMarksOverall: 1,
           nbMarksFood: req.body.markIndividual.markFood ? 1 : null,
           nbMarksPlace: req.body.markIndividual.markPlace ? 1 : null,

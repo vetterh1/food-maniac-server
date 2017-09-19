@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { Container } from 'reactstrap';
 import Alert from 'react-s-alert';
 import 'isomorphic-fetch';
-import { polyfill } from 'es6-promise';
+// import { polyfill } from 'es6-promise';
 import MdStarHalf from 'react-icons/lib/md/star-half';
 import SearchItemForm from './SearchItemForm';
 import ListOneMarkContainer from './ListOneMarkContainer';
@@ -62,26 +62,30 @@ class SearchItemContainer extends React.Component {
 
   onStartSearching = () => {
     this._nowStartSaving = new Date().getTime();
-    this.alert = Alert.info('Searching...');
+    const msg = this.context.intl.formatMessage({ id: 'messages.search.start' });
+    this.alert = Alert.info(msg);
   }
 
   onEndSearchingOK = (nbItems) => {
-    const durationSearching = new Date().getTime() - this._nowStartSaving;
-    if (this.alert) Alert.update(this.alert, `${nbItems} item(s) found! (duration=${durationSearching}ms)`, 'success');
-    else this.alert = Alert.success(`${nbItems} item(s) found! (duration=${durationSearching}ms)`);
+    const duration = new Date().getTime() - this._nowStartSaving;
+    const msg = this.context.intl.formatMessage({ id: 'messages.search.success' }, { nbItems, duration });
+    if (this.alert) Alert.update(this.alert, msg, 'success');
+    else this.alert = Alert.success(msg);
   }
 
   onEndSearchingNoResults = () => {
-    const durationSearching = new Date().getTime() - this._nowStartSaving;
-    if (this.alert) Alert.update(this.alert, `No results found (duration=${durationSearching}ms)`, 'warning');
-    else this.alert = Alert.warning(`No results found (duration=${durationSearching}ms)`);
+    const duration = new Date().getTime() - this._nowStartSaving;
+    const msg = this.context.intl.formatMessage({ id: 'messages.search.noresults' }, { duration });
+    if (this.alert) Alert.update(this.alert, msg, 'warning');
+    else this.alert = Alert.warning(msg);
   }
 
 
   onEndSearchingFailed = (errorMessage) => {
-    const durationSearching = new Date().getTime() - this._nowStartSaving;
-    if (this.alert) Alert.update(this.alert, `Error while searching (error=${errorMessage}, duration=${durationSearching}ms)`, 'error');
-    else this.alert = Alert.error(`Error while searching (error=${errorMessage}, duration=${durationSearching}ms)`);
+    const duration = new Date().getTime() - this._nowStartSaving;
+    const msg = this.context.intl.formatMessage({ id: 'messages.search.error' }, { errorMessage, duration });
+    if (this.alert) Alert.update(this.alert, msg, 'error');
+    else this.alert = Alert.error(msg);
   }
 
 
@@ -113,7 +117,8 @@ class SearchItemContainer extends React.Component {
       logSearchItemContainer.warn('{ SearchItemContainer.FindMarks');
       // logSearchItemContainer.warn(`SearchItemContainer.FindMarks - this.props.coordinates:\n\n${stringifyOnce(this.props.coordinates, null, 2)}`);
 
-      fetch(`/api/markAggregates/itemId/${this.values.item ? this.values.item : 'all'}/maxDistance/${this.values.distance}/lat/${this.props.coordinates.latitude}/lng/${this.props.coordinates.longitude}`)
+      const item = this.values.item ? this.values.item : 'all';
+      fetch(`/api/markAggregates/itemId/${item}/maxDistance/${this.values.distance}/lat/${this.props.coordinates.latitude}/lng/${this.props.coordinates.longitude}`)
       .then((response) => {
         if (response.status >= 400) {
           this.onEndSearchingFailed(response.status);
@@ -188,87 +193,7 @@ class SearchItemContainer extends React.Component {
   }
 }
 
-/* Old display in table
-
-                <Table responsive striped>
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Overall</th>
-                      <th>Food</th>
-                      <th>Value</th>
-                      <th>Place</th>
-                      <th>Staff</th>
-                      <th># Reviews</th>
-                      <th>Distance</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {this.state.markAggregates.map((markAggregate, index) => { return (<ListOneMark markAggregate={markAggregate} index={index} key={markAggregate._id} />); })}
-                  </tbody>
-                </Table>
-
-
-
-const ListOneMark = (props) => {
-  const { markAggregate } = props;
-  // sanitizeHtml escapes &<>" so we need to invert this for display!
-  const name = markAggregate.place.name.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
-
-  return (
-    <tr>
-      <th scope="row">{name}</th>
-      <td>{roundTo0dot5(markAggregate.markOverall)}</td>
-      <td>{roundTo0dot5(markAggregate.markFood)}</td>
-      <td>{roundTo0dot5(markAggregate.markValue)}</td>
-      <td>{roundTo0dot5(markAggregate.markPlace)}</td>
-      <td>{roundTo0dot5(markAggregate.markStaff)}</td>
-      <td>{markAggregate.nbMarksOverall}</td>
-      <td>{markAggregate.distanceFormated}</td>
-    </tr>
-  );
-};
-
-*/
-
-
-
-/* Old alert system: 
-
-  import { Alert } from 'reactstrap';
-  
-  in constructor:
-
-    this.state = {
-      // alertStatus possible values:
-      // -  0: no alerts
-      //  - searching alerts:  1: searching, 2: searching OK, 3: no results,
-      //                      -1: searching KO, -2: SearchItem error
-      alertStatus: 0,
-      alertMessage: '',
-
-  onStartSearching = () => {
-    this.setState({ alertStatus: 1, alertColor: 'info', alertMessage: 'Searching...' });
-    window.scrollTo(0, 0);
-
-  onEndSearchingOK = (nbItems) => {
-    const durationSearching = new Date().getTime() - this._nowStartSaving;
-    this.setState({ alertStatus: 2, alertColor: 'success', alertMessage: `Searching done! (duration=${durationSearching}ms)` });
-    setTimeout(() => { this.setState({ alertStatus: 0 }); }, 3000);
-
-  onEndSearchingNoResults = () => {
-    const durationSearching = new Date().getTime() - this._nowStartSaving;
-    this.setState({ alertStatus: 3, alertColor: 'warning', alertMessage: `No results found (duration=${durationSearching}ms)` });
-  }
-
-
-  onEndSearchingFailed = (errorMessage) => {
-    const durationSearching = new Date().getTime() - this._nowStartSaving;
-    this.setState({ alertStatus: -1, alertColor: 'danger', alertMessage: `Error while searching (error=${errorMessage}, duration=${durationSearching}ms)` });
-
-  in Render:
-    {this.state.alertStatus !== 0 && <Alert color={this.state.alertColor}>{this.state.alertMessage}</Alert>}
-*/
+SearchItemContainer.contextTypes = { intl: React.PropTypes.object.isRequired };
 
 
 const mapStateToProps = (state) => {

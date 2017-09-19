@@ -1,3 +1,4 @@
+// TODO: i18n
 /* eslint-disable no-class-assign */
 /* eslint-disable react/forbid-prop-types */
 

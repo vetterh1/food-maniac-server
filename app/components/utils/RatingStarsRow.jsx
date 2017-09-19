@@ -3,6 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Col, Label, FormFeedback, FormGroup } from 'reactstrap';
+import { FormattedMessage } from 'react-intl';
 import RatingStars from '../utils/RatingStars';
 
 
@@ -20,7 +21,15 @@ class RatingStarsRow extends React.PureComponent {
     hideIfNoQuantity: PropTypes.bool,
   };
 
-  static defaultProps = { initialRate: null, mandatoryWarning: false, size: 26, style: null, onChange: null, quantity: 0, hideIfNoQuantity: false };
+  static defaultProps = {
+    initialRate: null,
+    mandatoryWarning: false,
+    size: 26,
+    style: null,
+    onChange: null,
+    quantity: 0,
+    hideIfNoQuantity: false
+  };
 
   render() {
     const {
@@ -51,7 +60,10 @@ class RatingStarsRow extends React.PureComponent {
             onChange={onChange}
           />
           { quantity > 0 && <Label className="ml-2">({quantity})</Label> }
-          {mandatoryWarning && !initialRate && <FormFeedback style={{ marginTop: '-1rem' }} >(mandatory)</FormFeedback>}
+          {mandatoryWarning && !initialRate &&
+            <FormFeedback style={{ marginTop: '-1rem' }} >
+              (<FormattedMessage id="core.mandatory" />)
+            </FormFeedback>}
         </Col>
       </FormGroup>
     );

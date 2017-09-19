@@ -54,12 +54,25 @@ export default class ListOneMark extends React.Component {
 
   render() {
     const { markAggregate } = this.props;
-    // sanitizeHtml escapes &<>" so we need to invert this for display!
-    const name = markAggregate.place.name.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
-    const googleMapsUrl = `https://www.google.com/maps/dir/Current+Location/${markAggregate.location.coordinates[1]},${markAggregate.location.coordinates[0]}`;
 
-    const atLabel = `${this.context.intl.formatMessage({ id: 'core.at' })}...`;
-    const item = markAggregate.item && typeof markAggregate.item === 'object' ? `${markAggregate.item.name} ${atLabel} ` : '';
+    // sanitizeHtml escapes &<>" so we need to invert this for display!
+    const name =
+      markAggregate.place.name
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&quot;/g, '"');
+
+    const googleMapsUrl =
+      `https://www.google.com/maps/dir/Current+Location/${markAggregate.location.coordinates[1]},${markAggregate.location.coordinates[0]}`;
+
+    const atLabel =
+      `${this.context.intl.formatMessage({ id: 'core.at' })}...`;
+
+    const item =
+      markAggregate.item && typeof markAggregate.item === 'object'
+      ? `${markAggregate.item.name} ${atLabel} `
+      : '';
 
     const foodLabel = this.context.intl.formatMessage({ id: 'core.food' });
     const valueLabel = this.context.intl.formatMessage({ id: 'core.value' });
@@ -71,14 +84,26 @@ export default class ListOneMark extends React.Component {
         <Row noGutters>
           <Col xs={8} sm={6} className="pr-3">
             <Row className="result-item-name" noGutters>
-              <h6>{item}{name}</h6>
+              <h6>
+                {item}
+                {name}
+              </h6>
             </Row>
             <Row className="result-item-rate" noGutters>
               <RatingStars initialRate={markAggregate.markOverall} size={20} className="" />
             </Row>
             <Row className="result-item-rate mt-2" noGutters>
-              <Button block color="secondary" size="sm" className="" onClick={this.toggleIndividualMarks.bind(this)}>
-                {roundTo0dot5(markAggregate.markOverall)} ({markAggregate.nbMarksOverall} <FormattedMessage id="core.reviews" />)
+              <Button
+                block
+                color="secondary"
+                size="sm"
+                className=""
+                onClick={this.toggleIndividualMarks.bind(this)}
+              >
+                {roundTo0dot5(markAggregate.markOverall)}
+                &nbsp;
+                ({markAggregate.nbMarksOverall}&nbsp;
+                <FormattedMessage id="core.reviews" />)
               </Button>
             </Row>
             <Row className="result-item-location mt-2" noGutters>
@@ -91,7 +116,11 @@ export default class ListOneMark extends React.Component {
             </Row>
             {this.state.showIndividualMarks &&
               <Row className="result-item-location mt-4 bordered-block" noGutters>
-                <h6 className="mb-3"><MdStarHalf size={18} className="mr-2" /> <FormattedMessage id="marks.individual" />:</h6>
+                <h6 className="mb-3">
+                  <MdStarHalf size={18} className="mr-2" />
+                  <FormattedMessage id="marks.individual" />
+                  :
+                </h6>
                 <Col xs={12} className="pl-3-if-large">
                   <RatingStarsRow name="markFood" label={foodLabel} initialRate={markAggregate.markFood} quantity={markAggregate.nbMarksFood} hideIfNoQuantity size={18} />
                   <RatingStarsRow name="markValue" label={valueLabel} initialRate={markAggregate.markValue} quantity={markAggregate.nbMarksValue} hideIfNoQuantity size={18} />
@@ -102,12 +131,21 @@ export default class ListOneMark extends React.Component {
             }
           </Col>
           <Col xs={4} sm={6} className="result-item-image">
-            {markAggregate.place.googlePhotoUrl && <img src={markAggregate.place.googlePhotoUrl} alt="" className="result-item-picture" />}
+            {markAggregate.place.googlePhotoUrl &&
+            <img
+              src={markAggregate.place.googlePhotoUrl}
+              alt=""
+              className="result-item-picture"
+            />}
           </Col>
         </Row>
         {this.state.showIndividualMarks && this.props.markIndividuals.length > 0 &&
           <Row noGutters className="result-item-location mt-4 bordered-block">
-            <h6 className="mb-3"><MdRateReview size={18} className="mr-2" /> Optional Comments:</h6>
+            <h6 className="mb-3">
+              <MdRateReview size={18} className="mr-2" />
+              <FormattedMessage id="comments.optionals" />
+              :
+            </h6>
             <Col xs={12} className="pl-3">
               {this.props.markIndividuals.map((markIndividual) => {
                 return (<ListOneIndividualMark

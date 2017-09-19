@@ -1,3 +1,4 @@
+// TODO: i18n
 /* eslint-disable react/forbid-prop-types */
 
 import React from 'react';

@@ -3,7 +3,8 @@
 import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Card, CardTitle, Col, Collapse, Form, Label, Row } from 'reactstrap';
+import { FormattedMessage } from 'react-intl';
+import { Button, Col, Form, Label, Row } from 'reactstrap';
 import MdMap from 'react-icons/lib/md/map';
 import MdLocationSearching from 'react-icons/lib/md/location-searching';
 import SimpleListOrDropdown from '../utils/SimpleListOrDropdown';
@@ -38,12 +39,28 @@ class SearchItemForm extends React.Component {
 
       item: null,
       distance: '500',
+      distanceList: [],
+      distanceLanguage: null,
     };
 
     this.state = {
       ...this.defaultState,
     };
   }
+
+  componentDidMount() {
+    // this.setState({ distanceLanguage: this.context.intl.messages });
+    this.getPredifinedDistances();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const locale = this.context.intl.locale;
+    if (locale !== this.state.locale) {
+      this.getPredifinedDistances();
+    }
+  }
+
+
 
   onSubmit(event) {
     event.preventDefault();
@@ -72,18 +89,32 @@ class SearchItemForm extends React.Component {
     this.props.onRequestSimulateLocation();
   }
 
+
+  // TODO: i18n
+
+  /*
+    "distance.max": "Max distance",
+    "distance.unit": "I", // Imperial
+    "distance.list.display": "[500 yards,1/2 mile,1 mile,5 miles,10 miles,50 miles,100 miles,500 miles]",
+    "distance.list.in.meters": "[457,805,1609,8047,16093,80467,160934,804672]",
+    "distance.list": "[{id:'457', name:'500 yards'}, {id:'805', name:'1/2 mile'}, {id:'1609', name:'1 mile'}]",
+    OK: "distance.list": "[{\"id\":\"457\", \"name\":\"500 yards\"}, {\"id\":\"805\", \"name\":\"1/2 mile\"}, {\"id\":\"1609\", \"name\":\"1 mile\"}]",
+  */
+
   getPredifinedDistances() {
-    return [
-      { id: '200', name: '200 metres' },
-      { id: '500', name: '500 metres' },
-      { id: '1000', name: '1 kilometre' },
-      { id: '5000', name: '5 kilometres' },
-      { id: '10000', name: '10 kilometres' },
-      { id: '50000', name: '50 kilometres' },
-      { id: '100000', name: '100 kilometres' },
-      { id: '500000', name: '500 kilometres' },
-      { id: '0', name: 'no restriction' },
-    ];
+    const locale = this.context.intl.locale;
+    const messages = this.context.intl.messages;
+    const listNamesRaw = messages && messages['distance.list.names'] ? messages['distance.list.names'] : '---';
+    const listNamesArray = listNamesRaw.split(',');
+    const listIdsRaw = messages && messages['distance.list.ids'] ? messages['distance.list.ids'] : '0';
+    const listIdsArray = listIdsRaw.split(',');
+    const distanceList = [];
+    for (let i = 0; i < listNamesArray.length; i += 1) {
+      distanceList.push({ id: listIdsArray[i], name: listNamesArray[i] });
+    }
+    console.log('distanceList:', distanceList);
+    this.setState({ distanceList, locale });
+    // return listJson;
   }
 
   resetForm() {
@@ -99,12 +130,16 @@ class SearchItemForm extends React.Component {
     logSearchItemForm.debug('render SearchItemForm: (category, kind, item)=', this.state.category, this.state.kind, this.state.item);
     const formReadyForSubmit = true; // Always propose submit now that 'All' the default item.
     // const formReadyForSubmit = this.state.item && this.state.distance;
+
+    // i18n:
+    const what = this.context.intl.formatMessage({ id: 'core.what' });
+
     return (
       <div className="standard-container">
         <h3 className="mb-4">Seach the best place!</h3>
         <Form onSubmit={this.onSubmit.bind(this)}>
           <SelectItemPlus
-            title="What?"
+            title={what}
             kinds={this.props.kinds.kinds}
             categories={this.props.categories.categories}
             items={this.props.items}
@@ -113,25 +148,45 @@ class SearchItemForm extends React.Component {
           />
 
           <div className="mt-4">
-            <h5 className="mb-3"><MdLocationSearching size={24} className="mr-2 hidden-sm-up" /> Where</h5>
+            <h5 className="mb-3">
+              <MdLocationSearching size={24} className="mr-2 hidden-sm-up" />
+              <FormattedMessage id="core.where" />
+            </h5>
             <Row className="form-block" noGutters>
               <Col sm={2}>
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                  <div className="homepage-feature-icon hidden-xs-down"><MdLocationSearching size={48} /></div>
+                  <div className="homepage-feature-icon hidden-xs-down">
+                    <MdLocationSearching size={48} />
+                  </div>
                 </Row>
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                  <Label size="md" className="hidden-xs-down">Max distance</Label>
+                  <Label size="md" className="hidden-xs-down">
+                    <FormattedMessage id="distance.max" />
+                  </Label>
                 </Row>
               </Col>
               <Col xs={12} sm={10}>
                 <Row>
                   <Col xs={12} className="">
-                    <SimpleListOrDropdown items={this.getPredifinedDistances()} selectedOption={this.state.distance} onChange={this.onChangeDistance.bind(this)} dropdown />
+                    <SimpleListOrDropdown
+                      items={this.state.distanceList}
+                      selectedOption={this.state.distance}
+                      onChange={this.onChangeDistance.bind(this)}
+                      dropdown
+                    />
                   </Col>
                 </Row>
                 <Row>
                   <Col xs={6} sm={4}>
-                    <Button block color="secondary" size="sm" onClick={this.onOpenSimulateLocation.bind(this)}><MdMap className="mr-2" size={24} /> Map</Button>
+                    <Button
+                      block
+                      color="secondary"
+                      size="sm"
+                      onClick={this.onOpenSimulateLocation.bind(this)}
+                    >
+                      <MdMap className="mr-2" size={24} />
+                      <FormattedMessage id="core.map" />
+                    </Button>
                   </Col>
                 </Row>
               </Col>
@@ -139,13 +194,29 @@ class SearchItemForm extends React.Component {
           </div>
 
           <div className="mt-4">
-            <Button color="primary" type="submit" size="md" disabled={!formReadyForSubmit} getRef={(ref) => { this.refSubmit = ref; }} >Find</Button>
-            <Button color="link" onClick={this.resetForm.bind(this)} size="md" getRef={(ref) => { this.refReset = ref; }}>Reset</Button>
+            <Button
+              color="primary"
+              type="submit" size="md"
+              disabled={!formReadyForSubmit}
+              getRef={(ref) => { this.refSubmit = ref; }}
+            >
+              <FormattedMessage id="core.find" />
+            </Button>
+            <Button
+              color="link"
+              onClick={this.resetForm.bind(this)}
+              size="md"
+              getRef={(ref) => { this.refReset = ref; }}
+            >
+              <FormattedMessage id="core.reset" />
+            </Button>
           </div>
         </Form>
       </div>
     );
   }
 }
+
+SearchItemForm.contextTypes = { intl: React.PropTypes.object.isRequired };
 
 export default SearchItemForm;

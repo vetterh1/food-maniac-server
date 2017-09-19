@@ -3,6 +3,7 @@
 import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 import Alert from 'react-s-alert';
 import { MatchMediaHOC } from 'react-match-media';
 import { Button, Card, CardTitle, Col, Collapse, Label, Modal, ModalHeader, ModalBody, Row } from 'reactstrap';
@@ -147,7 +148,9 @@ class SelectItemPlus extends React.Component {
       <div>
         <Row>
           <Col xs={12} sm={3} md={2} >
-            <Label size="md">Category</Label>
+            <Label size="md">
+              <FormattedMessage id="core.category" />
+            </Label>
           </Col>
           <Col xs={12} sm={9} md={10} >
             <SimpleListOrDropdown
@@ -161,7 +164,9 @@ class SelectItemPlus extends React.Component {
         </Row>
         <Row>
           <Col xs={12} sm={3} md={2} >
-            <Label size="md">Kind</Label>
+            <Label size="md">
+              <FormattedMessage id="core.kind" />
+            </Label>
           </Col>
           <Col xs={12} sm={9} md={10} >
             <SimpleListOrDropdown
@@ -176,7 +181,13 @@ class SelectItemPlus extends React.Component {
         { showCloseButton &&
           <Row>
             <Col style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <Button color="primary" size="md" onClick={this.toggleFilters.bind(this)}>Close</Button>
+              <Button
+                color="primary"
+                size="md"
+                onClick={this.toggleFilters.bind(this)}
+              >
+                <FormattedMessage id="core.close" />
+              </Button>
             </Col>
           </Row>
         }
@@ -189,16 +200,25 @@ class SelectItemPlus extends React.Component {
     logSelectItemPlus.debug(`render SelectItemPlus: (category=${this.state.category}, kind=${this.state.kind}, item=${this.state.item}`);
     return (
       <div className={`form-block ${this.props.className}`}>
-        {this.props.title && <h5 className="mb-3"><MdRoomService size={24} className="mr-2 hidden-sm-up" /> {this.props.title}</h5>}
+        {this.props.title &&
+          <h5 className="mb-3">
+            <MdRoomService size={24} className="mr-2 hidden-sm-up" />
+            {this.props.title}
+          </h5>
+        }
 
         {!this.props.hideItem &&
           <Row className="" noGutters>
             <Col sm={2}>
               <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                <div className="homepage-feature-icon hidden-xs-down"><MdRoomService size={48} /></div>
+                <div className="homepage-feature-icon hidden-xs-down">
+                  <MdRoomService size={48} />
+                </div>
               </Row>
               <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                <Label size="md" className="hidden-xs-down">Item</Label>
+                <Label size="md" className="hidden-xs-down">
+                  <FormattedMessage id="core.item" />
+                </Label>
               </Row>
             </Col>
             <Col xs={12} sm={10}>
@@ -215,11 +235,27 @@ class SelectItemPlus extends React.Component {
               </Row>
               <Row>
                 <Col xs={6} sm={4} className="">
-                  <Button block color="secondary" size="sm" onClick={this.toggleFilters.bind(this)}><MdFilterList className="mr-2" size={24} /> Filters</Button>
+                  <Button
+                    block
+                    color="secondary"
+                    size="sm"
+                    onClick={this.toggleFilters.bind(this)}
+                  >
+                    <MdFilterList className="mr-2" size={24} />
+                    <FormattedMessage id="core.filters" />
+                  </Button>
                 </Col>
                 {this.props.onAddItem &&
                   <Col xs={6} sm={4} >
-                    <Button block color="secondary" size="sm" onClick={this.props.onAddItem}><MdPlaylistAdd className="mr-2" size={24} /> Add</Button>
+                    <Button
+                      block
+                      color="secondary"
+                      size="sm"
+                      onClick={this.props.onAddItem}
+                    >
+                      <MdPlaylistAdd className="mr-2" size={24} />
+                      <FormattedMessage id="core.add" />
+                    </Button>
                   </Col>
                 }
               </Row>
@@ -228,14 +264,22 @@ class SelectItemPlus extends React.Component {
                 <Row>
                   <Col xs={12} sm={10} className="pl-0 pt-4" >
                     <Card block>
-                      <CardTitle className="mb-4">Filter items</CardTitle>
+                      <CardTitle className="mb-4">
+                        <FormattedMessage id="item.filter.short" />
+                      </CardTitle>
                       {this.renderFiltersBody()}
                     </Card>
                   </Col>
                 </Row>
               </CollapseOnLargeScreens>
-              <ModalOnSmallScreens className="hidden-md-up" isOpen={this.state.collapseFilters} toggle={this.toggleFilters.bind(this)}>
-                <ModalHeader toggle={this.toggleFilters.bind(this)}>Filter items</ModalHeader>
+              <ModalOnSmallScreens
+                className="hidden-md-up"
+                isOpen={this.state.collapseFilters}
+                toggle={this.toggleFilters.bind(this)}
+              >
+                <ModalHeader toggle={this.toggleFilters.bind(this)}>
+                  <FormattedMessage id="item.filter.short" />
+                </ModalHeader>
                 <ModalBody>
                   {this.renderFiltersBody()}
                 </ModalBody>

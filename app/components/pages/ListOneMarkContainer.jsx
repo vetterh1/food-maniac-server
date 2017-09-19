@@ -3,8 +3,8 @@
 import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
-import ListOneMark from './ListOneMark';
 import Alert from 'react-s-alert';
+import ListOneMark from './ListOneMark';
 
 
 const logListOneMarkContainer = log.getLogger('logListOneMarkContainer');
@@ -31,26 +31,30 @@ export default class ListOneMarkContainer extends React.Component {
 
   onStartSearching = () => {
     this._nowStartSaving = new Date().getTime();
-    this.alert = Alert.info('Searching...');
+    const msg = this.context.intl.formatMessage({ id: 'messages.search.start' });
+    this.alert = Alert.info(msg);
   }
 
   onEndSearchingOK = (nbItems) => {
-    const durationSearching = new Date().getTime() - this._nowStartSaving;
-    if (this.alert) Alert.update(this.alert, `${nbItems} marks(s) found! (duration=${durationSearching}ms)`, 'success');
-    else this.alert = Alert.success(`${nbItems} marks(s) found! (duration=${durationSearching}ms)`);
+    const duration = new Date().getTime() - this._nowStartSaving;
+    const msg = this.context.intl.formatMessage({ id: 'messages.search.success' }, { nbItems, duration });
+    if (this.alert) Alert.update(this.alert, msg, 'success');
+    else this.alert = Alert.success(msg);
   }
 
   onEndSearchingNoResults = () => {
-    const durationSearching = new Date().getTime() - this._nowStartSaving;
-    if (this.alert) Alert.update(this.alert, `No results found (duration=${durationSearching}ms)`, 'warning');
-    else this.alert = Alert.warning(`No results found (duration=${durationSearching}ms)`);
+    const duration = new Date().getTime() - this._nowStartSaving;
+    const msg = this.context.intl.formatMessage({ id: 'messages.search.noresults' }, { duration });
+    if (this.alert) Alert.update(this.alert, msg, 'warning');
+    else this.alert = Alert.warning(msg);
   }
 
 
   onEndSearchingFailed = (errorMessage) => {
-    const durationSearching = new Date().getTime() - this._nowStartSaving;
-    if (this.alert) Alert.update(this.alert, `Error while searching (error=${errorMessage}, duration=${durationSearching}ms)`, 'error');
-    else this.alert = Alert.error(`Error while searching (error=${errorMessage}, duration=${durationSearching}ms)`);
+    const duration = new Date().getTime() - this._nowStartSaving;
+    const msg = this.context.intl.formatMessage({ id: 'messages.search.error' }, { errorMessage, duration });
+    if (this.alert) Alert.update(this.alert, msg, 'error');
+    else this.alert = Alert.error(msg);
   }
 
 
@@ -124,3 +128,4 @@ export default class ListOneMarkContainer extends React.Component {
 }
 
 ListOneMarkContainer.defaultProps = {};
+ListOneMarkContainer.contextTypes = { intl: React.PropTypes.object.isRequired };

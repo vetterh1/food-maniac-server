@@ -9,6 +9,24 @@
     "**/distBoServer": true,
     "**/distFoServer": true,
     "**/server/log": true
-  }  
+  },
+
+  "todohighlight.exclude": [
+    "**/node_modules/**",
+    "**/old/**",
+    "**/coverage/**",
+    "**/__tests__/**",
+    "**/distBoServer/**",
+    "**/distFoServer/**",
+    "**/dist/**",
+    "**/server/log/**",
+    "**/bower_components/**",
+    "**/build/**",
+    "**/.vscode/**",
+    "**/.github/**",
+    "**/_output/**",
+    "**/*.min.*",
+    "**/*.map"
+    ]
 }
 

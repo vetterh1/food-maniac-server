@@ -1,13 +1,15 @@
 {
   "EN": {
 
-
+    "language": "EN",
+    
     "core.close": "Close",
     "core.reset": "Reset",
     "core.save": "Save",
     "core.cancel": "Cancel",
     "core.go": "Go!",
-
+    "core.mandatory": "mandatory",
+    "core.add": "Add",
     "core.rate": "Rate",
     "core.search": "Search",
     "core.discover": "Discover",
@@ -15,15 +17,22 @@
     "core.where": "Where",
     "core.what": "What",
     "core.place": "Place",
+    "core.item": "Item",
     "core.map": "Map",
     "core.marks": "Marks",
     "core.details": "Details",
     "core.comment": "Comment",
     "core.reviews": "reviews",
     "core.at": "at",
+    "core.overall": "Overall",
     "core.food": "Food",
     "core.value": "Value",
     "core.staff": "Staff",
+    "core.filters": "Filters",
+    "core.category": "Category",
+    "core.kind": "Kind",
+    "core.find": "Find",
+    
 
 
     "messages.welcome.main": "Welcome, food lover!",
@@ -35,6 +44,11 @@
     "messages.save.start": "Saving...",
     "messages.save.success": "Saved! (duration={durationSaving}ms)",
     "messages.save.error": "Error while saving (error={errorMessage}, duration={durationSaving}ms)",
+
+    "messages.search.start": "Searching...",
+    "messages.search.success": "{nbItems} result(s) found! (duration={duration}ms)",
+    "messages.search.noresults": "No results found (duration={duration}ms)",
+    "messages.search.error": "Error while searching (error={errorMessage}, duration={duration}ms)",
 
     "messages.geolocalisation.error.PERMISSION_DENIED": "You have denied the request for localization.",
     "messages.geolocalisation.error.POSITION_UNAVAILABLE": "Cannot pinpoint your location.",
@@ -48,6 +62,7 @@
     "item.rate.long": "Rate your plate!",
     "item.search.short": "Search item",
     "item.select.long": "Select an item",
+    "item.filter.short": "Filter items",
 
 
     "place.select.long": "Select a place",
@@ -55,13 +70,18 @@
     "location.select.long": "Select a location",
     "location.move.long": "Move to wished area",
 
+    "distance.max": "Max distance",
+    "distance.list.names": "200 yards,500 yards,1/2 mile,1 mile,5 miles,10 miles,50 miles,100 miles,500 miles,Unrestricted",
+    "distance.list.ids": "190,805,1609,8047,16093,80467,160934,804672,0",
+    
 
     "marks.details": "Mark details",
     "marks.individual": "Individual marks",
 
 
     "comment.optional": "Optional comment",
-
+    "comments.optionals": "Optional comments",
+    
 
     "login.sign_in": "Sign-in"
 
@@ -72,13 +92,15 @@
 
   "FR": {
 
+    "language": "FR",
 
     "core.close": "Fermer",
     "core.reset": "Réinitialiser",
     "core.save": "Enregistrer",
     "core.cancel": "Annuler",
     "core.go": "Go !",
-
+    "core.mandatory": "obligatoire",
+    "core.add": "Ajouter",
     "core.rate": "Noter",
     "core.search": "Chercher",
     "core.discover": "Découvrir",
@@ -86,16 +108,22 @@
     "core.where": "Où",
     "core.what": "Quoi",
     "core.place": "Endroit",
+    "core.item": "Plat",
     "core.map": "Carte",
     "core.marks": "Notes",
     "core.details": "Détails",
     "core.comment": "Commentaire",
     "core.reviews": "critiques",
     "core.at": "chez",
+    "core.overall": "Général",
     "core.food": "Nourriture",
     "core.value": "Prix",
     "core.staff": "Service",
-
+    "core.filters": "Filtres",
+    "core.category": "Catégorie",
+    "core.kind": "Type",
+    "core.find": "Chercher",
+    
 
     "messages.welcome.main": "Bienvenue, food lover!",
     "messages.welcome.blob": "Partagez vos bons plans resto et bars!",
@@ -106,6 +134,11 @@
     "messages.save.start": "En cours de sauvegarde...",
     "messages.save.success": "Sauvé ! (durée={durationSaving}ms)",
     "messages.save.error": "Erreur de sauvegarde (erreur={errorMessage}, durée={durationSaving}ms)",
+
+    "messages.search.start": "Recherche en cours...",
+    "messages.search.success": "{nbItems} résultat(s) trouvées ! (durée={duration}ms)",
+    "messages.search.noresults": "Aucun résultat trouvé (durée={duration}ms)",
+    "messages.search.error": "Erreur lors de la recherche (erreur={errorMessage}, durée={duration}ms)",
 
     "messages.geolocalisation.error.PERMISSION_DENIED": "Vous n'avez pas autorisé la géolocalisation",
     "messages.geolocalisation.error.POSITION_UNAVAILABLE": "Impossible de vous localiser.",
@@ -119,20 +152,26 @@
     "item.rate.long": "Notez votre plat!",
     "item.search.short": "Chercher un plat",
     "item.select.long": "Sélectionnez un plat",
-
+    "item.filter.short": "Filter les plats",
+    
 
     "place.select.long": "Sélectionnez un endroit",
     "place.select.type": "Choix du type d'endroit",
     "location.select.long": "Sélectionnez un endroit",
     "location.move.long": "Trouvez la zone désirée",
 
+    "distance.max": "Distance max",
+    "distance.list.names": "200 mètres,500 mètres,1 kilomètre,5 kilomètres,10 kilomètres,50 kilomètres,100 kilomètres,500 kilomètres,Illimité",
+    "distance.list.ids": "200,500,1000,5000,10000,50000,100000,500000,0",
+    
 
     "marks.details": "Détail des notes",
     "marks.individual": "Notes individuelles",
 
 
     "comment.optional": "Commentaire optionnel",
-
+    "comments.optionals": "Commentaires optionnels",
+    
 
     "login.sign_in": "S'enregistrer"
 
