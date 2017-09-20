@@ -72,7 +72,7 @@
 
     "distance.max": "Max distance",
     "distance.list.names": "200 yards,500 yards,1/2 mile,1 mile,5 miles,10 miles,50 miles,100 miles,500 miles,Unrestricted",
-    "distance.list.ids": "190,805,1609,8047,16093,80467,160934,804672,0",
+    "distance.list.ids": "190,457,805,1609,8047,16093,80467,160934,804672,0",
     
 
     "marks.details": "Mark details",

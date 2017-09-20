@@ -7,7 +7,7 @@ import { FormattedMessage } from 'react-intl';
 import { Button, Col, Form, Label, Row } from 'reactstrap';
 import MdMap from 'react-icons/lib/md/map';
 import MdLocationSearching from 'react-icons/lib/md/location-searching';
-import SimpleListOrDropdown from '../utils/SimpleListOrDropdown';
+import SimpleListOrDropdownI18n from '../utils/SimpleListOrDropdownI18n';
 import SelectItemPlus from '../utils/SelectItemPlus';
 import { loglevelServerSend } from '../../utils/loglevel-serverSend';
 
@@ -39,8 +39,6 @@ class SearchItemForm extends React.Component {
 
       item: null,
       distance: '500',
-      distanceList: [],
-      distanceLanguage: null,
     };
 
     this.state = {
@@ -48,17 +46,6 @@ class SearchItemForm extends React.Component {
     };
   }
 
-  componentDidMount() {
-    // this.setState({ distanceLanguage: this.context.intl.messages });
-    this.getPredifinedDistances();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const locale = this.context.intl.locale;
-    if (locale !== this.state.locale) {
-      this.getPredifinedDistances();
-    }
-  }
 
 
 
@@ -89,33 +76,6 @@ class SearchItemForm extends React.Component {
     this.props.onRequestSimulateLocation();
   }
 
-
-  // TODO: i18n
-
-  /*
-    "distance.max": "Max distance",
-    "distance.unit": "I", // Imperial
-    "distance.list.display": "[500 yards,1/2 mile,1 mile,5 miles,10 miles,50 miles,100 miles,500 miles]",
-    "distance.list.in.meters": "[457,805,1609,8047,16093,80467,160934,804672]",
-    "distance.list": "[{id:'457', name:'500 yards'}, {id:'805', name:'1/2 mile'}, {id:'1609', name:'1 mile'}]",
-    OK: "distance.list": "[{\"id\":\"457\", \"name\":\"500 yards\"}, {\"id\":\"805\", \"name\":\"1/2 mile\"}, {\"id\":\"1609\", \"name\":\"1 mile\"}]",
-  */
-
-  getPredifinedDistances() {
-    const locale = this.context.intl.locale;
-    const messages = this.context.intl.messages;
-    const listNamesRaw = messages && messages['distance.list.names'] ? messages['distance.list.names'] : '---';
-    const listNamesArray = listNamesRaw.split(',');
-    const listIdsRaw = messages && messages['distance.list.ids'] ? messages['distance.list.ids'] : '0';
-    const listIdsArray = listIdsRaw.split(',');
-    const distanceList = [];
-    for (let i = 0; i < listNamesArray.length; i += 1) {
-      distanceList.push({ id: listIdsArray[i], name: listNamesArray[i] });
-    }
-    console.log('distanceList:', distanceList);
-    this.setState({ distanceList, locale });
-    // return listJson;
-  }
 
   resetForm() {
     // Reset the form & clear the image
@@ -168,8 +128,8 @@ class SearchItemForm extends React.Component {
               <Col xs={12} sm={10}>
                 <Row>
                   <Col xs={12} className="">
-                    <SimpleListOrDropdown
-                      items={this.state.distanceList}
+                    <SimpleListOrDropdownI18n
+                      i18nKey="distance.list"
                       selectedOption={this.state.distance}
                       onChange={this.onChangeDistance.bind(this)}
                       dropdown
