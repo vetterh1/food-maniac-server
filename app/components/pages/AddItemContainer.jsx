@@ -1,4 +1,3 @@
-// TODO: i18n
 /* eslint-disable no-class-assign */
 /* eslint-disable react/forbid-prop-types */
 
@@ -28,6 +27,7 @@ class AddItemContainer extends React.Component {
     kinds: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
     items: PropTypes.object.isRequired, // load the object and not just the array (in the object) to get redux info (isSaving...)
+    dispatch: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -38,53 +38,6 @@ class AddItemContainer extends React.Component {
 
     this.alert = null;
   }
-
-
-  onStartSaving = () => {
-    this._nowStartSaving = new Date().getTime();
-    this.alert = Alert.info('Saving...');
-  }
-
-  onEndSavingOK = () => {
-    const durationSaving = new Date().getTime() - this._nowStartSaving;
-    this.alert = Alert.success(`Saved! (duration=${durationSaving}ms)`);
-  }
-
-  onEndSavingFailed = (errorMessage) => {
-    const durationSaving = new Date().getTime() - this._nowStartSaving;
-    this.alert = Alert.error(`Error while saving (error=${errorMessage}, duration=${durationSaving}ms)`);
-  }
-
-  onSnapshotStartProcessing = () => {
-    this._nowStartProcessing = new Date().getTime();
-    this.alert = Alert.info('Processing snapshot...');
-}
-
-  onSnapshotError = (errorMessage) => {
-    const durationSaving = new Date().getTime() - this._nowStartProcessing;
-    this.alert = Alert.error(`Error while processing snapshot (error=${errorMessage}, duration=${durationSaving}ms)`);
-  }
-
-  onSnapshotReady = () => {
-    const timeDiffTotal = new Date().getTime() - this._nowStartProcessing;
-    this.alert = Alert.success(`Snapshot processed! (duration=${timeDiffTotal}ms)`);
-  }
-
-
-  onCancel() {
-    this.props.onClose();
-  }
-
-
-  onSubmit(data) {
-    this.onStartSaving();
-    const { dispatch } = this.props;  // Injected by react-redux
-    const action = itemsActions.saveItem(data);
-    dispatch(action);
-    this.props.onClose();
-}
-
-
 
   componentWillReceiveProps(nextProps) {
     console.log('AddItemContainer.componentWillReceiveProps - (nextProps, crtProps): ', nextProps, this.props);
@@ -102,6 +55,62 @@ class AddItemContainer extends React.Component {
     else this.onEndSavingFailed(nextProps.items.error);
   }
 
+
+  onCancel() {
+    this.props.onClose();
+  }
+
+
+  onSubmit(data) {
+    this.onStartSaving();
+    const { dispatch } = this.props;  // Injected by react-redux
+    const action = itemsActions.saveItem(data);
+    dispatch(action);
+    this.props.onClose();
+}
+
+
+  onStartSaving = () => {
+    this._nowStartSaving = new Date().getTime();
+    const msg = this.context.intl.formatMessage({ id: 'messages.save.start' });
+    this.alert = Alert.info(msg);
+  }
+
+  onEndSavingOK = () => {
+    const duration = new Date().getTime() - this._nowStartSaving;
+    const msg = this.context.intl.formatMessage({ id: 'messages.save.success' }, { duration });
+    if (this.alert) Alert.update(this.alert, msg, 'success');
+    else this.alert = Alert.success(msg);
+  }
+
+  onEndSavingFailed = (errorMessage) => {
+    const duration = new Date().getTime() - this._nowStartSaving;
+    const msg = this.context.intl.formatMessage({ id: 'messages.save.error' }, { errorMessage, duration });
+    if (this.alert) Alert.update(this.alert, msg, 'error');
+    else this.alert = Alert.error(msg);
+  }
+
+  onSnapshotStartProcessing = () => {
+    this._nowStartProcessing = new Date().getTime();
+    this.alert = Alert.info('Processing snapshot...');
+    const msg = this.context.intl.formatMessage({ id: 'messages.snapshot.start' });
+    if (this.alert) Alert.update(this.alert, msg, 'info');
+    else this.alert = Alert.info(msg);
+}
+
+  onSnapshotError = (errorMessage) => {
+    const duration = new Date().getTime() - this._nowStartProcessing;
+    const msg = this.context.intl.formatMessage({ id: 'messages.snapshot.error' }, { errorMessage, duration });
+    if (this.alert) Alert.update(this.alert, msg, 'error');
+    else this.alert = Alert.error(msg);
+  }
+
+  onSnapshotReady = () => {
+    const duration = new Date().getTime() - this._nowStartProcessing;
+    const msg = this.context.intl.formatMessage({ id: 'messages.snapshot.success' }, { duration });
+    if (this.alert) Alert.update(this.alert, msg, 'success');
+    else this.alert = Alert.success(msg);
+  }
 
 
   render() {
@@ -123,6 +132,7 @@ class AddItemContainer extends React.Component {
 
 }
 
+AddItemContainer.contextTypes = { intl: React.PropTypes.object.isRequired };
 
 const mapStateToProps = (state) => {
   // Add the All to the Kind & Category lists

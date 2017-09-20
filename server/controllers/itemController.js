@@ -16,7 +16,7 @@ import * as GenerateThumbnails from '../util/generateThumbnails';
 // Ex 2: http://localhost:8080/api/items/count?conditions={"category":"58f4dfff45dab98a840aa000"}
 
 export function getItemsCount(req, res) {
-  // TODO: query should return items of current user.
+  // LATER: query should return items of current user.
   const conditions = req.query.conditions ? JSON.parse(req.query.conditions) : {};
   Item.count(conditions, (err, count) => {
     if (err) {
@@ -58,7 +58,7 @@ export function getItems(req, res) {
 
   logger.info(`itemController.getItems computed params: offset=${offset} - limit=${limit} - query=${JSON.stringify(query)} - sort=${JSON.stringify(sort)}`);
 
-  // TODO: query should return items of current user.
+  // LATER: query should return items of current user.
 
   const options = {
     // select: 'title date author',

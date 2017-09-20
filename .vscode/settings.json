@@ -10,7 +10,48 @@
     "**/distFoServer": true,
     "**/server/log": true
   },
-
+  "todohighlight.isEnable": true,
+  "todohighlight.isCaseSensitive": true,
+  "todohighlight.keywords": [
+    "DEBUG:",
+    "REVIEW:",
+    {
+      "text": "OPTIMIZE:",
+      "color": "#000",
+      "backgroundColor": "yellow",
+      "overviewRulerColor": "yellow"
+    },
+    {
+      "text": "NOTE:",
+      "color": "#00f",
+      "backgroundColor": "lightyellow",
+      "overviewRulerColor": "lightyellow"
+    },
+    {
+      "text": "HACK:",
+      "color": "#000",
+      "isWholeLine": true
+    },
+    {
+      "text": "TODO:",
+      "color": "#f00",
+      "backgroundColor": "lightpink",
+      "overviewRulerColor": "pink"
+    },
+    {
+      "text": "LATER:",
+      "color": "black",
+      "backgroundColor": "aquamarine",
+      "overviewRulerColor": "aquamarine"
+    }
+  ],
+  "todohighlight.defaultStyle": {
+    "color": "red",
+    "backgroundColor": "#ffab00",
+    "overviewRulerColor": "#ffab00",
+    "isWholeLine": false
+    //other styling properties goes here ... 
+  },
   "todohighlight.exclude": [
     "**/node_modules/**",
     "**/old/**",

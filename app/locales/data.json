@@ -42,13 +42,18 @@
     "messages.discover.blob": "What's good in the area?",
 
     "messages.save.start": "Saving...",
-    "messages.save.success": "Saved! (duration={durationSaving}ms)",
-    "messages.save.error": "Error while saving (error={errorMessage}, duration={durationSaving}ms)",
+    "messages.save.success": "Saved! (duration={duration}ms)",
+    "messages.save.error": "Error while saving (error={errorMessage}, duration={duration}ms)",
 
     "messages.search.start": "Searching...",
     "messages.search.success": "{nbItems} result(s) found! (duration={duration}ms)",
     "messages.search.noresults": "No results found (duration={duration}ms)",
     "messages.search.error": "Error while searching (error={errorMessage}, duration={duration}ms)",
+
+    "messages.snapshot.start": "Processing snapshot..." ,
+    "messages.snapshot.success": "Snapshot processed! (duration={duration}ms)",
+    "messages.snapshot.error": "Error while processing snapshot (error={errorMessage}, duration={duration}ms)",
+
 
     "messages.geolocalisation.error.PERMISSION_DENIED": "You have denied the request for localization.",
     "messages.geolocalisation.error.POSITION_UNAVAILABLE": "Cannot pinpoint your location.",
@@ -139,6 +144,10 @@
     "messages.search.success": "{nbItems} résultat(s) trouvées ! (durée={duration}ms)",
     "messages.search.noresults": "Aucun résultat trouvé (durée={duration}ms)",
     "messages.search.error": "Erreur lors de la recherche (erreur={errorMessage}, durée={duration}ms)",
+
+    "messages.snapshot.start": "Création de l'image..." ,
+    "messages.snapshot.success": "Image créée ! (durée={duration}ms)",
+    "messages.snapshot.error": "Erreur lors de la création de l'image (error={errorMessage}, duration={duration}ms)",
 
     "messages.geolocalisation.error.PERMISSION_DENIED": "Vous n'avez pas autorisé la géolocalisation",
     "messages.geolocalisation.error.POSITION_UNAVAILABLE": "Impossible de vous localiser.",

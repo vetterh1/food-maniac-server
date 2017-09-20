@@ -3,6 +3,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 import { Alert, Button, Container, Col, FormFeedback, Input, Label, Modal, ModalHeader, ModalBody, ModalFooter, Row } from 'reactstrap';
 import SelectItemPlus from '../utils/SelectItemPlus';
 // import { AvForm, AvField, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
@@ -172,6 +173,8 @@ class AddItemModal extends React.Component {
   }
 
 }
+
+AddItemModal.contextTypes = { intl: React.PropTypes.object.isRequired };
 
 export default AddItemModal;
 

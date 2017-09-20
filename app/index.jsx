@@ -40,8 +40,9 @@ const store = createStore(
 store.dispatch(fetchKinds());
 store.dispatch(fetchCategories());
 
-// TODO: remove this as it loads ALL the items
-// Should be done only when necessary (ex: Rate page...)
+// OPTIMIZE: this loads ALL the items
+// Could be done only when necessary (ex: Rate page...)
+// Or only the current user last ones
 store.dispatch(fetchItems());
 
 

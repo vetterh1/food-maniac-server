@@ -58,8 +58,8 @@ class RateContainer extends React.Component {
   }
 
   onEndSavingOK = () => {
-    const durationSaving = new Date().getTime() - this._nowStartSaving;
-    const msg = this.context.intl.formatMessage({ id: 'messages.save.success' }, { durationSaving });
+    const duration = new Date().getTime() - this._nowStartSaving;
+    const msg = this.context.intl.formatMessage({ id: 'messages.save.success' }, { duration });
     if (this.alert) Alert.update(this.alert, msg, 'success');
     else this.alert = Alert.success(msg);
 
@@ -72,8 +72,8 @@ class RateContainer extends React.Component {
   }
 
   onEndSavingFailed = (errorMessage) => {
-    const durationSaving = new Date().getTime() - this._nowStartSaving;
-    const msg = this.context.intl.formatMessage({ id: 'messages.save.error' }, { errorMessage, durationSaving });
+    const duration = new Date().getTime() - this._nowStartSaving;
+    const msg = this.context.intl.formatMessage({ id: 'messages.save.error' }, { errorMessage, duration });
     if (this.alert) Alert.update(this.alert, msg, 'error');
     else this.alert = Alert.error(msg);
   }

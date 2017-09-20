@@ -13,7 +13,7 @@ import { distanceInKm, formatDistance } from '../util/mapUtils';
 // Ex 2: http://localhost:8080/api/markAggregates/count?conditions={"markOverall":"5"}
 
 export function getMarkAggregatesCount(req, res) {
-  // TODO: query should return MarkAggregates of current user.
+  // LATER: query should return MarkAggregates of current user.
   const conditions = req.query.conditions ? JSON.parse(req.query.conditions) : {};
   MarkAggregate.count(conditions, (err, count) => {
     if (err) {
