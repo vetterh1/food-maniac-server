@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/href-no-hash */
+/* eslint-disable jsx-a11y/img-has-alt */
+
 import React from 'react';
 import { render } from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';

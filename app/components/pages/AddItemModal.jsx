@@ -1,4 +1,6 @@
 // TODO: i18n
+/* eslint-disable jsx-a11y/href-no-hash */
+/* eslint-disable jsx-a11y/img-has-alt */
 /* eslint-disable react/forbid-prop-types */
 
 import React from 'react';
@@ -75,7 +77,7 @@ class AddItemModal extends React.Component {
     this.props.onSnapshotReady();
   }
 
-  onSubmit(event) {
+  onSubmit() {
     // event.preventDefault();
 
     const returnValue = {
@@ -108,11 +110,6 @@ class AddItemModal extends React.Component {
     this.setState({ name: event.target.value });
   }
 
-  displaySnapshot = (data) => {
-    this._imageCameraSnapshot.src = data;
-  }
-
-
   onCancel() {
     // Reset for next time it's displayed
     this.setState(this.defaultState);
@@ -120,10 +117,18 @@ class AddItemModal extends React.Component {
     this.props.onCancel();
   }
 
+  displaySnapshot = (data) => {
+    this._imageCameraSnapshot.src = data;
+  }
+
+
 
   render() {
     if (!this.props.open) return null;
-    
+
+    const categoryPlaceHolder = this.context.intl.formatMessage({ id: 'category.select.long' });
+    const kindPlaceHolder = this.context.intl.formatMessage({ id: 'kind.select.long' });
+
     console.log('AddItemModal render: (category, kind, name, picture)=', this.state.category, this.state.kind, this.state.name, this.state.picture ? this.state.picture.length : 'null');
     const formReadyForSubmit = this.state.name && this.state.kind && this.state.category;
     return (
@@ -138,8 +143,8 @@ class AddItemModal extends React.Component {
               categories={this.props.categories}
               onChangeKind={this.onChangeKind.bind(this)}
               onChangeCategory={this.onChangeCategory.bind(this)}
-              kindPlaceHolder="Select a kind"
-              categoryPlaceHolder="Select a category"
+              kindPlaceHolder={kindPlaceHolder}
+              categoryPlaceHolder={categoryPlaceHolder}
               ref={(r) => { this._refSelectItemPlus = r; }} // used to reset the 3 dropdowns
             />
 

@@ -1,10 +1,11 @@
+/* eslint-disable jsx-a11y/href-no-hash */
+/* eslint-disable jsx-a11y/img-has-alt */
 /* eslint-disable react/forbid-prop-types */
 
 import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import Alert from 'react-s-alert';
 import { MatchMediaHOC } from 'react-match-media';
 import { Button, Card, CardTitle, Col, Collapse, Label, Modal, ModalHeader, ModalBody, Row } from 'reactstrap';
 import MdFilterList from 'react-icons/lib/md/filter-list';
@@ -13,8 +14,6 @@ import MdPlaylistAdd from 'react-icons/lib/md/playlist-add';
 import MdRoomService from 'react-icons/lib/md/room-service';
 import SimpleListOrDropdown from '../utils/SimpleListOrDropdown';
 import { loglevelServerSend } from '../../utils/loglevel-serverSend';
-
-const ALERT_HELP_TIMEOUT = 120000;
 
 const logSelectItemPlus = log.getLogger('logSelectItemPlus');
 loglevelServerSend(logSelectItemPlus); // a setLevel() MUST be run AFTER this!
@@ -67,6 +66,12 @@ class SelectItemPlus extends React.Component {
     };
   }
 
+
+  componentWillMount() {
+    this.setI18nLabels();
+  }
+
+
   componentWillReceiveProps(nextProps) {
     if (!nextProps) return;
 
@@ -84,6 +89,13 @@ class SelectItemPlus extends React.Component {
     }
   }
 
+
+  componentDidUpdate() {
+    const categoryPlaceHolder = this.props.categoryPlaceHolder || this.context.intl.formatMessage({ id: 'core.all' });
+    if (this.state.categoryPlaceHolder !== categoryPlaceHolder) {
+      this.setI18nLabels();
+    }
+  }
 
   onChangeKind(event) {
     if (this.state.kind === event.target.value) return;
@@ -106,6 +118,14 @@ class SelectItemPlus extends React.Component {
       // console.log('onChangeItem (value, itemObject):', event.target.value, itemObject );
       this.props.onChangeItem(event.target.value, itemObject ? itemObject.name : null);
     }
+  }
+
+
+  setI18nLabels() {
+    const categoryPlaceHolder = this.props.categoryPlaceHolder || this.context.intl.formatMessage({ id: 'core.all' });
+    const kindPlaceHolder = this.props.kindPlaceHolder || this.context.intl.formatMessage({ id: 'core.all' });
+    const itemPlaceHolder = this.props.itemPlaceHolder || this.context.intl.formatMessage({ id: 'core.all' });
+    this.setState({ categoryPlaceHolder, kindPlaceHolder, itemPlaceHolder });
   }
 
 
@@ -155,7 +175,7 @@ class SelectItemPlus extends React.Component {
           <Col xs={12} sm={9} md={10} >
             <SimpleListOrDropdown
               items={this.props.categories}
-              dropdownPlaceholder={this.props.categoryPlaceHolder}
+              dropdownPlaceholder={this.state.categoryPlaceHolder}
               selectedOption={this.state.category}
               onChange={this.onChangeCategory.bind(this)}
               dropdown
@@ -171,7 +191,7 @@ class SelectItemPlus extends React.Component {
           <Col xs={12} sm={9} md={10} >
             <SimpleListOrDropdown
               items={this.props.kinds}
-              dropdownPlaceholder={this.props.kindPlaceHolder}
+              dropdownPlaceholder={this.state.kindPlaceHolder}
               selectedOption={this.state.kind}
               onChange={this.onChangeKind.bind(this)}
               dropdown
@@ -226,7 +246,7 @@ class SelectItemPlus extends React.Component {
                 <Col xs={12} className="">
                   <SimpleListOrDropdown
                     items={this.state.filteredItemsList}
-                    dropdownPlaceholder={this.props.itemPlaceHolder}
+                    dropdownPlaceholder={this.state.itemPlaceHolder}
                     selectedOption={this.state.item}
                     onChange={this.onChangeItem.bind(this)}
                     dropdown
@@ -301,6 +321,7 @@ class SelectItemPlus extends React.Component {
 }
 
 
+SelectItemPlus.contextTypes = { intl: React.PropTypes.object.isRequired };
 
 
 SelectItemPlus.defaultProps = {
@@ -313,9 +334,9 @@ SelectItemPlus.defaultProps = {
   onDislayItemsFilter: null,
   items: [],
   defaultItem: null,
-  categoryPlaceHolder: 'All',
-  kindPlaceHolder: 'All',
-  itemPlaceHolder: 'All',
+  categoryPlaceHolder: null,
+  kindPlaceHolder: null,
+  itemPlaceHolder: null,
   className: '',
   alertHelp: null,
 };

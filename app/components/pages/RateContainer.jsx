@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/href-no-hash */
+/* eslint-disable jsx-a11y/img-has-alt */
 /* eslint-disable no-class-assign */
 /* eslint-disable react/forbid-prop-types */
 
