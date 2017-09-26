@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 class languageChoice extends React.Component {
   constructor() { super(); this._onClick = this._onClick.bind(this); }
-  _onClick() { this.props.onClick(this.props.codeLanguage); }
+  _onClick() { this.props.onClick(this.props.locale); }
   render() {
     return (
       <div
@@ -16,7 +16,7 @@ class languageChoice extends React.Component {
           nav-link
           ${this.props.selected ? 'text-primary font-weight-bold' : 'text-secondary font-italic'}`}
       >
-        {this.props.codeLanguage}
+        {this.props.locale}
       </div>
     );
   }
@@ -25,7 +25,7 @@ class languageChoice extends React.Component {
 languageChoice.propTypes = {
   // index: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired,
-  codeLanguage: PropTypes.string.isRequired,
+  locale: PropTypes.string.isRequired,
   selected: PropTypes.bool.isRequired,
 };
 

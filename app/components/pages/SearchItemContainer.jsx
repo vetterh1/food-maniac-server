@@ -3,6 +3,7 @@
 import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Container } from 'reactstrap';
 import Alert from 'react-s-alert';
@@ -40,6 +41,7 @@ class SearchItemContainer extends React.Component {
     kinds: PropTypes.object.isRequired,
     categories: PropTypes.object.isRequired,
     items: PropTypes.array.isRequired,
+    locale: PropTypes.string.isRequired,
   }
 
   constructor(props) {
@@ -162,6 +164,7 @@ class SearchItemContainer extends React.Component {
       <div>
         <Container fluid>
           <SearchItemForm
+            locale={this.props.locale}
             ref={(r) => { this._childComponent = r; }}
             kinds={this.props.kinds}
             categories={this.props.categories}
@@ -173,7 +176,13 @@ class SearchItemContainer extends React.Component {
 
           {this.state.markAggregates &&
             <div className="standard-container mt-5">
-              <h5 className="mb-4"><MdStarHalf size={24} className="mr-2" /> Results:</h5>
+              <h5
+                className="mb-4"
+              >
+                <MdStarHalf size={24} className="mr-2" />
+                <FormattedMessage id="core.results" />
+                :
+              </h5>
               {this.state.markAggregates.map((markAggregate) => {
                 return (<ListOneMarkContainer
                   markAggregate={markAggregate}
@@ -202,6 +211,7 @@ const mapStateToProps = (state) => {
     kinds: state.kinds,
     categories: state.categories,
     items: state.items.items,
+    locale: state.languageInfo.locale,
   };
 };
 

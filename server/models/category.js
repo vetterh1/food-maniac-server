@@ -4,6 +4,9 @@ const Schema = mongoose.Schema;
 
 const categorySchema = new Schema({
   name: { type: 'String', required: true },
+
+  i18n: Schema.Types.Mixed, // ex: i18n: {FR: 'Plat'}
+
   since: { type: 'Date', default: Date.now, required: true },
   lastModif: { type: 'Date', default: Date.now, required: true },
 });

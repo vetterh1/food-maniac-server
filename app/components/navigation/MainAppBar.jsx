@@ -15,8 +15,7 @@ class MainAppBar extends React.Component {
     // location: PropTypes.object,
     languageInfo: PropTypes.shape({
       list: PropTypes.array,
-      codeLanguage: PropTypes.string,
-      changed: PropTypes.boolean,
+      locale: PropTypes.string,
     }).isRequired,
     dispatch: PropTypes.func.isRequired,
   }
@@ -40,10 +39,10 @@ class MainAppBar extends React.Component {
   }
 
 
-  handleChangeLanguage(codeLanguage) {
+  handleChangeLanguage(locale) {
     // Save new language selection in redux store
     const { dispatch } = this.props;  // Injected by react-redux
-    const action = changeLanguage(codeLanguage);
+    const action = changeLanguage(locale);
     dispatch(action);
   }
 
@@ -59,20 +58,60 @@ class MainAppBar extends React.Component {
     const onMainPage = this.props.location.pathname === '/';
     const isOpen = this.state.isOpen;
     return (
-      <Navbar color="inverse" inverse toggleable>
-        <NavbarToggler right onClick={this.toggle} />
-        <NavbarBrand tag={Link} to="/" onClick={this.resetOpenState}>Food Maniac!</NavbarBrand>
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="ml-auto" navbar>
+      <Navbar
+        color="inverse"
+        inverse
+        toggleable
+      >
+        <NavbarToggler
+          right
+          onClick={this.toggle}
+        />
+        <NavbarBrand
+          tag={Link}
+          to="/"
+          onClick={this.resetOpenState}
+        >
+          Food Maniac!
+        </NavbarBrand>
+        <Collapse
+          isOpen={isOpen}
+          navbar
+        >
+          <Nav
+            className="ml-auto"
+            navbar
+          >
             {!onMainPage && <NavItem>
-              <NavLink className="navbar-link" tag={Link} to="/rate" onClick={this.resetOpenState}>&gt; <FormattedMessage id="item.rate.short" /></NavLink>
+              <NavLink
+                className="navbar-link"
+                tag={Link}
+                to="/rate"
+                onClick={this.resetOpenState}
+              >
+                &gt;
+                <FormattedMessage id="item.rate.short" />
+              </NavLink>
             </NavItem>}
             {!onMainPage && <NavItem>
-              <NavLink className="navbar-link" tag={Link} to="/searchItem" onClick={this.resetOpenState}>&gt; <FormattedMessage id="item.search.short" /></NavLink>
+              <NavLink
+                className="navbar-link"
+                tag={Link}
+                to="/searchItem"
+                onClick={this.resetOpenState}
+              >
+                &gt;
+                <FormattedMessage id="item.search.short" />
+              </NavLink>
             </NavItem>}
             {this.props.languageInfo.list.map((oneLanguage, index) => (
               <NavItem key={oneLanguage}>
-                <LanguageChoice selected={oneLanguage === this.props.languageInfo.codeLanguage} index={index} codeLanguage={oneLanguage} onClick={this.handleChangeLanguage} />
+                <LanguageChoice
+                  selected={oneLanguage === this.props.languageInfo.locale}
+                  index={index}
+                  locale={oneLanguage}
+                  onClick={this.handleChangeLanguage}
+                />
               </NavItem>
               ), this)}
             <NavItem>

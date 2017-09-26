@@ -9,6 +9,9 @@ const itemSchema = new Schema({
   kind: { type: Schema.Types.ObjectId, ref: 'Kind', required: true },
   name: { type: 'String', required: true },
   picture: { type: 'String' }, // just an id here. the pic is stored externally in a folder (ex: storage/picture/items)
+
+  i18n: Schema.Types.Mixed, // ex: i18n: {FR: 'Plat'}
+
   since: { type: 'Date', default: Date.now, required: true },
   lastModif: { type: 'Date', default: Date.now, required: true },
 

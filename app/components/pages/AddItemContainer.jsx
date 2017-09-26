@@ -27,6 +27,7 @@ class AddItemContainer extends React.Component {
     kinds: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
     items: PropTypes.object.isRequired, // load the object and not just the array (in the object) to get redux info (isSaving...)
+    locale: PropTypes.string.isRequired,
     dispatch: PropTypes.func.isRequired,
   }
 
@@ -116,6 +117,7 @@ class AddItemContainer extends React.Component {
   render() {
     return (
       <AddItemModal
+        locale={this.props.locale}
         ref={(r) => { this._childComponent = r; }}
         open={this.props.open}
         kinds={this.props.kinds}
@@ -140,6 +142,7 @@ const mapStateToProps = (state) => {
     kinds: state.kinds.kinds,
     categories: state.categories.categories,
     items: state.items, // load the object and not just the array (in the object) to get redux info (isSaving...)
+    locale: state.languageInfo.locale,
   };
 };
 

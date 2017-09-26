@@ -18,6 +18,7 @@ logSearchItemForm.setLevel('debug');
 
 class SearchItemForm extends React.Component {
   static propTypes = {
+    locale: PropTypes.string.isRequired,
     kinds: PropTypes.object.isRequired,
     categories: PropTypes.object.isRequired,
     items: PropTypes.array.isRequired,
@@ -99,6 +100,7 @@ class SearchItemForm extends React.Component {
         <h3 className="mb-4">Seach the best place!</h3>
         <Form onSubmit={this.onSubmit.bind(this)}>
           <SelectItemPlus
+            locale={this.props.locale}
             title={what}
             kinds={this.props.kinds.kinds}
             categories={this.props.categories.categories}

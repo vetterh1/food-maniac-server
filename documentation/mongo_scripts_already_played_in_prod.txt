@@ -1,0 +1,118 @@
+
+
+---------------------------------------------------------------
+          Played in prod in previous installs
+---------------------------------------------------------------
+
+
+---------------------------------------------------------------
+
+
+use food_maniac;
+
+db.categories.update({'_id': ObjectId('58f4dfff45dab98a840aa000')}, {$set: {i18n: {FR: 'Plat'} } } );
+db.categories.update({'_id': ObjectId('58f4dfff45dab98a840aa001')}, {$set: {i18n: {FR: 'Dessert' } } } );
+db.categories.update({'_id': ObjectId('58f4dfff45dab98a840aa002')}, {$set: {i18n: {FR: 'Boisson' } } } );
+
+
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab005')}, {$set: {i18n: {FR: 'Américain' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab009')}, {$set: {i18n: {FR: 'Belge' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab00f')}, {$set: {i18n: {FR: 'Chinois' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab015')}, {$set: {i18n: {FR: 'Français' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab018')}, {$set: {i18n: {FR: 'Grecque' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab019')}, {$set: {i18n: {FR: 'Indien' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab01f')}, {$set: {i18n: {FR: 'Italien' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab025')}, {$set: {i18n: {FR: 'Japonais' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab029')}, {$set: {i18n: {FR: 'Mexicain' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab02f')}, {$set: {i18n: {FR: 'Thai' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab035')}, {$set: {i18n: {FR: 'Tunisien / Marocain' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab0a5')}, {$set: {i18n: {FR: 'Autre Africain' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab0a9')}, {$set: {i18n: {FR: 'Autre Américain' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab0af')}, {$set: {i18n: {FR: 'Autre Asiatique' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab0b5')}, {$set: {i18n: {FR: 'Autre Européen' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab0ff')}, {$set: {i18n: {FR: 'Autre' } } } );
+
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0000')}, {$set: {i18n: {FR: 'Pizza' } } } );
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0001')}, {$set: {i18n: {FR: 'Pâtes' } } } );
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0002')}, {$set: {i18n: {FR: 'Hamburger' } } } );
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0003')}, {$set: {i18n: {FR: 'Burrito' } } } );
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0004')}, {$set: {i18n: {FR: 'Taco' } } } );
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0005')}, {$set: {i18n: {FR: 'Croquettes de crevettes' } } } );
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0007')}, {$set: {i18n: {FR: 'Steak Tartare / Americain' } } } );
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0006')}, {$set: {i18n: {FR: 'Palak Paneer' } } } );
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0100')}, {$set: {i18n: {FR: 'Mousse au chocolat' } } } );
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0101')}, {$set: {i18n: {FR: 'Tarte Tatin' } } } );
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0200')}, {$set: {i18n: {FR: 'Bière' } } } );
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0201')}, {$set: {i18n: {FR: 'Vin' } } } );
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0202')}, {$set: {i18n: {FR: 'Tequila' } } } );
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0203')}, {$set: {i18n: {FR: 'Margarita' } } } );
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0204')}, {$set: {i18n: {FR: 'Sushi' } } } );
+db.items.update({'_id': ObjectId('590971d9e11dfc43f9004d0d')}, {$set: {i18n: {FR: 'Muffin' } } } );
+db.items.update({'_id': ObjectId('5909711ee11dfc43f9004d0c')}, {$set: {i18n: {FR: 'Croissant' } } } );
+db.items.update({'_id': ObjectId('5909710ae11dfc43f9004d0b')}, {$set: {i18n: {FR: 'Café gourmand' } } } );
+db.items.update({'_id': ObjectId('59096ffee11dfc43f9004cf8')}, {$set: {i18n: {FR: 'Crêpes' } } } );
+db.items.update({'_id': ObjectId('590866a01e82e670e77dae6e')}, {$set: {i18n: {FR: 'Couscous' } } } );
+db.items.update({'_id': ObjectId('5908660d1e82e670e77dae6b')}, {$set: {i18n: {FR: 'Moussaka' } } } );
+
+---------------------------------------------------------------
+
+Date: 2017-09-22 11:50:00
+Reason: add i18n (only FR today) to categories, kinds and items
+
+mongo
+use food_maniac;
+
+db.categories.update({'_id': ObjectId('58f4dfff45dab98a840aa000')}, {$set: {i18n: {FR: 'Plat' } } } );
+db.categories.update({'_id': ObjectId('58f4dfff45dab98a840aa001')}, {$set: {i18n: {FR: 'Dessert' } } } );
+db.categories.update({'_id': ObjectId('58f4dfff45dab98a840aa002')}, {$set: {i18n: {FR: 'Boisson' } } } );
+
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab005')}, {$set: {i18n: {FR: 'Américain' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab009')}, {$set: {i18n: {FR: 'Belge' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab00f')}, {$set: {i18n: {FR: 'Chinois' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab015')}, {$set: {i18n: {FR: 'Français' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab018')}, {$set: {i18n: {FR: 'Grecque' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab019')}, {$set: {i18n: {FR: 'Indien' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab01f')}, {$set: {i18n: {FR: 'Italien' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab025')}, {$set: {i18n: {FR: 'Japonais' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab029')}, {$set: {i18n: {FR: 'Mexicain' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab02f')}, {$set: {i18n: {FR: 'Thai' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab035')}, {$set: {i18n: {FR: 'Tunisien / Marocain' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab0a5')}, {$set: {i18n: {FR: 'Autre Africain' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab0a9')}, {$set: {i18n: {FR: 'Autre Américain' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab0af')}, {$set: {i18n: {FR: 'Autre Asiatique' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab0b5')}, {$set: {i18n: {FR: 'Autre Européen' } } } );
+db.kinds.update({'_id': ObjectId('58f4dfff45dab98a840ab0ff')}, {$set: {i18n: {FR: 'Autre' } } } );
+
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0000')}, {$set: {i18n: {FR: 'Pizza' } } } );
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0001')}, {$set: {i18n: {FR: 'Pâtes' } } } );
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0002')}, {$set: {i18n: {FR: 'Hamburger' } } } );
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0003')}, {$set: {i18n: {FR: 'Burrito' } } } );
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0004')}, {$set: {i18n: {FR: 'Taco' } } } );
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0005')}, {$set: {i18n: {FR: 'Croquettes de crevettes' } } } );
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0007')}, {$set: {i18n: {FR: 'Steak Tartare / Americain' } } } );
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0006')}, {$set: {i18n: {FR: 'Palak Paneer' } } } );
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0100')}, {$set: {i18n: {FR: 'Mousse au chocolat' } } } );
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0101')}, {$set: {i18n: {FR: 'Tarte Tatin' } } } );
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0200')}, {$set: {i18n: {FR: 'Bière' } } } );
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0201')}, {$set: {i18n: {FR: 'Vin' } } } );
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0202')}, {$set: {i18n: {FR: 'Tequila' } } } );
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0203')}, {$set: {i18n: {FR: 'Margarita' } } } );
+db.items.update({'_id': ObjectId('58f4dfff45dab98a840b0204')}, {$set: {i18n: {FR: 'Sushi' } } } );
+db.items.update({'_id': ObjectId('590971d9e11dfc43f9004d0d')}, {$set: {i18n: {FR: 'Muffin' } } } );
+db.items.update({'_id': ObjectId('5909711ee11dfc43f9004d0c')}, {$set: {i18n: {FR: 'Croissant' } } } );
+db.items.update({'_id': ObjectId('5909710ae11dfc43f9004d0b')}, {$set: {i18n: {FR: 'Café gourmand' } } } );
+db.items.update({'_id': ObjectId('59096ffee11dfc43f9004cf8')}, {$set: {i18n: {FR: 'Crêpes' } } } );
+db.items.update({'_id': ObjectId('590866a01e82e670e77dae6e')}, {$set: {i18n: {FR: 'Couscous' } } } );
+db.items.update({'_id': ObjectId('5908660d1e82e670e77dae6b')}, {$set: {i18n: {FR: 'Moussaka' } } } );
+
+---------------------------------------------------------------
+
+
+Date: 2017-07-12 15:18:00
+
+mongo
+use food_maniac;
+db.places.update({'_id': ObjectId('5908800450a7934d128ff770')}, {$set: {'name': 'Brasserie RN Louvain-La-Neuve', 'location': {'type' : 'Point', 'coordinates': [4.625232, 50.6682973]} } } )
+
+
+---------------------------------------------------------------

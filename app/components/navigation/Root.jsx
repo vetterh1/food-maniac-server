@@ -28,7 +28,7 @@ class Root extends React.Component {
     this.toggle = this.i18nLoad.bind(this);
 
     this.state = {
-      language: '',
+      locale: '',
       messages: [],
     };
   }
@@ -45,9 +45,9 @@ class Root extends React.Component {
     // Change language?
     if (nextProps &&
         nextProps.languageInfo &&
-        nextProps.languageInfo.codeLanguage &&
-        nextProps.languageInfo.codeLanguage !==
-          this.props.languageInfo.codeLanguage) {
+        nextProps.languageInfo.locale &&
+        nextProps.languageInfo.locale !==
+          this.props.languageInfo.locale) {
       this.i18nLoad(nextProps.languageInfo);
     }
   }
@@ -57,8 +57,8 @@ class Root extends React.Component {
   i18nLoad(languageInfo) {
     if (!languageInfo) return;
     this.setState({
-      language: languageInfo.codeLanguage,
-      messages: localeData[languageInfo.codeLanguage],
+      locale: languageInfo.locale,
+      messages: localeData[languageInfo.locale],
     });
   }
 
@@ -66,21 +66,81 @@ class Root extends React.Component {
   render() {
     if (!this.props.languageInfo) return null;
     return (
-      <Provider store={this.props.store}>
-        <IntlProvider locale={this.state.language} messages={this.state.messages}>
-          <Router history={browserHistory}>
-            <Route path="/" component={App}>
-              <IndexRoute component={MainPageContent} />
-              <Route path="/rate" component={RateContainer} />
-              <Route path="/searchItem" component={SearchItemContainer} />
-              <Route path="/login" component={Login} />
-              <Route path="/listItems" component={() => (<ListItemsContainer dropdown={false} />)} />
-              <Route path="/listItemsOld" component={() => (<ListItemsContainerOld URL="/api/items" dropdown={false} />)} />
-              <Route path="/listCategories" component={() => (<ListCategoriesContainer dropdown={false} />)} />
-              <Route path="/listKinds" component={() => (<ListKindsContainer dropdown={false} />)} />
-              <Route path="/adminItems" component={AdminItemsContainer} />
-              <Route path="/generateThumbnails" component={() => (<ListItemsContainerOld URL="/util/regenerateAllThumbnails" socketName="regenerateAllThumbnails" dropdown={false} />)} />
-              <Route path="*" component={NotFound} />
+      <Provider
+        store={this.props.store}
+      >
+        <IntlProvider
+          locale={this.state.locale}
+          messages={this.state.messages}
+        >
+          <Router
+            history={browserHistory}
+          >
+            <Route
+              path="/"
+              component={App}
+            >
+              <IndexRoute
+                component={MainPageContent}
+              />
+              <Route
+                path="/rate"
+                component={RateContainer}
+              />
+              <Route
+                path="/searchItem"
+                component={SearchItemContainer}
+              />
+              <Route
+                path="/login"
+                component={Login}
+              />
+              <Route
+                path="/listItems"
+                component={() => (
+                  <ListItemsContainer
+                    dropdown={false}
+                  />)}
+              />
+              <Route
+                path="/listItemsOld"
+                component={() => (
+                  <ListItemsContainerOld
+                    URL="/api/items"
+                    dropdown={false}
+                  />)}
+              />
+              <Route
+                path="/listCategories"
+                component={() => (
+                  <ListCategoriesContainer
+                    dropdown={false}
+                  />)}
+              />
+              <Route
+                path="/listKinds"
+                component={() => (
+                  <ListKindsContainer
+                    dropdown={false}
+                  />)}
+              />
+              <Route
+                path="/adminItems"
+                component={AdminItemsContainer}
+              />
+              <Route
+                path="/generateThumbnails"
+                component={() => (
+                  <ListItemsContainerOld
+                    URL="/util/regenerateAllThumbnails"
+                    socketName="regenerateAllThumbnails"
+                    dropdown={false}
+                  />)}
+              />
+              <Route
+                path="*"
+                component={NotFound}
+              />
             </Route>
           </Router>
         </IntlProvider>

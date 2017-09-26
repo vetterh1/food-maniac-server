@@ -77,7 +77,10 @@ mongoose.connect(databaseURL, options, (error) => {
     throw error;
   }
 
-  // feed some dummy data in DB if empty
+  //
+  // ADD INITIAL DATA IN DB
+  // WARNING:  DELETES ANY EXISTING DATA PRIOR TO 1968-12-21
+  //
   if (process.env.NODE_ENV !== 'test' && process.env.INSERT_INITIAL_DATA) {
     logger.warn('Insert initial data requested');
     insertInitialData();

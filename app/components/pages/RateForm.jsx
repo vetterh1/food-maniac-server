@@ -56,6 +56,7 @@ const LOCATION_TYPES = [
 
 class RateForm extends React.Component {
   static propTypes = {
+    locale: PropTypes.string.isRequired,
     kinds: PropTypes.object.isRequired,
     categories: PropTypes.object.isRequired,
     items: PropTypes.object.isRequired,
@@ -337,6 +338,7 @@ class RateForm extends React.Component {
         <Form onSubmit={this.onSubmit.bind(this)}>
           <Element name="scrollElementWhat" />
           <SelectItemPlus
+            locale={this.props.locale}
             title={what}
             kinds={this.props.kinds.kinds}
             categories={this.props.categories.categories}

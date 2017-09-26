@@ -26,6 +26,7 @@ const styles = {
 
 class AddItemModal extends React.Component {
   static propTypes = {
+    locale: PropTypes.string.isRequired,
     open: PropTypes.bool.isRequired,
     kinds: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
@@ -138,6 +139,7 @@ class AddItemModal extends React.Component {
           <Container fluid>
             <Alert color="warning">Please make sure a similar item does not already exist!</Alert>
             <SelectItemPlus
+              locale={this.props.locale}
               hideItem
               kinds={this.props.kinds}
               categories={this.props.categories}

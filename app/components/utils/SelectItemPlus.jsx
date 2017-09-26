@@ -25,6 +25,7 @@ const ModalOnSmallScreens = MatchMediaHOC(Modal, '(max-width: 575px)');
 
 class SelectItemPlus extends React.Component {
   static propTypes = {
+    locale: PropTypes.string.isRequired,
     title: PropTypes.string,
     hideItem: PropTypes.bool,
     onAddItem: PropTypes.func,
@@ -48,6 +49,7 @@ class SelectItemPlus extends React.Component {
     super(props);
 
     this.defaultState = {
+      locale: null,
       // Selected Kind & Category:
       kind: '',
       category: '',
@@ -67,7 +69,7 @@ class SelectItemPlus extends React.Component {
   }
 
 
-  componentWillMount() {
+  componentDidMount() {
     this.setI18nLabels();
   }
 
@@ -75,13 +77,17 @@ class SelectItemPlus extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (!nextProps) return;
 
+    if (this.props.locale !== nextProps.locale) {
+      this.setI18nLabels();
+    }
+
     // Check if full item list has changed. If yes: update it & reset default item
     if (nextProps.items && nextProps.items.length > 0 && nextProps.items !== this.state.fullItemsList) {
       this.setState({
         fullItemsList: nextProps.items,
         filteredItemsList: nextProps.items,
         item: nextProps.defaultItem || '',
-      });
+        });
       // If default item, tell parent about it so it can enable the Submit btn
       if (nextProps.defaultItem) {
         this.props.onChangeItem(nextProps.defaultItem, null);
@@ -126,6 +132,10 @@ class SelectItemPlus extends React.Component {
     const kindPlaceHolder = this.props.kindPlaceHolder || this.context.intl.formatMessage({ id: 'core.all' });
     const itemPlaceHolder = this.props.itemPlaceHolder || this.context.intl.formatMessage({ id: 'core.all' });
     this.setState({ categoryPlaceHolder, kindPlaceHolder, itemPlaceHolder });
+
+    const categories = this.props.categories.map(category => ({ ...category, name: category.i18n[this.props.locale] || category.name }));
+    const kinds = this.props.kinds.map(kind => ({ ...kind, name: kind.i18n[this.props.locale] || kind.name }));
+    this.setState({ categoryPlaceHolder, kindPlaceHolder, itemPlaceHolder, categories, kinds });
   }
 
 
@@ -174,7 +184,7 @@ class SelectItemPlus extends React.Component {
           </Col>
           <Col xs={12} sm={9} md={10} >
             <SimpleListOrDropdown
-              items={this.props.categories}
+              items={this.state.categories}
               dropdownPlaceholder={this.state.categoryPlaceHolder}
               selectedOption={this.state.category}
               onChange={this.onChangeCategory.bind(this)}
@@ -190,7 +200,7 @@ class SelectItemPlus extends React.Component {
           </Col>
           <Col xs={12} sm={9} md={10} >
             <SimpleListOrDropdown
-              items={this.props.kinds}
+              items={this.state.kinds}
               dropdownPlaceholder={this.state.kindPlaceHolder}
               selectedOption={this.state.kind}
               onChange={this.onChangeKind.bind(this)}

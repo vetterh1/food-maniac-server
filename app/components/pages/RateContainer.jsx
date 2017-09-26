@@ -33,6 +33,7 @@ class RateContainer extends React.Component {
     categories: PropTypes.object.isRequired,
     items: PropTypes.object.isRequired,
     places: PropTypes.object.isRequired,
+    locale: PropTypes.string.isRequired,
     dispatch: PropTypes.func.isRequired,
   }
 
@@ -245,6 +246,7 @@ class RateContainer extends React.Component {
     return (
       <Container fluid>
         <RateForm
+          locale={this.props.locale}
           ref={(r) => { this._childComponent = r; }}
           kinds={this.props.kinds}
           categories={this.props.categories}
@@ -279,6 +281,7 @@ const mapStateToProps = (state) => {
     kinds: state.kinds,
     categories: state.categories,
     items: state.items,
+    locale: state.languageInfo.locale,
   };
 };
 
