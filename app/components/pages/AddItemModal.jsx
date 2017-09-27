@@ -60,7 +60,7 @@ class AddItemModal extends React.Component {
     this.state = {
       ...this.defaultState,
     };
-    console.log('AddItemModal constructor (props, initial state): ', props, this.state);
+    // console.log('AddItemModal constructor (props, initial state): ', props, this.state);
   }
 
 
@@ -71,7 +71,7 @@ class AddItemModal extends React.Component {
 
   onSnapshotReady = (data /* , nowUpdateParent */) => {
     this.displaySnapshot(data);
-    console.log('AddItemModal.onSnapshot() snapshot length: ', data ? data.length : 'null');
+    // console.log('AddItemModal.onSnapshot() snapshot length: ', data ? data.length : 'null');
     this.setState({ picture: data });
 
     // Call parent for user feedback (status)
@@ -107,7 +107,7 @@ class AddItemModal extends React.Component {
   // and at least not in items list
   onChangeName(event) {
     if (this.state.name === event.target.value) return;
-    console.log('AddItemModal.onChangeName value:', event.target.value);
+    // console.log('AddItemModal.onChangeName value:', event.target.value);
     this.setState({ name: event.target.value });
   }
 
@@ -130,14 +130,29 @@ class AddItemModal extends React.Component {
     const categoryPlaceHolder = this.context.intl.formatMessage({ id: 'category.select.long' });
     const kindPlaceHolder = this.context.intl.formatMessage({ id: 'kind.select.long' });
 
-    console.log('AddItemModal render: (category, kind, name, picture)=', this.state.category, this.state.kind, this.state.name, this.state.picture ? this.state.picture.length : 'null');
+    // console.log('AddItemModal render: (category, kind, name, picture)=', this.state.category, this.state.kind, this.state.name, this.state.picture ? this.state.picture.length : 'null');
     const formReadyForSubmit = this.state.name && this.state.kind && this.state.category;
     return (
-      <Modal className="bottom-space-for-help" size="lg" isOpen={this.props.open} toggle={this.onCancel.bind(this)}>
-        <ModalHeader toggle={this.onCancel.bind(this)}>Add new dish...</ModalHeader>
+      <Modal
+        className="bottom-space-for-help"
+        size="lg"
+        isOpen={this.props.open}
+        toggle={this.onCancel.bind(this)}
+      >
+        <ModalHeader
+          toggle={this.onCancel.bind(this)}
+        >
+          <FormattedMessage id="messages.add.dish.title" />
+        </ModalHeader>
         <ModalBody>
-          <Container fluid>
-            <Alert color="warning">Please make sure a similar item does not already exist!</Alert>
+          <Container
+            fluid
+          >
+            <Alert
+              color="warning"
+            >
+              <FormattedMessage id="messages.add.dish.warning" />
+            </Alert>
             <SelectItemPlus
               locale={this.props.locale}
               hideItem
@@ -151,29 +166,81 @@ class AddItemModal extends React.Component {
             />
 
             <Row>
-              <Col xs={12} sm={3} md={2} >
-                <Label for="inputName" size="md">Name</Label>
+              <Col
+                xs={12} sm={3} md={2}
+              >
+                <Label
+                  for="inputName"
+                  size="md"
+                >
+                  <FormattedMessage id="core.name" />
+                </Label>
               </Col>
-              <Col xs={12} sm={9} md={10} >
-                <Input name="name" id="inputName" onChange={this.onChangeName.bind(this)} value={this.state.name} placeholder="..." required size="md" />
-                <FormFeedback>This field is mandatory!</FormFeedback>
+              <Col
+                xs={12} sm={9} md={10}
+              >
+                <Input
+                  name="name"
+                  id="inputName"
+                  onChange={this.onChangeName.bind(this)}
+                  value={this.state.name}
+                  placeholder="..."
+                  required
+                  size="md"
+                />
+                <FormFeedback>
+                  <FormattedMessage id="messages.forms.mandatory" />
+                </FormFeedback>
               </Col>
             </Row>
 
             <Row>
-              <Col xs={12} sm={3} md={2} >
-                <Label for="inputName" size="md">Picture</Label>
+              <Col
+                xs={12} sm={3} md={2}
+              >
+                <Label
+                  for="inputName"
+                  size="md"
+                >
+                  <FormattedMessage id="core.picture" />
+                </Label>
               </Col>
-              <Col xs={12} sm={9} md={10} >
-                <CameraSnapshotContainer onError={this.props.onSnapshotError} onSnapshotStartProcessing={this.props.onSnapshotStartProcessing} onSnapshotReady={this.onSnapshotReady.bind(this)} onDeleteSnapshot={this.onDeleteSnapshot.bind(this)} />
-                <img ref={(r) => { this._imageCameraSnapshot = r; }} style={styles.imageCameraSnapshot} alt="" />
+              <Col
+                xs={12} sm={9} md={10}
+              >
+                <CameraSnapshotContainer
+                  onError={this.props.onSnapshotError}
+                  onSnapshotStartProcessing={this.props.onSnapshotStartProcessing}
+                  onSnapshotReady={this.onSnapshotReady.bind(this)}
+                  onDeleteSnapshot={this.onDeleteSnapshot.bind(this)}
+                />
+                <img
+                  ref={(r) => { this._imageCameraSnapshot = r; }}
+                  style={styles.imageCameraSnapshot}
+                  alt=""
+                />
               </Col>
             </Row>
           </Container>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" type="submit" onClick={this.onSubmit.bind(this)} size="md" disabled={!formReadyForSubmit} getRef={(ref) => { this.refSubmit = ref; }} >Add</Button>
-          <Button color="link" onClick={this.onCancel.bind(this)} size="md">Cancel</Button>
+          <Button
+            color="primary"
+            type="submit"
+            onClick={this.onSubmit.bind(this)}
+            size="md"
+            disabled={!formReadyForSubmit}
+            getRef={(ref) => { this.refSubmit = ref; }}
+          >
+            <FormattedMessage id="core.add" />
+          </Button>
+          <Button
+            color="link"
+            onClick={this.onCancel.bind(this)}
+            size="md"
+          >
+            <FormattedMessage id="core.cancel" />
+          </Button>
         </ModalFooter>
       </Modal>
     );

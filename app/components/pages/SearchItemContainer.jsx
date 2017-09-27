@@ -185,6 +185,7 @@ class SearchItemContainer extends React.Component {
               </h5>
               {this.state.markAggregates.map((markAggregate) => {
                 return (<ListOneMarkContainer
+                  locale={this.props.locale}
                   markAggregate={markAggregate}
                   key={markAggregate._id}
                 />);

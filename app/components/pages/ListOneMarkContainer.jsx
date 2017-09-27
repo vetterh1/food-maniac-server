@@ -14,9 +14,8 @@ logListOneMarkContainer.debug('--> entering ListOneMarkContainer.jsx');
 export default class ListOneMarkContainer extends React.Component {
 
   static propTypes = {
+    locale: PropTypes.string.isRequired,
     markAggregate: PropTypes.object.isRequired,
-    // index: PropTypes.number.isRequired,
-    // key: PropTypes.string.isRequired,
   };
 
   constructor(props) {
@@ -118,6 +117,7 @@ export default class ListOneMarkContainer extends React.Component {
     const { markIndividuals } = this.state;
 
     return (<ListOneMark
+      locale={this.props.locale}
       markAggregate={markAggregate}
       markIndividuals={markIndividuals}
       key={markAggregate._id}

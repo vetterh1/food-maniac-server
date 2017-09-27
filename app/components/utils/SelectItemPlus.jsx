@@ -87,7 +87,7 @@ class SelectItemPlus extends React.Component {
         fullItemsList: nextProps.items,
         filteredItemsList: nextProps.items,
         item: nextProps.defaultItem || '',
-        });
+      });
       // If default item, tell parent about it so it can enable the Submit btn
       if (nextProps.defaultItem) {
         this.props.onChangeItem(nextProps.defaultItem, null);
@@ -133,11 +133,16 @@ class SelectItemPlus extends React.Component {
     const itemPlaceHolder = this.props.itemPlaceHolder || this.context.intl.formatMessage({ id: 'core.all' });
     this.setState({ categoryPlaceHolder, kindPlaceHolder, itemPlaceHolder });
 
-    const categories = this.props.categories.map(category => ({ ...category, name: category.i18n[this.props.locale] || category.name }));
-    const kinds = this.props.kinds.map(kind => ({ ...kind, name: kind.i18n[this.props.locale] || kind.name }));
+    // const categories = this.props.categories.map(category => ({ ...category, name: category.i18n[this.props.locale] || category.name }));
+    // const kinds = this.props.kinds.map(kind => ({ ...kind, name: kind.i18n[this.props.locale] || kind.name }));
+    const categories = this.getI18nVersion(this.props.categories);
+    const kinds = this.getI18nVersion(this.props.kinds);
     this.setState({ categoryPlaceHolder, kindPlaceHolder, itemPlaceHolder, categories, kinds });
   }
 
+  getI18nVersion(list) {
+    return list.map(item => ({ ...item, name: (item.i18n && item.i18n[this.props.locale]) ? item.i18n[this.props.locale] : item.name }));
+  }
 
   // return the filtered list
   getVisibleItems(kind, category) {
@@ -255,7 +260,7 @@ class SelectItemPlus extends React.Component {
               <Row>
                 <Col xs={12} className="">
                   <SimpleListOrDropdown
-                    items={this.state.filteredItemsList}
+                    items={this.getI18nVersion(this.state.filteredItemsList)}
                     dropdownPlaceholder={this.state.itemPlaceHolder}
                     selectedOption={this.state.item}
                     onChange={this.onChangeItem.bind(this)}

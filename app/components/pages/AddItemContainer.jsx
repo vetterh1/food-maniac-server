@@ -8,16 +8,6 @@ import { connect } from 'react-redux';
 import Alert from 'react-s-alert';
 import AddItemModal from './AddItemModal';
 import * as itemsActions from '../../actions/itemsActions';
-// import stringifyOnce from '../../utils/stringifyOnce';
-
-// require('es6-promise').polyfill();
-// require('isomorphic-fetch');
-import { polyfill } from 'es6-promise';
-import 'isomorphic-fetch';
-
-const logAddItemContainer = log.getLogger('logAddItemContainer');
-logAddItemContainer.setLevel('warn');
-logAddItemContainer.debug('--> entering AddItemContainer.jsx');
 
 class AddItemContainer extends React.Component {
   static propTypes = {
@@ -41,8 +31,6 @@ class AddItemContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('AddItemContainer.componentWillReceiveProps - (nextProps, crtProps): ', nextProps, this.props);
-
     // Only consider the end of saving:
     // previous isSaving = true and
     // new isSaving = false
@@ -68,7 +56,7 @@ class AddItemContainer extends React.Component {
     const action = itemsActions.saveItem(data);
     dispatch(action);
     this.props.onClose();
-}
+  }
 
 
   onStartSaving = () => {
@@ -97,7 +85,7 @@ class AddItemContainer extends React.Component {
     const msg = this.context.intl.formatMessage({ id: 'messages.snapshot.start' });
     if (this.alert) Alert.update(this.alert, msg, 'info');
     else this.alert = Alert.info(msg);
-}
+  }
 
   onSnapshotError = (errorMessage) => {
     const duration = new Date().getTime() - this._nowStartProcessing;

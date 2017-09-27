@@ -21,7 +21,9 @@
     "core.map": "Map",
     "core.marks": "Marks",
     "core.mandatory": "mandatory",
+    "core.name": "Name",
     "core.overall": "Overall",
+    "core.picture": "Picture",
     "core.place": "Place",
     "core.rate": "Rate",
     "core.reviews": "reviews",
@@ -35,7 +37,7 @@
     "core.what": "What",
     "core.where": "Where",
     
-
+    "messages.forms.mandatory": "This field is mandatory!",
 
     "messages.welcome.main": "Welcome, food lover!",
     "messages.welcome.blob": "Share what you feel is best in your favorite restaurants and bars. Food-maniac focuses on the plates and not the place. It&apos;s then the best way to discover where to go to eat the best pizza or to drink the most amazing margarita!",
@@ -56,6 +58,9 @@
     "messages.snapshot.success": "Snapshot processed! (duration={duration}ms)",
     "messages.snapshot.error": "Error while processing snapshot (error={errorMessage}, duration={duration}ms)",
 
+    "messages.add.dish.title": "Add new dish..." ,
+    "messages.add.dish.warning": "Please make sure a similar item does not already exist!" ,
+    
 
     "messages.geolocalisation.error.PERMISSION_DENIED": "You have denied the request for localization.",
     "messages.geolocalisation.error.POSITION_UNAVAILABLE": "Cannot pinpoint your location.",
@@ -122,7 +127,9 @@
     "core.mandatory": "obligatoire",
     "core.map": "Carte",
     "core.marks": "Notes",
+    "core.name": "Nom",
     "core.overall": "Général",
+    "core.picture": "Photo",
     "core.place": "Endroit",
     "core.rate": "Noter",
     "core.reset": "Réinitialiser",
@@ -136,6 +143,7 @@
     "core.what": "Quoi",
     "core.where": "Où",
     
+    "messages.forms.mandatory": "Ce champ est obligatoire !",
 
     "messages.welcome.main": "Bienvenue, food lover!",
     "messages.welcome.blob": "Partagez vos bons plans resto et bars!",
@@ -156,6 +164,9 @@
     "messages.snapshot.success": "Image créée ! (durée={duration}ms)",
     "messages.snapshot.error": "Erreur lors de la création de l'image (error={errorMessage}, duration={duration}ms)",
 
+    "messages.add.dish.title": "Ajouter un nouveau plat..." ,
+    "messages.add.dish.warning": "Vérifiez s'il vous plaît qu'un plat similaire n'existe pas déjà !" ,
+    
     "messages.geolocalisation.error.PERMISSION_DENIED": "Vous n'avez pas autorisé la géolocalisation",
     "messages.geolocalisation.error.POSITION_UNAVAILABLE": "Impossible de vous localiser.",
     "messages.geolocalisation.error.TIMEOUT": "La géolocalisation a pris trop de temps",

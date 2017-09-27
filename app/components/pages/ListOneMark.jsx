@@ -24,11 +24,10 @@ function roundTo0dot5(n) { return n ? (Math.round(n * 2) / 2).toFixed(1) : null;
 export default class ListOneMark extends React.Component {
 
   static propTypes = {
+    locale: PropTypes.string.isRequired,
     markAggregate: PropTypes.object.isRequired,
     markIndividuals: PropTypes.array,
     onRequestIndividualMarks: PropTypes.func.isRequired,
-    // index: PropTypes.number.isRequired,
-    // key: PropTypes.string.isRequired,
   };
 
 
@@ -52,6 +51,10 @@ export default class ListOneMark extends React.Component {
     this.setState({ showIndividualMarks: !this.state.showIndividualMarks });
   }
 
+  getI18nVersion(item) {
+    return (item.i18n && item.i18n[this.props.locale]) ? item.i18n[this.props.locale] : item.name;
+  }
+
   render() {
     const { markAggregate } = this.props;
 
@@ -69,9 +72,9 @@ export default class ListOneMark extends React.Component {
     const atLabel =
       `${this.context.intl.formatMessage({ id: 'core.at' })}...`;
 
-    const item =
-      markAggregate.item && typeof markAggregate.item === 'object'
-      ? `${markAggregate.item.name} ${atLabel} `
+    const itemName =
+      (markAggregate.item && typeof markAggregate.item === 'object')
+      ? `${this.getI18nVersion(markAggregate.item)} ${atLabel} `
       : '';
 
     const foodLabel = this.context.intl.formatMessage({ id: 'core.food' });
@@ -85,7 +88,7 @@ export default class ListOneMark extends React.Component {
           <Col xs={8} sm={6} className="pr-3">
             <Row className="result-item-name" noGutters>
               <h6>
-                {item}
+                {itemName}
                 {name}
               </h6>
             </Row>

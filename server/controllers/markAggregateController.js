@@ -66,13 +66,13 @@ export function getMarkAggregatesByItemIdAndDistance(req, res) {
     const findFilter = req.params._itemId === 'all' ? {} : { item: req.params._itemId };
     const query = MarkAggregate
       .find(findFilter) // find all the AGGREGATED markAggregates for one item
-      .populate('place', 'name googleMapId googlePhotoUrl') // add the place & googlePhotoUrl information (available with place.xxx)
+      .populate('place', 'name googleMapId googlePhotoUrl') // add a limitied place item (with name, googlePhotoUrl information (available with place.xxx))
       .sort({ markOverall: -1 }); // sort by rating (from best to worst)
 
     // If ask for any item ('all'), add the item name to every result
     if (req.params._itemId === 'all') {
       query
-        .populate('item', 'name');
+        .populate('item', 'name i18n'); // add a limited item object (only name & i18n)
     }
 
     if (req.params._maxDistance && req.params._maxDistance > 0 && req.params._lat && req.params._lng) {

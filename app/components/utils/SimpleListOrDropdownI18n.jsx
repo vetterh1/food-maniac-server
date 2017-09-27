@@ -6,6 +6,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SimpleListOrDropdown from './SimpleListOrDropdown';
 
+/*
+ *
+ * SimpleListOrDropdownI18n displays a dropdown list using i18n json data as input
+ *
+ * Requirements:
+ * - 2 entries should exist in the i18n data:
+ *    - "i18nKey".ids: contains the dropdown ids
+ *    - "i18nKey".names: contains the dropdown displayed values
+ *
+ * Example:
+ *    <SimpleListOrDropdownI18n i18nKey="distance.list".../>
+ *    will look for these entries (ex in FR):
+ *      - "distance.list.names": "200 mètres,500 mètres,1 kilomètre,5 kilomètres,10 kilomètres,50 kilomètres,100 kilomètres,500 kilomètres,Illimité",
+ *      - "distance.list.ids": "200,500,1000,5000,10000,50000,100000,500000,0",
+ *    and will display a dropdown with 9 entries:
+ *    - FR: 200 mètres,500 mètres,...
+ *    - EN: 200 yards,500 yards
+ */
+
 class SimpleListOrDropdownI18n extends React.Component {
 
   constructor(props) {
