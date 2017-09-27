@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/href-no-hash */
 /* eslint-disable jsx-a11y/img-has-alt */
+/* eslint-disable global-require */
 
 import React from 'react';
 import { render } from 'react-dom';
@@ -53,6 +54,8 @@ store.dispatch(fetchItems());
 // ------------------------  i18n  -------------------------
 //
 
+// Polyfill for Intl, not supported on old browsers
+// like IE10 or Safari.
 function ensureIntlSupport() {
   if (window.Intl) return Promise.resolve();
   return new Promise((resolve) => {
@@ -60,12 +63,15 @@ function ensureIntlSupport() {
   })
   .then(() => Promise.all([
     require('intl/locale-data/jsonp/en.js'),
+    require('intl/locale-data/jsonp/fr.js'),
   ]));
 }
 
 // TODO when adding a new language:
-// - add an import above
+// - add an import in the import section at the top
+// - add an require above
 // - add to languagesList array below
+// - add to addLocaleData method below
 
 const languagesList =
   ['EN', 'FR'];

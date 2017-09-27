@@ -89,7 +89,7 @@ class MainAppBar extends React.Component {
                 to="/rate"
                 onClick={this.resetOpenState}
               >
-                &gt;
+                &gt;&nbsp;
                 <FormattedMessage id="item.rate.short" />
               </NavLink>
             </NavItem>}
@@ -100,7 +100,7 @@ class MainAppBar extends React.Component {
                 to="/searchItem"
                 onClick={this.resetOpenState}
               >
-                &gt;
+                &gt;&nbsp;
                 <FormattedMessage id="item.search.short" />
               </NavLink>
             </NavItem>}
