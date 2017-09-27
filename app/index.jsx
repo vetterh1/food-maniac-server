@@ -53,6 +53,16 @@ store.dispatch(fetchItems());
 // ------------------------  i18n  -------------------------
 //
 
+function ensureIntlSupport() {
+  if (window.Intl) return Promise.resolve();
+  return new Promise((resolve) => {
+    resolve(require('intl'));
+  })
+  .then(() => Promise.all([
+    require('intl/locale-data/jsonp/en.js'),
+  ]));
+}
+
 // TODO when adding a new language:
 // - add an import above
 // - add to languagesList array below
@@ -79,6 +89,7 @@ store.dispatch(setupLanguages(languagesList, defaultLanguage));
 // --------------- MAIN RENDER ---------------
 //
 
-render(
-  <Root store={store} />,
-  document.getElementById('app'));
+ensureIntlSupport().then(
+  render(
+    <Root store={store} />,
+    document.getElementById('app')));
