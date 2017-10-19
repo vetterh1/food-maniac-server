@@ -570,6 +570,6 @@ class RateForm extends React.Component {
   }
 }
 
-RateForm.contextTypes = { intl: React.PropTypes.object.isRequired };
+RateForm.contextTypes = { intl: PropTypes.object.isRequired };
 
 export default RateForm;

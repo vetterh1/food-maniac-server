@@ -99,6 +99,6 @@ AlertGeolocalisation.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-AlertGeolocalisation.contextTypes = { intl: React.PropTypes.object.isRequired };
+AlertGeolocalisation.contextTypes = { intl: PropTypes.object.isRequired };
 
 export default connect(mapStateToProps)(AlertGeolocalisation);

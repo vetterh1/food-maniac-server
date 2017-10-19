@@ -179,6 +179,6 @@ class SearchItemForm extends React.Component {
   }
 }
 
-SearchItemForm.contextTypes = { intl: React.PropTypes.object.isRequired };
+SearchItemForm.contextTypes = { intl: PropTypes.object.isRequired };
 
 export default SearchItemForm;

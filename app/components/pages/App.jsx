@@ -3,7 +3,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import injectTapEventPlugin from 'react-tap-event-plugin';
+// import injectTapEventPlugin from 'react-tap-event-plugin'; // disabled as not compatible with React 16
 import Alert from 'react-s-alert';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/stackslide.css';
@@ -21,7 +21,7 @@ const styles = {
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
-injectTapEventPlugin();
+// injectTapEventPlugin(); // disabled as not compatible with React 16
 
 class App extends React.Component {
   static propTypes = {
@@ -42,22 +42,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-/*
-    For transitions: enclose children in routeTransistion
-
-     import { RouteTransition } from 'react-router-transition';
-     <div style={styles.pageContainer}>
-        <MainAppBar  />
-        <RouteTransition
-          pathname={this.props.location.pathname}
-          atEnter={{ translateX: 100 }}
-          atLeave={{ translateX: -100 }}
-          atActive={{ translateX: 0 }}
-          mapStyles={style => ({ transform: `translateX(${style.translateX}%)` })}
-        >
-          {this.props.children}
-        </RouteTransition>
-        <Footer />
-    </div>
-*/

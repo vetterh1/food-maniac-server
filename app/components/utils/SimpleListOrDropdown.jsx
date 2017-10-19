@@ -37,9 +37,9 @@ SimpleListOrDropdown.propTypes = {
   dropdown: PropTypes.bool.isRequired,
   // dropdownPlaceholder: Item added to the list (ex: 'all')
   // when selected, onChange returns null
-  dropdownPlaceholder: React.PropTypes.string,
+  dropdownPlaceholder: PropTypes.string,
   items: PropTypes.array.isRequired,
-  selectedOption: React.PropTypes.string,
+  selectedOption: PropTypes.string,
   onChange: PropTypes.func,
 };
 

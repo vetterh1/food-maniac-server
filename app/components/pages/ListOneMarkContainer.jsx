@@ -128,4 +128,4 @@ export default class ListOneMarkContainer extends React.Component {
 }
 
 ListOneMarkContainer.defaultProps = {};
-ListOneMarkContainer.contextTypes = { intl: React.PropTypes.object.isRequired };
+ListOneMarkContainer.contextTypes = { intl: PropTypes.object.isRequired };

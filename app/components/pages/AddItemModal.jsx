@@ -248,7 +248,7 @@ class AddItemModal extends React.Component {
 
 }
 
-AddItemModal.contextTypes = { intl: React.PropTypes.object.isRequired };
+AddItemModal.contextTypes = { intl: PropTypes.object.isRequired };
 
 export default AddItemModal;
 

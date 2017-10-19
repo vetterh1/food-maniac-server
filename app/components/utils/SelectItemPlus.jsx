@@ -336,7 +336,7 @@ class SelectItemPlus extends React.Component {
 }
 
 
-SelectItemPlus.contextTypes = { intl: React.PropTypes.object.isRequired };
+SelectItemPlus.contextTypes = { intl: PropTypes.object.isRequired };
 
 
 SelectItemPlus.defaultProps = {

@@ -193,7 +193,7 @@ class SimulateLocationModal extends React.Component {
 
 }
 
-SimulateLocationModal.contextTypes = { intl: React.PropTypes.object.isRequired };
+SimulateLocationModal.contextTypes = { intl: PropTypes.object.isRequired };
 
 export default SimulateLocationModal;
 

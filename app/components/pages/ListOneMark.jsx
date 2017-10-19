@@ -166,6 +166,6 @@ export default class ListOneMark extends React.Component {
 
 }
 
-ListOneMark.contextTypes = { intl: React.PropTypes.object.isRequired };
+ListOneMark.contextTypes = { intl: PropTypes.object.isRequired };
 
 ListOneMark.defaultProps = { markIndividuals: [] };

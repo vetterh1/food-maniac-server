@@ -17,6 +17,7 @@ if (process.env.NODE_ENV === 'production') {
   require('babel-register')({
     "plugins": [
       [
+        // TODO: Try without this plugin
         "babel-plugin-webpack-loaders",
         {
           "config": "./webpack.config.babel.js",

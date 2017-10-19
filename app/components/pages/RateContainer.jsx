@@ -270,7 +270,7 @@ class RateContainer extends React.Component {
   }
 }
 
-RateContainer.contextTypes = { intl: React.PropTypes.object.isRequired };
+RateContainer.contextTypes = { intl: PropTypes.object.isRequired };
 
 
 const mapStateToProps = (state) => {

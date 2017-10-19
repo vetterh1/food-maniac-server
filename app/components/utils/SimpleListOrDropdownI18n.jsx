@@ -80,8 +80,8 @@ class SimpleListOrDropdownI18n extends React.Component {
 
 SimpleListOrDropdownI18n.propTypes = {
   dropdown: PropTypes.bool.isRequired,
-  dropdownPlaceholder: React.PropTypes.string,
-  selectedOption: React.PropTypes.string,
+  dropdownPlaceholder: PropTypes.string,
+  selectedOption: PropTypes.string,
   onChange: PropTypes.func,
   i18nKey: PropTypes.string.isRequired,
 };
@@ -93,6 +93,6 @@ SimpleListOrDropdownI18n.defaultProps = {
   onChange: null,
 };
 
-SimpleListOrDropdownI18n.contextTypes = { intl: React.PropTypes.object.isRequired };
+SimpleListOrDropdownI18n.contextTypes = { intl: PropTypes.object.isRequired };
 
 export default SimpleListOrDropdownI18n;

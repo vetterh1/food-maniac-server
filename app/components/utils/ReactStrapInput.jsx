@@ -14,7 +14,7 @@ const ReactStrapInput = props => (
 
 ReactStrapInput.propTypes = {
   onChange: PropTypes.func.isRequired,
-  selectedOption: React.PropTypes.string,
+  selectedOption: PropTypes.string,
   children: PropTypes.array,
 };
 

@@ -122,7 +122,7 @@ class AddItemContainer extends React.Component {
 
 }
 
-AddItemContainer.contextTypes = { intl: React.PropTypes.object.isRequired };
+AddItemContainer.contextTypes = { intl: PropTypes.object.isRequired };
 
 const mapStateToProps = (state) => {
   // Add the All to the Kind & Category lists

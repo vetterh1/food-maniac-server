@@ -203,7 +203,7 @@ class SearchItemContainer extends React.Component {
   }
 }
 
-SearchItemContainer.contextTypes = { intl: React.PropTypes.object.isRequired };
+SearchItemContainer.contextTypes = { intl: PropTypes.object.isRequired };
 
 
 const mapStateToProps = (state) => {
