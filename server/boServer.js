@@ -1,8 +1,10 @@
  /* eslint-disable no-multiple-empty-lines */
+/* eslint-disable import/first */
 
 const logger = require('./util/logger.js');
 
 import express from 'express';
+import helmet from 'helmet';
 import http from 'http';
 import SocketIO from 'socket.io';
 import compression from 'compression';
@@ -178,6 +180,11 @@ if (process.env.NODE_ENV === 'development') {
 // ---------------------  INIT SERVER  ---------------------
 //
 
+// security
+app.use(allowCrossDomain);
+app.use(helmet());
+app.use(helmet.xssFilter({ setOnOldIE: true }));
+
 import apiRoutes from './routes/apiRoutes';
 import utilRoutes from './routes/utilRoutes';
 
@@ -189,7 +196,6 @@ app.use(morgan('combined', { stream: accessLogStream })); // for logging
 app.use(bodyParser.json({ limit: '5mb' })); // Mandatory to get body in post requests!
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
-app.use(allowCrossDomain);
 
 /*
  *   ------------------ IMPORTANT NOTE ON ADDING PATHS TO THE SERVER ------------------

@@ -1,8 +1,10 @@
  /* eslint-disable no-multiple-empty-lines */
+/* eslint-disable import/first */
 
 const logger = require('./util/logger.js');
 
 import Express from 'express';
+import helmet from 'helmet';
 import compression from 'compression';
 import bodyParser from 'body-parser';
 import fs from 'fs';
@@ -96,12 +98,18 @@ if (process.env.NODE_ENV === 'development') {
 // ---------------------  INIT SERVER  ---------------------
 //
 
+// security
+app.use(allowCrossDomain);
+app.use(helmet());
+app.use(helmet.xssFilter({ setOnOldIE: true }));
+logger.error('helmet on!');
+
+
 app.use(compression());
 app.use(morgan('combined', { stream: accessLogStream })); // for logging
 app.use(bodyParser.json({ limit: '5mb' })); // Mandatory to get body in post requests!
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
-app.use(allowCrossDomain);
 
 
 // serve our static stuff like index.css

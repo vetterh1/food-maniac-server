@@ -49,6 +49,7 @@
     "file-stream-rotator": "0.2.0",
     "fs": "0.0.1-security",
     "fs-extra": "^4.0.1",
+    "helmet": "^3.9.0",
     "http-server": "^0.10.0",
     "if-env": "^1.0.0",
     "intl": "^1.2.5",
