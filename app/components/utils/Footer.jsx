@@ -16,6 +16,7 @@ class Footer extends React.Component {
   }
 
   render() {
+    const hostname = window && window.location && window.location.hostname;
     return (
       <div style={divStyle}>
         <br />
@@ -28,6 +29,8 @@ class Footer extends React.Component {
         Last commit comment: {process.env.GIT_LAST_COMMIT_COMMENT}
         <br />
         Last commit date: {process.env.GIT_LAST_COMMIT_DATE}
+        <br />
+        Hostname: {hostname} / Host (from server): {process.env.HOST} / Port (from server): {process.env.PORT}
         <br />
         <a href="/logs/show?limit=200&level=1&minutes=30" target="_blank" rel="noopener noreferrer">Error logs</a>
         <br />

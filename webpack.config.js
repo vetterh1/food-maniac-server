@@ -42,6 +42,14 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 // const WebpackShellPlugin = require('webpack-shell-plugin');
 // const GenerateJsonPlugin = require('generate-json-webpack-plugin');
 
+// Get environment dependant values, to be passed to JS client through process.env:
+const config = require('config');
+const serverHost = config.get('server.FoServer.host');
+const serverPort = config.get('server.FoServer.port');
+logger.info(`[FoServer] Host: ${serverHost}`);
+logger.info(`[FoServer] Port: ${serverPort}`);
+
+
 const childProcess = require('child_process');
 
 logger.info('[FoServer] Start webpack (using webpack.config.js)');
@@ -74,9 +82,11 @@ plugins.push(
         GIT_BRANCH: JSON.stringify(gitBranch),
         GIT_LAST_COMMIT_COMMENT: JSON.stringify(gitLastCommitComment),
         GIT_LAST_COMMIT_DATE: JSON.stringify(gitLastCommitDate),
+        HOST: JSON.stringify(serverHost),
+        PORT: JSON.stringify(serverPort),
       },
     })
-  );
+);
 
 // plugins.push(
 //   new webpack.optimize.CommonsChunkPlugin({

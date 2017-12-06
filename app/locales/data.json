@@ -98,7 +98,7 @@
     "comments.optionals": "Optional comments",
     
 
-    "login.sign_in": "Sign-in"
+    "login.login_signin": "Login / Sign-in"
 
 
   },
@@ -201,9 +201,7 @@
     "comment.optional": "Commentaire optionnel",
     "comments.optionals": "Commentaires optionnels",
     
-
-    "login.sign_in": "S'enregistrer"
-
+    "login.login_signin": "Se connecter / S'enregistrer"
 
   }
 }

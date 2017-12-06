@@ -82,7 +82,8 @@ class MainAppBar extends React.Component {
             className="ml-auto"
             navbar
           >
-            {!onMainPage && <NavItem>
+            {!onMainPage &&
+            <NavItem>
               <NavLink
                 className="navbar-link"
                 tag={Link}
@@ -93,7 +94,8 @@ class MainAppBar extends React.Component {
                 <FormattedMessage id="item.rate.short" />
               </NavLink>
             </NavItem>}
-            {!onMainPage && <NavItem>
+            {!onMainPage &&
+            <NavItem>
               <NavLink
                 className="navbar-link"
                 tag={Link}
@@ -113,7 +115,7 @@ class MainAppBar extends React.Component {
                   onClick={this.handleChangeLanguage}
                 />
               </NavItem>
-              ), this)}
+            ), this)}
             <NavItem>
               <RetreiveLocations />
             </NavItem>

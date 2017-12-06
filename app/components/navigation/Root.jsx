@@ -16,7 +16,6 @@ import ListItemsContainer from '../pages/ListItemsContainer';
 import ListCategoriesContainer from '../pages/ListCategoriesContainer';
 import ListKindsContainer from '../pages/ListKindsContainer';
 import AdminItemsContainer from '../pages/AdminItemsContainer';
-import Login from '../pages/Login';
 
 const NotFound = () => <h2>404 error - This page is not found!</h2>;
 
@@ -90,10 +89,6 @@ class Root extends React.Component {
               <Route
                 path="/searchItem"
                 component={SearchItemContainer}
-              />
-              <Route
-                path="/login"
-                component={Login}
               />
               <Route
                 path="/listItems"
