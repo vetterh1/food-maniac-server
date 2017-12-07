@@ -3,10 +3,12 @@
 	{
 		"BoServer":
 		{
+      "host": "http://localhost:8090",
 			"port": 8090
 		},
     "FoServer":
     {
+      "host": "http://localhost:8080",
       "port": 8080
     }
 	},
