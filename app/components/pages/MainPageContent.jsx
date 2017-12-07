@@ -1,6 +1,7 @@
 /* eslint-disable class-methods-use-this */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 import { Button } from 'reactstrap';
@@ -10,26 +11,43 @@ import MdLocationSearching from 'react-icons/lib/md/location-searching';
 import Auth from '../../auth/Auth';
 
 class MainPageContent extends React.Component {
-
+  static propTypes = {
+    auth: PropTypes.object,
+  }
 
   onLogin() {
-    const auth = new Auth();
-    auth.login();
+    this.props.auth.login();
+  }
+
+  onLogout() {
+    this.props.auth.logout();
   }
 
   render() {
+    const { isAuthenticated } = this.props.auth;
+    console.log(`isAuthenticated: ${isAuthenticated()}`);
+
     return (
       <div>
-        <div className="jumbotron">
-          <div className="container">
-            <h1 className="display-6"><FormattedMessage id="messages.welcome.main" /></h1>
-            <p><FormattedMessage id="messages.welcome.blob" /></p>
-            <Button color="primary" size="md" onClick={this.onLogin.bind(this)}>
-              <FormattedMessage id="login.login_signin" />
-            </Button>
-
+        {!isAuthenticated() && (
+          <div className="jumbotron">
+            <div className="container">
+              <h1 className="display-6"><FormattedMessage id="messages.welcome.main" /></h1>
+              <p><FormattedMessage id="messages.welcome.blob" /></p>
+              <Button color="primary" size="md" onClick={this.onLogin.bind(this)}>
+                <FormattedMessage id="login.login_signin" />
+              </Button>
+            </div>
           </div>
-        </div>
+        )}
+        {isAuthenticated() && (
+          <div className="container">
+            <h1 className="display-6">Welcome :)</h1>
+            <Button color="primary" size="md" onClick={this.onLogout.bind(this)}>
+              Logout
+            </Button>
+          </div>
+        )}
         <div className="homepage-container">
           <div className="homepage-feature-items">
             <div className="homepage-feature-item">

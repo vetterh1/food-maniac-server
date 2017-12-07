@@ -10,6 +10,7 @@ import 'react-s-alert/dist/s-alert-css-effects/stackslide.css';
 import MainAppBar from '../navigation/MainAppBar';
 import Footer from '../utils/Footer';
 import AlertGeolocalisation from '../utils/AlertGeolocalisation';
+import Auth from '../../auth/Auth';
 
 
 const styles = {
@@ -25,7 +26,9 @@ const styles = {
 
 class App extends React.Component {
   static propTypes = {
-    children: PropTypes.node,
+    auth: PropTypes.object,
+    // children: PropTypes.node,
+
   }
 
   render() {

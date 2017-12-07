@@ -1,6 +1,7 @@
 /* eslint-disable react/forbid-prop-types */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect, Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 // Import bootstrap directly from cdn in index.html. no need for npm install bootstrap either!
@@ -16,12 +17,25 @@ import ListItemsContainer from '../pages/ListItemsContainer';
 import ListCategoriesContainer from '../pages/ListCategoriesContainer';
 import ListKindsContainer from '../pages/ListKindsContainer';
 import AdminItemsContainer from '../pages/AdminItemsContainer';
+import Callback from '../../auth/Callback';
+import Auth from '../../auth/Auth';
+
+const auth = new Auth();
+
+const handleAuthentication = (nextState, replace) => {
+  console.log('handleAuthentication() in route?');
+  if (/access_token|id_token|error/.test(nextState.location.hash)) {
+    auth.handleAuthentication();
+    console.log('handleAuthentication() in route --> YES');
+  } else {
+    console.log('handleAuthentication() in route --> NO');
+  }
+};
 
 const NotFound = () => <h2>404 error - This page is not found!</h2>;
 
 
 class Root extends React.Component {
-
   constructor() {
     super();
     this.toggle = this.i18nLoad.bind(this);
@@ -77,10 +91,17 @@ class Root extends React.Component {
           >
             <Route
               path="/"
-              component={App}
+              component={props => <App auth={auth} {...props} />}
             >
               <IndexRoute
-                component={MainPageContent}
+                component={props => <MainPageContent auth={auth} {...props} />}
+              />
+              <Route
+                path="/callback"
+                component={(props) => {
+                  handleAuthentication(props);
+                  return <Callback {...props} />;
+                }}
               />
               <Route
                 path="/rate"
