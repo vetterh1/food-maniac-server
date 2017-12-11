@@ -26,7 +26,7 @@ const styles = {
 
 class App extends React.Component {
   static propTypes = {
-    auth: PropTypes.object,
+    auth: PropTypes.instanceOf(Auth).isRequired,
     // children: PropTypes.node,
 
   }
@@ -34,7 +34,7 @@ class App extends React.Component {
   render() {
     return (
       <div style={styles.pageContainer}>
-        <MainAppBar location={this.props.location} router={this.props.router} route={this.props.route} />
+        <MainAppBar auth={this.props.auth} location={this.props.location} router={this.props.router} route={this.props.route} />
         <AlertGeolocalisation />
         {this.props.children}
         <Footer />

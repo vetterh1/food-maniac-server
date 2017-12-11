@@ -1,7 +1,17 @@
 /* eslint-disable class-methods-use-this */
 
+import * as log from 'loglevel';
 import { browserHistory } from 'react-router';
 import auth0 from 'auth0-js';
+import { loglevelServerSend } from '../utils/loglevel-serverSend';
+import stringifyOnce from '../utils/stringifyOnce';
+
+
+const logAuth = log.getLogger('logAuth');
+loglevelServerSend(logAuth); // a setLevel() MUST be run AFTER this!
+logAuth.setLevel('debug');
+logAuth.debug('--> entering Auth.jsx');
+
 
 export default class Auth {
   auth0 = new auth0.WebAuth({
@@ -16,23 +26,26 @@ export default class Auth {
 
 
   login() {
-    console.log('Auth.login()');
     this.auth0.authorize();
   }
 
 
   handleAuthentication() {
-    console.log('{ Auth.handleAuthentication()');
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
+        console.log('handleAuthentication() 1');
+        console.log(stringifyOnce(authResult, null, 2));
+        logAuth.log(stringifyOnce(authResult, null, 2));
         this.setSession(authResult);
-        console.log('} Auth.handleAuthentication() --> OK');
         browserHistory.replace('/');
       } else if (err) {
         browserHistory.replace('/');
-        console.log(err);
-        console.log('} Auth.handleAuthentication() --> KO');
+        logAuth.error(`Error: ${err.error}. Check the console for further details.`);
         alert(`Error: ${err.error}. Check the console for further details.`);
+        // TODO: better error message to user than alert!
+      } else {
+        console.log('handleAuthentication() 2');
+        console.log(stringifyOnce(authResult, null, 2));
       }
     });
   }
@@ -55,7 +68,7 @@ export default class Auth {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     // navigate to the home route
-    browserHistory.replace('/rate');
+    browserHistory.replace('/');
   }
 
 

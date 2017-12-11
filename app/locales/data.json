@@ -98,8 +98,10 @@
     "comments.optionals": "Optional comments",
     
 
-    "login.login_signin": "Login / Sign-in"
-
+    "login.login_signin": "Login / Sign-in",
+    "login.logout": "Logout",
+    "login.ask": "Please login / sign-up to access to this page"
+    
 
   },
 
@@ -201,7 +203,9 @@
     "comment.optional": "Commentaire optionnel",
     "comments.optionals": "Commentaires optionnels",
     
-    "login.login_signin": "Se connecter / S'enregistrer"
-
+    "login.login_signin": "Se connecter / S'enregistrer",
+    "login.logout": "Se déconnecter",
+    "login.ask": "Connectez-vous s'il vous plait pour accéder à cette page"
+    
   }
 }

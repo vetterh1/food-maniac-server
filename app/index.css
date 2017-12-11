@@ -161,6 +161,11 @@ h5 {
 
 **************************************************************/
 
+.auth-required {
+  color: rgb(128, 128, 128) !important;
+}
+
+
 .navbar-inverse .navbar-nav .nav-link {
     color: rgba(255, 255, 255, 0.85);
 }
@@ -212,7 +217,6 @@ h5 {
 .homepage-container .homepage-feature-icon {
     color: #000;
 }
-
 
 .homepage-container .homepage-feature-title {
     color: #000;

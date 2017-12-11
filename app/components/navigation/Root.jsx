@@ -1,5 +1,6 @@
 /* eslint-disable react/forbid-prop-types */
 
+import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect, Provider } from 'react-redux';
@@ -7,6 +8,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 // Import bootstrap directly from cdn in index.html. no need for npm install bootstrap either!
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import { IntlProvider } from 'react-intl';
+import { loglevelServerSend } from '../../utils/loglevel-serverSend';
 import localeData from '../../locales/data.json';
 import App from '../pages/App';
 import MainPageContent from '../pages/MainPageContent';
@@ -20,15 +22,16 @@ import AdminItemsContainer from '../pages/AdminItemsContainer';
 import Callback from '../../auth/Callback';
 import Auth from '../../auth/Auth';
 
+const logRoot = log.getLogger('logRoot');
+loglevelServerSend(logRoot); // a setLevel() MUST be run AFTER this!
+logRoot.setLevel('debug');
+logRoot.debug('--> entering Root.jsx');
+
 const auth = new Auth();
 
 const handleAuthentication = (nextState, replace) => {
-  console.log('handleAuthentication() in route?');
   if (/access_token|id_token|error/.test(nextState.location.hash)) {
     auth.handleAuthentication();
-    console.log('handleAuthentication() in route --> YES');
-  } else {
-    console.log('handleAuthentication() in route --> NO');
   }
 };
 
@@ -105,57 +108,53 @@ class Root extends React.Component {
               />
               <Route
                 path="/rate"
-                component={RateContainer}
+                component={props => <RateContainer auth={auth} {...props} />}
               />
               <Route
                 path="/searchItem"
-                component={SearchItemContainer}
+                component={props => <SearchItemContainer auth={auth} {...props} />}
               />
               <Route
                 path="/listItems"
-                component={() => (
-                  <ListItemsContainer
-                    dropdown={false}
-                  />)}
+                component={props => <ListItemsContainer dropdown={false} auth={auth} {...props} />}
               />
               <Route
                 path="/listItemsOld"
-                component={() => (
+                component={props => (
                   <ListItemsContainerOld
                     URL="/api/items"
                     dropdown={false}
+                    auth={auth}
+                    {...props}
                   />)}
               />
               <Route
                 path="/listCategories"
-                component={() => (
-                  <ListCategoriesContainer
-                    dropdown={false}
-                  />)}
+                component={props => <ListCategoriesContainer dropdown={false} auth={auth} {...props} />}
               />
               <Route
                 path="/listKinds"
-                component={() => (
-                  <ListKindsContainer
-                    dropdown={false}
-                  />)}
+                component={props => <ListKindsContainer dropdown={false} auth={auth} {...props} />}
               />
               <Route
                 path="/adminItems"
-                component={AdminItemsContainer}
+                component={props => <AdminItemsContainer auth={auth} {...props} />}
               />
               <Route
                 path="/generateThumbnails"
-                component={() => (
+                component={props => (
                   <ListItemsContainerOld
                     URL="/util/regenerateAllThumbnails"
                     socketName="regenerateAllThumbnails"
                     dropdown={false}
+                    auth={auth}
+                    {...props}
                   />)}
               />
               <Route
                 path="*"
                 component={NotFound}
+                auth={auth}
               />
             </Route>
           </Router>
@@ -176,12 +175,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(Root);
-
-
-/*
-        <IndexRoute component={MainChoiceContainer} />
-
-
-        <IndexRedirect to="/mainChoice" />
-        <Route path="/mainChoice" component={MainChoiceContainer} />
-*/

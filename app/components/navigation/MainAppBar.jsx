@@ -9,10 +9,13 @@ import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } f
 import RetreiveLocations from '../utils/RetreiveLocations';
 import LanguageChoice from '../utils/LanguageChoice';
 import { changeLanguage } from '../../actions/languageInfoActions';
+import Auth from '../../auth/Auth';
+import LoginInBar from '../../auth/LoginInBar';
 
 class MainAppBar extends React.Component {
   static propTypes = {
-    // location: PropTypes.object,
+    location: PropTypes.object,
+    auth: PropTypes.instanceOf(Auth).isRequired,
     languageInfo: PropTypes.shape({
       list: PropTypes.array,
       locale: PropTypes.string,
@@ -41,7 +44,7 @@ class MainAppBar extends React.Component {
 
   handleChangeLanguage(locale) {
     // Save new language selection in redux store
-    const { dispatch } = this.props;  // Injected by react-redux
+    const { dispatch } = this.props; // Injected by react-redux
     const action = changeLanguage(locale);
     dispatch(action);
   }
@@ -119,6 +122,7 @@ class MainAppBar extends React.Component {
             <NavItem>
               <RetreiveLocations />
             </NavItem>
+            <LoginInBar auth={this.props.auth} />
           </Nav>
         </Collapse>
       </Navbar>

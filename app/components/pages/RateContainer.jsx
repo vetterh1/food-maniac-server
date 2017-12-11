@@ -8,6 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Container } from 'reactstrap';
+import { FormattedMessage } from 'react-intl';
 import Alert from 'react-s-alert';
 import 'es6-promise/auto';
 import 'isomorphic-fetch';
@@ -18,6 +19,7 @@ import stringifyOnce from '../../utils/stringifyOnce';
 import { loglevelServerSend } from '../../utils/loglevel-serverSend';
 import * as itemsActions from '../../actions/itemsActions';
 import * as placesActions from '../../actions/PlacesActions';
+import Auth from '../../auth/Auth';
 
 
 const logRateContainer = log.getLogger('logRateContainer');
@@ -29,6 +31,7 @@ logRateContainer.debug('--> entering RateContainer.jsx');
 class RateContainer extends React.Component {
   static propTypes = {
     // Injected by redux-store connect:
+    auth: PropTypes.instanceOf(Auth).isRequired,
     kinds: PropTypes.object.isRequired,
     categories: PropTypes.object.isRequired,
     items: PropTypes.object.isRequired,
@@ -243,6 +246,14 @@ class RateContainer extends React.Component {
 
 
   render() {
+    const { isAuthenticated } = this.props.auth;
+    if (!isAuthenticated()) {
+      return (
+        <Container fluid>
+          <FormattedMessage id="login.ask" />
+        </Container>
+      );
+    }
     return (
       <Container fluid>
         <RateForm

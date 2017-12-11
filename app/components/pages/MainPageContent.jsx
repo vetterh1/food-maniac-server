@@ -12,20 +12,16 @@ import Auth from '../../auth/Auth';
 
 class MainPageContent extends React.Component {
   static propTypes = {
-    auth: PropTypes.object,
+    auth: PropTypes.instanceOf(Auth).isRequired,
   }
 
   onLogin() {
     this.props.auth.login();
   }
 
-  onLogout() {
-    this.props.auth.logout();
-  }
-
   render() {
     const { isAuthenticated } = this.props.auth;
-    console.log(`isAuthenticated: ${isAuthenticated()}`);
+    const greyWhenNoAuth = isAuthenticated() ? '' : 'auth-required';
 
     return (
       <div>
@@ -40,21 +36,13 @@ class MainPageContent extends React.Component {
             </div>
           </div>
         )}
-        {isAuthenticated() && (
-          <div className="container">
-            <h1 className="display-6">Welcome :)</h1>
-            <Button color="primary" size="md" onClick={this.onLogout.bind(this)}>
-              Logout
-            </Button>
-          </div>
-        )}
         <div className="homepage-container">
           <div className="homepage-feature-items">
             <div className="homepage-feature-item">
               <Link to="/rate" className="" style={{ textDecoration: 'none' }}>
-                <div className="homepage-feature-icon"><MdStarHalf size={64} /></div>
-                <h5 className="homepage-feature-title"><FormattedMessage id="core.rate" /></h5>
-                <div className="homepage-feature-detail">
+                <div className={`homepage-feature-icon ${greyWhenNoAuth}`}><MdStarHalf size={64} /></div>
+                <h5 className={`homepage-feature-title ${greyWhenNoAuth}`}><FormattedMessage id="core.rate" /></h5>
+                <div className={`homepage-feature-detail ${greyWhenNoAuth}`}>
                   <p><FormattedMessage id="messages.rate.blob" /></p>
                 </div>
               </Link>

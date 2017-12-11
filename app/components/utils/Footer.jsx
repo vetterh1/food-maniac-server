@@ -12,7 +12,7 @@ const divStyle = {
 class Footer extends React.Component {
 
   startServerLogging = () => {
-    loglevelStartServerTimer(30000);
+    loglevelStartServerTimer(60000);
   }
 
   render() {
@@ -36,7 +36,7 @@ class Footer extends React.Component {
         <br />
         <a href="/logs/show?limit=1000&level=5&minutes=1" target="_blank" rel="noopener noreferrer">Full logs (1mn)</a>
         <br />
-        <a onClick={this.startServerLogging.bind(this)} role="presentation">Start logging to server (30sec)</a>
+        <a onClick={this.startServerLogging.bind(this)} role="button">Start logging to server (1mn)</a>
       </div>
     );
   }
