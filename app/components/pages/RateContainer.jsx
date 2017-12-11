@@ -7,7 +7,7 @@ import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Container } from 'reactstrap';
+import { Button, Container } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import Alert from 'react-s-alert';
 import 'es6-promise/auto';
@@ -20,6 +20,7 @@ import { loglevelServerSend } from '../../utils/loglevel-serverSend';
 import * as itemsActions from '../../actions/itemsActions';
 import * as placesActions from '../../actions/PlacesActions';
 import Auth from '../../auth/Auth';
+import LoginBanner from '../../auth/LoginBanner';
 
 
 const logRateContainer = log.getLogger('logRateContainer');
@@ -56,6 +57,9 @@ class RateContainer extends React.Component {
 
 
 
+  onLogin() {
+    this.props.auth.login();
+  }
 
   onStartSaving = () => {
     this._nowStartSaving = new Date().getTime();
@@ -108,7 +112,7 @@ class RateContainer extends React.Component {
 
   onChangeLocationType(locationType) {
     // Remove any default item (set by Add Item)
-    const { dispatch } = this.props;  // Injected by react-redux
+    const { dispatch } = this.props; // Injected by react-redux
     const action = placesActions.setLocationType(locationType);
     dispatch(action);
   }
@@ -116,12 +120,12 @@ class RateContainer extends React.Component {
   save() {
     logRateContainer.debug(`RateContainer.save - values:\n\n${stringifyOnce(this.values, null, 2)}`);
     this.saveLocation()
-    .then(this.saveMarks.bind(this))
-    .then(this.saveDone.bind(this))
-    .catch((error) => {
-      logRateContainer.error('RateContainer.save failed: ', error);
-      this.onEndSavingFailed('01');
-    });
+      .then(this.saveMarks.bind(this))
+      .then(this.saveDone.bind(this))
+      .catch((error) => {
+        logRateContainer.error('RateContainer.save failed: ', error);
+        this.onEndSavingFailed('01');
+      });
   }
 
   saveLocation() {
@@ -155,21 +159,21 @@ class RateContainer extends React.Component {
         },
         body: JSON.stringify({ place }),
       })
-      .then((response) => {
-        logRateContainer.debug('   fetch result: ', JSON.stringify(response));
-        if (response.ok) {
-          logRateContainer.debug('   fetch operation OK');
-          // returns the (async) response from server: the saved location (with id)
-          resolve(response.json());
-        } else {
-          // returns the error given by the server (async)
-          response.json()
-          .then((error) => { throw new Error(error.message); });
-        }
-      })
-      .catch((error) => {
-        reject(Error(error.message));
-      });
+        .then((response) => {
+          logRateContainer.debug('   fetch result: ', JSON.stringify(response));
+          if (response.ok) {
+            logRateContainer.debug('   fetch operation OK');
+            // returns the (async) response from server: the saved location (with id)
+            resolve(response.json());
+          } else {
+            // returns the error given by the server (async)
+            response.json()
+              .then((error) => { throw new Error(error.message); });
+          }
+        })
+        .catch((error) => {
+          reject(Error(error.message));
+        });
       logRateContainer.debug('} RateContainer.saveLocation');
     });
   }
@@ -212,21 +216,21 @@ class RateContainer extends React.Component {
         },
         body: JSON.stringify({ markIndividual }),
       })
-      .then((response) => {
-        logRateContainer.debug('   fetch result: ', response);
-        if (response.ok) {
-          logRateContainer.debug('   fetch operation OK');
-          // returns the (async) response from server: the saved markIndividual (with id)
-          resolve(response.json());
-        } else {
-          // returns the error given by the server (async)
-          response.json()
-          .then((error) => { throw new Error(error.message); });
-        }
-      })
-      .catch((error) => {
-        reject(Error(error.message));
-      });
+        .then((response) => {
+          logRateContainer.debug('   fetch result: ', response);
+          if (response.ok) {
+            logRateContainer.debug('   fetch operation OK');
+            // returns the (async) response from server: the saved markIndividual (with id)
+            resolve(response.json());
+          } else {
+            // returns the error given by the server (async)
+            response.json()
+              .then((error) => { throw new Error(error.message); });
+          }
+        })
+        .catch((error) => {
+          reject(Error(error.message));
+        });
       logRateContainer.debug('} RateContainer.saveMarks');
     });
   }
@@ -236,7 +240,7 @@ class RateContainer extends React.Component {
     logRateContainer.debug(`saveDone - markIndividual saved: ${stringifyOnce(savedMark, null, 2)}`);
 
     // Remove any default item (set by Add Item)
-    const { dispatch } = this.props;  // Injected by react-redux
+    const { dispatch } = this.props; // Injected by react-redux
     const action = itemsActions.requestSetDefaultItem(null);
     dispatch(action);
 
@@ -247,13 +251,8 @@ class RateContainer extends React.Component {
 
   render() {
     const { isAuthenticated } = this.props.auth;
-    if (!isAuthenticated()) {
-      return (
-        <Container fluid>
-          <FormattedMessage id="login.ask" />
-        </Container>
-      );
-    }
+    if (!isAuthenticated()) return (<LoginBanner auth={this.props.auth} />);
+
     return (
       <Container fluid>
         <RateForm

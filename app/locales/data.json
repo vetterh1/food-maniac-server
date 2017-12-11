@@ -73,6 +73,7 @@
     "item.rate.short": "Rate item",
     "item.rate.long": "Rate your plate!",
     "item.search.short": "Search item",
+    "item.search.long": "Find the best place!",
     "item.select.long": "Select an item",
     "item.filter.short": "Filter items",
 
@@ -151,7 +152,7 @@
     "messages.welcome.blob": "Partagez vos bons plans resto et bars!",
     "messages.rate.blob": "Notez la pizza que vous venez de déguster!",
     "messages.search.blob": "Trouvez les meilleures pâtes autour de vous...",
-    "messages.discover.blob": "Qu'il y a t'il de bon ici ?",
+    "messages.discover.blob": "Qu'y a t'il de bon ici ?",
 
     "messages.save.start": "En cours de sauvegarde...",
     "messages.save.success": "Sauvé ! (durée={durationSaving}ms)",
@@ -180,6 +181,7 @@
     "item.rate.short": "Noter un plat",
     "item.rate.long": "Notez votre plat!",
     "item.search.short": "Chercher un plat",
+    "item.search.long": "Trouvez le meilleur endroit!",
     "item.select.long": "Sélectionnez un plat",
     "item.filter.short": "Filter les plats",
     

@@ -1,41 +1,27 @@
 /* eslint-disable class-methods-use-this */
+/* eslint-disable react/prefer-stateless-function */
 
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { FormattedMessage } from 'react-intl';
-import { Button } from 'reactstrap';
 import MdStarHalf from 'react-icons/lib/md/star-half';
 import MdLocalRestaurant from 'react-icons/lib/md/local-restaurant';
 import MdLocationSearching from 'react-icons/lib/md/location-searching';
 import Auth from '../../auth/Auth';
+import LoginBanner from '../../auth/LoginBanner';
 
 class MainPageContent extends React.Component {
   static propTypes = {
     auth: PropTypes.instanceOf(Auth).isRequired,
   }
 
-  onLogin() {
-    this.props.auth.login();
-  }
-
   render() {
-    const { isAuthenticated } = this.props.auth;
-    const greyWhenNoAuth = isAuthenticated() ? '' : 'auth-required';
+    const greyWhenNoAuth = this.props.auth.isAuthenticated() ? '' : 'auth-required';
 
     return (
       <div>
-        {!isAuthenticated() && (
-          <div className="jumbotron">
-            <div className="container">
-              <h1 className="display-6"><FormattedMessage id="messages.welcome.main" /></h1>
-              <p><FormattedMessage id="messages.welcome.blob" /></p>
-              <Button color="primary" size="md" onClick={this.onLogin.bind(this)}>
-                <FormattedMessage id="login.login_signin" />
-              </Button>
-            </div>
-          </div>
-        )}
+        <LoginBanner auth={this.props.auth} showWelcomeBlob />
         <div className="homepage-container">
           <div className="homepage-feature-items">
             <div className="homepage-feature-item">

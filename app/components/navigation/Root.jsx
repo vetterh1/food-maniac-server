@@ -29,7 +29,7 @@ logRoot.debug('--> entering Root.jsx');
 
 const auth = new Auth();
 
-const handleAuthentication = (nextState, replace) => {
+const handleAuthentication = (nextState) => {
   if (/access_token|id_token|error/.test(nextState.location.hash)) {
     auth.handleAuthentication();
   }
@@ -49,7 +49,7 @@ class Root extends React.Component {
     };
   }
 
-// -------------------  i18n  ---------------------
+  // -------------------  i18n  ---------------------
 
   componentWillMount() {
     // 1st load and data already present in redux store

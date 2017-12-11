@@ -97,7 +97,7 @@ class SearchItemForm extends React.Component {
 
     return (
       <div className="standard-container">
-        <h3 className="mb-4">Seach the best place!</h3>
+        <h3 className="mb-4"><FormattedMessage id="item.search.long" /></h3>
         <Form onSubmit={this.onSubmit.bind(this)}>
           <SelectItemPlus
             locale={this.props.locale}
