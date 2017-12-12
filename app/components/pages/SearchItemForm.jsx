@@ -109,21 +109,21 @@ class SearchItemForm extends React.Component {
             ref={(r) => { this._refSelectItemPlus = r; }} // used to reset the 3 dropdowns
           />
 
-          <div className="mt-4">
-            <h5 className="mb-3">
-              <MdLocationSearching size={24} className="mr-2 hidden-sm-up" />
+          <div className="mt-4 form-block">
+            <h5 className="mb-3 hidden-sm-up">
+              <MdLocationSearching size={24} className="mr-2" />
               <FormattedMessage id="core.where" />
             </h5>
-            <Row className="form-block" noGutters>
-              <Col sm={2}>
+            <Row>
+              <Col sm={2} className="pr-0 hidden-xs-down">
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                  <div className="homepage-feature-icon hidden-xs-down">
+                  <div className="homepage-feature-icon">
                     <MdLocationSearching size={48} />
                   </div>
                 </Row>
-                <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                  <Label size="md" className="hidden-xs-down">
-                    <FormattedMessage id="distance.max" />
+                <Row style={{ display: 'flex', justifyContent: 'center' }} className="mt-2">
+                  <Label size="md">
+                    <FormattedMessage id="core.where" />
                   </Label>
                 </Row>
               </Col>
@@ -158,7 +158,8 @@ class SearchItemForm extends React.Component {
           <div className="mt-4">
             <Button
               color="primary"
-              type="submit" size="md"
+              type="submit"
+              size="md"
               disabled={!formReadyForSubmit}
               getRef={(ref) => { this.refSubmit = ref; }}
             >

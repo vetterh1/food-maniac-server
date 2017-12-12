@@ -416,11 +416,6 @@ h5 {
   .standard-container {
     margin: 25px auto;
   }
-
-  .form-block {
-      padding: 30px 30px 30px 5px;
-  }
-
 }
 
 
@@ -429,11 +424,6 @@ h5 {
   .standard-container {
     max-width: 720px;
   }
-
-  .form-block {
-      padding: 40px 50px 40px 10px;
-  }
-
 }
 
 @media (min-width: 1200px) {
@@ -441,11 +431,6 @@ h5 {
   .standard-container {
     max-width: 992px;
   }
-
-  .form-block {
-      padding: 50px 75px 50px 15px;
-  }
-
 }
 
 

@@ -3,6 +3,7 @@
 
     "language": "EN",
     
+    "core.about": "About",
     "core.add": "Add",
     "core.all": "All",
     "core.at": "at",
@@ -10,6 +11,7 @@
     "core.close": "Close",
     "core.cancel": "Cancel",
     "core.comment": "Comment",
+    "core.debug-info": "Debug info",
     "core.details": "Details",
     "core.discover": "Discover",
     "core.filters": "Filters",
@@ -101,9 +103,17 @@
 
     "login.login_signin": "Login / Sign-in",
     "login.logout": "Logout",
-    "login.ask": "Please login / sign-up to access to this page"
+    "login.ask": "Please login / sign-up to access to this page",
     
-
+    "about.title": "Food-Maniac is a play ground to test new technologies / techniques",
+    "about.front": "Front Office",
+    "about.back": "Back Office",
+    "about.tools": "Tools",
+    "about.techniques": "Techniques",
+    "about.front.blob": "ES6, React, Redux, Flex, Auth0",
+    "about.back.blob": "NodeJS, Express, Nginx, Mongo, Mongoose",
+    "about.tools.blob": "Webpack, Tests (Mocha, Jest), Eslint, Google APIs",
+    "about.techniques.blob": "multi-device layouts, Promises, TDD, Webpack optimizations"
   },
 
 
@@ -112,6 +122,7 @@
 
     "language": "FR",
 
+    "core.about": "A propos",
     "core.add": "Ajouter",
     "core.all": "Tout",
     "core.at": "chez",
@@ -119,6 +130,7 @@
     "core.category": "Catégorie",
     "core.close": "Fermer",
     "core.comment": "Commentaire",
+    "core.debug-info": "Info debug",
     "core.details": "Détails",
     "core.discover": "Découvrir",
     "core.filters": "Filtres",
@@ -207,7 +219,16 @@
     
     "login.login_signin": "Se connecter / S'enregistrer",
     "login.logout": "Se déconnecter",
-    "login.ask": "Connectez-vous s'il vous plait pour accéder à cette page"
-    
-  }
+    "login.ask": "Connectez-vous s'il vous plait pour accéder à cette page",
+     
+    "about.title": "Food-Maniac est un terrain de jeux pour tester de nouvelles technologies / techniques",
+    "about.front": "Front Office",
+    "about.back": "Back Office",
+    "about.tools": "Outils",
+    "about.techniques": "Techniques",
+    "about.front.blob": "ES6, React, Redux, Flex, Auth0",
+    "about.back.blob": "NodeJS, Express, Nginx, Mongo, Mongoose",
+    "about.tools.blob": "Webpack, Tests (Mocha, Jest), Eslint, Google APIs",
+    "about.techniques.blob": "multi-device layouts, Promises, TDD, Webpack optimizations"
+ }
 }

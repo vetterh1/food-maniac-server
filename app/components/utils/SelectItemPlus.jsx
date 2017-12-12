@@ -236,23 +236,23 @@ class SelectItemPlus extends React.Component {
     return (
       <div className={`form-block ${this.props.className}`}>
         {this.props.title &&
-          <h5 className="mb-3">
-            <MdRoomService size={24} className="mr-2 hidden-sm-up" />
+          <h5 className="mb-3 hidden-sm-up">
+            <MdRoomService size={24} className="mr-2" />
             {this.props.title}
           </h5>
         }
 
         {!this.props.hideItem &&
-          <Row className="" noGutters>
-            <Col sm={2}>
+          <Row>
+            <Col sm={2} className="pr-0 hidden-xs-down">
               <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                <div className="homepage-feature-icon hidden-xs-down">
+                <div className="homepage-feature-icon">
                   <MdRoomService size={48} />
                 </div>
               </Row>
-              <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                <Label size="md" className="hidden-xs-down">
-                  <FormattedMessage id="core.item" />
+              <Row style={{ display: 'flex', justifyContent: 'center' }} className="mt-2">
+                <Label size="md">
+                  {this.props.title}
                 </Label>
               </Row>
             </Col>

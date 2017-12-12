@@ -354,20 +354,20 @@ class RateForm extends React.Component {
 
           <Element name="scrollElementWhere" />
           <div className={`mt-4 form-block element-with-transition ${classNameBlockWhere}`}>
-            <h5 className="mb-3">
-              <MdLocationSearching size={24} className="mr-2 hidden-sm-up" />
+            <h5 className="mb-3 hidden-sm-up">
+              <MdLocationSearching size={24} className="mr-2" />
               <FormattedMessage id="core.where" />
             </h5>
-            <Row className="" noGutters>
-              <Col sm={2}>
+            <Row>
+              <Col sm={2} className="pr-0 hidden-xs-down">
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                  <div className="homepage-feature-icon hidden-xs-down">
+                  <div className="homepage-feature-icon">
                     <MdLocationSearching size={48} />
                   </div>
                 </Row>
-                <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                  <Label size="md" className="hidden-xs-down">
-                    <FormattedMessage id="core.place" />
+                <Row style={{ display: 'flex', justifyContent: 'center' }} className="mt-2">
+                  <Label size="md">
+                    <FormattedMessage id="core.where" />
                   </Label>
                 </Row>
               </Col>
@@ -438,19 +438,19 @@ class RateForm extends React.Component {
 
           <Element name="scrollElementRate" />
           <div className={`mt-4 form-block element-with-transition ${classNameBlockRate}`}>
-            <h5 className="mb-3">
-              <MdStarHalf size={24} className="mr-2 hidden-sm-up" />
+            <h5 className="mb-3 hidden-sm-up">
+              <MdStarHalf size={24} className="mr-2" />
               <FormattedMessage id="core.marks" />
             </h5>
-            <Row className="" noGutters>
-              <Col sm={2}>
+            <Row>
+              <Col sm={2} className="pr-0 hidden-xs-down">
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                  <div className="homepage-feature-icon hidden-xs-down">
+                  <div className="homepage-feature-icon">
                     <MdStarHalf size={48} />
                   </div>
                 </Row>
-                <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                  <Label size="md" className="hidden-xs-down">
+                <Row style={{ display: 'flex', justifyContent: 'center' }} className="mt-2">
+                  <Label size="md">
                     <FormattedMessage id="core.marks" />
                   </Label>
                 </Row>
@@ -466,7 +466,6 @@ class RateForm extends React.Component {
                     />
                   </Col>
                 </Row>
-                <Element name="scrollElementOptional" />
                 <Row>
                   <Col xs={6} sm={4} >
                     <Button
@@ -510,22 +509,21 @@ class RateForm extends React.Component {
           </div>
 
 
-
-          <Element name="scrollElementComment" />
+          <Element name="scrollElementOptional" />
           <div className={`mt-4 form-block element-with-transition ${classNameOptionalElements}`}>
-            <h5 className="mb-3">
-              <MdEdit size={24} className="mr-2 hidden-sm-up" />
-              <FormattedMessage id="comment.optional" />
+            <h5 className="mb-3 hidden-sm-up">
+              <MdEdit size={24} className="mr-2" />
+              <FormattedMessage id="core.comment" />
             </h5>
-            <Row className="" noGutters>
-              <Col sm={2}>
+            <Row>
+              <Col sm={2} className="pr-0 hidden-xs-down">
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                  <div className="homepage-feature-icon hidden-xs-down">
+                  <div className="homepage-feature-icon">
                     <MdEdit size={48} />
                   </div>
                 </Row>
-                <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                  <Label size="md" className="hidden-xs-down">
+                <Row style={{ display: 'flex', justifyContent: 'center' }} className="mt-2">
+                  <Label size="md">
                     <FormattedMessage id="core.comment" />
                   </Label>
                 </Row>
