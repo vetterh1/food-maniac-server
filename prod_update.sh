@@ -1,4 +1,9 @@
 cd ./workspace/mapTest/
+rm distFoServer/bundle.*
+rm distFoServer/main.*
+rm distFoServer/manifest.*
+rm distFoServer/styles.*
+rm distFoServer/vendor.*
 pm2 stop all
 pm2 delete boServer foServer
 git pull
