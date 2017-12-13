@@ -102,7 +102,7 @@ class MainAppBar extends React.Component {
               <NavLink
                 className="navbar-link"
                 tag={Link}
-                to="/searchItem"
+                to="/search"
                 onClick={this.resetOpenState}
               >
                 &gt;&nbsp;

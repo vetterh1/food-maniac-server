@@ -112,7 +112,7 @@ class Root extends React.Component {
                 component={props => <RateContainer auth={auth} {...props} />}
               />
               <Route
-                path="/searchItem"
+                path="/search"
                 component={props => <SearchItemContainer auth={auth} {...props} />}
               />
               <Route

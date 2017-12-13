@@ -34,7 +34,7 @@ class MainPageContent extends React.Component {
               </Link>
             </div>
             <div className="homepage-feature-item">
-              <Link to="/searchItem" className="" style={{ textDecoration: 'none' }}>
+              <Link to="/search" className="" style={{ textDecoration: 'none' }}>
                 <div className="homepage-feature-icon"><MdLocationSearching size={64} /></div>
                 <h5 className="homepage-feature-title"><FormattedMessage id="core.search" /></h5>
                 <div className="homepage-feature-detail">
@@ -43,7 +43,7 @@ class MainPageContent extends React.Component {
               </Link>
             </div>
             <div className="homepage-feature-item">
-              <Link to="/searchItem" className="" style={{ textDecoration: 'none' }}>
+              <Link to="/search" className="" style={{ textDecoration: 'none' }}>
                 <div className="homepage-feature-icon"><MdLocalRestaurant size={64} /></div>
                 <h5 className="homepage-feature-title"><FormattedMessage id="core.discover" /></h5>
                 <div className="homepage-feature-detail">
