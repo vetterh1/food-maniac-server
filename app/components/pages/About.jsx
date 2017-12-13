@@ -27,6 +27,10 @@ class About extends React.Component {
               <MdSchool size={24} className="mr-2" />
               <FormattedMessage id="about.title" />
             </h5>
+            <p>
+              <FormattedMessage id="about.sub_title" />
+              <a href="https://www.linkedin.com/in/lvetter/" target="_blank" rel="noopener noreferrer">Laurent Vetterhoeffer</a>
+            </p>
           </div>
         </div>
         <div className="homepage-container">

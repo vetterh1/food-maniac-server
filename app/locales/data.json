@@ -106,6 +106,7 @@
     "login.ask": "Please login / sign-up to access to this page",
     
     "about.title": "Food-Maniac is a play ground to test new technologies / techniques",
+    "about.sub_title": "Designed & developped by ",
     "about.front": "Front Office",
     "about.back": "Back Office",
     "about.tools": "Tools",
@@ -222,6 +223,7 @@
     "login.ask": "Connectez-vous s'il vous plait pour accéder à cette page",
      
     "about.title": "Food-Maniac est un terrain de jeux pour tester de nouvelles technologies / techniques",
+    "about.sub_title": "Design et développement par ",
     "about.front": "Front Office",
     "about.back": "Back Office",
     "about.tools": "Outils",
