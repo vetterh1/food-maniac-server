@@ -638,6 +638,7 @@ docker exec -it mongo-foodmaniac mongo -u food -p maniac food_maniac
 docker exec -it mongo-foodmaniac bash
 
 # Remote access:
+mongo 51.254.221.25 --port 27017 -u "food" -p "maniac" --authenticationDatabase "food_maniac"
 mongo --port 27017 -u "food" -p "maniac" --authenticationDatabase "food_maniac"
 mongo --port 27017 -u "adminFood" -p "maniacRoot" --authenticationDatabase "admin"
 # or just mongo then use... then:

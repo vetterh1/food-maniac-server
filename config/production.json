@@ -18,7 +18,8 @@
   	"database":
   	{
   		"URL_old" : "mongodb://localhost:27017/food_maniac",
-  		"URL" : "mongodb://food:maniac@51.254.221.25:27017/food_maniac"		
+  		"URL_2" : "mongodb://food:maniac@51.254.221.25:27017/food_maniac",
+  		"URL" : "mongodb://51.254.221.25:27017/food_maniac"
   	},
     "static": "/static"
   },
