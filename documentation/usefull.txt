@@ -647,6 +647,8 @@ db.auth("food", "maniac")
 
 
 
+# Stop mongo on server (not docker):
+systemctl disable mongodb.service
 
 
 # Open mongo port:

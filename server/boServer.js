@@ -197,6 +197,7 @@ const jwtCheck = jwt({
   algorithms: ['RS256']
 });
 
+// TODO: re-enable once docker ok
 // app.use(jwtCheck);
 
 app.get('/authorized', (req, res) => {
