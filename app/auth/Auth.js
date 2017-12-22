@@ -14,14 +14,20 @@ logAuth.debug('--> entering Auth.jsx');
 
 
 export default class Auth {
+  constructor() {
+    this.getProfile = this.getProfile.bind(this);
+  }
+
   auth0 = new auth0.WebAuth({
     domain: 'foodmaniac.eu.auth0.com',
     clientID: 'lzKyAuN9mtO6q0ItFPow7wHBQsqqaj3B',
     redirectUri: `${process.env.HOST}/callback`,
     audience: 'https://foodmaniac.eu.auth0.com/userinfo',
     responseType: 'token id_token',
-    scope: 'openid',
+    scope: 'openid profile',
   });
+
+  userProfile = null;
 
 
 
@@ -33,19 +39,16 @@ export default class Auth {
   handleAuthentication() {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
-        console.log('handleAuthentication() 1');
-        console.log(stringifyOnce(authResult, null, 2));
-        logAuth.log(stringifyOnce(authResult, null, 2));
+        logAuth.debug(stringifyOnce(authResult, null, 2));
         this.setSession(authResult);
         browserHistory.replace('/');
       } else if (err) {
         browserHistory.replace('/');
-        logAuth.error(`Error: ${err.error}. Check the console for further details.`);
+        logAuth.error(`Error: ${stringifyOnce(err, null, 2)}. Check the console for further details (authResult=${stringifyOnce(authResult, null, 2)}.`);
         alert(`Error: ${err.error}. Check the console for further details.`);
         // TODO: better error message to user than alert!
       } else {
-        console.log('handleAuthentication() 2');
-        console.log(stringifyOnce(authResult, null, 2));
+        logAuth.debug(stringifyOnce(authResult, null, 2));
       }
     });
   }
@@ -69,6 +72,8 @@ export default class Auth {
     localStorage.removeItem('expires_at');
     // navigate to the home route
     browserHistory.replace('/');
+
+    this.userProfile = null;
   }
 
 
@@ -77,5 +82,24 @@ export default class Auth {
     // Check whether the current time is past the access token's expiry time
     const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
     return new Date().getTime() < expiresAt;
+  }
+
+
+  getAccessToken() {
+    const accessToken = localStorage.getItem('access_token');
+    if (!accessToken) {
+      throw new Error('No access token found');
+    }
+    return accessToken;
+  }
+
+  getProfile(callback) {
+    const accessToken = this.getAccessToken();
+    this.auth0.client.userInfo(accessToken, (err, profile) => {
+      if (profile) {
+        this.userProfile = profile;
+      }
+      callback(err, profile);
+    });
   }
 }

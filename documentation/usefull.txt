@@ -182,6 +182,9 @@ db.dropDatabase();
 exit
 // Then download the archive by browsing this url & use 7zip...
 https://food-maniac.com/food_maniac_prod_db.tar.gz
+// Unix: wget https://food-maniac.com/food_maniac_prod_db.tar.gz
+// Unix: tar xvf food_maniac_prod_db.tar.gz dump/
+// Unix: mongorestore -u 'food' -p 'maniac' --authenticationDatabase "food_maniac" dump/
 // Then restores from a /dump folder.
 // (to restrict to one collection, use this: --collection places)
 // (/dump folder must contain the json files dump with mongodump)
@@ -512,3 +515,154 @@ find . -size +100M -delete
 Disk usage (include folder sizes and grand total. -s: summary for each file, -h: human readable, -c: total)
 du -s -h -c *
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------
+                       DOCKER
+---------------------------------------------------------------
+
+IP server 1 (vps295100): 51.255.46.214
+IP server 2 (vps494554): 51.254.221.25
+
+
+----------  Init docker server  ---------- 
+# Change root password & create new user with sudo access:
+passwd
+adduser lve
+sudo usermod -aG sudo lve
+
+# Install Docker (on Ubuntu):
+https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-docker-ce-1
+
+# Docker without sudo (https://docs.docker.com/engine/installation/linux/linux-postinstall/):
+sudo groupadd docker
+sudo usermod -aG docker lve
+
+# Configure Docker to start on boot
+sudo systemctl enable docker
+
+------------------  1st tests  -----------------------
+
+docker-machine create -d virtualbox --engine-env HTTP_PROXY=http://proxy-internet.localnet:3128 --engine-env HTTPS_PROXY=http://proxy-internet.localnet:3128  proxy-machine
+
+
+
+------------------  nginx  -----------------------
+
+create a folder docker-nginx
+
+Dockerfile for nginx:
+FROM nginx
+# COPY static-html-directory /usr/share/nginx/html
+
+Build:
+sudo docker build -t test-nginx .
+
+Run:
+sudo docker run --name container-test-nginx -d -p 8123:80 test-nginx
+
+
+/etc/nginx/sites-available/default
+
+
+------------------  mongo  -----------------------
+
+(!)(!)(!)(!)(!)(!)(!)(!)
+1 - On Ubuntu, do NOT install the mongodb-clients, instead, use mongodb-org-shell
+2 - IMPORTANT !!! mongo and mongod should have the SAME VERSION!!!
+
+-------- Data / Volumes --------
+
+# Create volume for data:
+docker volume create --name food
+
+# List volumes:
+docker volume ls
+
+# Inspect volume (to find where it's stored on host machine)
+# current: /var/lib/docker/volumes/food/_data
+docker volume inspect food
+
+-------- Image initialization --------
+
+# Start container (w/ volume food) without authentication
+docker run --name mongo-foodmaniac-unsecure --mount type=volume,source=food,target=/data/db --mount type=bind,source=/tmp,target=/tmphost -d mongo
+# Create users (in console)
+docker exec -it mongo-foodmaniac-unsecure mongo admin
+use admin
+db.createUser({ user:"adminFood", pwd:"maniacRoot", roles: ["dbAdminAnyDatabase","clusterAdmin"]})
+use food_maniac
+db.createUser({ user:"food", pwd:"maniac", roles:["readWrite"] })
+# Kill non-secure container & remove it:
+docker rm -f mongo-foodmaniac-unsecure
+# Finally, start container (w/ volume food) with authentication
+docker run \
+        --name mongo-foodmaniac \
+        --mount type=volume,source=food,target=/data/db \
+        --mount type=bind,source=/tmp,target=/tmphost \
+        -d \
+        -p 27017:27017 \
+        mongo --auth
+
+
+-------- Misc --------
+
+# Show logs:
+docker logs mongo-foodmaniac
+#test:
+# use test
+# db.categories.insert({ "name":"test201201" })
+# db.categories.find()
+
+# Show console:
+docker exec -it mongo-foodmaniac mongo -u food -p maniac food_maniac
+
+# Shell in container
+docker exec -it mongo-foodmaniac bash
+
+# Remote access:
+mongo --port 27017 -u "food" -p "maniac" --authenticationDatabase "food_maniac"
+mongo --port 27017 -u "adminFood" -p "maniacRoot" --authenticationDatabase "admin"
+# or just mongo then use... then:
+db.auth("adminFood", "maniacRoot")
+db.auth("food", "maniac")
+
+
+
+
+
+# Open mongo port:
+Check from other machine: nmap 51.255.46.214
+iptables -A INPUT -p tcp --dport 27017 -j ACCEPT
+iptables-save > /etc/iptables.conf
+
+docker inspect mongo-foodmaniac
+
+
+
+
+
+----------  Backup volume  ---------- 
+cd /var/lib/docker/volumes
+tar cvzf food_docker_volume_backup.tar.gz food
+
+
+FTP (for backup):
+https://www.digitalocean.com/community/tutorials/how-to-set-up-vsftpd-for-a-user-s-directory-on-ubuntu-16-04

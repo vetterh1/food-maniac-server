@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Button } from 'reactstrap';
 import Auth from './Auth';
+import Profile from './Profile';
 
 class LoginBanner extends React.Component {
   static propTypes = {
@@ -19,7 +20,15 @@ class LoginBanner extends React.Component {
 
   render() {
     const { isAuthenticated } = this.props.auth;
-    if (isAuthenticated()) return null;
+    if (isAuthenticated()) {
+      return (
+        <div className="jumbotron">
+          <div className="container">
+            <Profile auth={this.props.auth} />
+          </div>
+        </div>
+      );
+    }
     return (
       <div className="jumbotron">
         <div className="container">
