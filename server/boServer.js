@@ -197,7 +197,7 @@ const jwtCheck = jwt({
   algorithms: ['RS256']
 });
 
-app.use(jwtCheck);
+// app.use(jwtCheck);
 
 app.get('/authorized', (req, res) => {
   res.send('Secured Resource');
