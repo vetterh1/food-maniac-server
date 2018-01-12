@@ -586,12 +586,15 @@ sudo docker run --name container-test-nginx -d -p 8123:80 test-nginx
 
 (!)(!)(!)(!)(!)(!)(!)(!)
 1 - On Ubuntu, do NOT install the mongodb-clients, instead, use mongodb-org-shell
+        sudo apt-get install mongodb-org-shell
 2 - IMPORTANT !!! mongo and mongod should have the SAME VERSION!!!
 
 -------- Data / Volumes --------
 
-# Create volume for data:
+# Create volume for data (prod / test / dev)
 docker volume create --name food
+docker volume create --name food-test
+docker volume create --name food-dev
 
 # List volumes:
 docker volume ls
@@ -600,27 +603,92 @@ docker volume ls
 # current: /var/lib/docker/volumes/food/_data
 docker volume inspect food
 
+# Backup prod data:
+docker stop mongo-foodmaniac
+docker run \
+        --rm \
+        --mount type=volume,source=food,target=/data/db \
+        --mount type=bind,source=/tmp,target=/tmphost \
+        busybox tar zcvf /tmphost/backupDb.tar.gz /data/db
+docker start mongo-foodmaniac
+ls -al /tmp
+
+# Restore backup data in dev volume:
+docker stop mongo-foodmaniac-dev
+docker run \
+        --rm \
+        --mount type=volume,source=food-dev,target=/data/db \
+        --mount type=bind,source=/tmp,target=/tmphost \
+        busybox tar xvf /tmphost/backupDb.tar.gz -C /data/db
+docker start mongo-foodmaniac-dev
+
+
+
 -------- Image initialization --------
 
+----- PROD ------
+
 # Start container (w/ volume food) without authentication
-docker run --name mongo-foodmaniac-unsecure --mount type=volume,source=food,target=/data/db --mount type=bind,source=/tmp,target=/tmphost -d mongo
+docker run --name mongo-foodmaniac-unsecure --mount type=volume,source=food,target=/data/db --mount type=bind,source=/tmp,target=/tmphost -d mongo:3.4
+docker run \
+        --name mongo-foodmaniac-unsecure \
+        --mount type=volume,source=food,target=/data/db \
+        --mount type=bind,source=/tmp,target=/tmphost \
+        -d \
+        -p 27117:27017 \
+        mongo:3.4
 # Create users (in console)
 docker exec -it mongo-foodmaniac-unsecure mongo admin
 use admin
 db.createUser({ user:"adminFood", pwd:"maniacRoot", roles: ["dbAdminAnyDatabase","clusterAdmin"]})
 use food_maniac
 db.createUser({ user:"food", pwd:"maniac", roles:["readWrite"] })
+db.createUser({ user:"adminFood", pwd:"maniacRoot", roles: ["dbAdmin"]})
+exit
 # Kill non-secure container & remove it:
 docker rm -f mongo-foodmaniac-unsecure
-# Finally, start container (w/ volume food) with authentication
+# Finally, start container (w/ volume food) with authentication and with automatic restart
 docker run \
         --name mongo-foodmaniac \
+        --restart unless-stopped \
         --mount type=volume,source=food,target=/data/db \
         --mount type=bind,source=/tmp,target=/tmphost \
         -d \
         -p 27017:27017 \
-        mongo --auth
+        mongo:3.4 \
+        --auth
+# Open port in firewall (require root access):
+iptables -A INPUT -p tcp --dport 27017 -j ACCEPT
+iptables -A INPUT -p tcp --dport 27117 -j ACCEPT
+iptables-save > /etc/iptables.conf
 
+----- DEV ------
+
+# Start container (w/ volume food) without authentication
+docker run --name mongo-foodmaniac-dev-unsecure --mount type=volume,source=food-dev,target=/data/db --mount type=bind,source=/tmp,target=/tmphost -d mongo:3.4
+# Create users (in console)
+docker exec -it mongo-foodmaniac-dev-unsecure mongo admin
+use admin
+db.createUser({ user:"adminFood", pwd:"maniacRoot", roles: ["dbAdminAnyDatabase","clusterAdmin"]})
+use food_maniac
+db.createUser({ user:"food", pwd:"maniac", roles:["readWrite"] })
+db.createUser({ user:"adminFood", pwd:"maniacRoot", roles: ["dbAdmin"]})
+exit
+# Kill non-secure container & remove it:
+docker rm -f mongo-foodmaniac-dev-unsecure
+# Finally, start container (w/ volume food) with authentication and with automatic restart
+docker run \
+        --name mongo-foodmaniac-dev \
+        --restart unless-stopped \
+        --mount type=volume,source=food-dev,target=/data/db \
+        --mount type=bind,source=/tmp,target=/tmphost \
+        -d \
+        -p 27018:27017 \
+        mongo:3.4 \
+        --auth
+# Open port in firewall (require root access):
+iptables -A INPUT -p tcp --dport 27018 -j ACCEPT
+iptables-save > /etc/iptables.conf
 
 -------- Misc --------
 
@@ -638,6 +706,7 @@ docker exec -it mongo-foodmaniac mongo -u food -p maniac food_maniac
 docker exec -it mongo-foodmaniac bash
 
 # Remote access:
+Check from other machine: nmap 51.255.46.214
 mongo 51.254.221.25 --port 27017 -u "food" -p "maniac" --authenticationDatabase "food_maniac"
 mongo --port 27017 -u "food" -p "maniac" --authenticationDatabase "food_maniac"
 mongo --port 27017 -u "adminFood" -p "maniacRoot" --authenticationDatabase "admin"
@@ -647,16 +716,25 @@ db.auth("food", "maniac")
 
 
 
+# If needed, restart after shutdown (normally not necessary with --restart option in docker run)
+docker start mongo-foodmaniac
+
 # Stop mongo on server (not docker):
 systemctl disable mongodb.service
 
 
-# Open mongo port:
-Check from other machine: nmap 51.255.46.214
-iptables -A INPUT -p tcp --dport 27017 -j ACCEPT
-iptables-save > /etc/iptables.conf
-
 docker inspect mongo-foodmaniac
+
+# Backup data:
+docker stop mongo-foodmaniac
+docker run \
+        --rm \
+        --mount type=volume,source=food,target=/data/db \
+        --mount type=bind,source=/tmp,target=/tmphost \
+        busybox tar cvf /tmphost/backupDb.tar /data/db
+docker start mongo-foodmaniac
+ls -al /tmp
+
 
 
 
