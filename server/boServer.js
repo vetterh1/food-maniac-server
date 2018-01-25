@@ -63,6 +63,8 @@ import insertInitialData from './initialData';
 // Set native promises as mongoose promise
 mongoose.Promise = global.Promise;
 
+
+
 // MongoDB Connection
 const databaseURL = config.get('storage.database.URL');
 logger.warn(`Mongodb: ${databaseURL}`);
@@ -70,26 +72,39 @@ if (!config.has('storage.database.URL')) logger.error(`! No config defined for s
 
 const options = {
   useMongoClient: true,
+  autoIndex: false, // Don't build indexes
   keepAlive: 1,
   connectTimeoutMS: 30000,
+  reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
+  reconnectInterval: 2000,
+  bufferCommands: false, // Disable buffering of mongoose commands
+  poolSize: 10, // Maintain up to 10 socket connections
+  user: 'food',
+  pass: 'maniac',
 };
-mongoose.connect(databaseURL, options, (error) => {
-  if (error) {
-    logger.error('Please make sure Mongodb is installed and running!');
-    throw error;
-  }
+mongoose.connect(databaseURL, options).then(
+  () => {
+    logger.warn('Mongodb is installed and running!');
 
-  //
-  // ADD INITIAL DATA IN DB
-  // WARNING:  DELETES ANY EXISTING DATA PRIOR TO 1968-12-21
-  //
-  if (process.env.NODE_ENV !== 'test' && process.env.INSERT_INITIAL_DATA) {
-    logger.warn('Insert initial data requested');
-    insertInitialData();
+    //
+    // ADD INITIAL DATA IN DB
+    // WARNING:  DELETES ANY EXISTING DATA PRIOR TO 1968-12-21
+    //
+    if (process.env.NODE_ENV !== 'test' && process.env.INSERT_INITIAL_DATA) {
+      logger.warn('Insert initial data requested');
+      insertInitialData();
+    }
+  },
+  (error) => {
+    if (error) {
+      logger.error('Please make sure Mongodb is installed and running!');
+      throw error;
+    }
   }
-});
+);
+
 const db = mongoose.connection;
-db.on('error', logger.error.bind(console, '!Mongoose connection error!'));
+db.on('error', logger.error.bind(console, '! Mongoose connection error !'));
 
 
 //

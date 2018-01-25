@@ -629,7 +629,6 @@ docker start mongo-foodmaniac-dev
 ----- PROD ------
 
 # Start container (w/ volume food) without authentication
-docker run --name mongo-foodmaniac-unsecure --mount type=volume,source=food,target=/data/db --mount type=bind,source=/tmp,target=/tmphost -d mongo:3.4
 docker run \
         --name mongo-foodmaniac-unsecure \
         --mount type=volume,source=food,target=/data/db \
@@ -637,10 +636,12 @@ docker run \
         -d \
         -p 27117:27017 \
         mongo:3.4
+# old: docker run --name mongo-foodmaniac-unsecure --mount type=volume,source=food,target=/data/db --mount type=bind,source=/tmp,target=/tmphost -d mongo:3.4
 # Create users (in console)
 docker exec -it mongo-foodmaniac-unsecure mongo admin
 use admin
-db.createUser({ user:"adminFood", pwd:"maniacRoot", roles: ["dbAdminAnyDatabase","clusterAdmin"]})
+db.createUser({ user:"foodOwner", pwd:"maniacRoot", roles: ["dbOwner"]})
+db.createUser({ user:"foodRoot", pwd:"maniacRoot", roles: ["root"]})
 use food_maniac
 db.createUser({ user:"food", pwd:"maniac", roles:["readWrite"] })
 db.createUser({ user:"adminFood", pwd:"maniacRoot", roles: ["dbAdmin"]})
@@ -657,6 +658,19 @@ docker run \
         -p 27017:27017 \
         mongo:3.4 \
         --auth
+
+# Test with 8080 port:
+docker run \
+        --name mongo-foodmaniac \
+        --restart unless-stopped \
+        --mount type=volume,source=food,target=/data/db \
+        --mount type=bind,source=/tmp,target=/tmphost \
+        -d \
+        -p 8080:27017 \
+        mongo:3.4 \
+        --auth
+
+
 # Open port in firewall (require root access):
 iptables -A INPUT -p tcp --dport 27017 -j ACCEPT
 iptables -A INPUT -p tcp --dport 27117 -j ACCEPT
@@ -705,13 +719,15 @@ docker exec -it mongo-foodmaniac mongo -u food -p maniac food_maniac
 # Shell in container
 docker exec -it mongo-foodmaniac bash
 
+# Check from other machine
+nmap 51.254.221.25
+
 # Remote access:
-Check from other machine: nmap 51.255.46.214
-mongo 51.254.221.25 --port 27017 -u "food" -p "maniac" --authenticationDatabase "food_maniac"
-mongo --port 27017 -u "food" -p "maniac" --authenticationDatabase "food_maniac"
-mongo --port 27017 -u "adminFood" -p "maniacRoot" --authenticationDatabase "admin"
+c:\mongodb\bin\mongo 51.254.221.25:27017/food_maniac -u "food" -p "maniac" --authenticationDatabase "food_maniac"
+c:\mongodb\bin\mongo 51.254.221.25:27017/food_maniac -u "foodOwner" -p "maniacRoot" --authenticationDatabase "admin"
 # or just mongo then use... then:
-db.auth("adminFood", "maniacRoot")
+db.auth("foodOwner", "maniacRoot")
+db.auth("foodRoot", "maniacRoot")
 db.auth("food", "maniac")
 
 
