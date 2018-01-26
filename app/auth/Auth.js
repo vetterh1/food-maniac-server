@@ -53,6 +53,34 @@ export default class Auth {
     });
   }
 
+
+  /*
+    Result of log when session ok:
+    26/01/2018 à 15:03:11 - debug: {
+    "accessToken": "OBzlRDb2TiEcepoY--60hslt999VAwrt",
+    "idToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IlJVWTRRVUpCUVVFMk9UTkZNakZHUWtSQk1VTkJSVFV5UVVRNE1rTkNSamxDTlRaQk5rSkRSQSJ9.eyJuaWNrbmFtZSI6InZldHRlcmgxIiwibmFtZSI6InZldHRlcmgxQHlhaG9vLmZyIiwicGljdHVyZSI6Imh0dHBzOi8vcy5ncmF2YXRhci5jb20vYXZhdGFyL2FlMWEwMWViYjY2OTIyNWRiYWRlMDNkMzIzNGViODE1P3M9NDgwJnI9cGcmZD1odHRwcyUzQSUyRiUyRmNkbi5hdXRoMC5jb20lMkZhdmF0YXJzJTJGdmUucG5nIiwidXBkYXRlZF9hdCI6IjIwMTgtMDEtMjZUMTQ6MDM6MDkuNzYzWiIsImlzcyI6Imh0dHBzOi8vZm9vZG1hbmlhYy5ldS5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWEyMDBkYzFhOTE2NzYwYTgwYjhiZTZkIiwiYXVkIjoibHpLeUF1TjltdE82cTBJdEZQb3c3d0hCUXNxcWFqM0IiLCJpYXQiOjE1MTY5NzUzODksImV4cCI6MTUxNzAxMTM4OSwiYXRfaGFzaCI6InhNT2YteXR6LTZ2TWtuVHYxek9fM3ciLCJub25jZSI6IlNjZVVzYzBfWFBBVTExZ1E3WGJseGFGOVpkczV3VklpIn0.Lz2o36yjAwQr2DdGoHraeJkdYuvz-RlJobf27HEZS2xk8ixTuqFkdEFPjieolRn7PBCIza2_nXQgkgYUXP2Cm3JqQaMzxt9DCSISlPEZu8qe9-rl534nuJSnrXc3UfirUmrXLax4rxtbh3-n9aHlPbzDHVeCPrOK6zashQV1JdtcU9AnloqKrSfigUbAoK-0i-A0vEYt5jWGDQxp83tcjfglNDesu7QWrDkBAcNZfH2z6Zsb4GvMB1EkjvnoaZkU2d4OmUrOy8S60Cai1gs2bC4L8i2ADKwgiNCocwQNXHfMcx342X735YIUHK5cN-tBtLSt2l-X6AVb8kQuQS4gww",
+    "idTokenPayload": {
+      "nickname": "vetterh1",
+      "name": "vetterh1@yahoo.fr",
+      "picture": "https://s.gravatar.com/avatar/ae1a01ebb669225dbade03d3234eb815?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fve.png",
+      "updated_at": "2018-01-26T14:03:09.763Z",
+      "iss": "https://foodmaniac.eu.auth0.com/",
+      "sub": "auth0|5a200dc1a916760a80b8be6d",
+      "aud": "lzKyAuN9mtO6q0ItFPow7wHBQsqqaj3B",
+      "iat": 1516975389,
+      "exp": 1517011389,
+      "at_hash": "xMOf-ytz-6vMknTv1zO_3w",
+      "nonce": "SceUsc0_XPAU11gQ7XblxaF9Zds5wVIi"
+    },
+    "appState": null,
+    "refreshToken": "(see object with key appState)",
+    "state": "DzDYmNatCN62kHKUhz889STEfMr_.Rar",
+    "expiresIn": 7200,
+    "tokenType": "Bearer",
+    "scope": "(see object with key appState)"
+  }
+*/
+
   setSession(authResult) {
     // Set the time that the access token will expire at
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());

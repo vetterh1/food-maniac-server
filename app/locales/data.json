@@ -168,8 +168,8 @@
     "messages.discover.blob": "Qu'y a t'il de bon ici ?",
 
     "messages.save.start": "En cours de sauvegarde...",
-    "messages.save.success": "Sauvé ! (durée={durationSaving}ms)",
-    "messages.save.error": "Erreur de sauvegarde (erreur={errorMessage}, durée={durationSaving}ms)",
+    "messages.save.success": "Sauvé ! (durée={duration}ms)",
+    "messages.save.error": "Erreur de sauvegarde (erreur={errorMessage}, durée={duration}ms)",
 
     "messages.search.start": "Recherche en cours...",
     "messages.search.success": "{nbItems} résultat(s) trouvées ! (durée={duration}ms)",

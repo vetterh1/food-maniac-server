@@ -1,4 +1,4 @@
- /* eslint-disable no-multiple-empty-lines */
+/* eslint-disable no-multiple-empty-lines */
 /* eslint-disable import/first */
 
 const logger = require('./util/logger.js');
@@ -79,8 +79,8 @@ const options = {
   reconnectInterval: 2000,
   bufferCommands: false, // Disable buffering of mongoose commands
   poolSize: 10, // Maintain up to 10 socket connections
-  user: 'food',
-  pass: 'maniac',
+  // user: 'food', --> user & pass are directly in URL
+  // pass: 'maniac',
 };
 mongoose.connect(databaseURL, options).then(
   () => {
