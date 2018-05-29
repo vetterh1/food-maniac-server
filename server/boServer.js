@@ -66,6 +66,11 @@ mongoose.Promise = global.Promise;
 
 
 // MongoDB Connection
+
+mongoose.set('debug', (coll, method, query, doc) => {
+  logger.info('Mongo query executed:', coll, method, query, doc);
+});
+
 const databaseURL = config.get('storage.database.URL');
 logger.warn(`Mongodb: ${databaseURL}`);
 if (!config.has('storage.database.URL')) logger.error(`! No config defined for storage.database.URL for env ${process.env.NODE_ENV} !`);
