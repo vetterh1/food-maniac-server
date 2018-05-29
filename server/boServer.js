@@ -68,7 +68,7 @@ mongoose.Promise = global.Promise;
 // MongoDB Connection
 
 mongoose.set('debug', (coll, method, query, doc) => {
-  logger.info('Mongo query executed:', coll, method, query, doc);
+  logger.debug('Mongo query executed:', coll, method, query, doc);
 });
 
 const databaseURL = config.get('storage.database.URL');
