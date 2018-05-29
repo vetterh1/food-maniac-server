@@ -81,6 +81,11 @@ const options = {
   poolSize: 10, // Maintain up to 10 socket connections
   // user: 'food', --> user & pass are directly in URL
   // pass: 'maniac',
+  server: {
+    sslValidate: false,
+    sslKey: fs.readFileSync('/etc/ssl/mongodb.pem'),
+    sslCert: fs.readFileSync('/etc/ssl/mongodb-cert.crt'),
+  },
 };
 mongoose.connect(databaseURL, options).then(
   () => {

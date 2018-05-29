@@ -88,6 +88,123 @@ https://www.imagemagick.org/download/binaries/ImageMagick-7.0.4-7-Q16-x64-dll.ex
                              MONGO
 ---------------------------------------------------------------
 
+-------------  Secure mongo ---------------
+
+# ------ 1 - Firewall configuration ------ 
+
+# Note: use iptables-persistent to easily save rules:
+sudo apt-get install iptables-persistent
+
+sudo iptables -A INPUT -i lo -j ACCEPT
+sudo iptables -A INPUT -d 127.0.0.0/8 -j REJECT
+sudo iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+sudo iptables -A OUTPUT -j ACCEPT
+#  Allow HTTP and HTTPS connections from anywhere
+sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
+# Open to all IP (not very safe!):
+sudo iptables -A INPUT -p tcp --dport 27017 -m state --state NEW,ESTABLISHED -j ACCEPT
+sudo iptables -A OUTPUT -p tcp --sport 27017 -m state --state ESTABLISHED -j ACCEPT
+# Secure way:
+sudo iptables -A INPUT -s 51.255.46.214 -p tcp --destination-port 27017 -m state --state NEW,ESTABLISHED -j ACCEPT
+sudo iptables -A OUTPUT -d 51.255.46.214 -p tcp --source-port 27017 -m state --state ESTABLISHED -j ACCEPT
+#  Allow SSH connections
+sudo iptables -A INPUT -p tcp -m state --state NEW --dport 22 -j ACCEPT
+#  Allow ping
+sudo iptables -A INPUT -p icmp -j ACCEPT
+#  Log iptables denied calls
+sudo iptables -A INPUT -m limit --limit 5/min -j LOG --log-prefix "iptables denied: " --log-level 7
+# Drop incoming connections if IP make more than 15 connection attempts to port 80 within 60 seconds
+sudo iptables -A INPUT -p tcp --dport 80 -i eth0 -m state --state NEW -m recent --set
+sudo iptables -A INPUT -p tcp --dport 80 -i eth0 -m state --state NEW -m recent --update --seconds 60  --hitcount 15 -j DROP
+#  Drop all other inbound - default deny unless explicitly allowed policy
+sudo iptables -A INPUT -j DROP
+sudo iptables -A FORWARD -j DROP
+
+# Check & persist:
+sudo iptables -L
+sudo netfilter-persistent save
+
+
+# ------ 2 - Mongo configuration ------ 
+
+# Allow external connections: add these lines to /etc/mongod.conf
+# Best: accept connections only from food maniac server bind_ip = 51.255.46.214
+bind_ip = 0.0.0.0
+port = 27017
+
+
+# ------ 3 - Setup TLS/SSL ------ 
+
+# Generate new certificate (.crt) & Private key (.key)
+openssl req -newkey rsa:2048 -new -x509 -days 3650 -nodes -out mongodb-cert.crt -keyout mongodb-cert.key
+# Generate a .pem from certificate & private key
+cat mongodb-cert.key mongodb-cert.crt > mongodb.pem
+sudo cp mongodb.pem /etc/ssl
+
+# Insert in /etc/mongod.conf, after the bind_ip:
+  ssl:
+    mode: requireSSL
+    PEMKeyFile: /etc/ssl/mongodb.pem
+    #CAFile: /etc/ssl/mongodb-cert.crt
+# Note: to connect with AND without SSL, one can use:
+    mode: allowSSL
+    
+# Restart mongo:
+sudo service mongod restart
+mongo --ssl --sslAllowInvalidHostnames --sslAllowInvalidCertificates
+
+# Mongoose changes to accept TLS/SSL:
+
+var fs = require('fs')
+  , mongoose = require('mongoose')
+  , mongoUri = "mongodb://127.0.0.1:27017?ssl=true"
+  , mongoOpt = {
+      "server": { 
+        "sslValidate": false,
+        "sslKey": fs.readFileSync('/etc/ssl/mongodb.pem'),
+        "sslCert": fs.readFileSync('/etc/ssl/mongodb-cert.crt')
+      }
+    }
+  ;
+
+mongoose.connect(mongoUri, mongoOpt);
+
+
+
+-------------  Create users & db ---------------
+
+# Create users (in console)
+mongo
+use admin
+db.createUser({ user:"admin", pwd:"maniacPwd", roles:[{role:"root", db:"admin"}]})
+use food_maniac_dev
+exit
+# Secure login:
+add --auth in /lib/systemd/system/mongod.service: ExecStart=/usr/bin/mongod --auth --config /etc/mongod.conf
+systemctl daemon-reload
+sudo service mongod restart
+mongo -u admin -p maniacPwd --authenticationDatabase admin
+use admin
+db.getUsers()
+use food_maniac_dev
+use food_maniac
+db.createUser({ user:"food", pwd:"maniac", roles:["readWrite"] })
+db.createUser({ user:"adminFood", pwd:"maniacRoot", roles: ["dbAdmin"]})
+use food_maniac
+db.createUser({ user:"food", pwd:"maniac", roles:["readWrite"] })
+db.createUser({ user:"adminFood", pwd:"maniacRoot", roles: ["dbAdmin"]})
+
+# to connect:
+mongo -u food -p maniac --authenticationDatabase food_maniac
+mongo 51.254.221.25:27017/food_maniac -u food -p maniac --authenticationDatabase food_maniac
+
+# or just mongo then use... then:
+use food_maniac
+db.auth("food", "maniac")
+
+
+
 -------------  Start DB ---------------
 
 // In new console, type:
@@ -640,8 +757,10 @@ docker run \
 # Create users (in console)
 docker exec -it mongo-foodmaniac-unsecure mongo admin
 use admin
-db.createUser({ user:"foodOwner", pwd:"maniacRoot", roles: ["dbOwner"]})
-db.createUser({ user:"foodRoot", pwd:"maniacRoot", roles: ["root"]})
+db.createUser({ user:"admin", pwd:"maniacPwd", roles:[{role:"root", db:"admin"}]})
+exit
+mongo -u admin -p maniacPwd --authenticationDatabase admin
+
 use food_maniac
 db.createUser({ user:"food", pwd:"maniac", roles:["readWrite"] })
 db.createUser({ user:"adminFood", pwd:"maniacRoot", roles: ["dbAdmin"]})
@@ -763,3 +882,7 @@ tar cvzf food_docker_volume_backup.tar.gz food
 
 FTP (for backup):
 https://www.digitalocean.com/community/tutorials/how-to-set-up-vsftpd-for-a-user-s-directory-on-ubuntu-16-04
+
+
+
+
