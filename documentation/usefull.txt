@@ -153,22 +153,21 @@ sudo cp mongodb.pem /etc/ssl
 # Restart mongo:
 sudo service mongod restart
 mongo --ssl --sslAllowInvalidHostnames --sslAllowInvalidCertificates
+mongo 51.254.221.25:27017/food_maniac -u food -p maniac --authenticationDatabase food_maniac --ssl --sslAllowInvalidHostnames --sslAllowInvalidCertificates
+mongo 51.254.221.25:27017/food_maniac -u food -p maniac --authenticationDatabase food_maniac --ssl --sslPEMKeyFile /etc/ssl/mongodb.pem --sslCAFile /etc/ssl/mongodb-cert.crt --sslAllowInvalidHostnames
 
-# Mongoose changes to accept TLS/SSL:
-
-var fs = require('fs')
-  , mongoose = require('mongoose')
-  , mongoUri = "mongodb://127.0.0.1:27017?ssl=true"
-  , mongoOpt = {
+# Mongoose options to accept TLS/SSL:
+   mongoOpt = {
       "server": { 
         "sslValidate": false,
         "sslKey": fs.readFileSync('/etc/ssl/mongodb.pem'),
         "sslCert": fs.readFileSync('/etc/ssl/mongodb-cert.crt')
       }
     }
-  ;
+# Transfer mongo certificates to app server:
+# From app server (folder /etc/ssl):
+sftp lve@51.254.221.25:/etc/ssl/mongo* ~/
 
-mongoose.connect(mongoUri, mongoOpt);
 
 
 
