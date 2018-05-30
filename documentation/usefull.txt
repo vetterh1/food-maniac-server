@@ -155,6 +155,8 @@ sudo service mongod restart
 mongo --ssl --sslAllowInvalidHostnames --sslAllowInvalidCertificates
 mongo 51.254.221.25:27017/food_maniac -u food -p maniac --authenticationDatabase food_maniac --ssl --sslAllowInvalidHostnames --sslAllowInvalidCertificates
 mongo 51.254.221.25:27017/food_maniac -u food -p maniac --authenticationDatabase food_maniac --ssl --sslPEMKeyFile /etc/ssl/mongodb.pem --sslCAFile /etc/ssl/mongodb-cert.crt --sslAllowInvalidHostnames
+c:\mongodb\bin\mongo 51.254.221.25:27017/food_maniac -u food -p maniac --authenticationDatabase food_maniac --ssl --sslPEMKeyFile C:\etc\ssl\mongodb.pem --sslCAFile C:\etc\ssl\mongodb-cert.crt --sslAllowInvalidHostnames
+"C:\Program Files\MongoDB\Server\3.6\bin\mongo" 51.254.221.25:27017/food_maniac -u food -p maniac --authenticationDatabase food_maniac --ssl --sslPEMKeyFile C:\etc\ssl\mongodb.pem --sslCAFile C:\etc\ssl\mongodb-cert.crt --sslAllowInvalidHostnames
 
 # Mongoose options to accept TLS/SSL:
    mongoOpt = {
@@ -168,6 +170,11 @@ mongo 51.254.221.25:27017/food_maniac -u food -p maniac --authenticationDatabase
 # From app server (folder /etc/ssl):
 sftp lve@51.254.221.25:/etc/ssl/mongo* ~/
 
+
+# ------ 4 - Connection behind a proxy ------ 
+
+Use proxyfier or similar:
+https://stackoverflow.com/questions/33483140/connect-to-mongodb-database-using-mongoose-behind-a-proxy
 
 
 
@@ -187,7 +194,6 @@ mongo -u admin -p maniacPwd --authenticationDatabase admin
 use admin
 db.getUsers()
 use food_maniac_dev
-use food_maniac
 db.createUser({ user:"food", pwd:"maniac", roles:["readWrite"] })
 db.createUser({ user:"adminFood", pwd:"maniacRoot", roles: ["dbAdmin"]})
 use food_maniac
@@ -212,7 +218,7 @@ db.auth("food", "maniac")
 
 -------------  Windows Console ---------------
 
-c:\mongodb\bin\mongo
+"C:\Program Files\MongoDB\Server\3.6\bin\mongo"
 
 -------------  List dbs & use ---------------
 show dbs

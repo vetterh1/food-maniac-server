@@ -17,7 +17,8 @@
   {
     "database":
     {
-      "URL" : "mongodb://localhost:27017/food_maniac_test"    
+      "URL" : "mongodb://localhost:27017/food_maniac_test"   ,
+      "ssl_mode" : false
     },
     "static": "/static_test"
   },

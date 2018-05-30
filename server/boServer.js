@@ -71,9 +71,61 @@ mongoose.set('debug', (coll, method, query, doc) => {
   logger.debug('Mongo query executed:', coll, method, query, doc);
 });
 
+if (!config.has('storage.database.URL')) logger.error(`! No config defined for storage.database.URL for env ${process.env.NODE_ENV} !`);
 const databaseURL = config.get('storage.database.URL');
 logger.warn(`Mongodb: ${databaseURL}`);
-if (!config.has('storage.database.URL')) logger.error(`! No config defined for storage.database.URL for env ${process.env.NODE_ENV} !`);
+
+// SSL to connect to mongo or not
+let sslMode = true;
+if (!config.has('storage.database.sslMode')) {
+  sslMode = false;
+  logger.error('! No SSL config defined for db. Connection will NOT be secured!');
+} else {
+  sslMode = config.get('storage.database.sslMode');
+  if (sslMode === false) logger.error('! SSL for db is DISABLED. Connection will NOT be secured!');
+}
+
+// If SSL mode, get key & certificate
+let sslKey = '';
+let sslCert = '';
+if (sslMode) {
+  // Path to SLL key (used if SSL mode ON)
+  let sslKeyPath = '';
+  if (!config.has('storage.database.sslKeyPath')) {
+    logger.error('! SSL key path missing for db secure connection!');
+  } else {
+    sslKeyPath = config.get('storage.database.sslKeyPath');
+    if (!sslKeyPath || sslKeyPath.length <= 0) {
+      logger.error('! SSL key path empty or invalid for db secure connection!');
+    } else {
+      // Read key content
+      sslKey = fs.readFileSync(sslKeyPath);
+      if (!sslKey || sslKey.length <= 0) logger.error('! SSL key missing or invalid for db secure connection!');
+    }
+  }
+
+  // Path to SLL certificate (used if SSL mode ON)
+  let sslCertPath = '';
+  if (!config.has('storage.database.sslCertPath')) {
+    logger.error('! SSL certificate path missing for db secure connection!');
+  } else {
+    sslCertPath = config.get('storage.database.sslCertPath');
+    if (!sslCertPath || sslCertPath.length <= 0) {
+      logger.error('! SSL certificate path empty or invalid for db secure connection!');
+    } else {
+      // Read certificate content
+      sslCert = fs.readFileSync(sslCertPath);
+      if (!sslCert || sslCert.length <= 0) logger.error('! SSL certificate missing or invalid for db secure connection!');
+    }
+  }
+}
+
+const sslOptions = {
+  ssl: sslMode,
+  sslValidate: false,
+  sslKey,
+  sslCert,
+};
 
 const options = {
   useMongoClient: true,
@@ -86,11 +138,9 @@ const options = {
   poolSize: 10, // Maintain up to 10 socket connections
   user: 'food',
   pass: 'maniac',
-  ssl: true,
-  sslValidate: false,
-  sslKey: fs.readFileSync('/etc/ssl/mongodb.pem'),
-  sslCert: fs.readFileSync('/etc/ssl/mongodb-cert.crt'),
+  ...sslOptions,
 };
+
 mongoose.connect(databaseURL, options).then(
   () => {
     logger.warn('Mongodb is installed and running!');
