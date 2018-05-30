@@ -20,7 +20,7 @@ if (!process.env.SERVER_NAME) console.error('! SERVER_NAME undefined !'); // esl
 if (!process.env.NODE_ENV) console.error('! NODE_ENV undefined !'); // eslint-disable-line no-console
 
 const serverPort = config.get('server.BoServer.port');
-logger.warn(`BoServer Port: ${serverPort}`);
+logger.info(`BoServer Port: ${serverPort}`);
 
 if (process.env.PORT) {
   console.error(`! PORT env var defined, but use ${serverPort} from config file !`); // eslint-disable-line no-console
@@ -73,16 +73,20 @@ mongoose.set('debug', (coll, method, query, doc) => {
 
 if (!config.has('storage.database.URL')) logger.error(`! No config defined for storage.database.URL for env ${process.env.NODE_ENV} !`);
 const databaseURL = config.get('storage.database.URL');
-logger.warn(`Mongodb: ${databaseURL}`);
+logger.info(`Mongodb server: ${databaseURL}`);
 
 // SSL to connect to mongo or not
 let sslMode = true;
 if (!config.has('storage.database.sslMode')) {
   sslMode = false;
-  logger.error('! No SSL config defined for db. Connection will NOT be secured!');
+  logger.error('! Mongo SSL config NOT defined for db. Connection will NOT be secured!');
 } else {
   sslMode = config.get('storage.database.sslMode');
-  if (sslMode === false) logger.error('! SSL for db is DISABLED. Connection will NOT be secured!');
+  if (sslMode === false) {
+    logger.error('! Mongo SSL for db is DISABLED. Connection will NOT be secured!');
+  } else {
+    logger.info('Mongo SSL enabled. Connections should be secure :)');
+  }
 }
 
 // If SSL mode, get key & certificate
@@ -92,30 +96,38 @@ if (sslMode) {
   // Path to SLL key (used if SSL mode ON)
   let sslKeyPath = '';
   if (!config.has('storage.database.sslKeyPath')) {
-    logger.error('! SSL key path missing for db secure connection!');
+    logger.error('! Mongo SSL key path missing for db secure connection!');
   } else {
     sslKeyPath = config.get('storage.database.sslKeyPath');
     if (!sslKeyPath || sslKeyPath.length <= 0) {
-      logger.error('! SSL key path empty or invalid for db secure connection!');
+      logger.error('! Mongo SSL key path empty or invalid for db secure connection!');
     } else {
       // Read key content
       sslKey = fs.readFileSync(sslKeyPath);
-      if (!sslKey || sslKey.length <= 0) logger.error('! SSL key missing or invalid for db secure connection!');
+      if (!sslKey || sslKey.length <= 0) {
+        logger.error(`! Mongo SSL key missing or invalid file: ${sslKeyPath}`);
+      } else {
+        logger.info(`Mongo SSL key loaded: ${sslKeyPath}`);
+      }
     }
   }
 
   // Path to SLL certificate (used if SSL mode ON)
   let sslCertPath = '';
   if (!config.has('storage.database.sslCertPath')) {
-    logger.error('! SSL certificate path missing for db secure connection!');
+    logger.error('! Mongo SSL certificate path missing for db secure connection!');
   } else {
     sslCertPath = config.get('storage.database.sslCertPath');
     if (!sslCertPath || sslCertPath.length <= 0) {
-      logger.error('! SSL certificate path empty or invalid for db secure connection!');
+      logger.error('! Mongo SSL certificate path empty or invalid for db secure connection!');
     } else {
       // Read certificate content
       sslCert = fs.readFileSync(sslCertPath);
-      if (!sslCert || sslCert.length <= 0) logger.error('! SSL certificate missing or invalid for db secure connection!');
+      if (!sslCert || sslCert.length <= 0) {
+        logger.error(`! Mongo SSL certificate missing or invalid file: ${sslCertPath}`);
+      } else {
+        logger.info(`Mongo SSL certificate loaded: ${sslCertPath}`);
+      }
     }
   }
 }
@@ -143,7 +155,7 @@ const options = {
 
 mongoose.connect(databaseURL, options).then(
   () => {
-    logger.warn('Mongodb is installed and running!');
+    logger.info('Mongodb is installed and running!');
 
     //
     // ADD INITIAL DATA IN DB
@@ -185,17 +197,17 @@ function mkdirReccursive(completePath) {
 }
 
 const folderStatic = config.get('storage.static');
-logger.warn(`Folder static: ${folderStatic}`);
+logger.info(`Folder static: ${folderStatic}`);
 if (!config.has('storage.static')) logger.error(`! No config defined for storage.static for env ${process.env.NODE_ENV} !`);
 
 // Items Pictures
 const folderPicturesItems = path.join(__dirname, folderStatic, '/pictures/items');
-logger.warn(`Folder pictures items: ${folderPicturesItems}`);
+logger.info(`Folder pictures items: ${folderPicturesItems}`);
 mkdirReccursive(folderPicturesItems);
 
 // Pictures Thumbnails
 const folderThumbnails = path.join(__dirname, folderStatic, '/thumbnails');
-logger.warn(`Folder thumbnails: ${folderThumbnails}`);
+logger.info(`Folder thumbnails: ${folderThumbnails}`);
 mkdirReccursive(folderPicturesItems);
 
 
