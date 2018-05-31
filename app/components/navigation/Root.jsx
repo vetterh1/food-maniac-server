@@ -5,8 +5,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect, Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-// Import bootstrap directly from cdn in index.html. no need for npm install bootstrap either!
-// import 'bootstrap/dist/css/bootstrap.min.css';
+// Older solution: Import bootstrap directly from cdn in index.html. no need for npm install bootstrap either!
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { IntlProvider } from 'react-intl';
 import { loglevelServerSend } from '../../utils/loglevel-serverSend';
 import localeData from '../../locales/data.json';

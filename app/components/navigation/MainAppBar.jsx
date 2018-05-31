@@ -59,17 +59,14 @@ class MainAppBar extends React.Component {
 
   render() {
     const onMainPage = this.props.location.pathname === '/';
-    const isOpen = this.state.isOpen;
+    const { isOpen } = this.state;
+
     return (
       <Navbar
-        color="inverse"
-        inverse
-        toggleable
+        color="dark"
+        dark
+        expand="sm"
       >
-        <NavbarToggler
-          right
-          onClick={this.toggle}
-        />
         <NavbarBrand
           tag={Link}
           to="/"
@@ -77,6 +74,9 @@ class MainAppBar extends React.Component {
         >
           Food Maniac!
         </NavbarBrand>
+        <NavbarToggler
+          onClick={this.toggle}
+        />
         <Collapse
           isOpen={isOpen}
           navbar

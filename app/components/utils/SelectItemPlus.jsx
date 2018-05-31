@@ -236,7 +236,7 @@ class SelectItemPlus extends React.Component {
     return (
       <div className={`form-block ${this.props.className}`}>
         {this.props.title &&
-          <h5 className="mb-3 hidden-sm-up">
+          <h5 className="mb-3 d-sm-none">
             <MdRoomService size={24} className="mr-2" />
             {this.props.title}
           </h5>
@@ -244,7 +244,7 @@ class SelectItemPlus extends React.Component {
 
         {!this.props.hideItem &&
           <Row>
-            <Col sm={2} className="pr-0 hidden-xs-down">
+            <Col sm={2} className="pr-0 d-none d-sm-block">
               <Row style={{ display: 'flex', justifyContent: 'center' }}>
                 <div className="homepage-feature-icon">
                   <MdRoomService size={48} />
@@ -298,7 +298,7 @@ class SelectItemPlus extends React.Component {
               <CollapseOnLargeScreens isOpen={this.state.collapseFilters}>
                 <Row>
                   <Col xs={12} sm={10} className="pl-0 pt-4" >
-                    <Card block>
+                    <Card body>
                       <CardTitle className="mb-4">
                         <FormattedMessage id="item.filter.short" />
                       </CardTitle>

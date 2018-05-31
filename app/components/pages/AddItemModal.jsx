@@ -230,7 +230,7 @@ class AddItemModal extends React.Component {
             onClick={this.onSubmit.bind(this)}
             size="md"
             disabled={!formReadyForSubmit}
-            getRef={(ref) => { this.refSubmit = ref; }}
+            innerRef={(ref) => { this.refSubmit = ref; }}
           >
             <FormattedMessage id="core.add" />
           </Button>

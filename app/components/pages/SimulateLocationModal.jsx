@@ -183,7 +183,7 @@ class SimulateLocationModal extends React.Component {
             </Container>
           </ModalBody>
           <ModalFooter>
-            <Button style={styles.btnGo} color="primary" type="submit" onClick={this.onSubmit.bind(this)} size="md" disabled={!formReadyForSubmit} getRef={(ref) => { this.refSubmit = ref; }} ><FormattedMessage id="core.go" /></Button>
+            <Button style={styles.btnGo} color="primary" type="submit" onClick={this.onSubmit.bind(this)} size="md" disabled={!formReadyForSubmit} innerRef={(ref) => { this.refSubmit = ref; }} ><FormattedMessage id="core.go" /></Button>
             <Button color="link" onClick={this.onCancel.bind(this)} size="md"><FormattedMessage id="core.cancel" /></Button>
           </ModalFooter>
         </Modal>

@@ -31,11 +31,11 @@ class RatingStars extends React.PureComponent {
     return (
       <span className={className} >
         <Rating
-          initialRate={initialRate}
+          initialRating={initialRate}
           onChange={rate => onChange && onChange(rate)}
           stop={stop}
-          full={<MdStar size={size} />}
-          empty={<MdStarOutline size={size} />}
+          fullSymbol={<MdStar size={size} />}
+          emptySymbol={<MdStarOutline size={size} />}
           style={style}
           readonly={!onChange}
           fractions={onChange ? 1 : 2}

@@ -354,12 +354,12 @@ class RateForm extends React.Component {
 
           <Element name="scrollElementWhere" />
           <div className={`mt-4 form-block element-with-transition ${classNameBlockWhere}`}>
-            <h5 className="mb-3 hidden-sm-up">
+            <h5 className="mb-3 d-sm-none">
               <MdLocationSearching size={24} className="mr-2" />
               <FormattedMessage id="core.where" />
             </h5>
             <Row>
-              <Col sm={2} className="pr-0 hidden-xs-down">
+              <Col sm={2} className="pr-0 d-none d-sm-block">
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
                   <div className="homepage-feature-icon">
                     <MdLocationSearching size={48} />
@@ -438,7 +438,7 @@ class RateForm extends React.Component {
 
           <Element name="scrollElementRate" />
           <div className={`mt-4 form-block element-with-transition ${classNameBlockRate}`}>
-            <h5 className="mb-3 hidden-sm-up">
+            <h5 className="mb-3 d-sm-none">
               <MdStarHalf size={24} className="mr-2" />
               <FormattedMessage id="core.marks" />
             </h5>
@@ -511,7 +511,7 @@ class RateForm extends React.Component {
 
           <Element name="scrollElementOptional" />
           <div className={`mt-4 form-block element-with-transition ${classNameOptionalElements}`}>
-            <h5 className="mb-3 hidden-sm-up">
+            <h5 className="mb-3 d-sm-none">
               <MdEdit size={24} className="mr-2" />
               <FormattedMessage id="core.comment" />
             </h5>
@@ -555,7 +555,7 @@ class RateForm extends React.Component {
               color="link"
               onClick={this.resetForm.bind(this)}
               size="md"
-              getRef={(ref) => { this.refReset = ref; }}
+              innerRef={(ref) => { this.refReset = ref; }}
             >
               <FormattedMessage id="core.reset" />
             </Button>

@@ -110,12 +110,12 @@ class SearchItemForm extends React.Component {
           />
 
           <div className="mt-4 form-block">
-            <h5 className="mb-3 hidden-sm-up">
+            <h5 className="mb-3 d-sm-none">
               <MdLocationSearching size={24} className="mr-2" />
               <FormattedMessage id="core.where" />
             </h5>
             <Row>
-              <Col sm={2} className="pr-0 hidden-xs-down">
+              <Col sm={2} className="pr-0 d-none d-sm-block">
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
                   <div className="homepage-feature-icon">
                     <MdLocationSearching size={48} />
@@ -161,7 +161,7 @@ class SearchItemForm extends React.Component {
               type="submit"
               size="md"
               disabled={!formReadyForSubmit}
-              getRef={(ref) => { this.refSubmit = ref; }}
+              innerRef={(ref) => { this.refSubmit = ref; }}
             >
               <FormattedMessage id="core.find" />
             </Button>
@@ -169,7 +169,7 @@ class SearchItemForm extends React.Component {
               color="link"
               onClick={this.resetForm.bind(this)}
               size="md"
-              getRef={(ref) => { this.refReset = ref; }}
+              innerRef={(ref) => { this.refReset = ref; }}
             >
               <FormattedMessage id="core.reset" />
             </Button>

@@ -140,7 +140,6 @@ const sslOptions = {
 };
 
 const options = {
-  useMongoClient: true,
   autoIndex: false, // Don't build indexes
   keepAlive: 1,
   connectTimeoutMS: 30000,
