@@ -88,6 +88,47 @@ https://www.imagemagick.org/download/binaries/ImageMagick-7.0.4-7-Q16-x64-dll.ex
                              MONGO
 ---------------------------------------------------------------
 
+
+
+-------------  A - Create users & db ---------------
+
+# ------ 1 - Create users (in console) ------ 
+
+mongo
+use admin
+db.createUser({ user:"admin", pwd:"maniacPwd", roles:[{role:"root", db:"admin"}]})
+use food_maniac_dev
+exit
+
+# ------ 2 - Secure login ------ 
+
+add: --auth in /lib/systemd/system/mongod.service: ExecStart=/usr/bin/mongod --auth --config /etc/mongod.conf
+systemctl daemon-reload
+sudo service mongod restart
+mongo -u admin -p maniacPwd --authenticationDatabase admin
+use admin
+db.getUsers()
+use food_maniac_dev
+db.createUser({ user:"food", pwd:"maniac", roles:["readWrite"] })
+db.createUser({ user:"adminFood", pwd:"maniacRoot", roles: ["dbAdmin"]})
+use food_maniac
+db.createUser({ user:"food", pwd:"maniac", roles:["readWrite"] })
+db.createUser({ user:"adminFood", pwd:"maniacRoot", roles: ["dbAdmin"]})
+
+# ------ 3 - Connexion (not valid once SSL setup!) ------ 
+
+# From localhost:
+mongo -u food -p maniac --authenticationDatabase food_maniac
+# Remote connexion:
+mongo 51.254.221.25:27017/food_maniac -u food -p maniac --authenticationDatabase food_maniac
+
+# Alternate method to id:
+use food_maniac
+db.auth("food", "maniac")
+
+
+
+
 -------------  Secure mongo ---------------
 
 # ------ 1 - Firewall configuration ------ 
@@ -155,8 +196,6 @@ sudo service mongod restart
 mongo --ssl --sslAllowInvalidHostnames --sslAllowInvalidCertificates
 mongo 51.254.221.25:27017/food_maniac -u food -p maniac --authenticationDatabase food_maniac --ssl --sslAllowInvalidHostnames --sslAllowInvalidCertificates
 mongo 51.254.221.25:27017/food_maniac -u food -p maniac --authenticationDatabase food_maniac --ssl --sslPEMKeyFile /etc/ssl/mongodb.pem --sslCAFile /etc/ssl/mongodb-cert.crt --sslAllowInvalidHostnames
-c:\mongodb\bin\mongo 51.254.221.25:27017/food_maniac -u food -p maniac --authenticationDatabase food_maniac --ssl --sslPEMKeyFile C:\etc\ssl\mongodb.pem --sslCAFile C:\etc\ssl\mongodb-cert.crt --sslAllowInvalidHostnames
-"C:\Program Files\MongoDB\Server\3.6\bin\mongo" 51.254.221.25:27017/food_maniac -u food -p maniac --authenticationDatabase food_maniac --ssl --sslPEMKeyFile C:\etc\ssl\mongodb.pem --sslCAFile C:\etc\ssl\mongodb-cert.crt --sslAllowInvalidHostnames
 
 # Mongoose options to accept TLS/SSL:
    mongoOpt = {
@@ -167,47 +206,59 @@ c:\mongodb\bin\mongo 51.254.221.25:27017/food_maniac -u food -p maniac --authent
       }
     }
 # Transfer mongo certificates to app server:
-# From app server (folder /etc/ssl):
+# From db server (folder /etc/ssl):
 sftp lve@51.254.221.25:/etc/ssl/mongo* ~/
 
 
-# ------ 4 - Connection behind a proxy ------ 
+# ------ 4 - Connexion once SSL is setup ------ 
+
+# Remote connection as a 'regular user':
+mongo 51.254.221.25:27017/food_maniac -u food -p maniac --authenticationDatabase food_maniac --ssl --sslPEMKeyFile /etc/ssl/mongodb.pem --sslCAFile /etc/ssl/mongodb-cert.crt --sslAllowInvalidHostnames
+# Remote connection as a 'regular user' from Windows:
+"C:\Program Files\MongoDB\Server\3.6\bin\mongo" 51.254.221.25:27017/food_maniac -u food -p maniac --authenticationDatabase food_maniac --ssl --sslPEMKeyFile C:\etc\ssl\mongodb.pem --sslCAFile C:\etc\ssl\mongodb-cert.crt --sslAllowInvalidHostnames
+
+# Remote connection as an admin:
+mongo 51.254.221.25:27017/admin -u admin -p maniacPwd --authenticationDatabase admin --ssl --sslPEMKeyFile /etc/ssl/mongodb.pem --sslCAFile /etc/ssl/mongodb-cert.crt --sslAllowInvalidHostnames
+# Remote connection as a 'regular user' from Windows:
+"C:\Program Files\MongoDB\Server\3.6\bin\mongo" 51.254.221.25:27017/admin -u admin -p maniacPwd --authenticationDatabase admin --ssl --sslPEMKeyFile C:\etc\ssl\mongodb.pem --sslCAFile C:\etc\ssl\mongodb-cert.crt --sslAllowInvalidHostnames
+
+
+# ------ 5 - Connection behind a proxy ------ 
 
 Use proxyfier or similar:
 https://stackoverflow.com/questions/33483140/connect-to-mongodb-database-using-mongoose-behind-a-proxy
 
 
+# ------ 6 - Backup / Restore once SSL is setup ------ 
 
--------------  Create users & db ---------------
+# (!) the BACKUP.SH script (in db folder) deals with backup & sends result from db server to app server
+# It should be put in crontab for auto run (see instructions in script)
 
-# Create users (in console)
-mongo
-use admin
-db.createUser({ user:"admin", pwd:"maniacPwd", roles:[{role:"root", db:"admin"}]})
-use food_maniac_dev
-exit
-# Secure login:
-add --auth in /lib/systemd/system/mongod.service: ExecStart=/usr/bin/mongod --auth --config /etc/mongod.conf
-systemctl daemon-reload
-sudo service mongod restart
-mongo -u admin -p maniacPwd --authenticationDatabase admin
-use admin
-db.getUsers()
-use food_maniac_dev
-db.createUser({ user:"food", pwd:"maniac", roles:["readWrite"] })
-db.createUser({ user:"adminFood", pwd:"maniacRoot", roles: ["dbAdmin"]})
-use food_maniac
-db.createUser({ user:"food", pwd:"maniac", roles:["readWrite"] })
-db.createUser({ user:"adminFood", pwd:"maniacRoot", roles: ["dbAdmin"]})
+# Locally or from a Unix machine:
+mongodump  -h 51.254.221.25:27017 --db food_maniac -u admin -p maniacPwd --authenticationDatabase admin --ssl --sslPEMKeyFile /etc/ssl/mongodb.pem --sslCAFile /etc/ssl/mongodb-cert.crt --sslAllowInvalidHostnames
+tar cvzf food_maniac_prod_db.tar.gz dump/
 
-# to connect:
-mongo -u food -p maniac --authenticationDatabase food_maniac
-mongo 51.254.221.25:27017/food_maniac -u food -p maniac --authenticationDatabase food_maniac
+# Remotelly from a Windows machine:
+"C:\Program Files\MongoDB\Server\3.6\bin\mongodump"   -h 51.254.221.25:27017 --db food_maniac -u admin -p maniacPwd --authenticationDatabase admin --ssl --sslPEMKeyFile C:\etc\ssl\mongodb.pem --sslCAFile C:\etc\ssl\mongodb-cert.crt --sslAllowInvalidHostnames
 
-# or just mongo then use... then:
-use food_maniac
-db.auth("food", "maniac")
+# Install keychain on db server to use sftp w/out password to send backup to other machine
+# see https://www.cyberciti.biz/faq/ssh-passwordless-login-with-keychain-for-scripts/
+# or better: https://discussions.apple.com/thread/6859137
+sudo apt-get install keychain
+ssh-keygen -t rsa
+(NO passphrase so it runs in crontab)
+add this to user .profile (or .bash_profile if it exists):
+### START-Keychain ###
+# Let  re-use ssh-agent and/or gpg-agent between logins
+/usr/bin/keychain $HOME/.ssh/id_rsa_nophrase
+source $HOME/.keychain/$HOSTNAME-sh
+### End-Keychain ###
 
+# Add the generated public key to all the systems you want to use w/out pwd.
+echo put /home/lve/.ssh/id_rsa_nophrase.pub | sftp -b- lve@51.255.46.214
+
+# it should be added to the .ssh/authorized_keys
+cat id_rsa_nophrase.pub >>$HOME/.ssh/authorized_keys
 
 
 -------------  Start DB ---------------
@@ -317,8 +368,15 @@ db.copyDatabase("food_maniac","food_maniac_dev","localhost")
 exit
 
 
+// ------ Duplicate db on the same server (or remote server NOT SSL) --------
 
+# From same mongo instance:
+db.copyDatabase('food_maniac', 'food_maniac_dev')
 
+# From remote instance (does NOT work as we use secure db with SSL):
+# Only backup & restore work then
+db.copyDatabase('food_maniac', 'food_maniac_dev')
+db.copyDatabase('food_maniac', 'food_maniac_dev', "51.254.221.25", "adminFood", "maniacRoot", "SCRAM-SHA-1")
 
 
 
