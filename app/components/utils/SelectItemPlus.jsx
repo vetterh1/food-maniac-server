@@ -6,7 +6,6 @@ import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { MatchMediaHOC } from 'react-match-media';
 import { Button, Card, CardTitle, Col, Collapse, Label, Modal, ModalHeader, ModalBody, Row } from 'reactstrap';
 import MdFilterList from 'react-icons/lib/md/filter-list';
 import MdPlaylistAdd from 'react-icons/lib/md/playlist-add';
@@ -18,9 +17,6 @@ import { loglevelServerSend } from '../../utils/loglevel-serverSend';
 const logSelectItemPlus = log.getLogger('logSelectItemPlus');
 loglevelServerSend(logSelectItemPlus); // a setLevel() MUST be run AFTER this!
 logSelectItemPlus.setLevel('debug');
-
-const CollapseOnLargeScreens = MatchMediaHOC(Collapse, '(min-width: 576px)');
-const ModalOnSmallScreens = MatchMediaHOC(Modal, '(max-width: 575px)');
 
 
 class SelectItemPlus extends React.Component {
@@ -295,7 +291,7 @@ class SelectItemPlus extends React.Component {
                 }
               </Row>
 
-              <CollapseOnLargeScreens isOpen={this.state.collapseFilters}>
+              <Collapse className="d-none d-sm-block" isOpen={this.state.collapseFilters}>
                 <Row>
                   <Col xs={12} sm={10} className="pl-0 pt-4" >
                     <Card body>
@@ -306,8 +302,8 @@ class SelectItemPlus extends React.Component {
                     </Card>
                   </Col>
                 </Row>
-              </CollapseOnLargeScreens>
-              <ModalOnSmallScreens
+              </Collapse>
+              <Modal className="d-block d-sm-none"
                 className="hidden-md-up"
                 isOpen={this.state.collapseFilters}
                 toggle={this.toggleFilters.bind(this)}
@@ -318,7 +314,7 @@ class SelectItemPlus extends React.Component {
                 <ModalBody>
                   {this.renderFiltersBody()}
                 </ModalBody>
-              </ModalOnSmallScreens>
+              </Modal>
             </Col>
           </Row>
         }

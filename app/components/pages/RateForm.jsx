@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { browserHistory } from 'react-router';
 import Alert from 'react-s-alert';
-import { MatchMediaHOC } from 'react-match-media';
 import { Button, Card, CardTitle, Col, Collapse, Form, Input, Label, Modal, ModalHeader, ModalBody, Row } from 'reactstrap';
 // import MdLocalCake from 'react-icons/lib/md/local-cake';
 // import MdLocalBar from 'react-icons/lib/md/local-bar';
@@ -38,9 +37,6 @@ const optionsScroll = { duration: 750, delay: 300, smooth: true, offset: -25 };
 const logRateForm = log.getLogger('logRateForm');
 loglevelServerSend(logRateForm); // a setLevel() MUST be run AFTER this!
 logRateForm.setLevel('debug');
-
-const CollapseOnLargeScreens = MatchMediaHOC(Collapse, '(min-width: 576px)');
-const ModalOnSmallScreens = MatchMediaHOC(Modal, '(max-width: 575px)');
 
 const ALERT_HELP_TIMEOUT = 120000;
 
@@ -407,7 +403,7 @@ class RateForm extends React.Component {
                     </Button>
                   </Col>
                 </Row>
-                <CollapseOnLargeScreens isOpen={this.state.collapseType}>
+                <Collapse className="d-none d-sm-block" isOpen={this.state.collapseType}>
                   <Row>
                     <Col xs={12} sm={10} className="pl-0 pt-4" >
                       <Card block>
@@ -418,8 +414,8 @@ class RateForm extends React.Component {
                       </Card>
                     </Col>
                   </Row>
-                </CollapseOnLargeScreens>
-                <ModalOnSmallScreens
+                </Collapse>
+                <Modal className="d-block d-sm-none"
                   className="hidden-md-up"
                   isOpen={this.state.collapseType}
                   toggle={this.toggleType.bind(this)}
@@ -430,7 +426,7 @@ class RateForm extends React.Component {
                   <ModalBody>
                     {this.renderTypeBody()}
                   </ModalBody>
-                </ModalOnSmallScreens>
+                </Modal>
               </Col>
             </Row>
           </div>
@@ -480,7 +476,7 @@ class RateForm extends React.Component {
                     </Button>
                   </Col>
                 </Row>
-                <CollapseOnLargeScreens isOpen={this.state.collapseMarks}>
+                <Collapse className="d-none d-sm-block" isOpen={this.state.collapseMarks}>
                   <Row>
                     <Col xs={12} sm={10} className="pl-0 pt-4" >
                       <Card block>
@@ -491,8 +487,8 @@ class RateForm extends React.Component {
                       </Card>
                     </Col>
                   </Row>
-                </CollapseOnLargeScreens>
-                <ModalOnSmallScreens
+                </Collapse>
+                <Modal className="d-block d-sm-none"
                   className="hidden-md-up"
                   isOpen={this.state.collapseMarks}
                   toggle={this.toggleMarks.bind(this)}
@@ -503,7 +499,7 @@ class RateForm extends React.Component {
                   <ModalBody>
                     {this.renderMarksBody()}
                   </ModalBody>
-                </ModalOnSmallScreens>
+                </Modal>
               </Col>
             </Row>
           </div>
