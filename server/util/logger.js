@@ -24,9 +24,19 @@ logger.addColors({
   error: 'red',
 });
 
-logger.remove(logger.transports.Console);
-logger.add(logger.transports.Console, { timestamp: () => { return (new Date()).toLocaleString(); }, level: levelConsole, colorize: true });
-logger.add(logger.transports.File, { timestamp: () => { return (new Date()).toLocaleString(); }, level: levelFile, filename: pathFile });
+const customFormat = logger.format.printf((info) => {
+  return `${info.timestamp} - ${info.level} - ${info.message}`;
+});
+
+const format = logger.format.combine(
+  logger.format.timestamp(),
+  logger.format.colorize(),
+  customFormat,
+);
+
+// logger.remove(new logger.transports.Console());
+logger.add(new logger.transports.Console({ format, level: levelConsole }));
+logger.add(new logger.transports.File({ format, level: levelFile, filename: pathFile }));
 
 
 // To use Loggly:

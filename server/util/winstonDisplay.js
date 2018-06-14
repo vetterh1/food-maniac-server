@@ -2,7 +2,8 @@ const jade = require('pug');
 const fs = require('fs');
 
 module.exports = function(app, logger) {
-  const logPath = `${logger.transports.file.dirname}/${logger.transports.file.filename}`;
+  // Use the 2nd transport (transports[1]), as it's the File transport (transports[0] is the console)
+  const logPath = `${logger.transports[1].dirname}/${logger.transports[1].filename}`;
 
   app.get('/logs/show', (req, res) => {
     const limit = req.query.limit ? Number(req.query.limit) : 500;
