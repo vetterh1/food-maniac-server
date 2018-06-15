@@ -28,10 +28,10 @@ class Footer extends React.Component {
     return (
       <Container fluid>
         <div className="form-block element-with-transition" style={{ marginTop: '10rem' }} >
-          <h7 className="mb-3 d-sm-none ">
+          <h6 className="mb-3 d-sm-none ">
             <MdBugReport size={24} className="mr-2" />
             <FormattedMessage id="core.debug-info" />
-          </h7>
+          </h6>
           <Row>
             <Col sm={2} className="pr-0 d-none d-sm-block">
               <Row style={{ display: 'flex', justifyContent: 'center' }}>

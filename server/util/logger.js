@@ -24,19 +24,23 @@ logger.addColors({
   error: 'red',
 });
 
-const customFormat = logger.format.printf((info) => {
+const customConsoleFormat = logger.format.printf((info) => {
   return `${info.timestamp} - ${info.level} - ${info.message}`;
 });
 
-const format = logger.format.combine(
-  logger.format.timestamp(),
+const formatConsole = logger.format.combine(
+  logger.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
   logger.format.colorize(),
-  customFormat,
+  customConsoleFormat
+);
+const formatFile = logger.format.combine(
+  logger.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+  logger.format.json()
 );
 
 // logger.remove(new logger.transports.Console());
-logger.add(new logger.transports.Console({ format, level: levelConsole }));
-logger.add(new logger.transports.File({ format, level: levelFile, filename: pathFile }));
+logger.add(new logger.transports.Console({ format: formatConsole, level: levelConsole }));
+logger.add(new logger.transports.File({ format: formatFile, level: levelFile, filename: pathFile }));
 
 
 // To use Loggly:

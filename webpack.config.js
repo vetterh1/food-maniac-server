@@ -42,6 +42,30 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 // const WebpackShellPlugin = require('webpack-shell-plugin');
 // const GenerateJsonPlugin = require('generate-json-webpack-plugin');
 
+//
+// Configure winston logger (only console)
+//
+
+logger.addColors({
+  debug: 'green',
+  info: 'cyan',
+  warn: 'yellow',
+  error: 'red',
+});
+
+const customConsoleFormat = logger.format.printf((info) => {
+  return `${info.timestamp} - ${info.level} - ${info.message}`;
+});
+
+const formatConsole = logger.format.combine(
+  logger.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+  logger.format.colorize(),
+  customConsoleFormat
+);
+logger.add(new logger.transports.Console({ format: formatConsole }));
+
+
+
 // Get environment dependant values, to be passed to JS client through process.env:
 const config = require('config');
 const serverHost = config.get('server.FoServer.host');
