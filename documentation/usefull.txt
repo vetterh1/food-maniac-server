@@ -97,7 +97,6 @@ https://www.imagemagick.org/download/binaries/ImageMagick-7.0.4-7-Q16-x64-dll.ex
 mongo
 use admin
 db.createUser({ user:"admin", pwd:"maniacPwd", roles:[{role:"root", db:"admin"}]})
-use food_maniac_dev
 exit
 
 # ------ 2 - Secure login ------ 

@@ -13,8 +13,10 @@ import MdStarHalf from 'react-icons/lib/md/star-half';
 import SearchItemForm from './SearchItemForm';
 import ListOneMarkContainer from './ListOneMarkContainer';
 import SimulateLocationContainer from '../pages/SimulateLocationContainer';
+import { loglevelServerSend } from '../../utils/loglevel-serverSend';
 
 const logSearchItemContainer = log.getLogger('logSearchItemContainer');
+loglevelServerSend(logSearchItemContainer); // a setLevel() MUST be run AFTER this!
 logSearchItemContainer.setLevel('debug');
 logSearchItemContainer.debug('--> entering SearchItemContainer.jsx');
 
@@ -207,6 +209,7 @@ SearchItemContainer.contextTypes = { intl: PropTypes.object.isRequired };
 
 
 const mapStateToProps = (state) => {
+  console.log('***************************** SearchItemContainer.mapStateToProps: state=', state);
   return {
     coordinates: state.coordinates,
     kinds: state.kinds,

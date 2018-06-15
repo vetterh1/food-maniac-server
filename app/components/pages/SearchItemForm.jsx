@@ -30,7 +30,7 @@ class SearchItemForm extends React.Component {
   constructor(props) {
     super(props);
 
-    logSearchItemForm.debug('SearchItemForm constructor props: ', props);
+    logSearchItemForm.debug(`SearchItemForm.constructor: # of (category, kind, item)= ${this.props.categories.categories.length || '-'}, ${this.props.kinds.kinds.length || '-'}, ${this.props.items.length || '-'}`);
 
     this._refSelectItemPlus = null; // used to reset the 3 dropdowns
 
@@ -88,7 +88,7 @@ class SearchItemForm extends React.Component {
   }
 
   render() {
-    logSearchItemForm.debug('render SearchItemForm: (category, kind, item)=', this.state.category, this.state.kind, this.state.item);
+    logSearchItemForm.debug(`SearchItemForm.render: # of (category, kind, item)= ${this.props.categories.categories.length || '-'}, ${this.props.kinds.kinds.length || '-'}, ${this.props.items.length || '-'}`);
     const formReadyForSubmit = true; // Always propose submit now that 'All' the default item.
     // const formReadyForSubmit = this.state.item && this.state.distance;
 

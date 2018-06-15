@@ -66,6 +66,7 @@ class SelectItemPlus extends React.Component {
 
 
   componentDidMount() {
+    logSelectItemPlus.debug('SelectItemPlus.componentDidMount()');
     this.setI18nLabels();
   }
 
@@ -73,9 +74,15 @@ class SelectItemPlus extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (!nextProps) return;
 
-    if (this.props.locale !== nextProps.locale) {
-      this.setI18nLabels();
-    }
+    // TODO: optipize this again! Here we reload the kinds & categories & items at every prop change!
+    this.setI18nLabels();
+
+    // if (this.props.locale !== nextProps.locale) {
+    //   logSelectItemPlus.debug('SelectItemPlus.componentWillReceiveProps() - Update !');
+    //   this.setI18nLabels();
+    // } else {
+    //   logSelectItemPlus.debug('SelectItemPlus.componentWillReceiveProps() - No update');
+    // }
 
     // Check if full item list has changed. If yes: update it & reset default item
     if (nextProps.items && nextProps.items.length > 0 && nextProps.items !== this.state.fullItemsList) {
@@ -93,10 +100,13 @@ class SelectItemPlus extends React.Component {
 
 
   componentDidUpdate() {
-    const categoryPlaceHolder = this.props.categoryPlaceHolder || this.context.intl.formatMessage({ id: 'core.all' });
-    if (this.state.categoryPlaceHolder !== categoryPlaceHolder) {
-      this.setI18nLabels();
-    }
+    // const categoryPlaceHolder = this.props.categoryPlaceHolder || this.context.intl.formatMessage({ id: 'core.all' });
+    // if (this.state.categoryPlaceHolder !== categoryPlaceHolder) {
+    //   logSelectItemPlus.debug(`SelectItemPlus.componentDidUpdate() - Update ! (categoryPlaceHolder=${categoryPlaceHolder}, this.state.categoryPlaceHolder=${this.state.categoryPlaceHolder})`);
+    //   this.setI18nLabels();
+    // } else {
+    //   logSelectItemPlus.debug(`SelectItemPlus.componentDidUpdate() - No update (categoryPlaceHolder=${categoryPlaceHolder})`);
+    // }
   }
 
   onChangeKind(event) {
@@ -133,7 +143,9 @@ class SelectItemPlus extends React.Component {
     // const kinds = this.props.kinds.map(kind => ({ ...kind, name: kind.i18n[this.props.locale] || kind.name }));
     const categories = this.getI18nVersion(this.props.categories);
     const kinds = this.getI18nVersion(this.props.kinds);
-    this.setState({ categoryPlaceHolder, kindPlaceHolder, itemPlaceHolder, categories, kinds });
+    this.setState({
+      categoryPlaceHolder, kindPlaceHolder, itemPlaceHolder, categories, kinds,
+    });
   }
 
   getI18nVersion(list) {
@@ -228,7 +240,9 @@ class SelectItemPlus extends React.Component {
 
 
   render() {
-    logSelectItemPlus.debug(`render SelectItemPlus: (category=${this.state.category}, kind=${this.state.kind}, item=${this.state.item}`);
+    logSelectItemPlus.debug(`SelectItemPlus.render: (category=${this.state.category}, kind=${this.state.kind}, item=${this.state.item})`);
+    logSelectItemPlus.debug(`SelectItemPlus.render: # of props (category, kind, item)= ${this.props.categories.length || '-'}, ${this.props.kinds.length || '-'}, ${this.props.items.length || '-'}`);
+    logSelectItemPlus.debug(`SelectItemPlus.render: # of state (category, kind, item)= ${(this.state.categories && this.state.categories.length) || '-'}, ${(this.state.kinds && this.state.kinds.length) || '-'}, ${(this.state.items && this.state.items.length) || '-'}`);
     return (
       <div className={`form-block ${this.props.className}`}>
         {this.props.title &&
@@ -303,8 +317,8 @@ class SelectItemPlus extends React.Component {
                   </Col>
                 </Row>
               </Collapse>
-              <Modal className="d-block d-sm-none"
-                className="hidden-md-up"
+              <Modal
+                className="d-block d-sm-none"
                 isOpen={this.state.collapseFilters}
                 toggle={this.toggleFilters.bind(this)}
               >

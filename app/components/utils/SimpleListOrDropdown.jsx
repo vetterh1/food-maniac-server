@@ -1,9 +1,14 @@
 /* eslint-disable react/forbid-prop-types */
 
+import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactStrapInput from '../utils/ReactStrapInput';
+import { loglevelServerSend } from '../../utils/loglevel-serverSend';
 
+const logSimpleListOrDropdown = log.getLogger('logSimpleListOrDropdown');
+loglevelServerSend(logSimpleListOrDropdown); // a setLevel() MUST be run AFTER this!
+logSimpleListOrDropdown.setLevel('debug');
 
 const ListOneItem = props => (
   <li>{props.item.name}</li>

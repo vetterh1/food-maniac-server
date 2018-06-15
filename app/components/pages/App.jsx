@@ -20,9 +20,6 @@ const styles = {
   },
 };
 
-// Needed for onTouchTap
-// http://stackoverflow.com/a/34015469/988941
-// injectTapEventPlugin(); // disabled as not compatible with React 16
 
 class App extends React.Component {
   static propTypes = {

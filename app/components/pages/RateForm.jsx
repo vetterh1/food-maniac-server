@@ -29,10 +29,11 @@ import SimpleListOrDropdown from '../utils/SimpleListOrDropdown';
 import SelectItemPlus from '../utils/SelectItemPlus';
 import { loglevelServerSend } from '../../utils/loglevel-serverSend';
 
-const Element = Scroll.Element;
-const scroller = Scroll.scroller;
+const { Element, scroller } = Scroll;
 const scroll = Scroll.animateScroll;
-const optionsScroll = { duration: 750, delay: 300, smooth: true, offset: -25 };
+const optionsScroll = {
+  duration: 750, delay: 300, smooth: true, offset: -25,
+};
 
 const logRateForm = log.getLogger('logRateForm');
 loglevelServerSend(logRateForm); // a setLevel() MUST be run AFTER this!
@@ -406,7 +407,7 @@ class RateForm extends React.Component {
                 <Collapse className="d-none d-sm-block" isOpen={this.state.collapseType}>
                   <Row>
                     <Col xs={12} sm={10} className="pl-0 pt-4" >
-                      <Card block>
+                      <Card body>
                         <CardTitle className="mb-4">
                           <FormattedMessage id="place.select.type" />
                         </CardTitle>
@@ -415,8 +416,8 @@ class RateForm extends React.Component {
                     </Col>
                   </Row>
                 </Collapse>
-                <Modal className="d-block d-sm-none"
-                  className="hidden-md-up"
+                <Modal
+                  className="d-block d-sm-none"
                   isOpen={this.state.collapseType}
                   toggle={this.toggleType.bind(this)}
                 >
@@ -439,7 +440,7 @@ class RateForm extends React.Component {
               <FormattedMessage id="core.marks" />
             </h5>
             <Row>
-              <Col sm={2} className="pr-0 hidden-xs-down">
+              <Col sm={2} className="pr-0 d-none d-sm-block">
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
                   <div className="homepage-feature-icon">
                     <MdStarHalf size={48} />
@@ -479,7 +480,7 @@ class RateForm extends React.Component {
                 <Collapse className="d-none d-sm-block" isOpen={this.state.collapseMarks}>
                   <Row>
                     <Col xs={12} sm={10} className="pl-0 pt-4" >
-                      <Card block>
+                      <Card body>
                         <CardTitle className="mb-4">
                           <FormattedMessage id="marks.details" />
                         </CardTitle>
@@ -488,8 +489,8 @@ class RateForm extends React.Component {
                     </Col>
                   </Row>
                 </Collapse>
-                <Modal className="d-block d-sm-none"
-                  className="hidden-md-up"
+                <Modal
+                  className="d-block d-sm-none"
                   isOpen={this.state.collapseMarks}
                   toggle={this.toggleMarks.bind(this)}
                 >
@@ -512,7 +513,7 @@ class RateForm extends React.Component {
               <FormattedMessage id="core.comment" />
             </h5>
             <Row>
-              <Col sm={2} className="pr-0 hidden-xs-down">
+              <Col sm={2} className="pr-0 d-none d-sm-block">
                 <Row style={{ display: 'flex', justifyContent: 'center' }}>
                   <div className="homepage-feature-icon">
                     <MdEdit size={48} />

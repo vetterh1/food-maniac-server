@@ -183,7 +183,7 @@ export default class CameraSnapshotContainer extends React.Component {
           <Col sm="12" md={{ size: 8, offset: 2 }}><canvas ref={(c) => { this._canvasCameraSnapshot = c; }} style={styles.canvas} /></Col>
         </Row>
         <Row>
-          <Col sm="12" md={{ size: 8, offset: 2 }}><Button style={styleDeleteSnapshot} onTouchTap={this.onDeleteSnapshot}>----> <MdDelete size={28} /></Button></Col>
+          <Col sm="12" md={{ size: 8, offset: 2 }}><Button style={styleDeleteSnapshot} onClick={this.onDeleteSnapshot}>----> <MdDelete size={28} /></Button></Col>
         </Row>
       </div>
     );
