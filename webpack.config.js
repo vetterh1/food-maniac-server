@@ -112,31 +112,7 @@ plugins.push(
     })
 );
 
-// plugins.push(
-//   new webpack.optimize.CommonsChunkPlugin({
-//     name: 'vendor',
-//     minChunks: function (module) {
-//        // this assumes your vendor imports exist in the node_modules directory
-//        return module.context && module.context.indexOf('node_modules') !== -1;
-//     },
-//     filename: 'vendor.bundle.[hash].js',
-//   }),
-// );
-
-
-// Explanation here: https://webpack.js.org/guides/code-splitting-libraries/#commonschunkplugin
 plugins.push(
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'vendor',
-    minChunks: function (module) {
-      // this assumes your vendor imports exist in the node_modules directory
-      return module.context && module.context.indexOf('node_modules') !== -1;
-    },
-  }),
-  // CommonChunksPlugin will now extract all the common modules from vendor and main bundles
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'manifest', // But since there are no more common modules between them we end up with just the runtime code included in the manifest file
-  }),
   new BundleAnalyzerPlugin({ analyzerMode: 'static', reportFilename: 'analyser.html', openAnalyzer: false })
 );
 
@@ -144,11 +120,10 @@ plugins.push(
 // PRODUCTION OPTIMIZATIONS
 if (process.env.NODE_ENV === 'production') {
   logger.info('[FoServer] Production mode');
-  plugins.push(
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin()
-  );
+  // plugins.push(
+  //   new webpack.optimize.DedupePlugin(),
+  //   new webpack.optimize.OccurrenceOrderPlugin(),
+  // );
 } else {
   logger.info('[FoServer] NOT in Production mode');
 }
@@ -162,7 +137,6 @@ const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 plugins.push(HTMLWebpackPluginConfig);
 
 
-
 /*
  *   Loaders:
  *   - babel: ES6 --> ES5
@@ -174,6 +148,7 @@ const loaders = ['babel-loader'];
 if (process.env.NODE_ENV !== 'production') {
   loaders.push('react-hot');
 }
+
 
 
 const jsEntry = [
@@ -208,14 +183,26 @@ module.exports = {
 
   plugins,
 
+  optimization: {
+    runtimeChunk: "single", // enable "runtime" chunk
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendor",
+          chunks: "all"
+        }
+      }
+    }
+  },
+
   module: {
-    loaders: [
-      // loader for all app (NOT node modules):
-      { test: /\.js.?$/, exclude: /node_modules/, loader: 'babel-loader' },
+    rules: [
+      { test: /\.js.?$/, exclude: /node_modules/, use: 'babel-loader' },
       // css loader to import CSS ES6 style (ex: import 'bootstrap/dist/css/bootstrap.css')
-      { test: /\.css$/, loader: 'style-loader!css-loader' },
+      { test: /\.css$/, use: 'style-loader!css-loader' },
       // loader for react-icons:
-      { test: /(\.js|\.jsx)$/, loader: 'babel', include: [path.resolve(__dirname, './node_modules/react-icons/fa'), path.resolve(__dirname, './node_modules/react-icons/go')], query: { presets: ['es2015', 'stage-0', 'react'] } },
+      // { test: /(\.js|\.jsx)$/, use: 'babel', include: [path.resolve(__dirname, './node_modules/react-icons/fa'), path.resolve(__dirname, './node_modules/react-icons/go')], query: { presets: ['es2015', 'stage-0', 'react'] } },
     ],
   },
 
