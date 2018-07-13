@@ -42,6 +42,10 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 // const WebpackShellPlugin = require('webpack-shell-plugin');
 // const GenerateJsonPlugin = require('generate-json-webpack-plugin');
 
+
+const devMode = process.env.NODE_ENV !== 'production'
+
+
 //
 // Configure winston logger (only console)
 //
@@ -145,7 +149,7 @@ plugins.push(HTMLWebpackPluginConfig);
  */
 
 const loaders = ['babel-loader'];
-if (process.env.NODE_ENV !== 'production') {
+if (devMode) {
   loaders.push('react-hot');
 }
 
@@ -200,7 +204,15 @@ module.exports = {
     rules: [
       { test: /\.js.?$/, exclude: /node_modules/, use: 'babel-loader' },
       // css loader to import CSS ES6 style (ex: import 'bootstrap/dist/css/bootstrap.css')
-      { test: /\.css$/, use: 'style-loader!css-loader' },
+      {
+        test: /.css$/,
+        // exclude: [/node_modules/],
+        use: [
+          devMode ? 'style-loader' : null,
+          'css-loader'
+        ],
+      },
+      // { test: /\.css$/, use: 'style-loader!css-loader' },
       // loader for react-icons:
       // { test: /(\.js|\.jsx)$/, use: 'babel', include: [path.resolve(__dirname, './node_modules/react-icons/fa'), path.resolve(__dirname, './node_modules/react-icons/go')], query: { presets: ['es2015', 'stage-0', 'react'] } },
     ],

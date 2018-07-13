@@ -207,17 +207,22 @@ mongo 51.254.221.25:27017/food_maniac -u food -p maniac --authenticationDatabase
 # Transfer mongo certificates to app server:
 # From db server (folder /etc/ssl):
 sftp lve@51.254.221.25:/etc/ssl/mongo* ~/
+# Move them to the /etc/ssl or local ssl folder (~/ssl)
 
 
 # ------ 4 - Connexion once SSL is setup ------ 
 
-# Remote connection as a 'regular user':
+# Remote connection as a 'regular user' (/etc/ssl folder):
 mongo 51.254.221.25:27017/food_maniac -u food -p maniac --authenticationDatabase food_maniac --ssl --sslPEMKeyFile /etc/ssl/mongodb.pem --sslCAFile /etc/ssl/mongodb-cert.crt --sslAllowInvalidHostnames
+# Remote connection as a 'regular user' (~/ssl folder):
+mongo 51.254.221.25:27017/food_maniac -u food -p maniac --authenticationDatabase food_maniac --ssl --sslPEMKeyFile ~/ssl/mongodb.pem --sslCAFile ~/ssl/mongodb-cert.crt --sslAllowInvalidHostnames
 # Remote connection as a 'regular user' from Windows:
 "C:\Program Files\MongoDB\Server\3.6\bin\mongo" 51.254.221.25:27017/food_maniac -u food -p maniac --authenticationDatabase food_maniac --ssl --sslPEMKeyFile C:\etc\ssl\mongodb.pem --sslCAFile C:\etc\ssl\mongodb-cert.crt --sslAllowInvalidHostnames
 
-# Remote connection as an admin:
+# Remote connection as an admin (/etc/ssl folder):
 mongo 51.254.221.25:27017/admin -u admin -p maniacPwd --authenticationDatabase admin --ssl --sslPEMKeyFile /etc/ssl/mongodb.pem --sslCAFile /etc/ssl/mongodb-cert.crt --sslAllowInvalidHostnames
+# Remote connection as an admin (~/ssl folder):
+mongo 51.254.221.25:27017/admin -u admin -p maniacPwd --authenticationDatabase admin --ssl --sslPEMKeyFile ~/ssl/mongodb.pem --sslCAFile ~/ssl/mongodb-cert.crt --sslAllowInvalidHostnames
 # Remote connection as a 'regular user' from Windows:
 "C:\Program Files\MongoDB\Server\3.6\bin\mongo" 51.254.221.25:27017/admin -u admin -p maniacPwd --authenticationDatabase admin --ssl --sslPEMKeyFile C:\etc\ssl\mongodb.pem --sslCAFile C:\etc\ssl\mongodb-cert.crt --sslAllowInvalidHostnames
 
