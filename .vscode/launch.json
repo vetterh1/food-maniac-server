@@ -2,11 +2,32 @@
   "version": "0.2.0",
   "configurations": [
       {
-          "name": "Chrome",
-          "type": "chrome",
+          "type": "node",
           "request": "launch",
-          "url": "http://localhost:8080",
-          "webRoot": "${workspaceRoot}"
+          "name": "Launch via NPM",
+          "runtimeExecutable": "npm",
+          "cwd": "${workspaceFolder}",
+          "runtimeArgs": [
+              "run-script",
+              "BoServer:dev"
+          ]
+      },
+      {
+          "type": "node",
+          "request": "launch",
+          "name": "nodemon",
+          "program": "${workspaceFolder}/server/boServer.js",
+          "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/babel-node",
+          "runtimeArgs": ["--presets", "es2015,stage-2"],
+          "sourceMaps": true,
+          "restart": true,
+          "console": "integratedTerminal",
+          "internalConsoleOptions": "neverOpen",
+          "env": {
+            "BABEL_DISABLE_CACHE": "1",
+             "NODE_ENV": "development",
+             "SERVER_NAME": "BoServer"
+          }
       }
   ]
 }
