@@ -1,9 +1,12 @@
 const logger = require('./logger.js');
 const crypto = require('crypto');
 
+const passphrase = "6fadeee8-d1b3-4ebe-b744-32f8e2d48689";
+
 
 // test with curl:
-// curl --data "AMOUNT=123" http://localhost:8080/util/computeHash
+// curl -d "AMOUNT=123" -d "ORDERID=ordertest" -d "CURRENCY=EUR" -d "PSPID=VETTERH1"   http://localhost:8080/util/computeHash
+
 
 export function computeHash(req, res) {
   if (!req.body || !req.body.AMOUNT || !req.body.CURRENCY || !req.body.ORDERID || !req.body.PSPID) {
@@ -17,32 +20,27 @@ export function computeHash(req, res) {
   } else {
     
     const hash = crypto.createHash('sha512');
+
+    // Function called when hash is ready (hash start is AFTER this function)
     hash.on('readable', () => {
       const data = hash.read();
       if (data) {
-        res.json({ code, details });
-// !!!!!
-        console.log(data.toString('hex'));
-        // Prints:
-        //   6a2da20943931e9834fc12cfe5bb47bbd9ae43489a30726962b576f4e3993e50
+        const hashResult = data.toString('hex');
+        console.log("Data hashed: ", hashResult);
+
+        // Sent to the browser so it can be sent to Ogone... 
+        res.json({ hashResult });
+      } else {
+        const error = { status: 'error', message: '! computeHash failed! - data emtpy' };
+        res.status(400).json(error);
       }
     });
     
-    hash.write('some data to hash');
+    const dataToHash = `AMOUNT=${req.body.AMOUNT}${passphrase}CURRENCY=${req.body.CURRENCY}${passphrase}ORDERID=${req.body.ORDERID}${passphrase}PSPID=${req.body.PSPID}${passphrase}`;
+    console.log("Data to hash: ", dataToHash);
+
+    hash.write(dataToHash);
     hash.end();
 
   }
 }
-
-
-export function sendHashBackToClient(json) {
-  request.post(
-    "https://secure.ogone.com/ncol/test/orderstandard.asp",
-    { json: { key: 'value' } },
-    function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            console.log(body)
-        }
-    }
-  );
-};

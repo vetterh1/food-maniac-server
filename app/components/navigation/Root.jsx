@@ -19,6 +19,7 @@ import ListItemsContainer from '../pages/ListItemsContainer';
 import ListCategoriesContainer from '../pages/ListCategoriesContainer';
 import ListKindsContainer from '../pages/ListKindsContainer';
 import AdminItemsContainer from '../pages/AdminItemsContainer';
+import CheckoutContainer from '../pages/CheckoutContainer';
 import About from '../pages/About';
 import Callback from '../../auth/Callback';
 import Auth from '../../auth/Auth';
@@ -144,6 +145,10 @@ class Root extends React.Component {
               <Route
                 path="/adminItems"
                 component={props => <AdminItemsContainer auth={auth} {...props} />}
+              />
+              <Route
+                path="/checkout"
+                component={props => <CheckoutContainer />}
               />
               <Route
                 path="/generateThumbnails"
