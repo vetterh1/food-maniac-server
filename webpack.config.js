@@ -208,7 +208,7 @@ module.exports = {
         test: /.css$/,
         // exclude: [/node_modules/],
         use: [
-          devMode ? 'style-loader' : null,
+          devMode ? 'style-loader' : 'style-loader',
           'css-loader'
         ],
       },
