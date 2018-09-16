@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Button } from 'reactstrap';
-import MdAddAPhoto from 'react-icons/lib/md/add-a-photo';
-import MdDelete from 'react-icons/lib/md/delete';
+import { MdAddAPhoto } from 'react-icons/md';
+import { MdDelete } from 'react-icons/md';
 import PromiseFileReader from '../utils/PromiseFileReader';
 
 const styles = {

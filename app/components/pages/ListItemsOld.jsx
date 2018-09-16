@@ -2,7 +2,7 @@ import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
-import MdLocalRestaurant from 'react-icons/lib/md/local-restaurant';
+import { MdLocalRestaurant } from 'react-icons/md';
 import SimpleListOrDropdown from '../utils/SimpleListOrDropdown';
 import ItemImage from '../utils/ItemImage';
 

@@ -9,7 +9,7 @@ import { Container } from 'reactstrap';
 import Alert from 'react-s-alert';
 import 'isomorphic-fetch';
 // import { polyfill } from 'es6-promise';
-import MdStarHalf from 'react-icons/lib/md/star-half';
+import { MdStarHalf } from 'react-icons/md';
 import SearchItemForm from './SearchItemForm';
 import ListOneMarkContainer from './ListOneMarkContainer';
 import SimulateLocationContainer from '../pages/SimulateLocationContainer';

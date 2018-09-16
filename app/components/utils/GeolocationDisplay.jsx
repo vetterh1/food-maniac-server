@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
-import MdLocationOn from 'react-icons/lib/md/location-on';
+import { MdLocationOn } from 'react-icons/md';
 import { connect } from 'react-redux';
 import TestDisplayPositionFromStore from './TestDisplayPositionFromStore';
 

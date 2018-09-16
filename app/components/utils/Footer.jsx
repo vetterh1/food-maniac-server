@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 import { Button, Col, Container, Label, Row } from 'reactstrap';
-import MdInfoOutline from 'react-icons/lib/md/info-outline';
-import MdBugReport from 'react-icons/lib/md/bug-report';
+import { MdInfoOutline } from 'react-icons/md';
+import { MdBugReport } from 'react-icons/md';
 import { loglevelStartServerTimer } from '../../utils/loglevel-serverSend';
 
 const divStyle = {

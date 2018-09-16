@@ -3,8 +3,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Rating from 'react-rating';
-import MdStar from 'react-icons/lib/md/star';
-import MdStarOutline from 'react-icons/lib/md/star-outline';
+import { MdStar } from 'react-icons/md';
+import { MdStarOutline } from 'react-icons/md';
 
 class RatingStars extends React.PureComponent {
   static propTypes = {

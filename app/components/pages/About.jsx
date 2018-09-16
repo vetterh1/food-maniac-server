@@ -4,11 +4,11 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { FormattedMessage } from 'react-intl';
-import MdBuild from 'react-icons/lib/md/build'; // Tools
-import MdBrush from 'react-icons/lib/md/brush'; // FO
-import MdDns from 'react-icons/lib/md/dns'; // BO
-import MdEdit from 'react-icons/lib/md/edit'; // Techniques
-import MdSchool from 'react-icons/lib/md/school'; // Title
+import { MdBuild } from 'react-icons/md'; // Tools
+import { MdBrush } from 'react-icons/md'; // FO
+import { MdDns } from 'react-icons/md'; // BO
+import { MdEdit } from 'react-icons/md'; // Techniques
+import { MdSchool } from 'react-icons/md'; // Title
 
 /*
 FO --> ES6, React, Redux, Flex, Auth0

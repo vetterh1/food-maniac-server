@@ -202,13 +202,12 @@ module.exports = {
 
   module: {
     rules: [
-      { test: /\.js.?$/, exclude: /node_modules/, use: 'babel-loader' },
+      { test: /\.(js|jsx)$/, exclude: /node_modules/, use: 'babel-loader' },
       // css loader to import CSS ES6 style (ex: import 'bootstrap/dist/css/bootstrap.css')
       {
-        test: /.css$/,
-        // exclude: [/node_modules/],
+        test: /\.css$/,
         use: [
-          devMode ? 'style-loader' : 'style-loader',
+          'style-loader',
           'css-loader'
         ],
       },

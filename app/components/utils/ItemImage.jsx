@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MdLocalRestaurant from 'react-icons/lib/md/local-restaurant';
+import { MdLocalRestaurant } from 'react-icons/md';
 
 const ItemImage = (props) => {
   if (!props.id) return null;

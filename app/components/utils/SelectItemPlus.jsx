@@ -7,10 +7,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Button, Card, CardTitle, Col, Collapse, Label, Modal, ModalHeader, ModalBody, Row } from 'reactstrap';
-import MdFilterList from 'react-icons/lib/md/filter-list';
-import MdPlaylistAdd from 'react-icons/lib/md/playlist-add';
-// import MdLocalRestaurant from 'react-icons/lib/md/local-restaurant';
-import MdRoomService from 'react-icons/lib/md/room-service';
+import { MdFilterList } from 'react-icons/md';
+import { MdPlaylistAdd } from 'react-icons/md';
+// import {MdLocalRestaurant} from 'react-icons/md';
+import { MdRoomService } from 'react-icons/md';
 import SimpleListOrDropdown from '../utils/SimpleListOrDropdown';
 import { loglevelServerSend } from '../../utils/loglevel-serverSend';
 

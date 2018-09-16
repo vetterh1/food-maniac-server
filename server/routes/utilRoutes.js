@@ -7,7 +7,7 @@ const router = new Router();
 
 // ----------------  OGONE ----------------
 
-router.route('/computeHash').post(OgoneGateway.computeHash);
+router.route('/computeHash').get(OgoneGateway.computeHash);
 
 
 

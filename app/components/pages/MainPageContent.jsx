@@ -5,9 +5,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { FormattedMessage } from 'react-intl';
-import MdStarHalf from 'react-icons/lib/md/star-half';
-import MdLocalRestaurant from 'react-icons/lib/md/local-restaurant';
-import MdLocationSearching from 'react-icons/lib/md/location-searching';
+import { MdStarHalf } from 'react-icons/md';
+import { MdLocalRestaurant } from 'react-icons/md';
+import { MdLocationSearching } from 'react-icons/md';
 import Auth from '../../auth/Auth';
 import LoginBanner from '../../auth/LoginBanner';
 
