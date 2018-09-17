@@ -58,7 +58,7 @@ const accessLogStream = FileStreamRotator.getStream({
 // ---------------------  INIT DB  ---------------------
 //
 
-import insertInitialData from './initialData';
+import insertInitialData from './initialData.mjs';
 
 // Set native promises as mongoose promise
 mongoose.Promise = global.Promise;
@@ -302,8 +302,8 @@ app.use(allowCrossDomain);
 app.use(helmet());
 app.use(helmet.xssFilter({ setOnOldIE: true }));
 
-import apiRoutes from './routes/apiRoutes';
-import utilRoutes from './routes/utilRoutes';
+import apiRoutes from './routes/apiRoutes.js';
+import utilRoutes from './routes/utilRoutes.js';
 
 // app.enable('trust proxy');  // used to get callers IP address (use req.ip)
 app.set('trust proxy', '127.0.0.1');
@@ -381,10 +381,10 @@ app.use('/static', express.static(folderStaticAbsolute));
 
 
 // Logs route: are visible here:  http://yourhost:port/logs/show
-require('./util/winstonDisplay')(app, logger.default);
+require('./util/winstonDisplay.js')(app, logger.default);
 
 // Save logs comming from here:  http://yourhost:port/logs/save
-require('./util/logsFromBrowser')(app);
+require('./util/logsFromBrowser.js')(app);
 
 
 // start app

@@ -1,50 +1,10 @@
-/*
- *    USAGE:
- *
- *    1 - Set Dev or Prod env:
- *
- *    - Unix:
- *            NODE_ENV=production
- *            NODE_ENV=dev
- *
- *    - Windows:
- *            SET "NODE_ENV=production"
- *            SET "NODE_ENV=dev"
- *
- *    2 - Build only: add "npm run build"
- *
- *            ...env... npm run build
- *
- *    3 - Build & Run: add "npm start"
- *
- *            ...env... npm start
- *
- *    4 - Process Manager
- *
- *          npm run pm2:restart
- *
- *    Note on combining:
- *    - Unix: NODE_ENV=production; npm start
- *    - Windows: SET "NODE_ENV=dev" && npm start
- *
- *    Examples:
- *
- *          NODE_ENV=production npm run build
- *          npm run pm2:restart
- *
- */
-
 const logger = require('winston');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-// const WebpackShellPlugin = require('webpack-shell-plugin');
-// const GenerateJsonPlugin = require('generate-json-webpack-plugin');
-
 
 const devMode = process.env.NODE_ENV !== 'production'
-
 
 //
 // Configure winston logger (only console)
@@ -119,6 +79,9 @@ plugins.push(
 plugins.push(
   new BundleAnalyzerPlugin({ analyzerMode: 'static', reportFilename: 'analyser.html', openAnalyzer: false })
 );
+
+
+logger.info('[FoServer] mode: ', process.env.mode);
 
 
 // PRODUCTION OPTIMIZATIONS

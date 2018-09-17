@@ -13,7 +13,7 @@ import { Button, Card, CardTitle, Col, Collapse, Form, Input, Label, Modal, Moda
 // import {MdLocalCake} from 'react-icons/md/local-cake';
 // import {MdLocalBar} from 'react-icons/md/local-bar';
 // import {MdLocalCafe} from 'react-icons/md/local-cafe';
-// import {MdLocalRestaurant} from 'react-icons/md/local-restaurant';
+// import {MdRestaurantMenu} from 'react-icons/md/local-restaurant';
 // import {MdRoomService} from 'react-icons/md/room-service';
 import { MdStore } from 'react-icons/md';
 import { MdMap } from 'react-icons/md';
@@ -45,7 +45,7 @@ const LOCATION_TYPES = [
   { id: 'bakery', name: 'Bakery', icon: 'MdLocalCake' },
   { id: 'bar', name: 'Bar', icon: 'MdLocalBar' },
   { id: 'cafe', name: 'Cafe', icon: 'MdLocalCafe' },
-  { id: 'restaurant', name: 'Restaurant', icon: 'MdLocalRestaurant' },
+  { id: 'restaurant', name: 'Restaurant', icon: 'MdRestaurantMenu' },
 ];
 
 

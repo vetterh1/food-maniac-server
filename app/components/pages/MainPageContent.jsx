@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 import { MdStarHalf } from 'react-icons/md';
-import { MdLocalRestaurant } from 'react-icons/md';
+import { MdRestaurantMenu } from 'react-icons/md';
 import { MdLocationSearching } from 'react-icons/md';
 import Auth from '../../auth/Auth';
 import LoginBanner from '../../auth/LoginBanner';
@@ -44,7 +44,7 @@ class MainPageContent extends React.Component {
             </div>
             <div className="homepage-feature-item">
               <Link to="/search" className="" style={{ textDecoration: 'none' }}>
-                <div className="homepage-feature-icon"><MdLocalRestaurant size={64} /></div>
+                <div className="homepage-feature-icon"><MdRestaurantMenu size={64} /></div>
                 <h5 className="homepage-feature-title"><FormattedMessage id="core.discover" /></h5>
                 <div className="homepage-feature-detail">
                   <p><FormattedMessage id="messages.discover.blob" /></p>

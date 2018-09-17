@@ -2,7 +2,7 @@ import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
-import { MdLocalRestaurant } from 'react-icons/md';
+import { MdRestaurantMenu } from 'react-icons/md';
 import SimpleListOrDropdown from '../utils/SimpleListOrDropdown';
 import ItemImage from '../utils/ItemImage';
 
@@ -180,7 +180,7 @@ class ListItems extends React.Component {
           <div style={styles.carrousel} className="carrousel">
             <Slider {...settings} style={styles.carrouselInner}>
               {this.props.items.map((item, index) => (
-                <div key={item._id}><h6><div className="row justify-content-center"><object data={`/static/thumbnails/${item.picture}.jpg`} type="image/jpg"><MdLocalRestaurant size={96} /></object></div><div className="row justify-content-center">{item.name}</div></h6></div>
+                <div key={item._id}><h6><div className="row justify-content-center"><object data={`/static/thumbnails/${item.picture}.jpg`} type="image/jpg"><MdRestaurantMenu size={96} /></object></div><div className="row justify-content-center">{item.name}</div></h6></div>
               ))}
             </Slider>
           </div>

@@ -521,6 +521,13 @@ sudo do-release-upgrade
 sudo reboot
 sudo shutdown -r now
 
+------ Nodejs update -------
+With 'n':
+sudo npm install -g n
+sudo n latest
+or sudo n current
+
+
 
 ---------------------------------------------------------------
                 SSL with letsencrypt certbot

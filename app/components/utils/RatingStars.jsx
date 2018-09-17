@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Rating from 'react-rating';
 import { MdStar } from 'react-icons/md';
-import { MdStarOutline } from 'react-icons/md';
+import { MdStarBorder } from 'react-icons/md';
 
 class RatingStars extends React.PureComponent {
   static propTypes = {
@@ -35,7 +35,7 @@ class RatingStars extends React.PureComponent {
           onChange={rate => onChange && onChange(rate)}
           stop={stop}
           fullSymbol={<MdStar size={size} />}
-          emptySymbol={<MdStarOutline size={size} />}
+          emptySymbol={<MdStarBorder size={size} />}
           style={style}
           readonly={!onChange}
           fractions={onChange ? 1 : 2}
