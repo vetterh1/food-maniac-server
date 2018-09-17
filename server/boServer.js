@@ -58,7 +58,7 @@ const accessLogStream = FileStreamRotator.getStream({
 // ---------------------  INIT DB  ---------------------
 //
 
-import insertInitialData from './initialData.mjs';
+import insertInitialData from './initialData';
 
 // Set native promises as mongoose promise
 mongoose.Promise = global.Promise;

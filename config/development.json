@@ -15,7 +15,7 @@
 
 	"storage":
   {
-    "database_remote":
+    "database_remote_PC":
     {
   		"URL_old_local" : "mongodb://localhost:27017/food_maniac_dev",
       "URL_distant_prod" : "mongodb://food:maniac@51.254.221.25:27017/food_maniac",
@@ -24,7 +24,7 @@
       "sslKeyPath" : "/etc/ssl/mongodb.pem",
       "sslCertPath" : "/etc/ssl/mongodb-cert.crt"
     },
-    "database_remote_ssl_not_in_etc":
+    "database_remote_OSX":
     {
   		"URL_old_local" : "mongodb://localhost:27017/food_maniac_dev",
       "URL_distant_prod" : "mongodb://food:maniac@51.254.221.25:27017/food_maniac",
@@ -39,8 +39,8 @@
       "URL_distant_prod" : "mongodb://food:maniac@51.254.221.25:27017/food_maniac",
   		"URL" : "mongodb://food:maniac@51.254.221.25:27017/food_maniac",
       "sslMode" : true,
-      "sslKeyPath" : "/etc/ssl/mongodb.pem",
-      "sslCertPath" : "/etc/ssl/mongodb-cert.crt"
+      "sslKeyPath" : "/Users/lav/ssl/mongodb.pem",
+      "sslCertPath" : "/Users/lav/ssl/mongodb-cert.crt"
     },
     "database_local":
     {
