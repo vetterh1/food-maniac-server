@@ -305,20 +305,22 @@ class SelectItemPlus extends React.Component {
                 }
               </Row>
 
-              <Collapse className="d-none d-sm-block" isOpen={this.state.collapseFilters}>
-                <Row>
-                  <Col xs={12} sm={10} className="pl-0 pt-4" >
-                    <Card body>
-                      <CardTitle className="mb-4">
-                        <FormattedMessage id="item.filter.short" />
-                      </CardTitle>
-                      {this.renderFiltersBody()}
-                    </Card>
-                  </Col>
-                </Row>
-              </Collapse>
+              <div className="d-none d-sm-block">
+                <Collapse isOpen={this.state.collapseFilters}>
+                  <Row>
+                    <Col xs={12} sm={10} className="pl-0 pt-4" >
+                      <Card body>
+                        <CardTitle className="mb-4">
+                          <FormattedMessage id="item.filter.short" />
+                        </CardTitle>
+                        {this.renderFiltersBody()}
+                      </Card>
+                    </Col>
+                  </Row>
+                </Collapse>
+              </div>
               <Modal
-                className="d-block d-sm-none"
+                wrapClassName="d-block d-sm-none"
                 isOpen={this.state.collapseFilters}
                 toggle={this.toggleFilters.bind(this)}
               >

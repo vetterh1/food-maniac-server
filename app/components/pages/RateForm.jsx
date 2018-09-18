@@ -404,20 +404,22 @@ class RateForm extends React.Component {
                     </Button>
                   </Col>
                 </Row>
-                <Collapse className="d-none d-sm-block" isOpen={this.state.collapseType}>
-                  <Row>
-                    <Col xs={12} sm={10} className="pl-0 pt-4" >
-                      <Card body>
-                        <CardTitle className="mb-4">
-                          <FormattedMessage id="place.select.type" />
-                        </CardTitle>
-                        {this.renderTypeBody()}
-                      </Card>
-                    </Col>
-                  </Row>
-                </Collapse>
+                <div className="d-none d-sm-block">
+                  <Collapse isOpen={this.state.collapseType}>
+                    <Row>
+                      <Col xs={12} sm={10} className="pl-0 pt-4" >
+                        <Card body>
+                          <CardTitle className="mb-4">
+                            <FormattedMessage id="place.select.type" />
+                          </CardTitle>
+                          {this.renderTypeBody()}
+                        </Card>
+                      </Col>
+                    </Row>
+                  </Collapse>
+                </div>
                 <Modal
-                  className="d-block d-sm-none"
+                  wrapClassName="d-block d-sm-none"
                   isOpen={this.state.collapseType}
                   toggle={this.toggleType.bind(this)}
                 >
@@ -469,7 +471,6 @@ class RateForm extends React.Component {
                       block
                       color="secondary"
                       size="sm"
-                      className={`element-with-transition ${classNameOptionalElements}`}
                       onClick={this.toggleMarks.bind(this)}
                     >
                       <MdStore className="mr-2" size={24} />
@@ -477,20 +478,22 @@ class RateForm extends React.Component {
                     </Button>
                   </Col>
                 </Row>
-                <Collapse className="d-none d-sm-block" isOpen={this.state.collapseMarks}>
-                  <Row>
-                    <Col xs={12} sm={10} className="pl-0 pt-4" >
-                      <Card body>
-                        <CardTitle className="mb-4">
-                          <FormattedMessage id="marks.details" />
-                        </CardTitle>
-                        {this.renderMarksBody()}
-                      </Card>
-                    </Col>
-                  </Row>
-                </Collapse>
+                <div className="d-none d-sm-block">
+                  <Collapse isOpen={this.state.collapseMarks}>
+                    <Row>
+                      <Col xs={12} sm={10} className="pl-0 pt-4" >
+                        <Card body>
+                          <CardTitle className="mb-4">
+                            <FormattedMessage id="marks.details" />
+                          </CardTitle>
+                          {this.renderMarksBody()}
+                        </Card>
+                      </Col>
+                    </Row>
+                  </Collapse>
+                </div>
                 <Modal
-                  className="d-block d-sm-none"
+                  wrapClassName="d-block d-sm-none"
                   isOpen={this.state.collapseMarks}
                   toggle={this.toggleMarks.bind(this)}
                 >
