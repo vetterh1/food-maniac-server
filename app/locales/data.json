@@ -116,7 +116,16 @@
     "about.back.blob": "NodeJS, Express, Nginx, Mongo, Mongoose",
     "about.tools.blob": "Webpack, Tests (Mocha, Jest), Eslint, Google APIs",
     "about.techniques.blob": "multi-device layouts, Promises, TDD, Webpack optimizations",
-    "about.cms.blob": "Kentico, Ingenico / Ogone payment gateway"
+    "about.cms.blob": "Kentico, Ingenico / Ogone payment gateway",
+
+    "checkout.ok.title": "Purchase complete!",
+    "checkout.ok.sub_title": "Thank you so much for your support.",
+    "checkout.ko.unknown.title": "Unknown error during purchase!",
+    "checkout.ko.unknown.sub_title": "Please try again later...",
+    "checkout.ko.acq.title": "Acquiring error during purchase!",
+    "checkout.ko.acq.sub_title": "Please try again later...",
+    "checkout.ko.cancel.title": "Purchase was cancelled!",
+    "checkout.ko.cancel.sub_title": "Please try again..."
   },
 
 
@@ -235,6 +244,15 @@
     "about.back.blob": "NodeJS, Express, Nginx, Mongo, Mongoose",
     "about.tools.blob": "Webpack, Tests (Mocha, Jest), Eslint, Google APIs",
     "about.techniques.blob": "multi-device layouts, Promises, TDD, Webpack optimizations",
-    "about.cms.blob": "Kentico, interfacage Ingenico / Ogone"
+    "about.cms.blob": "Kentico, interfacage Ingenico / Ogone",
+
+    "checkout.ok.title": "Achat validé !",
+    "checkout.ok.sub_title": "Merci de tout coeur pour votre support.",
+    "checkout.ko.unknown.title": "Erreur pendant l'achat !",
+    "checkout.ko.unknown.sub_title": "Veuillez réessayer plus tard...",
+    "checkout.ko.acq.title": "Erreur pendant l'achat (acq)",
+    "checkout.ko.acq.sub_title": "Veuillez réessayer plus tard...",
+    "checkout.ko.cancel.title": "L'achat a été annulé !",
+    "checkout.ko.cancel.sub_title": "Veuillez réessayer..."
   }
 }

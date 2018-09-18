@@ -19,10 +19,15 @@ import ListItemsContainer from '../pages/ListItemsContainer';
 import ListCategoriesContainer from '../pages/ListCategoriesContainer';
 import ListKindsContainer from '../pages/ListKindsContainer';
 import AdminItemsContainer from '../pages/AdminItemsContainer';
-import CheckoutContainer from '../pages/CheckoutContainer';
 import About from '../pages/About';
 import Callback from '../../auth/Callback';
 import Auth from '../../auth/Auth';
+import CheckoutContainer from '../checkout/CheckoutContainer';
+import CheckoutComplete from '../checkout/CheckoutComplete';
+import CheckoutAcqError from '../checkout/CheckoutAcqError';
+import CheckoutUnknownError from '../checkout/CheckoutUnknownError';
+import CheckoutCancelError from '../checkout/CheckoutCancelError';
+
 
 const logRoot = log.getLogger('logRoot');
 loglevelServerSend(logRoot); // a setLevel() MUST be run AFTER this!
@@ -161,6 +166,22 @@ class Root extends React.Component {
                     {...props}
                   />)}
               />
+              <Route
+                path="/eshop-ok"
+                component={props => <CheckoutComplete auth={auth} {...props} />}
+              />              
+              <Route
+                path="/eshop-ko-acq"
+                component={props => <CheckoutAcqError auth={auth} {...props} />}
+              />              
+              <Route
+                path="/eshop-ko-unknown"
+                component={props => <CheckoutUnknownError auth={auth} {...props} />}
+              />              
+              <Route
+                path="/eshop-ko-cancel"
+                component={props => <CheckoutCancelError auth={auth} {...props} />}
+              />              
               <Route
                 path="*"
                 component={NotFound}
