@@ -105,16 +105,18 @@
     "login.logout": "Logout",
     "login.ask": "Please login / sign-up to access to this page",
     
-    "about.title": "Food-Maniac is a play ground to test new technologies / techniques",
+    "about.title": "Food-Maniac is a playground to test new technologies / techniques",
     "about.sub_title": "Designed & developped by ",
     "about.front": "Front Office",
     "about.back": "Back Office",
     "about.tools": "Tools",
     "about.techniques": "Techniques",
+    "about.cms": "CMS / e-Commerce",
     "about.front.blob": "ES6, React, Redux, Flex, Auth0",
     "about.back.blob": "NodeJS, Express, Nginx, Mongo, Mongoose",
     "about.tools.blob": "Webpack, Tests (Mocha, Jest), Eslint, Google APIs",
-    "about.techniques.blob": "multi-device layouts, Promises, TDD, Webpack optimizations"
+    "about.techniques.blob": "multi-device layouts, Promises, TDD, Webpack optimizations",
+    "about.cms.blob": "Kentico, Ingenico / Ogone payment gateway"
   },
 
 
@@ -228,9 +230,11 @@
     "about.back": "Back Office",
     "about.tools": "Outils",
     "about.techniques": "Techniques",
+    "about.cms": "CMS / e-Commerce",
     "about.front.blob": "ES6, React, Redux, Flex, Auth0",
     "about.back.blob": "NodeJS, Express, Nginx, Mongo, Mongoose",
     "about.tools.blob": "Webpack, Tests (Mocha, Jest), Eslint, Google APIs",
-    "about.techniques.blob": "multi-device layouts, Promises, TDD, Webpack optimizations"
- }
+    "about.techniques.blob": "multi-device layouts, Promises, TDD, Webpack optimizations",
+    "about.cms.blob": "Kentico, interfacage Ingenico / Ogone"
+  }
 }

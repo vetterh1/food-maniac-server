@@ -9,6 +9,7 @@ import { MdBrush } from 'react-icons/md'; // FO
 import { MdDns } from 'react-icons/md'; // BO
 import { MdEdit } from 'react-icons/md'; // Techniques
 import { MdSchool } from 'react-icons/md'; // Title
+import { MdPayment } from 'react-icons/md'; // CMS
 
 /*
 FO --> ES6, React, Redux, Flex, Auth0
@@ -35,32 +36,39 @@ class About extends React.Component {
         </div>
         <div className="homepage-container">
           <div className="homepage-feature-items" style={{ maxWidth: '100rem' }}>
-            <div className="homepage-feature-item">
+            <div className="homepage-feature-item mt-5">
               <div className="homepage-feature-icon"><MdBrush size={48} /></div>
               <h5 className="homepage-feature-title"><FormattedMessage id="about.front" /></h5>
               <div className="homepage-feature-detail">
                 <p><FormattedMessage id="about.front.blob" /></p>
               </div>
             </div>
-            <div className="homepage-feature-item">
+            <div className="homepage-feature-item mt-5">
               <div className="homepage-feature-icon"><MdDns size={48} /></div>
               <h5 className="homepage-feature-title"><FormattedMessage id="about.back" /></h5>
               <div className="homepage-feature-detail">
                 <p><FormattedMessage id="about.back.blob" /></p>
               </div>
             </div>
-            <div className="homepage-feature-item">
+            <div className="homepage-feature-item mt-5">
               <div className="homepage-feature-icon"><MdBuild size={48} /></div>
               <h5 className="homepage-feature-title"><FormattedMessage id="about.tools" /></h5>
               <div className="homepage-feature-detail">
                 <p><FormattedMessage id="about.tools.blob" /></p>
               </div>
             </div>
-            <div className="homepage-feature-item">
+            <div className="homepage-feature-item mt-5">
               <div className="homepage-feature-icon"><MdEdit size={48} /></div>
               <h5 className="homepage-feature-title"><FormattedMessage id="about.techniques" /></h5>
               <div className="homepage-feature-detail">
                 <p><FormattedMessage id="about.techniques.blob" /></p>
+              </div>
+            </div>
+            <div className="homepage-feature-item mt-5">
+              <div className="homepage-feature-icon"><MdPayment size={48} /></div>
+              <h5 className="homepage-feature-title"><FormattedMessage id="about.cms" /></h5>
+              <div className="homepage-feature-detail">
+                <p><FormattedMessage id="about.cms.blob" /></p>
               </div>
             </div>
           </div>
