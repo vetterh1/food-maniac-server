@@ -4,8 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Link } from 'react-router-dom';
-import { NavItem, NavLink } from 'reactstrap';
+import { NavItem } from 'reactstrap';
 import Auth from './Auth';
 
 class LoginInBar extends React.Component {
@@ -23,25 +22,20 @@ class LoginInBar extends React.Component {
 
   // TODO: add User info when logged in
 
+//  <a href="javascript:void(0)" onClick={clickHandler} className = "nav-link">Your Label</a>
+
+
   render() {
     const { isAuthenticated } = this.props.auth;
     return (
       <NavItem>
         {!isAuthenticated() && (
-          <a
-            className="navbar-link"
-            role="button"
-            onClick={this.onLogin.bind(this)}
-          >
+          <a href="javascript:void(0)" onClick={this.onLogin.bind(this)} className = "nav-link">
             <FormattedMessage id="login.login_signin" />
           </a>
         )}
         {isAuthenticated() && (
-          <a
-            className="navbar-link"
-            role="button"
-            onClick={this.onLogout.bind(this)}
-          >
+          <a href="javascript:void(0)" onClick={this.onLogout.bind(this)} className = "nav-link">
             <FormattedMessage id="login.logout" />
           </a>
         )}

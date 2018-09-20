@@ -18,7 +18,7 @@ import * as GenerateThumbnails from '../util/generateThumbnails';
 export function getItemsCount(req, res) {
   // LATER: query should return items of current user.
   const conditions = req.query.conditions ? JSON.parse(req.query.conditions) : {};
-  Item.count(conditions, (err, count) => {
+  Item.countDocuments(conditions, (err, count) => {
     if (err) {
       logger.error('itemController.getItemsCount returns err: ', err);
       res.status(500).send(err);

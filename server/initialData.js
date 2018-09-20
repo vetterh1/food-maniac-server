@@ -236,49 +236,49 @@ export default function insertInitialData() {
 
   // Display collection counts
     .then(() => {
-      User.find({ since: '1968-12-21T00:00:00.000Z' }).count((errCountUser, results) => {
+      User.find({ since: '1968-12-21T00:00:00.000Z' }).countDocuments((errCountUser, results) => {
         if (errCountUser) return console.error(errCountUser);
         const expectedCount = initialUsers.length;
         const test = results === expectedCount ? 'OK' : `KO (should be ${expectedCount})`;
         console.log(`# Users: ${results} ${test}`);
         return results;
       });
-      Kind.find({ since: '1968-12-21T00:00:00.000Z' }).count((errKind, results) => {
+      Kind.find({ since: '1968-12-21T00:00:00.000Z' }).countDocuments((errKind, results) => {
         if (errKind) return console.error(errKind);
         const expectedCount = initialKinds.length;
         const test = results === expectedCount ? 'OK' : `KO (should be ${expectedCount})`;
         console.log(`# Kinds: ${results} ${test}`);
         return results;
       });
-      Category.find({ since: '1968-12-21T00:00:00.000Z' }).count((errCategory, results) => {
+      Category.find({ since: '1968-12-21T00:00:00.000Z' }).countDocuments((errCategory, results) => {
         if (errCategory) return console.error(errCategory);
         const expectedCount = initialCategories.length;
         const test = results === expectedCount ? 'OK' : `KO (should be ${expectedCount})`;
         console.log(`# Categories: ${results} ${test}`);
         return results;
       });
-      Item.find({ since: '1968-12-21T00:00:00.000Z' }).count((err6, results) => {
+      Item.find({ since: '1968-12-21T00:00:00.000Z' }).countDocuments((err6, results) => {
         if (err6) return console.error(err6);
         const expectedCount = initialItems.length;
         const test = results === expectedCount ? 'OK' : `KO (should be ${expectedCount})`;
         console.log(`# Items: ${results} ${test}`);
         return results;
       });
-      Place.find({ since: '1968-12-21T00:00:00.000Z' }).count((err7, results) => {
+      Place.find({ since: '1968-12-21T00:00:00.000Z' }).countDocuments((err7, results) => {
         if (err7) return console.error(err7);
         const expectedCount = initialPlaces.length;
         const test = results === expectedCount ? 'OK' : `KO (should be ${expectedCount})`;
         console.log(`# Places: ${results} ${test}`);
         return results;
       });
-      MarkAggregate.find({ since: '1968-12-21T00:00:00.000Z' }).count((err8, results) => {
+      MarkAggregate.find({ since: '1968-12-21T00:00:00.000Z' }).countDocuments((err8, results) => {
         if (err8) return console.error(err8);
         const expectedCount = initialMarkAggregates.length;
         const test = results === expectedCount ? 'OK' : `KO (should be ${expectedCount})`;
         console.log(`# MarkAggregate: ${results} ${test}`);
         return results;
       });
-      MarkIndividual.find({ since: '1968-12-21T00:00:00.000Z' }).count((err8, results) => {
+      MarkIndividual.find({ since: '1968-12-21T00:00:00.000Z' }).countDocuments((err8, results) => {
         if (err8) return console.error(err8);
         const expectedCount = initialMarkIndividuals.length;
         const test = results === expectedCount ? 'OK' : `KO (should be ${expectedCount})`;

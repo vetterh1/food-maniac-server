@@ -15,7 +15,7 @@ import { distanceInKm, formatDistance } from '../util/mapUtils';
 export function getMarkAggregatesCount(req, res) {
   // LATER: query should return MarkAggregates of current user.
   const conditions = req.query.conditions ? JSON.parse(req.query.conditions) : {};
-  MarkAggregate.count(conditions, (err, count) => {
+  MarkAggregate.countDocuments(conditions, (err, count) => {
     if (err) {
       logger.error('itemController.getMarkAggregatesCount returns err: ', err);
       res.status(500).send(err);

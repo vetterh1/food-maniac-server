@@ -88,7 +88,6 @@ class MainAppBar extends React.Component {
             {!onMainPage &&
             <NavItem>
               <NavLink
-                className="navbar-link"
                 tag={Link}
                 to="/rate"
                 onClick={this.resetOpenState}
@@ -100,7 +99,6 @@ class MainAppBar extends React.Component {
             {!onMainPage &&
             <NavItem>
               <NavLink
-                className="navbar-link"
                 tag={Link}
                 to="/search"
                 onClick={this.resetOpenState}
