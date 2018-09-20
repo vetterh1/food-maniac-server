@@ -4,7 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { NavItem, NavLink } from 'reactstrap';
 import Auth from './Auth';
 
@@ -28,24 +28,22 @@ class LoginInBar extends React.Component {
     return (
       <NavItem>
         {!isAuthenticated() && (
-          <NavLink
+          <a
             className="navbar-link"
             role="button"
-            tag={Link}
             onClick={this.onLogin.bind(this)}
           >
             <FormattedMessage id="login.login_signin" />
-          </NavLink>
+          </a>
         )}
         {isAuthenticated() && (
-          <NavLink
+          <a
             className="navbar-link"
             role="button"
-            tag={Link}
             onClick={this.onLogout.bind(this)}
           >
             <FormattedMessage id="login.logout" />
-          </NavLink>
+          </a>
         )}
       </NavItem>
     );

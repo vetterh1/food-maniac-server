@@ -7,7 +7,6 @@ import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { browserHistory } from 'react-router';
 import Alert from 'react-s-alert';
 import { Button, Card, CardTitle, Col, Collapse, Form, Input, Label, Modal, ModalHeader, ModalBody, Row } from 'reactstrap';
 // import {MdLocalCake} from 'react-icons/md/local-cake';
@@ -28,6 +27,9 @@ import RatingStarsRow from '../utils/RatingStarsRow';
 import SimpleListOrDropdown from '../utils/SimpleListOrDropdown';
 import SelectItemPlus from '../utils/SelectItemPlus';
 import { loglevelServerSend } from '../../utils/loglevel-serverSend';
+
+import history from '../navigation/history'
+
 
 const { Element, scroller } = Scroll;
 const scroll = Scroll.animateScroll;
@@ -100,12 +102,22 @@ class RateForm extends React.Component {
     // console.log('RateForm constructor (props, initial state): ', props, this.state);
   }
 
+  componentWillMount() {
+    // Remove the help alert whenever we leave the page
+     this.unlisten = history.listen((location, action) => {
+      this.closeHelp();
+      if(this.alertTimeout) clearTimeout(this.alertTimeout);
+    });
+  }
+  componentWillUnmount() {
+      this.unlisten();
+  }
+
   componentDidMount() {
     this.resetForm();
-
-    // Remove the help alert whenever we leave the page
-    browserHistory.listenBefore(() => { this.closeHelp(); });
   }
+
+
 
   componentWillReceiveProps(nextProps) {
     if (!nextProps || !nextProps.places || nextProps.places.places.length <= 0) return;
@@ -249,7 +261,7 @@ class RateForm extends React.Component {
     // window.scrollTo(0, 0);
     scroll.scrollToTop(optionsScroll);
 
-    setTimeout(() => {
+    this.alertTimeout = setTimeout(() => {
       this.displayItemHelp();
     }, 2000);
   }

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { browserHistory } from 'react-router';
 // import { Card, CardMedia, CardTitle } from 'material-ui/Card';
 // import Radium from 'radium';
+import history from '../navigation/history'
 
 
 const styles = {
@@ -47,7 +47,7 @@ class CardButton extends React.Component {
   _handleClick() {
     this.setState({ clicked: true });
     this.props.onClick();
-    browserHistory.push(this.props.url);
+    history.push(this.props.url);
   }
 
   // render() {

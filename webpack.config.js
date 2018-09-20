@@ -130,7 +130,7 @@ module.exports = {
   entry: {
     main: jsEntry, // Notice that we do not have an explicit vendor entry here
     styles: cssEntry,
-    // vendor: ['react', 'react-dom', 'react-router'],
+    // vendor: ['react', 'react-dom', 'react-router-dom'],
   },
 
   resolve: {

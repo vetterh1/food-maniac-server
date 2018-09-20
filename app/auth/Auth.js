@@ -1,10 +1,10 @@
 /* eslint-disable class-methods-use-this */
 
 import * as log from 'loglevel';
-import { browserHistory } from 'react-router';
 import auth0 from 'auth0-js';
 import { loglevelServerSend } from '../utils/loglevel-serverSend';
 import stringifyOnce from '../utils/stringifyOnce';
+import history from '../components/navigation/history'
 
 
 const logAuth = log.getLogger('logAuth');
@@ -41,9 +41,9 @@ export default class Auth {
       if (authResult && authResult.accessToken && authResult.idToken) {
         logAuth.debug(stringifyOnce(authResult, null, 2));
         this.setSession(authResult);
-        browserHistory.replace('/');
+        history.replace('/');
       } else if (err) {
-        browserHistory.replace('/');
+        history.replace('/');
         logAuth.error(`Error: ${stringifyOnce(err, null, 2)}. Check the console for further details (authResult=${stringifyOnce(authResult, null, 2)}.`);
         alert(`Error: ${err.error}. Check the console for further details.`);
         // TODO: better error message to user than alert!
@@ -88,7 +88,7 @@ export default class Auth {
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
     // navigate to the home route
-    browserHistory.replace('/');
+    history.replace('/');
   }
 
 
@@ -99,7 +99,7 @@ export default class Auth {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     // navigate to the home route
-    browserHistory.replace('/');
+    history.replace('/');
 
     this.userProfile = null;
   }

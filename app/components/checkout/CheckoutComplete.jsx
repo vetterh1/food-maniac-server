@@ -2,7 +2,7 @@
 /* eslint-disable react/prefer-stateless-function */
 
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { MdDone } from 'react-icons/md';
 

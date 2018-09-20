@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { Button, Col, Container, Label, Row } from 'reactstrap';
 import { MdInfoOutline } from 'react-icons/md';

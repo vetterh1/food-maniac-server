@@ -4,45 +4,20 @@ import * as log from 'loglevel';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect, Provider } from 'react-redux';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { Router, Route } from 'react-router-dom';
 // Older solution: Import bootstrap directly from cdn in index.html. no need for npm install bootstrap either!
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { IntlProvider } from 'react-intl';
 import { loglevelServerSend } from '../../utils/loglevel-serverSend';
 import localeData from '../../locales/data.json';
 import App from '../pages/App';
-import MainPageContent from '../pages/MainPageContent';
-import RateContainer from '../pages/RateContainer';
-import SearchItemContainer from '../pages/SearchItemContainer';
-import ListItemsContainerOld from '../pages/ListItemsContainerOld';
-import ListItemsContainer from '../pages/ListItemsContainer';
-import ListCategoriesContainer from '../pages/ListCategoriesContainer';
-import ListKindsContainer from '../pages/ListKindsContainer';
-import AdminItemsContainer from '../pages/AdminItemsContainer';
-import About from '../pages/About';
-import Callback from '../../auth/Callback';
-import Auth from '../../auth/Auth';
-import CheckoutContainer from '../checkout/CheckoutContainer';
-import CheckoutComplete from '../checkout/CheckoutComplete';
-import CheckoutAcqError from '../checkout/CheckoutAcqError';
-import CheckoutUnknownError from '../checkout/CheckoutUnknownError';
-import CheckoutCancelError from '../checkout/CheckoutCancelError';
+import history from '../navigation/history'
 
 
 const logRoot = log.getLogger('logRoot');
 loglevelServerSend(logRoot); // a setLevel() MUST be run AFTER this!
 logRoot.setLevel('debug');
 logRoot.debug('--> entering Root.jsx');
-
-const auth = new Auth();
-
-const handleAuthentication = (nextState) => {
-  if (/access_token|id_token|error/.test(nextState.location.hash)) {
-    auth.handleAuthentication();
-  }
-};
-
-const NotFound = () => <h2>404 error - This page is not found!</h2>;
 
 
 class Root extends React.Component {
@@ -96,98 +71,8 @@ class Root extends React.Component {
           locale={this.state.locale}
           messages={this.state.messages}
         >
-          <Router
-            history={browserHistory}
-          >
-            <Route
-              path="/"
-              component={props => <App auth={auth} {...props} />}
-            >
-              <IndexRoute
-                component={props => <MainPageContent auth={auth} {...props} />}
-              />
-              <Route
-                path="/callback"
-                component={(props) => {
-                  handleAuthentication(props);
-                  return <Callback {...props} />;
-                }}
-              />
-              <Route
-                path="/rate"
-                component={props => <RateContainer auth={auth} {...props} />}
-              />
-              <Route
-                path="/search"
-                component={props => <SearchItemContainer auth={auth} {...props} />}
-              />
-              <Route
-                path="/about"
-                component={() => <About />}
-              />
-              <Route
-                path="/listItems"
-                component={props => <ListItemsContainer dropdown={false} auth={auth} {...props} />}
-              />
-              <Route
-                path="/listItemsOld"
-                component={props => (
-                  <ListItemsContainerOld
-                    URL="/api/items"
-                    dropdown={false}
-                    auth={auth}
-                    {...props}
-                  />)}
-              />
-              <Route
-                path="/listCategories"
-                component={props => <ListCategoriesContainer dropdown={false} auth={auth} {...props} />}
-              />
-              <Route
-                path="/listKinds"
-                component={props => <ListKindsContainer dropdown={false} auth={auth} {...props} />}
-              />
-              <Route
-                path="/adminItems"
-                component={props => <AdminItemsContainer auth={auth} {...props} />}
-              />
-              <Route
-                path="/checkout"
-                component={props => <CheckoutContainer />}
-              />
-              <Route
-                path="/generateThumbnails"
-                component={props => (
-                  <ListItemsContainerOld
-                    URL="/util/regenerateAllThumbnails"
-                    socketName="regenerateAllThumbnails"
-                    dropdown={false}
-                    auth={auth}
-                    {...props}
-                  />)}
-              />
-              <Route
-                path="/eshop-ok"
-                component={props => <CheckoutComplete auth={auth} {...props} />}
-              />              
-              <Route
-                path="/eshop-ko-acq"
-                component={props => <CheckoutAcqError auth={auth} {...props} />}
-              />              
-              <Route
-                path="/eshop-ko-unknown"
-                component={props => <CheckoutUnknownError auth={auth} {...props} />}
-              />              
-              <Route
-                path="/eshop-ko-cancel"
-                component={props => <CheckoutCancelError auth={auth} {...props} />}
-              />              
-              <Route
-                path="*"
-                component={NotFound}
-                auth={auth}
-              />
-            </Route>
+          <Router history={history}>
+            <Route path="/" component={props => <App {...props} />} />
           </Router>
         </IntlProvider>
       </Provider>

@@ -7,8 +7,6 @@ import PropTypes from 'prop-types';
 import ChechoutForm from './CheckoutForm';
 import CheckoutConfirmForm from './CheckoutConfirmForm';
 
-import { browserHistory } from 'react-router';
-
 class CheckoutContainer extends React.Component {
 
   constructor(props) {
