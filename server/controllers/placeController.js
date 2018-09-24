@@ -351,7 +351,9 @@ export function batchUpdatePlacesWithGooglePhoto(req, res) {
                   // 3) Call the Photo api with this ref (and size) to get the url in return
                   const queryPhotoApi = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=${options.maxwidth}&photoreference=${photoReference}&key=AIzaSyAPbswfvaojeQVe9eE-0CtZ4iEtWia9KO0`;
                   // Call example for via istambul: https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=CmRaAAAA5U6Pz0DeS0xe-x5KqI2YeOj3Ub0M0TyT0oeJd_lUZtcrCieI7d6QSTjRHfgwf1EdhTpPW_X6uKhl5Xr5IuKjFy_TsGthBLwTMAoayc3AZp7v_oBm5w6ZEwe-AoFd_pBmEhBUVcj39_zDWDHcHHSS5VcrGhR3hl4p-JVQ69NoDnI6kOn5FYDW4g&key=AIzaSyAPbswfvaojeQVe9eE-0CtZ4iEtWia9KO0
-                
+                  // Call example for via ciccio bello (place_id: "ChIJf9RC-tvaw0cR6kscd8IzPJQ"): https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=ChIJf9RC-tvaw0cR6kscd8IzPJQ&key=AIzaSyAPbswfvaojeQVe9eE-0CtZ4iEtWia9KO0
+                  
+
                   request({ url: queryPhotoApi, proxy: options.proxy },
                     (errorQueryPhoto, responseQueryPhoto) => {
                       if (errorQueryPhoto || responseQueryPhoto.statusCode !== 200) {
