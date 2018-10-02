@@ -51,7 +51,7 @@ npm install google-maps-react --save
 // For UI compornents:
 npm install react-tap-event-plugin --save
 
-npm install react-fontawesome --save
+
 
 // For testing
 npm install mocha --save-dev
@@ -487,13 +487,13 @@ or try:
 ---------------------------------------------------------------
 
 
-// Update dependency version:
+# Find what needs to be updated:
+npm outdated
+# Globally:
+npm outdated -g
 
-	npm install -g npm-check-updates
-	ncu -a -x react-router,react-router-transition
-	npm update --save
-
-  ncu -x react-router,react-router-transition
+# Update all (& update the package.json file)
+npm update
 
 # Reinstall node_modules & npm cache:
 npm cache clean --force
