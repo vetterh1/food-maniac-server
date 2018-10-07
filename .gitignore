@@ -4,5 +4,4 @@ sublime
 npm-debug*.*
 dist
 distBoServer
-distFoServer
 server/static_dev
