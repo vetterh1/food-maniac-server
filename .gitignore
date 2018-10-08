@@ -5,3 +5,5 @@ npm-debug*.*
 dist
 distBoServer
 server/static_dev
+.DS_Store
+

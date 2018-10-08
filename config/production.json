@@ -5,11 +5,6 @@
     {
       "host": "https://food-maniac.com:8085",
       "port": 8085
-    },
-    "FoServer":
-    {
-      "host": "https://food-maniac.com",
-      "port": 8080
     }
 	},
 
@@ -34,10 +29,6 @@
     "BoServer":
     {
       "pathFile" : "./distBoServer/log/winston.log"
-    },
-    "FoServer":
-    {
-      "pathFile" : "./distFoServer/log/winston.log"
     }
 	}
 }
