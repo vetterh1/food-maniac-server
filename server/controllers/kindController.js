@@ -13,6 +13,7 @@ export function getKinds(req, res) {
       res.status(500).send(err);
     } else {
       res.json({ kinds });
+      res.set('Cache-Control', 'public, max-age=9000000'); // 15mn
       logger.info(`kindController.getKinds length=${kinds.length}`);
     }
   });

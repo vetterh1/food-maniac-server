@@ -13,6 +13,7 @@ export function getCategories(req, res) {
       res.status(500).send(err);
     } else {
       res.json({ categories });
+      res.set('Cache-Control', 'public, max-age=9000000'); // 15mn
       logger.info(`categoryController.getCategories length=${categories.length}`);
       // logger.info('getCategories:', JSON.stringify(categories));
     }
