@@ -79,8 +79,8 @@ export function getItems(req, res) {
       // res.status(200).type('json').send('{"valid":"valid json but not what expected!"}'); // Should display error=10 (ok)
       // res.status(200).type('json').send('{"invalid"}'); // Should display error=14 (ok)
       // res.status(500).type('json').send('{"error": "message from server"}'); // Should display error=500 (ok)
-      res.json({ items: items.docs });
       res.set('Cache-Control', 'public, max-age=1000000'); // 3mn
+      res.json({ items: items.docs });
       logger.info(`itemController.getItems length=${items.docs.length}`);
       // logger.info('getItems:', JSON.stringify(items.docs));
     }

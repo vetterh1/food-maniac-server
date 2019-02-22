@@ -12,8 +12,8 @@ export function getKinds(req, res) {
       logger.error('kindController.getKinds returns err: ', err);
       res.status(500).send(err);
     } else {
-      res.json({ kinds });
       res.set('Cache-Control', 'public, max-age=9000000'); // 15mn
+      res.json({ kinds });
       logger.info(`kindController.getKinds length=${kinds.length}`);
     }
   });

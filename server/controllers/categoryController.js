@@ -12,8 +12,8 @@ export function getCategories(req, res) {
       logger.error('categoryController.getCategories returns err: ', err);
       res.status(500).send(err);
     } else {
-      res.json({ categories });
       res.set('Cache-Control', 'public, max-age=9000000'); // 15mn
+      res.json({ categories });
       logger.info(`categoryController.getCategories length=${categories.length}`);
       // logger.info('getCategories:', JSON.stringify(categories));
     }
