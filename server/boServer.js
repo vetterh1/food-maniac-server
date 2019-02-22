@@ -368,7 +368,7 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 
 // Serve our mongo apis:
-app.use('/api', apiRoutes);
+app.use('/api', apiRoutes, { maxAge: 1000000 });
 
 // Serve our utility functions:
 app.use('/util', utilRoutes);
