@@ -1,3 +1,7 @@
+IP server 1 (vps295100): 51.255.46.214
+IP server 2 (vps494554): 51.254.221.25
+
+
 ---------------------------------------------------------------
                            INSTALL 
 ---------------------------------------------------------------
@@ -9,11 +13,6 @@ Base: MERN-STARTER
 // For upgrading npm packages:
 install npm-check-update, then run:
 ncu -u
-ncu -u -a -x react-router,react-router-transition
-
-// Versions to keep (NO update):
- react-router               3.0.5
- react-router-transition    0.0.6
 
 // List npm packages (global & project)
 npm list -g --depth=0
@@ -732,9 +731,6 @@ du -s -h -c *
                        DOCKER
 ---------------------------------------------------------------
 
-IP server 1 (vps295100): 51.255.46.214
-IP server 2 (vps494554): 51.254.221.25
-
 
 ----------  Init docker server  ---------- 
 # Change root password & create new user with sudo access:
@@ -966,41 +962,3 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-vsftpd-for-a-user
 https://rapidgator.net/file/50c523a2aee88ed44289eefe4d9725d0/Ass_Worship_-_Lick_My_Holes_Clean_-_GoddessClaudia.rar.html
 https://rapidgator.net/file/50b22ae4b2eb53755783b4eb84e5d2b7/FIRST_DP_-_Octavia_May.rar.html
 https://rapidgator.net/file/81ee30f0ef33dd432cad325a81e7c574/EroticaX_18_06_13_Sheena_Ryder_A_Little_Bit_More_Love_XXX_1080p_MP4_KTR.rar.html
-
-
-
-
-
-
-removed packages for server only project:
-npm uninstall --save @babel/polyfill
-npm uninstall --save async-es
-npm uninstall --save auth0-js
-npm uninstall --save bootstrap
-npm uninstall --save classnames
-npm uninstall --save es6-object-assign
-npm uninstall --save es6-promise
-npm uninstall --save intl
-npm uninstall --save isomorphic-fetch
-npm uninstall --save loglevel
-npm uninstall --save prop-types
-npm uninstall --save react
-npm uninstall --save react-dom
-npm uninstall --save react-icons
-npm uninstall --save react-intl
-npm uninstall --save react-rating
-npm uninstall --save react-redux
-npm uninstall --save redux-logger
-npm uninstall --save redux-thunk
-npm uninstall --save-dev @babel/preset-react
-npm uninstall --save-dev css-loader
-npm uninstall --save-dev jest
-npm uninstall --save-dev style-loader
-    "webpack": "^4.20.2",
-    "webpack-bundle-analyzer": "^3.0.2",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-middleware": "^3.4.0",
-    "webpack-dev-server": "^3.1.9",
-    "webpack-hot-middleware": "^2.24.2",
-    "webpack-shell-plugin": "^0.5.0"
-        "html-webpack-plugin": "^3.2.0",
