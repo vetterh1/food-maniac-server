@@ -24,30 +24,55 @@ export function getUsers(req, res) {
  */
 
 export function addUser(req, res) {
-  if (!req.body || !req.body.user || !req.body.user.login || !req.body.user.first || !req.body.user.last) {
+  if (!req.body || !req.body.user || !req.body.user.id || !req.body.user.displayedName) {
     logger.error('userController.addUser failed - missing mandatory fields');
     if (!req.body) logger.error('... no req.body!');
     if (req.body && !req.body.user) logger.error('... no req.body.user!');
-    if (req.body && req.body.user && !req.body.user.login) logger.error('... no req.body.user.login!');
-    if (req.body && req.body.user && !req.body.user.first) logger.error('... no req.body.user.first!');
-    if (req.body && req.body.user && !req.body.user.last) logger.error('... no req.body.user.last!');
+    if (req.body && req.body.user && !req.body.user.id) logger.error('... no req.body.user.id!');
+    if (req.body && req.body.user && !req.body.user.displayedName) logger.error('... no req.body.user.displayedName!');
     res.status(400).end();
   } else {
     const newUser = new User(req.body.user);
 
     // Let's sanitize inputs
-    newUser.login = sanitizeHtml(newUser.login);
-    newUser.first = sanitizeHtml(newUser.first);
-    newUser.last = sanitizeHtml(newUser.last);
+    newUser.displayedName = sanitizeHtml(newUser.displayedName);
     newUser.save((err, saved) => {
       if (err) {
-        logger.error(`userController.addUser ${newUser.login} failed - err = `, err);
+        logger.error(`userController.addUser ${newUser.id} failed - err = `, err);
         res.status(500).send(err);
       } else {
         res.json({ user: saved });
-        logger.info(`userController.addUser ${newUser.login} (_id=${saved._id})`);
+        logger.info(`userController.addUser ${newUser.id} (_id=${saved._id})`);
       }
     });
+  }
+}
+
+
+
+/*
+ * Add a user (or update if already exists)
+ */ 
+export function addOrUpdateByAuthId(req, res) {
+  if (!req.body || !req.body.user || !req.body.user.authId || !req.body.user.displayedName) {
+    const error = { status: 'error', message: 'userController.updateUser failed - no body or user or user mandatory info' };
+    if (!req.body) error.message += '... no req.body!';
+    if (req.body && !req.body.user) error.message += '... no req.body.user!';
+    if (req.body && !req.body.user.authId) error.message += '... no req.body.user.authId!';
+    if (req.body && !req.body.user.displayedName) error.message += '... no req.body.user.displayedName!';
+    res.status(400).json(error);
+  } else if (req.body && req.body.user && req.body.user._id) {
+    res.status(400).json({ status: 'error', message: 'userController.updateUser failed - _id cannot be changed' });
+  } else {
+    User.findOneAndUpdate({ authId: req.body.user.authId }, { authId: req.body.user.authId, displayedName: req.body.user.displayedName }, { new: true, upsert: true }, (err, user) => {
+      if (err || !user) {
+        logger.error(`userController.updateUser ${req.body.user.authId} / ${req.body.user.displayedName} failed to update - err = `, err);
+        res.status(500).send(err);
+      } else {
+        res.json({ user });
+        logger.info(`userController.updateUser ${req.body.user.authId} /  ${req.body.user.displayedName}`);
+      }
+    }); 
   }
 }
 

@@ -3,10 +3,13 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const markIndividualSchema = new Schema({
-  // marks are about an item found in one place, but we use the aggregate to link to that couple
+  // marks are about an item found in one place for one user
+  item: { type: Schema.Types.ObjectId, ref: 'Item', required: true },
+  place: { type: Schema.Types.ObjectId, ref: 'Place', required: true },  
+  // ink to the average mark for this item+place by all users
   markAggregate: { type: Schema.Types.ObjectId, ref: 'MarkAggregate', required: true },
-  // and are given by a user (empty if it's an aggregate)
-  user: { type: Schema.Types.ObjectId, ref: 'User', required: false },
+  // and are given by a user
+  user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   // There are 4 different marks, only 1st one is mandatory
   markOverall: { type: 'Number', required: true },
   markFood: { type: 'Number', required: false },

@@ -3,9 +3,8 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  login: { type: 'String', required: true },
-  first: { type: 'String', required: true },
-  last: { type: 'String', required: true },
+  authId: { type: 'String', required: true },
+  displayedName: { type: 'String', required: true },
   since: { type: 'Date', default: Date.now, required: true },
   lastModif: { type: 'Date', default: Date.now, required: true },
   role: ['String'],

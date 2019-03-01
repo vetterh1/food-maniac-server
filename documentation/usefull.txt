@@ -1,12 +1,21 @@
-IP server 1 (vps295100): 51.255.46.214
-IP server 2 (vps494554): 51.254.221.25
+-------------  0 - TL;DR ---------------
+
+# Connect on app server (vps295100):
+ssh lve@51.255.46.214
+# Connect on db server (vps494554):
+ssh lve@51.254.221.25
+
+# Connect on mongo (from app or db server):
+# as admin:
+mongo 51.254.221.25:27017/admin -u admin -p maniacPwd --authenticationDatabase admin --ssl --sslPEMKeyFile /etc/ssl/mongodb.pem --sslCAFile /etc/ssl/mongodb-cert.crt --sslAllowInvalidHostnames
+# as regular user:
+mongo 51.254.221.25:27017/food_maniac -u food -p maniac --authenticationDatabase food_maniac --ssl --sslPEMKeyFile /etc/ssl/mongodb.pem --sslCAFile /etc/ssl/mongodb-cert.crt --sslAllowInvalidHostnames
+
 
 
 ---------------------------------------------------------------
                            INSTALL 
 ---------------------------------------------------------------
-
-Base: MERN-STARTER
 
 -------------  Additional modules ---------------
 
@@ -86,7 +95,6 @@ https://www.imagemagick.org/download/binaries/ImageMagick-7.0.4-7-Q16-x64-dll.ex
 ---------------------------------------------------------------
                              MONGO
 ---------------------------------------------------------------
-
 
 
 -------------  A - Create users & db ---------------

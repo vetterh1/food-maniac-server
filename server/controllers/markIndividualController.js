@@ -65,6 +65,8 @@ function addRegularMark({ req, res, markAggregate }) {
 
     const newMarkIndividual = new MarkIndividual({
       markAggregate: markAggregate._id,
+      item: req.body.markIndividual.item,
+      place: req.body.markIndividual.place,
       user: req.body.markIndividual.user,
       markOverall: req.body.markIndividual.markOverall,
       markFood: req.body.markIndividual.markFood,
@@ -192,13 +194,18 @@ function sendResponseToBrowser({ req, res, markIndividual, markAggregate }) {
 // Returns code 200 otherwise + { markIndividual, markAggregate }
 
 export function addMarkIndividual(req, res) {
-  if (!req.body || !req.body.markIndividual || !req.body.markIndividual.markOverall || !req.body.markIndividual.item || !req.body.markIndividual.place) {
+  if (!req.body || !req.body.markIndividual || 
+      !req.body.markIndividual.markOverall || 
+      !req.body.markIndividual.item || 
+      !req.body.markIndividual.place ||
+      !req.body.markIndividual.user) {
     const error = { status: 'error', message: 'markIndividualController.addMarkIndividual failed - missing mandatory fields: ' };
     if (!req.body) error.message += 'body ';
     if (req.body && !req.body.markIndividual) error.message += 'body.markIndividual ';
     if (req.body && req.body.markIndividual && !req.body.markIndividual.markOverall) error.message += 'body.markIndividual.markOverall ';
     if (req.body && req.body.markIndividual && !req.body.markIndividual.item) error.message += 'body.markIndividual.item ';
     if (req.body && req.body.markIndividual && !req.body.markIndividual.place) error.message += 'body.markIndividual.place ';
+    if (req.body && req.body.markIndividual && !req.body.markIndividual.user) error.message += 'body.markIndividual.user ';
     logger.error(error);
     res.status(400).json(error);
   } else {

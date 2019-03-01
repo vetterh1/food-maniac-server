@@ -12,19 +12,23 @@ const router = new Router();
 
 // ----------------  USERS ----------------
 
-// Get all Items
+// Get all users
 router.route('/users').get(UserController.getUsers);
 
-// Get one item by _id
+// Get one user by _id
 router.route('/users/id/:_id').get(UserController.getUser);
 
-// Add a new Item
+// Add a new user
 router.route('/users').post(UserController.addUser);
 
-// Update a item by _id
+// Add a new user (or update if already exists)
+// Returns the user db record, including its db id (in fields id & _id)
+router.route('/users/addOrUpdateByAuthId').post(UserController.addOrUpdateByAuthId);
+
+// Update a user by _id
 router.route('/users/id/:_id').post(UserController.updateUser);
 
-// Delete a item by _id
+// Delete a user by _id
 router.route('/users/id/:_id').delete(UserController.deleteUser);
 
 
