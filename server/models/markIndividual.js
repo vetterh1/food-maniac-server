@@ -15,6 +15,12 @@ const markIndividualSchema = new Schema({
   markFood: { type: 'Number', required: false },
   markPlace: { type: 'Number', required: false },
   markStaff: { type: 'Number', required: false },
+  // Place geolocation is copied in the mark for easier search (by distance)
+  location: {
+    type: { type: 'String', default: 'Point', required: false },
+    // coordinates are LONGITUDE then latitude, NOT the opposite!
+    coordinates: { type: ['Number'], default: [0, 0], required: false },
+  },
   // A mark also contains an optional comment (and later an optional picture)
   comment: { type: 'String', required: false },
   // Timestamps

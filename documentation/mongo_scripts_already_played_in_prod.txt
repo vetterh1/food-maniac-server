@@ -115,4 +115,57 @@ use food_maniac;
 db.places.update({'_id': ObjectId('5908800450a7934d128ff770')}, {$set: {'name': 'Brasserie RN Louvain-La-Neuve', 'location': {'type' : 'Point', 'coordinates': [4.625232, 50.6682973]} } } )
 
 
----------------------------------------------------------------
+----------------------------------------------------------------
+
+
+Date:         2019-03-13 15:00:00
+Description:  Update markindividual marks to add a place, 
+              an item and a coord; from the corresponding
+              MarkAggregate
+
+// use food_maniac_dev;
+// use food_maniac_dev3;
+
+// Loop on all the individual marks
+var markindividualList = db.markindividuals.find();
+markindividualList.forEach(function(anIndividualMark) {
+  print('------------------------');
+  print('IndividualMark:');
+  printjson(anIndividualMark)
+
+  // Get the corresponding AggregateMark
+  var correspondingAggregateMarks = db.markaggregates.find({"_id": anIndividualMark.markAggregate});
+  print('Corresponding AggregateMark:');
+  printjson(correspondingAggregateMarks[0])
+  var itemAggregate = correspondingAggregateMarks[0].item;
+  var placeAggregate = correspondingAggregateMarks[0].place;
+  var locationAggregate = correspondingAggregateMarks[0].location;
+
+  var res = db.markindividuals.update({"_id": anIndividualMark._id}, {$set: {"location": locationAggregate, "place": placeAggregate, "item": itemAggregate }});
+
+  print('Updated IndividualMark:');
+  printjson(res);
+});
+
+----------------------------------------------------------------
+
+
+Date:         2019-03-19 15:00:00
+Description:  Update markindividual marks to replace the user
+              with "me" : "user" : ObjectId("5c9116a7dbf8b9f31e5d1cc1")
+
+// use food_maniac_dev;
+// use food_maniac_dev3;
+
+// Loop on all the individual marks
+var markindividualList = db.markindividuals.find();
+markindividualList.forEach(function(anIndividualMark) {
+  print('------------------------');
+  print('IndividualMark:');
+  printjson(anIndividualMark)
+  var res = db.markindividuals.update({"_id": anIndividualMark._id}, {$set: {"user" : ObjectId("5c9116a7dbf8b9f31e5d1cc1")}});
+
+  print('Updated IndividualMark:');
+  printjson(res);
+});
+

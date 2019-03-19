@@ -21,7 +21,6 @@ const markAggregateSchema = new Schema({
   nbMarksValue: { type: 'Number', required: false },
   nbMarksStaff: { type: 'Number', required: false },
   // Place geolocation is copied in the mark for easier search (by distance)
-  // but ONLY for AGGREGATE marks. Individual marks don't need this information
   location: {
     type: { type: 'String', default: 'Point', required: false },
     // coordinates are LONGITUDE then latitude, NOT the opposite!

@@ -73,6 +73,7 @@ function addRegularMark({ req, res, markAggregate }) {
       markPlace: req.body.markIndividual.markPlace,
       markValue: req.body.markIndividual.markValue,
       markStaff: req.body.markIndividual.markStaff,
+      location: req.body.markIndividual.location,
       comment,
     });
     newMarkIndividual.save((err, markIndividual) => {
