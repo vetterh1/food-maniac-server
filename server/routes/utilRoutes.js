@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import * as GenerateThumbnails from '../util/generateThumbnails';
 import * as OgoneGateway from '../util/ogoneGateway';
+import * as MailController from '../util/mailController';
+
 
 const router = new Router();
 
@@ -9,6 +11,9 @@ const router = new Router();
 
 router.route('/computeHash').post(OgoneGateway.computeHash);
 
+// ----------------  Mail ----------------
+
+router.route('/testSendMail').get(MailController.testSendMail);
 
 
 // ----------------  THUMBNAILS ----------------
